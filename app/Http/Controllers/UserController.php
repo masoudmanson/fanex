@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class userController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,6 +16,7 @@ class userController extends Controller
      */
     public function index()
     {
+//        dd(Auth::guard('api')->user());
     }
 
     /**

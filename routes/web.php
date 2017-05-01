@@ -27,8 +27,11 @@
 
 Route::get('/', function () {
     return view('welcome');
-});;
+});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->middleware('auth:api');;
+Route::get('/home', 'HomeController@index');
+Route::get('/usertest', 'UserController@index')->middleware('auth:api');
+
+Route::get('/sso', 'UserController@loginTest');
