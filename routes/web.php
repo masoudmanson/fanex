@@ -22,9 +22,6 @@
 //Route::get('/users/{user}', 'UserController@show')->middleware('auth:api');
 
 
-
-
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -32,6 +29,22 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-Route::get('/usertest', 'UserController@index')->middleware('auth:api');
+Route::post('/home', 'HomeController@formController');
 
-Route::get('/sso', 'UserController@loginTest');
+Route::get('/dotin', 'DotinController@dotinAuthorization');//maybe get,will implement according to the fake web service
+
+Route::get('/profile', 'UserController@show'); // or user/me
+
+//Route::post('/pay', 'WalletController') ;
+//
+Route::post('/calculate', 'UptController@calculateRemittance')->name('calculate'); //maybe get, according to fake web service
+
+Route::get('/test', 'PaymentController@index');
+Route::get('/payment', 'PaymentController@pay');
+Route::get('/payment2', 'PaymentController@pay2');
+
+Route::get('/callback/{callback}', 'CallbackController@callbackHandler');
+
+Route::resource('/additional-info', 'UserInformationController');
+
+//Route::request('/token/validate','TokenController@tokenValidation')->name('tokenValidate');

@@ -3,18 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Traits\TokenTrait;
-use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Psr\Http\Message\ServerRequestInterface;
 
-class UserController extends Controller
+class PaymentController extends Controller
 {
     use TokenTrait;
 
     public function __construct()
     {
-        $this->middleware('checkToken', ['only' => ['show', 'index']]);
+        $this->middleware('checkToken', ['only' => ['pay']]);
     }
 
     /**
@@ -24,7 +21,16 @@ class UserController extends Controller
      */
     public function index()
     {
-//        dd(Auth::guard('api')->user());
+
+//        return view('test' , compact('redirect_uri'));
+        return view('test');
+    }
+
+    public function pay(Request $request)
+    {
+dd('slm');
+
+        //todo
     }
 
     /**
@@ -40,7 +46,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -51,24 +57,18 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Request|ServerRequestInterface $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
-        if ($result = $this->checkToken($request)) {
-            $user = new User();
-
-            $user->user_id = $result->sub;
-            dd($user);
-
-        }
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -79,8 +79,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -91,7 +91,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

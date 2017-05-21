@@ -13,7 +13,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-//        $this->middleware('auth');
+//        $this->middleware('checkToken');
+
     }
 
     /**
@@ -24,5 +25,22 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function formController(Request $request)
+    {
+//
+////        dd($request);
+//        if($request["calculate"]) {
+////            return redirect()->action(
+////                'UptController@calculateRemittance', ['id' => 1]
+////            );
+//            return redirect()->route('calculate', ['id' => 1]);
+//        }
+//        if($request["payment"]) {
+//
+//            echo "hi there";
+//            //wallet controller
+//        }
     }
 }

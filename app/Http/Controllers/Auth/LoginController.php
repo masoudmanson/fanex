@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Psr\Http\Message\ServerRequestInterface;
 
 class LoginController extends Controller
 {
@@ -18,16 +22,40 @@ class LoginController extends Controller
     |
     */
 
-    public function showLoginForm()
+
+    public function showLoginForm(Request $request)
     {
 
-        http://demo.fanapium.com:12594/oauth2/authorize/?client_id=474c4fbdbf159b1560e8c230&response_type=token&redirect_uri=http://fanapium.com&prompt=login
+        if (!$request->session()->get('redirect_uri'))
+//            $request->redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/callback/profile';
+            $request->redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/profile';
+        else {
 
-        $client = new Client();
-        $client_id = '474c4fbdbf159b1560e8c230';
-        $res = $client->get('http://demo.fanapium.com:12594/oauth2/authorize/?client_id=474c4fbdbf159b1560e8c230&response_type=token&redirect_uri=localhost:8080&prompt=login');
-        echo $res->getStatusCode(); // 200
-        echo $res->getBody();
+            $request->redirect_uri = $request->session()->get('redirect_uri');
+            $request->queryString = $request->session()->get('query_string');
+//            $request->redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/callback'.'/'.$redirect_uri;
+        }
+
+        $id = adapterAssignment()->getId();
+
+        $arguments = array(
+            'client_id' => $id,
+            'response_type' => 'token',
+            'redirect_uri' => $request->redirect_uri,
+            'prompt' => 'login'
+        );
+//
+        $queryString = http_build_query($arguments);
+
+//        return Redirect::away('http://sandbox.fanapium.com/oauth2/authorize/?client_id='.$id.'&response_type=token&redirect_uri='.$params['redirect_uri'].'&prompt=login');
+        //todo
+//        $tmp = $request->redirect_uri ;
+//        $tmp = str_replace('&','#',$tmp);
+
+        return Redirect::away('http://sandbox.fanapium.com/oauth2/authorize/?client_id=' . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri . '&state='.$request->queryString.'&prompt=login');
+
+//        return \Redirect::away('http://sandbox.fanapium.com/oauth2/authorize?'.$queryString);
+//        return \redirect('http://sandbox.fanapium.com/oauth2/authorize?'.$queryString);
 
         //sso login form
     }
