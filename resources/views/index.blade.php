@@ -5,7 +5,6 @@
     <script src="https://www.amcharts.com/lib/3/maps/js/worldHigh.js"></script>
     <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
     <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-    <link rel="stylesheet" href="{{ asset('css/amcharts.css') }}" type="text/css" media="all"/>
 @endsection
 
 @section('content')
@@ -23,7 +22,7 @@
                         {{-- Destination Country --}}
                         <div class="form-group bsWrapper">
                             <i class="icon-globe bsIcon"></i>
-                            <select class="form-control selectpicker" name="country">
+                            <select class="form-control selectpicker" name="country" id="exCountry">
                                 <optgroup label="Active">
                                     <option value="Turkey">Turkey</option>
                                 </optgroup>
@@ -58,7 +57,7 @@
                             <div class="col-md-6 col-sm-12 pr-2">
                                 <div class="form-group bsWrapper">
                                     <i class="icon-change bsIcon"></i>
-                                    <input type="text" class="form-control fanexInput" id="exampleInputAmount"
+                                    <input type="text" class="form-control fanexInput" id="exAmount"
                                            name="amount" placeholder="Amount">
                                 </div>
                             </div>
@@ -66,7 +65,7 @@
                             <div class="col-md-6 col-sm-12 pl-2">
                                 <div class="form-group bsWrapper">
                                     <i class="icon-coin bsIcon"></i>
-                                    <select class="form-control selectpicker" name="currency">
+                                    <select class="form-control selectpicker" name="currency" id="exCurrency">
                                         <option value="lira">Turkish Lira (₺)</option>
                                         <option value="euro">Euro (€)</option>
                                     </select>
@@ -79,9 +78,9 @@
                             {{-- Captcha Image --}}
                             <div class="col-md-6 col-sm-12 pr-2">
                                 <div class="form-group bsWrapper">
-                                    <a href="/" class="captchaRefresher"><i class="icon-refresh bsIcon"></i></a>
+                                    <a href="javascript: reloadCaptcha();" class="captchaRefresher"><i class="icon-refresh bsIcon"></i></a>
                                     <div class="fanexInput" style="text-align:center;">
-                                        {!! Captcha::img('flat') !!}
+                                        <img src="{{ captcha_src('flat') }}" alt="captcha" class="captcha-img" data-refresh-config="flat">
                                     </div>
                                 </div>
                             </div>
@@ -108,8 +107,7 @@
                         <div class="row">
                             {{-- Calculate Amount --}}
                             <div class="col-md-6 col-sm-12 pr-2">
-                                <input type="submit" class="btn fanexBtnOutlineOrange" value="Calculate"
-                                       name="calculate"/>
+                                <input type="button" class="btn fanexBtnOutlineOrange" value="Calculate" onclick="getAmount()"/>
                             </div>
                             {{-- Go For Payment --}}
                             <div class="col-md-6 col-sm-12 pl-2">
@@ -139,10 +137,38 @@
 @section('scripts')
     <script>
         $(document).ready(function () {
-            $('.selectpicker').selectpicker({
-                style: 'fanexInput'
-            });
+//            $('.selectpicker').selectpicker({
+//                style: 'fanexInput'
+//            });
         });
+
+        function reloadCaptcha() {
+            var captcha = $('.captcha-img');
+            var config = captcha.data('refresh-config');
+            $.ajax({
+                method: 'GET',
+                url: '/get_captcha/' + config,
+            }).done(function (response) {
+                captcha.prop('src', response);
+            });
+        }
+
+        function getAmount() {
+            alert('آآآآآآی،\n ماااااادرتو گاییدم');
+            $.ajax({
+                method: 'POST',
+                url: '/calculate',
+                data: {
+                    '_token': "{{ csrf_token() }}",
+                    "amount": $('#exAmount').val(),
+                    "currency": $('#exCurrency').val(),
+                    "country": $('#exCountry').val()
+                },
+            }).done(function (response) {
+                alert(response);
+            });
+        }
+
         // svg path for target icon
         var targetSVG = "M9,0C4.029,0,0,4.029,0,9s4.029,9,9,9s9-4.029,9-9S13.971,0,9,0z M9,15.93 c-3.83,0-6.93-3.1-6.93-6.93S5.17,2.07,9,2.07s6.93,3.1,6.93,6.93S12.83,15.93,9,15.93 M12.5,9c0,1.933-1.567,3.5-3.5,3.5S5.5,10.933,5.5,9S7.067,5.5,9,5.5 S12.5,7.067,12.5,9z";
 

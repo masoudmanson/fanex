@@ -26,6 +26,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'flat') {
+    return $captcha->src($config);
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
