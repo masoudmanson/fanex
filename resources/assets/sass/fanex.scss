@@ -276,6 +276,10 @@ body {
                     font-size: 18px;
                     font-weight: 400;
                     text-align: left;
+                    #tempAmountNumber {
+                        font-weight: 500 !important;
+                        color: $fanapOrange;
+                    }
                 }
                 .tempAmountWrapper {
                     padding: 20px 0;

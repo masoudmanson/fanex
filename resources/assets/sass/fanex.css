@@ -181,6 +181,9 @@ body {
           font-size: 18px;
           font-weight: 400;
           text-align: left; }
+          .indexWrapper .indexLeft .mainForm .tempAmount h2 #tempAmountNumber {
+            font-weight: 500 !important;
+            color: #F58121; }
         .indexWrapper .indexLeft .mainForm .tempAmount .tempAmountWrapper {
           padding: 20px 0; }
         .indexWrapper .indexLeft .mainForm .tempAmount .calcAmount {

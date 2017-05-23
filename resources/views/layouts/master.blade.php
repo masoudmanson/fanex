@@ -20,12 +20,6 @@
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
-//
-//        $.ajaxSetup({
-//            headers: {
-//                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//            }
-//        })
     </script>
 </head>
 <body>
@@ -34,6 +28,7 @@
 
 <!-- Scripts -->
 <script src="{{ mix('js/app.js') }}"></script>
+<script src="{{ mix('js/scripts.js') }}"></script>
 
 @yield('scripts')
 

@@ -22,9 +22,10 @@
                         {{-- Destination Country --}}
                         <div class="form-group bsWrapper">
                             <i class="icon-globe bsIcon"></i>
-                            <select class="form-control selectpicker" name="country" id="exCountry">
+                            <select class="form-control selectpicker2" name="country" id="exCountry">
                                 <optgroup label="Active">
                                     <option value="Turkey">Turkey</option>
+                                    <option value="Canada">Canada</option>
                                 </optgroup>
                                 <optgroup label="Inactive">
                                     <option value="France" disabled>France</option>
@@ -46,7 +47,6 @@
                                     <option value="Russia" disabled>Russia</option>
                                     <option value="China" disabled>China</option>
                                     <option value="USA" disabled>USA</option>
-                                    <option value="Canada" disabled>Canada</option>
                                 </optgroup>
                             </select>
                         </div>
@@ -65,7 +65,7 @@
                             <div class="col-md-6 col-sm-12 pl-2">
                                 <div class="form-group bsWrapper">
                                     <i class="icon-coin bsIcon"></i>
-                                    <select class="form-control selectpicker" name="currency" id="exCurrency">
+                                    <select class="form-control selectpicker2" name="currency" id="exCurrency">
                                         <option value="lira">Turkish Lira (₺)</option>
                                         <option value="euro">Euro (€)</option>
                                     </select>
@@ -96,7 +96,7 @@
 
                         {{-- Temproray Calculated Amount --}}
                         <div class="tempAmount" style="display: none;">
-                            <h2>Cost of Transferring <span>5000 EUR</span> to Turkey is:</h2>
+                            <h2>Cost of Transferring <span id="tempAmountNumber">5000 EUR</span> to Turkey is:</h2>
                             <div class="tempAmountWrapper">
                                 <span class="calcAmount">15.500.000</span>
                                 <span class="tempCurrency">Rials</span>
@@ -137,9 +137,15 @@
 @section('scripts')
     <script>
         $(document).ready(function () {
-//            $('.selectpicker').selectpicker({
-//                style: 'fanexInput'
-//            });
+            $('.selectpicker').selectpicker();
+
+            $('#exCountry, #exCurrency').change(function() {
+                $('.tempAmount').slideUp(300);
+            });
+
+            $('#exAmount').keyup(function() {
+                $('.tempAmount').slideUp(300);
+            });
         });
 
         function reloadCaptcha() {
@@ -154,7 +160,6 @@
         }
 
         function getAmount() {
-            alert('آآآآآآی،\n ماااااادرتو گاییدم');
             $.ajax({
                 method: 'POST',
                 url: '/calculate',
@@ -165,7 +170,9 @@
                     "country": $('#exCountry').val()
                 },
             }).done(function (response) {
-                alert(response);
+                $('#tempAmountNumber').text(accounting.formatMoney($('#exAmount').val(), "", 0)+ ' ' + $('#exCurrency').val());
+                $('.calcAmount').text(accounting.formatMoney(response*$('#exAmount').val(), "", 0));
+                $('.tempAmount').slideDown(300);
             });
         }
 

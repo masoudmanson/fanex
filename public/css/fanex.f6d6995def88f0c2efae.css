@@ -178,7 +178,7 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', tahoma, sans-serif;
 }
 
 .navbar {
@@ -244,6 +244,11 @@ body {
   font-size: 18px;
   font-weight: 400;
   text-align: left;
+}
+
+.indexWrapper .indexLeft .mainForm .tempAmount h2 #tempAmountNumber {
+  font-weight: 500 !important;
+  color: #F58121;
 }
 
 .indexWrapper .indexLeft .mainForm .tempAmount .tempAmountWrapper {
@@ -334,6 +339,10 @@ body {
 .fanexInput:hover, .fanexInput:active, .fanexInput:focus {
   color: #333333;
   background-color: #F4F4F4;
+}
+
+.fanexInput img {
+  margin-top: 5px;
 }
 
 .dropdown-menu {
