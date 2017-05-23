@@ -14,7 +14,7 @@ class UptController extends Controller
     {
         $client = new Client();
 
-        $U_to_R = $client->get('https://private-3df4f-fanex.apiary-mock.com/er');
+        $U_to_R = $client->get('http://172.16.4.121:3000/er');
 
         return $U_to_R;
 
@@ -29,7 +29,7 @@ class UptController extends Controller
     {
         $client = new Client();
 
-        $T_to_U = $client->get('https://private-3df4f-fanex.apiary-mock.com/upt/er');
+        $T_to_U = $client->get('http://172.16.4.121:3000/er');
 
         return $T_to_U;
 
@@ -41,13 +41,13 @@ class UptController extends Controller
 
         $EuroER = $result->getBody()->getContents();
 //        dd(json_decode($EuroER)[0]->er);
-        $EuroTTL = $this->getEuroExchangeRate($request);
+//        $EuroTTL = $this->getEuroExchangeRate($request);
 
         if($request['currency']=='Turkish Lira'){
 
 
         }
-        echo 'calculating...';
+       return json_decode($EuroER)[0]->er;
     }
 
 
