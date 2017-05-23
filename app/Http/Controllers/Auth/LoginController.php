@@ -38,20 +38,6 @@ class LoginController extends Controller
 
         $id = adapterAssignment()->getId();
 
-        $arguments = array(
-            'client_id' => $id,
-            'response_type' => 'token',
-            'redirect_uri' => $request->redirect_uri,
-            'prompt' => 'login'
-        );
-//
-        $queryString = http_build_query($arguments);
-
-//        return Redirect::away('http://sandbox.fanapium.com/oauth2/authorize/?client_id='.$id.'&response_type=token&redirect_uri='.$params['redirect_uri'].'&prompt=login');
-        //todo
-//        $tmp = $request->redirect_uri ;
-//        $tmp = str_replace('&','#',$tmp);
-
         return Redirect::away('http://sandbox.fanapium.com/oauth2/authorize/?client_id=' . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri . '&state='.$request->queryString.'&prompt=login');
 
 //        return \Redirect::away('http://sandbox.fanapium.com/oauth2/authorize?'.$queryString);
