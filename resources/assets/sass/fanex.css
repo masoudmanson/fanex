@@ -243,6 +243,8 @@ body {
   .fanexInput:hover, .fanexInput:active, .fanexInput:focus {
     color: #333333;
     background-color: #F4F4F4; }
+  .fanexInput img {
+    float: right; }
 
 .dropdown-menu {
   margin: 0;

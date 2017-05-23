@@ -4,6 +4,7 @@
             aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+
     <a class="navbar-brand" href="/">
         FANEx
     </a>
@@ -12,17 +13,9 @@
         <ul class="navbar-nav mr-auto">
 
         </ul>
-        {{--<ul class="navbar-nav">--}}
-            {{--<li class="nav-item">--}}
-                {{--<a href="#" class="nav-link">Log In</a>--}}
-            {{--</li>--}}
-            {{--<li class="nav-item">--}}
-                {{--<a href="#" class="nav-link">Register</a>--}}
-            {{--</li>--}}
-        {{--</ul>--}}
 
+        {{-- Authentication Links --}}
         <ul class="navbar-nav">
-            <!-- Authentication Links -->
             @if (Auth::guest())
                 <li class="nav-item">
                     <a href="{{ route('login') }}" class="nav-link">Login</a>
@@ -44,10 +37,7 @@
                         {{ csrf_field() }}
                     </form>
                 </li>
-
             @endif
         </ul>
-
-
     </div>
 </nav>

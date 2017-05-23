@@ -12,6 +12,7 @@
     @include('partials.nav')
     <div class="container-fluid  p-0 indexWrapper">
         <div class="row m-0">
+            {{-- Form Container --}}
             <div class="col-lg-6 col-md-12 p-0 indexWrapperInside indexLeft">
                 <div class="mainForm">
                     <h1 class="pb-3">International Money E-Transfer</h1>
@@ -79,8 +80,8 @@
                             <div class="col-md-6 col-sm-12 pr-2">
                                 <div class="form-group bsWrapper">
                                     <a href="/" class="captchaRefresher"><i class="icon-refresh bsIcon"></i></a>
-                                    <div class="fanexInput">
-
+                                    <div class="fanexInput" style="text-align:center;">
+                                        {!! Captcha::img('flat') !!}
                                     </div>
                                 </div>
                             </div>
@@ -120,6 +121,7 @@
                 </div>
             </div>
 
+            {{-- Map and Static Pages Container --}}
             <div class="col-lg-6 col-md-12 p-0 indexWrapperInside indexRight">
                 <div id="mapWrapper">
 

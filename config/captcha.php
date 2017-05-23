@@ -13,14 +13,14 @@ return [
 
     'flat'   => [
         'length'    => 6,
-        'width'     => 160,
-        'height'    => 46,
-        'quality'   => 90,
-        'lines'     => 6,
+        'width'     => 140,
+        'height'    => 50,
+        'quality'   => 100,
+        'lines'     => 12,
         'bgImage'   => false,
-        'bgColor'   => '#ecf2f4',
-        'fontColors'=> ['#2c3e50', '#c0392b', '#16a085', '#c0392b', '#8e44ad', '#303f9f', '#f57c00', '#795548'],
-        'contrast'  => -5,
+        'bgColor'   => '#f8f8f8',
+        'fontColors'=> ['#000', '#222', '#444', '#666', '#888'],
+        'contrast'  => 0,
     ],
 
     'mini'   => [
