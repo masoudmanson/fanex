@@ -14,46 +14,61 @@ use Illuminate\Http\Request;
 trait PlatformTrait
 {
 
-    public function RegisterWithSSO(Request $request)
+    public function registerWithSSO(Request $request)
     {
-        $code = $request['code'];
-        $nick = $request['nickname'];
+        $token = $request->bearerToken();
 
-        $id = adapterAssignment()->getId();
-        $secret = adapterAssignment()->getSecret();
+//        $nick = $request['nickname'];
+        $nick = $request->nickname;
 
         $client = new Client();
-        $res = $client->post('http://sandbox.fanapium.com/aut/registerWithSSO', [
-            "form_params" => [
-                "nickname" => 'authorization_code',
-                "code" => $code,
-                "redirect_uri" => $request->url(),
-                "client_id" => $id,
-                "client_secret" => $secret,
+        $res = $client->request('GET', 'http://sandbox.fanapium.com:8080/aut/registerWithSSO/', [
+            'query' => ['nickname' => $nick],
+            'headers' => [
+                '_token_' => $token,
+                '_token_issuer_' => 1
             ]
         ]);
 
+//        dd($res->getBody()->getContents());
         return $res;
     }
 
-    public function GetCurrentPlatformUser(Request $request , $token)
+    public function getCurrentPlatformUser($token)
     {
-        $code = $request['code'];
-        $nick = $request['nickname'];
-
-        $id = adapterAssignment()->getId();
-        $secret = adapterAssignment()->getSecret();
-
-        //token in header
         $client = new Client();
-        $res = $client->post('http://sandbox.fanapium.com/user', [
-//            "form_params" => [
-//                "nickname" => 'authorization_code',
-//                "code" => $code,
-//                "redirect_uri" => $request->url(),
-//                "client_id" => $id,
-//                "client_secret" => $secret,
-//            ]
+        $res = $client->get('http://sandbox.fanapium.com:8080/nzh/getUserProfile', [
+            'headers' => [
+                '_token_' => $token,
+                '_token_issuer_' => 1
+            ]
         ]);
+        return $res;
+    }
+
+    public function followBusiness($token)
+    {
+        $client = new Client();
+        //businessId should receive from getBusiness.however it's static in platform db.
+        $res = $client->get('http://sandbox.fanapium.com:8080/nzh/follow/?businessId=22&follow=true', [
+            'headers' => [
+                '_token_' => $token,
+                '_token_issuer_' => 1
+            ]
+        ]);
+        return $res;
+    }
+
+    public function getBusiness($token)
+    {
+        $client = new Client();
+        //business token must taken from sso
+        $res = $client->get('http://sandbox.fanapium.com:8080/nzh/getUserBusiness', [
+            'headers' => [
+                '_token_' => $token,// get business token and put in here
+                '_token_issuer_' => 1
+            ]
+        ]);
+        return $res;
     }
 }

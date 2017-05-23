@@ -12,6 +12,7 @@ class PaymentController extends Controller
     public function __construct()
     {
         $this->middleware('checkToken', ['only' => ['pay']]);
+        $this->middleware('checkUser', ['only' => ['pay']]);
     }
 
     /**
