@@ -12,7 +12,7 @@ class PaymentController extends Controller
     public function __construct()
     {
         $this->middleware('checkToken', ['only' => ['pay']]);
-        $this->middleware('checkUser', ['only' => ['pay']]);
+//        $this->middleware('checkUser', ['only' => ['pay']]);
     }
 
     /**
@@ -29,9 +29,10 @@ class PaymentController extends Controller
 
     public function pay(Request $request)
     {
-dd('slm');
+dd($request);
+        //todo keywords:state, base64,decode,view
 
-        //todo
+        return response()->view('beneficiary', $request->query(), 200)->header('authorization', 'Bearer ' . $request->bearerToken());
     }
 
     /**
