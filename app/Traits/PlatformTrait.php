@@ -10,6 +10,7 @@ namespace App\Traits;
 
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Morilog\Jalali\jDate;
 
 trait PlatformTrait
 {
@@ -80,9 +81,10 @@ trait PlatformTrait
         $token = $token_object->access_token;
 
         $user = $this->getCurrentPlatformUser($request->bearerToken());
-        if (!$user->hasError)
+//        if (!$user->hasError)
             $userId = $user->result->userId;
-        else
+//        else
+
             //redirect to login? or refresh the user token ,,,
             // *hint: if refresh token was needed, get the user refresh token from its db row
             //todo how can I know user object on db, if his token expired and I don't have his userId??
@@ -94,7 +96,7 @@ trait PlatformTrait
                 'userId' => $userId,// get userId from his token: gholi = 204
                 'billNumber' => '135f31bd2a0675d5', //todo : make a random factor bill number , it's the same URN (Unique Reference Number)
                 'description' => 'for now we have no description',
-                'deadline' => '', //persian date in format yyyy/mm/dd
+                'deadline' => jDate::forge('now')->format('Y/m/d'), //persian date in format yyyy/mm/dd
                 'productId[]' => 0, //I've no idea
                 'price[]' => 0, //give the price from saved transaction
                 'productDescription[]' => 'for now we have no description', //I've no idea

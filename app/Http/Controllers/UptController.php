@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Beneficiary;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Psr\Http\Message\ServerRequestInterface;
@@ -47,6 +48,9 @@ class UptController extends Controller
 
 
         }
+
+        //write to backlog
+
        return json_decode($EuroER)[0]->er;
     }
 

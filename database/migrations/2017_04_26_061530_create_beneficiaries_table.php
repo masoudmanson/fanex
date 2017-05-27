@@ -33,7 +33,8 @@ class CreateBeneficiariesTable extends Migration
             $table->timestamps();
 
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onUpdate('cascade')->onDelete('set null');
         });
     }
 
@@ -44,6 +45,10 @@ class CreateBeneficiariesTable extends Migration
      */
     public function down()
     {
+        Schema::table('transactions', function($table) {
+            $table->dropForeign(['user_id']);
+        });
+
         Schema::dropIfExists('beneficiaries');
     }
 }
