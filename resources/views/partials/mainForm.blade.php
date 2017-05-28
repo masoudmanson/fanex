@@ -91,7 +91,7 @@
             <div class="col-sm-6 col-xs-12 pl-md-2">
                 <div class="form-group bsWrapper">
                     <i class="icon-check bsIcon"></i>
-                    <input type="text" class="form-control fanexInput" name="captcha"
+                    <input type="text" class="form-control fanexInput" name="captcha" id="captcha"
                            placeholder="Enter Captcha Here">
                 </div>
             </div>

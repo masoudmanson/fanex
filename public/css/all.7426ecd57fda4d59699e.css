@@ -8179,6 +8179,14 @@ select.selectpicker {
   content: "\49";
 }
 
+.icon-agreement:before {
+  content: "\4a";
+}
+
+.icon-about:before {
+  content: "\4b";
+}
+
 * {
   outline: none !important;
   font-family: 'Roboto', sans-serif !important;

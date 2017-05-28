@@ -64,7 +64,8 @@ function getAmount() {
                 '_token': csrfToken,
                 "amount": $('#exAmount').val(),
                 "currency": $('#exCurrency').val(),
-                "country": $('#exCountry').val()
+                "country": $('#exCountry').val(),
+                "captcha": $('#captcha').val()
             },
         }).done(function (response) {
             $('#mainFormLoader').fadeOut(200);
