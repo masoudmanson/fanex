@@ -104,8 +104,12 @@ return [
 
         //my custom validation error msgs.
         'captcha' => [
-            'required' => 'captcha is required.',
-            'captcha' => 'Incorrect captcha.',
+            'required' => 'Captcha Required!',
+            'captcha'  => "Incorrect Captcha.",
+        ],
+        'amount' => [
+            'required'  => "Please Enter an Amount.",
+            'min'  => "Please Enter an Valid Amount."
         ],
     ],
 

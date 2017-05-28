@@ -1,10 +1,7 @@
 <div class="mainForm">
     {{-- Form Loading Container --}}
     <div id="mainFormLoader" style="display:none;">
-        {{--<div class="spinner">--}}
-        {{--<div class="double-bounce1"></div>--}}
-        {{--<div class="double-bounce2"></div>--}}
-        {{--</div>--}}
+        <div class="errors" style="display: none"></div>
         <div class="spinner2">
             <div class="bounce1"></div>
             <div class="bounce2"></div>

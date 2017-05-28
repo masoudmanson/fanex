@@ -43,7 +43,7 @@ $(document).ready(function () {
 });
 
 function reloadCaptcha() {
-    // $('.tempAmount').slideUp(300);
+    $('#captcha').val('');
     var captcha = $('.captcha-img');
     var config = captcha.data('refresh-config');
     $.ajax({
@@ -67,6 +67,20 @@ function getAmount() {
                 "country": $('#exCountry').val(),
                 "captcha": $('#captcha').val()
             },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reloadCaptcha();
+                var json = $.parseJSON(xhr.responseText);
+                $(json).each(function(i,val) {
+                    $('#mainFormLoader .spinner2').fadeOut(200);
+                    $.each(val, function (k, v) {
+                        $('#mainFormLoader .errors').fadeIn(200).html(v);
+                        setTimeout(function() {
+                            $('#mainFormLoader, #mainFormLoader .errors').fadeOut(200);
+                            $('#mainFormLoader .spinner2').fadeIn();
+                        }, 1000);
+                    });
+                });
+            }
         }).done(function (response) {
             $('#mainFormLoader').fadeOut(200);
             $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 2) + ' ' + $('#exCurrency').val() + 's');
