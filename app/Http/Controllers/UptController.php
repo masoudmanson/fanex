@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Beneficiary;
+use App\Http\Requests\RemittanceForm;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Psr\Http\Message\ServerRequestInterface;
 
 class UptController extends Controller
@@ -29,8 +31,9 @@ class UptController extends Controller
         return $T_to_U;
     }
 
-    public function calculateRemittance(Request $request)
+    public function calculateRemittance(RemittanceForm $request)
     {
+
         $result = $this->getEuroExchangeRate();
 
         $EuroER = $result->getBody()->getContents();
@@ -44,7 +47,7 @@ class UptController extends Controller
 
         //write to backlog
 
-       return json_decode($EuroER)[0]->er;
+       return json_decode($EuroER)[0]->er*$request->amount;
     }
 
 

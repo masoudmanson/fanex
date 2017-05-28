@@ -94,7 +94,7 @@ trait PlatformTrait
                 //todo
                 'redirectURL' => 'http://localhost:8080/profile',// factor page
                 'userId' => $userId,// get userId from his token: gholi = 204
-                'billNumber' => '135f31bd2a0675d5', //todo : make a random factor bill number , it's the same URN (Unique Reference Number)
+                'billNumber' => generateUniqueReferenceNumber(), //todo : make a random factor bill number , it's the same URN (Unique Reference Number)
                 'description' => 'for now we have no description',
                 'deadline' => jDate::forge('now')->format('Y/m/d'), //persian date in format yyyy/mm/dd
                 'productId[]' => 0, //I've no idea
