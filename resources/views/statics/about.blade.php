@@ -1,18 +1,19 @@
 @extends('layouts.master')
 
 @section('styles')
-    <script src="https://www.amcharts.com/lib/3/ammap.js"></script>
-    <script src="https://www.amcharts.com/lib/3/maps/js/worldHigh.js"></script>
-    <script src="https://www.amcharts.com/lib/3/themes/black.js"></script>
-    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
     <style>
         .bgWrapper {
             background-color: #333 !important;
         }
-        .bgDiv i {
-            color: #666;
+        .bgDiv i::before {
+            color: rgba(0, 0, 0, 0.3);
             font-size: 500px;
             position: absolute;
+            margin: auto;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            vertical-align: middle;
         }
     </style>
 @endsection

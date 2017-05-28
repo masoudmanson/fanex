@@ -62,7 +62,7 @@ body {
                 @include transition(all .3s);
                 &:hover, &:active, &:focus {
                     text-decoration: none;
-                    color: $fanapDark;
+                    opacity: 0.6;
                 }
             }
         }
@@ -99,7 +99,7 @@ body {
         width: 100%;
     }
     .indexWrapperInside {
-        height: calc(100vh - 225px);
+        height: calc(100vh - 210px);
         min-height: 600px;
         position: relative;
         @include mq($max-width: 1200px) {
@@ -121,7 +121,7 @@ body {
                 margin: 50px auto;
                 width: calc(100% - 100px);
                 position: static;
-                transform: translate(0,0);
+                transform: translate(0, 0);
             }
             @include mq($max-width: 520px) {
                 margin: 0 auto;
@@ -219,10 +219,27 @@ body {
                 }
             }
         }
+        .addressWrapper {
+            @extend .mottoWrapper;
+            @include absolut-center(75%, 50%);
+            h4 {
+                font-weight: 300;
+                font-size: 18px;
+                line-height: 1.6em;
+            }
+            p {
+                font-size: 18px;
+                font-weight: 200;
+                i {
+                    vertical-align: middle;
+                    padding: 0 10px 0 0;
+                }
+            }
+        }
         .staticHeader {
             @include absolut-center();
             text-align: center;
-            width: 80%;
+            width: 70%;
             color: #fff;
             .fanexLogoName {
                 font-weight: 100;
@@ -282,6 +299,13 @@ body {
     img {
         margin-top: 5px;
     }
+}
+
+textarea.fanexInput {
+    width: 100%;
+    resize: none;
+    min-height: 150px;
+    padding: 15px 20px;
 }
 
 .dropdown-menu {
@@ -352,6 +376,10 @@ body {
     @include transition(all .3s);
 }
 
+.fanexBtn.hasIcon {
+    line-height: 52px !important;
+}
+
 .fanexBtnOutline {
     @extend .fanexBtn;
     background-color: transparent;
@@ -402,8 +430,6 @@ body {
             list-style: none;
             float: left;
             a {
-                padding-left: 0 !important;
-                padding-right: 25px;
                 text-decoration: none;
             }
             @include mq($max-width: 768px) {
@@ -417,11 +443,15 @@ body {
     }
     .footerLeft {
         float: left;
-        a {
-            color: $fanapDark;
-            @include transition(all .3s);
-            &:hover {
-                color: $fanapOrange;
+        li {
+            a {
+                padding-left: 0;
+                padding-right: 25px;
+                color: $fanapDark;
+                @include transition(all .3s);
+                &:hover {
+                    color: $fanapOrange;
+                }
             }
         }
 
@@ -443,9 +473,11 @@ body {
                 font-size: 28px;
                 padding-top: 0;
                 padding-bottom: 0;
+                padding-right: 0;
+                padding-left: 25px;
                 @include transition(all .3s);
                 &:hover {
-                    color: $fanapDark;
+                    opacity: 0.6;
                 }
             }
         }

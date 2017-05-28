@@ -32,7 +32,7 @@ $(document).ready(function () {
     });
 
     //About Page Scroll Bar
-    $('.fanexMotto, .dropdown-menu .inner').niceScroll({
+    $('.fanexMotto, .dropdown-menu .inner, textarea').niceScroll({
         cursorcolor: "#000",
         cursoropacitymin: 0.1,
         cursoropacitymax: 0.4,
@@ -43,7 +43,7 @@ $(document).ready(function () {
 });
 
 function reloadCaptcha() {
-    $('.tempAmount').slideUp(300);
+    // $('.tempAmount').slideUp(300);
     var captcha = $('.captcha-img');
     var config = captcha.data('refresh-config');
     $.ajax({
@@ -71,8 +71,9 @@ function getAmount() {
             $('#mainFormLoader').fadeOut(200);
             $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 2) + ' ' + $('#exCurrency').val() + 's');
             $('#tempAmountCountry').text($('#exCountry').val());
-            $('.calcAmount').text(accounting.formatMoney(response * $('#exAmount').val(), "", 0));
+            $('.calcAmount').text(accounting.formatMoney(response, "", 0));
             $('.tempAmount').slideDown(300);
+            reloadCaptcha();
         });
     }, 1000);
 }
