@@ -35,10 +35,10 @@ $breakePoint_sm: "only screen and (min-width: 321px) AND (max-width:640px)";
     box-shadow: $option;
 }
 
-@mixin absolut-center() {
+@mixin absolut-center($top:50%, $left:50%) {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: $top;
+    left: $left;
     transform: translate(-50%, -50%);
 }
 

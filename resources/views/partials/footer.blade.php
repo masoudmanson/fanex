@@ -4,13 +4,13 @@
             {{-- Footer Left List --}}
             <ul class="footerLeft">
                 <li>
-                    <a href="#" class="nav-link">Terms And Conditions</a>
+                    <a href="/terms" class="nav-link">Terms And Conditions</a>
                 </li>
                 <li>
                     <a href="/about" class="nav-link">About Us</a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link">Contact Us</a>
+                    <a href="/contact" class="nav-link">Contact Us</a>
                 </li>
             </ul>
             {{-- Footer Right List --}}

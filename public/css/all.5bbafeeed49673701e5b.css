@@ -8267,7 +8267,7 @@ body {
 
 .navbar .navbar-nav li.nav-item a.nav-link:hover, .navbar .navbar-nav li.nav-item a.nav-link:active, .navbar .navbar-nav li.nav-item a.nav-link:focus {
   text-decoration: none;
-  color: #333333;
+  opacity: 0.6;
 }
 
 .bgWrapper {
@@ -8306,7 +8306,7 @@ body {
 }
 
 .indexWrapper .indexWrapperInside {
-  height: calc(100vh - 225px);
+  height: calc(100vh - 210px);
   min-height: 600px;
   position: relative;
 }
@@ -8464,7 +8464,7 @@ body {
   display: none !important;
 }
 
-.indexWrapper .indexRight .mottoWrapper {
+.indexWrapper .indexRight .mottoWrapper, .indexWrapper .indexRight .addressWrapper {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -8474,25 +8474,49 @@ body {
   color: #fff;
 }
 
-.indexWrapper .indexRight .mottoWrapper .fanexLogoName {
+.indexWrapper .indexRight .mottoWrapper .fanexLogoName, .indexWrapper .indexRight .addressWrapper .fanexLogoName {
   font-weight: 100;
   font-size: 120px;
 }
 
 @media only screen and (max-width: 1400px) {
-  .indexWrapper .indexRight .mottoWrapper .fanexLogoName {
+  .indexWrapper .indexRight .mottoWrapper .fanexLogoName, .indexWrapper .indexRight .addressWrapper .fanexLogoName {
     font-size: 90px;
   }
 }
 
-.indexWrapper .indexRight .mottoWrapper .fanexMotto {
+.indexWrapper .indexRight .mottoWrapper .fanexMotto, .indexWrapper .indexRight .addressWrapper .fanexMotto {
   margin-top: -40px;
 }
 
 @media only screen and (max-width: 1400px) {
-  .indexWrapper .indexRight .mottoWrapper .fanexMotto {
+  .indexWrapper .indexRight .mottoWrapper .fanexMotto, .indexWrapper .indexRight .addressWrapper .fanexMotto {
     margin-top: -20px;
   }
+}
+
+.indexWrapper .indexRight .addressWrapper {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.indexWrapper .indexRight .addressWrapper h4 {
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.6em;
+}
+
+.indexWrapper .indexRight .addressWrapper p {
+  font-size: 18px;
+  font-weight: 200;
+}
+
+.indexWrapper .indexRight .addressWrapper p i {
+  vertical-align: middle;
+  padding: 0 10px 0 0;
 }
 
 .indexWrapper .indexRight .staticHeader {
@@ -8502,7 +8526,7 @@ body {
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   text-align: center;
-  width: 80%;
+  width: 70%;
   color: #fff;
 }
 
@@ -8571,6 +8595,13 @@ body {
 
 .fanexInput img {
   margin-top: 5px;
+}
+
+textarea.fanexInput {
+  width: 100%;
+  resize: none;
+  min-height: 150px;
+  padding: 15px 20px;
 }
 
 .dropdown-menu {
@@ -8646,6 +8677,10 @@ body {
   transition: all 0.3s;
 }
 
+.fanexBtn.hasIcon, .hasIcon.fanexBtnOutline, .hasIcon.fanexBtnOutlineGrey, .hasIcon.fanexBtnOutlineOrange, .hasIcon.fanexBtnGrey, .hasIcon.fanexBtnOrange {
+  line-height: 52px !important;
+}
+
 .fanexBtnOutline, .fanexBtnOutlineGrey, .fanexBtnOutlineOrange {
   background-color: transparent;
   color: #949597;
@@ -8697,8 +8732,6 @@ body {
 }
 
 .fanexFooter ul li a {
-  padding-left: 0 !important;
-  padding-right: 25px;
   text-decoration: none;
 }
 
@@ -8717,12 +8750,14 @@ body {
   float: left;
 }
 
-.fanexFooter .footerLeft a {
+.fanexFooter .footerLeft li a {
+  padding-left: 0;
+  padding-right: 25px;
   color: #333333;
   transition: all 0.3s;
 }
 
-.fanexFooter .footerLeft a:hover {
+.fanexFooter .footerLeft li a:hover {
   color: #d30e4c;
 }
 
@@ -8748,11 +8783,13 @@ body {
   font-size: 28px;
   padding-top: 0;
   padding-bottom: 0;
+  padding-right: 0;
+  padding-left: 25px;
   transition: all 0.3s;
 }
 
 .fanexFooter .footerRight li a:hover {
-  color: #333333;
+  opacity: 0.6;
 }
 
 @media only screen and (max-width: 768px) {

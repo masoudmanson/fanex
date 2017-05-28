@@ -12,7 +12,8 @@
         "mews/captcha": "^2.1",
         "morilog/jalali": "^2.2",
         "symfony/psr-http-message-bridge": "^1.0",
-        "zendframework/zend-diactoros": "^1.4"
+        "zendframework/zend-diactoros": "^1.4",
+        "cornford/googlmapper": "2.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
