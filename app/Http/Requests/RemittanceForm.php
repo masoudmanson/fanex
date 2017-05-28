@@ -33,12 +33,12 @@ class RemittanceForm extends FormRequest
      *
      * @return array
      */
-    public function messages()
+    public function messages() //todo: maybe it should be delete, and add to lang validation file (for ability to define other language error msgs)
     {
-        return [
-            'captcha.required' => 'captcha required.',
-            'captcha.captcha'  => "Incorrect captcha.",
-            'amount.required'  => "please inter an amount.",
-        ];
+//        return [
+//            'captcha.required' => 'captcha required.',
+//            'captcha.captcha'  => "Incorrect captcha.",
+//            'amount.required'  => "please inter an amount.",
+//        ];
     }
 }

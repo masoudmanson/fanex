@@ -101,6 +101,12 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+
+        //my custom validation error msgs.
+        'captcha' => [
+            'required' => 'captcha is required.',
+            'captcha' => 'Incorrect captcha.',
+        ],
     ],
 
     /*
