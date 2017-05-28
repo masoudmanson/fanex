@@ -11,7 +11,8 @@
         }
         .bgDiv i {
             color: #666;
-            font-size: 120px;
+            font-size: 500px;
+            position: absolute;
         }
     </style>
 @endsection
@@ -24,7 +25,7 @@
     <div class="bgWrapper">
         <div class="col-lg-6 col-md-12 bgDiv bgDivLeft"></div>
         <div class="col-lg-6 col-md-12 bgDiv bgDivRight">
-            <i class="icon-group">Masoud</i>
+            <i class="icon-about"></i>
         </div>
     </div>
     <div class="container-fluid indexWrapper">
