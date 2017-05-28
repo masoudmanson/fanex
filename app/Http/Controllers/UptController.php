@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Beneficiary;
+use App\Http\Requests\RemittanceForm;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -30,19 +31,8 @@ class UptController extends Controller
         return $T_to_U;
     }
 
-    public function calculateRemittance(Request $request)
+    public function calculateRemittance(RemittanceForm $request)
     {
-        $rules = ['captcha' => 'required|captcha'];
-dd($request);
-        $validator = Validator::make($request->all(), $rules);//todo validation class must add to head of class
-        if ($validator->fails())
-        {
-            echo '<p style="color: #ff0000;">Incorrect!</p>';
-        }
-        else
-        {
-            echo '<p style="color: #00ff30;">Matched :)</p>';
-        }
 
         $result = $this->getEuroExchangeRate();
 
@@ -57,7 +47,7 @@ dd($request);
 
         //write to backlog
 
-       return json_decode($EuroER)[0]->er;
+       return json_decode($EuroER)[0]->er*$request->amount;
     }
 
 
