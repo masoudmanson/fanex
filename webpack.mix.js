@@ -1,11 +1,11 @@
 const {mix} = require('laravel-mix');
 
-// var LiveReloadPlugin = require('webpack-livereload-plugin');
-// mix.webpackConfig({
-//     plugins: [
-//         new LiveReloadPlugin()
-//     ]
-// });
+var LiveReloadPlugin = require('webpack-livereload-plugin');
+mix.webpackConfig({
+    plugins: [
+        new LiveReloadPlugin()
+    ]
+});
 
 /*
  |--------------------------------------------------------------------------
@@ -17,11 +17,11 @@ const {mix} = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-mix.scripts(['resources/assets/js/accounting.min.js'], 'public/js/scripts.js');
+
+mix.copy('node_modules/nicescroll/jquery.nicescroll.js', 'public/js');
 
 mix.js('resources/assets/js/app.js', 'public/js')
-    .js('public/js/scripts.js', 'public/js')
-    .sass('resources/assets/sass/app.scss', 'public/css')
-    .sass('resources/assets/sass/fanex.scss', 'public/css')
-    .version()
-    .options({ processCssUrls: false });
+    .js('resources/assets/js/scripts.js', 'public/js')
+    .sass('resources/assets/sass/all.scss', 'public/css');
+
+mix.version().options({processCssUrls: false});

@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+// Color Variables
+$fanapOrange: lighten(#a30b3b, 10%) ;//#F58121;
+$fanapDark: #333333;
+$fanapGrey: #949597;
+$fanapGreyLight: #F4F4F4;
+$fanapGreyUltraLight: #F8F8F8;
+$fanapGreyDark: #BBBBBB;
+$fanapRed: #F44336;
+$fanapGreen: #4CAF50;
+
+// Breakpoint Variables
+$breakePoint_xs: "only screen and (max-width:320px)";
+$breakePoint_sm: "only screen and (min-width: 321px) AND (max-width:640px)";
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin transition($option) {
+    -webkit-transition: $option;
+    -moz-transition: $option;
+    -ms-transition: $option;
+    -o-transition: $option;
+    transition: $option;
+}
+
+@mixin box-shadow($option) {
+    -webkit-box-shadow: $option;
+    -moz-box-shadow: $option;
+    box-shadow: $option;
+}
+
+@mixin absolut-center() {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin text-overflow(){
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

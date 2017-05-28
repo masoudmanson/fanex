@@ -16,25 +16,18 @@ class UptController extends Controller
     {
         $client = new Client();
 
-        $U_to_R = $client->get('http://localhost:3000/er');
+        $U_to_R = $client->get('http://172.16.4.65:3000/er');
 
         return $U_to_R;
-
-
-//        "er": "123",
-//    "date": "2015-08-05T08:40:51.620Z",
-//    "ttl": "12355234"
-
     }
 
     public function getLiraExchangeRate(Request $request)
     {
         $client = new Client();
 
-        $T_to_U = $client->get('http://localhost:3000/er');
+        $T_to_U = $client->get('http://172.16.4.65:3000/er');
 
         return $T_to_U;
-
     }
 
     public function calculateRemittance(Request $request)

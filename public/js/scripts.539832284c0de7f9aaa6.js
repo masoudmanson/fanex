@@ -63,31 +63,22 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/assets/sass/app.scss":
+/***/ "./resources/assets/js/scripts.js":
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+// require('./node_modules/nicescroll/jquery.nicescroll');
 
 /***/ }),
 
-/***/ "./resources/assets/sass/fanex.scss":
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 0:
+/***/ 1:
 /***/ (function(module, exports, __webpack_require__) {
 
-(function webpackMissingModule() { throw new Error("Cannot find module \"C:\\Users\\M.Amjadi\\Desktop\\FANEx\\public\\js\\all.js\""); }());
-__webpack_require__("./resources/assets/sass/app.scss");
-module.exports = __webpack_require__("./resources/assets/sass/fanex.scss");
+module.exports = __webpack_require__("./resources/assets/js/scripts.js");
 
 
 /***/ })
