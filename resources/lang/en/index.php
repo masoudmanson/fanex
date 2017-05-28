@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'calculate' => 'calculate',
-    'pay' => 'pay',
+    'calculate' => 'Calculate',
+    'pay' => 'Pay',
 
 ];

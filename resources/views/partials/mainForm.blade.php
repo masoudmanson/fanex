@@ -108,12 +108,12 @@
         <div class="row">
             {{-- Calculate Amount --}}
             <div class="col-sm-6 col-xs-12 pr-md-2 mb-xs-4">
-                <input type="button" class="btn fanexBtnOutlineOrange" value="Calculate"
+                <input type="button" class="btn fanexBtnOutlineOrange" value=@lang('index.calculate')
                        onclick="getAmount()"/>
             </div>
             {{-- Go For Payment --}}
             <div class="col-sm-6 col-xs-12 pl-md-2">
-                <input type="submit" class="btn fanexBtnOutlineGrey" value="Pay" name="payment"/>
+                <input type="submit" class="btn fanexBtnOutlineGrey" value=@lang('index.pay') name="payment"/>
             </div>
         </div>
 

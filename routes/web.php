@@ -22,10 +22,18 @@
 //Route::get('/users/{user}', 'UserController@show')->middleware('auth:api');
 
 
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Route;
 use Morilog\Jalali\Facades\jDate;
 
 Route::get('/', function () {
     return view('index');
+});
+
+Route::get('/{locale}', function ($locale) {
+    App::setLocale($locale);
+    return view('index');
+    //
 });
 
 // Static Routes
