@@ -26,9 +26,15 @@ Route::get('/', function () {
     return view('index');
 });
 
+// Static Routes
+
 Route::get('/get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'flat') {
     return $captcha->src($config);
 });
+
+Route::get('/about', 'StaticsController@about');
+Route::get('/terms', 'StaticsController@terms');
+Route::get('/contact', 'StaticsController@contact');
 
 Auth::routes();
 

@@ -1,39 +1,50 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
 <head>
+    {{-- SEO & Meta Tags --}}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
+    {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'FanEx') }}</title>
 
-    <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <link href="{{ mix('css/fanex.css') }}" rel="stylesheet">
-@yield('styles')
+    {{-- General Styles --}}
+    <link href="{{ mix('css/all.css') }}" rel="stylesheet">
 
-<!-- Scripts -->
-    <script>
-        window.Laravel = {!! json_encode([
-            'csrfToken' => csrf_token(),
-        ]) !!};
-    </script>
+    {{-- Yielding Page Styles --}}
+    @yield('styles')
+
 </head>
+
 <body>
 
+{{-- Yielding Page Content --}}
+@yield('header')
+
+{{-- Yielding Page Content --}}
 @yield('content')
 
-<!-- Scripts -->
+{{-- Yielding Page Content --}}
+@yield('footer')
+
+{{-- General Scripts --}}
 <script src="{{ mix('js/app.js') }}"></script>
 <script src="{{ mix('js/scripts.js') }}"></script>
+<script src="{{ asset('js/accounting.min.js') }}"></script>
+<script src="{{ asset('js/jquery.nicescroll.js') }}"></script>
 
+<script>
+    var csrfToken = $('meta[name="csrf-token"]').attr('content');
+</script>
+
+{{-- Yielding Pages Scripts --}}
 @yield('scripts')
 
-{{--@if(config('app.env') == 'local')--}}
-    {{--<script src="http://localhost:35729/livereload.js"></script>--}}
-{{--@endif--}}
+@if(config('app.env') == 'local')
+    <script src="http://localhost:35729/livereload.js"></script>
+@endif
 </body>
 </html>

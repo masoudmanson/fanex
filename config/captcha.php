@@ -12,14 +12,14 @@ return [
     ],
 
     'flat'   => [
-        'length'    => 6,
-        'width'     => 140,
+        'length'    => 5,
+        'width'     => 200,
         'height'    => 50,
         'quality'   => 100,
-        'lines'     => 12,
+        'lines'     => 8,
         'bgImage'   => false,
         'bgColor'   => '#f8f8f8',
-        'fontColors'=> ['#000', '#222', '#444', '#666', '#888'],
+        'fontColors'=> ['#000', '#222', '#444', '#666'],
         'contrast'  => 0,
     ],
 
