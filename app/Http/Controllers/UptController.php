@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Beneficiary;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Psr\Http\Message\ServerRequestInterface;
 
 class UptController extends Controller
@@ -38,6 +39,18 @@ class UptController extends Controller
 
     public function calculateRemittance(Request $request)
     {
+        $rules = ['captcha' => 'required|captcha'];
+dd($request);
+        $validator = Validator::make($request->all(), $rules);//todo validation class must add to head of class
+        if ($validator->fails())
+        {
+            echo '<p style="color: #ff0000;">Incorrect!</p>';
+        }
+        else
+        {
+            echo '<p style="color: #00ff30;">Matched :)</p>';
+        }
+
         $result = $this->getEuroExchangeRate();
 
         $EuroER = $result->getBody()->getContents();
