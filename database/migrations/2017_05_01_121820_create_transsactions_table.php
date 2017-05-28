@@ -22,11 +22,15 @@ class CreateTranssactionsTable extends Migration
             $table->enum('status',['canceled','unsuccessful','successful'])->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('beneficiary_id')->references('id')->on('beneficiaries');
-            $table->foreign('backlog_id')->references('id')->on('backlogs');
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onUpdate('cascade')->onDelete('set null');
 
-            //check how to drop foreign keys, and set null onDelete, cascading onUpdate
+            $table->foreign('beneficiary_id')->references('id')->on('beneficiaries')
+                ->onUpdate('cascade')->onDelete('set null');
+
+            $table->foreign('backlog_id')->references('id')->on('backlogs')
+                ->onUpdate('cascade')->onDelete('set null');
+
         });
     }
 
@@ -37,6 +41,12 @@ class CreateTranssactionsTable extends Migration
      */
     public function down()
     {
+        Schema::table('transactions', function($table) {
+            $table->dropForeign(['user_id']);
+            $table->dropForeign(['beneficiary_id']);
+            $table->dropForeign(['backlog_id']);
+        });
+
         Schema::dropIfExists('transactions');
     }
 }

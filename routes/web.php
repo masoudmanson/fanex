@@ -22,6 +22,8 @@
 //Route::get('/users/{user}', 'UserController@show')->middleware('auth:api');
 
 
+use Morilog\Jalali\Facades\jDate;
+
 Route::get('/', function () {
     return view('index');
 });

@@ -82,4 +82,23 @@ trait TokenTrait
     }
 
 
+    public function refreshToken($token)
+    {
+        $id = adapterAssignment()->getId();
+        $secret = adapterAssignment()->getSecret();
+
+        $client = new Client();
+        $res = $client->post('http://sandbox.fanapium.com/oauth2/token', [
+            'form_params' => [
+                'grant_type'=>'refresh_token',
+                'refresh_token' => $token,
+                'client_id' => $id,
+                'client_secret' => $secret,
+            ]
+        ]);
+
+        return $res;
+    }
+
+
 }

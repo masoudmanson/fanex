@@ -179,6 +179,7 @@ return [
 
         \App\Providers\SSOServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
+        Morilog\Jalali\JalaliServiceProvider::class,
 
     ],
 
@@ -230,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
+        'jDate' => Morilog\Jalali\Facades\jDate::class
 
     ],
 

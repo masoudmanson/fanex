@@ -68,6 +68,9 @@ class UserInformationController extends Controller
 
             if($sso_result->active){
 
+                $follow_res = $this->followBusiness($request->bearerToken());
+
+//                dd($follow_res);
                 $user = new User;
 
                 $user->firstname = $dotin_result->firsname;
@@ -76,7 +79,7 @@ class UserInformationController extends Controller
 
                 $user->save();http://sandbox.fanapium.com:8080/nzh/follow/?businessId=22&follow=true
 
-                return response()->view('beneficiary', $data, 200)->header('authorization', 'Bearer ' . $token);
+                return response()->view('beneficiary', $data, 200)->header('authorization', 'Bearer ' . $request->bearerToken());
             }
         }
         /*

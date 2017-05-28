@@ -15,11 +15,13 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unique()->nullable();//maybe string
+            $table->integer('userId')->unique()->nullable();//maybe string
 //            $table->string('api_token')->nullable();
             $table->string('api_token', 60)->unique();
             $table->string('firstname');
             $table->string('lastname');
+
+//** should be encrypted
             $table->string('account_number')->nullable();
             $table->string('mobile')->nullable();
             $table->enum('gender', ['Mr.', 'Ms.', 'Co.'])->nullable();
@@ -31,7 +33,8 @@ class CreateUsersTable extends Migration
             $table->string('tel')->nullable();
             $table->string('fax')->nullable();
             $table->string('email')->unique();
-            $table->string('password');
+//            $table->string('password');
+//**
             $table->boolean('is_authorized')->nullable();
             $table->rememberToken();
             $table->timestamps();
