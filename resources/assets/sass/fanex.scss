@@ -453,13 +453,12 @@ textarea.fanexInput {
                     color: $fanapOrange;
                 }
             }
-        }
-
-        @include mq($max-width: 1200px) {
-            a {
-                color: #fff;
-                &:hover {
-                    color: $fanapDark;
+            @include mq($max-width: 1200px) {
+                a {
+                    color: #fff;
+                    &:hover {
+                        opacity: 0.6;
+                    }
                 }
             }
         }
@@ -512,6 +511,13 @@ textarea.fanexInput {
     z-index: 3000;
     .spinner2 {
         @include absolut-center();
+    }
+    .errors {
+        @include absolut-center();
+        font-size: 32px;
+        font-weight: 600;
+        color: $fanapRed;
+        text-align: center;
     }
 }
 
