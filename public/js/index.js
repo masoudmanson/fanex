@@ -77,7 +77,7 @@ function getAmount() {
                         setTimeout(function() {
                             $('#mainFormLoader, #mainFormLoader .errors').fadeOut(200);
                             $('#mainFormLoader .spinner2').fadeIn();
-                        }, 1000);
+                        }, 2000);
                     });
                 });
             }

@@ -25,7 +25,7 @@ class RemittanceForm extends FormRequest
     {
         return [
             'captcha' => 'required|captcha',
-            'amount'  => 'required|min:2'
+            'amount'  => 'required|min:2|integer|between:10,10000'
         ];
     }
 
@@ -37,11 +37,12 @@ class RemittanceForm extends FormRequest
     public function messages() //todo: maybe it should be delete, and add to lang validation file (for ability to define other language error msgs)
     {
 
-//        return [
-//            'captcha.required' => 'Captcha Required!',
-//            'captcha.captcha'  => "Incorrect Captcha.",
-//            'amount.required'  => "Please Enter an Amount.",
-//            'amount.min'  => "Please Enter an Valid Amount.",
-//        ];
+        return [
+            'captcha.required' => 'Captcha Required!',
+            'captcha.captcha'  => "Incorrect Captcha.",
+            'amount.required'  => "Please Enter an Amount.",
+            'amount.min'  => "Please Enter an Valid Amount.",
+//            'amount.between' => "hehehe"
+        ];
     }
 }
