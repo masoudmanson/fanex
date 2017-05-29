@@ -16,19 +16,19 @@ body {
         color: $fanapGrey;
         font-weight: 500;
         @include transition(all .3s);
-        @include mq($max-width: 1200px) {
+        @include mq($max-width: $breakePoint_xl) {
             color: #fff;
         }
     }
     .navbar-brand:hover, .navbar-brand:focus {
         color: $fanapOrange;
-        @include mq($max-width: 1200px) {
+        @include mq($max-width: $breakePoint_xl) {
             color: $fanapDark;
         }
     }
 }
 
-@include mq($max-width: 768px) {
+@include mq($max-width: $breakePoint_md) {
     .navbar-nav > li, .navbar-nav {
         float: left !important;
     }
@@ -47,10 +47,10 @@ body {
     z-index: 1000;
     padding: 30px 100px;
     margin: 0;
-    @include mq($max-width: 1400px) {
+    @include mq($max-width: $breakePoint_xxl) {
         padding: 30px 50px;
     }
-    @include mq($max-width: 520px) {
+    @include mq($max-width: $breakePoint_sm) {
         padding: 20px 15px;
     }
     .navbar-nav {
@@ -84,7 +84,7 @@ body {
     }
     .bgDivLeft {
         background: $fanapGreyLight url("images/pattern.png");
-        @include mq($max-width: 1200px) {
+        @include mq($max-width: $breakePoint_xl) {
             background: $fanapOrange url("images/pattern.png");
         }
         -webkit-background-size: 40%;
@@ -93,7 +93,7 @@ body {
 }
 
 .indexWrapper {
-    @include mq($max-width: 520px) {
+    @include mq($max-width: $breakePoint_sm) {
         margin: 0;
         padding: 0 !important;
         width: 100%;
@@ -102,7 +102,7 @@ body {
         height: calc(100vh - 210px);
         min-height: 600px;
         position: relative;
-        @include mq($max-width: 1200px) {
+        @include mq($max-width: $breakePoint_xl) {
             height: auto;
         }
     }
@@ -114,16 +114,16 @@ body {
             padding: 50px;
             width: 100%;
             margin: auto -70px auto 100px;
-            @include mq($max-width: 1400px) {
+            @include mq($max-width: $breakePoint_xxl) {
                 margin: auto -40px auto 50px;
             }
-            @include mq($max-width: 1200px) {
+            @include mq($max-width: $breakePoint_xl) {
                 margin: 50px auto;
                 width: calc(100% - 100px);
                 position: static;
                 transform: translate(0, 0);
             }
-            @include mq($max-width: 520px) {
+            @include mq($max-width: $breakePoint_sm) {
                 margin: 0 auto;
                 width: 100%;
                 padding: 50px 30px;
@@ -133,7 +133,7 @@ body {
                 color: $fanapDark;
                 font-size: 32px;
                 font-weight: normal;
-                @include mq($max-width: 768px) {
+                @include mq($max-width: $breakePoint_md) {
                     font-size: 24px;
                     @include text-overflow();
                 }
@@ -146,7 +146,7 @@ body {
                     font-weight: 300;
                     text-align: left;
                     line-height: 1.5em !important;
-                    @include mq($max-width: 768px) {
+                    @include mq($max-width: $breakePoint_md) {
                         font-size: 16px;
                     }
                     #tempAmountCash {
@@ -168,10 +168,10 @@ body {
                     font-size: 52px;
                     font-weight: 600;
                     color: $fanapOrange;
-                    @include mq($max-width: 768px) {
+                    @include mq($max-width: $breakePoint_md) {
                         font-size: 36px;
                     }
-                    @include mq($max-width: 520px) {
+                    @include mq($max-width: $breakePoint_sm) {
                         font-size: 28px;
                     }
                 }
@@ -183,10 +183,10 @@ body {
     }
     .indexRight {
         z-index: 50;
-        @include mq($max-width: 768px) {
+        @include mq($max-width: $breakePoint_md) {
             min-height: 400px;
         }
-        @include mq($max-width: 520px) {
+        @include mq($max-width: $breakePoint_sm) {
             min-height: 400px;
         }
         #mapWrapper {
@@ -208,13 +208,13 @@ body {
             .fanexLogoName {
                 font-weight: 100;
                 font-size: 120px;
-                @include mq($max-width: 1400px) {
+                @include mq($max-width: $breakePoint_xxl) {
                     font-size: 90px;
                 }
             }
             .fanexMotto {
                 margin-top: -40px;
-                @include mq($max-width: 1400px) {
+                @include mq($max-width: $breakePoint_xxl) {
                     margin-top: -20px;
                 }
             }
@@ -244,7 +244,7 @@ body {
             .fanexLogoName {
                 font-weight: 100;
                 font-size: 72px;
-                @include mq($max-width: 1400px) {
+                @include mq($max-width: $breakePoint_xxl) {
                     font-size: 60px;
                 }
             }
@@ -253,7 +253,7 @@ body {
                 margin-top: 0px;
                 overflow-y: scroll;
                 max-height: 400px;
-                @include mq($max-width: 768px) {
+                @include mq($max-width: $breakePoint_md) {
                     max-height: 300px;
                 }
             }
@@ -409,7 +409,7 @@ textarea.fanexInput {
 .fanexBtnOrange {
     @extend .fanexBtn;
     background-color: $fanapOrange;
-    color: #fff;
+    color: #fff !important;
     &:hover, &:focus, &:active {
         background-color: darken($fanapOrange, 10%);
         color: #fff;
@@ -432,7 +432,7 @@ textarea.fanexInput {
             a {
                 text-decoration: none;
             }
-            @include mq($max-width: 768px) {
+            @include mq($max-width: $breakePoint_md) {
                 float: none;
                 margin-bottom: 8px;
             }
@@ -453,7 +453,7 @@ textarea.fanexInput {
                     color: $fanapOrange;
                 }
             }
-            @include mq($max-width: 1200px) {
+            @include mq($max-width: $breakePoint_xl) {
                 a {
                     color: #fff;
                     &:hover {
@@ -481,7 +481,7 @@ textarea.fanexInput {
             }
         }
 
-        @include mq($max-width: 768px) {
+        @include mq($max-width: $breakePoint_md) {
             li.copyright {
                 display: none;
             }

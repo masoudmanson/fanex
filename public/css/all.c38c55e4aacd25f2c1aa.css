@@ -8216,7 +8216,7 @@ body {
 }
 
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-  color: #d30e4c;
+  color: #bb0d44;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -8278,7 +8278,7 @@ body {
   height: 100vh;
   min-height: 200px;
   margin: auto;
-  background-color: #d30e4c;
+  background-color: #bb0d44;
   z-index: 0;
 }
 
@@ -8293,7 +8293,7 @@ body {
 
 @media only screen and (max-width: 1200px) {
   .bgWrapper .bgDivLeft {
-    background: #d30e4c url("images/pattern.png");
+    background: #bb0d44 url("images/pattern.png");
   }
 }
 
@@ -8393,7 +8393,7 @@ body {
 
 .indexWrapper .indexLeft .mainForm .tempAmount h2 #tempAmountCash, .indexWrapper .indexLeft .mainForm .tempAmount h2 #tempAmountCountry {
   font-weight: 500 !important;
-  color: #d30e4c;
+  color: #bb0d44;
 }
 
 .indexWrapper .indexLeft .mainForm .tempAmount h2 #tempAmountCountry {
@@ -8410,7 +8410,7 @@ body {
 .indexWrapper .indexLeft .mainForm .tempAmount .calcAmount {
   font-size: 52px;
   font-weight: 600;
-  color: #d30e4c;
+  color: #bb0d44;
 }
 
 @media only screen and (max-width: 768px) {
@@ -8661,7 +8661,7 @@ textarea.fanexInput {
 }
 
 .captchaRefresher:hover i {
-  color: #d30e4c;
+  color: #bb0d44;
 }
 
 .fanexBtn, .fanexBtnOutline, .fanexBtnOutlineGrey, .fanexBtnOutlineOrange, .fanexBtnGrey, .fanexBtnOrange {
@@ -8688,8 +8688,8 @@ textarea.fanexInput {
 }
 
 .fanexBtnOutline:hover, .fanexBtnOutlineGrey:hover, .fanexBtnOutlineOrange:hover, .fanexBtnOutline:focus, .fanexBtnOutlineGrey:focus, .fanexBtnOutlineOrange:focus, .fanexBtnOutline:active, .fanexBtnOutlineGrey:active, .fanexBtnOutlineOrange:active {
-  border-color: #d30e4c;
-  background-color: #d30e4c;
+  border-color: #bb0d44;
+  background-color: #bb0d44;
   color: #fff;
 }
 
@@ -8707,18 +8707,18 @@ textarea.fanexInput {
 }
 
 .fanexBtnOrange {
-  background-color: #d30e4c;
-  color: #fff;
+  background-color: #bb0d44;
+  color: #fff !important;
 }
 
 .fanexBtnOrange:hover, .fanexBtnOrange:focus, .fanexBtnOrange:active {
-  background-color: #a30b3b;
+  background-color: #8b0932;
   color: #fff;
 }
 
 .fanexBtnOutlineOrange {
-  border-color: #d30e4c;
-  color: #d30e4c;
+  border-color: #bb0d44;
+  color: #bb0d44;
 }
 
 .fanexFooter ul {
@@ -8758,7 +8758,7 @@ textarea.fanexInput {
 }
 
 .fanexFooter .footerLeft li a:hover {
-  color: #d30e4c;
+  color: #bb0d44;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -8851,7 +8851,7 @@ textarea.fanexInput {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: #d30e4c;
+  background-color: #bb0d44;
   opacity: 0.6;
   position: absolute;
   top: 0;
@@ -8894,7 +8894,7 @@ textarea.fanexInput {
 .spinner2 > div {
   width: 18px;
   height: 18px;
-  background-color: #d30e4c;
+  background-color: #bb0d44;
   border-radius: 100%;
   display: inline-block;
   -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
