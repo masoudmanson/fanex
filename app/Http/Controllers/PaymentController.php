@@ -29,7 +29,7 @@ class PaymentController extends Controller
 
     public function pay(Request $request)
     {
-dd($request);
+//dd($request);
         //todo keywords:state, base64,decode,view
 
         return response()->view('beneficiary', $request->query(), 200)->header('authorization', 'Bearer ' . $request->bearerToken());

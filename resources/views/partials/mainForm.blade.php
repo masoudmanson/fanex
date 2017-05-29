@@ -11,7 +11,7 @@
 
     <h1 class="pb-3 mt-0">International Money E-Transfer</h1>
 
-    <form action="/calculate" method="post">
+    <form action="/payment" method="get">
         {{ csrf_field() }}
 
         {{-- Destination Country --}}

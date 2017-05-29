@@ -56,15 +56,10 @@ Route::post('/calculate', 'UptController@calculateRemittance')->name('calculate'
 
 Route::get('/test', 'PaymentController@index');
 Route::get('/payment', 'PaymentController@pay');
-Route::get('/payment2', 'PaymentController@pay2');
 
 Route::get('/callback/{callback}', 'CallbackController@callbackHandler');
 
 Route::resource('/additional-info', 'UserInformationController');
-
-//Route::request('/token/validate','TokenController@tokenValidation')->name('tokenValidate');
-
-
 
 Route::get('/{locale}', function ($locale) {
     App::setLocale($locale);
