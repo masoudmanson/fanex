@@ -30,12 +30,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/{locale}', function ($locale) {
-    App::setLocale($locale);
-    return view('index');
-    //
-});
-
 // Static Routes
 
 Route::get('/get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'flat') {
@@ -69,3 +63,11 @@ Route::get('/callback/{callback}', 'CallbackController@callbackHandler');
 Route::resource('/additional-info', 'UserInformationController');
 
 //Route::request('/token/validate','TokenController@tokenValidation')->name('tokenValidate');
+
+
+
+Route::get('/{locale}', function ($locale) {
+    App::setLocale($locale);
+    return view('index');
+    //
+});
