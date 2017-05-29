@@ -22,9 +22,6 @@ body {
     }
     .navbar-brand:hover, .navbar-brand:focus {
         color: $fanapOrange;
-        @include mq($max-width: $breakePoint_xl) {
-            color: $fanapDark;
-        }
     }
 }
 
@@ -78,7 +75,7 @@ body {
     min-height: 200px;
     margin: auto;
     background-color: $fanapOrange;
-    z-index: 0;
+    z-index: -1;
     .bgDiv {
         height: 100vh;
     }
@@ -104,6 +101,7 @@ body {
         position: relative;
         @include mq($max-width: $breakePoint_xl) {
             height: auto;
+            position: relative;
         }
     }
     .indexLeft {
@@ -121,6 +119,8 @@ body {
                 margin: 50px auto;
                 width: calc(100% - 100px);
                 position: static;
+                top: 0;
+                left: 0;
                 transform: translate(0, 0);
             }
             @include mq($max-width: $breakePoint_sm) {
@@ -241,11 +241,22 @@ body {
             text-align: center;
             width: 70%;
             color: #fff;
+            @include mq($max-width: $breakePoint_xl) {
+                position: static;
+                top: 0;
+                left: 0;
+                transform: translate(0, 0);
+                margin: auto;
+                width: 90%;
+            }
             .fanexLogoName {
                 font-weight: 100;
                 font-size: 72px;
                 @include mq($max-width: $breakePoint_xxl) {
                     font-size: 60px;
+                }
+                @include mq($max-width: $breakePoint_xl) {
+                    margin-top: 30px;
                 }
             }
             .fanexMotto {
@@ -253,8 +264,9 @@ body {
                 margin-top: 0px;
                 overflow-y: scroll;
                 max-height: 400px;
-                @include mq($max-width: $breakePoint_md) {
-                    max-height: 300px;
+                margin-bottom: 50px;
+                @include mq($max-width: $breakePoint_xl) {
+                    max-height: 1000px;
                 }
             }
         }
@@ -450,7 +462,7 @@ textarea.fanexInput {
                 color: $fanapDark;
                 @include transition(all .3s);
                 &:hover {
-                    color: $fanapOrange;
+                    opacity: 0.6;
                 }
             }
             @include mq($max-width: $breakePoint_xl) {

@@ -8219,12 +8219,6 @@ body {
   color: #bb0d44;
 }
 
-@media only screen and (max-width: 1200px) {
-  .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-    color: #333333;
-  }
-}
-
 @media only screen and (max-width: 768px) {
   .navbar-nav > li, .navbar-nav {
     float: left !important;
@@ -8279,7 +8273,7 @@ body {
   min-height: 200px;
   margin: auto;
   background-color: #bb0d44;
-  z-index: 0;
+  z-index: -1;
 }
 
 .bgWrapper .bgDiv {
@@ -8314,6 +8308,7 @@ body {
 @media only screen and (max-width: 1200px) {
   .indexWrapper .indexWrapperInside {
     height: auto;
+    position: relative;
   }
 }
 
@@ -8345,6 +8340,8 @@ body {
     margin: 50px auto;
     width: calc(100% - 100px);
     position: static;
+    top: 0;
+    left: 0;
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0);
   }
@@ -8530,6 +8527,18 @@ body {
   color: #fff;
 }
 
+@media only screen and (max-width: 1200px) {
+  .indexWrapper .indexRight .staticHeader {
+    position: static;
+    top: 0;
+    left: 0;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+    margin: auto;
+    width: 90%;
+  }
+}
+
 .indexWrapper .indexRight .staticHeader .fanexLogoName {
   font-weight: 100;
   font-size: 72px;
@@ -8541,16 +8550,23 @@ body {
   }
 }
 
+@media only screen and (max-width: 1200px) {
+  .indexWrapper .indexRight .staticHeader .fanexLogoName {
+    margin-top: 30px;
+  }
+}
+
 .indexWrapper .indexRight .staticHeader .fanexMotto {
   padding: 10px 30px;
   margin-top: 0px;
   overflow-y: scroll;
   max-height: 400px;
+  margin-bottom: 50px;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1200px) {
   .indexWrapper .indexRight .staticHeader .fanexMotto {
-    max-height: 300px;
+    max-height: 1000px;
   }
 }
 
@@ -8758,7 +8774,7 @@ textarea.fanexInput {
 }
 
 .fanexFooter .footerLeft li a:hover {
-  color: #bb0d44;
+  opacity: 0.6;
 }
 
 @media only screen and (max-width: 1200px) {

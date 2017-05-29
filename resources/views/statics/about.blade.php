@@ -43,8 +43,7 @@
                     <div class="fanexMotto">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias distinctio minima minus
                             nobis, ratione sapiente. Consectetur corporis doloribus, earum eveniet inventore minus, modi
-                            neque pariatur placeat, provident quibusdam ratione sit!</p>
-                        <p>Ab aut eum, expedita fugit ipsa iure, perferendis, quasi quo saepe sequi similique soluta
+                            neque pariatur placeat, provident quibusdam ratione sit! Ab aut eum, expedita fugit ipsa iure, perferendis, quasi quo saepe sequi similique soluta
                             tempore ut veniam voluptate. A, aperiam consequuntur distinctio doloribus fugiat id minima
                             nesciunt sequi temporibus! Est.</p>
                         <p>Alias asperiores aspernatur at dicta enim, facilis illum ipsa ipsam laudantium modi nobis

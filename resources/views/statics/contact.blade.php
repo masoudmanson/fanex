@@ -3,12 +3,19 @@
 @section('styles')
     <style>
         a[title="Click to see this area on Google Maps"],
+        .gm-style div a div img,
         .gm-style-cc,
         .gmnoprint {
             opacity: 0;
+            display: none;
         }
         .bgWrapper {
             background-color: #333 !important;
+        }
+        @media only screen and (max-width: 1200px) {
+            .bgDivLeft {
+                display: none;
+            }
         }
     </style>
 @endsection
