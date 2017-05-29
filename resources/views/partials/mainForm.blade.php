@@ -17,7 +17,7 @@
         {{-- Destination Country --}}
         <div class="form-group bsWrapper">
             <i class="icon-globe bsIcon"></i>
-            <select class="form-control fanexInput selectpicker" data-style="fanexInput" name="country"
+            <select class="form-control fanexInput selectpicker indexSelectBox" data-style="fanexInput" name="country"
                     id="exCountry">
                 <optgroup label="Active">
                     <option value="Turkey">Turkey</option>

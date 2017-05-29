@@ -23,5 +23,7 @@ mix.copy('node_modules/nicescroll/jquery.nicescroll.js', 'public/js');
 mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/scripts.js', 'public/js')
     .sass('resources/assets/sass/all.scss', 'public/css');
+    // .sass('resources/assets/sass/fanex.scss', 'public/css'),
+    // .sass('resources/assets/sass/fanexDashboard.scss', 'public/css');
 
 mix.version().options({processCssUrls: false});
