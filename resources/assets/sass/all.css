@@ -7,6 +7,7 @@ Error: File to import not found or unreadable: node_modules/bootstrap-sass/asset
 4: @import "fanexFont";
 5: @import "fanex";
 6: @import "boxing";
+7: @import "animate.css";
 
 Backtrace:
 app.scss:8
@@ -66,4 +67,4 @@ C:/Ruby23-x64/bin/scss:22:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: File to import not found or unreadable: node_modules/bootstrap-sass/assets/stylesheets/bootstrap.\A         on line 8 of app.scss\A         from line 1 of all.scss\A \A 3: @import \"variables\";\A 4: @import \"fanexFont\";\A 5: @import \"fanex\";\A 6: @import \"boxing\";"; }
+  content: "Error: File to import not found or unreadable: node_modules/bootstrap-sass/assets/stylesheets/bootstrap.\A         on line 8 of app.scss\A         from line 1 of all.scss\A \A 3: @import \"variables\";\A 4: @import \"fanexFont\";\A 5: @import \"fanex\";\A 6: @import \"boxing\";\A 7: @import \"animate.css\";"; }

@@ -7,7 +7,7 @@
         }
         .bgDiv i::before {
             color: rgba(0, 0, 0, 0.3);
-            font-size: 500px;
+            font-size: 600px;
             position: absolute;
             margin: auto;
             top: 50%;

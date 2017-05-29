@@ -1,5 +1,5 @@
-<nav class="navbar navbar-fixed-bottom2">
-    <div class="container-fluid">
+<nav class="navbar @if(!empty($type)) @if($type == "dashboard") dashboard-footer @endif @endif">
+    <div class="container-fluid px-xs-4 p-sm-0 p-md-0 p-lg-0">
         <div class="fanexFooter">
             {{-- Footer Left List --}}
             <ul class="footerLeft">
@@ -28,6 +28,7 @@
                     <a href="/" style="font-size: 16px;">FANEx &copy; {{ \Carbon\Carbon::now()->year }}</a>
                 </li>
             </ul>
+            <div class="clearfix"></div>
         </div>
     </div>
 </nav>

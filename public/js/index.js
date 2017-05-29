@@ -3,6 +3,8 @@ $(document).ready(function () {
 
     });
 
+    $('#paymentBtn, #calcBtn').attr({'disabled':'disabled'});
+
     $('#exCountry, #exCurrency').change(function () {
         $('.tempAmount').slideUp(300);
     });
@@ -41,10 +43,10 @@ $(document).ready(function () {
     });
 
     //About Page Scroll Bar
-    $('.fanexMotto, .dropdown-menu .inner, textarea').niceScroll({
+    $('html, body, .fanexMotto, .dropdown-menu .inner, textarea').niceScroll({
         cursorcolor: "#000",
         cursoropacitymin: 0.1,
-        cursoropacitymax: 0.4,
+        cursoropacitymax: 0.3,
         cursorwidth: "5px",
         cursorborder: "none",
         cursorborderradius: "5px"
