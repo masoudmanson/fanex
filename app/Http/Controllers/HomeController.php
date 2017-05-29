@@ -24,21 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        if (Request::getMethod() == 'POST')
-//        {
-//            $rules = ['captcha' => 'required|captcha'];
-//            $validator = Validator::make(Input::all(), $rules);
-//            if ($validator->fails())
-//            {
-//                echo '<p style="color: #ff0000;">Incorrect!</p>';
-//            }
-//            else
-//            {
-//                echo '<p style="color: #00ff30;">Matched :)</p>';
-//            }
-//        }
-
-
         return view('home');
     }
 

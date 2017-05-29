@@ -22,9 +22,11 @@ class CheckTokenExist
      */
     public function handle($request, Closure $next)
     {
-        if ($request->bearerToken()) {
+        if (($token = $request->bearerToken())) //|| ($token = $request->hasCookie('token')))
+        {
 
-            $result = $this->tokenValidation($request->bearerToken());
+//            $result = $this->tokenValidation($request->bearerToken());
+            $result = $this->tokenValidation($token);
             $result = json_decode($result->getBody()->getContents());
 
             if ($result->active) {

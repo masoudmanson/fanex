@@ -29,6 +29,7 @@ use Morilog\Jalali\Facades\jDate;
 Route::get('/', function () {
     return view('index');
 });
+//    ->middleware('checkUser');
 
 // Static Routes
 
@@ -54,7 +55,8 @@ Route::get('/profile', 'UserController@show'); // or user/me
 //
 Route::post('/calculate', 'UptController@calculateRemittance')->name('calculate'); //maybe get, according to fake web service
 
-Route::get('/test', 'PaymentController@index');
+//Route::get('/test', 'PaymentController@index');
+Route::get('/test', 'PaymentController@test');
 Route::get('/payment', 'PaymentController@pay');
 
 Route::get('/callback/{callback}', 'CallbackController@callbackHandler');

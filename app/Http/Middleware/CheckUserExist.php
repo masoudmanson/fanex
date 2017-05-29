@@ -6,6 +6,7 @@ use App\Traits\PlatformTrait;
 use App\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class CheckUserExist
@@ -27,8 +28,14 @@ class CheckUserExist
             $platform_user = json_decode($result->getBody()->getContents());
             $id = $platform_user->result->userId;
 
-            if (User::find($id))
+            if (User::find($id)) {
+                $user = User::find($id);
+                dd($user);
+                $user->api_token = $request->bearerToken();
+                Auth::login($user);
+                dd(Auth::user());
                 return $next($request);
+            }
             else {
 //                $this->RegisterWithSSO($request);
 //                return redirect('additional-info')->with([
@@ -46,28 +53,5 @@ class CheckUserExist
             }
 
         }
-        //redirect to login
-
-
-//        elseif ($request->has('code')) {
-//
-//            $result = $this->getToken($request);
-//
-//            $token_object = json_decode($result->getBody()->getContents());
-//
-//            $request->headers->set('authorization', 'Bearer ' . $token_object->access_token);
-//
-////            $result = $this->RegisterWithSSO($request);
-//
-//            return $next($request);
-//        }
-//
-//        $queryString = $request->getQueryString();
-//
-//        return redirect('login')->with([
-//            'redirect_uri' => $redirect_uri = $request->url(),
-////            'redirect_uri' => $redirect_uri = $request->route()->uri(),
-//            'query_string' => (is_base64($queryString) ? $queryString : base64_encode($queryString))
-//        ]);
     }
 }
