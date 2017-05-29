@@ -8,13 +8,14 @@
 
         .bgDiv i::before {
             color: rgba(0, 0, 0, 0.3);
-            font-size: 500px;
+            font-size: 1000px;
             position: absolute;
             margin: auto;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             vertical-align: middle;
+            z-index: -1;
         }
     </style>
 @endsection
@@ -27,7 +28,7 @@
     <div class="bgWrapper">
         <div class="col-lg-6 col-md-12 bgDiv bgDivLeft"></div>
         <div class="col-lg-6 col-md-12 bgDiv bgDivRight">
-            <i class="icon-about"></i>
+            <i class="icon-agreement"></i>
         </div>
     </div>
     <div class="container-fluid indexWrapper">
