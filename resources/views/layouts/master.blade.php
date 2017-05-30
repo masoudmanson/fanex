@@ -51,6 +51,11 @@
 
 @if(config('app.env') == 'local')
     <script src="http://localhost:35729/livereload.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 @endif
 </body>
 </html>

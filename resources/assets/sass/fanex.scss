@@ -106,6 +106,7 @@ body {
 }
 
 .dashboard-wrapper {
+    min-height: 95vh;
     padding: 160px 100px 30px;
     @include mq($max-width: $breakePoint_xxl) {
         padding: 130px 50px 30px;
@@ -114,9 +115,12 @@ body {
         padding: 120px 30px 20px;
     }
     .dash-title {
-        font-weight: 400;
+        font-weight: 200;
         color: $fanapDark;
         padding-bottom: 15px;
+        b {
+            font-weight: 400;
+        }
     }
     .dash-subtitle {
         color: $fanapOrange;
@@ -726,10 +730,210 @@ textarea.fanexInput {
             }
         }
     }
+
+    .profile-ul {
+        list-style: none;
+        padding: 0px;
+        .profile-li {
+            margin: 0px 0 20px;
+            a {
+                font-size: 21px;
+                font-weight: 200;
+                color: $fanapGrey;
+                text-decoration: none;
+                @include transition(all .3s);
+                i {
+                    font-size: 30px;
+                    vertical-align: middle;
+                    padding-right: 13px;
+                    padding-top: 6px;
+                }
+                &:hover {
+                    color: $fanapOrange;
+                }
+            }
+        }
+        .profile-li.active {
+            a {
+                color: $fanapOrange;
+                font-weight: 400;
+            }
+        }
+    }
+}
+
+.filter-ul {
+    margin: 35px 0 20px;
+    list-style: none;
+    padding: 0;
+    .filter-li {
+        display: inline-block;
+        padding: 0 20px;
+        height: 40px;
+        line-height: 40px;
+        background-color: transparent;
+        @include border-radius(20px);
+        @include transition(all .3s);
+        a {
+            color: $fanapGreyDark;
+            text-decoration: none;
+            @include transition(all .3s);
+            &:hover {
+                color: $fanapOrange;
+            }
+        }
+    }
+    .filter-li.active {
+        color: #fff;
+        background-color: $fanapGreyDark;
+        &:hover {
+            background-color: darken($fanapGreyDark, 15%);
+        }
+        a {
+            color: #fff;
+            &:hover {
+                color: #ffffff;
+            }
+        }
+    }
+}
+
+.filter-ul.filter-right {
+    .filter-li {
+        float: right;
+        background-color: $fanapOrange;
+        &:hover {
+            background-color: darken($fanapOrange, 15%);
+        }
+        a {
+            color: #fff;
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+}
+
+.panel {
+    border: none;
+    @include border-radius(0);
+}
+
+.panel-default {
+    @include border-radius(0);
+    .panel-heading {
+        background-color: #fff;
+        height: 70px;
+        line-height: 70px;
+        @include border-radius(0);
+        border: none;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+        .acc-main-icon {
+            color: $fanapOrange;
+            font-size: 28px;
+            vertical-align: middle;
+            &:before {
+                vertical-align: middle;
+            }
+        }
+        .acc-user {
+            font-weight: 300;
+            color: $fanapGreyDark;
+            font-size: 14px;
+            b {
+                font-weight: 400;
+                color: $fanapDark;
+            }
+        }
+        .acc-date {
+            color: $fanapGreyDark;
+        }
+        .acc-cash {
+            color: $fanapDark;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .acc-status {
+            i {
+                font-size: 16px;
+                padding-right: 5px;
+                &:before {
+                    vertical-align: middle;
+                }
+            }
+        }
+        .acc-status.pending {
+            color: $fanapOrange;
+        }
+        .acc-status.successful {
+            color: $fanapGreen;
+        }
+        .acc-status.failed {
+            color: $fanapRed;
+        }
+        .acc-type {
+            i {
+                &:before {
+                    font-size: 21px;
+                    color: $fanapGreyDark;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+    .panel-body {
+        padding: 30px 20px;
+        @include border-radius(0);
+        .acc-info-left {
+            p {
+                color: $fanapGreyDark;
+                font-weight: 300;
+            }
+        }
+        .acc-info-right {
+            p {
+                color: $fanapDark;
+                font-weight: 500;
+            }
+        }
+        .acc-factor {
+            hr {
+                margin: 5px 0;
+            }
+            .acc-factor-sum {
+                color: $fanapOrange;
+            }
+        }
+    }
+}
+
+.panel-heading .accordion-toggle:after {
+    font-family: 'fanex';
+    content: "\43";
+    float: right;
+    vertical-align: middle;
+    font-size: 21px;
+    color: $fanapGreyDark !important;
+    cursor: pointer;
+}
+
+.panel-heading .accordion-toggle.collapsed:after {
+    content: "\69";
 }
 
 #bnf-sidebar .white-card {
     margin-top: 100px;
+    @include mq($max-width: $breakePoint_lg) {
+        margin-top: 20px;
+    }
+}
+
+#profile-sidebar .white-card {
+    margin-top: 30px;
     @include mq($max-width: $breakePoint_lg) {
         margin-top: 20px;
     }
