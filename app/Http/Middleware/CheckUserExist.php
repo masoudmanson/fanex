@@ -26,7 +26,7 @@ class CheckUserExist
 
             $result = $this->getCurrentPlatformUser($token);
             $platform_user = json_decode($result->getBody()->getContents());
-            $id = $platform_user->result->userId;
+            $id = $platform_user->result->userId; //todo : check for a logined user he isn't exist in platform
 
             if (User::findByUserId($id)) {
                 $user = User::findByUserId($id)->first();
@@ -46,7 +46,7 @@ class CheckUserExist
                 $data = array(
                     'redirect_uri' => $request->url(),
                     'state' => $request->state,
-                    'token' => $request->bearerToken() // :?
+                    'token' => $request->bearerToken() // todo: this is just for run test. when masud put his js codes into project, it must be deleted.
                 );
 
                 return response()->view('additional', $data, 200)->header('authorization', 'Bearer ' . $token);

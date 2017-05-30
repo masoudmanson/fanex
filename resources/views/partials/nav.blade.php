@@ -17,7 +17,7 @@
                 </li>
             @else
                 <li class="nav-item">
-                    <a href="{{ route('login') }}" class="nav-link">{{ Auth::user()->name }}</a>
+                    <a href="/profile" class="nav-link">{{ Auth::user()->firstname }}</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link"

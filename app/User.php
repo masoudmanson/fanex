@@ -32,4 +32,10 @@ class User extends Authenticatable
     {
         return $query->where('userId', $userId);
     }
+
+    public function beneficiary()
+    {
+        return $this->hasMany('App\Beneficiary');
+    }
+
 }

@@ -23,11 +23,13 @@
 
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Morilog\Jalali\Facades\jDate;
 
 Route::get('/', function () {
-    return view('index');
+    $user = Auth::user();
+    return view('index',compact('user'));
 });
 //    ->middleware('checkUser');
 

@@ -17,7 +17,7 @@ class UserInformationController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkToken', ['only' => ['index']]);
+        $this->middleware('checkToken', ['only' => ['store']]);
     }
 
     /**

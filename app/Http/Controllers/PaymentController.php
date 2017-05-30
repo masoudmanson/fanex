@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Beneficiary;
 use App\Traits\TokenTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,10 +39,13 @@ class PaymentController extends Controller
 
     public function pay(Request $request)
     {
-//dd($request);
         //todo keywords:state, base64,decode,view
 
-        dd(Auth::user());
+        $user = Auth::user();
+
+        $beneficiaries = $user->beneficiary()->get();
+
+        ($request->query->add(['user'=>$user,'beneficiaries'=>$beneficiaries]));
         return response()->view('dashboard.beneficiary', $request->query(), 200)->header('authorization', 'Bearer ' . $request->bearerToken());
     }
 

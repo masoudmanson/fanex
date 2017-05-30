@@ -24,8 +24,8 @@ class UserController extends Controller
      */
     public function index()
     {
-//        dd(Auth::guard('api')->user());
-        return view('dashboard.index');
+        $user = Auth::user();
+        return view('dashboard.index',compact('user'));
     }
 
     /**
@@ -57,7 +57,7 @@ class UserController extends Controller
      */
     public function show(Request $request)
     {
-        return response()->view('');
+
     }
 
     /**
