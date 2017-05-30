@@ -49,7 +49,7 @@ Route::post('/home', 'HomeController@formController');
 
 Route::get('/dotin', 'DotinController@dotinAuthorization');//maybe get,will implement according to the fake web service
 
-Route::get('/profile', 'UserController@show'); // or user/me
+Route::get('/profile', 'UserController@index'); // or user/me
 
 //Route::post('/pay', 'WalletController') ;
 //

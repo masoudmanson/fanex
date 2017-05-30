@@ -11,7 +11,7 @@
 @section('content')
     <div class="container-fluid dashboard-wrapper">
         <div class="row m-0">
-            <h1 class="dash-title">Beneficiary Information</h1>
+            <h1 class="dash-title"><b>Beneficiary Information</b></h1>
 
             {{-- Beneficiary Info Form Container --}}
             <div class="col-lg-9 col-md-8 col-sm-12 p-0">

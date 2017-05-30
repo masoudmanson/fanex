@@ -14,7 +14,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkToken', ['only' => ['show', 'index']]);
+//        $this->middleware('checkToken', ['only' => ['show', 'index']]);
     }
 
     /**
@@ -25,6 +25,7 @@ class UserController extends Controller
     public function index()
     {
 //        dd(Auth::guard('api')->user());
+        return view('dashboard.index');
     }
 
     /**
