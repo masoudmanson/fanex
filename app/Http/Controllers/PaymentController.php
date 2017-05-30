@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Traits\TokenTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 
 class PaymentController extends Controller
@@ -40,6 +41,7 @@ class PaymentController extends Controller
 //dd($request);
         //todo keywords:state, base64,decode,view
 
+        dd(Auth::user());
         return response()->view('dashboard.beneficiary', $request->query(), 200)->header('authorization', 'Bearer ' . $request->bearerToken());
     }
 

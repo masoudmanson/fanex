@@ -14,8 +14,10 @@ class CreateBeneficiariesTable extends Migration
     public function up()
     {
         Schema::create('beneficiaries', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->engine = 'InnoDB';
+
+            $table->increments('id')->unsigned();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->string('firstname');
             $table->string('lastname');
             $table->string('account_number');
@@ -32,7 +34,6 @@ class CreateBeneficiariesTable extends Migration
             $table->string('blz_bsb');
             $table->timestamps();
 
-
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('set null');
         });
@@ -45,7 +46,7 @@ class CreateBeneficiariesTable extends Migration
      */
     public function down()
     {
-        Schema::table('transactions', function($table) {
+        Schema::table('transactions', function ($table) {
             $table->dropForeign(['user_id']);
         });
 

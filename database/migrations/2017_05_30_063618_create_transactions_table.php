@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTranssactionsTable extends Migration
+class CreateTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,12 @@ class CreateTranssactionsTable extends Migration
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('beneficiary_id')->unsigned();
-            $table->integer('backlog_id')->unsigned();
+            $table->engine = 'InnoDB';
+
+            $table->increments('id')->unsigned();
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('beneficiary_id')->unsigned()->nullable();
+            $table->integer('backlog_id')->unsigned()->nullable();
             $table->string('uri')->nullable();
             $table->enum('status',['canceled','unsuccessful','successful'])->nullable();
             $table->timestamps();

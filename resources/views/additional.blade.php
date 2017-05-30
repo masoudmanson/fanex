@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.master')
 
 @section('content')
     <div class="container">
@@ -15,7 +15,8 @@
                             <div class = "form-group">
                                 <label for = "nickname">Nick Name</label>
                                 <input name="nickname" type = "text" class = "form-control" id = "nickname" placeholder = "Enter nickname">
-                                <input type = "text" value="{{$state}}" class = "form-control" id = "state" style="display: none">
+                                <input type = "text" name="state" value="{{$state}}" class = "form-control" id = "state" style="display: none">
+                                <input type = "text" name="token" value="{{$token}}" class = "form-control" id = "token" style="display: none">
                             </div>
 
                             <div class = "form-group">

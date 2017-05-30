@@ -24,7 +24,7 @@ trait DotinTrait
 
         $client = new Client();
 //        $res = $client->post('https://private-3df4f-fanex.apiary-mock.com/dotin', [
-        $res = $client->get('http://172.16.4.121:3000/auth', [ //er:euro to rial
+        $res = $client->get('http://localhost:3000/auth', [ //er:euro to rial
 //            'headers' => [
 //                'Authorization' => 'Bearer ' . $token,
 //                'Content-Type' => 'application/json'

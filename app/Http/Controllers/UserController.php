@@ -56,13 +56,7 @@ class UserController extends Controller
      */
     public function show(Request $request)
     {
-        if ($result = $this->checkToken($request)) {
-            $user = new User();
-
-            $user->user_id = $result->sub;
-            dd($user);
-
-        }
+        return response()->view('');
     }
 
     /**

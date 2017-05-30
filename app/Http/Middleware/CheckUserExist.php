@@ -28,12 +28,11 @@ class CheckUserExist
             $platform_user = json_decode($result->getBody()->getContents());
             $id = $platform_user->result->userId;
 
-            if (User::find($id)) {
-                $user = User::find($id);
-                dd($user);
+            if (User::findByUserId($id)) {
+                $user = User::findByUserId($id)->first();
                 $user->api_token = $request->bearerToken();
+//                dd($user);
                 Auth::login($user);
-                dd(Auth::user());
                 return $next($request);
             }
             else {
@@ -46,7 +45,8 @@ class CheckUserExist
 
                 $data = array(
                     'redirect_uri' => $request->url(),
-                    'state' => $request->state
+                    'state' => $request->state,
+                    'token' => $request->bearerToken() // :?
                 );
 
                 return response()->view('additional', $data, 200)->header('authorization', 'Bearer ' . $token);
