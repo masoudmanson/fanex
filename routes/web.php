@@ -23,12 +23,15 @@
 
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Morilog\Jalali\Facades\jDate;
 
 Route::get('/', function () {
-    return view('index');
+    $user = Auth::user();
+    return view('index',compact('user'));
 });
+//    ->middleware('checkUser');
 
 // Static Routes
 
@@ -57,7 +60,8 @@ Route::get('/settings', 'UserController@settings'); // or user/me
 //
 Route::post('/calculate', 'UptController@calculateRemittance')->name('calculate'); //maybe get, according to fake web service
 
-Route::get('/test', 'PaymentController@index');
+//Route::get('/test', 'PaymentController@index');
+Route::get('/test', 'PaymentController@test');
 Route::get('/payment', 'PaymentController@pay');
 
 Route::get('/callback/{callback}', 'CallbackController@callbackHandler');

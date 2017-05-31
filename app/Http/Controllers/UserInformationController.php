@@ -17,7 +17,7 @@ class UserInformationController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkToken', ['only' => ['index']]);
+        $this->middleware('checkToken', ['only' => ['store']]);
     }
 
     /**
@@ -61,25 +61,30 @@ class UserInformationController extends Controller
         $dotin_response = $this->dotinCredential($request->account_number , $request->mobile);
         $dotin_result = json_decode($dotin_response->getBody()->getContents());
 
+        $request->headers->set('authorization', 'Bearer ' . $request->token);
+
         if($dotin_result[0]->auth){
             //requestwithtoken
             $sso_response = $this->registerWithSSO($request);
             $sso_result = json_decode($sso_response->getBody()->getContents());
 
-            if($sso_result->active){
+            if(!$sso_result->hasError && $sso_result->result){
 
                 $follow_res = $this->followBusiness($request->bearerToken());
 
 //                dd($follow_res);
                 $user = new User;
+                $user->firstname = $dotin_result[0]->message->firstname;
+                $user->lastname = $dotin_result[0]->message->lastname;
+                $user->userId = $sso_result->result->userId;
+//                $user->api_token = $request->bearerToken();
+                $user->api_token = $request->token;
 
-                $user->firstname = $dotin_result->firsname;
-                $user->lastname = $dotin_result->lastname;
-                $user->userId = $sso_result->userId;
+                $user->save();
 
-                $user->save();http://sandbox.fanapium.com:8080/nzh/follow/?businessId=22&follow=true
-
-                return response()->view('beneficiary', $data, 200)->header('authorization', 'Bearer ' . $request->bearerToken());
+//                http://sandbox.fanapium.com:8080/nzh/follow/?businessId=22&follow=true
+//  get user beneficiary's?!
+                return response()->view('dashboard.beneficiary', $request->state, 200)->header('authorization', 'Bearer ' . $request->token);
             }
         }
         /*

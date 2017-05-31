@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Beneficiary;
 use App\Traits\TokenTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class PaymentController extends Controller
 {
@@ -11,8 +14,9 @@ class PaymentController extends Controller
 
     public function __construct()
     {
-//        $this->middleware('checkToken', ['only' => ['pay']]);
-//        $this->middleware('checkUser', ['only' => ['pay']]);
+
+        $this->middleware('checkToken', ['only' => ['pay']]);
+        $this->middleware('checkUser', ['only' => ['pay']]);
     }
 
     /**
@@ -26,12 +30,22 @@ class PaymentController extends Controller
 //        return view('test' , compact('redirect_uri'));
         return view('test');
     }
+    public function test(Request $request)
+    {
+        dd($request);
+//        dd(Cookie::get('token'));
+        dd($request->cookies);
+    }
 
     public function pay(Request $request)
     {
-//dd($request);
         //todo keywords:state, base64,decode,view
 
+        $user = Auth::user();
+
+        $beneficiaries = $user->beneficiary()->get();
+
+        ($request->query->add(['user'=>$user,'beneficiaries'=>$beneficiaries]));
         return response()->view('dashboard.beneficiary', $request->query(), 200)->header('authorization', 'Bearer ' . $request->bearerToken());
     }
 

@@ -6,6 +6,7 @@ use App\Traits\PlatformTrait;
 use App\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class CheckUserExist
@@ -25,10 +26,15 @@ class CheckUserExist
 
             $result = $this->getCurrentPlatformUser($token);
             $platform_user = json_decode($result->getBody()->getContents());
-            $id = $platform_user->result->userId;
+            $id = $platform_user->result->userId; //todo : check for a logined user he isn't exist in platform
 
-            if (User::find($id))
+            if (User::findByUserId($id)) {
+                $user = User::findByUserId($id)->first();
+                $user->api_token = $request->bearerToken();
+//                dd($user);
+                Auth::login($user);
                 return $next($request);
+            }
             else {
 //                $this->RegisterWithSSO($request);
 //                return redirect('additional-info')->with([
@@ -39,35 +45,13 @@ class CheckUserExist
 
                 $data = array(
                     'redirect_uri' => $request->url(),
-                    'state' => $request->state
+                    'state' => $request->state,
+                    'token' => $request->bearerToken() // todo: this is just for run test. when masud put his js codes into project, it must be deleted.
                 );
 
                 return response()->view('additional', $data, 200)->header('authorization', 'Bearer ' . $token);
             }
 
         }
-        //redirect to login
-
-
-//        elseif ($request->has('code')) {
-//
-//            $result = $this->getToken($request);
-//
-//            $token_object = json_decode($result->getBody()->getContents());
-//
-//            $request->headers->set('authorization', 'Bearer ' . $token_object->access_token);
-//
-////            $result = $this->RegisterWithSSO($request);
-//
-//            return $next($request);
-//        }
-//
-//        $queryString = $request->getQueryString();
-//
-//        return redirect('login')->with([
-//            'redirect_uri' => $redirect_uri = $request->url(),
-////            'redirect_uri' => $redirect_uri = $request->route()->uri(),
-//            'query_string' => (is_base64($queryString) ? $queryString : base64_encode($queryString))
-//        ]);
     }
 }

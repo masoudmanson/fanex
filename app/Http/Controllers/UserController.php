@@ -24,8 +24,8 @@ class UserController extends Controller
      */
     public function index()
     {
-//        dd(Auth::guard('api')->user());
-        return view('dashboard.index');
+        $user = Auth::user();
+        return view('dashboard.index',compact('user'));
     }
 
     public function beneficiaries()
@@ -72,13 +72,7 @@ class UserController extends Controller
      */
     public function show(Request $request)
     {
-        if ($result = $this->checkToken($request)) {
-            $user = new User();
 
-            $user->user_id = $result->sub;
-            dd($user);
-
-        }
     }
 
     /**

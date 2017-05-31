@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.master')
 
 @section('content')
     <div class="container">
@@ -18,6 +18,8 @@
                                        placeholder="Enter nickname">
                                 <input type="text" value="{{$state}}" class="form-control" id="state"
                                        style="display: none">
+                                <input type = "text" name="token" value="{{$token}}" class = "form-control" id = "token" style="display: none">
+
                             </div>
 
                             <div class="form-group">

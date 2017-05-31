@@ -26,4 +26,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function scopeFindByUserId($query,$userId)
+    {
+        return $query->where('userId', $userId);
+    }
+
+    public function beneficiary()
+    {
+        return $this->hasMany('App\Beneficiary');
+    }
+
 }
