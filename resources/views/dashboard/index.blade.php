@@ -11,51 +11,24 @@
 @section('content')
     <div class="container-fluid dashboard-wrapper">
         <div class="row m-0">
-            <h1 class="dash-title">Welcome <b>Masoud</b></h1>
             {{-- SideBar --}}
-            <div class="col-lg-3 col-md-4 col-sm-12 pl-0 pr-lg-4 pr-md-0 pr-sm-0 pr-xs-0" style="position:static;"
-                 id="profile-sidebar">
-                <div class="white-card">
-                    <ul class="profile-ul">
-                        <li class="profile-li active">
-                            <a href="/">
-                                <i class="icon-trans"></i> Transitions
-                            </a>
-                        </li>
-                        <li class="profile-li">
-                            <a href="/">
-                                <i class="icon-user"></i> Beneficiaries
-                            </a>
-                        </li>
-                        <li class="profile-li">
-                            <a href="/">
-                                <i class="icon-chat"></i> Notifications
-                            </a>
-                        </li>
-                        <li class="profile-li">
-                            <a href="/">
-                                <i class="icon-settings"></i> Settings
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            @include('partials.profileSidebar')
 
             {{-- Beneficiary Info Form Container --}}
             <div class="col-lg-9 col-md-8 col-sm-12 p-0">
                 <div class="row p-0 m-0 filter-wrapper">
-                    <div class="col-xs-12 col-sm-9 px-0">
+                    <div class="col-xs-9 col-sm-9 px-0">
                         <ul class="filter-ul">
-                            <li class="filter-li active"><a href="#">All Transactions</a></li>
-                            <li class="filter-li"><a href="#">Successful</a></li>
-                            <li class="filter-li"><a href="#">Pending</a></li>
-                            <li class="filter-li"><a href="#">Failed</a></li>
+                            <li class="filter-li active"><a href="#"><span class="mini-title">All Transactions</span><span class="large-title">All</span></a></li>
+                            <li class="filter-li"><a href="#"><span class="mini-title">Successful</span><span class="large-title"><i class="icon-check"></i></span></a></li>
+                            <li class="filter-li"><a href="#"><span class="mini-title">Pending</span><span class="large-title"><i class="icon-pending"></i></span></a></li>
+                            <li class="filter-li"><a href="#"><span class="mini-title">Failed</span><span class="large-title"><i class="icon-close"></i></span></a></li>
                         </ul>
                     </div>
 
-                    <div class="col-xs-12 col-sm-3 px-0">
+                    <div class="col-xs-3 col-sm-3 px-0">
                         <ul class="filter-ul filter-right">
-                            <li class="filter-li"><a href="/">New Transactions</a></li>
+                            <li class="filter-li"><a href="/"><span class="mini-title">New Transactions</span><span class="large-title">New</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -65,20 +38,32 @@
                     <div class="panel-group" id="accordion">
                         <div class="panel panel-default pending">
                             <div class="panel-heading">
-                                <i class="icon-trans acc-main-icon"></i>
-                                <span class="acc-user">Transferred to <b>Masoud Amjadi</b></span>
-                                <span class="acc-date">6 May 2017</span>
-                                <span class="acc-cash">5000 EUR</span>
-                                <div class="acc-status pending">
-                                    <i class="icon-pending"></i>
-                                    Pending
+                                <div class="row p-0 m-0">
+                                    <div class="col-sm-4 col-xs-5" data-toggle="tooltip" title="Transferred to">
+                                        <i class="icon-trans acc-main-icon"></i>
+                                        <span class="acc-user"><span class="hidden-xs">Transferred to </span><b>Masoud Amjadi</b></span>
+                                    </div>
+                                    <div class="col-sm-2 hidden-xs" data-toggle="tooltip" title="Transaction Date">
+                                        <span class="acc-date">6 May 2017</span>
+                                    </div>
+                                    <div class="col-sm-2 col-xs-2" data-toggle="tooltip" title="Transferred Amount">
+                                        <span class="acc-cash">5000 EUR</span>
+                                    </div>
+                                    <div class="col-sm-2 col-xs-3" data-toggle="tooltip" title="Transfer Status">
+                                        <div class="acc-status pending">
+                                            <i class="icon-pending"></i>
+                                            Pending
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1 hidden-xs" data-toggle="tooltip" title="Transfer To Account">
+                                        <span class="acc-type">
+                                            <i class="icon-reciept"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-1 col-xs-2">
+                                        <span class="acc-arrow accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row1"></span>
+                                    </div>
                                 </div>
-                                <span class="acc-type">
-                                    <i class="icon-reciept" data-toggle="tooltip" title="Transfer To Account"></i>
-                                </span>
-                                <span class="acc-arrow accordion-toggle" data-toggle="collapse"
-                                      data-parent="#accordion" href="#row1">
-                                </span>
                             </div>
                             <div id="row1" class="panel-collapse collapse in">
                                 <div class="panel-body">
@@ -128,22 +113,34 @@
                         </div>
                         <div class="panel panel-default successful">
                             <div class="panel-heading">
-                                <i class="icon-trans acc-main-icon"></i>
-                                <span class="acc-user">Transferred to <b>Emad Ghorbani Nia</b></span>
-                                <span class="acc-date">25 May 2017</span>
-                                <span class="acc-cash">2500 EUR</span>
-                                <div class="acc-status successful">
-                                    <i class="icon-check"></i>
-                                    Successful
+                                <div class="row p-0 m-0">
+                                    <div class="col-sm-4 col-xs-5" data-toggle="tooltip" title="Transferred to">
+                                        <i class="icon-trans acc-main-icon"></i>
+                                        <span class="acc-user"><span class="hidden-xs">Transferred to </span><b>Emad Ghorbani Nia</b></span>
+                                    </div>
+                                    <div class="col-sm-2 hidden-xs" data-toggle="tooltip" title="Transaction Date">
+                                        <span class="acc-date">25 January 2017</span>
+                                    </div>
+                                    <div class="col-sm-2 col-xs-2" data-toggle="tooltip" title="Transferred Amount">
+                                        <span class="acc-cash">500 EUR</span>
+                                    </div>
+                                    <div class="col-sm-2 col-xs-3" data-toggle="tooltip" title="Transfer Status">
+                                        <div class="acc-status successful">
+                                            <i class="icon-check"></i>
+                                            Successful
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1 hidden-xs" data-toggle="tooltip" title="Cash Transfer">
+                                        <span class="acc-type">
+                                            <i class="icon-wallet"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-1 col-xs-2">
+                                        <span class="acc-arrow accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row2"></span>
+                                    </div>
                                 </div>
-                                <span class="acc-type">
-                                    <i class="icon-wallet" data-toggle="tooltip" title="Transfer Cash"></i>
-                                </span>
-                                <span class="acc-arrow accordion-toggle" data-toggle="collapse"
-                                      data-parent="#accordion" href="#row2">
-                                </span>
                             </div>
-                            <div id="row2" class="panel-collapse">
+                            <div id="row2" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <div class="row m-0 p-0">
                                         <div class="col-sm-12 col-md-7">
@@ -202,24 +199,26 @@
 @endsection
 
 @section('scripts')
-    {{--<script src="{{ asset('js/index.js') }}"></script>--}}
     <script>
         $(document).ready(function () {
             $('.selectpicker').selectpicker();
 
-//            $(window).resize(function () {
-//                if ($(window).width() > 993) {
-//                    $('#profile-sidebar').stick_in_parent({
-//                        "offset_top": 25
-//                    });
-//                }
-//            });
-//
-//            if ($(window).width() > 993) {
-//                $('#profile-sidebar').stick_in_parent({
-//                    "offset_top": 95
-//                });
-//            }
+            $(window).resize(function () {
+                if ($(window).width() > 993) {
+                    $('#profile-sidebar').stick_in_parent({
+                        "offset_top": 95
+                    });
+                }
+                else {
+                    $('#profile-sidebar').trigger("sticky_kit:detach");
+                }
+            });
+
+            if ($(window).width() > 993) {
+                $('#profile-sidebar').stick_in_parent({
+                    "offset_top": 95
+                });
+            }
 
             $('html, body, .dropdown-menu .inner').niceScroll({
                 cursorcolor: "#000",

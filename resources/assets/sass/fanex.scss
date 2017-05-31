@@ -651,7 +651,20 @@ textarea.fanexInput {
 /* Sidebar */
 .white-card {
     background-color: #fff;
-    padding: 40px 50px 20px;
+    padding: 40px 40px 20px;
+    @include mq($max-width: $breakePoint_sm) {
+        padding: 30px 30px 10px;
+        .profile-ul {
+            .profile-li {
+                a {
+                    font-size: 18px !important;
+                    i {
+                        font-size: 24px !important;
+                    }
+                }
+            }
+        }
+    }
     color: $fanapDark;
     p {
         color: lighten($fanapDark, 20%);
@@ -665,14 +678,12 @@ textarea.fanexInput {
         text-align: center;
         margin-top: 5px;
     }
-
     h3.alert {
         color: $fanapRed;
         font-size: 32px;
         font-weight: 500;
         margin-bottom: 0;
     }
-
     .steps-ul {
         list-style: none;
         padding: 20px 0 0 15px;
@@ -730,7 +741,6 @@ textarea.fanexInput {
             }
         }
     }
-
     .profile-ul {
         list-style: none;
         padding: 0px;
@@ -774,12 +784,27 @@ textarea.fanexInput {
         background-color: transparent;
         @include border-radius(20px);
         @include transition(all .3s);
+        @include mq($max-width: $breakePoint_md) {
+            padding: 0 15px;
+        }
         a {
             color: $fanapGreyDark;
             text-decoration: none;
             @include transition(all .3s);
             &:hover {
                 color: $fanapOrange;
+            }
+            .large-title {
+                display: none;
+                @include mq($max-width: $breakePoint_md) {
+                    display: block;
+                }
+            }
+            .mini-title {
+                display: block;
+                @include mq($max-width: $breakePoint_md) {
+                    display: none;
+                }
             }
         }
     }
@@ -816,7 +841,12 @@ textarea.fanexInput {
 
 .panel {
     border: none;
-    @include border-radius(0);
+    @include border-radius(0 !important);
+    @include box-shadow(none !important);
+}
+
+.panel-group .panel + .panel {
+    margin-top: 15px;
 }
 
 .panel-default {
@@ -828,16 +858,29 @@ textarea.fanexInput {
         @include border-radius(0);
         border: none;
         padding: 0 20px;
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        justify-content: space-between;
+        @include mq($max-width: $breakePoint_md) {
+            padding: 0 10px;
+        }
+        div {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: center;
+        }
+        div:first-child {
+            text-align: left;
+        }
         .acc-main-icon {
             color: $fanapOrange;
             font-size: 28px;
             vertical-align: middle;
+            padding-right: 10px;
             &:before {
                 vertical-align: middle;
+            }
+            @include mq($max-width: $breakePoint_sm) {
+                font-size: 21px;
+                padding-right: 5px;
             }
         }
         .acc-user {
@@ -884,23 +927,39 @@ textarea.fanexInput {
                 }
             }
         }
+        .bnf-action-icons {
+            i {
+                color: $fanapGreyDark;
+                font-size: 20px;
+                padding: 0 3px;
+                &:before {
+                    vertical-align: middle !important;
+                }
+            }
+        }
     }
     .panel-body {
-        padding: 30px 20px;
         @include border-radius(0);
         .acc-info-left {
             p {
                 color: $fanapGreyDark;
                 font-weight: 300;
+                @include text-overflow();
             }
         }
         .acc-info-right {
             p {
                 color: $fanapDark;
                 font-weight: 500;
+                @include mq($max-width: $breakePoint_lg) {
+                    text-align: right;
+                }
             }
         }
         .acc-factor {
+            @include mq($max-width: $breakePoint_lg) {
+                margin-top: 40px;
+            }
             hr {
                 margin: 5px 0;
             }

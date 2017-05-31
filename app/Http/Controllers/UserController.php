@@ -28,6 +28,21 @@ class UserController extends Controller
         return view('dashboard.index');
     }
 
+    public function beneficiaries()
+    {
+        return view('dashboard.beneficiaries');
+    }
+
+    public function notifications()
+    {
+        return view('dashboard.notifications');
+    }
+
+    public function settings()
+    {
+        return view('dashboard.settings');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
