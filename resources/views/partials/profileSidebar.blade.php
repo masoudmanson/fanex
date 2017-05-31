@@ -4,22 +4,22 @@
      id="profile-sidebar">
     <div class="white-card">
         <ul class="profile-ul">
-            <li class="profile-li active">
+            <li class="profile-li @if($page == "transactions") active @endif">
                 <a href="/profile">
                     <i class="icon-trans"></i> Transitions
                 </a>
             </li>
-            <li class="profile-li">
+            <li class="profile-li @if($page == "beneficiaries") active @endif">
                 <a href="/beneficiaries">
                     <i class="icon-user"></i> Beneficiaries
                 </a>
             </li>
-            <li class="profile-li">
+            <li class="profile-li @if($page == "notifications") active @endif">
                 <a href="/notifications">
                     <i class="icon-chat"></i> Notifications
                 </a>
             </li>
-            <li class="profile-li">
+            <li class="profile-li @if($page == "settings") active @endif">
                 <a href="/settings">
                     <i class="icon-settings"></i> Settings
                 </a>

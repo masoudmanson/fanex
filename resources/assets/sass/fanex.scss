@@ -9,6 +9,16 @@ body {
     background-color: $fanapGreyLight;
 }
 
+.fanex-text-red {
+    color: $fanapRed !important;
+}
+.fanex-text-green {
+    color: $fanapGreen !important;
+}
+.fanex-text-orange {
+    color: $fanapOrange !important;
+}
+
 @include mq($max-width: $breakePoint_sm) {
     h1 {
         font-size: 28px;
@@ -34,7 +44,7 @@ body {
         font-weight: 500;
         padding-left: 0;
         @include mq($max-width: $breakePoint_sm) {
-            padding-left: 15px;
+            //padding-left: 15px;
         }
         @include transition(all .3s);
         @include mq($max-width: $breakePoint_xl) {
@@ -45,6 +55,10 @@ body {
             }
         }
     }
+}
+
+.navbar-header {
+    margin-left: 0 !important;
 }
 
 @include mq($max-width: $breakePoint_md) {
@@ -352,7 +366,7 @@ body {
     color: $fanapGreyDark;
     position: absolute;
     z-index: 100;
-    margin: 14px 0 0 15px;
+    margin: 16px 0 0 15px;
 }
 
 .fanexInput {
@@ -386,6 +400,20 @@ body {
         color: $fanapDark;
         background-color: #fff;
         @include box-shadow(0 0 7px rgba(0, 0, 0, 0.2) !important);
+    }
+}
+
+.panel-body .bsWrapper {
+    margin: 0;
+}
+
+.fanexInputPanel {
+    @extend .fanexInput;
+    color: $fanapDark;
+    border: solid 1px $fanapGreyLight;
+    background-color: #fff;
+    &:hover, &:active, &:focus {
+        background-color: #fff;
     }
 }
 
@@ -794,6 +822,10 @@ textarea.fanexInput {
             &:hover {
                 color: $fanapOrange;
             }
+            .mini-title,
+            .large-title {
+                @include text-overflow();
+            }
             .large-title {
                 display: none;
                 @include mq($max-width: $breakePoint_md) {
@@ -866,6 +898,8 @@ textarea.fanexInput {
             overflow: hidden;
             text-overflow: ellipsis;
             text-align: center;
+            padding-right: 2px !important;
+            padding-left: 2px !important;
         }
         div:first-child {
             text-align: left;
@@ -873,7 +907,7 @@ textarea.fanexInput {
         .acc-main-icon {
             color: $fanapOrange;
             font-size: 28px;
-            vertical-align: middle;
+            vertical-align: top;
             padding-right: 10px;
             &:before {
                 vertical-align: middle;
@@ -928,12 +962,22 @@ textarea.fanexInput {
             }
         }
         .bnf-action-icons {
-            i {
-                color: $fanapGreyDark;
-                font-size: 20px;
-                padding: 0 3px;
-                &:before {
-                    vertical-align: middle !important;
+            text-align: right;
+            a {
+                text-decoration: none;
+                i {
+                    color: $fanapGreyDark;
+                    font-size: 24px;
+                    padding: 0 5px;
+                    @include transition(all .3s);
+                    &:before {
+                        vertical-align: middle !important;
+                    }
+                }
+                &:hover {
+                    i {
+                        color: $fanapDark;
+                    }
                 }
             }
         }
@@ -954,6 +998,7 @@ textarea.fanexInput {
                 @include mq($max-width: $breakePoint_lg) {
                     text-align: right;
                 }
+                @include text-overflow();
             }
         }
         .acc-factor {
@@ -965,6 +1010,20 @@ textarea.fanexInput {
             }
             .acc-factor-sum {
                 color: $fanapOrange;
+            }
+            p.table-header {
+                background-color: #fff;
+                padding: 5px 0;
+                color: $fanapGreyDark;
+                font-weight: 500;
+                border-bottom: solid 1px $fanapGreyLight;
+                @include mq($max-width: $breakePoint_lg) {
+                    background-color: $fanapGreyDark;
+                    margin-left: -30px;
+                    margin-right: -30px;
+                    padding: 5px 30px;
+                    color: #fff;
+                }
             }
         }
     }

@@ -1,11 +1,10 @@
 <nav class="navbar navbar-default @if(!empty($type)) @if($type == "dashboard") navbar-fixed-top dashboard-nav @endif @endif">
-    <div class="container-fluid px-sm-0 px-md-4 px-lg-4">
+    <div class="container-fluid px-xs-4 px-sm-0 px-md-4 px-lg-4">
         {{-- Brand and toggle get grouped for better mobile display --}}
         <div class="navbar-header">
             <a class="navbar-brand" href="/">FANEx</a>
         </div>
 
-        {{-- Collect the nav links, forms, and other content for toggling --}}
         {{-- Authentication Links --}}
         <ul class="nav navbar-nav navbar-right">
             @if (Auth::guest())
