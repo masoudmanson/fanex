@@ -1,4 +1,9 @@
-<nav class="navbar navbar-default @if(!empty($type)) @if($type == "dashboard") navbar-fixed-top dashboard-nav @endif @endif">
+<nav class="navbar navbar-default
+    @if(!empty($type))
+        @if($type == "dashboard") navbar-fixed-top dashboard-nav
+        @elseif($type == "dark") dark-header
+        @endif
+    @endif">
     <div class="container-fluid px-xs-4 px-sm-0 px-md-4 px-lg-4">
         {{-- Brand and toggle get grouped for better mobile display --}}
         <div class="navbar-header">

@@ -9904,6 +9904,19 @@ body {
   opacity: 0.6;
 }
 
+.dark-header {
+  background: transparent;
+  background-color: transparent;
+}
+
+.dark-header .navbar-nav li.nav-item a.nav-link {
+  color: #333333;
+}
+
+.dark-header .navbar-nav li.nav-item a.nav-link:hover, .dark-header .navbar-nav li.nav-item a.nav-link:active, .dark-header .navbar-nav li.nav-item a.nav-link:focus {
+  color: #F58121;
+}
+
 .dashboard-nav {
   background: #F58121 url("images/pattern.png");
   background-size: 50%;
@@ -9920,6 +9933,32 @@ body {
 
 .dashboard-nav ul li.nav-item a.nav-link:hover {
   color: #783905;
+}
+
+.additional-wrapper {
+  min-height: 77vh;
+  padding: 160px 100px 30px;
+  background: #F4F4F4 url("images/pattern.png");
+  background-size: 40%;
+  margin: auto;
+}
+
+@media only screen and (max-width: 1400px) {
+  .additional-wrapper {
+    padding: 130px 50px 30px;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .additional-wrapper {
+    padding: 120px 30px 20px;
+  }
+}
+
+.additional-wrapper .white-div {
+  padding: 50px 40px;
+  background-color: #fff;
+  margin: auto;
 }
 
 .dashboard-wrapper {
@@ -10592,6 +10631,17 @@ a.btn {
 .dashboard-footer .footerRight li a:hover {
   opacity: 1;
   color: #f8ab6a;
+}
+
+.dark-footer .footerLeft li a,
+.dark-footer .footerRight li a {
+  color: #333333;
+}
+
+.dark-footer .footerLeft li a:hover,
+.dark-footer .footerRight li a:hover {
+  opacity: 1;
+  color: #F58121;
 }
 
 #mainFormLoader {

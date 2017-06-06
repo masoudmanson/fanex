@@ -103,6 +103,21 @@ body {
     }
 }
 
+.dark-header {
+    background: transparent;
+    background-color: transparent;
+    .navbar-nav {
+        li.nav-item {
+            a.nav-link {
+                color: $fanapDark;
+                &:hover, &:active, &:focus {
+                    color: $fanapOrange;
+                }
+            }
+        }
+    }
+}
+
 .dashboard-nav {
     background: $fanapOrange url("images/pattern.png");
     -webkit-background-size: 50%;
@@ -116,6 +131,25 @@ body {
     }
     ul li.nav-item a.nav-link:hover {
         color: darken($fanapOrange, 30%);
+    }
+}
+
+.additional-wrapper {
+    min-height: 77vh;
+    padding: 160px 100px 30px;
+    background: $fanapGreyLight url("images/pattern.png");
+    background-size: 40%;
+    margin: auto;
+    @include mq($max-width: $breakePoint_xxl) {
+        padding: 130px 50px 30px;
+    }
+    @include mq($max-width: $breakePoint_sm) {
+        padding: 120px 30px 20px;
+    }
+    .white-div {
+        padding: 50px 40px;
+        background-color: #fff;
+        margin: auto;
     }
 }
 
@@ -652,6 +686,21 @@ a.btn {
                 &:hover {
                     opacity: 1;
                     color: lighten($fanapOrange, 15%);
+                }
+            }
+        }
+    }
+}
+
+.dark-footer {
+    .footerLeft,
+    .footerRight {
+        li {
+            a {
+                color: $fanapDark;
+                &:hover {
+                    opacity: 1;
+                    color: $fanapOrange;
                 }
             }
         }

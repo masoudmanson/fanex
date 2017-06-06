@@ -1,4 +1,9 @@
-<nav class="navbar @if(!empty($type)) @if($type == "dashboard") dashboard-footer @endif @endif">
+<nav class="navbar
+    @if(!empty($type))
+        @if($type == "dashboard") dashboard-footer
+        @elseif($type == "dark") dark-footer
+        @endif
+    @endif">
     <div class="container-fluid px-xs-4 p-sm-0 p-md-0 p-lg-0">
         <div class="fanexFooter">
             {{-- Footer Left List --}}

@@ -26,20 +26,21 @@ class CheckUserExist
 
             $result = $this->getCurrentPlatformUser($token);
             $platform_user = json_decode($result->getBody()->getContents());
+//            dd($platform_user);
             $id = $platform_user->result->userId; //todo : check for a logined user he isn't exist in platform
-
+//dd($id);
 
 //            if (User::findByUserId($id)->first) {
-            if (User::findByUserId($id)->first()) {
-                $user = User::findByUserId($id)->first();
-                $user->api_token = $request->bearerToken();
-
-                $user->save();
-                Auth::login($user);
-
-                return $next($request);
-            }
-            else {
+//            if (User::findByUserId($id)->first()) {
+//                $user = User::findByUserId($id)->first();
+//                $user->api_token = $request->bearerToken();
+//
+//                $user->save();
+//                Auth::login($user);
+//
+//                return $next($request);
+//            }
+//            else {
 //                $this->RegisterWithSSO($request);
 //                return redirect('additional-info')->with([
 //                    'redirect_uri' => $request->url(),
@@ -53,8 +54,8 @@ class CheckUserExist
                     'token' => $request->bearerToken() // todo: this is just for run test. when masoud put his js codes into project, it must be deleted.
                 );
 
-                return response()->view('additional', $data, 200)->header('authorization', 'Bearer ' . $token);
-            }
+                return response()->view('statics.additional', $data, 200)->header('authorization', 'Bearer ' . $token);
+//            }
 
         }
     }
