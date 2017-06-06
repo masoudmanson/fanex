@@ -9775,6 +9775,10 @@ select.selectpicker {
   content: "\4e";
 }
 
+.icon-exit:before {
+  content: "\4f";
+}
+
 * {
   outline: none !important;
   font-family: 'Roboto', sans-serif !important;
@@ -9926,7 +9930,7 @@ body {
 .dashboard-wrapper .dash-title {
   font-weight: 200;
   color: #333333;
-  padding-bottom: 15px;
+  padding-bottom: 5px;
 }
 
 .dashboard-wrapper .dash-title b {

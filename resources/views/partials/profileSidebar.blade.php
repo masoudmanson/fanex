@@ -1,4 +1,4 @@
-<h1 class="dash-title">Welcome <b>Masoud</b></h1>
+<h1 class="dash-title">Welcome <b>{{ Auth::user()->firstname }}</b></h1>
 
 <div class="col-lg-3 col-md-4 col-sm-12 pl-0 pr-lg-4 pr-md-0 pr-sm-0 pr-xs-0" style="position:static;"
      id="profile-sidebar">
@@ -23,6 +23,15 @@
                 <a href="/settings">
                     <i class="icon-settings"></i> Settings
                 </a>
+            </li>
+            <li class="profile-li">
+                <a href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> <i class="icon-exit"></i> Log Out
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
             </li>
         </ul>
     </div>

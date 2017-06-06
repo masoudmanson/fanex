@@ -14,7 +14,8 @@ class UserController extends Controller
 
     public function __construct()
     {
-//        $this->middleware('checkToken', ['only' => ['show', 'index']]);
+//        $this->middleware('checkToken', ['only' => ['show', 'index', 'beneficiaries']]);
+//        $this->middleware('checkUser');
     }
 
     /**
@@ -28,9 +29,11 @@ class UserController extends Controller
         return view('dashboard.index',compact('user'));
     }
 
-    public function beneficiaries()
+    public function beneficiaries(Request $request)
     {
-        return view('dashboard.beneficiaries');
+//        $user = Auth::user();
+//        $beneficiaries = $user->beneficiary()->get();
+        return view('dashboard.beneficiaries', compact('beneficiaries'));
     }
 
     public function notifications()

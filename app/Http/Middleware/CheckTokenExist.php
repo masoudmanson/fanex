@@ -22,6 +22,8 @@ class CheckTokenExist
      */
     public function handle($request, Closure $next)
     {
+
+//        dd($request);
         if (($token = $request->bearerToken())) //|| ($token = $request->hasCookie('token')))
         {
 
@@ -35,7 +37,6 @@ class CheckTokenExist
             }
 
         } elseif ($request->has('code')) {
-
             if ($request->hasCookie('code') && $request['code'] == $request->cookie('code')) {
                 return $next($request);
             }
@@ -44,7 +45,8 @@ class CheckTokenExist
 
             $token_object = json_decode($result->getBody()->getContents());
 
-            setcookie('code', $request['code'], $token_object->expires_in, "", "", FALSE, TRUE);
+//            $request->cookie('code', $request['code'], $token_object->expires_in, "", "", FALSE, TRUE);
+//            dd($request);
             $request->headers->set('authorization', 'Bearer ' . $token_object->access_token);
 
 //            $result = $this->RegisterWithSSO($request);

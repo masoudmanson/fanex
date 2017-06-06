@@ -51,7 +51,7 @@ class LoginController extends Controller
         /*
          * logout sso
          */
-
+        return redirect('/');
         //http://demo.fanapium.com:12594/oauth2/logout/
     }
 

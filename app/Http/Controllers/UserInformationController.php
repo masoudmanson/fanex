@@ -58,6 +58,8 @@ class UserInformationController extends Controller
 //            'email' => 'email',
 //            'password' => 'min:3|confirmed',
 //        ]);
+
+        dd($request);
         $dotin_response = $this->dotinCredential($request->account_number , $request->mobile);
         $dotin_result = json_decode($dotin_response->getBody()->getContents());
 
