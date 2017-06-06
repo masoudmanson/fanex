@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Backlog;
 use App\Beneficiary;
 use App\Http\Requests\RemittanceForm;
 use App\Traits\UptTrait;
@@ -13,7 +14,7 @@ use Psr\Http\Message\ServerRequestInterface;
 class UptController extends Controller
 {
     use UptTrait;
-    public function test()
+    public function test(RemittanceForm $request)
     {
         $this->CorpGetCountryData();
     }
@@ -41,6 +42,7 @@ class UptController extends Controller
 
     public function calculateRemittance(RemittanceForm $request)
     {
+//     dd(   $this->CorpGetCurrencyRate($request->amount));
 
         $result = $this->getEuroExchangeRate();
 
@@ -54,6 +56,8 @@ class UptController extends Controller
         }
 
         //write to backlog
+
+//        $log = new Backlog();
 
        return json_decode($EuroER)[0]->er*$request->amount;
     }

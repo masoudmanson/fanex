@@ -27,10 +27,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Morilog\Jalali\Facades\jDate;
 
-Route::get('/', function () {
-    $user = Auth::user();
-    return view('index',compact('user'));
-});
+Route::get('/', 'HomeController@index');
 //    ->middleware('checkUser');
 
 // Static Routes
@@ -66,6 +63,7 @@ Route::get('/test', 'PaymentController@test');
 Route::get('/payment', 'PaymentController@pay');
 
 Route::get('/callback/{callback}', 'CallbackController@callbackHandler');
+Route::get('/emad', 'Payment@test');
 
 Route::resource('/additional-info', 'UserInformationController');
 

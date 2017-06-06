@@ -32,9 +32,8 @@ class PaymentController extends Controller
     }
     public function test(Request $request)
     {
-        dd($request);
-//        dd(Cookie::get('token'));
-        dd($request->cookies);
+
+        dd($request->input());
     }
 
     public function pay(Request $request)
