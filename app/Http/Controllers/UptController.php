@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Beneficiary;
 use App\Http\Requests\RemittanceForm;
+use App\Traits\UptTrait;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -11,6 +12,13 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class UptController extends Controller
 {
+    use UptTrait;
+    public function test()
+    {
+        $this->CorpGetCountryData();
+    }
+
+
     // upt fake web service
 
     public function getEuroExchangeRate()
