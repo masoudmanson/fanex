@@ -56,6 +56,8 @@ Route::get('/beneficiaries', 'UserController@beneficiaries');
 Route::get('/beneficiaries/add', 'UserController@addBeneficiary');
 Route::get('/notifications', 'UserController@notifications');
 Route::get('/settings', 'UserController@settings');
+Route::get('/logout', 'Auth/LoginController@logout');
+
 
 //Route::post('/pay', 'WalletController') ;
 //
