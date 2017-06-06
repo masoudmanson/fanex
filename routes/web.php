@@ -68,6 +68,8 @@ Route::get('/callback/{callback}', 'CallbackController@callbackHandler');
 
 Route::resource('/additional-info', 'UserInformationController');
 
+Route::get('/ws', 'UptController@test');
+
 Route::get('/{locale}', function ($locale) {
     App::setLocale($locale);
     return view('index');

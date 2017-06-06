@@ -17,7 +17,7 @@ class UserInformationController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkToken', ['only' => ['store']]);
+//        $this->middleware('checkToken', ['only' => ['store']]);
     }
 
     /**
@@ -58,6 +58,9 @@ class UserInformationController extends Controller
 //            'email' => 'email',
 //            'password' => 'min:3|confirmed',
 //        ]);
+
+        $request->headers->set('authorization', 'Bearer ' . $request->token); //todo:  it must be deleted. cause it comes from form input and it's not gonna be like that any more
+
         $dotin_response = $this->dotinCredential($request->account_number , $request->mobile);
         $dotin_result = json_decode($dotin_response->getBody()->getContents());
 
@@ -82,7 +85,6 @@ class UserInformationController extends Controller
 
                 $user->save();
 
-//                http://sandbox.fanapium.com:8080/nzh/follow/?businessId=22&follow=true
 //  get user beneficiary's?!
                 return response()->view('dashboard.beneficiary', $request->state, 200)->header('authorization', 'Bearer ' . $request->token);
             }

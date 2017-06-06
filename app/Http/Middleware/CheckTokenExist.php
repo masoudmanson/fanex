@@ -4,8 +4,10 @@ namespace App\Http\Middleware;
 
 use App\Traits\PlatformTrait;
 use App\Traits\TokenTrait;
+use App\User;
 use Closure;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
 
 class CheckTokenExist
 {
@@ -22,6 +24,17 @@ class CheckTokenExist
      */
     public function handle($request, Closure $next)
     {
+        if(Auth::user()){
+            $result = $this->tokenValidation(Auth::user()->api_token);
+            $result = json_decode($result->getBody()->getContents());
+
+            if ($result->active) {
+                $request->headers->set('authorization', 'Bearer ' . Auth::user()->api_token);
+                return $next($request);
+                // or ,else refresh token todo: refresh token and cookie, and then go to next
+            }
+        }
+
         if (($token = $request->bearerToken())) //|| ($token = $request->hasCookie('token')))
         {
 
@@ -36,9 +49,11 @@ class CheckTokenExist
 
         } elseif ($request->has('code')) {
 
+            //test and delete it if not necessary
             if ($request->hasCookie('code') && $request['code'] == $request->cookie('code')) {
                 return $next($request);
             }
+            //
 
             $result = $this->getToken($request);
 

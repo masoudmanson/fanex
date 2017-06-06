@@ -45,7 +45,7 @@ class PaymentController extends Controller
 
         $beneficiaries = $user->beneficiary()->get();
 
-        ($request->query->add(['user'=>$user,'beneficiaries'=>$beneficiaries]));
+        $request->query->add(['user'=>$user,'beneficiaries'=>$beneficiaries]);
         return response()->view('dashboard.beneficiary', $request->query(), 200)->header('authorization', 'Bearer ' . $request->bearerToken());
     }
 
