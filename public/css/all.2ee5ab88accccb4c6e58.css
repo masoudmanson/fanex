@@ -9585,6 +9585,14 @@ select.selectpicker {
   float: none;
 }
 
+.no-border {
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
 @font-face {
   font-family: "fanex";
   src: url("../fonts/fanex.eot");
@@ -9777,6 +9785,10 @@ select.selectpicker {
 
 .icon-exit:before {
   content: "\4f";
+}
+
+.icon-download:before {
+  content: "\50";
 }
 
 * {
@@ -10390,6 +10402,10 @@ textarea.fanexInput, textarea.fanexInputWhite, textarea.fanexInputPanel {
   color: #F58121;
 }
 
+a.btn {
+  line-height: 46px;
+}
+
 .fanexBtn, .fanexBtnOutline, .fanexBtnOutlineGrey, .fanexBtnOutlineOrange, .fanexBtnGrey, .fanexBtnOrange {
   height: 60px;
   font-weight: 200;
@@ -10858,6 +10874,7 @@ textarea.fanexInput, textarea.fanexInputWhite, textarea.fanexInputPanel {
 }
 
 .panel-default .panel-heading {
+  position: relative;
   background-color: #fff;
   height: 70px;
   line-height: 70px;
@@ -10974,8 +10991,19 @@ textarea.fanexInput, textarea.fanexInputWhite, textarea.fanexInputPanel {
   color: #333333;
 }
 
+.panel-default .panel-heading.new::before {
+  content: '';
+  background-color: #F58121;
+  width: 15px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .panel-default .panel-body {
   border-radius: 0;
+  border-top: solid 1px #F8F8F8 !important;
 }
 
 .panel-default .panel-body .acc-info-left p {
@@ -11030,6 +11058,36 @@ textarea.fanexInput, textarea.fanexInputWhite, textarea.fanexInputPanel {
     padding: 5px 30px;
     color: #fff;
   }
+}
+
+.panel-default .panel-body a.notification-link {
+  transition: all 0.3s;
+  padding: 5px 0 20px;
+  color: #949597;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.panel-default .panel-body a.notification-link:hover {
+  color: #333333;
+}
+
+.panel-default .panel-body a.notification-link i {
+  vertical-align: middle;
+}
+
+.panel-default .panel-body.new::before {
+  content: '';
+  background-color: #F58121;
+  width: 15px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.panel-default .panel-body.notification-body {
+  padding: 30px 20px;
 }
 
 .panel-heading .accordion-toggle:after {

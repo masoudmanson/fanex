@@ -36,6 +36,11 @@ class UserController extends Controller
         return view('dashboard.beneficiaries', compact('beneficiaries'));
     }
 
+    public function addBeneficiary()
+    {
+        return view("dashboard.add-beneficiary");
+    }
+
     public function notifications()
     {
         return view('dashboard.notifications');

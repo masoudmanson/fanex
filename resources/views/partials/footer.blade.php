@@ -22,7 +22,7 @@
                     <a href="#" class="nav-link"><i class="icon-linkedin"></i></a>
                 </li>
                 <li class="hasIcon">
-                    <a href="#" class="nav-link"><i class="icon-instagram"></i></a>
+                    <a href="https://www.instagram.com/fanex_fanap/" target="_blank" class="nav-link"><i class="icon-instagram"></i></a>
                 </li>
                 <li class="copyright">
                     <a href="/" style="font-size: 16px;">FANEx &copy; {{ \Carbon\Carbon::now()->year }}</a>

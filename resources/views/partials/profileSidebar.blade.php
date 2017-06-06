@@ -19,11 +19,11 @@
                     <i class="icon-chat"></i> Notifications
                 </a>
             </li>
-            <li class="profile-li @if($page == "settings") active @endif">
-                <a href="/settings">
-                    <i class="icon-settings"></i> Settings
-                </a>
-            </li>
+            {{--<li class="profile-li @if($page == "settings") active @endif">--}}
+                {{--<a href="/settings">--}}
+                    {{--<i class="icon-settings"></i> Settings--}}
+                {{--</a>--}}
+            {{--</li>--}}
             <li class="profile-li">
                 <a href="{{ route('logout') }}"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> <i class="icon-exit"></i> Log Out

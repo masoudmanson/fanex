@@ -214,7 +214,7 @@
                                 </div>
                             </div>
                             <div id="row3" class="panel-collapse collapse">
-                                <div class="panel-body">
+                                <div class="panel-body no-border">
                                     <div class="row m-0 p-0">
                                         <div class="col-sm-12 col-md-7">
                                             <div class="col-xs-5 p-0 m-0 acc-info-left">

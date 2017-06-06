@@ -36,11 +36,11 @@
                         <div class="panel panel-default pending">
                             <div class="panel-heading">
                                 <div class="row p-0 m-0">
-                                    <div class="col-md-3 col-sm-3 col-xs-5" data-toggle="tooltip" title="Beneficiary Name">
+                                    <div class="col-md-2 col-sm-3 col-xs-5" data-toggle="tooltip" title="Beneficiary Name">
                                         <i class="icon-user acc-main-icon"></i>
                                         <span class="acc-user"><b>Masoud Amjadi</b></span>
                                     </div>
-                                    <div class="col-md-2 col-sm-3 hidden-xs" data-toggle="tooltip" title="Beneficiary Account Number">
+                                    <div class="col-md-3 col-sm-3 hidden-xs" data-toggle="tooltip" title="Beneficiary Account Number">
                                         <span class="acc-date">6104-3379-1254-3665</span>
                                     </div>
                                     <div class="col-md-1 hidden-sm hidden-xs" data-toggle="tooltip" title="Country">

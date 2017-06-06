@@ -483,6 +483,10 @@ textarea.fanexInput {
     color: $fanapOrange;
 }
 
+a.btn {
+    line-height: 46px;
+}
+
 .fanexBtn {
     height: 60px;
     font-weight: 200;
@@ -884,6 +888,7 @@ textarea.fanexInput {
 .panel-default {
     @include border-radius(0);
     .panel-heading {
+        position: relative;
         background-color: #fff;
         height: 70px;
         line-height: 70px;
@@ -982,8 +987,18 @@ textarea.fanexInput {
             }
         }
     }
+    .panel-heading.new::before {
+        content: '';
+        background-color: $fanapOrange;
+        width: 15px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
     .panel-body {
         @include border-radius(0);
+        border-top: solid 1px $fanapGreyUltraLight !important;
         .acc-info-left {
             p {
                 color: $fanapGreyDark;
@@ -1026,6 +1041,31 @@ textarea.fanexInput {
                 }
             }
         }
+        a.notification-link {
+            @include transition(all .3s);
+            padding: 5px 0 20px;
+            color: $fanapGrey;
+            text-decoration: none;
+            font-size: 13px;
+            &:hover {
+                color: $fanapDark;
+            }
+            i {
+                vertical-align: middle;
+            }
+        }
+    }
+    .panel-body.new::before {
+        content: '';
+        background-color: $fanapOrange;
+        width: 15px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .panel-body.notification-body {
+        padding: 30px 20px;
     }
 }
 
