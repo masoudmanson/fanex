@@ -59,6 +59,7 @@ class UserInformationController extends Controller
 //            'password' => 'min:3|confirmed',
 //        ]);
 
+
         $request->headers->set('authorization', 'Bearer ' . $request->token); //todo:  it must be deleted. cause it comes from form input and it's not gonna be like that any more
 
         $dotin_response = $this->dotinCredential($request->account_number , $request->mobile);

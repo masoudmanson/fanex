@@ -140,3 +140,6 @@
 .icon-bank:before {
     content: "\48";
 }
+.icon-download:before {
+    content: "\50";
+}

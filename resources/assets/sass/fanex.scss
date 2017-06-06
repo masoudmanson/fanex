@@ -9,6 +9,16 @@ body {
     background-color: $fanapGreyLight;
 }
 
+.fanex-text-red {
+    color: $fanapRed !important;
+}
+.fanex-text-green {
+    color: $fanapGreen !important;
+}
+.fanex-text-orange {
+    color: $fanapOrange !important;
+}
+
 @include mq($max-width: $breakePoint_sm) {
     h1 {
         font-size: 28px;
@@ -34,7 +44,7 @@ body {
         font-weight: 500;
         padding-left: 0;
         @include mq($max-width: $breakePoint_sm) {
-            padding-left: 15px;
+            //padding-left: 15px;
         }
         @include transition(all .3s);
         @include mq($max-width: $breakePoint_xl) {
@@ -45,6 +55,10 @@ body {
             }
         }
     }
+}
+
+.navbar-header {
+    margin-left: 0 !important;
 }
 
 @include mq($max-width: $breakePoint_md) {
@@ -89,6 +103,21 @@ body {
     }
 }
 
+.dark-header {
+    background: transparent;
+    background-color: transparent;
+    .navbar-nav {
+        li.nav-item {
+            a.nav-link {
+                color: $fanapDark;
+                &:hover, &:active, &:focus {
+                    color: $fanapOrange;
+                }
+            }
+        }
+    }
+}
+
 .dashboard-nav {
     background: $fanapOrange url("images/pattern.png");
     -webkit-background-size: 50%;
@@ -105,6 +134,25 @@ body {
     }
 }
 
+.additional-wrapper {
+    min-height: 77vh;
+    padding: 160px 100px 30px;
+    background: $fanapGreyLight url("images/pattern.png");
+    background-size: 40%;
+    margin: auto;
+    @include mq($max-width: $breakePoint_xxl) {
+        padding: 130px 50px 30px;
+    }
+    @include mq($max-width: $breakePoint_sm) {
+        padding: 120px 30px 20px;
+    }
+    .white-div {
+        padding: 50px 40px;
+        background-color: #fff;
+        margin: auto;
+    }
+}
+
 .dashboard-wrapper {
     min-height: 95vh;
     padding: 160px 100px 30px;
@@ -117,7 +165,7 @@ body {
     .dash-title {
         font-weight: 200;
         color: $fanapDark;
-        padding-bottom: 15px;
+        padding-bottom: 5px;
         b {
             font-weight: 400;
         }
@@ -352,7 +400,7 @@ body {
     color: $fanapGreyDark;
     position: absolute;
     z-index: 100;
-    margin: 14px 0 0 15px;
+    margin: 16px 0 0 15px;
 }
 
 .fanexInput {
@@ -386,6 +434,20 @@ body {
         color: $fanapDark;
         background-color: #fff;
         @include box-shadow(0 0 7px rgba(0, 0, 0, 0.2) !important);
+    }
+}
+
+.panel-body .bsWrapper {
+    margin: 0;
+}
+
+.fanexInputPanel {
+    @extend .fanexInput;
+    color: $fanapDark;
+    border: solid 1px $fanapGreyLight;
+    background-color: #fff;
+    &:hover, &:active, &:focus {
+        background-color: #fff;
     }
 }
 
@@ -453,6 +515,10 @@ textarea.fanexInput {
 
 .captchaRefresher:hover i {
     color: $fanapOrange;
+}
+
+a.btn {
+    line-height: 46px;
 }
 
 .fanexBtn {
@@ -620,6 +686,21 @@ textarea.fanexInput {
                 &:hover {
                     opacity: 1;
                     color: lighten($fanapOrange, 15%);
+                }
+            }
+        }
+    }
+}
+
+.dark-footer {
+    .footerLeft,
+    .footerRight {
+        li {
+            a {
+                color: $fanapDark;
+                &:hover {
+                    opacity: 1;
+                    color: $fanapOrange;
                 }
             }
         }
@@ -794,6 +875,10 @@ textarea.fanexInput {
             &:hover {
                 color: $fanapOrange;
             }
+            .mini-title,
+            .large-title {
+                @include text-overflow();
+            }
             .large-title {
                 display: none;
                 @include mq($max-width: $breakePoint_md) {
@@ -852,6 +937,7 @@ textarea.fanexInput {
 .panel-default {
     @include border-radius(0);
     .panel-heading {
+        position: relative;
         background-color: #fff;
         height: 70px;
         line-height: 70px;
@@ -866,6 +952,8 @@ textarea.fanexInput {
             overflow: hidden;
             text-overflow: ellipsis;
             text-align: center;
+            padding-right: 2px !important;
+            padding-left: 2px !important;
         }
         div:first-child {
             text-align: left;
@@ -873,7 +961,7 @@ textarea.fanexInput {
         .acc-main-icon {
             color: $fanapOrange;
             font-size: 28px;
-            vertical-align: middle;
+            vertical-align: top;
             padding-right: 10px;
             &:before {
                 vertical-align: middle;
@@ -928,18 +1016,38 @@ textarea.fanexInput {
             }
         }
         .bnf-action-icons {
-            i {
-                color: $fanapGreyDark;
-                font-size: 20px;
-                padding: 0 3px;
-                &:before {
-                    vertical-align: middle !important;
+            text-align: right;
+            a {
+                text-decoration: none;
+                i {
+                    color: $fanapGreyDark;
+                    font-size: 24px;
+                    padding: 0 5px;
+                    @include transition(all .3s);
+                    &:before {
+                        vertical-align: middle !important;
+                    }
+                }
+                &:hover {
+                    i {
+                        color: $fanapDark;
+                    }
                 }
             }
         }
     }
+    .panel-heading.new::before {
+        content: '';
+        background-color: $fanapOrange;
+        width: 15px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
     .panel-body {
         @include border-radius(0);
+        border-top: solid 1px $fanapGreyUltraLight !important;
         .acc-info-left {
             p {
                 color: $fanapGreyDark;
@@ -954,6 +1062,7 @@ textarea.fanexInput {
                 @include mq($max-width: $breakePoint_lg) {
                     text-align: right;
                 }
+                @include text-overflow();
             }
         }
         .acc-factor {
@@ -966,7 +1075,46 @@ textarea.fanexInput {
             .acc-factor-sum {
                 color: $fanapOrange;
             }
+            p.table-header {
+                background-color: #fff;
+                padding: 5px 0;
+                color: $fanapGreyDark;
+                font-weight: 500;
+                border-bottom: solid 1px $fanapGreyLight;
+                @include mq($max-width: $breakePoint_lg) {
+                    background-color: $fanapGreyDark;
+                    margin-left: -30px;
+                    margin-right: -30px;
+                    padding: 5px 30px;
+                    color: #fff;
+                }
+            }
         }
+        a.notification-link {
+            @include transition(all .3s);
+            padding: 5px 0 20px;
+            color: $fanapGrey;
+            text-decoration: none;
+            font-size: 13px;
+            &:hover {
+                color: $fanapDark;
+            }
+            i {
+                vertical-align: middle;
+            }
+        }
+    }
+    .panel-body.new::before {
+        content: '';
+        background-color: $fanapOrange;
+        width: 15px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .panel-body.notification-body {
+        padding: 30px 20px;
     }
 }
 

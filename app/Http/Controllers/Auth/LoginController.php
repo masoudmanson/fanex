@@ -41,7 +41,7 @@ class LoginController extends Controller
 
         $id = adapterAssignment()->getId();
 
-        return Redirect::away('http://sandbox.fanapium.com/oauth2/authorize/?client_id=' . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri . '&state='.$request->queryString.'&prompt=login');
+        return Redirect::away('http://sandbox.fanapium.com/oauth2/authorize/?client_id=' . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri . '&state=' . $request->queryString . '&prompt=login');
 
 //        return \Redirect::away('http://sandbox.fanapium.com/oauth2/authorize?'.$queryString);
 //        return \redirect('http://sandbox.fanapium.com/oauth2/authorize?'.$queryString);
@@ -53,7 +53,7 @@ class LoginController extends Controller
     {
         $this->revokeToken(Auth::user()->api_token);
         Auth::logout();
-        return Redirect::away('http://sandbox.fanapium.com/oauth2/logout/?continue='.$request->root());
+        return Redirect::away('http://sandbox.fanapium.com/oauth2/logout/?continue=' . $request->root());
     }
 
     public function showRegistrationForm()

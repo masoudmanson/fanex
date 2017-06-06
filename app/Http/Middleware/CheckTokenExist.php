@@ -24,6 +24,7 @@ class CheckTokenExist
      */
     public function handle($request, Closure $next)
     {
+
         if(Auth::user()){
             $result = $this->tokenValidation(Auth::user()->api_token);
             $result = json_decode($result->getBody()->getContents());
@@ -37,7 +38,6 @@ class CheckTokenExist
 
         if (($token = $request->bearerToken())) //|| ($token = $request->hasCookie('token')))
         {
-
 //            $result = $this->tokenValidation($request->bearerToken());
             $result = $this->tokenValidation($token);
             $result = json_decode($result->getBody()->getContents());
@@ -48,8 +48,6 @@ class CheckTokenExist
             }
 
         } elseif ($request->has('code')) {
-
-            //test and delete it if not necessary
             if ($request->hasCookie('code') && $request['code'] == $request->cookie('code')) {
                 return $next($request);
             }
@@ -59,7 +57,8 @@ class CheckTokenExist
 
             $token_object = json_decode($result->getBody()->getContents());
 
-            setcookie('code', $request['code'], $token_object->expires_in, "", "", FALSE, TRUE);
+//            $request->cookie('code', $request['code'], $token_object->expires_in, "", "", FALSE, TRUE);
+//            dd($request);
             $request->headers->set('authorization', 'Bearer ' . $token_object->access_token);
 
 //            $result = $this->RegisterWithSSO($request);

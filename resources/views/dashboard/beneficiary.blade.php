@@ -120,35 +120,20 @@
                                         data-style="fanexInput fanexInputWhite"
                                         name="bnf"
                                         id="bnfSelect">
-                                    <option value="1">Hamidreza Amouzegar</option>
-                                    <option value="2">Mohammad Parham</option>
-                                    <option value="3">Pooria Pahlevani</option>
-                                    <option value="4">Emad Ghorbani Nia</option>
-                                    <option value="5">Masoud Amjadi</option>
-                                    <option value="6">Jeffery Way</option>
-                                    <option value="7">John Doe</option>
-                                    <option value="8">Hillary Duff</option>
-                                    <option value="3">Pooria Pahlevani</option>
-                                    <option value="4">Emad Ghorbani Nia</option>
-                                    <option value="5">Masoud Amjadi</option>
-                                    <option value="6">Jeffery Way</option>
-                                    <option value="7">John Doe</option>
-                                    <option value="8">Hillary Duff</option>
+                                    <option selected disabled>Select Beneficiary</option>
+                                    @foreach($beneficiaries as $bnf)
+                                        <option value="{{ $bnf['id'] }}">{{ $bnf['firstname']. ' ' .$bnf['lastname'] }}</option>
+                                    @endforeach
                                 </select>
                             </div>
-
-                            {{-- Form Submition --}}
-                            {{--<input type="submit" class="btn fanexBtnOutlineGrey" id="paymentBtn"--}}
-                            {{--value=@lang('index.pay') name="payment" disabled/>--}}
-
                         </form>
 
                         <div id="bnf-ajax-div" style="display: none;">
                             {{-- Firstname --}}
                             <div class="form-group bsWrapper">
                                 <i class="icon-user bsIcon"></i>
-                                <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-firstname">Masoud
-                                    Amjadi
+                                <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-name">
+                                    Beneficiary Name
                                 </div>
                             </div>
 
@@ -156,43 +141,47 @@
                             <div class="form-group bsWrapper">
                                 <i class="icon-card bsIcon"></i>
                                 <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-accountnumber">
-                                    6104337912543665
+                                    Account Number
                                 </div>
                             </div>
 
                             {{-- Address --}}
                             <div class="form-group bsWrapper">
                                 <i class="icon-globe bsIcon"></i>
-                                <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-address">#123, Noavari
-                                    12, Pardis Tech PArk, Tehran, Iran
+                                <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-address">
+                                    Beneficiary Address
                                 </div>
                             </div>
 
                             {{-- Phone Number --}}
                             <div class="form-group bsWrapper">
                                 <i class="icon-mobile bsIcon"></i>
-                                <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-phone">09148401824
+                                <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-phone">
+                                    Mobile
                                 </div>
                             </div>
 
                             {{-- Fax Number --}}
                             <div class="form-group bsWrapper">
                                 <i class="icon-fax bsIcon"></i>
-                                <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-fax">02171951111</div>
+                                <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-fax">
+                                    Fax Number
+                                </div>
                             </div>
 
                             {{-- Bank Name --}}
                             <div class="form-group bsWrapper">
                                 <i class="icon-bank bsIcon"></i>
-                                <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-bankname">Pasargad
+                                <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-bankname">
+                                    Bank Name
                                 </div>
                             </div>
 
                             {{-- Branch Address --}}
                             <div class="form-group bsWrapper">
                                 <i class="icon-branch bsIcon"></i>
-                                <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-branch">#12, Pasargad
-                                    13, Africa Blv, Tehran, Iran
+                                <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-branch">
+                                    Branch Address
                                 </div>
                             </div>
 
@@ -200,7 +189,7 @@
                             <div class="form-group bsWrapper">
                                 <i class="icon-swift bsIcon"></i>
                                 <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-swift">
-                                    54584534468431346463131
+                                    Swift Code
                                 </div>
                             </div>
 
@@ -208,7 +197,7 @@
                             <div class="form-group bsWrapper">
                                 <i class="icon-code bsIcon"></i>
                                 <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-iban">
-                                    4646464000011054048880
+                                    iBan Number
                                 </div>
                             </div>
 
@@ -229,7 +218,8 @@
             </div>
 
             {{-- SideBar --}}
-            <div class="col-lg-3 col-md-4 col-sm-12 pr-0 pl-lg-4 pl-md-0 pl-sm-0 pl-xs-0" style="position:static;" id="bnf-sidebar">
+            <div class="col-lg-3 col-md-4 col-sm-12 pr-0 pl-lg-4 pl-md-0 pl-sm-0 pl-xs-0" style="position:static;"
+                 id="bnf-sidebar">
                 <div class="white-card">
                     <p>Rates expire in:</p>
                     <h3 id="countdown">9:53</h3>
@@ -272,6 +262,7 @@
 @section('scripts')
     {{--<script src="{{ asset('js/index.js') }}"></script>--}}
     <script>
+        var beneficiaries = {!! $beneficiaries !!};
         $(document).ready(function () {
             $('.selectpicker').selectpicker();
 
@@ -325,8 +316,21 @@
                 $('#countdown').html('Time Out!').addClass('alert shake animated');
             });
 
-            $('#bnfSelect').on('change', function () {
+            $('#bnfSelect').on('change blur', function () {
                 $('#add-bnf-form').css({"opacity": 0.5});
+
+                var bnf_id = $(this).val();
+                var bnf = beneficiaries[bnf_id-1];
+                $('#bnf-ajax-name').text(bnf.firstname+' '+bnf.lastname);
+                $('#bnf-ajax-accountnumber').text(bnf.account_number);
+                $('#bnf-ajax-address').text(bnf.address);
+                $('#bnf-ajax-phone').text(bnf.tel);
+                $('#bnf-ajax-fax').text(bnf.fax);
+                $('#bnf-ajax-bankname').text(bnf.bank_name);
+                $('#bnf-ajax-branch').text(bnf.branch_address);
+                $('#bnf-ajax-swift').text(bnf.swift_code);
+                $('#bnf-ajax-iban').text(bnf.iban_code);
+
                 $('#bnf-ajax-div').slideDown(300);
             });
 
