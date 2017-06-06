@@ -55,6 +55,7 @@ Route::get('/profile', 'UserController@index'); // or user/me
 Route::get('/beneficiaries', 'UserController@beneficiaries'); // or user/me
 Route::get('/notifications', 'UserController@notifications'); // or user/me
 Route::get('/settings', 'UserController@settings'); // or user/me
+Route::get('/logout', 'Auth/LoginController@logout');
 
 //Route::post('/pay', 'WalletController') ;
 //

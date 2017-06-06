@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 
+use App\Traits\TokenTrait;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -22,6 +24,7 @@ class LoginController extends Controller
     |
     */
 
+    use TokenTrait;
 
     public function showLoginForm(Request $request)
     {
@@ -46,13 +49,11 @@ class LoginController extends Controller
         //sso login form
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        /*
-         * logout sso
-         */
-
-        //http://demo.fanapium.com:12594/oauth2/logout/
+        $this->revokeToken(Auth::user()->api_token);
+        Auth::logout();
+        return Redirect::away('http://sandbox.fanapium.com/oauth2/logout/?continue='.$request->root());
     }
 
     public function showRegistrationForm()

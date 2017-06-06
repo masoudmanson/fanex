@@ -100,5 +100,23 @@ trait TokenTrait
         return $res;
     }
 
+    public function revokeToken($token)
+    {
+        $id = adapterAssignment()->getId();
+        $secret = adapterAssignment()->getSecret();
+
+        $client = new Client();
+        $res = $client->post('http://sandbox.fanapium.com/oauth2/token/revoke', [
+            'form_params' => [
+                'token_type_hint'=>'access_token',
+                'token' => $token,
+                'client_id' => $id,
+                'client_secret' => $secret,
+            ]
+        ]);
+
+        return $res;
+    }
+
 
 }
