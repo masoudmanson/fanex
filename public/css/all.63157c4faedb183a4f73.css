@@ -9936,22 +9936,26 @@ body {
 }
 
 .additional-wrapper {
-  min-height: 77vh;
+  min-height: 80vh;
   padding: 160px 100px 30px;
-  background: #F4F4F4 url("images/pattern.png");
-  background-size: 40%;
   margin: auto;
 }
 
 @media only screen and (max-width: 1400px) {
   .additional-wrapper {
-    padding: 130px 50px 30px;
+    padding: 120px 50px 30px;
   }
 }
 
 @media only screen and (max-width: 520px) {
   .additional-wrapper {
-    padding: 120px 30px 20px;
+    padding: 80px 30px 20px;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .additional-wrapper {
+    padding: 60px 30px 20px;
   }
 }
 
@@ -9994,6 +9998,91 @@ body {
   font-weight: 500;
   padding-bottom: 30px;
   padding-top: 15px;
+}
+
+.dashboard-wrapper .proforma-wrapper {
+  height: 1500px;
+  background-color: #fff;
+}
+
+.dashboard-wrapper .invoice-wrapper {
+  background-color: #fff;
+  padding: 25px 45px 40px;
+}
+
+.dashboard-wrapper .invoice-wrapper .invoice-title {
+  font-size: 24px;
+  color: #333333;
+  padding-bottom: 20px;
+}
+
+.dashboard-wrapper .invoice-wrapper .invoice-date {
+  float: right;
+  font-size: 14px;
+  color: #949597;
+  font-weight: 300;
+  padding-top: 6px;
+}
+
+.dashboard-wrapper .invoice-wrapper .invoice-bnf {
+  color: #BBBBBB;
+}
+
+.dashboard-wrapper .invoice-wrapper .invoice-factor {
+  padding: 20px 0 40px;
+}
+
+.dashboard-wrapper .invoice-wrapper .invoice-factor hr {
+  margin: 7px 0;
+}
+
+.dashboard-wrapper .invoice-wrapper .invoice-factor .acc-factor-sum {
+  color: #BBBBBB;
+}
+
+.dashboard-wrapper .invoice-wrapper .invoice-factor .orange {
+  font-weight: 500;
+  color: #F58121;
+}
+
+.dashboard-wrapper .invoice-wrapper .invoice-factor .grey {
+  color: #BBBBBB;
+}
+
+.dashboard-wrapper .invoice-wrapper .invoice-factor p.table-header {
+  background-color: #fff;
+  padding: 5px 0;
+  color: #BBBBBB;
+  font-weight: 500;
+  border-bottom: solid 1px #F4F4F4;
+}
+
+.dashboard-wrapper .invoice-wrapper .regards {
+  font-weight: 500;
+  color: #333333;
+  font-size: 16px;
+}
+
+.dashboard-wrapper .invoice-wrapper .regards .grey {
+  color: #BBBBBB;
+  font-weight: 300;
+  font-size: 75%;
+}
+
+.dashboard-wrapper .invoice-wrapper .invoice-print {
+  float: right;
+  margin-top: -15px;
+  text-decoration: none;
+}
+
+.dashboard-wrapper .invoice-wrapper .invoice-print i {
+  font-size: 42px;
+  color: #BBBBBB;
+  transition: all 0.3s;
+}
+
+.dashboard-wrapper .invoice-wrapper .invoice-print:hover i {
+  color: #333333;
 }
 
 .bgWrapper {
@@ -10445,7 +10534,7 @@ a.btn {
   line-height: 46px;
 }
 
-.fanexBtn, .fanexBtnOutline, .fanexBtnOutlineGrey, .fanexBtnOutlineOrange, .fanexBtnGrey, .fanexBtnOrange {
+.fanexBtn, .fanexBtnOutline, .fanexBtnOutlineGrey, .fanexBtnOutlineOrange, .fanexBtnNoline, .fanexBtnGrey, .fanexBtnOrange {
   height: 60px;
   font-weight: 200;
   font-size: 24px;
@@ -10458,7 +10547,7 @@ a.btn {
   transition: all 0.3s;
 }
 
-.fanexBtn.hasIcon, .hasIcon.fanexBtnOutline, .hasIcon.fanexBtnOutlineGrey, .hasIcon.fanexBtnOutlineOrange, .hasIcon.fanexBtnGrey, .hasIcon.fanexBtnOrange {
+.fanexBtn.hasIcon, .hasIcon.fanexBtnOutline, .hasIcon.fanexBtnOutlineGrey, .hasIcon.fanexBtnOutlineOrange, .hasIcon.fanexBtnNoline, .hasIcon.fanexBtnGrey, .hasIcon.fanexBtnOrange {
   line-height: 52px !important;
 }
 
@@ -10472,6 +10561,17 @@ a.btn {
   border-color: #F58121;
   background-color: #F58121;
   color: #fff;
+}
+
+.fanexBtnNoline {
+  background-color: transparent;
+  color: #949597;
+  border: none;
+  text-align: right;
+}
+
+.fanexBtnNoline:hover, .fanexBtnNoline:focus, .fanexBtnNoline:active {
+  color: #333333;
 }
 
 .fanexBtnGrey {
