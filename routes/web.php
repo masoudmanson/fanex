@@ -65,7 +65,7 @@ Route::get('/test', 'PaymentController@test');
 Route::get('/payment', 'PaymentController@pay');
 
 Route::get('/callback/{callback}', 'CallbackController@callbackHandler');
-Route::get('/emad', 'Payment@test');
+Route::get('/emad', 'PaymentController@test');
 
 Route::resource('/additional-info', 'UserInformationController');
 

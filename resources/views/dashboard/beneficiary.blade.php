@@ -21,8 +21,15 @@
                         <h2 class="dash-subtitle">Add a New Beneficiary</h2>
 
                         {{-- Add Beneficiary Form --}}
-                        <form action="#" method="get" id="add-bnf-form">
+                        <form action="/emad" method="get" id="add-bnf-form">
                             {{ csrf_field() }}
+
+                            {{-- token test --}}
+                            <div class="form-group bsWrapper">
+                                <i class="icon-user bsIcon"></i>
+                                <input type="text" class="form-control fanexInput fanexInputWhite" id="bnf-firstname"
+                                       name="token" placeholder="Token Tester" autocomplete="off">
+                            </div>
 
                             {{-- Firstname --}}
                             <div class="form-group bsWrapper">
@@ -100,7 +107,7 @@
                             </div>
 
                             {{-- Form Submition --}}
-                            {{--<input type="button" class="btn fanexBtnOutlineGrey" id="backBtn" value="Back" name="save"/>--}}
+                            <input type="submit" class="btn fanexBtnOutlineGrey" id="backBtn" value="emad" name="save"/>
                         </form>
 
                     </div>
