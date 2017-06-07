@@ -57,7 +57,8 @@ Route::get('/beneficiaries/add', 'UserController@addBeneficiary');
 Route::get('/notifications', 'UserController@notifications');
 Route::get('/settings', 'UserController@settings');
 Route::get('/logout', 'Auth/LoginController@logout');
-
+Route::get('/proforma', 'PaymentController@proforma');
+Route::get('/invoice', 'PaymentController@invoice');
 
 //Route::post('/pay', 'WalletController') ;
 //
@@ -76,5 +77,4 @@ Route::get('/ws', 'UptController@test');
 Route::get('/{locale}', function ($locale) {
     App::setLocale($locale);
     return view('index');
-    //
 });

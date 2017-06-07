@@ -110,7 +110,7 @@
                         <h2 class="dash-subtitle">or Select From Existings</h2>
 
                         {{-- Select Beneficiary Box --}}
-                        <form action="#" method="get" id="select-bnf-form">
+                        <form action="/proforma" method="get" id="select-bnf-form">
                             {{ csrf_field() }}
 
                             {{-- Existing Beneficiaries --}}
@@ -211,46 +211,15 @@
                         <input type="button" class="btn fanexBtnOutlineGrey" id="backBtn" value="Back"/>
                     </div>
                     <div class="col-sm-6 col-xs-12 p-0 pl-md-2 pb-md-0 pb-sm-4 pb-xs-4  pl-lg-3">
-                        <input type="submit" class="btn fanexBtnOutlineGrey" id="paymentBtn"
-                               value="Show Proforma"/>
+                        {{--<input type="submit" class="btn fanexBtnOutlineGrey" id="paymentBtn"--}}
+                               {{--value="Show Proforma"/>--}}
+                        <a href="/proforma" class="btn fanexBtnOutlineGrey">Show Proforma</a>
                     </div>
                 </div>
             </div>
 
             {{-- SideBar --}}
-            <div class="col-lg-3 col-md-4 col-sm-12 pr-0 pl-lg-4 pl-md-0 pl-sm-0 pl-xs-0" style="position:static;"
-                 id="bnf-sidebar">
-                <div class="white-card">
-                    <p>Rates expire in:</p>
-                    <h3 id="countdown">9:53</h3>
-                    <ul class="steps-ul">
-                        <li class="steps-li done">
-                            <a href="/">
-                                <span class="steps-number">1</span>
-                                Price Check
-                            </a>
-                        </li>
-                        <li class="steps-li done">
-                            <a href="javascript:;">
-                                <span class="steps-number">2</span>
-                                Login
-                            </a>
-                        </li>
-                        <li class="steps-li active">
-                            <span class="steps-number">3</span>
-                            Beneficiary Info
-                        </li>
-                        <li class="steps-li">
-                            <span class="steps-number">4</span>
-                            Checkout
-                        </li>
-                        <li class="steps-li">
-                            <span class="steps-number">5</span>
-                            Finish
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            @include('partials.stepsSidebar', ['step' => 3])
         </div>
     </div>
 @endsection

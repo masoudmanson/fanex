@@ -14,7 +14,6 @@ class PaymentController extends Controller
 
     public function __construct()
     {
-
         $this->middleware('checkToken', ['only' => ['pay']]);
         $this->middleware('checkUser', ['only' => ['pay']]);
     }
@@ -47,6 +46,16 @@ class PaymentController extends Controller
 
         $request->query->add(['user'=>$user,'beneficiaries'=>$beneficiaries]);
         return response()->view('dashboard.beneficiary', $request->query(), 200)->header('authorization', 'Bearer ' . $request->bearerToken());
+    }
+
+    public function proforma()
+    {
+        return view('dashboard.proforma');
+    }
+
+    public function invoice()
+    {
+        return view('dashboard.invoice');
     }
 
     /**

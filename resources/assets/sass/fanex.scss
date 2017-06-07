@@ -12,9 +12,11 @@ body {
 .fanex-text-red {
     color: $fanapRed !important;
 }
+
 .fanex-text-green {
     color: $fanapGreen !important;
 }
+
 .fanex-text-orange {
     color: $fanapOrange !important;
 }
@@ -177,6 +179,82 @@ body {
         font-weight: 500;
         padding-bottom: 30px;
         padding-top: 15px;
+    }
+    .proforma-wrapper {
+        height: 1500px;
+        background-color: #fff;
+    }
+    .invoice-wrapper {
+        background-color: #fff;
+        padding: 25px 45px 40px;
+        .invoice-title {
+            font-size: 24px;
+            color: $fanapDark;
+            padding-bottom: 20px;
+        }
+        .invoice-date {
+            float: right;
+            font-size: 14px;
+            color: $fanapGrey;
+            font-weight: 300;
+            padding-top: 6px;
+        }
+        .invoice-bnf {
+            color: $fanapGreyDark;
+        }
+
+        .invoice-factor {
+            padding: 20px 0 40px;
+            @include mq($max-width: $breakePoint_lg) {
+            }
+            hr {
+                margin: 7px 0;
+            }
+            .acc-factor-sum {
+                color: $fanapGreyDark;
+            }
+            .orange {
+                font-weight: 500;
+                color: $fanapOrange;
+            }
+            .grey {
+                color: $fanapGreyDark;
+            }
+            p.table-header {
+                background-color: #fff;
+                padding: 5px 0;
+                color: $fanapGreyDark;
+                font-weight: 500;
+                border-bottom: solid 1px $fanapGreyLight;
+            }
+        }
+
+        .regards {
+            font-weight: 500;
+            color: $fanapDark;
+            font-size: 16px;
+            .grey {
+                color: $fanapGreyDark;
+                font-weight: 300;
+                font-size: 75%;
+            }
+        }
+
+        .invoice-print {
+            float: right;
+            margin-top: -15px;
+            text-decoration: none;
+            i {
+                font-size: 42px;
+                color: $fanapGreyDark;
+                @include transition(all .3s);
+            }
+            &:hover {
+                i {
+                    color: $fanapDark;
+                }
+            }
+        }
     }
 }
 
@@ -548,6 +626,17 @@ a.btn {
         border-color: $fanapOrange;
         background-color: $fanapOrange;
         color: #fff;
+    }
+}
+
+.fanexBtnNoline {
+    @extend .fanexBtn;
+    background-color: transparent;
+    color: $fanapGrey;
+    border: none;
+    text-align: right;
+    &:hover, &:focus, &:active {
+        color: $fanapDark;
     }
 }
 
