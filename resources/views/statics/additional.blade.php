@@ -1,5 +1,17 @@
 @extends('layouts.master')
 
+@section('styles')
+    <style>
+        body {
+            background: #f4f4f4 url({{ asset('css/images/pattern.png') }});
+            background-size: 30%;
+        }
+        .navbar-right {
+            display: none;
+        }
+    </style>
+@endsection
+
 @section('header')
     @include('partials.nav', ["type"=>"dark"])
 @endsection
@@ -7,7 +19,7 @@
 @section('content')
     <div class="container-fluid additional-wrapper">
         <div class="row m-0 p-0">
-            <div class="col-md-8 col-sm-10 col-xs-12 col-md-push-2 col-sm-push-1 white-div">
+            <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12 col-lg-push-3 col-md-push-2 col-sm-push-1 white-div">
 
                 <div class="mainForm">
                     {{-- Form Loading Container --}}
@@ -22,16 +34,19 @@
 
                     <h1 class="pb-3 mt-0">Complete you account info</h1>
 
-                    <form action="/payment" method="get">
+                    <form action="/additional-info" method="post">
                         {{ csrf_field() }}
+
+                        <input type="hidden" value="{{$state}}" id="state" style="display: none">
+                        <input type = "hidden" name="token" value="{{$token}}" id="token" style="display: none">
 
                         {{-- Nickname --}}
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="form-group bsWrapper">
                                     <i class="icon-user bsIcon"></i>
-                                    <input type="text" class="form-control fanexInput" id="exAmount"
-                                           name="amount" placeholder="Choose a Username" autocomplete="off">
+                                    <input type="text" class="form-control fanexInput" id="nickname"
+                                           name="nickname" placeholder="Choose a Username" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -41,8 +56,8 @@
                             <div class="col-xs-12">
                                 <div class="form-group bsWrapper">
                                     <i class="icon-mobile bsIcon"></i>
-                                    <input type="text" class="form-control fanexInput numberTextField" id="exAmount"
-                                           name="amount" placeholder="Enter Your Mobile Number" autocomplete="off">
+                                    <input type="text" class="form-control fanexInput numberTextField" id="mobile"
+                                           name="mobile" placeholder="Enter Your Mobile Number" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -52,8 +67,8 @@
                             <div class="col-xs-12">
                                 <div class="form-group bsWrapper">
                                     <i class="icon-card bsIcon"></i>
-                                    <input type="text" class="form-control fanexInput numberTextField" id="exAmount"
-                                           name="amount" placeholder="Enter Your Account Number" autocomplete="off">
+                                    <input type="text" class="form-control fanexInput numberTextField" id="account"
+                                           name="account_number" placeholder="Enter Your Account Number" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -75,47 +90,6 @@
             </div>
         </div>
     </div>
-
-
-
-    {{--<div class="container">--}}
-    {{--<div class="row">--}}
-    {{--<div class="col-md-8 col-md-offset-2">--}}
-    {{--<div class="panel panel-default">--}}
-    {{--<div class="panel-body">--}}
-    {{--<form class="form-group" action="/additional-info" method="post">--}}
-    {{--{{ csrf_field() }}--}}
-
-    {{--<div class="form-group">--}}
-    {{--<label for="nickname">Nick Name</label>--}}
-    {{--<input name="nickname" type="text" class="form-control" id="nickname"--}}
-    {{--placeholder="Enter nickname">--}}
-    {{--<input type="text" value="{{$state}}" class="form-control" id="state" style="display: none">--}}
-    {{--<input type = "text" name="token" value="{{$token}}" class = "form-control" id = "token" style="display: none">--}}
-
-    {{--</div>--}}
-
-    {{--<div class="form-group">--}}
-    {{--<label for="account_number">Account Number</label>--}}
-    {{--<input name="account_number" type="text" class="form-control" id="account"--}}
-    {{--placeholder="Enter account number">--}}
-    {{--</div>--}}
-
-    {{--<div class="form-group">--}}
-    {{--<label for="mobile">Mobile</label>--}}
-    {{--<input name="mobile" type="text" class="form-control" id="mobile" placeholder="mobile">--}}
-    {{--</div>--}}
-
-
-    {{--<button type="submit" class="btn btn-default">Submit</button>--}}
-
-    {{--</form>--}}
-
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
 @endsection
 
 @section('footer')

@@ -31,16 +31,16 @@ class CheckUserExist
 //dd($id);
 
 //            if (User::findByUserId($id)->first) {
-//            if (User::findByUserId($id)->first()) {
-//                $user = User::findByUserId($id)->first();
-//                $user->api_token = $request->bearerToken();
-//
-//                $user->save();
-//                Auth::login($user);
-//
-//                return $next($request);
-//            }
-//            else {
+            if (User::findByUserId($id)->first()) {
+                $user = User::findByUserId($id)->first();
+                $user->api_token = $request->bearerToken();
+
+                $user->save();
+                Auth::login($user);
+
+                return $next($request);
+            }
+            else {
 //                $this->RegisterWithSSO($request);
 //                return redirect('additional-info')->with([
 //                    'redirect_uri' => $request->url(),
@@ -55,7 +55,7 @@ class CheckUserExist
                 );
 
                 return response()->view('statics.additional', $data, 200)->header('authorization', 'Bearer ' . $token);
-//            }
+            }
 
         }
     }

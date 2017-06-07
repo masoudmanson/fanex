@@ -135,16 +135,17 @@ body {
 }
 
 .additional-wrapper {
-    min-height: 77vh;
+    min-height: 80vh;
     padding: 160px 100px 30px;
-    background: $fanapGreyLight url("images/pattern.png");
-    background-size: 40%;
     margin: auto;
     @include mq($max-width: $breakePoint_xxl) {
-        padding: 130px 50px 30px;
+        padding: 120px 50px 30px;
     }
     @include mq($max-width: $breakePoint_sm) {
-        padding: 120px 30px 20px;
+        padding: 80px 30px 20px;
+    }
+    @include mq($max-width: $breakePoint_xs) {
+        padding: 60px 30px 20px;
     }
     .white-div {
         padding: 50px 40px;

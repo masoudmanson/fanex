@@ -9936,22 +9936,26 @@ body {
 }
 
 .additional-wrapper {
-  min-height: 77vh;
+  min-height: 80vh;
   padding: 160px 100px 30px;
-  background: #F4F4F4 url("images/pattern.png");
-  background-size: 40%;
   margin: auto;
 }
 
 @media only screen and (max-width: 1400px) {
   .additional-wrapper {
-    padding: 130px 50px 30px;
+    padding: 120px 50px 30px;
   }
 }
 
 @media only screen and (max-width: 520px) {
   .additional-wrapper {
-    padding: 120px 30px 20px;
+    padding: 80px 30px 20px;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .additional-wrapper {
+    padding: 60px 30px 20px;
   }
 }
 
