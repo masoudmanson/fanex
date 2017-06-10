@@ -208,7 +208,7 @@
                 {{-- Form Actions --}}
                 <div class="row p-0 m-0">
                     <div class="col-sm-6 col-xs-12 p-0 pb-md-0 pb-sm-4 pb-xs-4 pr-md-2 pr-lg-3">
-                        <input type="button" class="btn fanexBtnOutlineGrey" id="backBtn" value="Back"/>
+                        <a href="/" class="btn fanexBtnNoline">Back Home</a>
                     </div>
                     <div class="col-sm-6 col-xs-12 p-0 pl-md-2 pb-md-0 pb-sm-4 pb-xs-4  pl-lg-3">
                         {{--<input type="submit" class="btn fanexBtnOutlineGrey" id="paymentBtn"--}}

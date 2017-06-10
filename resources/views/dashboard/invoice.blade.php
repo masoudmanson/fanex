@@ -57,7 +57,7 @@
                             <div class="regards">
                                 <p class="grey">Best Regards</p>
                                 FANEx Team.
-                                <a href="/" class="invoice-print"><i class="icon-printer"></i></a>
+                                <a href="/" class="invoice-print" data-toggle="tooltip" title="Print The Invoice"><i class="icon-printer"></i></a>
                             </div>
                         </div>
                     </div>

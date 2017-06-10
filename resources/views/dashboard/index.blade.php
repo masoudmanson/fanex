@@ -275,6 +275,8 @@
             $('.selectpicker').selectpicker();
 
             $('.filter-li').on('click', function() {
+                $('.filter-li').removeClass('active');
+                $(this).addClass('active');
                var filter = $(this).attr('data-filter');
                if(filter == 'all') {
                    $('.panel-default').slideDown(200);
