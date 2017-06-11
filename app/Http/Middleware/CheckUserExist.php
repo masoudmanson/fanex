@@ -27,10 +27,8 @@ class CheckUserExist
             $result = $this->getCurrentPlatformUser($token);
             $platform_user = json_decode($result->getBody()->getContents());
 //            dd($platform_user);
-            $id = $platform_user->result->userId; //todo : check for a logined user he isn't exist in platform
-//dd($id);
+            $id = $platform_user->id; //todo : check for a logined user he isn't exist in platform
 
-//            if (User::findByUserId($id)->first) {
             if (User::findByUserId($id)->first()) {
                 $user = User::findByUserId($id)->first();
                 $user->api_token = $request->bearerToken();

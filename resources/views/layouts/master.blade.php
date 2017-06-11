@@ -53,7 +53,7 @@
     <script src="http://localhost:35729/livereload.js"></script>
     <script>
         $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip();
+//            $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
 @endif

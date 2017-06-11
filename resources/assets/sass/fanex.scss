@@ -205,20 +205,30 @@ body {
 
         .invoice-factor {
             padding: 20px 0 40px;
-            @include mq($max-width: $breakePoint_lg) {
+            list-style: none;
+            .acc-info-left {
+                p {
+                    color: $fanapGreyDark;
+                }
+            }
+            .acc-info-right {
+                p {
+                    color: $fanapDark;
+                    font-weight: 500;
+                }
             }
             hr {
                 margin: 7px 0;
             }
             .acc-factor-sum {
-                color: $fanapGreyDark;
+                color: $fanapGreyDark !important;
             }
             .orange {
                 font-weight: 500;
-                color: $fanapOrange;
+                color: $fanapOrange !important;
             }
             .grey {
-                color: $fanapGreyDark;
+                color: $fanapGreyDark !important;
             }
             p.table-header {
                 background-color: #fff;
@@ -516,6 +526,38 @@ body {
     }
 }
 
+#search-input {
+    position: relative;
+    .search-filter {
+        width: 100%;
+    }
+}
+
+#search-input::before {
+    content: '\51';
+    font-family: 'fanex';
+    color: $fanapOrange;
+    font-size: 32px;
+    position: absolute;
+    @include absolut-center($top:50%, $left:0%);
+    left: 40px;
+    z-index: 300;
+    @include mq($max-width: $breakePoint_md) {
+        left: 30px;
+    }
+}
+
+.search-filter {
+    font-size: 32px;
+    color: $fanapGreyDark !important;
+    font-weight: 100;
+    padding-left: 63px !important;
+    &::before {
+        content: '\51';
+        font-family: 'fanex';
+    }
+}
+
 .panel-body .bsWrapper {
     margin: 0;
 }
@@ -637,6 +679,9 @@ a.btn {
     text-align: right;
     &:hover, &:focus, &:active {
         color: $fanapDark;
+    }
+    @include mq($max-width: $breakePoint_md) {
+        text-align: center;
     }
 }
 
@@ -1134,6 +1179,36 @@ a.btn {
         position: absolute;
         top: 0;
         left: 0;
+    }
+    .panel-heading.new {
+        @include mq($max-width: $breakePoint_md) {
+            background-color: $fanapOrange;
+            color: #fff !important;
+            .acc-main-icon,
+            .acc-user,
+            .acc-cash,
+            .acc-date {
+                color: #fff !important;
+                b {
+                    color: #fff !important;
+                }
+            }
+            .bnf-action-icons {
+                a {
+                    i {
+                        color: #fff;
+                    }
+                    &:hover {
+                        i {
+                            color: $fanapDark;
+                        }
+                    }
+                }
+            }
+            .accordion-toggle:after {
+                color: #fff !important;
+            }
+        }
     }
     .panel-body {
         @include border-radius(0);

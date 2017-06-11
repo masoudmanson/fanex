@@ -173,6 +173,10 @@
                 $('#bnf-ajax-div').slideUp(300);
             });
 
+            $('#accordion').on('shown.bs.collapse', function() {
+                var heading = $(this).find('.panel-heading');
+                heading.removeClass('new');
+            });
         });
     </script>
 @endsection

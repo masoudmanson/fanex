@@ -116,7 +116,7 @@
                                 <a href="/beneficiaries" class="btn fanexBtnOutlineGrey" id="backBtn" value="Back">Back</a>
                             </div>
                             <div class="col-sm-6 col-xs-12 p-0 pl-md-2 pb-md-0 pb-sm-4 pb-xs-4  pl-lg-3">
-                                <input type="submit" class="btn fanexBtnOutlineGrey" id="paymentBtn"
+                                <input type="submit" class="btn fanexBtnOrange" id="paymentBtn"
                                        value="Save Beneficiary"/>
                             </div>
                         </div>

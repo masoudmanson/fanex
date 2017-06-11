@@ -26,32 +26,99 @@
 
                             {{-- Invoice Table --}}
                             <div class="row m-0 p-0">
-                                <div class="col-sm-12 col-md-8 col-md-push-2 invoice-factor">
-                                <div class="col-xs-6 p-0 m-0 acc-info-left">
-                                    <p class="table-header">Item</p>
-                                    <p>Prem. Amount:</p>
-                                    <p>Expense:</p>
-                                    <p>Tax:</p>
+                                <ul class="col-sm-12 col-md-8 col-md-push-2 invoice-factor">
+                                    <li class="row m-0">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0">
+                                            <p class="table-header">Item</p>
+                                        </div>
+                                        <div class="hidden-xs col-sm-6 p-0 m-0">
+                                            <p class="table-header">Cost</p>
+                                        </div>
+                                    </li>
+
+                                    <li class="row m-0">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left">
+                                            <p>Prem. Amount:</p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
+                                            <p>3500 EUR</p>
+                                        </div>
+                                    </li>
+
+                                    <li class="row m-0">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left">
+                                            <p>Expense:</p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
+                                            <p>15 EUR</p>
+                                        </div>
+                                    </li>
+
+                                    <li class="row m-0">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left">
+                                            <p>Tax:</p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
+                                            <p>4.5 EUR</p>
+                                        </div>
+                                    </li>
+
                                     <hr>
-                                    <p>Sum</p>
-                                    <p>&nbsp;</p>
+
+                                    <li class="row m-0">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left">
+                                            <p>Sum</p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
+                                            <p>3519.5 EUR</p>
+                                            <p class="acc-factor-sum">= 95000000 Rials</p>
+                                        </div>
+                                    </li>
+
                                     <hr>
-                                    <p class="orange">Transaction Reference No.</p>
-                                    <p class="grey">Transaction Status</p>
-                                </div>
-                                <div class="col-xs-6 p-0 m-0 acc-info-right">
-                                    <p class="table-header">Price</p>
-                                    <p>3500 EUR</p>
-                                    <p>15 EUR</p>
-                                    <p>4.5 EUR</p>
-                                    <hr>
-                                    <p>3519.5 EUR</p>
-                                    <p class="acc-factor-sum">= 95000000 Rials</p>
-                                    <hr>
-                                    <p class="orange">c56ds6a7658v987vdfb09</p>
-                                    <p class="grey">Pending ...</p>
-                                </div>
-                            </div>
+
+                                    <li class="row m-0">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left">
+                                            <p class="orange">Transaction Reference No.</p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
+                                            <p class="orange">c56ds6a7658v987vdfb09</p>
+                                        </div>
+                                    </li>
+
+                                    <li class="row m-0">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left">
+                                            <p class="grey">Transaction Status</p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
+                                            <p class="grey">Pending ...</p>
+                                        </div>
+                                    </li>
+                                {{--<div class="col-xs-6 p-0 m-0 acc-info-left">--}}
+                                    {{--<p class="table-header">Item</p>--}}
+                                    {{--<p>Prem. Amount:</p>--}}
+                                    {{--<p>Expense:</p>--}}
+                                    {{--<p>Tax:</p>--}}
+                                    {{--<hr>--}}
+                                    {{--<p>Sum</p>--}}
+                                    {{--<p>&nbsp;</p>--}}
+                                    {{--<hr>--}}
+                                    {{--<p class="orange">Trnas. Ref. No.</p>--}}
+                                    {{--<p class="grey">Trans. Status</p>--}}
+                                {{--</div>--}}
+                                {{--<div class="col-xs-6 p-0 m-0 acc-info-right">--}}
+                                    {{--<p class="table-header">Cost</p>--}}
+                                    {{--<p>3500 EUR</p>--}}
+                                    {{--<p>15 EUR</p>--}}
+                                    {{--<p>4.5 EUR</p>--}}
+                                    {{--<hr>--}}
+                                    {{--<p>3519.5 EUR</p>--}}
+                                    {{--<p class="acc-factor-sum">= 95000000 Rials</p>--}}
+                                    {{--<hr>--}}
+                                    {{--<p class="orange">c56ds6a7658v987vdfb09</p>--}}
+                                    {{--<p class="grey">Pending ...</p>--}}
+                                {{--</div>--}}
+                            </ul>
                             </div>
 
                             <div class="regards">
