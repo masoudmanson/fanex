@@ -20,6 +20,7 @@
     "bootstrap-select":"^1.12.2",
     "tether":"^1.4.0",
     "sass-mediaqueries":"^1.6.1",
-    "nicescroll":"^3.7.0"
+    "nicescroll":"^3.7.0",
+    "flag-icon-css":"^2.8.0"
   }
 }

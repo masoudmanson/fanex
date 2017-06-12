@@ -1,4 +1,4 @@
-<div class="col-lg-3 col-md-4 col-sm-12 pr-0 pl-lg-4 pl-md-0 pl-sm-0 pl-xs-0" style="position:static;"
+<div class="col-lg-3 col-md-4 col-sm-12 pr-0 pl-lg-4 pl-md-0 pl-sm-0 pl-xs-0 bnf-auto-sidebar" style="position:static;"
      id="bnf-sidebar">
     <div class="white-card">
         <p>Rates expire in:</p>

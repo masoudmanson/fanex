@@ -28,7 +28,7 @@
 
                     <div class="col-xs-3 col-sm-3 px-0">
                         <ul class="filter-ul filter-right">
-                            <li class="filter-li"><a href="/"><span class="mini-title">New Transactions</span><span class="large-title">New</span></a></li>
+                            <li class="filter-li-link"><a href="/"><span class="mini-title">New Transactions</span><span class="large-title">New</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                 <div class="row p-0 m-0">
                     <div class="panel-group" id="accordion">
                         <div class="panel panel-default search" id="search-input">
-                                <input type="text" class="panel-heading fanexInputWhite search-filter">
+                            <input type="text" class="panel-heading fanexInputWhite search-filter" placeholder="Search in Transactions">
                             <div id="searchbox" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <div class="row m-0 p-0">

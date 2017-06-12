@@ -7,6 +7,7 @@ html,
 body {
     font-family: 'Roboto', tahoma, sans-serif;
     background-color: $fanapGreyLight;
+    direction: ltr !important;
 }
 
 .fanex-text-red {
@@ -164,6 +165,12 @@ body {
     }
     @include mq($max-width: $breakePoint_sm) {
         padding: 120px 30px 20px;
+    }
+    #bnf-slc-container {
+        min-height: 603px;
+        @include mq($max-width: $breakePoint_lg) {
+            min-height: 0;
+        }
     }
     .dash-title {
         font-weight: 200;
@@ -549,7 +556,7 @@ body {
 
 .search-filter {
     font-size: 32px;
-    color: $fanapGreyDark !important;
+    color: #666 !important;
     font-weight: 100;
     padding-left: 63px !important;
     &::before {
@@ -1027,6 +1034,28 @@ a.btn {
                 }
             }
         }
+        i {
+            height: 30px;
+            width: 30px;
+            margin-top: 5px;
+            -webkit-background-size: cover;
+            background-size: cover;
+            @include border-radius(50%);
+            display: block;
+            cursor: pointer;
+        }
+    }
+    .filter-li.flag {
+        filter: grayscale(1);
+        -webkit-filter: grayscale(1);
+        padding: 0 10px 0 0;
+        opacity: 0.5;
+        @include transition(all .3s);
+        &:hover {
+            opacity: 1;
+            filter: grayscale(0);
+            -webkit-filter: grayscale(0);
+        }
     }
     .filter-li.active {
         color: #fff;
@@ -1040,6 +1069,15 @@ a.btn {
                 color: #ffffff;
             }
         }
+    }
+    .filter-li.flag.active {
+        filter: grayscale(0);
+        -webkit-filter: grayscale(0);
+        opacity: 1;
+        background-color: transparent !important;
+    }
+    .filter-li-link {
+        @extend .filter-li;
     }
 }
 
