@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <h1 class="pb-3 mt-0">International Money E-Transfer</h1>
+    <h1 class="pb-3 mt-0">@lang('index.formTitle')</h1>
 
     <form action="/payment" method="get">
         {{ csrf_field() }}
@@ -19,11 +19,12 @@
             <i class="icon-globe bsIcon"></i>
             <select class="form-control fanexInput selectpicker indexSelectBox" data-style="fanexInput" name="country"
                     id="exCountry">
-                <optgroup label="Active">
+                <option value=""  selected="selected" disabled="disabled">@lang('index.formCountry')</option>
+                <optgroup label="@lang('index.formActive')">
                     <option value="Turkey">Turkey</option>
                     <option value="Canada">Canada</option>
                 </optgroup>
-                <optgroup label="Inactive">
+                <optgroup label="@lang('index.formInactive')">
                     <option value="France" disabled>France</option>
                     <option value="Italy" disabled>Italy</option>
                     <option value="Germany" disabled>Germany</option>
@@ -54,7 +55,7 @@
                 <div class="form-group bsWrapper">
                     <i class="icon-change bsIcon"></i>
                     <input type="text" class="form-control fanexInput numberTextField" id="exAmount"
-                           name="amount" placeholder="Amount" autocomplete="off">
+                           name="amount" placeholder="@lang('index.formAmount')" autocomplete="off">
                 </div>
             </div>
             {{-- Currency --}}
@@ -64,6 +65,7 @@
                     <select class="form-control fanexInput selectpicker" data-style="fanexInput"
                             name="currency"
                             id="exCurrency">
+                        <option value=""  selected="selected" disabled="disabled">@lang('index.formCurrency')</option>
                         <option value="lira">₺ Turkish Lira</option>
                         <option value="euro">€ Euro</option>
                     </select>
@@ -89,18 +91,18 @@
                 <div class="form-group bsWrapper">
                     <i class="icon-check bsIcon"></i>
                     <input type="text" class="form-control fanexInput" name="captcha" id="captcha"
-                           placeholder="Enter Captcha Here">
+                           placeholder="@lang('index.formCaptcha')">
                 </div>
             </div>
         </div>
 
         {{-- Temproray Calculated Amount --}}
         <div class="tempAmount" style="display: none;">
-            <h2>Cost of Transferring <span id="tempAmountCash"></span> to <span
-                        id="tempAmountCountry"></span> is:</h2>
+            <h2>@lang('index.formCost') <span id="tempAmountCash"></span> @lang('index.formTo') <span
+                        id="tempAmountCountry"></span> @lang('index.formIs'):</h2>
             <div class="tempAmountWrapper">
-                <span class="calcAmount">Country</span>
-                <span class="tempCurrency">Rials</span>
+                <span class="calcAmount"></span>
+                <span class="tempCurrency">@lang('index.formRials')</span>
             </div>
         </div>
 

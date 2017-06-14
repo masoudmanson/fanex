@@ -329,7 +329,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-default filtered ctr-uk">
+                        <div class="panel panel-default filtered ctr-us">
                             <div class="panel-heading">
                                 <div class="row p-0 m-0">
                                     <div class="col-md-3 col-sm-3 col-xs-5" data-toggle="tooltip" title="Beneficiary Name">
@@ -452,7 +452,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-default filtered ctr-us">
+                        <div class="panel panel-default filtered ctr-uk">
                             <div class="panel-heading">
                                 <div class="row p-0 m-0">
                                     <div class="col-md-3 col-sm-3 col-xs-5" data-toggle="tooltip" title="Beneficiary Name">

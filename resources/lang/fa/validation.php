@@ -99,8 +99,20 @@ return [
     |
     */
 
-    'custom'               => [
-        //
+    'custom' => [
+        'attribute-name' => [
+            'rule-name' => 'custom-message',
+        ],
+
+        //my custom validation error msgs.
+        'captcha' => [
+            'required' => 'کدامنیتی را وارد کنید!',
+            'captcha'  => "کد امنیتی اشتباه است!",
+        ],
+        'amount' => [
+            'required'  => "لطفا مقدار ارز را وارد نمائید.",
+            'min'  => "مقدار ارز معتبر وارد نمائید."
+        ],
     ],
 
     /*

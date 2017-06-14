@@ -16,7 +16,11 @@
     <title>{{ config('app.name', 'FanEx') }}</title>
 
     {{-- General Styles --}}
-    <link href="{{ mix('css/all.css') }}" rel="stylesheet">
+    @if(\Illuminate\Support\Facades\App::isLocale('fa'))
+        <link href="{{ asset('css/fa.css') }}" rel="stylesheet">
+    @else(\Illuminate\Support\Facades\App::isLocale('en'))
+        <link href="{{ mix('css/all.css') }}" rel="stylesheet">
+    @endif
 
     {{-- Yielding Page Styles --}}
     @yield('styles')
@@ -53,7 +57,7 @@
     <script src="http://localhost:35729/livereload.js"></script>
     <script src="{{ asset('js/index.js') }}"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
 //            $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
