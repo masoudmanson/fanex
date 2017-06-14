@@ -32,7 +32,7 @@
                         </div>
                     </div>
 
-                    <h1 class="pb-3 mt-0">Complete you account info</h1>
+                    <h1 class="pb-3 mt-0">@lang('index.additionalTitle')</h1>
 
                     <form action="/additional-info" method="post">
                         {{ csrf_field() }}
@@ -46,7 +46,7 @@
                                 <div class="form-group bsWrapper">
                                     <i class="icon-user bsIcon"></i>
                                     <input type="text" class="form-control fanexInput" id="nickname"
-                                           name="nickname" placeholder="Choose a Username" autocomplete="off">
+                                           name="nickname" placeholder="@lang('index.additionalUsername')" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                                 <div class="form-group bsWrapper">
                                     <i class="icon-mobile bsIcon"></i>
                                     <input type="text" class="form-control fanexInput numberTextField" id="mobile"
-                                           name="mobile" placeholder="Enter Your Mobile Number" autocomplete="off">
+                                           name="mobile" placeholder="@lang('index.additionalMobile')" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                                 <div class="form-group bsWrapper">
                                     <i class="icon-card bsIcon"></i>
                                     <input type="text" class="form-control fanexInput numberTextField" id="account"
-                                           name="account_number" placeholder="Enter Your Account Number" autocomplete="off">
+                                           name="account_number" placeholder="@lang('index.additionalCC')" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                             </div>
                             {{-- Go For Payment --}}
                             <div class="col-sm-6 col-xs-12 pl-md-2">
-                                <input type="submit" class="btn fanexBtnOutlineGrey" value="Continue" name="payment"/>
+                                <input type="submit" class="btn fanexBtnOutlineGrey" value="@lang('index.continue')" name="payment"/>
                             </div>
                         </div>
 
