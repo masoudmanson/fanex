@@ -11,6 +11,7 @@
         "guzzlehttp/guzzle": "~6.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "mcamara/laravel-localization": "^1.2",
         "mews/captcha": "^2.1",
         "morilog/jalali": "^2.2",
         "symfony/psr-http-message-bridge": "^1.0",

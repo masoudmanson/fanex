@@ -22,23 +22,25 @@ class CheckUserExist
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($token = $request->bearerToken()) {
+        if ($request->hasCookie('_token'))
+            $access_token = $request->cookie('_token')['access'];
+        elseif ($access_token = $request->bearerToken());
 
-            $result = $this->getCurrentPlatformUser($token);
+            $result = $this->getCurrentPlatformUser($access_token);
             $platform_user = json_decode($result->getBody()->getContents());
-//            dd($platform_user);
-            $id = $platform_user->id; //todo : check for a logined user he isn't exist in platform
+
+            $id = $platform_user->id;
 
             if (User::findByUserId($id)->first()) {
                 $user = User::findByUserId($id)->first();
-                $user->api_token = $request->bearerToken();
 
-                $user->save();
+//                $user->api_token = $request->bearerToken();
+//                $user->save();
+
                 Auth::login($user);
 
                 return $next($request);
-            }
-            else {
+            } else {
 //                $this->RegisterWithSSO($request);
 //                return redirect('additional-info')->with([
 //                    'redirect_uri' => $request->url(),
@@ -49,12 +51,13 @@ class CheckUserExist
                 $data = array(
                     'redirect_uri' => $request->url(),
                     'state' => $request->state,
-                    'token' => $request->bearerToken() // todo: this is just for run test. when masoud put his js codes into project, it must be deleted.
+//                    'token' => $request->bearerToken() // todo: this is just for run test. when masoud put his js codes into project, it must be deleted.
+//                    'token' => $request->cookie('access_token')
                 );
 
-                return response()->view('statics.additional', $data, 200)->header('authorization', 'Bearer ' . $token);
+                return response()->view('statics.additional', $data, 200);
+//                    ->header('authorization', 'Bearer ' . $token);
             }
 
         }
-    }
 }

@@ -10,6 +10,7 @@ namespace App\Traits;
 
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Morilog\Jalali\jDate;
 
 trait PlatformTrait
@@ -23,7 +24,7 @@ trait PlatformTrait
         $nick = $request->nickname;
 
         $client = new Client();
-        $res = $client->request('GET', 'http://sandbox.fanapium.com:8080/aut/registerWithSSO/', [
+        $res = $client->request('GET', 'http://sandbox.fanapium.com:8081/aut/registerWithSSO/', [
             'query' => ['nickname' => $nick],
             'headers' => [
                 '_token_' => $token,
@@ -31,7 +32,6 @@ trait PlatformTrait
             ]
         ]);
 
-//        dd($res->getBody()->getContents());
         return $res;
     }
 
@@ -62,7 +62,7 @@ trait PlatformTrait
     {
         $client = new Client();
         //businessId should receive from getBusiness.however it's static in platform db.
-        $res = $client->get('http://sandbox.fanapium.com:8080/nzh/follow/?businessId=22&follow=true', [
+        $res = $client->get('http://sandbox.fanapium.com:8081/nzh/follow/?businessId=22&follow=true', [
             'headers' => [
                 '_token_' => $token,
                 '_token_issuer_' => 1
@@ -88,17 +88,19 @@ trait PlatformTrait
     {
         $client = new Client();
         //business token must taken from sso
-        $token_object = $this->refreshToken('2345413e8e5041ec945e48ab4ce65596'); //token must taken from setting or register from a service provider
-        $token = $token_object->access_token;
 
-        $user = $this->getCurrentPlatformUser($request->bearerToken());
+//        $token_object = $this->refreshToken('33dc287af5f34f9bb9534f0bf6687866'); //token must taken from setting or register from a service provider
+//        $token = json_decode($token_object->getBody()->getContents())->access_token;
+        $token = 'd35b0c351acd47cc87a76b1c4b07239a'; //biz static token
+
+        $user_object = $this->getCurrentPlatformUser($request->bearerToken());
 //        if (!$user->hasError)
-            $userId = $user->result->userId;
+        $userId = json_decode($user_object->getBody()->getContents())->result->userId;
 //        else
 
-            //redirect to login? or refresh the user token ,,,
-            // *hint: if refresh token was needed, get the user refresh token from its db row
-            //todo how can I know user object on db, if his token expired and I don't have his userId??
+        //redirect to login? or refresh the user token ,,,
+        // *hint: if refresh token was needed, get the user refresh token from its db row
+        //todo how can I know user object on db, if his token expired and I don't have his userId??
 
         $res = $client->get('http://sandbox.fanapium.com:8080/nzh/biz/issueInvoice', [
             'query' => [
@@ -127,6 +129,9 @@ trait PlatformTrait
                 '_token_issuer_' => 1
             ]
         ]);
+
+//       $queryString = http_build_query($query);
+//       return response()->redirectTo('http://sandbox.fanapium.com:8080/nzh/biz/issueInvoice/?'.$queryString,302,$header);
         return $res;
     }
 }

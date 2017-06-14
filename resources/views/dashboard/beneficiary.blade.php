@@ -14,8 +14,109 @@
             <h1 class="dash-title"><b>Beneficiary Information</b></h1>
 
             {{-- Beneficiary Info Form Container --}}
+<<<<<<< HEAD
+            <div class="col-lg-9 col-md-8 col-sm-12 p-0">
+                <div class="row p-0 m-0">
+                    {{-- Create a New Benificiary --}}
+                    <div class="col-md-6 col-sm-12 p-0 pr-lg-3 pb-md-3">
+                        <h2 class="dash-subtitle">Add a New Beneficiary</h2>
+
+                        {{-- Add Beneficiary Form --}}
+                        <form action="/emad" method="get" id="add-bnf-form">
+                            {{ csrf_field() }}
+
+                            {{-- token test --}}
+                            <div class="form-group bsWrapper">
+                                <i class="icon-user bsIcon"></i>
+                                <input type="text" class="form-control fanexInput fanexInputWhite" id="bnf-firstname"
+                                       name="token" placeholder="Token Tester" autocomplete="off">
+                            </div>
+
+                            {{-- Firstname --}}
+                            <div class="form-group bsWrapper">
+                                <i class="icon-user bsIcon"></i>
+                                <input type="text" class="form-control fanexInput fanexInputWhite" id="bnf-firstname"
+                                       name="firstname" placeholder="Firstname" autocomplete="off">
+                            </div>
+
+                            {{-- Lastname --}}
+                            <div class="form-group bsWrapper">
+                                <i class="icon-user bsIcon"></i>
+                                <input type="text" class="form-control fanexInput fanexInputWhite" id="bnf-lastname"
+                                       name="lastname" placeholder="Lastname" autocomplete="off">
+                            </div>
+
+                            {{-- Account Number --}}
+                            <div class="form-group bsWrapper">
+                                <i class="icon-card bsIcon"></i>
+                                <input type="text" class="form-control fanexInput fanexInputWhite numberTextField"
+                                       id="bnf-accountnumber"
+                                       name="accountnumber" placeholder="Account Number" autocomplete="off">
+                            </div>
+
+                            {{-- Address --}}
+                            <div class="form-group bsWrapper">
+                                <i class="icon-globe bsIcon"></i>
+                                <input type="text" class="form-control fanexInput fanexInputWhite" id="bnf-address"
+                                       name="address" placeholder="Address" autocomplete="off">
+                            </div>
+
+                            {{-- Phone Number --}}
+                            <div class="form-group bsWrapper">
+                                <i class="icon-mobile bsIcon"></i>
+                                <input type="text" class="form-control fanexInput fanexInputWhite numberTextField"
+                                       id="bnf-phone"
+                                       name="phone" placeholder="Phone Number" autocomplete="off">
+                            </div>
+
+                            {{-- Fax Number --}}
+                            <div class="form-group bsWrapper">
+                                <i class="icon-fax bsIcon"></i>
+                                <input type="text" class="form-control fanexInput fanexInputWhite numberTextField"
+                                       id="bnf-fax"
+                                       name="fax" placeholder="Fax Number" autocomplete="off">
+                            </div>
+
+                            {{-- Bank Name --}}
+                            <div class="form-group bsWrapper">
+                                <i class="icon-bank bsIcon"></i>
+                                <input type="text" class="form-control fanexInput fanexInputWhite" id="bnf-bankname"
+                                       name="bankname" placeholder="Bank Name" autocomplete="off">
+                            </div>
+
+                            {{-- Branch Address --}}
+                            <div class="form-group bsWrapper">
+                                <i class="icon-branch bsIcon"></i>
+                                <input type="text" class="form-control fanexInput fanexInputWhite" id="bnf-branch"
+                                       name="branch" placeholder="Branch Address" autocomplete="off">
+                            </div>
+
+                            {{-- Swift Code --}}
+                            <div class="form-group bsWrapper">
+                                <i class="icon-swift bsIcon"></i>
+                                <input type="text" class="form-control fanexInput fanexInputWhite numberTextField"
+                                       id="bnf-swift"
+                                       name="swift" placeholder="Swift Code" autocomplete="off">
+                            </div>
+
+                            {{-- iBan Number --}}
+                            <div class="form-group bsWrapper">
+                                <i class="icon-code bsIcon"></i>
+                                <input type="text" class="form-control fanexInput fanexInputWhite numberTextField"
+                                       id="bnf-iban"
+                                       name="iban" placeholder="iBan Number" autocomplete="off">
+                            </div>
+
+                            {{-- Form Submition --}}
+                            <input type="submit" class="btn fanexBtnOutlineGrey" id="backBtn" value="emad" name="save"/>
+                        </form>
+
+                    </div>
+
+=======
             <div class="col-lg-9 col-md-8 col-sm-12 p-0 bnf-auto-content">
                 <div class="row p-0 m-0" id="bnf-slc-container">
+>>>>>>> 690dd3733016f80c79be7dd13f138cc13d2da11d
                     {{-- Select From Existing Beneficiaries --}}
                     <div class="col-md-6 col-sm-12 p-0 pr-lg-3">
                         <h2 class="dash-subtitle">Select Beneficiary</h2>

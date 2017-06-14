@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Beneficiary;
+use App\Traits\PlatformTrait;
 use App\Traits\TokenTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Cookie;
 class PaymentController extends Controller
 {
     use TokenTrait;
+    use PlatformTrait;
 
     public function __construct()
     {
@@ -31,9 +33,13 @@ class PaymentController extends Controller
     }
     public function test(Request $request)
     {
-        dd($request);
-//        dd(Cookie::get('token'));
-        dd($request->cookies);
+
+//        dd($request->input());
+//        dd(Auth::user()->api_token);
+        $request->headers->set('authorization', 'Bearer ' . Auth::user()->api_token);
+
+        return $this->userInvoice($request);
+
     }
 
     public function pay(Request $request)

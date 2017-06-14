@@ -8,6 +8,8 @@ use App\User;
 use Closure;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Cookie;
+use Illuminate\Http\Response;
 
 class CheckTokenExist
 {
@@ -25,45 +27,63 @@ class CheckTokenExist
     public function handle($request, Closure $next)
     {
 
-        if(Auth::user()){
-            $result = $this->tokenValidation(Auth::user()->api_token);
+//        if(Auth::user()){
+//
+//            $token = $request->cookie('access_token');
+//            $result = $this->tokenValidation($token);
+//            $result = json_decode($result->getBody()->getContents());
+//
+//            if ($result->active) {
+//
+//                $result = $this->refreshToken($token);
+//                $token_object = json_decode($result->getBody()->getContents());
+//
+//
+//                $request->headers->set('authorization', 'Bearer ' . $token_object->access_token); //?
+//
+//                $cookie = cookie('access_token', $token_object->access_token,$token_object->expires_in/60,
+//                    '','',FALSE,TRUE);
+//
+//                return $next($request->cookie($cookie));
+//                // or ,else refresh token todo: refresh token and cookie, and then go to next
+//            }
+//        }
+
+
+        if ($request->hasCookie('_token')) {
+            $token = $request->cookie('_token');
+
+            $result = $this->tokenValidation($token['access']);
             $result = json_decode($result->getBody()->getContents());
 
             if ($result->active) {
-                $request->headers->set('authorization', 'Bearer ' . Auth::user()->api_token);
-                return $next($request);
-                // or ,else refresh token todo: refresh token and cookie, and then go to next
-            }
-        }
 
-        if (($token = $request->bearerToken())) //|| ($token = $request->hasCookie('token')))
-        {
-//            $result = $this->tokenValidation($request->bearerToken());
-            $result = $this->tokenValidation($token);
-            $result = json_decode($result->getBody()->getContents());
+                $result = $this->refreshToken($token['refresh']);
+                $token_object = json_decode($result->getBody()->getContents());
 
-            if ($result->active) {
-                return $next($request);
-                // or ,else refresh token todo: refresh token and cookie, and then go to next
+                $token_array = array('access' => $token_object->access_token, 'refresh' => $token_object->refresh_token);
+
+                $cookie = cookie('_token', $token_array, $token_object->expires_in/60,
+                    '', '', FALSE, FALSE);
+
+                return $next($request)->withCookie($cookie);
             }
 
         } elseif ($request->has('code')) {
-            if ($request->hasCookie('code') && $request['code'] == $request->cookie('code')) {
-                return $next($request);
-            }
-            //
 
             $result = $this->getToken($request);
-
             $token_object = json_decode($result->getBody()->getContents());
+            $token_array = array('access' => $token_object->access_token, 'refresh' => $token_object->refresh_token);
 
-//            $request->cookie('code', $request['code'], $token_object->expires_in, "", "", FALSE, TRUE);
-//            dd($request);
+            $cookie = cookie('_token', $token_array, $token_object->expires_in/60,
+                '', '', false, false);
+
             $request->headers->set('authorization', 'Bearer ' . $token_object->access_token);
 
-//            $result = $this->RegisterWithSSO($request);
+            $response = $next($request);
 
-            return $next($request);
+            return $response->withCookie($cookie);
+
         }
 
         $queryString = $request->getQueryString();
