@@ -30,9 +30,11 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
-        $data = $this->CorpGetCountryData();
+//        $data = $this->CorpGetCountryData();
+//
+//        $country_list = $data->CorpGetCountryDataResult->COUNTRYLIST->WSCountry;
 
-        $country_list = $data->CorpGetCountryDataResult->COUNTRYLIST->WSCountry;
+
 
 //        $countries = new Country();
 //
@@ -40,6 +42,8 @@ class HomeController extends Controller
 //        {
 //            if ()
 //        }
+
+
 
         return view('index',compact('user','country_list'));
     }

@@ -46,7 +46,7 @@ class CreateBeneficiariesTable extends Migration
      */
     public function down()
     {
-        Schema::table('transactions', function ($table) {
+        Schema::table('beneficiaries', function ($table) {
             $table->dropForeign(['user_id']);
         });
 

@@ -14,9 +14,9 @@ use Psr\Http\Message\ServerRequestInterface;
 class UptController extends Controller
 {
     use UptTrait;
-    public function test(RemittanceForm $request)
+    public function test()
     {
-        $this->CorpGetCountryData();
+        dd($this->CorpGetCountryData());
     }
 
 

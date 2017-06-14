@@ -7,6 +7,7 @@ use App\Traits\PlatformTrait;
 use App\Traits\TokenTrait;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserInformationController extends Controller
@@ -17,7 +18,7 @@ class UserInformationController extends Controller
 
     public function __construct()
     {
-//        $this->middleware('checkToken', ['only' => ['store']]);
+        $this->middleware('checkToken', ['only' => ['store']]);
     }
 
     /**
@@ -43,7 +44,7 @@ class UserInformationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -60,42 +61,53 @@ class UserInformationController extends Controller
 //        ]);
 
 
-        $request->headers->set('authorization', 'Bearer ' . $request->token); //todo:  it must be deleted. cause it comes from form input and it's not gonna be like that any more
+        $request->headers->set('authorization', 'Bearer ' . $request->cookie('_token')['access']);
 
-        $dotin_response = $this->dotinCredential($request->account_number , $request->mobile);
+        $dotin_response = $this->dotinCredential($request->account_number, $request->mobile);
         $dotin_result = json_decode($dotin_response->getBody()->getContents());
 
-        $request->headers->set('authorization', 'Bearer ' . $request->token);
+        if ($dotin_result[0]->auth) {
 
-        if($dotin_result[0]->auth){
-            //requestwithtoken
-            $sso_response = $this->registerWithSSO($request);
-            $sso_result = json_decode($sso_response->getBody()->getContents());
+//            $sso_response = $this->registerWithSSO($request);
+//            $sso_result = json_decode($sso_response->getBody()->getContents());
 
-            if(!$sso_result->hasError && $sso_result->result){
+//            if(!$sso_result->hasError && $sso_result->result){
+//            if(!$sso_result->hasError && $sso_result->result){
 
-                $follow_res = $this->followBusiness($request->bearerToken());
+            $result = $this->followBusiness($request->bearerToken());
+            $follow_res = json_decode($result->getBody()->getContents());
+//            if(!$follow_res->hassError)
 
-//                dd($follow_res);
-                $user = new User;
-                $user->firstname = $dotin_result[0]->message->firstname;
-                $user->lastname = $dotin_result[0]->message->lastname;
-                $user->userId = $sso_result->result->userId;
+
+            //todo
+            $result = $this->getCurrentPlatformUser($request->cookie('_token')['access']);
+            $platform_user = json_decode($result->getBody()->getContents());
+
+            $user = User::firstOrNew(array('userId' => $platform_user->id));
+
+            $user->firstname = $dotin_result[0]->message->firstname;
+            $user->lastname = $dotin_result[0]->message->lastname;
 //                $user->api_token = $request->bearerToken();
-                $user->api_token = $request->token;
+//                $user->api_token = $request->token;
 
-                $user->save();
+            $user->save();
+
+            //todo : save or update
+
+            Auth::login($user);
+
+            $data = array('state' => $request->state);
 
 //  get user beneficiary's?!
-                return response()->view('dashboard.beneficiary', $request->state, 200)->header('authorization', 'Bearer ' . $request->token);
-            }
+            return response()->view('dashboard.beneficiary', $data, 200)->header('authorization', 'Bearer ' . $request->token);
         }
+
+//        }
         /*
          * 1. datin.
          * 2.register user to platform
          * 3. save user data , given from datin and platform (userId)
          */
-
 
 
 //        User::create($request->all());
@@ -107,10 +119,11 @@ class UserInformationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public
+    function show($id)
     {
         //
     }
@@ -118,10 +131,11 @@ class UserInformationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public
+    function edit($id)
     {
         //
     }
@@ -129,11 +143,12 @@ class UserInformationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public
+    function update(Request $request, $id)
     {
         //
     }
@@ -141,10 +156,11 @@ class UserInformationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public
+    function destroy($id)
     {
         //
     }

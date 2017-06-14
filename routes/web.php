@@ -27,52 +27,61 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Morilog\Jalali\Facades\jDate;
 
-Route::get('/', 'HomeController@index');
 //    ->middleware('checkUser');
 
 // Static Routes
 
-Route::get('/get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'flat') {
-    return $captcha->src($config);
-});
 
-Route::get('/about', 'StaticsController@about');
-Route::get('/terms', 'StaticsController@terms');
-Route::get('/contact', 'StaticsController@contact');
-Route::post('/contact', 'StaticsController@sendMail');
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+    ],
+    function () {
+        Route::get('/', 'HomeController@index');
 
-Auth::routes();
+        Route::get('/about', 'StaticsController@about');
+        Route::get('/terms', 'StaticsController@terms');
+        Route::get('/contact', 'StaticsController@contact');
+        Route::post('/contact', 'StaticsController@sendMail');
 
-Route::get('/home', 'HomeController@index');
-Route::post('/home', 'HomeController@formController');
+        Auth::routes();
 
-Route::get('/dotin', 'DotinController@dotinAuthorization');//maybe get,will implement according to the fake web service
+        Route::get('/home', 'HomeController@index');
+        Route::post('/home', 'HomeController@formController');
 
-Route::get('/profile', 'UserController@index');
-Route::get('/beneficiaries', 'UserController@beneficiaries');
-Route::get('/beneficiaries/add', 'UserController@addBeneficiary');
-Route::get('/notifications', 'UserController@notifications');
-Route::get('/settings', 'UserController@settings');
-Route::get('/logout', 'Auth/LoginController@logout');
-Route::get('/proforma', 'PaymentController@proforma');
-Route::get('/invoice', 'PaymentController@invoice');
+        Route::get('/dotin', 'DotinController@dotinAuthorization');//maybe get,will implement according to the fake web service
+
+        Route::get('/profile', 'UserController@index');
+        Route::get('/beneficiaries', 'UserController@beneficiaries');
+        Route::get('/beneficiaries/add', 'UserController@addBeneficiary');
+        Route::get('/notifications', 'UserController@notifications');
+        Route::get('/settings', 'UserController@settings');
+        Route::get('/logout', 'Auth/LoginController@logout');
+        Route::get('/proforma', 'PaymentController@proforma');
+        Route::get('/invoice', 'PaymentController@invoice');
 
 //Route::post('/pay', 'WalletController') ;
 //
-Route::post('/calculate', 'UptController@calculateRemittance')->name('calculate'); //maybe get, according to fake web service
+        Route::post('/calculate', 'UptController@calculateRemittance')->name('calculate'); //maybe get, according to fake web service
 
 //Route::get('/test', 'PaymentController@index');
-Route::get('/test', 'PaymentController@test');
-Route::get('/payment', 'PaymentController@pay');
+        Route::get('/test', 'PaymentController@test');
+        Route::get('/payment', 'PaymentController@pay');
 
-Route::get('/callback/{callback}', 'CallbackController@callbackHandler');
-Route::get('/emad', 'PaymentController@test');
+        Route::get('/callback/{callback}', 'CallbackController@callbackHandler');
+        Route::get('/emad', 'PaymentController@test');
 
-Route::resource('/additional-info', 'UserInformationController');
+//    Route::resource('/additional-info', 'UserInformationController');
 
-Route::get('/ws', 'UptController@test');
+        Route::get('/ws', 'UptController@test');
+        Route::get('/cookie', 'PaymentController@test');
 
-Route::get('/{locale}', function ($locale) {
-    App::setLocale($locale);
-    return view('index');
+    });
+
+Route::get('/get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'flat') {
+    return $captcha->src($config);
+
+
 });
+

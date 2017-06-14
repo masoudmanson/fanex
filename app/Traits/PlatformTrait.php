@@ -24,7 +24,7 @@ trait PlatformTrait
         $nick = $request->nickname;
 
         $client = new Client();
-        $res = $client->request('GET', 'http://sandbox.fanapium.com:8080/aut/registerWithSSO/', [
+        $res = $client->request('GET', 'http://sandbox.fanapium.com:8081/aut/registerWithSSO/', [
             'query' => ['nickname' => $nick],
             'headers' => [
                 '_token_' => $token,
@@ -38,10 +38,9 @@ trait PlatformTrait
     public function getCurrentPlatformUser($token)
     {
         $client = new Client();
-        $res = $client->get('http://sandbox.fanapium.com:8080/nzh/getUserProfile', [
+        $res = $client->get('http://sandbox.fanapium.com/users', [
             'headers' => [
-                '_token_' => $token,
-                '_token_issuer_' => 1
+                'authorization' => 'bearer '.$token
             ]
         ]);
         return $res;
@@ -51,7 +50,7 @@ trait PlatformTrait
     {
         $client = new Client();
         //businessId should receive from getBusiness.however it's static in platform db.
-        $res = $client->get('http://sandbox.fanapium.com:8080/nzh/follow/?businessId=22&follow=true', [
+        $res = $client->get('http://sandbox.fanapium.com:8081/nzh/follow/?businessId=22&follow=true', [
             'headers' => [
                 '_token_' => $token,
                 '_token_issuer_' => 1

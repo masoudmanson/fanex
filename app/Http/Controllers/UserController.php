@@ -14,8 +14,8 @@ class UserController extends Controller
 
     public function __construct()
     {
-//        $this->middleware('checkToken', ['only' => ['show', 'index', 'beneficiaries']]);
-//        $this->middleware('checkUser');
+        $this->middleware('checkToken', ['only' => ['show', 'index', 'beneficiaries']]);
+        $this->middleware('checkUser');
     }
 
     /**

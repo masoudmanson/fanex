@@ -13,6 +13,18 @@ use SoapVar;
 
 trait UptTrait
 {
+    public function ListOfAvailableCountries()
+    {
+        $upt_resp = $this->CorpGetCountryData()->CorpGetCountryDataResult;
+
+        if($upt_resp->COUNTRYSTATUS->RESPONSE == 'Success')
+        {
+            $country_list = $upt_resp->COUNTRYLIST->WSCountry ;
+        }
+
+
+    }
+    
     public function CorpGetCountryData()
     {
         $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?WSDL';
@@ -29,6 +41,7 @@ trait UptTrait
 
         $return = $client->__SoapCall('CorpGetCountryData', array());
 
+        dd($return->CorpGetCountryDataResult->COUNTRYLIST->WSCountry[3]);
         return $return;
 
     }
