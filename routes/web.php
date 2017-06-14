@@ -63,7 +63,6 @@ Route::group(
 
 //Route::post('/pay', 'WalletController') ;
 //
-        Route::post('/calculate', 'UptController@calculateRemittance')->name('calculate'); //maybe get, according to fake web service
 
 //Route::get('/test', 'PaymentController@index');
         Route::get('/test', 'PaymentController@test');
@@ -72,8 +71,6 @@ Route::group(
         Route::get('/callback/{callback}', 'CallbackController@callbackHandler');
         Route::get('/emad', 'PaymentController@test');
 
-//    Route::resource('/additional-info', 'UserInformationController');
-
         Route::get('/ws', 'UptController@test');
         Route::get('/cookie', 'PaymentController@test');
 
@@ -81,7 +78,7 @@ Route::group(
 
 Route::get('/get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'flat') {
     return $captcha->src($config);
-
-
 });
 
+Route::post('/calculate', 'UptController@calculateRemittance')->name('calculate'); //maybe get, according to fake web service
+Route::resource('/additional-info', 'UserInformationController');

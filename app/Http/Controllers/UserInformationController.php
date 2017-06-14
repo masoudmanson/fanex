@@ -95,8 +95,8 @@ class UserInformationController extends Controller
             //todo : save or update
 
             Auth::login($user);
-
-            $data = array('state' => $request->state);
+            $beneficiaries = $user->beneficiary()->get();
+            $data = array('state' => $request->state, 'beneficiaries' => $beneficiaries);
 
 //  get user beneficiary's?!
             return response()->view('dashboard.beneficiary', $data, 200)->header('authorization', 'Bearer ' . $request->token);

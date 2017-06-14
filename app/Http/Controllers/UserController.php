@@ -31,8 +31,8 @@ class UserController extends Controller
 
     public function beneficiaries(Request $request)
     {
-//        $user = Auth::user();
-//        $beneficiaries = $user->beneficiary()->get();
+        $user = Auth::user();
+        $beneficiaries = $user->beneficiary()->get();
         return view('dashboard.beneficiaries', compact('beneficiaries'));
     }
 
