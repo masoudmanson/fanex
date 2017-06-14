@@ -28,7 +28,7 @@
 
                     <div class="col-xs-3 col-sm-3 px-0">
                         <ul class="filter-ul filter-right">
-                            <li class="filter-li"><a href="/"><span class="mini-title">New Transactions</span><span class="large-title">New</span></a></li>
+                            <li class="filter-li-link"><a href="/"><span class="mini-title">New Transactions</span><span class="large-title">New</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -36,36 +36,9 @@
                 {{-- Table Wrapper --}}
                 <div class="row p-0 m-0">
                     <div class="panel-group" id="accordion">
-                        <div class="panel panel-default pending">
-                            <div class="panel-heading">
-                                <div class="row p-0 m-0">
-                                    <div class="col-md-4 col-sm-4 col-xs-5" data-toggle="tooltip" title="Transferred to">
-                                        <i class="icon-trans acc-main-icon"></i>
-                                        <span class="acc-user"><span class="hidden-sm hidden-xs">Transferred to </span><b>Masoud Amjadi</b></span>
-                                    </div>
-                                    <div class="col-md-2 hidden-xs hidden-sm" data-toggle="tooltip" title="Transaction Date">
-                                        <span class="acc-date">6 May 2017</span>
-                                    </div>
-                                    <div class="col-md-2 col-sm-3 col-xs-3" data-toggle="tooltip" title="Transferred Amount">
-                                        <span class="acc-cash">5000 EUR</span>
-                                    </div>
-                                    <div class="col-md-2 col-sm-3 col-xs-2" data-toggle="tooltip" title="Transfer Status">
-                                        <span class="acc-status pending">
-                                            <i class="icon-pending"></i>
-                                            <span class="hidden-xs">Pending</span>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-1 col-sm-1 hidden-xs" data-toggle="tooltip" title="Transfer To Account">
-                                        <span class="acc-type">
-                                            <i class="icon-reciept"></i>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-1 col-sm-1 col-xs-2">
-                                        <span class="acc-arrow accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row1" data-target="#row1"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="row1" class="panel-collapse collapse in">
+                        <div class="panel panel-default search" id="search-input">
+                            <input type="text" class="panel-heading fanexInputWhite search-filter" placeholder="Search in Transactions">
+                            <div id="searchbox" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <div class="row m-0 p-0">
                                         <div class="col-sm-12 col-md-7">
@@ -110,7 +83,81 @@
                             </div>
                         </div>
 
-                        <div class="panel panel-default successful">
+                        <div class="panel panel-default filtered pending">
+                            <div class="panel-heading">
+                                <div class="row p-0 m-0">
+                                    <div class="col-md-4 col-sm-4 col-xs-5" data-toggle="tooltip" title="Transferred to">
+                                        <i class="icon-trans acc-main-icon"></i>
+                                        <span class="acc-user"><span class="hidden-sm hidden-xs">Transferred to </span><b>Masoud Amjadi</b></span>
+                                    </div>
+                                    <div class="col-md-2 hidden-xs hidden-sm" data-toggle="tooltip" title="Transaction Date">
+                                        <span class="acc-date">6 May 2017</span>
+                                    </div>
+                                    <div class="col-md-2 col-sm-3 col-xs-3" data-toggle="tooltip" title="Transferred Amount">
+                                        <span class="acc-cash">5000 EUR</span>
+                                    </div>
+                                    <div class="col-md-2 col-sm-3 col-xs-2" data-toggle="tooltip" title="Transfer Status">
+                                        <span class="acc-status pending">
+                                            <i class="icon-pending"></i>
+                                            <span class="hidden-xs">Pending</span>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 hidden-xs" data-toggle="tooltip" title="Transfer To Account">
+                                        <span class="acc-type">
+                                            <i class="icon-reciept"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 col-xs-2">
+                                        <span class="acc-arrow accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row1" data-target="#row1"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="row1" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="row m-0 p-0">
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="col-xs-5 p-0 m-0 acc-info-left">
+                                                <p>Trans. No.:</p>
+                                                <p>Bnf. Acc. No.:</p>
+                                                <p>Bank Name:</p>
+                                                <p>Payment Date:</p>
+                                                <p>Trans. Status:</p>
+                                                <p>Trans. Type:</p>
+                                            </div>
+                                            <div class="col-xs-7 p-0 m-0 acc-info-right">
+                                                <p>v8845ewf1w23fwefwe</p>
+                                                <p>6104337912543665</p>
+                                                <p>Pasargad</p>
+                                                <p>{{ \Carbon\Carbon::now()->format("d M Y, H:s:i") }}</p>
+                                                <p class="fanex-text-orange">Pending</p>
+                                                <p>Transfer To Account</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-5 acc-factor">
+                                            <div class="col-xs-5 p-0 m-0 acc-info-left">
+                                                <p class="table-header">Item</p>
+                                                <p>Prem. Amount:</p>
+                                                <p>Expense:</p>
+                                                <p>Tax:</p>
+                                                <hr>
+                                                <p>Sum</p>
+                                            </div>
+                                            <div class="col-xs-7 p-0 m-0 acc-info-right">
+                                                <p class="table-header">Price</p>
+                                                <p>5000 EUR</p>
+                                                <p>15 EUR</p>
+                                                <p>4.5 EUR</p>
+                                                <hr>
+                                                <p>5019.5 EUR</p>
+                                                <p class="acc-factor-sum">= 155000000 Rials</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default filtered successful">
                             <div class="panel-heading">
                                 <div class="row p-0 m-0">
                                     <div class="col-md-4 col-sm-4 col-xs-5" data-toggle="tooltip" title="Transferred to">
@@ -184,7 +231,7 @@
                             </div>
                         </div>
 
-                        <div class="panel panel-default failed">
+                        <div class="panel panel-default filtered failed">
                             <div class="panel-heading">
                                 <div class="row p-0 m-0">
                                     <div class="col-md-4 col-sm-4 col-xs-5" data-toggle="tooltip" title="Transferred to">
@@ -274,14 +321,20 @@
         $(document).ready(function () {
             $('.selectpicker').selectpicker();
 
+            $('.search-filter').on('keyup', function() {
+               console.log($(this).val());
+            });
+
             $('.filter-li').on('click', function() {
+                $('.filter-li').removeClass('active');
+                $(this).addClass('active');
                var filter = $(this).attr('data-filter');
                if(filter == 'all') {
-                   $('.panel-default').slideDown(200);
+                   $('.filtered').slideDown(200);
                }
                else {
-                   $('.panel-default').slideUp(200);
-                   $('.panel-default.'+filter).slideDown(200);
+                   $('.filtered').slideUp(200);
+                   $('.filtered.'+filter).slideDown(200);
                }
             });
 

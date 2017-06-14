@@ -23,7 +23,22 @@ mix.copy('node_modules/nicescroll/jquery.nicescroll.js', 'public/js');
 mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/scripts.js', 'public/js')
     .sass('resources/assets/sass/all.scss', 'public/css');
-    // .sass('resources/assets/sass/fanex.scss', 'public/css'),
-    // .sass('resources/assets/sass/fanexDashboard.scss', 'public/css');
 
-mix.version().options({processCssUrls: false});
+/*
+ / Compiling RTL Css Class
+ */
+const exec = require('child_process').exec
+
+mix.then(() => {
+    exec('rtlcss ./public/css/all.css ./public/css/fa.css', (error, stdout, stderr) => {
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        console.log(`stdout(RTLCSS): ${stdout}`);
+        console.log(`stderr(RTLCSS): ${stderr}`);
+    });
+});
+
+// mix.version().options({processCssUrls: false});
+mix.options({processCssUrls: false});

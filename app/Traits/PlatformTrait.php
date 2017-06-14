@@ -35,6 +35,18 @@ trait PlatformTrait
         return $res;
     }
 
+//    public function getCurrentPlatformUser($token)
+//    {
+//        $client = new Client();
+//        $res = $client->get('http://sandbox.fanapium.com:8080/nzh/getUserProfile', [
+//            'headers' => [
+//                '_token_' => $token,
+//                '_token_issuer_' => 1
+//            ]
+//        ]);
+//        return $res;
+//    }
+
     public function getCurrentPlatformUser($token)
     {
         $client = new Client();

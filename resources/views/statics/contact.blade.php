@@ -41,7 +41,7 @@
             {{-- Map and Static Pages Container --}}
             <div class="col-lg-6 col-md-12 p-0 indexWrapperInside indexRight">
                 <div class="addressWrapper">
-                    <h4>#123, 12th Noavari Ave, Pardis Tech Park, Tehran, Iran</h4>
+                    <h4>@lang('index.address')</h4>
                     <p><i class="icon-phone"></i> +98 21 7625 0515</p>
                     <p><i class="icon-fax"></i> +98 21 7625 0516</p>
                 </div>

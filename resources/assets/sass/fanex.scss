@@ -1,12 +1,13 @@
 * {
     outline: none !important;
-    font-family: 'Roboto', sans-serif !important;
+    font-family: 'IRANSans', 'Roboto', sans-serif !important;
 }
 
 html,
 body {
-    font-family: 'Roboto', tahoma, sans-serif;
+    font-family: 'IRANSans', 'Roboto', tahoma, sans-serif;
     background-color: $fanapGreyLight;
+    direction: ltr !important;
 }
 
 .fanex-text-red {
@@ -165,6 +166,12 @@ body {
     @include mq($max-width: $breakePoint_sm) {
         padding: 120px 30px 20px;
     }
+    #bnf-slc-container {
+        min-height: 603px;
+        @include mq($max-width: $breakePoint_lg) {
+            min-height: 0;
+        }
+    }
     .dash-title {
         font-weight: 200;
         color: $fanapDark;
@@ -205,20 +212,30 @@ body {
 
         .invoice-factor {
             padding: 20px 0 40px;
-            @include mq($max-width: $breakePoint_lg) {
+            list-style: none;
+            .acc-info-left {
+                p {
+                    color: $fanapGreyDark;
+                }
+            }
+            .acc-info-right {
+                p {
+                    color: $fanapDark;
+                    font-weight: 500;
+                }
             }
             hr {
                 margin: 7px 0;
             }
             .acc-factor-sum {
-                color: $fanapGreyDark;
+                color: $fanapGreyDark !important;
             }
             .orange {
                 font-weight: 500;
-                color: $fanapOrange;
+                color: $fanapOrange !important;
             }
             .grey {
-                color: $fanapGreyDark;
+                color: $fanapGreyDark !important;
             }
             p.table-header {
                 background-color: #fff;
@@ -516,6 +533,38 @@ body {
     }
 }
 
+#search-input {
+    position: relative;
+    .search-filter {
+        width: 100%;
+    }
+}
+
+#search-input::before {
+    content: '\51';
+    font-family: 'fanex';
+    color: $fanapOrange;
+    font-size: 32px;
+    position: absolute;
+    @include absolut-center($top:50%, $left:0%);
+    left: 40px;
+    z-index: 300;
+    @include mq($max-width: $breakePoint_md) {
+        left: 30px;
+    }
+}
+
+.search-filter {
+    font-size: 32px;
+    color: #666 !important;
+    font-weight: 100;
+    padding-left: 63px !important;
+    &::before {
+        content: '\51';
+        font-family: 'fanex';
+    }
+}
+
 .panel-body .bsWrapper {
     margin: 0;
 }
@@ -637,6 +686,9 @@ a.btn {
     text-align: right;
     &:hover, &:focus, &:active {
         color: $fanapDark;
+    }
+    @include mq($max-width: $breakePoint_md) {
+        text-align: center;
     }
 }
 
@@ -982,6 +1034,28 @@ a.btn {
                 }
             }
         }
+        i {
+            height: 30px;
+            width: 30px;
+            margin-top: 5px;
+            -webkit-background-size: cover;
+            background-size: cover;
+            @include border-radius(50%);
+            display: block;
+            cursor: pointer;
+        }
+    }
+    .filter-li.flag {
+        filter: grayscale(1);
+        -webkit-filter: grayscale(1);
+        padding: 0 10px 0 0;
+        opacity: 0.5;
+        @include transition(all .3s);
+        &:hover {
+            opacity: 1;
+            filter: grayscale(0);
+            -webkit-filter: grayscale(0);
+        }
     }
     .filter-li.active {
         color: #fff;
@@ -995,6 +1069,15 @@ a.btn {
                 color: #ffffff;
             }
         }
+    }
+    .filter-li.flag.active {
+        filter: grayscale(0);
+        -webkit-filter: grayscale(0);
+        opacity: 1;
+        background-color: transparent !important;
+    }
+    .filter-li-link {
+        @extend .filter-li;
     }
 }
 
@@ -1134,6 +1217,36 @@ a.btn {
         position: absolute;
         top: 0;
         left: 0;
+    }
+    .panel-heading.new {
+        @include mq($max-width: $breakePoint_md) {
+            background-color: $fanapOrange;
+            color: #fff !important;
+            .acc-main-icon,
+            .acc-user,
+            .acc-cash,
+            .acc-date {
+                color: #fff !important;
+                b {
+                    color: #fff !important;
+                }
+            }
+            .bnf-action-icons {
+                a {
+                    i {
+                        color: #fff;
+                    }
+                    &:hover {
+                        i {
+                            color: $fanapDark;
+                        }
+                    }
+                }
+            }
+            .accordion-toggle:after {
+                color: #fff !important;
+            }
+        }
     }
     .panel-body {
         @include border-radius(0);

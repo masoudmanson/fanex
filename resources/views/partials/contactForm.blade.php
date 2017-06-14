@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <h1 class="pb-3 mt-0">Contact Us</h1>
+    <h1 class="pb-3 mt-0">@lang('index.contact')</h1>
 
     <form action="/calculate" method="post">
         {{ csrf_field() }}
@@ -20,7 +20,7 @@
                 <div class="form-group bsWrapper">
                     <i class="icon-user bsIcon"></i>
                     <input type="text" class="form-control fanexInput" id="name"
-                           name="name" placeholder="Enter your Name" autocomplete="off">
+                           name="name" placeholder="@lang('index.contactName')" autocomplete="off">
                 </div>
             </div>
             {{-- Email --}}
@@ -29,7 +29,7 @@
                     <div class="form-group bsWrapper">
                         <i class="icon-mail bsIcon"></i>
                         <input type="text" class="form-control fanexInput" id="mail"
-                               name="mail" placeholder="Enter your E-Mail" autocomplete="off">
+                               name="mail" placeholder="@lang('index.contactMail')" autocomplete="off">
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
             <div class="col-xs-12">
                 <div class="form-group bsWrapper">
                     <div class="form-group bsWrapper">
-                        <textarea class="fanexInput" name="text" id="contactText" placeholder="We are happy to hear from you"></textarea>
+                        <textarea class="fanexInput" name="text" id="contactText" placeholder="@lang('index.contactText')"></textarea>
                     </div>
                 </div>
             </div>
