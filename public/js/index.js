@@ -98,7 +98,7 @@ $(document).ready(function () {
     $('#countdown').countdown(tenMins, function (event) {
         $(this).html(event.strftime('%M:%S'));
     }).on('finish.countdown', function () {
-        $('#countdown').html('Time Out!').addClass('alert shake animated');
+        $('#countdown').html('Time Out').addClass('alert shake animated');
     });
 
 });

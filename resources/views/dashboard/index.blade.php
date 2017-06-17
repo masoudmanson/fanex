@@ -19,10 +19,10 @@
                 <div class="row p-0 m-0 filter-wrapper">
                     <div class="col-xs-9 col-sm-9 px-0">
                         <ul class="filter-ul">
-                            <li class="filter-li active" data-filter="all"><a href="#"><span class="mini-title">All Transactions</span><span class="large-title">All</span></a></li>
-                            <li class="filter-li" data-filter="successful"><a href="#"><span class="mini-title">Successful</span><span class="large-title"><i class="icon-check"></i></span></a></li>
-                            <li class="filter-li" data-filter="pending"><a href="#"><span class="mini-title">Pending</span><span class="large-title"><i class="icon-pending"></i></span></a></li>
-                            <li class="filter-li" data-filter="failed"><a href="#"><span class="mini-title">Failed</span><span class="large-title"><i class="icon-close"></i></span></a></li>
+                            <li class="filter-li active" data-filter="all"><a href="#"><span class="mini-title">@lang('profile.filterAll')</span><span class="large-title">All</span></a></li>
+                            <li class="filter-li" data-filter="successful"><a href="#"><span class="mini-title">@lang('profile.filterSucc')</span><span class="large-title"><i class="icon-check"></i></span></a></li>
+                            <li class="filter-li" data-filter="pending"><a href="#"><span class="mini-title">@lang('profile.filterPend')</span><span class="large-title"><i class="icon-pending"></i></span></a></li>
+                            <li class="filter-li" data-filter="failed"><a href="#"><span class="mini-title">@lang('profile.filterFail')</span><span class="large-title"><i class="icon-close"></i></span></a></li>
                         </ul>
                     </div>
 
