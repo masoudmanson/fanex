@@ -48,8 +48,8 @@
                             <div class="panel-heading">
                                 <div class="row p-0 m-0">
                                     <div class="col-md-4 col-sm-4 col-xs-5" data-toggle="tooltip" title="@lang('profile.titleTransfer')">
-                                        <i class="icon-trans acc-main-icon"></i>
-                                        <span class="acc-user"><span class="hidden-sm hidden-xs">@lang('profile.titleTransfer')</span><b>Masoud Amjadi</b></span>
+                                        <i class="icon-trans acc-main-icon hidden-xs"></i>
+                                        <span class="acc-user"><span class="hidden-sm hidden-xs">@lang('profile.titleTransfer') </span><b>Masoud Amjadi</b></span>
                                     </div>
                                     <div class="col-md-2 hidden-xs hidden-sm" data-toggle="tooltip" title="@lang('profile.titleDate')">
                                         <span class="acc-date">6 May 2017</span>
@@ -122,8 +122,8 @@
                             <div class="panel-heading">
                                 <div class="row p-0 m-0">
                                     <div class="col-md-4 col-sm-4 col-xs-5" data-toggle="tooltip" title="@lang('profile.titleTransfer')">
-                                        <i class="icon-trans acc-main-icon"></i>
-                                        <span class="acc-user"><span class="hidden-sm hidden-xs">@lang('profile.titleTransfer')</span><b>Emad Ghorbani Nia</b></span>
+                                        <i class="icon-trans acc-main-icon hidden-xs"></i>
+                                        <span class="acc-user"><span class="hidden-sm hidden-xs">@lang('profile.titleTransfer') </span><b>Emad Ghorbani Nia</b></span>
                                     </div>
                                     <div class="col-md-2 hidden-xs hidden-sm" data-toggle="tooltip" title="@lang('profile.titleDate')">
                                         <span class="acc-date">23 April 2017</span>
@@ -196,8 +196,8 @@
                             <div class="panel-heading">
                                 <div class="row p-0 m-0">
                                     <div class="col-md-4 col-sm-4 col-xs-5" data-toggle="tooltip" title="@lang('profile.titleTransfer')">
-                                        <i class="icon-trans acc-main-icon"></i>
-                                        <span class="acc-user"><span class="hidden-sm hidden-xs">@lang('profile.titleTransfer')</span><b>Pooria Pahlevani</b></span>
+                                        <i class="icon-trans acc-main-icon hidden-xs"></i>
+                                        <span class="acc-user"><span class="hidden-sm hidden-xs">@lang('profile.titleTransfer') </span><b>Pooria Pahlevani</b></span>
                                     </div>
                                     <div class="col-md-2 hidden-xs hidden-sm" data-toggle="tooltip" title="@lang('profile.titleDate')">
                                         <span class="acc-date">10 April 2017</span>

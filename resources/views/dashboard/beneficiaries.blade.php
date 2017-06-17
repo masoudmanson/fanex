@@ -50,7 +50,7 @@
                             <div class="panel-heading">
                                 <div class="row p-0 m-0">
                                     <div class="col-md-3 col-sm-3 col-xs-5" data-toggle="tooltip" title="@lang('profile.bnfName')">
-                                        <i class="icon-user acc-main-icon"></i>
+                                        <i class="icon-user acc-main-icon hidden-xs"></i>
                                         <span class="acc-user"><b>Masoud Amjadi</b></span>
                                     </div>
                                     <div class="col-md-2 col-sm-3 hidden-xs" data-toggle="tooltip" title="@lang('payment.bnfCC')">
@@ -173,7 +173,7 @@
                             <div class="panel-heading">
                                 <div class="row p-0 m-0">
                                     <div class="col-md-3 col-sm-3 col-xs-5" data-toggle="tooltip" title="Beneficiary Name">
-                                        <i class="icon-user acc-main-icon"></i>
+                                        <i class="icon-user acc-main-icon hidden-xs"></i>
                                         <span class="acc-user"><b>Pooria Pahlevani</b></span>
                                     </div>
                                     <div class="col-md-2 col-sm-3 hidden-xs" data-toggle="tooltip" title="Beneficiary Account Number">
@@ -296,7 +296,7 @@
                             <div class="panel-heading">
                                 <div class="row p-0 m-0">
                                     <div class="col-md-3 col-sm-3 col-xs-5" data-toggle="tooltip" title="Beneficiary Name">
-                                        <i class="icon-user acc-main-icon"></i>
+                                        <i class="icon-user acc-main-icon hidden-xs"></i>
                                         <span class="acc-user"><b>Hamidreza Amouzegar</b></span>
                                     </div>
                                     <div class="col-md-2 col-sm-3 hidden-xs" data-toggle="tooltip" title="Beneficiary Account Number">
@@ -419,7 +419,7 @@
                             <div class="panel-heading">
                                 <div class="row p-0 m-0">
                                     <div class="col-md-3 col-sm-3 col-xs-5" data-toggle="tooltip" title="Beneficiary Name">
-                                        <i class="icon-user acc-main-icon"></i>
+                                        <i class="icon-user acc-main-icon hidden-xs"></i>
                                         <span class="acc-user"><b>Mohammad Parham</b></span>
                                     </div>
                                     <div class="col-md-2 col-sm-3 hidden-xs" data-toggle="tooltip" title="Beneficiary Account Number">

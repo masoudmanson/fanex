@@ -47,7 +47,8 @@ body {
         font-weight: 500;
         padding-left: 0;
         @include mq($max-width: $breakePoint_sm) {
-            //padding-left: 15px;
+            font-size: 32px !important;
+            padding-top: 20px !important;
         }
         @include transition(all .3s);
         @include mq($max-width: $breakePoint_xl) {
@@ -555,13 +556,19 @@ body {
 }
 
 .search-filter {
-    font-size: 32px;
+    font-size: 26px;
     color: #666 !important;
     font-weight: 100;
     padding-left: 63px !important;
     &::before {
         content: '\51';
         font-family: 'fanex';
+    }
+    @include mq($max-width: $breakePoint_md) {
+        font-size: 22px;
+    }
+    @include mq($max-width: $breakePoint_sm) {
+        font-size: 16px;
     }
 }
 
@@ -584,6 +591,7 @@ textarea.fanexInput {
     resize: none;
     min-height: 150px;
     padding: 15px 20px;
+    line-height: 1.6em !important;
 }
 
 .dropdown-menu {
@@ -1010,6 +1018,9 @@ a.btn {
         @include mq($max-width: $breakePoint_md) {
             padding: 0 15px;
         }
+        @include mq($max-width: $breakePoint_sm) {
+            padding: 0 10px;
+        }
         a {
             color: $fanapGreyDark;
             text-decoration: none;
@@ -1037,18 +1048,22 @@ a.btn {
         i {
             height: 30px;
             width: 30px;
-            margin-top: 5px;
+            //margin-top: 5px;
             -webkit-background-size: cover;
             background-size: cover;
             @include border-radius(50%);
             display: block;
             cursor: pointer;
+            vertical-align: middle;
+            &:before {
+                vertical-align: super !important;
+            }
         }
     }
     .filter-li.flag {
         filter: grayscale(1);
         -webkit-filter: grayscale(1);
-        padding: 0 10px 0 0;
+        padding: 5px 10px 0 0;
         opacity: 0.5;
         @include transition(all .3s);
         &:hover {
@@ -1078,6 +1093,10 @@ a.btn {
     }
     .filter-li-link {
         @extend .filter-li;
+        overflow: hidden;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 }
 

@@ -23,7 +23,7 @@
                             <div class="panel-heading">
                                 <div class="row p-0 m-0">
                                     <div class="col-md-4 col-sm-6 col-xs-9" data-toggle="tooltip" title="@lang('profile.ntfTitle')">
-                                        <i class="icon-chat acc-main-icon"></i>
+                                        <i class="icon-chat acc-main-icon hidden-xs"></i>
                                         <span class="acc-user"><b>@lang('profile.ntfSucc')</b></span>
                                     </div>
                                     <div class="col-md-3 col-sm-4 hidden-xs" data-toggle="tooltip" title="@lang('profile.ntfSender')">
@@ -58,7 +58,7 @@
                             <div class="panel-heading new">
                                 <div class="row p-0 m-0">
                                     <div class="col-md-4 col-sm-6 col-xs-9" data-toggle="tooltip" title="@lang('profile.ntfTitle')">
-                                        <i class="icon-chat acc-main-icon"></i>
+                                        <i class="icon-chat acc-main-icon hidden-xs"></i>
                                         <span class="acc-user"><b>Puleto Rikhtam :V</b></span>
                                     </div>
                                     <div class="col-md-3 col-sm-4 hidden-xs" data-toggle="tooltip" title="@lang('profile.ntfSender')">
