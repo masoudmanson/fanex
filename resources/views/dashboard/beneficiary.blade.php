@@ -213,7 +213,8 @@
                     <div class="col-sm-6 col-xs-12 p-0 pl-md-2 pb-md-0 pb-sm-4 pb-xs-4  pl-lg-3">
                         {{--<input type="submit" class="btn fanexBtnOutlineGrey" id="paymentBtn"--}}
                         {{--value="Show Proforma"/>--}}
-                        <a href="/proforma" class="btn fanexBtnOutlineGrey">@lang('payment.showProforma')</a>
+                        {{--<a href="/proforma" class="btn fanexBtnOutlineGrey">@lang('payment.showProforma')</a>--}}
+                        <a onclick="sendBNF()" class="btn fanexBtnOutlineGrey">@lang('payment.showProforma')</a>
                     </div>
                 </div>
             </div>
@@ -258,5 +259,19 @@
                 $('#bnf-ajax-div').slideUp(300);
             });
         });
+
+        function sendBNF(){
+            var bnf = parseInt($('#bnfSelect').val())-1;
+            console.log(bnf);
+            console.log(beneficiaries[bnf]);
+            $.ajax({
+                method: 'POST',
+                data: {"bnf" : beneficiaries[bnf],
+                    '_token': csrfToken},
+                url: '/proforma',
+            }).done(function (response) {
+                console.log(response);
+            });
+        }
     </script>
 @endsection

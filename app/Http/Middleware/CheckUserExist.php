@@ -29,7 +29,7 @@ class CheckUserExist
             $result = $this->getCurrentPlatformUser($access_token);
             $platform_user = json_decode($result->getBody()->getContents());
 
-            $id = $platform_user->id;
+            $id = $platform_user->result->userId;
 
             if (User::findByUserId($id)->first()) {
                 $user = User::findByUserId($id)->first();

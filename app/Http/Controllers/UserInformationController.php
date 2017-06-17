@@ -60,7 +60,6 @@ class UserInformationController extends Controller
 //            'password' => 'min:3|confirmed',
 //        ]);
 
-
         $request->headers->set('authorization', 'Bearer ' . $request->cookie('_token')['access']);
 
         $dotin_response = $this->dotinCredential($request->account_number, $request->mobile);
@@ -83,8 +82,9 @@ class UserInformationController extends Controller
             $result = $this->getCurrentPlatformUser($request->cookie('_token')['access']);
             $platform_user = json_decode($result->getBody()->getContents());
 
-            $user = User::firstOrNew(array('userId' => $platform_user->id));
+            $user = User::firstOrNew(array('userId' => $platform_user->result->userId));
 
+            $user->userId = $platform_user->result->userId;
             $user->firstname = $dotin_result[0]->message->firstname;
             $user->lastname = $dotin_result[0]->message->lastname;
 //                $user->api_token = $request->bearerToken();

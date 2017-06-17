@@ -35,24 +35,14 @@ trait PlatformTrait
         return $res;
     }
 
-//    public function getCurrentPlatformUser($token)
-//    {
-//        $client = new Client();
-//        $res = $client->get('http://sandbox.fanapium.com:8080/nzh/getUserProfile', [
-//            'headers' => [
-//                '_token_' => $token,
-//                '_token_issuer_' => 1
-//            ]
-//        ]);
-//        return $res;
-//    }
-
     public function getCurrentPlatformUser($token)
     {
         $client = new Client();
-        $res = $client->get('http://sandbox.fanapium.com/users', [
+        $res = $client->get('http://sandbox.fanapium.com:8081/nzh/getUserProfile', [
             'headers' => [
-                'authorization' => 'bearer '.$token
+//                'authorization' => 'bearer '.$token
+                '_token_' => $token,
+                '_token_issuer_' => 1
             ]
         ]);
         return $res;
@@ -96,14 +86,15 @@ trait PlatformTrait
         $user_object = $this->getCurrentPlatformUser($request->bearerToken());
 //        if (!$user->hasError)
         $userId = json_decode($user_object->getBody()->getContents())->result->userId;
+        $ott = json_decode($user_object->getBody()->getContents())->result->ott;
 //        else
 
         //redirect to login? or refresh the user token ,,,
         // *hint: if refresh token was needed, get the user refresh token from its db row
         //todo how can I know user object on db, if his token expired and I don't have his userId??
 
-        $res = $client->get('http://sandbox.fanapium.com:8080/nzh/biz/issueInvoice', [
-            'query' => [
+        $res = $client->post('http://sandbox.fanapium.com:8080/nzh/biz/issueInvoice', [
+            'form_params' => [
                 //todo
                 'redirectURL' => 'http://localhost:8080/profile',// factor page
                 'userId' => $userId,// get userId from his token: gholi = 204
@@ -125,13 +116,26 @@ trait PlatformTrait
                 'phoneNumber' => '09387181694',//maybe user's phone number
             ],
             'headers' => [
-                '_token_' => $token,// get business token and put in here
+                '_ott_' => $ott,
                 '_token_issuer_' => 1
             ]
         ]);
 
 //       $queryString = http_build_query($query);
 //       return response()->redirectTo('http://sandbox.fanapium.com:8080/nzh/biz/issueInvoice/?'.$queryString,302,$header);
+        return $res;
+    }
+
+    public function issueInvoice()
+    {
+        $client = new Client();
+        //business token must taken from sso
+        $res = $client->get("http://http://176.221.69.209:1031/v1/pbc/payinvoice/", [
+            'query' => [
+                'invoiceId'=>'InvoiceId'
+            ],
+
+        ]);
         return $res;
     }
 }
