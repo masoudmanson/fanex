@@ -22,19 +22,19 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="row p-0 m-0">
-                                    <div class="col-md-4 col-sm-6 col-xs-9" data-toggle="tooltip" title="Notification Title">
+                                    <div class="col-md-4 col-sm-6 col-xs-9" data-toggle="tooltip" title="@lang('profile.ntfTitle')">
                                         <i class="icon-chat acc-main-icon"></i>
-                                        <span class="acc-user"><b>Transaction Successfully Done.</b></span>
+                                        <span class="acc-user"><b>@lang('profile.ntfSucc')</b></span>
                                     </div>
-                                    <div class="col-md-3 col-sm-4 hidden-xs" data-toggle="tooltip" title="Message Sender">
-                                        <span class="acc-cash">FANEx Team</span>
+                                    <div class="col-md-3 col-sm-4 hidden-xs" data-toggle="tooltip" title="@lang('profile.ntfSender')">
+                                        <span class="acc-cash">@lang('profile.ntfFanex')</span>
                                     </div>
-                                    <div class="col-md-3 hidden-sm hidden-xs" data-toggle="tooltip" title="Message Time">
+                                    <div class="col-md-3 hidden-sm hidden-xs" data-toggle="tooltip" title="@lang('profile.ntfTime')">
                                         <span class="acc-date">{{ \Carbon\Carbon::now()->format("d M Y, H:i:s") }}</span>
                                     </div>
                                     <div class="col-md-1 col-sm-1 col-xs-2 px-0 bnf-action-icons">
                                         <a href="">
-                                            <i class="icon-delete" title="Delete Notification"></i>
+                                            <i class="icon-delete" title="@lang('profile.ntfDelete')"></i>
                                         </a>
                                     </div>
                                     <div class="col-md-1 col-sm-1 col-xs-1">
@@ -46,11 +46,8 @@
                                 <div class="panel-body no-border notification-body">
                                     <div class="row">
                                         <div class="col-xs-12 px-5">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor dolores
-                                                eligendi illo, neque perspiciatis sint tempora. Asperiores consequatur
-                                                deserunt dolorem dolorum, et fuga molestiae natus, nobis omnis
-                                                repellendus sint sit!</p>
-                                            <a href="/" class="notification-link">Download Attachment Files <i class="icon-download"></i></a>
+                                            <p>@lang('profile.ntfLorem')</p>
+                                            <a href="/" class="notification-link">@lang('profile.ntfAttach') <i class="icon-download"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -60,19 +57,19 @@
                         <div class="panel panel-default">
                             <div class="panel-heading new">
                                 <div class="row p-0 m-0">
-                                    <div class="col-md-4 col-sm-6 col-xs-9" data-toggle="tooltip" title="Notification Title">
+                                    <div class="col-md-4 col-sm-6 col-xs-9" data-toggle="tooltip" title="@lang('profile.ntfTitle')">
                                         <i class="icon-chat acc-main-icon"></i>
                                         <span class="acc-user"><b>Puleto Rikhtam :V</b></span>
                                     </div>
-                                    <div class="col-md-3 col-sm-4 hidden-xs" data-toggle="tooltip" title="Message Sender">
+                                    <div class="col-md-3 col-sm-4 hidden-xs" data-toggle="tooltip" title="@lang('profile.ntfSender')">
                                         <span class="acc-cash">Emad Ghorbani Nia</span>
                                     </div>
-                                    <div class="col-md-3 hidden-sm hidden-xs" data-toggle="tooltip" title="Message Time">
+                                    <div class="col-md-3 hidden-sm hidden-xs" data-toggle="tooltip" title="@lang('profile.ntfTime')">
                                         <span class="acc-date">{{ \Carbon\Carbon::now()->format("d M Y, H:i:s") }}</span>
                                     </div>
                                     <div class="col-md-1 col-sm-1 col-xs-2 px-0 bnf-action-icons">
                                         <a href="">
-                                            <i class="icon-delete" title="Delete Notification"></i>
+                                            <i class="icon-delete" title="@lang('profile.ntfDelete')"></i>
                                         </a>
                                     </div>
                                     <div class="col-md-1 col-sm-1 col-xs-1">
@@ -84,10 +81,7 @@
                                 <div class="panel-body no-border notification-body">
                                     <div class="row">
                                         <div class="col-xs-12 px-5">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor dolores
-                                                eligendi illo, neque perspiciatis sint tempora. Asperiores consequatur
-                                                deserunt dolorem dolorum, et fuga molestiae natus, nobis omnis
-                                                repellendus sint sit!</p>
+                                            <p>@lang('profile.ntfLorem')</p>
                                         </div>
                                     </div>
                                 </div>

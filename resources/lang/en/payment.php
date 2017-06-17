@@ -22,6 +22,7 @@ return [
     'bnfSwift' => 'Swift Code',
     'bnfIban' => 'iBan Number',
     'backHome' => 'Back Home',
+    'back' => 'Back',
     'showProforma' => 'Show Proforma',
 
 
