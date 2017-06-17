@@ -133,7 +133,8 @@
                                 <div class="form-group bsWrapper">
                                     <i class="icon-user bsIcon"></i>
                                     <input type="text" class="form-control fanexInput fanexInputWhite" id="bnf-lastname"
-                                           name="lastname" placeholder="@lang('payment.bnfLastname')" autocomplete="off">
+                                           name="lastname" placeholder="@lang('payment.bnfLastname')"
+                                           autocomplete="off">
                                 </div>
 
                                 {{-- Account Number --}}
@@ -232,6 +233,7 @@
 @section('scripts')
     <script>
         var beneficiaries = {!! $beneficiaries !!};
+        console.log(beneficiaries);
 
         $(document).ready(function () {
             $('#bnfSelect').on('change blur', function () {
@@ -258,20 +260,21 @@
                 $('#add-new-bnf-ajax').slideDown(200);
                 $('#bnf-ajax-div').slideUp(300);
             });
-
-            function sendBnf() {
-                var bnf = parseInt($('#bnfSelect').val())-1;
-                console.log(bnf);
-                console.log(beneficiaries[bnf]);
-                $.ajax({
-                    method: 'POST',
-                    data: {"bnf" : beneficiaries[bnf],
-                        '_token': csrfToken},
-                    url: '/proforma',
-                }).done(function (response) {
-                    console.log(response);
-                });
-            }
         });
+
+        function sendBnf() {
+            var bnf = parseInt($('#bnfSelect').val()) - 1;
+            $.ajax({
+                method: 'POST',
+                data: {
+                    'hash' : beneficiaries[bnf]['hash'],
+                    '_token': csrfToken,
+                    'id': beneficiaries[bnf]['id']
+                },
+                url: '/proforma',
+            }).done(function (response) {
+                console.log(response);
+            });
+        }
     </script>
 @endsection

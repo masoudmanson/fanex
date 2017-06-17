@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 class PaymentController extends Controller
 {
@@ -50,11 +51,11 @@ class PaymentController extends Controller
         $user = Auth::user();
 
         $beneficiaries = $user->beneficiary()->get();
-
         foreach ($beneficiaries as $beneficiary){
-            $beneficiary['hash'] = Crypt::encryptString($beneficiary);
+//            dd($beneficiary);
+            $beneficiary['hash'] = bcrypt($beneficiary);
         }
-
+//        dd($beneficiaries);
         $request->query->add(['user'=>$user,'beneficiaries'=>$beneficiaries]);
         return response()->view('dashboard.beneficiary', $request->query(), 200)->header('authorization', 'Bearer ' . $request->bearerToken());
     }
@@ -63,16 +64,12 @@ class PaymentController extends Controller
      * @param Request $request
      * @param Beneficiary $beneficiary
      */
-    public function proforma(Request $request , Beneficiary $beneficiary)
+    public function proforma(Request $request)
     {
-        dd($request->bnf);
-
-        $encrypted = Crypt::encryptString($beneficiary);
-
-        if($request->hash ===  $encrypted){
-            dd('bah bah, baah baaaah!');
+        $beneficiary = \App\Beneficiary::findOrFail($request->id);
+        if(Hash::check($beneficiary, $request->hash)){
+            //Todo: :|
         }
-//        return view('dashboard.proforma');
     }
 
     public function invoice()
