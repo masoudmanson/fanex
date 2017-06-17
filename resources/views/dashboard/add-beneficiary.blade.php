@@ -19,7 +19,7 @@
 
                 <div class="row p-0 m-0 filter-wrapper">
                     <div class="col-xs-11 px-0">
-                        <h2 class="dash-subtitle m-0">Add New Beneficiary</h2>
+                        <h2 class="dash-subtitle m-0">@lang('payment.bnfNew')</h2>
                     </div>
 
                     <div class="col-xs-1 px-0">
@@ -28,6 +28,7 @@
 
                 {{-- Table Wrapper --}}
                 <div class="row p-0 m-0">
+
                     {{-- Add Beneficiary Form --}}
                     <form action="#" method="get" id="add-bnf-form">
                         {{ csrf_field() }}
@@ -36,14 +37,14 @@
                         <div class="form-group bsWrapper">
                             <i class="icon-user bsIcon"></i>
                             <input type="text" class="form-control fanexInput fanexInputWhite" id="bnf-firstname"
-                                   name="firstname" placeholder="Firstname" autocomplete="off">
+                                   name="firstname" placeholder="@lang('payment.bnfFirstname')" autocomplete="off">
                         </div>
 
                         {{-- Lastname --}}
                         <div class="form-group bsWrapper">
                             <i class="icon-user bsIcon"></i>
                             <input type="text" class="form-control fanexInput fanexInputWhite" id="bnf-lastname"
-                                   name="lastname" placeholder="Lastname" autocomplete="off">
+                                   name="lastname" placeholder="@lang('payment.bnfLastname')" autocomplete="off">
                         </div>
 
                         {{-- Account Number --}}
@@ -51,14 +52,14 @@
                             <i class="icon-card bsIcon"></i>
                             <input type="text" class="form-control fanexInput fanexInputWhite numberTextField"
                                    id="bnf-accountnumber"
-                                   name="accountnumber" placeholder="Account Number" autocomplete="off">
+                                   name="accountnumber" placeholder="@lang('payment.bnfCC')" autocomplete="off">
                         </div>
 
                         {{-- Address --}}
                         <div class="form-group bsWrapper">
                             <i class="icon-globe bsIcon"></i>
                             <input type="text" class="form-control fanexInput fanexInputWhite" id="bnf-address"
-                                   name="address" placeholder="Address" autocomplete="off">
+                                   name="address" placeholder="@lang('payment.bnfAddr')" autocomplete="off">
                         </div>
 
                         {{-- Phone Number --}}
@@ -66,7 +67,7 @@
                             <i class="icon-mobile bsIcon"></i>
                             <input type="text" class="form-control fanexInput fanexInputWhite numberTextField"
                                    id="bnf-phone"
-                                   name="phone" placeholder="Phone Number" autocomplete="off">
+                                   name="phone" placeholder="@lang('payment.bnfPhone')" autocomplete="off">
                         </div>
 
                         {{-- Fax Number --}}
@@ -74,21 +75,21 @@
                             <i class="icon-fax bsIcon"></i>
                             <input type="text" class="form-control fanexInput fanexInputWhite numberTextField"
                                    id="bnf-fax"
-                                   name="fax" placeholder="Fax Number" autocomplete="off">
+                                   name="fax" placeholder="@lang('payment.bnfFax')" autocomplete="off">
                         </div>
 
                         {{-- Bank Name --}}
                         <div class="form-group bsWrapper">
                             <i class="icon-bank bsIcon"></i>
                             <input type="text" class="form-control fanexInput fanexInputWhite" id="bnf-bankname"
-                                   name="bankname" placeholder="Bank Name" autocomplete="off">
+                                   name="bankname" placeholder="@lang('payment.bnfBank')" autocomplete="off">
                         </div>
 
                         {{-- Branch Address --}}
                         <div class="form-group bsWrapper">
                             <i class="icon-branch bsIcon"></i>
                             <input type="text" class="form-control fanexInput fanexInputWhite" id="bnf-branch"
-                                   name="branch" placeholder="Branch Address" autocomplete="off">
+                                   name="branch" placeholder="@lang('payment.bnfBranch')" autocomplete="off">
                         </div>
 
                         {{-- Swift Code --}}
@@ -96,7 +97,7 @@
                             <i class="icon-swift bsIcon"></i>
                             <input type="text" class="form-control fanexInput fanexInputWhite numberTextField"
                                    id="bnf-swift"
-                                   name="swift" placeholder="Swift Code" autocomplete="off">
+                                   name="swift" placeholder="@lang('payment.bnfSwift')" autocomplete="off">
                         </div>
 
                         {{-- iBan Number --}}
@@ -104,25 +105,21 @@
                             <i class="icon-code bsIcon"></i>
                             <input type="text" class="form-control fanexInput fanexInputWhite numberTextField"
                                    id="bnf-iban"
-                                   name="iban" placeholder="iBan Number" autocomplete="off">
+                                   name="iban" placeholder="@lang('payment.bnfIban')" autocomplete="off">
                         </div>
-
-                        {{-- Form Submition --}}
-                        {{--<input type="button" class="btn fanexBtnOutlineGrey" id="backBtn" value="Back" name="save"/>--}}
-
-                        {{-- Form Actions --}}
+                        {{--Form Actions--}}
                         <div class="row p-0 m-0">
                             <div class="col-sm-6 col-xs-12 p-0 pb-md-0 pb-sm-4 pb-xs-4 pr-md-2 pr-lg-3">
-                                <a href="/beneficiaries" class="btn fanexBtnOutlineGrey" id="backBtn" value="Back">Back</a>
+                                <a href="/beneficiaries" class="btn fanexBtnOutlineGrey" id="backBtn"
+                                   value="Back">@lang('payment.back')</a>
                             </div>
                             <div class="col-sm-6 col-xs-12 p-0 pl-md-2 pb-md-0 pb-sm-4 pb-xs-4  pl-lg-3">
                                 <input type="submit" class="btn fanexBtnOrange" id="paymentBtn"
-                                       value="Save Beneficiary"/>
+                                       value="@lang('profile.bnfSave')"/>
                             </div>
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>

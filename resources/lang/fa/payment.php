@@ -22,6 +22,7 @@ return [
     'bnfSwift' => 'کد سویفت',
     'bnfIban' => 'شماره ی iBan',
     'backHome' => 'صفحه اصلی',
+    'back' => 'بازگشت',
     'showProforma' => 'پیش فاکتور',
 
 

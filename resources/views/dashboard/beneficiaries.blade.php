@@ -19,7 +19,7 @@
                 <div class="row p-0 m-0 filter-wrapper">
                     <div class="col-xs-9 px-0">
                         <ul class="filter-ul">
-                            <li class="filter-li active" data-filter="all" style="margin-right: 5px;"><a href="#"><span class="mini-title">All</span><span class="large-title">All</span></a></li>
+                            <li class="filter-li active" data-filter="all" style="margin-right: 5px;"><a href="#"><span class="mini-title">@lang('profile.filterAllShort')</span><span class="large-title">@lang('profile.filterAllShort')</span></a></li>
                             <li class="filter-li flag" data-filter="ir" title="Islamic Republic of Iran"><i class="flag-icon-squared flag-icon-ir"></i></li>
                             <li class="filter-li flag" data-filter="tr" title="Turkey"><i class="flag-icon-squared flag-icon-tr"></i></li>
                             <li class="filter-li flag" data-filter="us" title="United States of America"><i class="flag-icon-squared flag-icon-us"></i></li>
@@ -29,7 +29,7 @@
 
                     <div class="col-xs-3 px-0">
                         <ul class="filter-ul filter-right">
-                            <li class="filter-li-link"><a href="/beneficiaries/add">Add New</a></li>
+                            <li class="filter-li-link"><a href="/beneficiaries/add">@lang('profile.addNew')</a></li>
                         </ul>
                     </div>
                 </div>
@@ -37,80 +37,43 @@
                 {{-- Table Wrapper --}}
                 <div class="row p-0 m-0">
                     <div class="panel-group" id="accordion">
+                        {{-- Search Box --}}
                         <div class="panel panel-default search" id="search-input">
-                            <input type="text" class="panel-heading fanexInputWhite search-filter" placeholder="Search in Beneficiaries">
+                            <input type="text" class="panel-heading fanexInputWhite search-filter" placeholder="@lang('profile.bnfSearch')">
                             <div id="searchbox" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <div class="row m-0 p-0">
-                                        <div class="col-sm-12 col-md-7">
-                                            <div class="col-xs-5 p-0 m-0 acc-info-left">
-                                                <p>Trans. No.:</p>
-                                                <p>Bnf. Acc. No.:</p>
-                                                <p>Bank Name:</p>
-                                                <p>Payment Date:</p>
-                                                <p>Trans. Status:</p>
-                                                <p>Trans. Type:</p>
-                                            </div>
-                                            <div class="col-xs-7 p-0 m-0 acc-info-right">
-                                                <p>v8845ewf1w23fwefwe</p>
-                                                <p>6104337912543665</p>
-                                                <p>Pasargad</p>
-                                                <p>{{ \Carbon\Carbon::now()->format("d M Y, H:s:i") }}</p>
-                                                <p class="fanex-text-orange">Pending</p>
-                                                <p>Transfer To Account</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-5 acc-factor">
-                                            <div class="col-xs-5 p-0 m-0 acc-info-left">
-                                                <p class="table-header">Item</p>
-                                                <p>Prem. Amount:</p>
-                                                <p>Expense:</p>
-                                                <p>Tax:</p>
-                                                <hr>
-                                                <p>Sum</p>
-                                            </div>
-                                            <div class="col-xs-7 p-0 m-0 acc-info-right">
-                                                <p class="table-header">Price</p>
-                                                <p>5000 EUR</p>
-                                                <p>15 EUR</p>
-                                                <p>4.5 EUR</p>
-                                                <hr>
-                                                <p>5019.5 EUR</p>
-                                                <p class="acc-factor-sum">= 155000000 Rials</p>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="panel panel-default filtered ctr-ir">
                             <div class="panel-heading">
                                 <div class="row p-0 m-0">
-                                    <div class="col-md-3 col-sm-3 col-xs-5" data-toggle="tooltip" title="Beneficiary Name">
+                                    <div class="col-md-3 col-sm-3 col-xs-5" data-toggle="tooltip" title="@lang('profile.bnfName')">
                                         <i class="icon-user acc-main-icon"></i>
                                         <span class="acc-user"><b>Masoud Amjadi</b></span>
                                     </div>
-                                    <div class="col-md-2 col-sm-3 hidden-xs" data-toggle="tooltip" title="Beneficiary Account Number">
+                                    <div class="col-md-2 col-sm-3 hidden-xs" data-toggle="tooltip" title="@lang('payment.bnfCC')">
                                         <span class="acc-date">6104-3379-1254-3665</span>
                                     </div>
-                                    <div class="col-md-1 hidden-sm hidden-xs" data-toggle="tooltip" title="Country">
+                                    <div class="col-md-1 hidden-sm hidden-xs" data-toggle="tooltip" title="@lang('profile.bnfCountry')">
                                         <span class="acc-cash">Iran</span>
                                     </div>
-                                    <div class="col-md-2 hidden-sm hidden-xs" data-toggle="tooltip" title="Mobile Number">
+                                    <div class="col-md-2 hidden-sm hidden-xs" data-toggle="tooltip" title="@lang('payment.bnfPhone')">
                                         <span class="acc-date">09148401824</span>
                                     </div>
                                     <div class="col-md-3 col-sm-5 col-xs-6 px-0 bnf-action-icons">
                                         <a href="/">
-                                            <i class="icon-trans" title="Send Money"></i>
+                                            <i class="icon-trans" title="@lang('profile.bnfSendMoney')"></i>
                                         </a>
                                         <a href="/">
-                                            <i class="icon-chat hidden-xs" title="Send Message"></i>
+                                            <i class="icon-chat hidden-xs" title="@lang('profile.bnfSendMsg')"></i>
                                         </a>
                                         <a href="">
-                                            <i class="icon-edit"title="Edit Info"></i>
+                                            <i class="icon-edit"title="@lang('profile.bnfEdit')"></i>
                                         </a>
                                         <a href="">
-                                            <i class="icon-delete" title="Delete Beneficiary"></i>
+                                            <i class="icon-delete" title="@lang('profile.bnfDelete')"></i>
                                         </a>
                                     </div>
                                     <div class="col-md-1 col-sm-1 col-xs-1">
@@ -123,7 +86,7 @@
                                     <div class="row m-0 p-0">
                                         <div class="col-sm-12 col-md-6 p-0 m-0">
                                             {{-- Beneficiary Name --}}
-                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="Beneficiary Name">
+                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="@lang('profile.bnfName')">
                                                 <i class="icon-user bsIcon"></i>
                                                 <div class="form-control fanexInput fanexInputPanel" id="bnf-ajax-firstname">
                                                     Masoud Amjadi
@@ -131,7 +94,7 @@
                                             </div>
 
                                             {{-- Account Number --}}
-                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="Account Number">
+                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="@lang('payment.bnfCC')">
                                                 <i class="icon-card bsIcon"></i>
                                                 <div class="form-control fanexInput fanexInputPanel" id="bnf-ajax-accountnumber">
                                                     6104337912543665
@@ -139,7 +102,7 @@
                                             </div>
 
                                             {{-- Country --}}
-                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="Country">
+                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="@lang('profile.bnfCountry')">
                                                 <i class="icon-globe bsIcon"></i>
                                                 <div class="form-control fanexInput fanexInputPanel" id="bnf-ajax-country">
                                                     Iran
@@ -147,7 +110,7 @@
                                             </div>
 
                                             {{-- Address --}}
-                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="Beneficiary Address">
+                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="@lang('payment.bnfAddr')">
                                                 <i class="icon-globe bsIcon"></i>
                                                 <div class="form-control fanexInput fanexInputPanel" id="bnf-ajax-address">#123, Noavari
                                                     12, Pardis Tech Park, Tehran
@@ -155,7 +118,7 @@
                                             </div>
 
                                             {{-- Phone Number --}}
-                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="Mobile Number">
+                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="@lang('payment.bnfPhone')">
                                                 <i class="icon-mobile bsIcon"></i>
                                                 <div class="form-control fanexInput fanexInputPanel" id="bnf-ajax-phone">09148401824
                                                 </div>
@@ -165,7 +128,7 @@
                                         {{-- Left Column --}}
                                         <div class="col-sm-12 col-md-6 p-0 m-0">
                                             {{-- Bank Name --}}
-                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="Bank Name">
+                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="@lang('payment.bnfBank')">
                                                 <i class="icon-bank bsIcon"></i>
                                                 <div class="form-control fanexInput fanexInputPanel" id="bnf-ajax-bankname">
                                                     Pasargad
@@ -173,7 +136,7 @@
                                             </div>
 
                                             {{-- Branch Address --}}
-                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="Branch Address">
+                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="@lang('payment.bnfBranch')">
                                                 <i class="icon-branch bsIcon"></i>
                                                 <div class="form-control fanexInput fanexInputPanel" id="bnf-ajax-branch">
                                                     #12, Pasargad 13, Africa Blv, Tehran, Iran
@@ -181,7 +144,7 @@
                                             </div>
 
                                             {{-- Swift Code --}}
-                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="Swift Code">
+                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="@lang('payment.bnfSwift')">
                                                 <i class="icon-swift bsIcon"></i>
                                                 <div class="form-control fanexInput fanexInputPanel" id="bnf-ajax-swift">
                                                     54584534468431346463131
@@ -189,7 +152,7 @@
                                             </div>
 
                                             {{-- iBan Number --}}
-                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="iBan Number">
+                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="@lang('payment.bnfIban')">
                                                 <i class="icon-code bsIcon"></i>
                                                 <div class="form-control fanexInput fanexInputPanel" id="bnf-ajax-iban">
                                                     4646464000011054048880
@@ -197,7 +160,7 @@
                                             </div>
 
                                             {{-- Fax Number --}}
-                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="Fax Number">
+                                            <div class="form-group bsWrapper" data-toggle="tooltip" title="@lang('payment.bnfFax')">
                                                 <i class="icon-fax bsIcon"></i>
                                                 <div class="form-control fanexInput fanexInputPanel" id="bnf-ajax-fax">02171951111</div>
                                             </div>
