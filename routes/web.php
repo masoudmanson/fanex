@@ -58,7 +58,7 @@ Route::group(
         Route::get('/notifications', 'UserController@notifications');
         Route::get('/settings', 'UserController@settings');
         Route::get('/logout', 'Auth\LoginController@logout');
-        Route::get('/proforma', 'PaymentController@proforma');
+//        Route::get('/proforma', 'PaymentController@proforma');
         Route::get('/invoice', 'PaymentController@invoice');
 
 //Route::post('/pay', 'WalletController') ;
@@ -80,3 +80,5 @@ Route::get('/get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $
 
 Route::post('/calculate', 'UptController@calculateRemittance')->name('calculate'); //maybe get, according to fake web service
 Route::resource('/additional-info', 'UserInformationController');
+
+Route::post('/proforma', 'PaymentController@proforma');

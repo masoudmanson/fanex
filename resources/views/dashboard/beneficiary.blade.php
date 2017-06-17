@@ -260,18 +260,18 @@
             });
 
             function sendBnf() {
-                var bnf = $('#bnfSelect').val('');
+                var bnf = parseInt($('#bnfSelect').val())-1;
                 console.log(bnf);
-//                var captcha = $('.captcha-img');
-//                var config = captcha.data('refresh-config');
-//                $.ajax({
-//                    method: 'GET',
-//                    url: '/get_captcha/' + config,
-//                }).done(function (response) {
-//                    captcha.prop('src', response);
-//                });
+                console.log(beneficiaries[bnf]);
+                $.ajax({
+                    method: 'POST',
+                    data: {"bnf" : beneficiaries[bnf],
+                        '_token': csrfToken},
+                    url: '/proforma',
+                }).done(function (response) {
+                    console.log(response);
+                });
             }
-
         });
     </script>
 @endsection
