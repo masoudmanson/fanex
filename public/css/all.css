@@ -11905,7 +11905,7 @@ html,
 body {
   font-family: 'IRANSans', 'Roboto', tahoma, sans-serif;
   background-color: #F4F4F4;
-  direction: ltr !important;
+  direction: ltr;
 }
 
 .fanex-text-red {
@@ -13077,7 +13077,7 @@ a.btn {
   font-size: 30px;
   vertical-align: middle;
   padding-right: 13px;
-  padding-top: 6px;
+  float: left;
 }
 
 .white-card .profile-ul .profile-li a:hover {
@@ -13261,6 +13261,7 @@ a.btn {
   font-size: 28px;
   vertical-align: top;
   padding-right: 10px;
+  float: left;
 }
 
 .panel-default .panel-heading .acc-main-icon:before {

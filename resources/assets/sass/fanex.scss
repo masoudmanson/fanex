@@ -7,7 +7,7 @@ html,
 body {
     font-family: 'IRANSans', 'Roboto', tahoma, sans-serif;
     background-color: $fanapGreyLight;
-    direction: ltr !important;
+    direction: ltr;
 }
 
 .fanex-text-red {
@@ -979,7 +979,7 @@ a.btn {
                     font-size: 30px;
                     vertical-align: middle;
                     padding-right: 13px;
-                    padding-top: 6px;
+                    float: left;
                 }
                 &:hover {
                     color: $fanapOrange;
@@ -1136,6 +1136,7 @@ a.btn {
             font-size: 28px;
             vertical-align: top;
             padding-right: 10px;
+            float: left;
             &:before {
                 vertical-align: middle;
             }

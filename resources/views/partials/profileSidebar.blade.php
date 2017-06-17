@@ -6,17 +6,17 @@
         <ul class="profile-ul">
             <li class="profile-li @if($page == "transactions") active @endif">
                 <a href="/profile">
-                    <i class="icon-trans"></i> Transitions
+                    <i class="icon-trans"></i> @lang('profile.menuTrans')
                 </a>
             </li>
             <li class="profile-li @if($page == "beneficiaries") active @endif">
                 <a href="/beneficiaries">
-                    <i class="icon-user"></i> Beneficiaries
+                    <i class="icon-user"></i> @lang('profile.menuBnf')
                 </a>
             </li>
             <li class="profile-li @if($page == "notifications") active @endif">
                 <a href="/notifications">
-                    <i class="icon-chat"></i> Notifications
+                    <i class="icon-chat"></i> @lang('profile.menuNotify')
                 </a>
             </li>
             {{--<li class="profile-li @if($page == "settings") active @endif">--}}
@@ -26,7 +26,7 @@
             {{--</li>--}}
             <li class="profile-li">
                 <a href="{{ route('logout') }}"
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> <i class="icon-exit"></i> Log Out
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> <i class="icon-exit"></i> @lang('index.logout')
                 </a>
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
