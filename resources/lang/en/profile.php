@@ -3,7 +3,7 @@
 return [
     // Left Menu
     'welcome' => 'Welcome',
-    'menuTrans' => 'Transitions',
+    'menuTrans' => 'Transactions',
     'menuBnf' => 'Beneficiaries',
     'menuNotify' => 'Notifications',
 
