@@ -7,9 +7,10 @@ use App\Traits\TokenTrait;
 use App\User;
 use Closure;
 use GuzzleHttp\Client;
+use Illuminate\Cookie\CookieJar;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Cookie;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cookie;
 
 class CheckTokenExist
 {
@@ -26,30 +27,6 @@ class CheckTokenExist
      */
     public function handle($request, Closure $next)
     {
-
-//        if(Auth::user()){
-//
-//            $token = $request->cookie('access_token');
-//            $result = $this->tokenValidation($token);
-//            $result = json_decode($result->getBody()->getContents());
-//
-//            if ($result->active) {
-//
-//                $result = $this->refreshToken($token);
-//                $token_object = json_decode($result->getBody()->getContents());
-//
-//
-//                $request->headers->set('authorization', 'Bearer ' . $token_object->access_token); //?
-//
-//                $cookie = cookie('access_token', $token_object->access_token,$token_object->expires_in/60,
-//                    '','',FALSE,TRUE);
-//
-//                return $next($request->cookie($cookie));
-//                // or ,else refresh token todo: refresh token and cookie, and then go to next
-//            }
-//        }
-
-
         if ($request->hasCookie('_token')) {
             $token = $request->cookie('_token');
 
@@ -84,6 +61,10 @@ class CheckTokenExist
 
             return $response->withCookie($cookie);
 
+        }
+
+        if(Auth::user()) {
+            Auth::logout();
         }
 
         $queryString = $request->getQueryString();

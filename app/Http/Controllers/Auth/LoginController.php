@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 
 use App\Traits\TokenTrait;
+use Illuminate\Cookie\CookieJar;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Redirect;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -26,11 +29,16 @@ class LoginController extends Controller
 
     use TokenTrait;
 
+    public function __construct()
+    {
+        $this->middleware('logOut', ['only' => ['logout']]);
+    }
+
     public function showLoginForm(Request $request)
     {
         if (!$request->session()->get('redirect_uri'))
 //            $request->redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/callback/profile';
-            $request->redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/en/profile';
+            $request->redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/' . App::getLocale() . '/profile';
         else {
 
             $request->redirect_uri = $request->session()->get('redirect_uri');
@@ -51,8 +59,8 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        $this->revokeToken(Auth::user()->api_token);
         Auth::logout();
+
         return Redirect::away('http://sandbox.fanapium.com/oauth2/logout/?continue=' . $request->root());
     }
 

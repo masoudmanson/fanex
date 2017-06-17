@@ -34,25 +34,14 @@ class CheckUserExist
             if (User::findByUserId($id)->first()) {
                 $user = User::findByUserId($id)->first();
 
-//                $user->api_token = $request->bearerToken();
-//                $user->save();
-
                 Auth::login($user);
 
                 return $next($request);
             } else {
-//                $this->RegisterWithSSO($request);
-//                return redirect('additional-info')->with([
-//                    'redirect_uri' => $request->url(),
-//                    'state' => $request->state,
-//                    'token' => $token
-//                ]);
 
                 $data = array(
                     'redirect_uri' => $request->url(),
                     'state' => $request->state,
-//                    'token' => $request->bearerToken() // todo: this is just for run test. when masoud put his js codes into project, it must be deleted.
-//                    'token' => $request->cookie('access_token')
                 );
 
                 return response()->view('statics.additional', $data, 200);
