@@ -52,24 +52,25 @@ class PaymentController extends Controller
 
         $beneficiaries = $user->beneficiary()->get();
         foreach ($beneficiaries as $beneficiary){
-//            dd($beneficiary);
             $beneficiary['hash'] = bcrypt($beneficiary);
         }
-//        dd($beneficiaries);
-        $request->query->add(['user'=>$user,'beneficiaries'=>$beneficiaries]);
-        return response()->view('dashboard.beneficiary', $request->query(), 200)->header('authorization', 'Bearer ' . $request->bearerToken());
+        $request->query->add(['beneficiaries'=>$beneficiaries]);
+        return response()->view('dashboard.beneficiary', $request->query(), 200);
+//            ->header('authorization', 'Bearer ' . $request->bearerToken());
     }
 
     /**
      * @param Request $request
-     * @param Beneficiary $beneficiary
+     * @return $this
      */
     public function proforma(Request $request)
     {
-        $beneficiary = \App\Beneficiary::findOrFail($request->id);
+        $beneficiary = Beneficiary::findOrFail($request->id);
         if(Hash::check($beneficiary, $request->hash)){
-            //Todo: :|
+            return response()->view('dashboard.proforma', $request->query(), 200)->header('authorization', 'Bearer ' . $request->bearerToken());
         }
+        else
+            return response();// todo : return back with error msg. (check for flash msg)
     }
 
     public function invoice()

@@ -40,6 +40,10 @@ class UptController extends Controller
         return $T_to_U;
     }
 
+    /**
+     * @param RemittanceForm $request
+     * @return mixed
+     */
     public function calculateRemittance(RemittanceForm $request)
     {
 //     dd(   $this->CorpGetCurrencyRate($request->amount));
