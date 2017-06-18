@@ -20,6 +20,8 @@ class LogOut
     {
         $response = $next($request);
 
+        setcookie('ttl','', -60, "/", "", false, false);
+
         if ($request->hasCookie('_token')) {
             $this->revokeToken($request->cookie('_token')['access']);
             $cookie = cookie('_token', '', -6000);

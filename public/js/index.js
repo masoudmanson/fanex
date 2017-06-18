@@ -94,14 +94,25 @@ $(document).ready(function () {
         }
     });
 
-    var tenMins = new Date().getTime() + (1 * 60 * 1000);
+    var ttl = readCookie('ttl');
+    var tenMins = new Date().getTime() + ((ttl*1000) - new Date().getTime());
     $('#countdown').countdown(tenMins, function (event) {
         $(this).html(event.strftime('%M:%S'));
     }).on('finish.countdown', function () {
-        $('#countdown').html('Time Out').addClass('alert shake animated');
-    });
+        $('#countdown').html('Time Out').addClass('alert shake animated');    });
 
 });
+
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+//            return null;
+}
 
 function reloadCaptcha() {
     $('#captcha').val('');

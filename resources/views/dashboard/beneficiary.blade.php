@@ -233,7 +233,6 @@
 @section('scripts')
     <script>
         var beneficiaries = {!! $beneficiaries !!};
-        console.log(beneficiaries);
 
         $(document).ready(function () {
             $('#bnfSelect').on('change blur', function () {

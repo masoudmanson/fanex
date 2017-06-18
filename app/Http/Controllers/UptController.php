@@ -14,6 +14,7 @@ use Psr\Http\Message\ServerRequestInterface;
 class UptController extends Controller
 {
     use UptTrait;
+
     public function test()
     {
         dd($this->CorpGetCountryData());
@@ -54,7 +55,7 @@ class UptController extends Controller
 //        dd(json_decode($EuroER)[0]->er);
 //        $EuroTTL = $this->getEuroExchangeRate($request);
 
-        if($request['currency']=='Turkish Lira'){
+        if ($request['currency'] == 'Turkish Lira') {
 
 
         }
@@ -63,7 +64,10 @@ class UptController extends Controller
 
 //        $log = new Backlog();
 
-       return json_decode($EuroER)[0]->er*$request->amount;
+        // TTL Expire Times Cookie
+        setcookie('ttl', time() + 600, time() + 600);
+
+        return json_decode($EuroER)[0]->er * $request->amount;
     }
 
 

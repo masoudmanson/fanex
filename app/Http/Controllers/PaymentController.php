@@ -55,10 +55,8 @@ class PaymentController extends Controller
             $beneficiary['hash'] = bcrypt($beneficiary);
         }
 
-        $cookie = cookie('ttl',strtotime("+10 minutes"),15);
-
         $request->query->add(['beneficiaries'=>$beneficiaries]);
-        return response()->view('dashboard.beneficiary', $request->query(), 200)->withCookie($cookie);
+        return response()->view('dashboard.beneficiary', $request->query(), 200);//->withCookie($cookie);
 //            ->header('authorization', 'Bearer ' . $request->bearerToken());
     }
 
