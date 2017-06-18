@@ -97,6 +97,7 @@ class UserInformationController extends Controller
             Auth::login($user);
             $beneficiaries = $user->beneficiary()->get();
             $data = array('state' => $request->state, 'beneficiaries' => $beneficiaries);
+            dd($request->state);
 
 //  get user beneficiary's?!
             return response()->view('dashboard.beneficiary', $data, 200)->header('authorization', 'Bearer ' . $request->token);

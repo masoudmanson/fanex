@@ -71,26 +71,27 @@ class PaymentController extends Controller
     public function proforma_with_selected_bnf(Request $request)
     {
         $beneficiary = Beneficiary::findOrFail($request->bnf);
+        $request->query->add(['beneficiary' => $beneficiary]);
         return Hash::check($beneficiary, $request->hash)
             ? response()->view('dashboard.proforma', $request->query(), 200)
             : redirect()->back()->withErrors(['msg', 'The Message']);
     }
 
+
     /**
      * @param BeneficiaryRequest $request
-     * @return $this
+     * @return \Illuminate\Http\RedirectResponse|Response
      */
     public function proforma_with_new_bnf(BeneficiaryRequest $request)
     {
-        $ben = Beneficiary::create($request->all());
+        $request['user_id'] = Auth::user()->id;
+        $beneficiary = Beneficiary::create($request->all());
 
-        dd($ben);
+        $request->query->add(['beneficiary' => $beneficiary]);
 
-//        if(Hash::check($beneficiary, $request->hash)){
-//            return response()->view('dashboard.proforma', $request->query(), 200)->header('authorization', 'Bearer ' . $request->bearerToken());
-//        }
-//        else
-//            return response();// todo : return back with error msg. (check for flash msg)
+        return $beneficiary->id
+            ? response()->view('dashboard.proforma', $request->query(), 200)
+            : redirect()->back()->withErrors(['msg', 'The Message']);
     }
 
     public function invoice()

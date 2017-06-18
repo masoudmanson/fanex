@@ -24,6 +24,17 @@ trait UptTrait
 
 
     }
+
+    public function UPTGetTExchangeData($amount,$from,$to) {
+        $upt_resp = $this->CorpGetCurrencyRate($amount,$from,$to)->CorpGetCurrencyRateResult;
+        $response_array = array();
+        if($upt_resp->CURRENCYRATESTATUS->RESPONSE == 'Success')
+        {
+            $response_array['currency_rate'] = $upt_resp->OUTCURRENCYRATE;
+            $response_array['out'] = $upt_resp->OUTPARITY;
+        }
+        return $response_array;
+    }
     
     public function CorpGetCountryData()
     {

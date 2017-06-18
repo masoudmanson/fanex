@@ -17,7 +17,7 @@ class UptController extends Controller
 
     public function test()
     {
-        dd($this->CorpGetCountryData());
+        dd($this->CorpGetCurrencyRate());
     }
 
 
@@ -47,18 +47,18 @@ class UptController extends Controller
      */
     public function calculateRemittance(RemittanceForm $request)
     {
-//     dd(   $this->CorpGetCurrencyRate($request->amount));
+        if ($request['currency'] == 'lira') {
+            $upt_result = $this->UPTGetTExchangeData($request->amount,'TRY','EUR');
+            $request->amount = $upt_result['out'];
+        }
 
         $result = $this->getEuroExchangeRate();
 
         $EuroER = $result->getBody()->getContents();
-//        dd(json_decode($EuroER)[0]->er);
+
 //        $EuroTTL = $this->getEuroExchangeRate($request);
 
-        if ($request['currency'] == 'Turkish Lira') {
 
-
-        }
 
         //write to backlog
 
