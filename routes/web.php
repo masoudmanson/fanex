@@ -53,8 +53,8 @@ Route::group(
         Route::get('/dotin', 'DotinController@dotinAuthorization');//maybe get,will implement according to the fake web service
 
         Route::get('/profile', 'UserController@index');
-        Route::get('/beneficiaries', 'UserController@beneficiaries');
-        Route::get('/beneficiaries/add', 'UserController@addBeneficiary');
+        Route::resource('/beneficiaries', 'BeneficiaryController');
+
         Route::get('/notifications', 'UserController@notifications');
         Route::get('/settings', 'UserController@settings');
         Route::get('/logout', 'Auth\LoginController@logout');
@@ -64,11 +64,11 @@ Route::group(
 //Route::post('/pay', 'WalletController') ;
 
         Route::get('/test', 'PaymentController@test');
-        Route::get('/payment', 'PaymentController@pay');
+        Route::get('/payment', 'PaymentController@pay'); //todo: load beneficiary page, go to beneficiary controller?
 
         Route::get('/callback/{callback}', 'CallbackController@callbackHandler');
-        Route::get('/emad', 'PaymentController@test');
 
+        Route::get('/emad', 'PaymentController@test');
         Route::get('/ws', 'UptController@test');
         Route::get('/cookie', 'PaymentController@test');
 
@@ -81,4 +81,5 @@ Route::get('/get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $
 Route::post('/calculate', 'UptController@calculateRemittance')->name('calculate'); //maybe get, according to fake web service
 Route::resource('/additional-info', 'UserInformationController');
 
-Route::post('/proforma', 'PaymentController@proforma');
+Route::post('/proforma/selected', 'PaymentController@proforma_with_selected_bnf');
+Route::post('/proforma', 'PaymentController@proforma_with_selected_bnf');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Beneficiary;
 use App\Http\Requests\BeneficiaryRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BeneficiaryController extends Controller
 {
@@ -15,7 +16,9 @@ class BeneficiaryController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $beneficiaries = $user->beneficiary()->get();
+        return view('dashboard.beneficiaries', compact('beneficiaries'));
     }
 
     /**
@@ -25,7 +28,7 @@ class BeneficiaryController extends Controller
      */
     public function create()
     {
-        //
+        return view("dashboard.add-beneficiary");
     }
 
     /**
@@ -37,11 +40,10 @@ class BeneficiaryController extends Controller
      */
     public function store(BeneficiaryRequest $request)
     {
-        $request->url();
 
         Beneficiary::create($request->all());
 
-        return redirect()->view('proforma');
+        return redirect('beneficiaries');
 
     }
 

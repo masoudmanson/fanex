@@ -29,18 +29,6 @@ class UserController extends Controller
         return view('dashboard.index',compact('user'));
     }
 
-    public function beneficiaries(Request $request)
-    {
-        $user = Auth::user();
-        $beneficiaries = $user->beneficiary()->get();
-        return view('dashboard.beneficiaries', compact('beneficiaries'));
-    }
-
-    public function addBeneficiary()
-    {
-        return view("dashboard.add-beneficiary");
-    }
-
     public function notifications()
     {
         return view('dashboard.notifications');
