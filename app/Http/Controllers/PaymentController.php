@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Beneficiary;
+use App\Http\Requests\BeneficiaryRequest;
 use App\Traits\PlatformTrait;
 use App\Traits\TokenTrait;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Response;
 
 class PaymentController extends Controller
 {
@@ -33,6 +35,7 @@ class PaymentController extends Controller
 //        return view('test' , compact('redirect_uri'));
         return view('test');
     }
+
     public function test(Request $request)
     {
 
@@ -51,27 +54,43 @@ class PaymentController extends Controller
         $user = Auth::user();
 
         $beneficiaries = $user->beneficiary()->get();
-        foreach ($beneficiaries as $beneficiary){
+        foreach ($beneficiaries as $beneficiary) {
             $beneficiary['hash'] = bcrypt($beneficiary);
         }
 
-        $request->query->add(['beneficiaries'=>$beneficiaries]);
+        $request->query->add(['beneficiaries' => $beneficiaries]);
         return response()->view('dashboard.beneficiary', $request->query(), 200);//->withCookie($cookie);
 //            ->header('authorization', 'Bearer ' . $request->bearerToken());
     }
 
+
     /**
      * @param Request $request
-     * @return $this
+     * @return \Illuminate\Http\RedirectResponse|Response
      */
-    public function proforma(Request $request)
+    public function proforma_with_selected_bnf(Request $request)
     {
         $beneficiary = Beneficiary::findOrFail($request->id);
-        if(Hash::check($beneficiary, $request->hash)){
-            return response()->view('dashboard.proforma', $request->query(), 200)->header('authorization', 'Bearer ' . $request->bearerToken());
-        }
-        else
-            return response();// todo : return back with error msg. (check for flash msg)
+        return Hash::check($beneficiary, $request->hash)
+            ? response()->view('dashboard.proforma', $request->query(), 200)
+            : redirect()->back()->withErrors(['msg', 'The Message']);
+    }
+
+    /**
+     * @param BeneficiaryRequest $request
+     * @return $this
+     */
+    public function proforma_with_new_bnf(BeneficiaryRequest $request)
+    {
+        $ben = Beneficiary::create($request->all());
+
+        dd($ben);
+
+//        if(Hash::check($beneficiary, $request->hash)){
+//            return response()->view('dashboard.proforma', $request->query(), 200)->header('authorization', 'Bearer ' . $request->bearerToken());
+//        }
+//        else
+//            return response();// todo : return back with error msg. (check for flash msg)
     }
 
     public function invoice()
@@ -92,7 +111,7 @@ class PaymentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -103,7 +122,7 @@ class PaymentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -114,7 +133,7 @@ class PaymentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -125,8 +144,8 @@ class PaymentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -137,7 +156,7 @@ class PaymentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
