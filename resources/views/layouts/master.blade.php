@@ -18,13 +18,12 @@
     {{-- General Styles --}}
     @if(\Illuminate\Support\Facades\App::isLocale('fa'))
         <link href="{{ asset('css/fa.css') }}" rel="stylesheet">
-    @else(\Illuminate\Support\Facades\App::isLocale('en'))
+    @else
         <link href="{{ mix('css/all.css') }}" rel="stylesheet">
     @endif
 
     {{-- Yielding Page Styles --}}
     @yield('styles')
-
 </head>
 
 <body>
