@@ -32,8 +32,7 @@ class CheckTokenExist
 
             $result = $this->tokenValidation($token['access']);
             $result = json_decode($result->getBody()->getContents());
-
-            if ($result->active) {
+            if ($result && $result->active) {
 
                 $result = $this->refreshToken($token['refresh']);
                 $token_object = json_decode($result->getBody()->getContents());

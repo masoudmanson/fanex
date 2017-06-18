@@ -61,7 +61,7 @@ trait TokenTrait
             $result = $this->tokenValidation($request->bearerToken());
             $result = json_decode($result->getBody()->getContents());
 
-            if (!$result->active) {
+            if (!$result || !$result->active) {
 
 //                $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
