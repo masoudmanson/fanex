@@ -26,12 +26,12 @@ class CreateBeneficiariesTable extends Migration
             $table->string('fax');
             $table->string('bank_name');
             $table->string('branch_name');
-            $table->text('branch_address');
+            $table->text('branch_address')->nullable();
             $table->string('swift_code');
             $table->string('iban_code');
-            $table->string('routing_aba');
-            $table->string('transit_sort_code');
-            $table->string('blz_bsb');
+            $table->string('routing_aba')->nullable();
+            $table->string('transit_sort_code')->nullable();
+            $table->string('blz_bsb')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')

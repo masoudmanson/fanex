@@ -24,6 +24,8 @@ return [
     'backHome' => 'Back Home',
     'back' => 'Back',
     'showProforma' => 'Show Proforma',
+    'showProformaSelect' => 'Select and Go',
+    'showProformaSave' => 'Save and Continue',
 
 
     'stepsTitle' => 'Rates expire in:',

@@ -12095,12 +12095,12 @@ body {
   }
 }
 
-.dashboard-wrapper #bnf-slc-container {
+.dashboard-wrapper #bnf-ajax-div {
   min-height: 603px;
 }
 
 @media only screen and (max-width: 992px) {
-  .dashboard-wrapper #bnf-slc-container {
+  .dashboard-wrapper #bnf-ajax-div {
     min-height: 0;
   }
 }
@@ -12541,7 +12541,7 @@ body {
   margin: 16px 0 0 15px;
 }
 
-.fanexInput, .fanexInputWhite, .fanexInputPanel {
+.fanexInput, .fanexInputWhite, .fanexInputError, .fanexInputPanel {
   color: #949597;
   background-color: #F8F8F8;
   height: 60px;
@@ -12553,18 +12553,18 @@ body {
   transition: all 0.3s;
 }
 
-.fanexInput:hover, .fanexInputWhite:hover, .fanexInputPanel:hover {
+.fanexInput:hover, .fanexInputWhite:hover, .fanexInputError:hover, .fanexInputPanel:hover {
   color: #333333;
   background-color: #F4F4F4;
 }
 
-.fanexInput:active, .fanexInputWhite:active, .fanexInputPanel:active, .fanexInput:focus, .fanexInputWhite:focus, .fanexInputPanel:focus {
+.fanexInput:active, .fanexInputWhite:active, .fanexInputError:active, .fanexInputPanel:active, .fanexInput:focus, .fanexInputWhite:focus, .fanexInputError:focus, .fanexInputPanel:focus {
   color: #333333;
   background-color: #F4F4F4;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05) !important;
 }
 
-.fanexInput img, .fanexInputWhite img, .fanexInputPanel img {
+.fanexInput img, .fanexInputWhite img, .fanexInputError img, .fanexInputPanel img {
   margin-top: 5px;
 }
 
@@ -12576,6 +12576,23 @@ body {
   color: #333333;
   background-color: #fff;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.2) !important;
+}
+
+.fanexInputError {
+  background-color: #fff;
+  border: solid 1px #F44336 !important;
+}
+
+.fanexInputError:hover, .fanexInputError:active, .fanexInputError:focus {
+  color: #333333;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(250, 0, 0, 0.6) !important;
+}
+
+.fanexDanger {
+  font-size: 12px;
+  color: #F44336;
+  padding: 10px 0 0;
 }
 
 #search-input {
@@ -12645,7 +12662,7 @@ body {
   background-color: #fff;
 }
 
-textarea.fanexInput, textarea.fanexInputWhite, textarea.fanexInputPanel {
+textarea.fanexInput, textarea.fanexInputWhite, textarea.fanexInputError, textarea.fanexInputPanel {
   width: 100%;
   resize: none;
   min-height: 150px;

@@ -70,7 +70,7 @@ class PaymentController extends Controller
      */
     public function proforma_with_selected_bnf(Request $request)
     {
-        $beneficiary = Beneficiary::findOrFail($request->id);
+        $beneficiary = Beneficiary::findOrFail($request->bnf);
         return Hash::check($beneficiary, $request->hash)
             ? response()->view('dashboard.proforma', $request->query(), 200)
             : redirect()->back()->withErrors(['msg', 'The Message']);

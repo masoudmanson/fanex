@@ -82,4 +82,4 @@ Route::post('/calculate', 'UptController@calculateRemittance')->name('calculate'
 Route::resource('/additional-info', 'UserInformationController');
 
 Route::post('/proforma/selected', 'PaymentController@proforma_with_selected_bnf');
-Route::post('/proforma', 'PaymentController@proforma_with_selected_bnf');
+Route::post('/proforma', 'PaymentController@proforma_with_new_bnf');

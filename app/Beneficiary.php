@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Beneficiary extends Model
 {
+    protected $fillable = [
+        'firstname', 'lastname', 'account_number', 'address', 'tel', 'fax', 'bank_name', 'branch_name', 'swift_code', 'iban_code'
+    ];
 
     public function user()
     {

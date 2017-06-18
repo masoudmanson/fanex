@@ -167,7 +167,7 @@ body {
     @include mq($max-width: $breakePoint_sm) {
         padding: 120px 30px 20px;
     }
-    #bnf-slc-container {
+    #bnf-ajax-div {
         min-height: 603px;
         @include mq($max-width: $breakePoint_lg) {
             min-height: 0;
@@ -532,6 +532,23 @@ body {
         background-color: #fff;
         @include box-shadow(0 0 7px rgba(0, 0, 0, 0.2) !important);
     }
+}
+
+.fanexInputError {
+    @extend .fanexInput;
+    background-color: #fff;
+    border: solid 1px $fanapRed !important;
+    &:hover, &:active, &:focus {
+        color: $fanapDark;
+        background-color: #fff;
+        @include box-shadow(0 0 5px rgba(250, 0, 0, 0.6) !important);
+    }
+}
+
+.fanexDanger {
+    font-size: 12px;
+    color: $fanapRed;
+    padding: 10px 0 0;
 }
 
 #search-input {

@@ -24,6 +24,8 @@ return [
     'backHome' => 'Eve geri',
     'back' => 'Geri',
     'showProforma' => 'Faktörı Göster',
+    'showProformaSelect' => 'Seç ve Git',
+    'showProformaSave' => 'Kaydet ve Devam Et',
 
 
     'stepsTitle' => 'Oranların dolmasına kaldi:',
