@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class BeneficiaryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('checkToken');
+    }
+
     /**
      * Display a listing of the resource.
      *
