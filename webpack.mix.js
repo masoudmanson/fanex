@@ -19,10 +19,11 @@ mix.webpackConfig({
  */
 
 mix.copy('node_modules/nicescroll/jquery.nicescroll.js', 'public/js');
+mix.copy('node_modules/formvalidation/dist/css/formValidation.min.css', 'public/css');
 
-mix.js('resources/assets/js/app.js', 'public/js')
-    .js('resources/assets/js/scripts.js', 'public/js')
-    .sass('resources/assets/sass/all.scss', 'public/css');
+mix.sass('resources/assets/sass/all.scss', 'public/css')
+    .js('resources/assets/js/app.js', 'public/js')
+    .js('resources/assets/js/scripts.js', 'public/js');
 
 /*
  / Compiling RTL Css Class
