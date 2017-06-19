@@ -72,6 +72,8 @@ Route::group(
         Route::get('/ws', 'UptController@test');
         Route::get('/cookie', 'PaymentController@test');
 
+        Route::post('/proforma/selected', 'PaymentController@proforma_with_selected_bnf');
+        Route::post('/proforma', 'PaymentController@proforma_with_new_bnf');
     });
 
 Route::get('/get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'flat') {
@@ -81,5 +83,5 @@ Route::get('/get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $
 Route::post('/calculate', 'UptController@calculateRemittance')->name('calculate'); //maybe get, according to fake web service
 Route::resource('/additional-info', 'UserInformationController');
 
-Route::post('/proforma/selected', 'PaymentController@proforma_with_selected_bnf');
-Route::post('/proforma', 'PaymentController@proforma_with_new_bnf');
+//Route::post('/proforma/selected', 'PaymentController@proforma_with_selected_bnf');
+//Route::post('/proforma', 'PaymentController@proforma_with_new_bnf');

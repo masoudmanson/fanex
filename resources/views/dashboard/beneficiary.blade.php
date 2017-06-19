@@ -23,7 +23,7 @@
                             {{ csrf_field() }}
 
                             {{-- Existing Beneficiaries --}}
-                            <div class="form-group bsWrapper">
+                            <div class="form-group bsWrapper mim">
                                 <i class="icon-user bsIcon"></i>
                                 <select class="form-control fanexInput selectpicker"
                                         data-style="fanexInput fanexInputWhite"
@@ -293,6 +293,7 @@
 
         $(document).ready(function () {
             $('#bnfSelect').on('change blur', function () {
+
                 $('#bnfSaveSubmit').fadeOut(200);
                 $('#bnfSelectSubmit').fadeIn(200);
                 $('#add-bnf-form').css({"opacity": 0.5});

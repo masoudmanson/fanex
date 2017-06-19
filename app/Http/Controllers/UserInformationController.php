@@ -91,14 +91,14 @@ class UserInformationController extends Controller
 //                $user->api_token = $request->token;
 
             $user->save();
-
+dd($user);
             //todo : save or update
 
             Auth::login($user);
             $beneficiaries = $user->beneficiary()->get();
             $data = array('state' => $request->state, 'beneficiaries' => $beneficiaries);
-            dd($request->state);
-
+//            dd($request->state);
+//dd($request->token);
 //  get user beneficiary's?!
             return response()->view('dashboard.beneficiary', $data, 200)->header('authorization', 'Bearer ' . $request->token);
         }
@@ -123,8 +123,7 @@ class UserInformationController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public
-    function show($id)
+    public function show($id)
     {
         //
     }
@@ -135,8 +134,7 @@ class UserInformationController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public
-    function edit($id)
+    public function edit($id)
     {
         //
     }
@@ -148,8 +146,7 @@ class UserInformationController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public
-    function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -160,8 +157,7 @@ class UserInformationController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public
-    function destroy($id)
+    public function destroy($id)
     {
         //
     }

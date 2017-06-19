@@ -102,6 +102,12 @@ body {
                     text-decoration: none;
                     opacity: 0.6;
                 }
+                @include mq($max-width: $breakePoint_md) {
+                    padding-left: 2rem;
+                }
+                @include mq($max-width: $breakePoint_sm) {
+                    padding-left: 1rem;
+                }
             }
         }
     }
@@ -345,7 +351,7 @@ body {
                 font-weight: normal;
                 @include mq($max-width: $breakePoint_md) {
                     font-size: 24px;
-                    @include text-overflow();
+                    //@include text-overflow();
                 }
             }
             .tempAmount {
