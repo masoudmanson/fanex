@@ -19,7 +19,7 @@
                         <h2 class="dash-subtitle">@lang('payment.bnfSelect')</h2>
 
                         {{-- Select Beneficiary Box --}}
-                        <form action="/proforma/selected" method="POST" id="select-bnf-form">
+                        <form action="proforma/selected" method="POST" id="select-bnf-form">
                             {{ csrf_field() }}
 
                             {{-- Existing Beneficiaries --}}
@@ -127,7 +127,7 @@
                         <h2 class="dash-subtitle">@lang('payment.bnfNew')</h2>
 
                         {{-- Add Beneficiary Form --}}
-                        <form action="/proforma" method="post" id="add-bnf-form">
+                        <form action="proforma" method="post" id="add-bnf-form">
                             {{ csrf_field() }}
 
                             {{-- Firstname --}}
