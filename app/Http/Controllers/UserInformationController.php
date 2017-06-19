@@ -49,10 +49,6 @@ class UserInformationController extends Controller
      */
     public function store(Request $request)
     {
-        // store user additional info to db, and register user to platform
-        //registerwithSSo after authorization in datin
-
-        //check header with middleware
 
 //        $this->validate($request,[            //validate the form inputs if need to
 //            '*' => 'required',
@@ -97,10 +93,10 @@ class UserInformationController extends Controller
             Auth::login($user);
             $beneficiaries = $user->beneficiary()->get();
             $data = array('state' => $request->state, 'beneficiaries' => $beneficiaries);
-            dd($request->state);
+            //todo : check again if user was in his first time
 
-//  get user beneficiary's?!
-            return response()->view('dashboard.beneficiary', $data, 200)->header('authorization', 'Bearer ' . $request->token);
+            return response()->view('dashboard.beneficiary', $data, 200);
+//                ->header('authorization', 'Bearer ' . $request->token);
         }
 
 //        }
