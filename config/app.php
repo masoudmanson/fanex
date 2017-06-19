@@ -79,7 +79,7 @@ return [
 
     'locale' => 'en',
 
-    'locales' => ['en' => 'English', 'fa' => 'Persian', 'tr' => 'Turkish'],
+    'locales' => ['en' => 'English', 'fa' => 'فارسی', 'tr' => 'Türkçe'],
 
     /*
     |--------------------------------------------------------------------------

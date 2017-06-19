@@ -13,15 +13,22 @@
         {{-- Authentication Links --}}
         <ul class="nav navbar-nav navbar-right">
             @if (Auth::guest())
+                {{-- Change Language Dropdown --}}
                 <li class="dropdown nav-item">
-                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">@lang('index.language')
-                        <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        @lang('index.language') <span class="caret"></span>
+                    </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/language/en">English</a></li>
-                        <li><a href="/language/fa">فارسی</a></li>
-                        <li><a href="/language/tr">Turkce</a></li>
+                        @foreach (Config::get('app.locales') as $lang => $language)
+                            @if ($lang != App::getLocale())
+                                <li>
+                                    <a href="{{ route('lang.switch', $lang) }}">{{$language}}</a>
+                                </li>
+                            @endif
+                        @endforeach
                     </ul>
                 </li>
+
                 <li class="nav-item">
                     <a href="{{ route('login') }}" class="nav-link">@lang('index.login')</a>
                 </li>
@@ -29,13 +36,19 @@
                     <a href="{{ route('register') }}" class="nav-link">@lang('index.register')</a>
                 </li>
             @else
+                {{-- Change Language Dropdown --}}
                 <li class="dropdown nav-item">
-                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">@lang('index.language')
-                        <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        @lang('index.language') <span class="caret"></span>
+                    </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/en">English</a></li>
-                        <li><a href="/fa">فارسی</a></li>
-                        <li><a href="/tr">Turkce</a></li>
+                        @foreach (Config::get('app.locales') as $lang => $language)
+                            @if ($lang != App::getLocale())
+                                <li>
+                                    <a href="{{ route('lang.switch', $lang) }}">{{$language}}</a>
+                                </li>
+                            @endif
+                        @endforeach
                     </ul>
                 </li>
                 <li class="nav-item">
