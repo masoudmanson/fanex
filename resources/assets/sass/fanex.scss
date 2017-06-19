@@ -101,6 +101,8 @@ body {
                 &:hover, &:active, &:focus {
                     text-decoration: none;
                     opacity: 0.6;
+                    background: transparent;
+                    background-color: transparent;
                 }
                 @include mq($max-width: $breakePoint_md) {
                     padding-left: 2rem;

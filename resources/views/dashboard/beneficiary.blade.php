@@ -29,10 +29,9 @@
                                         data-style="fanexInput fanexInputWhite"
                                         name="bnf"
                                         id="bnfSelect">
-                                    <option selected disabled>@lang('payment.bnfSelect')</option>
+                                    <option selected disabled value="0">@lang('payment.bnfSelect')</option>
                                     @foreach($beneficiaries as $bnf)
-                                        {{--<option value="{{ $bnf['id'] }}">{{ $bnf['firstname']. ' ' .$bnf['lastname'] }}</option>--}}
-                                        <option value="{{ $bnf['id'] }}">{{ $bnf['firstname']. ' ' .$bnf['lastname'] }}</option>
+                                        <option value="{{ $bnf['id'] }}" class="enable">{{ $bnf['firstname']. ' ' .$bnf['lastname'] }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -292,8 +291,7 @@
         var beneficiaries = {!! $beneficiaries !!};
 
         $(document).ready(function () {
-            $('#bnfSelect').on('change blur', function () {
-
+            $('#bnfSelect').on('change blur', function() {
                 $('#bnfSaveSubmit').fadeOut(200);
                 $('#bnfSelectSubmit').fadeIn(200);
                 $('#add-bnf-form').css({"opacity": 0.5});
@@ -309,7 +307,7 @@
                 $('#bnf-ajax-phone').text(bnf.tel);
                 $('#bnf-ajax-fax').text(bnf.fax);
                 $('#bnf-ajax-bankname').text(bnf.bank_name);
-                $('#bnf-ajax-branch').text(bnf.branch_address);
+                $('#bnf-ajax-branch').text(bnf.branch_name);
                 $('#bnf-ajax-swift').text(bnf.swift_code);
                 $('#bnf-ajax-iban').text(bnf.iban_code);
 
@@ -317,6 +315,8 @@
             });
 
             $('#add-bnf-form input').on('focus', function () {
+                $('#bnfSelect').val(0);
+                $('.selectpicker').selectpicker('refresh');
                 $('#add-bnf-form').css({"opacity": 1});
                 $('#add-new-bnf-ajax').slideDown(200);
                 $('#bnf-ajax-div').slideUp(300);
@@ -324,20 +324,5 @@
                 $('#bnfSelectSubmit').fadeOut(200);
             });
         });
-
-        function sendBnf() {
-            var bnf = parseInt($('#bnfSelect').val()) - 1;
-            $.ajax({
-                method: 'POST',
-                data: {
-                    'hash': beneficiaries[bnf]['hash'],
-                    '_token': csrfToken,
-                    'id': beneficiaries[bnf]['id']
-                },
-                url: '/proforma',
-            }).done(function (response) {
-                console.log(response);
-            });
-        }
     </script>
 @endsection

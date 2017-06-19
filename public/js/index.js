@@ -1,15 +1,15 @@
 $(document).ready(function () {
     $('.selectpicker').selectpicker();
 
-    $('#paymentBtn, #calcBtn').attr({'disabled':'disabled'});
+    $('#paymentBtn, #calcBtn').attr({'disabled': 'disabled'});
 
     $('#exCountry, #exCurrency').change(function () {
         $('.tempAmount').slideUp(300);
-        if($('#captcha').val().length == 5 && $('#exAmount').val() > 9 && $('#exCountry').val() != null && $('#exCurrency').val() != null)
+        if ($('#captcha').val().length == 5 && $('#exAmount').val() > 9 && $('#exCountry').val() != null && $('#exCurrency').val() != null)
             $('#calcBtn').removeAttr('disabled').removeClass('fanexBtnOutlineOrange').addClass('fanexBtnOrange');
         else {
-            $('#paymentBtn').attr({'disabled':'disabled'});
-            $('#calcBtn').attr({'disabled':'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
+            $('#paymentBtn').attr({'disabled': 'disabled'});
+            $('#calcBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
         }
     });
 
@@ -37,12 +37,12 @@ $(document).ready(function () {
         }
     });
 
-    $('#captcha, #exAmount').keyup(function(e){
-        if($('#captcha').val().length == 5 && $('#exAmount').val() > 9 && $('#exCountry').val() != null && $('#exCurrency').val() != null)
+    $('#captcha, #exAmount').keyup(function (e) {
+        if ($('#captcha').val().length == 5 && $('#exAmount').val() > 9 && $('#exCountry').val() != null && $('#exCurrency').val() != null)
             $('#calcBtn').removeAttr('disabled').removeClass('fanexBtnOutlineOrange').addClass('fanexBtnOrange');
         else {
-            $('#paymentBtn').attr({'disabled':'disabled'});
-            $('#calcBtn').attr({'disabled':'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
+            $('#paymentBtn').attr({'disabled': 'disabled'});
+            $('#calcBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
         }
     });
 
@@ -95,21 +95,27 @@ $(document).ready(function () {
     });
 
     var ttl = readCookie('ttl');
-    var tenMins = new Date().getTime() + ((ttl*1000) - new Date().getTime());
-    $('#countdown').countdown(tenMins, function (event) {
-        $(this).html(event.strftime('%M:%S'));
-    }).on('finish.countdown', function () {
-        $('#countdown').html('Time Out').addClass('alert shake animated');    });
 
+    if (!isNaN(ttl)) {
+        var tenMins = new Date().getTime() + ((ttl * 1000) - new Date().getTime());
+        $('#countdown').countdown(tenMins, function (event) {
+            $(this).html(event.strftime('%M:%S'));
+        }).on('finish.countdown', function () {
+            $('#countdown').html(timeOut).addClass('alert shake animated');
+        });
+    }
+    else {
+        $('#countdown').html(timeOut).addClass('alert shake animated');
+    }
 });
 
 function readCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
+    for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
     }
 //            return null;
 }
@@ -128,7 +134,7 @@ function reloadCaptcha() {
 
 function getAmount() {
     $('#mainFormLoader').fadeIn(200);
-    setTimeout(function() {
+    setTimeout(function () {
         $.ajax({
             method: 'POST',
             url: '/calculate',
@@ -140,14 +146,14 @@ function getAmount() {
                 "captcha": $('#captcha').val()
             },
             error: function (xhr, ajaxOptions, thrownError) {
-                $('#calcBtn').attr({'disabled':'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
+                $('#calcBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
                 reloadCaptcha();
                 var json = $.parseJSON(xhr.responseText);
-                $(json).each(function(i,val) {
+                $(json).each(function (i, val) {
                     $('#mainFormLoader .spinner2').fadeOut(200);
                     $.each(val, function (k, v) {
                         $('#mainFormLoader .errors').fadeIn(200).html(v);
-                        setTimeout(function() {
+                        setTimeout(function () {
                             $('#mainFormLoader, #mainFormLoader .errors').fadeOut(200);
                             $('#mainFormLoader .spinner2').fadeIn();
                         }, 2000);

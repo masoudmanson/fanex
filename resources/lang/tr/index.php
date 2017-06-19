@@ -33,4 +33,6 @@ return [
     'formTo' =>  'to',
     'formIs' =>  'olur',
     'formRials' =>  'Rials',
+    'timeout' => 'Zaman Aşimi!',
+    'language' => 'TR',
 ];

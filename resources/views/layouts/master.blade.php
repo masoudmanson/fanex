@@ -47,6 +47,7 @@
 
 <script>
     var csrfToken = $('meta[name="csrf-token"]').attr('content');
+    var timeOut = "@lang('index.timeout')";
 </script>
 
 {{-- Yielding Pages Scripts --}}

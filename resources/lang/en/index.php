@@ -45,4 +45,6 @@ return [
     'additionalMobile' => 'Enter Your Mobile Number',
     'additionalCC' => 'Enter Your Account Number',
     'continue' => 'Continue',
+    'timeout' => 'Time Out!',
+    'language' => 'EN',
 ];

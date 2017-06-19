@@ -87,7 +87,7 @@ class UserInformationController extends Controller
 //                $user->api_token = $request->token;
 
             $user->save();
-            
+
             //todo : save or update
 
             Auth::login($user);

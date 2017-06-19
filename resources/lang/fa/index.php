@@ -45,4 +45,6 @@ return [
     'additionalMobile' => 'شماره موبایل خود را وارد نمائید',
     'additionalCC' => 'شماره حساب خود را وارد نمائید',
     'continue' => 'ادامه',
+    'timeout' => 'پایان زمان!',
+    'language' => 'فا',
 ];

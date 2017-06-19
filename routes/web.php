@@ -22,6 +22,7 @@
 //Route::get('/users/{user}', 'UserController@show')->middleware('auth:api');
 
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -77,6 +78,12 @@ Route::group(
         Route::post('/proforma/selected', 'PaymentController@proforma_with_selected_bnf');
 
     });
+
+Route::get('/language/{lang}' , function($lang, Request $request) {
+    dd($request->getRequestUri());
+    App::setLocale($lang);
+    return redirect()->back();
+});
 
 Route::get('/get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'flat') {
     return $captcha->src($config);
