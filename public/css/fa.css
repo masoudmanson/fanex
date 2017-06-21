@@ -13813,7 +13813,7 @@ perspective effects (not including the modals and the overlay).
   right: 0;
   z-index: 199999;
   opacity: 0;
-  background: rgba(53, 4, 19, 0.8);
+  background: rgba(77, 5, 28, 0.8);
   transition: all 0.3s;
 }
 
