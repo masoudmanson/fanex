@@ -591,6 +591,18 @@ body {
     }
 }
 
+div.fanexInput {
+    height: auto !important;
+    line-height: 1.3em;
+    padding: 20px 30px 20px 50px;
+}
+
+div.fanexCaptcha {
+    height: 60px;
+    line-height: 60px;
+    padding: 0px 50px;
+}
+
 .fanexInputError {
     @extend .fanexInput;
     background-color: #fff;
@@ -602,10 +614,17 @@ body {
     }
 }
 
+.fanexLabel {
+    font-weight: 200;
+    color: $fanapGrey;
+    display: block;
+}
+
 .fanexDanger {
     font-size: 12px;
     color: $fanapRed;
-    padding: 10px 0 0;
+    padding: 8px 5px 10px;
+    background-color: rgba($fanapRed, 0.1);
 }
 
 #search-input {

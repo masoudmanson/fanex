@@ -132,6 +132,9 @@
 
                             {{-- Firstname --}}
                             <div class="form-group bsWrapper">
+                                @if($errors->first('firstname'))
+                                    <label for="firstname" class="fanexLabel">@lang('payment.bnfFirstname')</label>
+                                @endif
                                 <i class="icon-user bsIcon"></i>
                                 <input type="text"
                                        class="form-control fanexInput @if($errors->first('firstname')) fanexInputError @else fanexInputWhite @endif"
@@ -148,6 +151,9 @@
 
                                 {{-- Lastname --}}
                                 <div class="form-group bsWrapper">
+                                    @if($errors->first('lastname'))
+                                        <label for="lastname" class="fanexLabel">@lang('payment.bnfLastname')</label>
+                                    @endif
                                     <i class="icon-user bsIcon"></i>
                                     <input type="text"
                                            class="form-control fanexInput  @if($errors->first('lastname')) fanexInputError @else fanexInputWhite @endif"
@@ -161,6 +167,9 @@
 
                                 {{-- Account Number --}}
                                 <div class="form-group bsWrapper">
+                                    @if($errors->first('account_number'))
+                                        <label for="account_number" class="fanexLabel">@lang('payment.bnfCC')</label>
+                                    @endif
                                     <i class="icon-card bsIcon"></i>
                                     <input type="text"
                                            class="form-control fanexInput  @if($errors->first('account_number')) fanexInputError @else fanexInputWhite @endif numberTextField"
@@ -175,6 +184,9 @@
 
                                 {{-- Address --}}
                                 <div class="form-group bsWrapper">
+                                    @if($errors->first('address'))
+                                        <label for="address" class="fanexLabel">@lang('payment.bnfAddr')</label>
+                                    @endif
                                     <i class="icon-globe bsIcon"></i>
                                     <input type="text"
                                            class="form-control fanexInput  @if($errors->first('address')) fanexInputError @else fanexInputWhite @endif"
@@ -189,6 +201,9 @@
 
                                 {{-- Phone Number --}}
                                 <div class="form-group bsWrapper">
+                                    @if($errors->first('tel'))
+                                        <label for="tel" class="fanexLabel">@lang('payment.bnfPhone')</label>
+                                    @endif
                                     <i class="icon-mobile bsIcon"></i>
                                     <input type="text"
                                            class="form-control fanexInput  @if($errors->first('tel')) fanexInputError @else fanexInputWhite @endif numberTextField"
@@ -203,6 +218,9 @@
 
                                 {{-- Fax Number --}}
                                 <div class="form-group bsWrapper">
+                                    @if($errors->first('fax'))
+                                        <label for="fax" class="fanexLabel">@lang('payment.bnfFax')</label>
+                                    @endif
                                     <i class="icon-fax bsIcon"></i>
                                     <input type="text"
                                            class="form-control fanexInput  @if($errors->first('fax')) fanexInputError @else fanexInputWhite @endif numberTextField"
@@ -217,6 +235,9 @@
 
                                 {{-- Bank Name --}}
                                 <div class="form-group bsWrapper">
+                                    @if($errors->first('bank_name'))
+                                        <label for="bank_name" class="fanexLabel">@lang('payment.bnfBank')</label>
+                                    @endif
                                     <i class="icon-bank bsIcon"></i>
                                     <input type="text"
                                            class="form-control fanexInput  @if($errors->first('bank_name')) fanexInputError @else fanexInputWhite @endif"
@@ -231,6 +252,9 @@
 
                                 {{-- Branch Address --}}
                                 <div class="form-group bsWrapper">
+                                    @if($errors->first('branch_name'))
+                                        <label for="branch_name" class="fanexLabel">@lang('payment.bnfBranch')</label>
+                                    @endif
                                     <i class="icon-branch bsIcon"></i>
                                     <input type="text"
                                            class="form-control fanexInput  @if($errors->first('branch_name')) fanexInputError @else fanexInputWhite @endif"
@@ -245,6 +269,9 @@
 
                                 {{-- Swift Code --}}
                                 <div class="form-group bsWrapper">
+                                    @if($errors->first('swift_code'))
+                                        <label for="swift_code" class="fanexLabel">@lang('payment.bnfSwift')</label>
+                                    @endif
                                     <i class="icon-swift bsIcon"></i>
                                     <input type="text"
                                            class="form-control fanexInput  @if($errors->first('swift_code')) fanexInputError @else fanexInputWhite @endif numberTextField"
@@ -259,6 +286,9 @@
 
                                 {{-- iBan Number --}}
                                 <div class="form-group bsWrapper">
+                                    @if($errors->first('iban_code'))
+                                        <label for="iban_code" class="fanexLabel">@lang('payment.bnfIban')</label>
+                                    @endif
                                     <i class="icon-code bsIcon"></i>
                                     <input type="text"
                                            class="form-control fanexInput  @if($errors->first('iban_code')) fanexInputError @else fanexInputWhite @endif numberTextField"
@@ -295,7 +325,6 @@
 @section('scripts')
     <script>
         var beneficiaries = {!! $beneficiaries !!};
-
         $(document).ready(function () {
             $('#bnfSelect').on('change blur', function () {
                 $('#bnfSaveSubmit').fadeOut(200);
@@ -304,7 +333,7 @@
                 $('#add-new-bnf-ajax').slideUp(200);
 
                 var bnf_id = $(this).val();
-                var bnf = beneficiaries[bnf_id - 1];
+                var bnf = $.grep(beneficiaries, function(e){ return e.id == bnf_id; })[0];
                 $('#bnfSelectHash').val(bnf.hash);
 
                 $('#bnf-ajax-name').text(bnf.firstname + ' ' + bnf.lastname);
