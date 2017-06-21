@@ -12076,7 +12076,7 @@ body {
 }
 
 .dashboard-nav {
-  background: #F58121 url("images/pattern.png");
+  background: #F58121 url("images/pattern-w.png");
   background-size: 50%;
   z-index: 4000;
 }
@@ -12281,7 +12281,7 @@ body {
 
 .bgWrapper .bgDivLeft {
   background: #F4F4F4 url("images/pattern.png");
-  background-size: 40%;
+  background-size: 80%;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -12849,7 +12849,9 @@ a.btn {
 
 .fanexBtnOutline:hover, .fanexBtnOutlineGrey:hover, .fanexBtnOutlineOrange:hover, .fanexBtnOutline:focus, .fanexBtnOutlineGrey:focus, .fanexBtnOutlineOrange:focus, .fanexBtnOutline:active, .fanexBtnOutlineGrey:active, .fanexBtnOutlineOrange:active {
   border-color: #F58121;
-  background-color: #F58121;
+  background: #F58121 url("images/pattern-w.png");
+  background-size: 140%;
+  -webkit-background-size: 140%;
   color: #fff;
 }
 
@@ -12884,12 +12886,14 @@ a.btn {
 }
 
 .fanexBtnOrange {
-  background-color: #F58121;
+  background: #F58121 url("images/pattern-w.png");
+  -webkit-background-size: 140%;
   color: #fff !important;
 }
 
 .fanexBtnOrange:hover, .fanexBtnOrange:focus, .fanexBtnOrange:active {
-  background-color: #d9680a;
+  background: #d9680a url("images/pattern-w.png");
+  -webkit-background-size: 140%;
   color: #fff;
 }
 
@@ -13801,9 +13805,8 @@ perspective effects (not including the modals and the overlay).
 
 .md-content {
   color: #fff;
-  background: #f68f39;
+  background: #f68930;
   position: relative;
-  border-radius: 3px;
   margin: 0 auto;
 }
 
@@ -13814,7 +13817,9 @@ perspective effects (not including the modals and the overlay).
   font-size: 1.8em;
   font-weight: 300;
   opacity: 0.8;
-  background: rgba(0, 0, 0, 0.1);
+  background: #f2730b url("images/pattern-w.png");
+  background-size: 100%;
+  -webkit-background-size: 100%;
   border-radius: 3px 3px 0 0;
 }
 
@@ -13884,18 +13889,21 @@ perspective effects (not including the modals and the overlay).
 
 .md-button {
   border: none;
-  padding: 0.6em 1.2em;
-  background: #f2730b;
+  padding: 0.6em 3em;
+  background: #f47912 url("images/pattern-w.png");
+  background-size: 140%;
+  -webkit-background-size: 140%;
   color: #fff;
   font-size: 1em;
   cursor: pointer;
   display: inline-block;
-  margin: 3px 2px;
-  border-radius: 2px;
+  transition: all 0.3s;
 }
 
 .md-button:hover {
-  background: #c15c09;
+  background: #d9680a url("images/pattern-w.png");
+  background-size: 140%;
+  -webkit-background-size: 140%;
 }
 
 .w-25 {

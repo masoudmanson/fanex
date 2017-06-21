@@ -29,7 +29,7 @@
 
                     <div class="col-xs-3 px-0">
                         <ul class="filter-ul filter-right">
-                            <li class="filter-li-link"><a href="/beneficiaries/add">@lang('profile.addNew')</a></li>
+                            <li class="filter-li-link"><a href="/beneficiaries/create">@lang('profile.addNew')</a></li>
                         </ul>
                     </div>
                 </div>
