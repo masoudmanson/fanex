@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,600);@charset "UTF-8";
+@charset "UTF-8";
 
 /*!
  * animate.css -http://daneden.me/animate
@@ -1578,7 +1578,6 @@
   animation-name: slideOutUp;
 }
 @charset "UTF-8";
-
 
 @font-face {
   font-family: IRANSans;
@@ -11898,12 +11897,11 @@ select.selectpicker {
 
 * {
   outline: none !important;
-  font-family: 'IRANSans', 'Roboto', sans-serif !important;
 }
 
 html,
 body {
-  font-family: 'IRANSans', 'Roboto', tahoma, sans-serif;
+  font-family: 'Roboto', 'IRANSans', tahoma, sans-serif;
   background-color: #F4F4F4;
   direction: ltr;
 }
@@ -12821,7 +12819,7 @@ a.btn {
 
 .fanexBtn, .fanexBtnOutline, .fanexBtnOutlineGrey, .fanexBtnOutlineOrange, .fanexBtnNoline, .fanexBtnGrey, .fanexBtnOrange {
   height: 60px;
-  font-weight: 200;
+  font-weight: 300;
   font-size: 24px;
   text-align: center;
   width: 100%;
@@ -13770,7 +13768,7 @@ perspective effects (not including the modals and the overlay).
   max-width: 630px;
   min-width: 320px;
   height: auto;
-  z-index: 2000;
+  z-index: 200000;
   visibility: hidden;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -13789,7 +13787,7 @@ perspective effects (not including the modals and the overlay).
   visibility: hidden;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 199999;
   opacity: 0;
   background: rgba(95, 45, 4, 0.8);
   transition: all 0.3s;
@@ -13845,7 +13843,7 @@ perspective effects (not including the modals and the overlay).
   color: #BBBBBB;
   text-decoration: none;
   font-size: 24px;
-  font-weight: 200;
+  font-weight: 300;
   color: #fff;
   text-align: center;
 }

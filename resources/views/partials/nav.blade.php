@@ -15,25 +15,10 @@
             @if (Auth::guest())
                 {{-- Change Language Dropdown --}}
                 <li class="dropdown nav-item">
-                    <a href="#" class="dropdown-toggle nav-link md-trigger" data-modal="modal-9"> {{-- data-toggle="modal" data-target=".language-modal"> --}}
+                    <a href="javascript:;" class="dropdown-toggle nav-link md-trigger" data-modal="modal-9">
                         @lang('index.language')
                     </a>
                 </li>
-                {{--<li class="dropdown nav-item">--}}
-                {{--<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">--}}
-                {{--@lang('index.language') <span class="caret"></span>--}}
-                {{--</a>--}}
-                {{--<ul class="dropdown-menu">--}}
-                {{--@foreach (Config::get('app.locales') as $lang => $language)--}}
-                {{--@if ($lang != App::getLocale())--}}
-                {{--<li>--}}
-                {{--<a href="{{ route('lang.switch', $lang) }}">{{$language}}</a>--}}
-                {{--</li>--}}
-                {{--@endif--}}
-                {{--@endforeach--}}
-                {{--</ul>--}}
-                {{--</li>--}}
-
                 <li class="nav-item">
                     <a href="{{ route('login') }}" class="nav-link">@lang('index.login')</a>
                 </li>
@@ -43,18 +28,9 @@
             @else
                 {{-- Change Language Dropdown --}}
                 <li class="dropdown nav-item">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        @lang('index.language') <span class="caret"></span>
+                    <a href="javascript:;" class="dropdown-toggle nav-link md-trigger" data-modal="modal-9">
+                        @lang('index.language')
                     </a>
-                    <ul class="dropdown-menu">
-                        @foreach (Config::get('app.locales') as $lang => $language)
-                            @if ($lang != App::getLocale())
-                                <li>
-                                    <a href="{{ route('lang.switch', $lang) }}">{{$language}}</a>
-                                </li>
-                            @endif
-                        @endforeach
-                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="/profile" class="nav-link">{{ Auth::user()->firstname }}</a>
@@ -72,30 +48,6 @@
         </ul>
     </div>
 </nav>
-
-<div class="modal fade language-modal" tabindex="-1" role="dialog" aria-labelledby="Language Modal">
-    <div class="modal-dialog modal-md" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">@lang('index.langSelect')</h4>
-            </div>
-            <div class="modal-body">
-                <ul class="lang-ul">
-                    @foreach (Config::get('app.locales') as $lang => $language)
-                        @if ($lang != App::getLocale())
-                            <li>
-                                <a href="{{ route('lang.switch', $lang) }}">{{$language}}</a>
-                            </li>
-                        @endif
-                    @endforeach
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <div class="md-modal md-effect-9" id="modal-9">
     <div class="md-content">

@@ -1,11 +1,10 @@
 * {
     outline: none !important;
-    font-family: 'IRANSans', 'Roboto', sans-serif !important;
 }
 
 html,
 body {
-    font-family: 'IRANSans', 'Roboto', tahoma, sans-serif;
+    font-family: 'Roboto', 'IRANSans', tahoma, sans-serif;
     background-color: $fanapGreyLight;
     direction: ltr;
 }
@@ -734,7 +733,7 @@ a.btn {
 
 .fanexBtn {
     height: 60px;
-    font-weight: 200;
+    font-weight: 300;
     font-size: 24px;
     text-align: center;
     width: 100%;
@@ -1573,7 +1572,7 @@ perspective effects (not including the modals and the overlay).
     max-width: 630px;
     min-width: 320px;
     height: auto;
-    z-index: 2000;
+    z-index: 200000;
     visibility: hidden;
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
@@ -1595,7 +1594,7 @@ perspective effects (not including the modals and the overlay).
     visibility: hidden;
     top: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 199999;
     opacity: 0;
     background: rgba(darken($fanapOrange, 35%), .8);
     -webkit-transition: all 0.3s;
@@ -1643,7 +1642,7 @@ perspective effects (not including the modals and the overlay).
                     color: $fanapGreyDark;
                     text-decoration: none;
                     font-size: 24px;
-                    font-weight: 200;
+                    font-weight: 300;
                     color: #fff;
                     text-align: center;
                     &:hover {
