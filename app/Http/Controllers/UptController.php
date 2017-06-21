@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Backlog;
 use App\Beneficiary;
 use App\Http\Requests\RemittanceForm;
+use App\Traits\LogTrait;
 use App\Traits\UptTrait;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ use Psr\Http\Message\ServerRequestInterface;
 class UptController extends Controller
 {
     use UptTrait;
+    use LogTrait;
 
     public function test()
     {
@@ -47,9 +49,12 @@ class UptController extends Controller
      */
     public function calculateRemittance(RemittanceForm $request)
     {
+        $upt_result = array();
+        $amount = $request->amount;
+
         if ($request['currency'] == 'lira') {
-            $upt_result = $this->UPTGetTExchangeData($request->amount,'TRY','EUR');
-            $request->amount = $upt_result['out'];
+            $upt_result = $this->UPTGetTExchangeData($request->amount, 'TRY', 'EUR');
+            $amount = $upt_result['out'];
         }
 
         $result = $this->getEuroExchangeRate();
@@ -59,15 +64,15 @@ class UptController extends Controller
 //        $EuroTTL = $this->getEuroExchangeRate($request);
 
 
-
         //write to backlog
+        $log = new Backlog();
+        $log = $this->maniFormBackLog($log, $request, $upt_result, json_decode($EuroER));
 
-//        $log = new Backlog();
+        setcookie('backlog', base64_encode($log->id), time() + 600);
 
-        // TTL Expire Times Cookie
         setcookie('ttl', time() + 600, time() + 600);
 
-        return json_decode($EuroER)[0]->er * $request->amount;
+        return json_decode($EuroER)[0]->er * $amount;
     }
 
 

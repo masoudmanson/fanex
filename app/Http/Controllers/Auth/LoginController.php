@@ -38,18 +38,19 @@ class LoginController extends Controller
     {
         if (!$request->session()->get('redirect_uri'))
 //            $request->redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/callback/profile';
-            $request->redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/' . App::getLocale() . '/profile';
+            $request->redirect_uri = 'http://' . $_SERVER['HTTP_HOST']  . '/profile';
         else {
-
             $request->redirect_uri = $request->session()->get('redirect_uri');
-//            $redirect_uri = $request->session()->get('redirect_uri');
-            $request->queryString = $request->session()->get('query_string');
+//            $request->queryString = $request->session()->get('query_string');
 //            $request->redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/callback'.'/'.$redirect_uri;
         }
 
         $id = adapterAssignment()->getId();
 
-        return Redirect::away('http://sandbox.fanapium.com/oauth2/authorize/?client_id=' . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri . '&state=' . $request->queryString . '&prompt=login');
+        return Redirect::away('http://sandbox.fanapium.com/oauth2/authorize/?client_id='
+            . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri
+//            . '&state=' . $request->queryString
+            . '&prompt=login');
 
 //        return \Redirect::away('http://sandbox.fanapium.com/oauth2/authorize?'.$queryString);
 //        return \redirect('http://sandbox.fanapium.com/oauth2/authorize?'.$queryString);
