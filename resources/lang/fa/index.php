@@ -47,4 +47,6 @@ return [
     'continue' => 'ادامه',
     'timeout' => 'پایان زمان!',
     'language' => 'فا',
+    'langSelect' => 'انتخاب زبان',
+    'close' => 'بستن',
 ];

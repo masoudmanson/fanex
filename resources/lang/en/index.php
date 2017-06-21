@@ -47,4 +47,6 @@ return [
     'continue' => 'Continue',
     'timeout' => 'Time Out!',
     'language' => 'EN',
+    'langSelect' => 'Select Language',
+    'close' => 'Close',
 ];

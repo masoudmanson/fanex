@@ -35,4 +35,6 @@ return [
     'formRials' =>  'Rials',
     'timeout' => 'Zaman Aşimi!',
     'language' => 'TR',
+    'langSelect' => 'Dil Seçmek',
+    'close' => 'Bakla',
 ];

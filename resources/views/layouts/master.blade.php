@@ -44,6 +44,7 @@
 <script src="{{ asset('js/jquery.nicescroll.js') }}"></script>
 <script src="{{ asset('js/jquery.sticky-kit.min.js') }}"></script>
 <script src="{{ asset('js/jquery.countdown.min.js') }}"></script>
+<script src="{{ asset('js/classie.js') }}"></script>
 
 <script>
     var csrfToken = $('meta[name="csrf-token"]').attr('content');

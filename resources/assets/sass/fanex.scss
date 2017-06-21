@@ -63,6 +63,9 @@ body {
 
 .navbar-header {
     margin-left: 0 !important;
+    @include mq($max-width: $breakePoint_sm) {
+        position: absolute !important;
+    }
 }
 
 @include mq($max-width: $breakePoint_md) {
@@ -89,7 +92,7 @@ body {
         padding: 30px 50px;
     }
     @include mq($max-width: $breakePoint_sm) {
-        padding: 20px 15px;
+        padding: 10px;
     }
     .navbar-nav {
         li.nav-item {
@@ -98,6 +101,8 @@ body {
                 padding-left: 3rem;
                 padding-right: 0;
                 @include transition(all .3s);
+                background: transparent !important;
+                background-color: transparent !important;
                 &:hover, &:active, &:focus {
                     text-decoration: none;
                     opacity: 0.6;
@@ -109,6 +114,33 @@ body {
                 }
                 @include mq($max-width: $breakePoint_sm) {
                     padding-left: 1rem;
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        left: 5px;
+                        top: 25%;
+                        width: 1px;
+                        background-color: $fanapGreyLight;
+                        height: 40%;
+                        opacity: 0.6;
+                    }
+                }
+            }
+        }
+        li.nav-item.open {
+            a.nav-link {
+                float: right;
+            }
+            .dropdown-menu {
+                li {
+                    a {
+                        color: $fanapDark;
+                        padding: 20px 0 15px;
+                        text-align: center;
+                        &:hover, &:active, &:focus {
+                            color: #FFF;
+                        }
+                    }
                 }
             }
         }
@@ -344,7 +376,7 @@ body {
             @include mq($max-width: $breakePoint_sm) {
                 margin: 0 auto;
                 width: 100%;
-                padding: 50px 30px;
+                padding: 25px 30px 40px;
             }
             z-index: 300;
             h1 {
@@ -353,7 +385,12 @@ body {
                 font-weight: normal;
                 @include mq($max-width: $breakePoint_md) {
                     font-size: 24px;
-                    //@include text-overflow();
+                    @include text-overflow();
+                }
+                @include mq($max-width: $breakePoint_sm) {
+                    font-size: 20px;
+                    margin-bottom: 10px;
+                    @include text-overflow();
                 }
             }
             .tempAmount {
@@ -440,6 +477,9 @@ body {
         .addressWrapper {
             @extend .mottoWrapper;
             @include absolut-center(75%, 50%);
+            @include mq($max-width: $breakePoint_sm) {
+                width: 90%;
+            }
             h4 {
                 font-weight: 300;
                 font-size: 18px;
@@ -506,6 +546,9 @@ body {
     position: absolute;
     z-index: 100;
     margin: 16px 0 0 15px;
+    @include mq($max-width: $breakePoint_sm) {
+        margin: 13px 0 0 12px;
+    }
 }
 
 .fanexInput {
@@ -529,6 +572,13 @@ body {
     }
     img {
         margin-top: 5px;
+        @include mq($max-width: $breakePoint_sm) {
+            margin-top: 0;
+        }
+    }
+    @include mq($max-width: $breakePoint_sm) {
+        height: 50px;
+        line-height: 50px;
     }
 }
 
@@ -572,7 +622,7 @@ body {
     color: $fanapOrange;
     font-size: 32px;
     position: absolute;
-    @include absolut-center($top:50%, $left:0%);
+    @include absolut-center($top: 50%, $left: 0%);
     left: 40px;
     z-index: 300;
     @include mq($max-width: $breakePoint_md) {
@@ -693,6 +743,9 @@ a.btn {
     @include box-shadow(none !important);
     @include border-radius(0);
     @include transition(all .3s);
+    @include mq($max-width: $breakePoint_sm) {
+        height: 50px;
+    }
 }
 
 .fanexBtn.hasIcon {
@@ -1484,5 +1537,172 @@ a.btn {
     40% {
         -webkit-transform: scale(1.0);
         transform: scale(1.0);
+    }
+}
+
+/* General styles for the modal */
+
+/*
+Styles for the html/body for special modal where we want 3d effects
+Note that we need a container wrapping all content on the page for the
+perspective effects (not including the modals and the overlay).
+*/
+.md-perspective,
+.md-perspective body {
+    height: 100%;
+    overflow: hidden;
+}
+
+.md-perspective body {
+    background: #222;
+    -webkit-perspective: 600px;
+    -moz-perspective: 600px;
+    perspective: 600px;
+}
+
+.container {
+    background: #e74c3c;
+    min-height: 100%;
+}
+
+.md-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    max-width: 630px;
+    min-width: 320px;
+    height: auto;
+    z-index: 2000;
+    visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.md-show {
+    visibility: visible;
+}
+
+.md-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    opacity: 0;
+    background: rgba(darken($fanapOrange, 35%), .8);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.md-show ~ .md-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+.md-content {
+    color: #fff;
+    background: lighten($fanapOrange, 5%);
+    position: relative;
+    border-radius: 3px;
+    margin: 0 auto;
+    h3 {
+        margin: 0;
+        padding: .8em .5em;
+        text-align: center;
+        font-size: 1.8em;
+        font-weight: 300;
+        opacity: 0.8;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 3px 3px 0 0;
+    }
+    .md-body {
+        padding: 15px 40px 30px;
+        margin: 0;
+        font-weight: 300;
+        font-size: 1.15em;
+        p {
+            margin: 0;
+            padding: 10px 0;
+        }
+        .lang-ul {
+            padding: 10px 30px;
+            list-style: none;
+            li {
+                padding: 20px 0 10px;
+                a {
+                    @include transition(all .05s);
+                    color: $fanapGreyDark;
+                    text-decoration: none;
+                    font-size: 24px;
+                    font-weight: 200;
+                    color: #fff;
+                    text-align: center;
+                    &:hover {
+                        color: $fanapOrange;
+                        font-weight: 500;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+
+    }
+    button {
+        display: block;
+        margin: 0 auto;
+        font-size: 0.8em;
+    }
+}
+
+/* Effect 9: 3D flip vertical */
+.md-effect-9.md-modal {
+    -webkit-perspective: 1300px;
+    -moz-perspective: 1300px;
+    perspective: 1300px;
+}
+
+.md-effect-9 .md-content {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: rotateX(-70deg);
+    -moz-transform: rotateX(-70deg);
+    -ms-transform: rotateX(-70deg);
+    transform: rotateX(-70deg);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    opacity: 0;
+}
+
+.md-show.md-effect-9 .md-content {
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    -ms-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    opacity: 1;
+}
+
+.md-button {
+    border: none;
+    padding: 0.6em 1.2em;
+    background: darken($fanapOrange, 5%);
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    display: inline-block;
+    margin: 3px 2px;
+    border-radius: 2px;
+    &:hover {
+        background: darken($fanapOrange, 15%);
     }
 }
