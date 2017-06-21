@@ -61,9 +61,10 @@ class UptController extends Controller
 
         $EuroResult = $result->getBody()->getContents();
 
-        $EuroER = json_decode($EuroResult)[0]->er ;
+        $EuroER = json_decode($EuroResult)[0]->er;
 
-        $amount = $EuroER*$amount;
+        //todo : Round the Amount
+        $amount = ceil($EuroER*$amount);
 
         //write to backlog
         $log = new Backlog();
