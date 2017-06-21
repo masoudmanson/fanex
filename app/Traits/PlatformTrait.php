@@ -8,6 +8,7 @@
 
 namespace App\Traits;
 
+use App\Backlog;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -74,7 +75,7 @@ trait PlatformTrait
         return $res;
     }
 
-    public function userInvoice(Request $request)
+    public function userInvoice(Request $request , Backlog $backlog)
     {
         $client = new Client();
         //business token must taken from sso
@@ -83,10 +84,13 @@ trait PlatformTrait
 //        $token = json_decode($token_object->getBody()->getContents())->access_token;
         $token = 'd35b0c351acd47cc87a76b1c4b07239a'; //biz static token
 
-        $user_object = $this->getCurrentPlatformUser($request->bearerToken());
+//        $user_object = $this->getCurrentPlatformUser($request->bearerToken());
+        $user_object = $this->getCurrentPlatformUser($request->cookie('_token')['access']);
 //        if (!$user->hasError)
-        $userId = json_decode($user_object->getBody()->getContents())->result->userId;
-        $ott = json_decode($user_object->getBody()->getContents())->result->ott;
+//        dd($user_object->getBody()->getContents());
+        $json_input = $user_object->getBody()->getContents();
+        $userId = json_decode($json_input)->result->userId;
+        $ott = json_decode($json_input)->ott;
 //        else
 
         //redirect to login? or refresh the user token ,,,
@@ -116,6 +120,7 @@ trait PlatformTrait
                 'phoneNumber' => '09387181694',//maybe user's phone number
             ],
             'headers' => [
+                '_token_' => $token,
                 '_ott_' => $ott,
                 '_token_issuer_' => 1
             ]

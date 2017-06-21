@@ -66,12 +66,12 @@ class CheckTokenExist
             Auth::logout();
         }
 
-        $queryString = $request->getQueryString();
+//        $queryString = $request->getQueryString();
 
         return redirect('login')->with([
             'redirect_uri' => $request->url(),
 //            'redirect_uri' => $redirect_uri = $request->route()->uri(),
-            'query_string' => (is_base64($queryString) ? $queryString : base64_encode($queryString))
+//            'query_string' => (is_base64($queryString) ? $queryString : base64_encode($queryString))
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Backlog;
 use App\Beneficiary;
 use App\Http\Requests\BeneficiaryRequest;
 use App\Traits\PlatformTrait;
@@ -20,7 +21,7 @@ class PaymentController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkToken', ['only' => ['pay']]);
+        $this->middleware('checkToken', ['only' => ['pay', 'invoice']]);
         $this->middleware('checkUser', ['only' => ['pay']]);
     }
 
@@ -94,9 +95,15 @@ class PaymentController extends Controller
             : redirect()->back()->withErrors(['msg', 'The Message']);
     }
 
-    public function invoice()
+    public function invoice(Request $request)
     {
-        return view('dashboard.invoice');
+        $id = base64_decode($_COOKIE['backlog']);
+        $backlog = Backlog::findOrFail($id);
+        $result = $this->userInvoice($request,$backlog);
+
+        dd(json_decode($result->getBody()->getContents()));
+
+//        return view('dashboard.invoice');
     }
 
     /**
