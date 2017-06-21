@@ -100,13 +100,13 @@ trait PlatformTrait
         $res = $client->post('http://sandbox.fanapium.com:8080/nzh/biz/issueInvoice', [
             'form_params' => [
                 //todo
-                'redirectURL' => 'http://localhost:8080/profile',// factor page
+                'redirectURL' => 'http://' . $_SERVER['HTTP_HOST']  . '/invoice/show',
                 'userId' => $userId,// get userId from his token: gholi = 204
                 'billNumber' => generateUniqueReferenceNumber(), //todo : make a random factor bill number , it's the same URN (Unique Reference Number)
                 'description' => 'for now we have no description',
                 'deadline' => jDate::forge('now')->format('Y/m/d'), //persian date in format yyyy/mm/dd
                 'productId[]' => 0, //I've no idea
-                'price[]' => 0, //give the price from saved transaction
+                'price[]' => $backlog->payment_amount, //give the price from saved transaction
                 'productDescription[]' => 'for now we have no description', //I've no idea
                 'quantity[]' => 1, //I'm not sure
                 'pay' => false, // for now false is enough. later, depend on method of pay, it can change dynamically.
@@ -114,8 +114,8 @@ trait PlatformTrait
                 'guildCode' => 'FINANCIAL_GUILD',
                 'state' => 'tehran', //right up to the address maybe
                 'city' => 'tehran',
-                'postalCode' => '1654777159',// maybe will taken from user
-                'address' => 'somewhere',
+                'postalCode' => '1654777158',// maybe will taken from user
+                'address' => 'somewhere new',
                 'addressId' => 0,
                 'phoneNumber' => '09387181694',//maybe user's phone number
             ],
@@ -131,16 +131,16 @@ trait PlatformTrait
         return $res;
     }
 
-    public function issueInvoice()
-    {
-        $client = new Client();
-        //business token must taken from sso
-        $res = $client->get("http://http://176.221.69.209:1031/v1/pbc/payinvoice/", [
-            'query' => [
-                'invoiceId'=>'InvoiceId'
-            ],
-
-        ]);
-        return $res;
-    }
+//    public function issueInvoice()
+//    {
+//        $client = new Client();
+//        //business token must taken from sso
+//        $res = $client->get("http://http://176.221.69.209:1031/v1/pbc/payinvoice/", [
+//            'query' => [
+//                'invoiceId'=>'InvoiceId'
+//            ],
+//
+//        ]);
+//        return $res;
+//    }
 }

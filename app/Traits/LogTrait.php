@@ -15,11 +15,11 @@ use Illuminate\Http\Request;
 trait LogTrait
 {
 
-    public function maniFormBackLog(Backlog $log, Request $request, $upt_result, $euro_result)
+    public function mainFormBackLog(Backlog $log,$amount, Request $request, $upt_result, $euro_result)
     {
         $log->ip = $request->ip();
         $log->currency = $request->currency;
-        $log->payment_amount = $request['amount'];
+        $log->payment_amount = $amount;
         $log->country = $request->country;
         $log->ttl = time() + 600; //from sarrafi, or agreement
         $log->upt_ttl = time() + 600; //from upt, ws response

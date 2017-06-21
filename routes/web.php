@@ -69,7 +69,8 @@
     Route::get('/settings', 'UserController@settings');
     Route::get('/logout', 'Auth\LoginController@logout');
     //        Route::get('/proforma', 'PaymentController@proforma');
-    Route::get('/invoice', 'PaymentController@invoice');
+    Route::get('/invoice', 'PaymentController@issueInvoice');
+    Route::get('/invoice/show', 'PaymentController@showInvoice');
 
     //Route::post('/pay', 'WalletController') ;
 

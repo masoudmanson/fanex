@@ -95,15 +95,25 @@ class PaymentController extends Controller
             : redirect()->back()->withErrors(['msg', 'The Message']);
     }
 
-    public function invoice(Request $request)
+    public function issueInvoice(Request $request)
     {
         $id = base64_decode($_COOKIE['backlog']);
         $backlog = Backlog::findOrFail($id);
         $result = $this->userInvoice($request,$backlog);
 
-        dd(json_decode($result->getBody()->getContents()));
+        $invoice = json_decode($result->getBody()->getContents());
 
+        if(!$invoice->hasError) {
+            return redirect("http://176.221.69.209:1031/v1/pbc/payinvoice/?invoiceId=".$invoice->result->id);
+        }
+
+        else dd($invoice);
 //        return view('dashboard.invoice');
+    }
+
+    public function showInvoice()
+    {
+        return view('dashboard.invoice');
     }
 
     /**
