@@ -11916,7 +11916,7 @@ body {
 }
 
 .fanex-text-orange {
-  color: #F58121 !important;
+  color: #dc0f50 !important;
 }
 
 @media only screen and (max-width: 520px) {
@@ -11938,7 +11938,7 @@ body {
 }
 
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-  color: #F58121;
+  color: #dc0f50;
 }
 
 .navbar-default .navbar-brand {
@@ -12072,11 +12072,11 @@ body {
 }
 
 .dark-header .navbar-nav li.nav-item a.nav-link:hover, .dark-header .navbar-nav li.nav-item a.nav-link:active, .dark-header .navbar-nav li.nav-item a.nav-link:focus {
-  color: #F58121;
+  color: #dc0f50;
 }
 
 .dashboard-nav {
-  background: #F58121 url("images/pattern.png");
+  background: #dc0f50 url("images/pattern-w.png");
   background-size: 50%;
   z-index: 4000;
 }
@@ -12086,11 +12086,11 @@ body {
 }
 
 .dashboard-nav .navbar-brand:hover {
-  color: #a85008;
+  color: #7d082d;
 }
 
 .dashboard-nav ul li.nav-item a.nav-link:hover {
-  color: #783905;
+  color: #4d051c;
 }
 
 .additional-wrapper {
@@ -12161,7 +12161,7 @@ body {
 }
 
 .dashboard-wrapper .dash-subtitle {
-  color: #F58121;
+  color: #dc0f50;
   font-size: 24px;
   font-weight: 500;
   padding-bottom: 30px;
@@ -12220,7 +12220,7 @@ body {
 
 .dashboard-wrapper .invoice-wrapper .invoice-factor .orange {
   font-weight: 500;
-  color: #F58121 !important;
+  color: #dc0f50 !important;
 }
 
 .dashboard-wrapper .invoice-wrapper .invoice-factor .grey {
@@ -12271,7 +12271,7 @@ body {
   height: 100vh;
   min-height: 200px;
   margin: auto;
-  background-color: #F58121;
+  background-color: #dc0f50;
   z-index: 0;
 }
 
@@ -12281,12 +12281,12 @@ body {
 
 .bgWrapper .bgDivLeft {
   background: #F4F4F4 url("images/pattern.png");
-  background-size: 40%;
+  background-size: 80%;
 }
 
 @media only screen and (max-width: 1200px) {
   .bgWrapper .bgDivLeft {
-    background: #F58121 url("images/pattern.png");
+    background: #dc0f50 url("images/pattern.png");
   }
 }
 
@@ -12399,7 +12399,7 @@ body {
 
 .indexWrapper .indexLeft .mainForm .tempAmount h2 #tempAmountCash, .indexWrapper .indexLeft .mainForm .tempAmount h2 #tempAmountCountry {
   font-weight: 500 !important;
-  color: #F58121;
+  color: #dc0f50;
 }
 
 .indexWrapper .indexLeft .mainForm .tempAmount h2 #tempAmountCountry {
@@ -12416,7 +12416,7 @@ body {
 .indexWrapper .indexLeft .mainForm .tempAmount .calcAmount {
   font-size: 52px;
   font-weight: 600;
-  color: #F58121;
+  color: #dc0f50;
 }
 
 @media only screen and (max-width: 768px) {
@@ -12658,6 +12658,18 @@ body {
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.2) !important;
 }
 
+div.fanexInput, div.fanexInputWhite, div.fanexInputError, div.fanexInputPanel {
+  height: auto !important;
+  line-height: 1.3em;
+  padding: 20px 50px 20px 30px;
+}
+
+div.fanexCaptcha {
+  height: 60px;
+  line-height: 60px;
+  padding: 0px 50px;
+}
+
 .fanexInputError {
   background-color: #fff;
   border: solid 1px #F44336 !important;
@@ -12669,10 +12681,17 @@ body {
   box-shadow: 0 0 5px rgba(250, 0, 0, 0.6) !important;
 }
 
+.fanexLabel {
+  font-weight: 200;
+  color: #949597;
+  display: block;
+}
+
 .fanexDanger {
   font-size: 12px;
   color: #F44336;
-  padding: 10px 0 0;
+  padding: 8px 5px 10px;
+  background-color: rgba(244, 67, 54, 0.1);
 }
 
 #search-input {
@@ -12686,7 +12705,7 @@ body {
 #search-input::before {
   content: '\51';
   font-family: 'fanex';
-  color: #F58121;
+  color: #dc0f50;
   font-size: 32px;
   position: absolute;
   position: absolute;
@@ -12811,7 +12830,7 @@ textarea.fanexInput, textarea.fanexInputWhite, textarea.fanexInputError, textare
 }
 
 .captchaRefresher:hover i {
-  color: #F58121;
+  color: #dc0f50;
 }
 
 a.btn {
@@ -12848,8 +12867,10 @@ a.btn {
 }
 
 .fanexBtnOutline:hover, .fanexBtnOutlineGrey:hover, .fanexBtnOutlineOrange:hover, .fanexBtnOutline:focus, .fanexBtnOutlineGrey:focus, .fanexBtnOutlineOrange:focus, .fanexBtnOutline:active, .fanexBtnOutlineGrey:active, .fanexBtnOutlineOrange:active {
-  border-color: #F58121;
-  background-color: #F58121;
+  border-color: #dc0f50;
+  background: #dc0f50 url("images/pattern-w.png");
+  background-size: 140%;
+  -webkit-background-size: 140%;
   color: #fff;
 }
 
@@ -12884,18 +12905,20 @@ a.btn {
 }
 
 .fanexBtnOrange {
-  background-color: #F58121;
+  background: #dc0f50 url("images/pattern-w.png");
+  -webkit-background-size: 140%;
   color: #fff !important;
 }
 
 .fanexBtnOrange:hover, .fanexBtnOrange:focus, .fanexBtnOrange:active {
-  background-color: #d9680a;
+  background: #ad0c3e url("images/pattern-w.png");
+  -webkit-background-size: 140%;
   color: #fff;
 }
 
 .fanexBtnOutlineOrange {
-  border-color: #F58121;
-  color: #F58121;
+  border-color: #dc0f50;
+  color: #dc0f50;
 }
 
 .fanexFooter ul {
@@ -13026,7 +13049,7 @@ a.btn {
 .dashboard-footer .footerLeft li a:hover,
 .dashboard-footer .footerRight li a:hover {
   opacity: 1;
-  color: #f8ab6a;
+  color: #f2457c;
 }
 
 .dark-footer .footerLeft li a,
@@ -13037,7 +13060,7 @@ a.btn {
 .dark-footer .footerLeft li a:hover,
 .dark-footer .footerRight li a:hover {
   opacity: 1;
-  color: #F58121;
+  color: #dc0f50;
 }
 
 #mainFormLoader {
@@ -13100,7 +13123,7 @@ a.btn {
 .white-card h3 {
   font-size: 48px;
   font-weight: 600;
-  color: #F58121;
+  color: #dc0f50;
   text-align: center;
   margin-top: 5px;
 }
@@ -13125,13 +13148,13 @@ a.btn {
 }
 
 .white-card .steps-ul .steps-li a {
-  color: #F58121;
+  color: #dc0f50;
   transition: all 0.3s;
   text-decoration: none;
 }
 
 .white-card .steps-ul .steps-li a:hover {
-  color: #f8ab6a;
+  color: #f2457c;
 }
 
 .white-card .steps-ul .steps-li .steps-number {
@@ -13154,28 +13177,28 @@ a.btn {
 }
 
 .white-card .steps-ul .steps-li.done {
-  border-color: #F58121;
-  color: #F58121;
+  border-color: #dc0f50;
+  color: #dc0f50;
   font-weight: 500;
 }
 
 .white-card .steps-ul .steps-li.done .steps-number {
-  background-color: #F58121;
+  background-color: #dc0f50;
   color: #fff;
-  border-color: #F58121;
+  border-color: #dc0f50;
   font-weight: 400;
 }
 
 .white-card .steps-ul .steps-li.active {
-  border-color: #F58121;
-  color: #F58121;
+  border-color: #dc0f50;
+  color: #dc0f50;
   font-weight: 500;
 }
 
 .white-card .steps-ul .steps-li.active .steps-number {
   background-color: #fff;
-  color: #F58121;
-  border-color: #F58121;
+  color: #dc0f50;
+  border-color: #dc0f50;
   font-weight: 400;
 }
 
@@ -13204,11 +13227,11 @@ a.btn {
 }
 
 .white-card .profile-ul .profile-li a:hover {
-  color: #F58121;
+  color: #dc0f50;
 }
 
 .white-card .profile-ul .profile-li.active a {
-  color: #F58121;
+  color: #dc0f50;
   font-weight: 400;
 }
 
@@ -13247,7 +13270,7 @@ a.btn {
 }
 
 .filter-ul .filter-li a:hover, .filter-ul .filter-li-link a:hover {
-  color: #F58121;
+  color: #dc0f50;
 }
 
 .filter-ul .filter-li a .mini-title, .filter-ul .filter-li-link a .mini-title,
@@ -13338,11 +13361,11 @@ a.btn {
 
 .filter-ul.filter-right .filter-li, .filter-ul.filter-right .filter-li-link {
   float: left;
-  background-color: #F58121;
+  background-color: #dc0f50;
 }
 
 .filter-ul.filter-right .filter-li:hover, .filter-ul.filter-right .filter-li-link:hover {
-  background-color: #c15c09;
+  background-color: #950a36;
 }
 
 .filter-ul.filter-right .filter-li a, .filter-ul.filter-right .filter-li-link a {
@@ -13397,7 +13420,7 @@ a.btn {
 }
 
 .panel-default .panel-heading .acc-main-icon {
-  color: #F58121;
+  color: #dc0f50;
   font-size: 28px;
   vertical-align: top;
   padding-left: 10px;
@@ -13446,7 +13469,7 @@ a.btn {
 }
 
 .panel-default .panel-heading .acc-status.pending {
-  color: #F58121;
+  color: #dc0f50;
 }
 
 .panel-default .panel-heading .acc-status.successful {
@@ -13488,7 +13511,7 @@ a.btn {
 
 .panel-default .panel-heading.new::before {
   content: '';
-  background-color: #F58121;
+  background-color: #dc0f50;
   width: 15px;
   height: 100%;
   position: absolute;
@@ -13498,7 +13521,7 @@ a.btn {
 
 @media only screen and (max-width: 768px) {
   .panel-default .panel-heading.new {
-    background-color: #F58121;
+    background-color: #dc0f50;
     color: #fff !important;
   }
   .panel-default .panel-heading.new .acc-main-icon,
@@ -13562,7 +13585,7 @@ a.btn {
 }
 
 .panel-default .panel-body .acc-factor .acc-factor-sum {
-  color: #F58121;
+  color: #dc0f50;
 }
 
 .panel-default .panel-body .acc-factor p.table-header {
@@ -13601,7 +13624,7 @@ a.btn {
 
 .panel-default .panel-body.new::before {
   content: '';
-  background-color: #F58121;
+  background-color: #dc0f50;
   width: 15px;
   height: 100%;
   position: absolute;
@@ -13658,7 +13681,7 @@ a.btn {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: #F58121;
+  background-color: #dc0f50;
   opacity: 0.6;
   position: absolute;
   top: 0;
@@ -13701,7 +13724,7 @@ a.btn {
 .spinner2 > div {
   width: 18px;
   height: 18px;
-  background-color: #F58121;
+  background-color: #dc0f50;
   border-radius: 100%;
   display: inline-block;
   -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
@@ -13790,7 +13813,7 @@ perspective effects (not including the modals and the overlay).
   right: 0;
   z-index: 199999;
   opacity: 0;
-  background: rgba(95, 45, 4, 0.8);
+  background: rgba(77, 5, 28, 0.8);
   transition: all 0.3s;
 }
 
@@ -13801,9 +13824,8 @@ perspective effects (not including the modals and the overlay).
 
 .md-content {
   color: #fff;
-  background: #f68f39;
+  background: #eb1055;
   position: relative;
-  border-radius: 3px;
   margin: 0 auto;
 }
 
@@ -13814,7 +13836,9 @@ perspective effects (not including the modals and the overlay).
   font-size: 1.8em;
   font-weight: 300;
   opacity: 0.8;
-  background: rgba(0, 0, 0, 0.1);
+  background: #c40d47 url("images/pattern-w.png");
+  background-size: 100%;
+  -webkit-background-size: 100%;
   border-radius: 3px 3px 0 0;
 }
 
@@ -13850,7 +13874,7 @@ perspective effects (not including the modals and the overlay).
 }
 
 .md-content .md-body .lang-ul li a:hover {
-  color: #F58121;
+  color: #dc0f50;
   font-weight: 500;
   color: #fff;
 }
@@ -13884,18 +13908,21 @@ perspective effects (not including the modals and the overlay).
 
 .md-button {
   border: none;
-  padding: 0.6em 1.2em;
-  background: #f2730b;
+  padding: 0.6em 3em;
+  background: #ce0e4b url("images/pattern-w.png");
+  background-size: 140%;
+  -webkit-background-size: 140%;
   color: #fff;
   font-size: 1em;
   cursor: pointer;
   display: inline-block;
-  margin: 3px 2px;
-  border-radius: 2px;
+  transition: all 0.3s;
 }
 
 .md-button:hover {
-  background: #c15c09;
+  background: #ad0c3e url("images/pattern-w.png");
+  background-size: 140%;
+  -webkit-background-size: 140%;
 }
 
 .w-25 {

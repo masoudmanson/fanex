@@ -162,7 +162,7 @@ body {
 }
 
 .dashboard-nav {
-    background: $fanapOrange url("images/pattern.png");
+    background: $fanapOrange url("images/pattern-w.png");
     -webkit-background-size: 50%;
     background-size: 50%;
     z-index: 4000;
@@ -333,8 +333,8 @@ body {
         @include mq($max-width: $breakePoint_xl) {
             background: $fanapOrange url("images/pattern.png");
         }
-        -webkit-background-size: 40%;
-        background-size: 40%;
+        -webkit-background-size: 80%;
+        background-size: 80%;
     }
 }
 
@@ -591,6 +591,18 @@ body {
     }
 }
 
+div.fanexInput {
+    height: auto !important;
+    line-height: 1.3em;
+    padding: 20px 30px 20px 50px;
+}
+
+div.fanexCaptcha {
+    height: 60px;
+    line-height: 60px;
+    padding: 0px 50px;
+}
+
 .fanexInputError {
     @extend .fanexInput;
     background-color: #fff;
@@ -602,10 +614,17 @@ body {
     }
 }
 
+.fanexLabel {
+    font-weight: 200;
+    color: $fanapGrey;
+    display: block;
+}
+
 .fanexDanger {
     font-size: 12px;
     color: $fanapRed;
-    padding: 10px 0 0;
+    padding: 8px 5px 10px;
+    background-color: rgba($fanapRed, 0.1);
 }
 
 #search-input {
@@ -758,7 +777,9 @@ a.btn {
     border: solid 1px $fanapGreyLight;
     &:hover, &:focus, &:active {
         border-color: $fanapOrange;
-        background-color: $fanapOrange;
+        background: $fanapOrange url("images/pattern-w.png");
+        background-size: 140%;
+        -webkit-background-size: 140%;
         color: #fff;
     }
 }
@@ -793,10 +814,12 @@ a.btn {
 
 .fanexBtnOrange {
     @extend .fanexBtn;
-    background-color: $fanapOrange;
+    background: $fanapOrange url("images/pattern-w.png");
+    -webkit-background-size: 140%;
     color: #fff !important;
     &:hover, &:focus, &:active {
-        background-color: darken($fanapOrange, 10%);
+        background: darken($fanapOrange, 10%) url("images/pattern-w.png");
+        -webkit-background-size: 140%;
         color: #fff;
     }
 }
@@ -1596,7 +1619,7 @@ perspective effects (not including the modals and the overlay).
     left: 0;
     z-index: 199999;
     opacity: 0;
-    background: rgba(darken($fanapOrange, 35%), .8);
+    background: rgba(darken($fanapOrange, 30%), .8);
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
@@ -1609,9 +1632,8 @@ perspective effects (not including the modals and the overlay).
 
 .md-content {
     color: #fff;
-    background: lighten($fanapOrange, 5%);
+    background: lighten($fanapOrange, 3%);
     position: relative;
-    border-radius: 3px;
     margin: 0 auto;
     h3 {
         margin: 0;
@@ -1620,7 +1642,9 @@ perspective effects (not including the modals and the overlay).
         font-size: 1.8em;
         font-weight: 300;
         opacity: 0.8;
-        background: rgba(0, 0, 0, 0.1);
+        background: darken($fanapOrange, 5%) url('images/pattern-w.png');
+        background-size: 100%;
+        -webkit-background-size: 100%;
         border-radius: 3px 3px 0 0;
     }
     .md-body {
@@ -1693,15 +1717,18 @@ perspective effects (not including the modals and the overlay).
 
 .md-button {
     border: none;
-    padding: 0.6em 1.2em;
-    background: darken($fanapOrange, 5%);
+    padding: 0.6em 3em;
+    background: darken($fanapOrange, 3%) url('images/pattern-w.png');
+    background-size: 140%;
+    -webkit-background-size: 140%;
     color: #fff;
     font-size: 1em;
     cursor: pointer;
     display: inline-block;
-    margin: 3px 2px;
-    border-radius: 2px;
+    @include transition(all .3s);
     &:hover {
-        background: darken($fanapOrange, 15%);
+        background: darken($fanapOrange, 10%) url('images/pattern-w.png');
+        background-size: 140%;
+        -webkit-background-size: 140%;
     }
 }

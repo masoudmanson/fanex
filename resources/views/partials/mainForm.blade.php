@@ -80,7 +80,7 @@
                 <div class="form-group bsWrapper">
                     <a href="javascript: reloadCaptcha();" class="captchaRefresher"><i
                                 class="icon-refresh bsIcon"></i></a>
-                    <div class="fanexInput" style="text-align:center; overflow: hidden;">
+                    <div class="fanexInput fanexCaptcha" style="text-align:center; overflow: hidden;">
                         <img src="{{ captcha_src('flat') }}" alt="captcha" class="captcha-img"
                              data-refresh-config="flat">
                     </div>
