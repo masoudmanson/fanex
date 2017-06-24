@@ -123,7 +123,7 @@ class PaymentController extends Controller
 
         if(!$invoice->hasError) {
 
-            $transaction = Transaction::findOrFail(bcrypt($request->hash)->id);
+            $transaction = Transaction::findOrFail(bcrypt($request->transaction_sign)->id);//todo : check it after masouds changes
             dd($transaction);
             $transaction->uri = $invoice->result->billNumber;
             $transaction->update();
