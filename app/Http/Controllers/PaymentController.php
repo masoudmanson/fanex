@@ -73,7 +73,16 @@ class PaymentController extends Controller
     public function proforma_with_selected_bnf(Request $request)
     {
         $beneficiary = Beneficiary::findOrFail($request->bnf);
-        $request->query->add(['beneficiary' => $beneficiary]);
+
+        $id = base64_decode($_COOKIE['backlog']);
+        $transaction = new Transaction();
+        $transaction->user_id = Auth::user()->id;
+        $transaction->beneficiary_id = $beneficiary->id;
+        $transaction->backlog_id = $id;
+        $transaction->save();//todo : code cleaning
+        $transaction['hash'] = bcrypt($transaction);
+
+        $request->query->add(['beneficiary' => $beneficiary,'transaction_sign'=>$transaction['hash']]);
         return Hash::check($beneficiary, $request->hash)
             ? response()->view('dashboard.proforma', $request->query(), 200)
             : redirect()->back()->withErrors(['msg', 'The Message']);
@@ -89,7 +98,15 @@ class PaymentController extends Controller
         $request['user_id'] = Auth::user()->id;
         $beneficiary = Beneficiary::create($request->all());
 
-        $request->query->add(['beneficiary' => $beneficiary]);
+        $id = base64_decode($_COOKIE['backlog']);
+        $transaction = new Transaction();
+        $transaction->user_id = Auth::user();
+        $transaction->beneficiary_id = $beneficiary->id;
+        $transaction->backlog_id = $id;
+        $transaction->save();//todo : code cleaning
+        $transaction['hash'] = bcrypt($transaction);
+
+        $request->query->add(['beneficiary' => $beneficiary,'transaction_sign'=>$transaction['hash']]);
 
         return $beneficiary->id
             ? response()->view('dashboard.proforma', $request->query(), 200)
@@ -104,10 +121,13 @@ class PaymentController extends Controller
 
         $invoice = json_decode($result->getBody()->getContents());
 
-//        dd($invoice);
         if(!$invoice->hasError) {
-            //set a new transaction
-            $transaction = new Transaction();
+
+            $transaction = Transaction::findOrFail(bcrypt($request->hash)->id);
+            dd($transaction);
+            $transaction->uri = $invoice->result->billNumber;
+            $transaction->update();
+
             return redirect("http://176.221.69.209:1031/v1/pbc/payinvoice/?invoiceId="
                 .$invoice->result->id."&redirect_uri=http://" . $_SERVER['HTTP_HOST']  . "/invoice/show");
             //todo : why still not redirect
