@@ -7,6 +7,7 @@ use App\Beneficiary;
 use App\Http\Requests\BeneficiaryRequest;
 use App\Traits\PlatformTrait;
 use App\Traits\TokenTrait;
+use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
@@ -103,11 +104,16 @@ class PaymentController extends Controller
 
         $invoice = json_decode($result->getBody()->getContents());
 
+//        dd($invoice);
         if(!$invoice->hasError) {
-            return redirect("http://176.221.69.209:1031/v1/pbc/payinvoice/?invoiceId=".$invoice->result->id);
+            //set a new transaction
+            $transaction = new Transaction();
+            return redirect("http://176.221.69.209:1031/v1/pbc/payinvoice/?invoiceId="
+                .$invoice->result->id."&redirect_uri=http://" . $_SERVER['HTTP_HOST']  . "/invoice/show&call_uri=showInvoice");
+            //todo : why still not redirect
         }
 
-        else dd($invoice);
+        else dd($invoice);  //todo: error handling
 //        return view('dashboard.invoice');
     }
 
