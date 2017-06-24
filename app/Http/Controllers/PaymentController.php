@@ -109,7 +109,7 @@ class PaymentController extends Controller
             //set a new transaction
             $transaction = new Transaction();
             return redirect("http://176.221.69.209:1031/v1/pbc/payinvoice/?invoiceId="
-                .$invoice->result->id."&redirect_uri=http://" . $_SERVER['HTTP_HOST']  . "/invoice/show&call_uri=showInvoice");
+                .$invoice->result->id."&redirect_uri=http://" . $_SERVER['HTTP_HOST']  . "/invoice/show");
             //todo : why still not redirect
         }
 
