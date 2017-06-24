@@ -183,6 +183,7 @@ return [
         Mews\Captcha\CaptchaServiceProvider::class,
         Morilog\Jalali\JalaliServiceProvider::class,
         Cornford\Googlmapper\MapperServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -236,6 +237,7 @@ return [
         'jDate' => Morilog\Jalali\Facades\jDate::class,
         'Mapper' => Cornford\Googlmapper\Facades\MapperFacade::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

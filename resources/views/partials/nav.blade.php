@@ -7,7 +7,7 @@
     <div class="container-fluid px-xs-4 px-sm-0 px-md-4 px-lg-4">
         {{-- Brand and toggle get grouped for better mobile display --}}
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">@lang('index.fanex')</a>
+            <a class="navbar-brand" href="{{ route('index') }}">@lang('index.fanex')</a>
         </div>
 
         {{-- Authentication Links --}}

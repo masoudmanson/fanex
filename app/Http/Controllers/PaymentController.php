@@ -104,7 +104,7 @@ class PaymentController extends Controller
         $invoice = json_decode($result->getBody()->getContents());
 
         if(!$invoice->hasError) {
-            return redirect("http://176.221.69.209:1031/v1/pbc/payinvoice/?invoiceId=".$invoice->result->id);
+            return redirect("http://176.221.69.209:1031/v1/pbc/payinvoice/?invoiceId=".$invoice->result->id."&PayInvoiceCallback=http://".$_SERVER['HTTP_HOST']."/invoice/show");
         }
 
         else dd($invoice);

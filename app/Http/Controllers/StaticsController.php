@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App;
+use Barryvdh\DomPDF\Facade as PDF;
 use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
-use Illuminate\Http\Request;
 
 class StaticsController extends Controller
 {
@@ -40,5 +41,24 @@ class StaticsController extends Controller
         /*
          *  Kos sherato inja benevis :|
          */
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function pdf()
+    {
+        $pdf = App::make('dompdf.wrapper');
+        $html =
+<<<'ENDHTML'
+<html>
+<body>
+<h1>Hello Masoud</h1>
+</body>
+</html>
+ENDHTML;
+        $pdf->loadHTML("https://www.google.com/");
+        return $pdf->stream();
     }
 }
