@@ -49,4 +49,7 @@ return [
     'language' => 'EN',
     'langSelect' => 'Select Language',
     'close' => 'Close',
+    'EUR' => '€ Euro',
+    'USD' => '$ US Dollar',
+    'TRY' => '‎₺ Turkish Lira',
 ];

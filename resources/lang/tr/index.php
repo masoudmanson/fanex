@@ -37,4 +37,7 @@ return [
     'language' => 'TR',
     'langSelect' => 'Dil Seçmek',
     'close' => 'Kapat',
+    'EUR' => '€ Euro',
+    'USD' => '$ ABD Doları',
+    'TRY' => '‎₺ Türk Lirası',
 ];

@@ -3,6 +3,23 @@ $(document).ready(function () {
 
     $('#paymentBtn, #calcBtn').attr({'disabled': 'disabled'});
 
+    $('#exCountry').change(function () {
+        console.log($("#exCountry").val());
+        console.log($("#exCountry option:selected").text());
+        console.log($("#exCountry option:selected").attr('data-currency'));
+        var currencies = $("#exCountry option:selected").attr('data-currency');
+        $('#exCurrency').find('option').remove().end();
+        $.each(JSON.parse(currencies), function( index, value ) {
+            console.log(value);
+            $('#exCurrency')
+                .append($("<option></option>")
+                    .attr("value",value)
+                    .text(value));
+        });
+        $('#exCurrency').removeAttr('disabled');
+        $('.selectpicker').selectpicker('refresh');
+    });
+
     $('#exCountry, #exCurrency').change(function () {
         $('.tempAmount').slideUp(300);
         if ($('#captcha').val().length == 5 && removeComma($('#exAmount').val()) > 9 && $('#exCountry').val() != null && $('#exCurrency').val() != null)
@@ -169,8 +186,8 @@ function getAmount() {
             }
         }).done(function (response) {
             $('#mainFormLoader').fadeOut(200);
-            $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 2) + ' ' + $('#exCurrency').val() + 's');
-            $('#tempAmountCountry').text($('#exCountry').val());
+            $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 2) + ' ' + $('#exCurrency').val());
+            $('#tempAmountCountry').text($("#exCountry option:selected").text());
             $('.calcAmount').text(accounting.formatMoney(response, "", 0));
             $('.tempAmount').slideDown(300);
             $('#calcBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');//.trigger( "focusout" );

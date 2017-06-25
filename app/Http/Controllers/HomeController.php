@@ -33,33 +33,42 @@ class HomeController extends Controller
         $user = Auth::user();
 
         $data = $this->CorpGetCountryData();
-//        $multiLangCountries = Countries::lookup(session('applocale'));
+        $multiLangCountries = Countries::lookup(session('applocale'));
         $upt_country_list = $data->CorpGetCountryDataResult->COUNTRYLIST->WSCountry;
-//        dd($multiLangCountries);
-
+//dd($upt_country_list);
         $country_list = array();
-//
-//        foreach ($upt_country_list as $key => $value) {
-//            $country = Country::findByCountryCode($value->COUNTRYCODEOUT)->first();
-//            $test = array();
-//            if(isset($country->id)){
-//                $test['enable'] = true;
-//                $test['code'] = $value->COUNTRYCODEOUT;
-//                $test['name'] = $multiLangCountries[$value->COUNTRYCODEOUT];
-//                $test['currency'] = $value->CURRENTPAYMENTLIMITS->WSCountryCurrentLimit;
-////                $value->Enable = true;
-//
-//                $country_list[$value->COUNTRYCODEOUT] = $test;
-//            }
-//            else
-//            {
-////                $value->Enable = false;
-//                $test['enable'] = false;
-//                $test['code'] = $value->COUNTRYCODEOUT;
-//                $test['name'] = $multiLangCountries[$value->COUNTRYCODEOUT];
-//                $country_list[$value->COUNTRYCODEOUT] = $test;
-//            }
-//        }
+
+        foreach ($upt_country_list as $key => $value) {
+            $country = Country::findByCountryCode($value->COUNTRYCODEOUT)->first();
+            $test = array();
+            if (isset($country->id) && $country->id > 0) {
+                $test['enable'] = 1;
+                $test['code'] = $value->COUNTRYCODEOUT;
+                $test['name'] = $multiLangCountries[$value->COUNTRYCODEOUT];
+                $test['currency'] = array();
+                if (is_array($value->CURRENTPAYMENTLIMITS->WSCountryCurrentLimit)) {
+                    foreach ($value->CURRENTPAYMENTLIMITS->WSCountryCurrentLimit as $curr) {
+                        if ($curr->TRANSACTION_TYPE == "008")
+//                            array_push($test['currency'], $curr->CURRENCY);
+                            $test['currency'][$curr->CURRENCY] = __('index.'.$curr->CURRENCY);
+                    }
+                } else {
+                    if (!empty($value->CURRENTPAYMENTLIMITS->WSCountryCurrentLimit->CURRENCY))
+//                        array_push($test['currency'], $value->CURRENTPAYMENTLIMITS->WSCountryCurrentLimit->CURRENCY);
+                        $test['currency'][$value->CURRENTPAYMENTLIMITS->WSCountryCurrentLimit->CURRENCY] = __('index.'.$value->CURRENTPAYMENTLIMITS->WSCountryCurrentLimit->CURRENCY);
+                    else
+                        continue;
+                }
+                $country_list[$value->COUNTRYCODEOUT] = $test;
+            } else {
+                $test['enable'] = 0;
+                $test['code'] = $value->COUNTRYCODEOUT;
+                $test['name'] = $multiLangCountries[$value->COUNTRYCODEOUT];
+                $test['currency'] = array();
+                $country_list[$value->COUNTRYCODEOUT] = $test;
+            }
+        }
+        arsort($country_list);
 
         return view('index', compact('user', 'country_list'));
     }
