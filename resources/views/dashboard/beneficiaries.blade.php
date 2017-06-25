@@ -565,7 +565,6 @@
                     $('.filtered.ctr-'+filter).slideDown(200);
                 }
             });
-
         });
     </script>
 @endsection

@@ -33,8 +33,13 @@ $(document).ready(function () {
         }
     });
 
+    $('#exAmount').blur(function() {
+        console.log(accounting.formatMoney($('#exAmount').val()));
+        $('#exAmount').val(accounting.formatMoney($('#exAmount').val(), "", 2));
+        console.log(removeComma($('#exAmount').val()));
+    });
     $('#captcha, #exAmount').keyup(function (e) {
-        $('#exAmount').val(accounting.formatMoney($('#exAmount').val(), "", 0));
+        // $('#exAmount').val(accounting.formatMoney($('#exAmount').val(), "", 2));
         $('.tempAmount').slideUp(300);
         $(this).focus();
         if ($('#captcha').val().length == 5 && removeComma($('#exAmount').val()) > 9 && $('#exCountry').val() != null && $('#exCurrency').val() != null)
@@ -120,7 +125,6 @@ function readCookie(name) {
         while (c.charAt(0) == ' ') c = c.substring(1, c.length);
         if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
     }
-//            return null;
 }
 
 function reloadCaptcha() {
@@ -143,7 +147,7 @@ function getAmount() {
             url: '/calculate',
             data: {
                 '_token': csrfToken,
-                "amount": parseFloat($('#exAmount').val().replace(/,/g, '')),//removeComma($('#exAmount').val()),
+                "amount": parseFloat($('#exAmount').val().replace(/,/g, '')),
                 "currency": $('#exCurrency').val(),
                 "country": $('#exCountry').val(),
                 "captcha": $('#captcha').val()
@@ -165,7 +169,7 @@ function getAmount() {
             }
         }).done(function (response) {
             $('#mainFormLoader').fadeOut(200);
-            $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 0) + ' ' + $('#exCurrency').val() + 's');
+            $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 2) + ' ' + $('#exCurrency').val() + 's');
             $('#tempAmountCountry').text($('#exCountry').val());
             $('.calcAmount').text(accounting.formatMoney(response, "", 0));
             $('.tempAmount').slideDown(300);
