@@ -36,7 +36,7 @@
                         <form action="/invoice" method="get">
 
                             {{--<a href="/invoice" class="btn fanexBtnOutlineGrey">@lang('payment.prfPay')</a>--}}
-                            <input type="hidden" value="" name="">
+                            <input type="hidden" value="{{ $transaction_sign }}" name="transaction_sign">
                             <input type="submit"  class="btn fanexBtnOutlineGrey" value="@lang('payment.prfPay')">
                         </form>
                     </div>
