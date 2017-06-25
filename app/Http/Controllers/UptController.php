@@ -62,7 +62,7 @@ class UptController extends Controller
 
         $EuroResult = $result->getBody()->getContents();
 
-        $EuroER = json_decode($EuroResult)[0]->er ;
+        $EuroER = json_decode($EuroResult)[0]->er;
 
         $amount = ceil($EuroER*$amount);
 

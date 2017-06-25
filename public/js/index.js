@@ -5,7 +5,7 @@ $(document).ready(function () {
 
     $('#exCountry, #exCurrency').change(function () {
         $('.tempAmount').slideUp(300);
-        if ($('#captcha').val().length == 5 && $('#exAmount').val() > 9 && $('#exCountry').val() != null && $('#exCurrency').val() != null)
+        if ($('#captcha').val().length == 5 && removeComma($('#exAmount').val()) > 9 && $('#exCountry').val() != null && $('#exCurrency').val() != null)
             $('#calcBtn').removeAttr('disabled').removeClass('fanexBtnOutlineOrange').addClass('fanexBtnOrange');
         else {
             $('#paymentBtn').attr({'disabled': 'disabled'});
@@ -34,9 +34,10 @@ $(document).ready(function () {
     });
 
     $('#captcha, #exAmount').keyup(function (e) {
+        $('#exAmount').val(accounting.formatMoney($('#exAmount').val(), "", 0));
         $('.tempAmount').slideUp(300);
         $(this).focus();
-        if ($('#captcha').val().length == 5 && $('#exAmount').val() > 9 && $('#exCountry').val() != null && $('#exCurrency').val() != null)
+        if ($('#captcha').val().length == 5 && removeComma($('#exAmount').val()) > 9 && $('#exCountry').val() != null && $('#exCurrency').val() != null)
             $('#calcBtn').removeAttr('disabled').removeClass('fanexBtnOutlineOrange').addClass('fanexBtnOrange');
         else {
             $('#paymentBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
@@ -107,6 +108,10 @@ $(document).ready(function () {
     }
 });
 
+function removeComma(amount) {
+    return parseFloat(amount.replace(/,/g, ''));
+}
+
 function readCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -138,7 +143,7 @@ function getAmount() {
             url: '/calculate',
             data: {
                 '_token': csrfToken,
-                "amount": $('#exAmount').val(),
+                "amount": parseFloat($('#exAmount').val().replace(/,/g, '')),//removeComma($('#exAmount').val()),
                 "currency": $('#exCurrency').val(),
                 "country": $('#exCountry').val(),
                 "captcha": $('#captcha').val()
@@ -160,7 +165,7 @@ function getAmount() {
             }
         }).done(function (response) {
             $('#mainFormLoader').fadeOut(200);
-            $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 2) + ' ' + $('#exCurrency').val() + 's');
+            $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 0) + ' ' + $('#exCurrency').val() + 's');
             $('#tempAmountCountry').text($('#exCountry').val());
             $('.calcAmount').text(accounting.formatMoney(response, "", 0));
             $('.tempAmount').slideDown(300);
@@ -172,6 +177,9 @@ function getAmount() {
     }, 1000);
 }
 
+/*
+  | Change Language Modal
+ */
 var ModalEffects = (function() {
 
     function init() {

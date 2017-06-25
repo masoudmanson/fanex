@@ -130,8 +130,8 @@ return [
         'name'                  => 'نام',
         'username'              => 'نام کاربری',
         'email'                 => 'ایمیل',
-        'firstname'            => 'نام',
-        'lastname'             => 'نام خانوادگی',
+        'firstname'             => 'نام',
+        'lastname'              => 'نام خانوادگی',
         'password'              => 'رمز عبور',
         'password_confirmation' => 'تکرار رمز عبور',
         'city'                  => 'شهر',
@@ -165,6 +165,6 @@ return [
         'iban_code'             => 'کد iBan',
         'tel'                   => 'شماره تماس',
         'fax'                   => 'شماره فکس',
+        'amount'                => 'مقدار پول',
     ],
-
 ];

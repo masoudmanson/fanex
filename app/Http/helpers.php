@@ -25,7 +25,7 @@ function is_base64($str)
 function generateUniqueReferenceNumber()
 {
     //todo: what rules has to be observe??
-    // Available alpha caracters
+    // Available alpha characters
     $CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $chars = 'abcdefghijklmnopqrstuvwxyz';
 
