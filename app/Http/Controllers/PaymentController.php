@@ -133,7 +133,7 @@ class PaymentController extends Controller
 //            $transaction->update();
 
             return redirect("http://176.221.69.209:1031/v1/pbc/payinvoice/?invoiceId="
-                .$invoice->result->id."&redirect_uri=http://" . $_SERVER['HTTP_HOST']  . "/invoice/show");
+                .$invoice->result->id."&redirectUri=http://" . $_SERVER['HTTP_HOST']  . "/invoice/show");
             //todo : why still not redirect
         }
 
