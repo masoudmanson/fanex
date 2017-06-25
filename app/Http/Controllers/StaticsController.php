@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App;
+use App\Http\Requests\ContactFormRequest;
+use App\Mail\ContactMail;
 use Barryvdh\DomPDF\Facade as PDF;
 use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
+use Mail;
+use Redirect;
 
 class StaticsController extends Controller
 {
@@ -36,11 +40,17 @@ class StaticsController extends Controller
     /*
      * Contact Page Send Mail
      */
-    public function sendMail()
+    public function sendMail(ContactFormRequest $request)
     {
-        /*
-         *  Kos sherato inja benevis :|
-         */
+        $content = [
+            'title'=> $request->get('name'),
+            'body'=> $request->get('contactText'),
+            'button' => 'Go to Fanex'
+        ];
+        $receiverAddress = $request->get('email');
+        Mail::to($receiverAddress)->send(new ContactMail($content));
+
+        return \Redirect::route('contact')->with('message', 'Thanks for contacting us!');
     }
 
 
