@@ -25,7 +25,7 @@ class RemittanceForm extends FormRequest
     {
         return [
             'captcha' => 'required|captcha',
-            'amount'  => 'required|min:2|regex:/^\d*(\.\d{2})?$/'
+            'amount'  => 'required|min:2|regex:/^\d*(\.\d{1,2})?$/'
         ];
     }
 
