@@ -10,7 +10,7 @@
 
     <h1 class="pb-3 mt-0">@lang('index.contact')</h1>
 
-    <form action="/calculate" method="post">
+    <form action="/contact" method="post">
         {{ csrf_field() }}
 
         {{-- Name + Email --}}
@@ -28,8 +28,8 @@
                 <div class="form-group bsWrapper">
                     <div class="form-group bsWrapper">
                         <i class="icon-mail bsIcon"></i>
-                        <input type="text" class="form-control fanexInput" id="mail"
-                               name="mail" placeholder="@lang('index.contactMail')" autocomplete="off">
+                        <input type="text" class="form-control fanexInput" id="email"
+                               name="email" placeholder="@lang('index.contactMail')" autocomplete="off">
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
             <div class="col-xs-12">
                 <div class="form-group bsWrapper">
                     <div class="form-group bsWrapper">
-                        <textarea class="fanexInput" name="text" id="contactText" placeholder="@lang('index.contactText')"></textarea>
+                        <textarea class="fanexInput" name="contactText" id="contactText" placeholder="@lang('index.contactText')"></textarea>
                     </div>
                 </div>
             </div>
@@ -50,8 +50,8 @@
         <div class="row">
             {{-- Send Contact Mail --}}
             <div class="col-sm-6 col-xs-12 pl-md-2 pull-right">
-                {{--<input type="submit" class="btn fanexBtnOutlineOrange" value="Send" name="payment"/>--}}
-                <div class="btn fanexBtnOutlineOrange hasIcon" onclick="sendMail()"><i class="icon-telegram"></i></div>
+                <input type="submit" class="btn fanexBtnOutlineOrange" value="Send"/>
+                {{--<div class="btn fanexBtnOutlineOrange hasIcon" onclick="sendMail()"><i class="icon-telegram"></i></div>--}}
             </div>
         </div>
 

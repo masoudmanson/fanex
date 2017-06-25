@@ -4,13 +4,9 @@ $(document).ready(function () {
     $('#paymentBtn, #calcBtn').attr({'disabled': 'disabled'});
 
     $('#exCountry').change(function () {
-        console.log($("#exCountry").val());
-        console.log($("#exCountry option:selected").text());
-        console.log($("#exCountry option:selected").attr('data-currency'));
         var currencies = $("#exCountry option:selected").attr('data-currency');
         $('#exCurrency').find('option').remove().end();
         $.each(JSON.parse(currencies), function( index, value ) {
-            console.log(value);
             $('#exCurrency')
                 .append($("<option></option>")
                     .attr("value",value)
