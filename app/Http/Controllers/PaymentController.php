@@ -82,7 +82,9 @@ class PaymentController extends Controller
         $transaction->save();//todo : code cleaning
         $transaction['hash'] = bcrypt($transaction);
 
-        $request->query->add(['beneficiary' => $beneficiary,'transaction_sign'=>$transaction['hash']]);
+        $request->query->add(['beneficiary' => $beneficiary,
+//            'transaction_sign'=>$transaction['hash']
+        ]);
         return Hash::check($beneficiary, $request->hash)
             ? response()->view('dashboard.proforma', $request->query(), 200)
             : redirect()->back()->withErrors(['msg', 'The Message']);
@@ -106,7 +108,9 @@ class PaymentController extends Controller
         $transaction->save();//todo : code cleaning
         $transaction['hash'] = bcrypt($transaction);
 
-        $request->query->add(['beneficiary' => $beneficiary,'transaction_sign'=>$transaction['hash']]);
+        $request->query->add(['beneficiary' => $beneficiary,
+//            'transaction_sign'=>$transaction['hash']
+        ]);
 
         return $beneficiary->id
             ? response()->view('dashboard.proforma', $request->query(), 200)
@@ -123,10 +127,10 @@ class PaymentController extends Controller
 
         if(!$invoice->hasError) {
 
-            $transaction = Transaction::findOrFail(bcrypt($request->transaction_sign)->id);//todo : check it after masouds changes
-            dd($transaction);
-            $transaction->uri = $invoice->result->billNumber;
-            $transaction->update();
+//            $transaction = Transaction::findOrFail(bcrypt($request->transaction_sign)->id);//todo : check it after masouds changes
+//            dd($transaction);
+//            $transaction->uri = $invoice->result->billNumber;
+//            $transaction->update();
 
             return redirect("http://176.221.69.209:1031/v1/pbc/payinvoice/?invoiceId="
                 .$invoice->result->id."&redirect_uri=http://" . $_SERVER['HTTP_HOST']  . "/invoice/show");

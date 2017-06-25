@@ -52,7 +52,6 @@ trait UptTrait
 
         $return = $client->__SoapCall('CorpGetCountryData', array());
 
-        dd($return->CorpGetCountryDataResult->COUNTRYLIST->WSCountry[3]);
         return $return;
 
     }
