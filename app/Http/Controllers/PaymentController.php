@@ -80,10 +80,11 @@ class PaymentController extends Controller
         $transaction->beneficiary_id = $beneficiary->id;
         $transaction->backlog_id = $id;
         $transaction->save();//todo : code cleaning
-        $transaction['hash'] = bcrypt($transaction);
+//        $transaction['hash'] = bcrypt($transaction);
+        $transaction['hash'] = Crypt::encryptString($transaction);
 
         $request->query->add(['beneficiary' => $beneficiary,
-//            'transaction_sign'=>$transaction['hash']
+            'transaction_sign'=>$transaction['hash']
         ]);
         return Hash::check($beneficiary, $request->hash)
             ? response()->view('dashboard.proforma', $request->query(), 200)
@@ -106,10 +107,11 @@ class PaymentController extends Controller
         $transaction->beneficiary_id = $beneficiary->id;
         $transaction->backlog_id = $id;
         $transaction->save();//todo : code cleaning
-        $transaction['hash'] = bcrypt($transaction);
+//        $transaction['hash'] = bcrypt($transaction);
+        $transaction['hash'] = Crypt::encryptString($transaction);
 
         $request->query->add(['beneficiary' => $beneficiary,
-//            'transaction_sign'=>$transaction['hash']
+            'transaction_sign'=>$transaction['hash']
         ]);
 
         return $beneficiary->id
@@ -127,10 +129,10 @@ class PaymentController extends Controller
 
         if(!$invoice->hasError) {
 
-//            $transaction = Transaction::findOrFail(bcrypt($request->transaction_sign)->id);//todo : check it after masouds changes
-//            dd($transaction);
-//            $transaction->uri = $invoice->result->billNumber;
-//            $transaction->update();
+            $transaction = Transaction::findOrFail(json_decode(Crypt::decryptString($request->transaction_sign))->id);//todo : check it after masouds changes
+
+            $transaction->uri = $invoice->result->billNumber;
+            $transaction->update();
 
             return redirect("http://176.221.69.209:1031/v1/pbc/payinvoice/?invoiceId="
                 .$invoice->result->id."&redirectUri=http://" . $_SERVER['HTTP_HOST']  . "/invoice/show");
@@ -141,8 +143,10 @@ class PaymentController extends Controller
 //        return view('dashboard.invoice');
     }
 
-    public function showInvoice()
+    public function showInvoice(Request $request)
     {
+        var_dump($request->tref);
+        dd($request);
         return view('dashboard.invoice');
     }
 

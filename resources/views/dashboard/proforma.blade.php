@@ -33,7 +33,8 @@
                     <div class="col-sm-6 col-xs-12 p-0 pl-md-2 pb-md-0 pb-sm-4 pb-xs-4  pl-lg-3">
                         {{--<input type="submit" class="btn fanexBtnOutlineGrey" id="paymentBtn"--}}
                         {{--value="Show Proforma"/>--}}
-                        <form action="/invoice" method="get">
+                        <form action="/invoice" method="post">
+                            {{ csrf_field() }}
 
                             {{--<a href="/invoice" class="btn fanexBtnOutlineGrey">@lang('payment.prfPay')</a>--}}
                             <input type="hidden" value="{{ $transaction_sign }}" name="transaction_sign">
