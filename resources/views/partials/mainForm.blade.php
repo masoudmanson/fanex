@@ -9,6 +9,9 @@
         </div>
     </div>
 
+    {{--{{ dd($country_list) }}--}}
+{{--    {{ dd(Countries::keyValue(session('applocale'), 'code', 'name')) }}--}}
+{{--    {{ dd(session('applocale')) }}--}}
     <h1 class="pb-3 mt-0">@lang('index.formTitle')</h1>
 
     <form action="/payment" method="get">

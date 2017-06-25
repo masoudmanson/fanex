@@ -184,6 +184,7 @@ return [
         Morilog\Jalali\JalaliServiceProvider::class,
         Cornford\Googlmapper\MapperServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        PeterColes\Countries\CountriesServiceProvider::class,
     ],
 
     /*
@@ -238,6 +239,7 @@ return [
         'Mapper' => Cornford\Googlmapper\Facades\MapperFacade::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Countries' => PeterColes\Countries\CountriesFacade::class,
     ],
 
 ];

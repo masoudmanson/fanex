@@ -10,7 +10,7 @@ return [
 
     'calculate' => 'Calculate',
     'pay' => 'Pay',
-    'terms' => 'Terms And Conditions',
+    'terms' => 'Terms & Conditions',
     'about' => 'About Us',
     'contact' => 'Contact Us',
     'contactName' => 'Enter your Name',
