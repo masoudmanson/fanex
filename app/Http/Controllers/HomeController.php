@@ -35,10 +35,11 @@ class HomeController extends Controller
         $data = $this->CorpGetCountryData();
         $multiLangCountries = Countries::lookup(session('applocale'));
         $upt_country_list = $data->CorpGetCountryDataResult->COUNTRYLIST->WSCountry;
-//dd($upt_country_list);
         $country_list = array();
 
         foreach ($upt_country_list as $key => $value) {
+            if($value->COUNTRYCODEOUT == "KV")
+                continue;
             $country = Country::findByCountryCode($value->COUNTRYCODEOUT)->first();
             $test = array();
             if (isset($country->id) && $country->id > 0) {
@@ -49,12 +50,10 @@ class HomeController extends Controller
                 if (is_array($value->CURRENTPAYMENTLIMITS->WSCountryCurrentLimit)) {
                     foreach ($value->CURRENTPAYMENTLIMITS->WSCountryCurrentLimit as $curr) {
                         if ($curr->TRANSACTION_TYPE == "008")
-//                            array_push($test['currency'], $curr->CURRENCY);
                             $test['currency'][$curr->CURRENCY] = __('index.'.$curr->CURRENCY);
                     }
                 } else {
                     if (!empty($value->CURRENTPAYMENTLIMITS->WSCountryCurrentLimit->CURRENCY))
-//                        array_push($test['currency'], $value->CURRENTPAYMENTLIMITS->WSCountryCurrentLimit->CURRENCY);
                         $test['currency'][$value->CURRENTPAYMENTLIMITS->WSCountryCurrentLimit->CURRENCY] = __('index.'.$value->CURRENTPAYMENTLIMITS->WSCountryCurrentLimit->CURRENCY);
                     else
                         continue;
