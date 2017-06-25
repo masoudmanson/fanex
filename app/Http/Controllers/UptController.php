@@ -50,11 +50,12 @@ class UptController extends Controller
     public function calculateRemittance(RemittanceForm $request)
     {
         $upt_result = array();
-        $amount = $request->amount;
+        $amount = (float)($request->amount);
 
         if ($request['currency'] == 'lira') {
-            $upt_result = $this->UPTGetTExchangeData($request->amount, 'TRY', 'EUR');
-            $amount = $upt_result['out'];
+            $upt_result = $this->UPTGetTExchangeData((float)($request->amount), 'TRY', 'EUR');
+            $upt_rate = $upt_result['currency_rate'];
+            $amount = $upt_rate*$amount ;
         }
 
         $result = $this->getEuroExchangeRate();
@@ -63,7 +64,6 @@ class UptController extends Controller
 
         $EuroER = json_decode($EuroResult)[0]->er;
 
-        //todo : Round the Amount
         $amount = ceil($EuroER*$amount);
 
         //write to backlog
