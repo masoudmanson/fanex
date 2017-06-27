@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 // Color Variables
-$fanapOrange: lighten(#a30b3b, 10%) ;//#F58121;
+$fanapOrange: #1abc9c;//lighten(#a30b3b, 12%);//#F58121;//
 $fanapDark: #333333;
 $fanapGrey: #949597;
 $fanapGreyLight: #F4F4F4;
@@ -11,8 +11,12 @@ $fanapRed: #F44336;
 $fanapGreen: #4CAF50;
 
 // Breakpoint Variables
-$breakePoint_xs: "only screen and (max-width:320px)";
-$breakePoint_sm: "only screen and (min-width: 321px) AND (max-width:640px)";
+$breakePoint_xs: "460px";
+$breakePoint_sm: "520px";
+$breakePoint_md: "768px";
+$breakePoint_lg: "992px";
+$breakePoint_xl: "1200px";
+$breakePoint_xxl: "1400px";
 
 @mixin border-radius($radius) {
     -webkit-border-radius: $radius;
@@ -46,4 +50,20 @@ $breakePoint_sm: "only screen and (min-width: 321px) AND (max-width:640px)";
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+@mixin no-border() {
+    border: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
+}
+
+.no-border {
+    border: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
 }

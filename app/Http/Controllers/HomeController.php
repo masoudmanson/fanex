@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Country;
+use App\Traits\UptTrait;
+use Countries;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    use UptTrait;
+
     /**
      * Create a new controller instance.
      *
@@ -24,38 +30,46 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        if (Request::getMethod() == 'POST')
-//        {
-//            $rules = ['captcha' => 'required|captcha'];
-//            $validator = Validator::make(Input::all(), $rules);
-//            if ($validator->fails())
-//            {
-//                echo '<p style="color: #ff0000;">Incorrect!</p>';
-//            }
-//            else
-//            {
-//                echo '<p style="color: #00ff30;">Matched :)</p>';
-//            }
-//        }
+        $user = Auth::user();
 
+        $data = $this->CorpGetCountryData();
+        $multiLangCountries = Countries::lookup(session('applocale'));
+        $upt_country_list = $data->CorpGetCountryDataResult->COUNTRYLIST->WSCountry;
+        $country_list = array();
 
-        return view('home');
+        foreach ($upt_country_list as $key => $value) {
+            if($value->COUNTRYCODEOUT == "KV")
+                continue;
+            $country = Country::findByCountryCode($value->COUNTRYCODEOUT)->first();
+            $test = array();
+            if (isset($country->id) && $country->id > 0) {
+                $test['enable'] = 1;
+                $test['code'] = $value->COUNTRYCODEOUT;
+                $test['name'] = $multiLangCountries[$value->COUNTRYCODEOUT];
+                $test['currency'] = array();
+                if (is_array($value->CURRENTPAYMENTLIMITS->WSCountryCurrentLimit)) {
+                    foreach ($value->CURRENTPAYMENTLIMITS->WSCountryCurrentLimit as $curr) {
+                        if ($curr->TRANSACTION_TYPE == "008")
+                            $test['currency'][$curr->CURRENCY] = __('index.'.$curr->CURRENCY);
+                    }
+                } else {
+                    if (!empty($value->CURRENTPAYMENTLIMITS->WSCountryCurrentLimit->CURRENCY))
+                        $test['currency'][$value->CURRENTPAYMENTLIMITS->WSCountryCurrentLimit->CURRENCY] = __('index.'.$value->CURRENTPAYMENTLIMITS->WSCountryCurrentLimit->CURRENCY);
+                    else
+                        continue;
+                }
+                $country_list[$value->COUNTRYCODEOUT] = $test;
+            } else {
+                $test['enable'] = 0;
+                $test['code'] = $value->COUNTRYCODEOUT;
+                $test['name'] = $multiLangCountries[$value->COUNTRYCODEOUT];
+                $test['currency'] = array();
+                $country_list[$value->COUNTRYCODEOUT] = $test;
+            }
+        }
+        arsort($country_list);
+
+        return view('index', compact('user', 'country_list'));
     }
 
-    public function formController(Request $request)
-    {
-//
-////        dd($request);
-//        if($request["calculate"]) {
-////            return redirect()->action(
-////                'UptController@calculateRemittance', ['id' => 1]
-////            );
-//            return redirect()->route('calculate', ['id' => 1]);
-//        }
-//        if($request["payment"]) {
-//
-//            echo "hi there";
-//            //wallet controller
-//        }
-    }
 }

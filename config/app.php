@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Tehran',
 
     /*
     |--------------------------------------------------------------------------
@@ -79,7 +79,7 @@ return [
 
     'locale' => 'en',
 
-    'locales' => ['en' => 'English', 'fa' => 'Persian'],
+    'locales' => ['en' => 'English', 'fa' => 'فارسی', 'tr' => 'Türkçe'],
 
     /*
     |--------------------------------------------------------------------------
@@ -169,7 +169,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-
+        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -183,6 +183,8 @@ return [
         Mews\Captcha\CaptchaServiceProvider::class,
         Morilog\Jalali\JalaliServiceProvider::class,
         Cornford\Googlmapper\MapperServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+        PeterColes\Countries\CountriesServiceProvider::class,
     ],
 
     /*
@@ -235,6 +237,9 @@ return [
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
         'jDate' => Morilog\Jalali\Facades\jDate::class,
         'Mapper' => Cornford\Googlmapper\Facades\MapperFacade::class,
+        'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Countries' => PeterColes\Countries\CountriesFacade::class,
     ],
 
 ];

@@ -7,6 +7,7 @@ use App\Traits\PlatformTrait;
 use App\Traits\TokenTrait;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserInformationController extends Controller
@@ -17,7 +18,7 @@ class UserInformationController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkToken', ['only' => ['index']]);
+        $this->middleware('checkToken', ['only' => ['store']]);
     }
 
     /**
@@ -43,51 +44,67 @@ class UserInformationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        // store user additional info to db, and register user to platform
-        //registerwithSSo after authorization in datin
-
-        //check header with middleware
 
 //        $this->validate($request,[            //validate the form inputs if need to
 //            '*' => 'required',
 //            'email' => 'email',
 //            'password' => 'min:3|confirmed',
 //        ]);
-        $dotin_response = $this->dotinCredential($request->account_number , $request->mobile);
+
+        $request->headers->set('authorization', 'Bearer ' . $request->cookie('_token')['access']);
+
+        $dotin_response = $this->dotinCredential($request->account_number, $request->mobile);
         $dotin_result = json_decode($dotin_response->getBody()->getContents());
 
-        if($dotin_result[0]->auth){
-            //requestwithtoken
-            $sso_response = $this->registerWithSSO($request);
-            $sso_result = json_decode($sso_response->getBody()->getContents());
+        if ($dotin_result[0]->auth) {
 
-            if($sso_result->active){
+//            $sso_response = $this->registerWithSSO($request);
+//            $sso_result = json_decode($sso_response->getBody()->getContents());
 
-                $follow_res = $this->followBusiness($request->bearerToken());
+//            if(!$sso_result->hasError && $sso_result->result){
+//            if(!$sso_result->hasError && $sso_result->result){
 
-//                dd($follow_res);
-                $user = new User;
+            $result = $this->followBusiness($request->bearerToken());
+            $follow_res = json_decode($result->getBody()->getContents());
+//            if(!$follow_res->hassError)
 
-                $user->firstname = $dotin_result->firsname;
-                $user->lastname = $dotin_result->lastname;
-                $user->userId = $sso_result->userId;
 
-                $user->save();http://sandbox.fanapium.com:8080/nzh/follow/?businessId=22&follow=true
+            //todo
+            $result = $this->getCurrentPlatformUser($request->cookie('_token')['access']);
+            $platform_user = json_decode($result->getBody()->getContents());
 
-                return response()->view('beneficiary', $data, 200)->header('authorization', 'Bearer ' . $request->bearerToken());
-            }
+            $user = User::firstOrNew(array('userId' => $platform_user->result->userId));
+
+            $user->userId = $platform_user->result->userId;
+            $user->firstname = $dotin_result[0]->message->firstname;
+            $user->lastname = $dotin_result[0]->message->lastname;
+//                $user->api_token = $request->bearerToken();
+//                $user->api_token = $request->token;
+
+            $user->save();
+
+            //todo : save or update
+
+            Auth::login($user);
+            $beneficiaries = $user->beneficiary()->get();
+            $data = array('state' => $request->state, 'beneficiaries' => $beneficiaries);
+            //todo : check again if user was in his first time
+
+            return response()->view('dashboard.beneficiary', $data, 200);
+//                ->header('authorization', 'Bearer ' . $request->token);
         }
+
+//        }
         /*
          * 1. datin.
          * 2.register user to platform
          * 3. save user data , given from datin and platform (userId)
          */
-
 
 
 //        User::create($request->all());
@@ -99,7 +116,7 @@ class UserInformationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -110,7 +127,7 @@ class UserInformationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -121,8 +138,8 @@ class UserInformationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -133,7 +150,7 @@ class UserInformationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

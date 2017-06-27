@@ -14,7 +14,17 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkToken', ['only' => ['show', 'index']]);
+        $this->middleware('checkToken'
+//            [
+//                'only' =>
+//                    [
+//                        'show',
+//                        'index'
+//                    ]
+//            ]
+        );
+
+        $this->middleware('checkUser');
     }
 
     /**
@@ -24,7 +34,18 @@ class UserController extends Controller
      */
     public function index()
     {
-//        dd(Auth::guard('api')->user());
+        $user = Auth::user();
+        return view('dashboard.index', compact('user'));
+    }
+
+    public function notifications()
+    {
+        return view('dashboard.notifications');
+    }
+
+    public function settings()
+    {
+        return view('dashboard.settings');
     }
 
     /**
@@ -56,13 +77,7 @@ class UserController extends Controller
      */
     public function show(Request $request)
     {
-        if ($result = $this->checkToken($request)) {
-            $user = new User();
 
-            $user->user_id = $result->sub;
-            dd($user);
-
-        }
     }
 
     /**

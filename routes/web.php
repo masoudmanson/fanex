@@ -23,28 +23,35 @@
 
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Morilog\Jalali\Facades\jDate;
 
-Route::get('/', function () {
-    return view('index');
-});
-
-Route::get('/{locale}', function ($locale) {
-    App::setLocale($locale);
-    return view('index');
-    //
-});
+//    ->middleware('checkUser');
 
 // Static Routes
 
-Route::get('/get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'flat') {
-    return $captcha->src($config);
-});
+
+//Route::get('/{lang}', function($lang){
+////    dd($lang);
+////    App::setLocale($lang);
+//    return redirect()->back();
+//});//->where('lang', '/^[A-Za-z]{2}$/');
+
+
+//Route::group(
+//    [
+//        'prefix' => LaravelLocalization::setLocale(),
+//        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+//    ],
+//    function () {
+
+
+Route::get('/', 'HomeController@index')->name('index');
 
 Route::get('/about', 'StaticsController@about');
 Route::get('/terms', 'StaticsController@terms');
-Route::get('/contact', 'StaticsController@contact');
+Route::get('/contact', 'StaticsController@contact')->name('contact');
 Route::post('/contact', 'StaticsController@sendMail');
 
 Auth::routes();
@@ -54,18 +61,39 @@ Route::post('/home', 'HomeController@formController');
 
 Route::get('/dotin', 'DotinController@dotinAuthorization');//maybe get,will implement according to the fake web service
 
-Route::get('/profile', 'UserController@show'); // or user/me
+Route::get('/profile', 'UserController@index');
+Route::resource('/beneficiaries', 'BeneficiaryController');
+
+Route::get('/notifications', 'UserController@notifications');
+Route::get('/settings', 'UserController@settings');
+Route::get('/logout', 'Auth\LoginController@logout');
+//        Route::get('/proforma', 'PaymentController@proforma');
+Route::get('/invoice', 'PaymentController@issueInvoice');
+Route::get('/invoice/show', 'PaymentController@showInvoice');
 
 //Route::post('/pay', 'WalletController') ;
-//
-Route::post('/calculate', 'UptController@calculateRemittance')->name('calculate'); //maybe get, according to fake web service
 
-Route::get('/test', 'PaymentController@index');
-Route::get('/payment', 'PaymentController@pay');
-Route::get('/payment2', 'PaymentController@pay2');
+Route::get('/test', 'PaymentController@test');
+Route::get('/payment', 'PaymentController@pay'); //todo: load beneficiary page, go to beneficiary controller?
 
 Route::get('/callback/{callback}', 'CallbackController@callbackHandler');
 
-Route::resource('/additional-info', 'UserInformationController');
+Route::get('/emad', 'PaymentController@test');
+Route::get('/ws', 'UptController@test');
+Route::get('/cookie', 'PaymentController@test');
 
-//Route::request('/token/validate','TokenController@tokenValidation')->name('tokenValidate');
+Route::resource('/additional-info', 'UserInformationController');
+Route::post('/proforma', 'PaymentController@proforma_with_new_bnf');
+Route::post('/proforma/selected', 'PaymentController@proforma_with_selected_bnf');
+
+//    });
+
+Route::get('/get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'flat') {
+    return $captcha->src($config);
+});
+
+Route::post('/calculate', 'UptController@calculateRemittance')->name('calculate'); //maybe get, according to fake web service
+
+Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
+
+Route::get('pdf', 'StaticsController@pdf');

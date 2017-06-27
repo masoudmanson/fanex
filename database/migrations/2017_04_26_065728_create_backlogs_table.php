@@ -14,11 +14,13 @@ class CreateBacklogsTable extends Migration
     public function up()
     {
         Schema::create('backlogs', function (Blueprint $table) {
-            $table->increments('id');
+            $table->engine = 'InnoDB';
+
+            $table->increments('id')->unsigned();
             $table->string('ip');
             $table->string('currency');
-            $table->string('upt_exchange_rate');
-            $table->string('upt_ttl');
+            $table->string('upt_exchange_rate')->nullable();
+            $table->string('upt_ttl')->nullable();
             $table->string('exchange_rate');
             $table->string('ttl');
             $table->string('payment_amount');

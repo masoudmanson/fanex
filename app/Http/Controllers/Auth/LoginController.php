@@ -4,8 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 
+use App\Traits\TokenTrait;
+use Illuminate\Cookie\CookieJar;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Redirect;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -22,23 +27,30 @@ class LoginController extends Controller
     |
     */
 
+    use TokenTrait;
+
+    public function __construct()
+    {
+        $this->middleware('logOut', ['only' => ['logout']]);
+    }
 
     public function showLoginForm(Request $request)
     {
-
         if (!$request->session()->get('redirect_uri'))
 //            $request->redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/callback/profile';
-            $request->redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/profile';
+            $request->redirect_uri = 'http://' . $_SERVER['HTTP_HOST']  . '/profile';
         else {
-
             $request->redirect_uri = $request->session()->get('redirect_uri');
-            $request->queryString = $request->session()->get('query_string');
+//            $request->queryString = $request->session()->get('query_string');
 //            $request->redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/callback'.'/'.$redirect_uri;
         }
 
         $id = adapterAssignment()->getId();
 
-        return Redirect::away('http://sandbox.fanapium.com/oauth2/authorize/?client_id=' . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri . '&state='.$request->queryString.'&prompt=login');
+        return Redirect::away('http://sandbox.fanapium.com/oauth2/authorize/?client_id='
+            . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri
+//            . '&state=' . $request->queryString
+            . '&prompt=login');
 
 //        return \Redirect::away('http://sandbox.fanapium.com/oauth2/authorize?'.$queryString);
 //        return \redirect('http://sandbox.fanapium.com/oauth2/authorize?'.$queryString);
@@ -46,13 +58,11 @@ class LoginController extends Controller
         //sso login form
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        /*
-         * logout sso
-         */
+        Auth::logout();
 
-        //http://demo.fanapium.com:12594/oauth2/logout/
+        return Redirect::away('http://sandbox.fanapium.com/oauth2/logout/?continue=' . $request->root());
     }
 
     public function showRegistrationForm()

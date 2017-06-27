@@ -9,41 +9,22 @@
         </div>
     </div>
 
-    <h1 class="pb-3 mt-0">International Money E-Transfer</h1>
-
-    <form action="/calculate" method="post">
+    <h1 class="pb-3 mt-0">@lang('index.formTitle')</h1>
+    <form action="/payment" method="get">
         {{ csrf_field() }}
 
         {{-- Destination Country --}}
         <div class="form-group bsWrapper">
             <i class="icon-globe bsIcon"></i>
-            <select class="form-control fanexInput selectpicker" data-style="fanexInput" name="country"
+            <select class="form-control fanexInput selectpicker indexSelectBox" data-style="fanexInput" name="country"
                     id="exCountry">
-                <optgroup label="Active">
-                    <option value="Turkey">Turkey</option>
-                    <option value="Canada">Canada</option>
-                </optgroup>
-                <optgroup label="Inactive">
-                    <option value="France" disabled>France</option>
-                    <option value="Italy" disabled>Italy</option>
-                    <option value="Germany" disabled>Germany</option>
-                    <option value="Switzerland" disabled>Switzerland</option>
-                    <option value="Sweden" disabled>Sweden</option>
-                    <option value="Norway" disabled>Norway</option>
-                    <option value="Belgium" disabled>Belgium</option>
-                    <option value="Austria" disabled>Austria</option>
-                    <option value="Finland" disabled>Finland</option>
-                    <option value="Greece" disabled>Greece</option>
-                    <option value="Denmark" disabled>Denmark</option>
-                    <option value="Netherlands" disabled>Netherlands</option>
-                    <option value="Portugal" disabled>Portugal</option>
-                    <option value="Spain" disabled>Spain</option>
-                    <option value="England" disabled>England</option>
-                    <option value="Iraq" disabled>Iraq</option>
-                    <option value="Russia" disabled>Russia</option>
-                    <option value="China" disabled>China</option>
-                    <option value="USA" disabled>USA</option>
-                </optgroup>
+                <option value="" selected="selected" disabled="disabled">@lang('index.formCountry')</option>
+
+                @foreach($country_list as $country)
+                    <option value="{{ $country['code'] }}" @if(!$country['enable']) disabled @endif data-currency="{{ json_encode($country['currency']) }}">
+                        {{ $country['name'] }}
+                    </option>
+                @endforeach
             </select>
         </div>
 
@@ -54,7 +35,7 @@
                 <div class="form-group bsWrapper">
                     <i class="icon-change bsIcon"></i>
                     <input type="text" class="form-control fanexInput numberTextField" id="exAmount"
-                           name="amount" placeholder="Amount" autocomplete="off">
+                           name="amount" placeholder="@lang('index.formAmount')" autocomplete="off">
                 </div>
             </div>
             {{-- Currency --}}
@@ -63,9 +44,10 @@
                     <i class="icon-coin bsIcon"></i>
                     <select class="form-control fanexInput selectpicker" data-style="fanexInput"
                             name="currency"
-                            id="exCurrency">
-                        <option value="lira">₺ Turkish Lira</option>
-                        <option value="euro">€ Euro</option>
+                            id="exCurrency" disabled>
+                        <option value="" selected="selected" disabled="disabled">@lang('index.formCurrency')</option>
+                        {{--<option value="lira">₺ Turkish Lira</option>--}}
+                        {{--<option value="euro">€ Euro</option>--}}
                     </select>
                 </div>
             </div>
@@ -78,7 +60,7 @@
                 <div class="form-group bsWrapper">
                     <a href="javascript: reloadCaptcha();" class="captchaRefresher"><i
                                 class="icon-refresh bsIcon"></i></a>
-                    <div class="fanexInput" style="text-align:center; overflow: hidden;">
+                    <div class="fanexInput fanexCaptcha" style="text-align:center; overflow: hidden;">
                         <img src="{{ captcha_src('flat') }}" alt="captcha" class="captcha-img"
                              data-refresh-config="flat">
                     </div>
@@ -89,18 +71,18 @@
                 <div class="form-group bsWrapper">
                     <i class="icon-check bsIcon"></i>
                     <input type="text" class="form-control fanexInput" name="captcha" id="captcha"
-                           placeholder="Enter Captcha Here">
+                           placeholder="@lang('index.formCaptcha')">
                 </div>
             </div>
         </div>
 
         {{-- Temproray Calculated Amount --}}
         <div class="tempAmount" style="display: none;">
-            <h2>Cost of Transferring <span id="tempAmountCash"></span> to <span
-                        id="tempAmountCountry"></span> is:</h2>
+            <h2>@lang('index.formCost') <span id="tempAmountCash"></span> @lang('index.formTo') <span
+                        id="tempAmountCountry"></span> @lang('index.formIs'):</h2>
             <div class="tempAmountWrapper">
-                <span class="calcAmount">Country</span>
-                <span class="tempCurrency">Rials</span>
+                <span class="calcAmount"></span>
+                <span class="tempCurrency">@lang('index.formRials')</span>
             </div>
         </div>
 
@@ -108,12 +90,13 @@
         <div class="row">
             {{-- Calculate Amount --}}
             <div class="col-sm-6 col-xs-12 pr-md-2 mb-xs-4">
-                <input type="button" class="btn fanexBtnOutlineOrange" value=@lang('index.calculate')
-                       onclick="getAmount()"/>
+                <input type="button" class="btn fanexBtnOutlineOrange" value=@lang('index.calculate') id="calcBtn"
+                       onclick="getAmount()" disabled/>
             </div>
             {{-- Go For Payment --}}
             <div class="col-sm-6 col-xs-12 pl-md-2">
-                <input type="submit" class="btn fanexBtnOutlineGrey" value=@lang('index.pay') name="payment"/>
+                <input type="submit" class="btn fanexBtnOutlineGrey" id="paymentBtn"
+                       value=@lang('index.pay') name="payment" disabled/>
             </div>
         </div>
 

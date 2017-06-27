@@ -1,34 +1,83 @@
 * {
     outline: none !important;
-    font-family: 'Roboto', sans-serif !important;
 }
 
 html,
 body {
-    font-family: 'Roboto', tahoma, sans-serif;
+    font-family: 'Roboto', 'IRANSans', tahoma, sans-serif;
+    background-color: $fanapGreyLight;
+    direction: ltr;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.fanex-text-red {
+    color: $fanapRed !important;
+}
+
+.fanex-text-green {
+    color: $fanapGreen !important;
+}
+
+.fanex-text-orange {
+    color: $fanapOrange !important;
+}
+
+@include mq($max-width: $breakePoint_sm) {
+    h1 {
+        font-size: 28px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+    h2 {
+        font-size: 24px;
+        margin-top: 8px;
+        margin-bottom: 4px;
+    }
 }
 
 .navbar-default {
     background-color: transparent;
     border: none;
+    .navbar-brand:hover, .navbar-brand:focus {
+        color: $fanapOrange;
+    }
     .navbar-brand {
         font-size: 42px;
         color: $fanapGrey;
         font-weight: 500;
-        @include transition(all .3s);
-        @include mq($max-width: 1200px) {
-            color: #fff;
+        padding-left: 0;
+        @include mq($max-width: $breakePoint_sm) {
+            font-size: 32px !important;
+            padding-top: 20px !important;
         }
-    }
-    .navbar-brand:hover, .navbar-brand:focus {
-        color: $fanapOrange;
-        @include mq($max-width: 1200px) {
-            color: $fanapDark;
+        @include transition(all .3s);
+        @include mq($max-width: $breakePoint_xl) {
+            color: #fff;
+            &:hover, &:focus {
+                color: #fff;
+                opacity: 0.6;
+            }
         }
     }
 }
 
-@include mq($max-width: 768px) {
+.navbar-header {
+    margin-left: 0 !important;
+    @include mq($max-width: $breakePoint_sm) {
+        position: absolute !important;
+    }
+}
+
+@include mq($max-width: $breakePoint_md) {
     .navbar-nav > li, .navbar-nav {
         float: left !important;
     }
@@ -47,11 +96,12 @@ body {
     z-index: 1000;
     padding: 30px 100px;
     margin: 0;
-    @include mq($max-width: 1400px) {
+    @include border-radius(0);
+    @include mq($max-width: $breakePoint_xxl) {
         padding: 30px 50px;
     }
-    @include mq($max-width: 520px) {
-        padding: 20px 15px;
+    @include mq($max-width: $breakePoint_sm) {
+        padding: 10px;
     }
     .navbar-nav {
         li.nav-item {
@@ -60,9 +110,215 @@ body {
                 padding-left: 3rem;
                 padding-right: 0;
                 @include transition(all .3s);
+                background: transparent !important;
+                background-color: transparent !important;
                 &:hover, &:active, &:focus {
                     text-decoration: none;
                     opacity: 0.6;
+                    background: transparent;
+                    background-color: transparent;
+                }
+                @include mq($max-width: $breakePoint_md) {
+                    padding-left: 2rem;
+                }
+                @include mq($max-width: $breakePoint_sm) {
+                    padding-left: 1rem;
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        left: 5px;
+                        top: 25%;
+                        width: 1px;
+                        background-color: $fanapGreyLight;
+                        height: 40%;
+                        opacity: 0.6;
+                    }
+                }
+            }
+        }
+        li.nav-item.open {
+            a.nav-link {
+                float: right;
+            }
+            .dropdown-menu {
+                li {
+                    a {
+                        color: $fanapDark;
+                        padding: 20px 0 15px;
+                        text-align: center;
+                        &:hover, &:active, &:focus {
+                            color: #FFF;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.dark-header {
+    background: transparent;
+    background-color: transparent;
+    .navbar-nav {
+        li.nav-item {
+            a.nav-link {
+                color: $fanapDark;
+                &:hover, &:active, &:focus {
+                    color: $fanapOrange;
+                }
+            }
+        }
+    }
+}
+
+.dashboard-nav {
+    background: $fanapOrange url("images/pattern-w.png");
+    -webkit-background-size: 50%;
+    background-size: 50%;
+    z-index: 4000;
+    .navbar-brand {
+        color: #fff;
+        &:hover {
+            color: darken($fanapOrange, 20%);
+        }
+    }
+    ul li.nav-item a.nav-link:hover {
+        color: darken($fanapOrange, 30%);
+    }
+}
+
+.additional-wrapper {
+    min-height: 80vh;
+    padding: 160px 100px 30px;
+    margin: auto;
+    @include mq($max-width: $breakePoint_xxl) {
+        padding: 120px 50px 30px;
+    }
+    @include mq($max-width: $breakePoint_sm) {
+        padding: 80px 30px 20px;
+    }
+    @include mq($max-width: $breakePoint_xs) {
+        padding: 60px 30px 20px;
+    }
+    .white-div {
+        padding: 50px 40px;
+        background-color: #fff;
+        margin: auto;
+    }
+}
+
+.dashboard-wrapper {
+    min-height: 95vh;
+    padding: 160px 100px 30px;
+    @include mq($max-width: $breakePoint_xxl) {
+        padding: 130px 50px 30px;
+    }
+    @include mq($max-width: $breakePoint_sm) {
+        padding: 120px 30px 20px;
+    }
+    #bnf-ajax-div {
+        min-height: 603px;
+        @include mq($max-width: $breakePoint_lg) {
+            min-height: 0;
+        }
+    }
+    .dash-title {
+        font-weight: 200;
+        color: $fanapDark;
+        padding-bottom: 5px;
+        b {
+            font-weight: 400;
+        }
+    }
+    .dash-subtitle {
+        color: $fanapOrange;
+        font-size: 24px;
+        font-weight: 500;
+        padding-bottom: 30px;
+        padding-top: 15px;
+    }
+    .proforma-wrapper {
+        height: 1500px;
+        background-color: #fff;
+    }
+    .invoice-wrapper {
+        background-color: #fff;
+        padding: 25px 45px 40px;
+        .invoice-title {
+            font-size: 24px;
+            color: $fanapDark;
+            padding-bottom: 20px;
+        }
+        .invoice-date {
+            float: right;
+            font-size: 14px;
+            color: $fanapGrey;
+            font-weight: 300;
+            padding-top: 6px;
+        }
+        .invoice-bnf {
+            color: $fanapGreyDark;
+        }
+
+        .invoice-factor {
+            padding: 20px 0 40px;
+            list-style: none;
+            .acc-info-left {
+                p {
+                    color: $fanapGreyDark;
+                }
+            }
+            .acc-info-right {
+                p {
+                    color: $fanapDark;
+                    font-weight: 500;
+                }
+            }
+            hr {
+                margin: 7px 0;
+            }
+            .acc-factor-sum {
+                color: $fanapGreyDark !important;
+            }
+            .orange {
+                font-weight: 500;
+                color: $fanapOrange !important;
+            }
+            .grey {
+                color: $fanapGreyDark !important;
+            }
+            p.table-header {
+                background-color: #fff;
+                padding: 5px 0;
+                color: $fanapGreyDark;
+                font-weight: 500;
+                border-bottom: solid 1px $fanapGreyLight;
+            }
+        }
+
+        .regards {
+            font-weight: 500;
+            color: $fanapDark;
+            font-size: 16px;
+            .grey {
+                color: $fanapGreyDark;
+                font-weight: 300;
+                font-size: 75%;
+            }
+        }
+
+        .invoice-print {
+            float: right;
+            margin-top: -15px;
+            text-decoration: none;
+            i {
+                font-size: 42px;
+                color: $fanapGreyDark;
+                @include transition(all .3s);
+            }
+            &:hover {
+                i {
+                    color: $fanapDark;
                 }
             }
         }
@@ -84,16 +340,16 @@ body {
     }
     .bgDivLeft {
         background: $fanapGreyLight url("images/pattern.png");
-        @include mq($max-width: 1200px) {
+        @include mq($max-width: $breakePoint_xl) {
             background: $fanapOrange url("images/pattern.png");
         }
-        -webkit-background-size: 40%;
-        background-size: 40%;
+        -webkit-background-size: 80%;
+        background-size: 80%;
     }
 }
 
 .indexWrapper {
-    @include mq($max-width: 520px) {
+    @include mq($max-width: $breakePoint_sm) {
         margin: 0;
         padding: 0 !important;
         width: 100%;
@@ -102,8 +358,9 @@ body {
         height: calc(100vh - 210px);
         min-height: 600px;
         position: relative;
-        @include mq($max-width: 1200px) {
+        @include mq($max-width: $breakePoint_xl) {
             height: auto;
+            position: relative;
         }
     }
     .indexLeft {
@@ -114,27 +371,34 @@ body {
             padding: 50px;
             width: 100%;
             margin: auto -70px auto 100px;
-            @include mq($max-width: 1400px) {
+            @include mq($max-width: $breakePoint_xxl) {
                 margin: auto -40px auto 50px;
             }
-            @include mq($max-width: 1200px) {
+            @include mq($max-width: $breakePoint_xl) {
                 margin: 50px auto;
                 width: calc(100% - 100px);
                 position: static;
+                top: 0;
+                left: 0;
                 transform: translate(0, 0);
             }
-            @include mq($max-width: 520px) {
+            @include mq($max-width: $breakePoint_sm) {
                 margin: 0 auto;
                 width: 100%;
-                padding: 50px 30px;
+                padding: 25px 30px 40px;
             }
             z-index: 300;
             h1 {
                 color: $fanapDark;
                 font-size: 32px;
                 font-weight: normal;
-                @include mq($max-width: 768px) {
+                @include mq($max-width: $breakePoint_md) {
                     font-size: 24px;
+                    @include text-overflow();
+                }
+                @include mq($max-width: $breakePoint_sm) {
+                    font-size: 20px;
+                    margin-bottom: 10px;
                     @include text-overflow();
                 }
             }
@@ -146,7 +410,7 @@ body {
                     font-weight: 300;
                     text-align: left;
                     line-height: 1.5em !important;
-                    @include mq($max-width: 768px) {
+                    @include mq($max-width: $breakePoint_md) {
                         font-size: 16px;
                     }
                     #tempAmountCash {
@@ -168,10 +432,10 @@ body {
                     font-size: 52px;
                     font-weight: 600;
                     color: $fanapOrange;
-                    @include mq($max-width: 768px) {
+                    @include mq($max-width: $breakePoint_md) {
                         font-size: 36px;
                     }
-                    @include mq($max-width: 520px) {
+                    @include mq($max-width: $breakePoint_sm) {
                         font-size: 28px;
                     }
                 }
@@ -183,10 +447,10 @@ body {
     }
     .indexRight {
         z-index: 50;
-        @include mq($max-width: 768px) {
+        @include mq($max-width: $breakePoint_md) {
             min-height: 400px;
         }
-        @include mq($max-width: 520px) {
+        @include mq($max-width: $breakePoint_sm) {
             min-height: 400px;
         }
         #mapWrapper {
@@ -208,13 +472,13 @@ body {
             .fanexLogoName {
                 font-weight: 100;
                 font-size: 120px;
-                @include mq($max-width: 1400px) {
+                @include mq($max-width: $breakePoint_xxl) {
                     font-size: 90px;
                 }
             }
             .fanexMotto {
                 margin-top: -40px;
-                @include mq($max-width: 1400px) {
+                @include mq($max-width: $breakePoint_xxl) {
                     margin-top: -20px;
                 }
             }
@@ -222,6 +486,9 @@ body {
         .addressWrapper {
             @extend .mottoWrapper;
             @include absolut-center(75%, 50%);
+            @include mq($max-width: $breakePoint_sm) {
+                width: 90%;
+            }
             h4 {
                 font-weight: 300;
                 font-size: 18px;
@@ -241,11 +508,22 @@ body {
             text-align: center;
             width: 70%;
             color: #fff;
+            @include mq($max-width: $breakePoint_xl) {
+                position: static;
+                top: 0;
+                left: 0;
+                transform: translate(0, 0);
+                margin: auto;
+                width: 90%;
+            }
             .fanexLogoName {
                 font-weight: 100;
                 font-size: 72px;
-                @include mq($max-width: 1400px) {
+                @include mq($max-width: $breakePoint_xxl) {
                     font-size: 60px;
+                }
+                @include mq($max-width: $breakePoint_xl) {
+                    margin-top: 30px;
                 }
             }
             .fanexMotto {
@@ -253,8 +531,9 @@ body {
                 margin-top: 0px;
                 overflow-y: scroll;
                 max-height: 400px;
-                @include mq($max-width: 768px) {
-                    max-height: 300px;
+                margin-bottom: 50px;
+                @include mq($max-width: $breakePoint_xl) {
+                    max-height: 2000px;
                 }
             }
         }
@@ -275,13 +554,17 @@ body {
     color: $fanapGreyDark;
     position: absolute;
     z-index: 100;
-    margin: 14px 0 0 15px;
+    margin: 16px 0 0 15px;
+    @include mq($max-width: $breakePoint_sm) {
+        margin: 13px 0 0 12px;
+    }
 }
 
 .fanexInput {
     color: $fanapGrey;
     background-color: $fanapGreyUltraLight;
     height: 60px;
+    line-height: 60px;
     padding: 0px 50px;
     border: none;
     border-radius: 0 !important;
@@ -298,6 +581,111 @@ body {
     }
     img {
         margin-top: 5px;
+        @include mq($max-width: $breakePoint_sm) {
+            margin-top: 0;
+        }
+    }
+    @include mq($max-width: $breakePoint_sm) {
+        height: 50px;
+        line-height: 50px;
+    }
+}
+
+.fanexInputWhite {
+    @extend .fanexInput;
+    background-color: #fff;
+    &:hover, &:active, &:focus {
+        color: $fanapDark;
+        background-color: #fff;
+        @include box-shadow(0 0 7px rgba(0, 0, 0, 0.2) !important);
+    }
+}
+
+div.fanexInput {
+    height: auto !important;
+    line-height: 1.3em;
+    padding: 20px 30px 20px 50px;
+}
+
+div.fanexCaptcha {
+    height: 60px;
+    line-height: 60px;
+    padding: 0px 50px;
+}
+
+.fanexInputError {
+    @extend .fanexInput;
+    background-color: #fff;
+    border: solid 1px $fanapRed !important;
+    &:hover, &:active, &:focus {
+        color: $fanapDark;
+        background-color: #fff;
+        @include box-shadow(0 0 5px rgba(250, 0, 0, 0.6) !important);
+    }
+}
+
+.fanexLabel {
+    font-weight: 200;
+    color: $fanapGrey;
+    display: block;
+}
+
+.fanexDanger {
+    font-size: 12px;
+    color: $fanapRed;
+    padding: 8px 5px 10px;
+    background-color: rgba($fanapRed, 0.1);
+}
+
+#search-input {
+    position: relative;
+    .search-filter {
+        width: 100%;
+    }
+}
+
+#search-input::before {
+    content: '\51';
+    font-family: 'fanex';
+    color: $fanapOrange;
+    font-size: 32px;
+    position: absolute;
+    @include absolut-center($top: 50%, $left: 0%);
+    left: 40px;
+    z-index: 300;
+    @include mq($max-width: $breakePoint_md) {
+        left: 30px;
+    }
+}
+
+.search-filter {
+    font-size: 26px;
+    color: #666 !important;
+    font-weight: 100;
+    padding-left: 63px !important;
+    &::before {
+        content: '\51';
+        font-family: 'fanex';
+    }
+    @include mq($max-width: $breakePoint_md) {
+        font-size: 22px;
+    }
+    @include mq($max-width: $breakePoint_sm) {
+        font-size: 16px;
+    }
+}
+
+.panel-body .bsWrapper {
+    margin: 0;
+}
+
+.fanexInputPanel {
+    @extend .fanexInput;
+    color: $fanapDark;
+    border: solid 1px $fanapGreyLight;
+    background-color: #fff;
+    &:hover, &:active, &:focus {
+        background-color: #fff;
     }
 }
 
@@ -306,14 +694,15 @@ textarea.fanexInput {
     resize: none;
     min-height: 150px;
     padding: 15px 20px;
+    line-height: 1.6em !important;
 }
 
 .dropdown-menu {
     margin: 0;
     border-top: 0;
     padding: 0;
+    max-height: 500px !important;
     border: solid 1px darken($fanapGreyLight, 5%);
-    max-height: 240px !important;
     @include border-radius(0);
     @include box-shadow(none !important);
     .inner {
@@ -351,6 +740,10 @@ textarea.fanexInput {
     }
 }
 
+.indexSelectBox .dropdown-menu {
+    max-height: 240px !important;
+}
+
 .dropdown-toggle::after {
     margin-left: -.5rem !important;
 }
@@ -363,9 +756,13 @@ textarea.fanexInput {
     color: $fanapOrange;
 }
 
+a.btn {
+    line-height: 46px;
+}
+
 .fanexBtn {
     height: 60px;
-    font-weight: 200;
+    font-weight: 300;
     font-size: 24px;
     text-align: center;
     width: 100%;
@@ -374,6 +771,9 @@ textarea.fanexInput {
     @include box-shadow(none !important);
     @include border-radius(0);
     @include transition(all .3s);
+    @include mq($max-width: $breakePoint_sm) {
+        height: 50px;
+    }
 }
 
 .fanexBtn.hasIcon {
@@ -387,8 +787,24 @@ textarea.fanexInput {
     border: solid 1px $fanapGreyLight;
     &:hover, &:focus, &:active {
         border-color: $fanapOrange;
-        background-color: $fanapOrange;
+        background: $fanapOrange url("images/pattern-w.png");
+        background-size: 140%;
+        -webkit-background-size: 140%;
         color: #fff;
+    }
+}
+
+.fanexBtnNoline {
+    @extend .fanexBtn;
+    background-color: transparent;
+    color: $fanapGrey;
+    border: none;
+    text-align: right;
+    &:hover, &:focus, &:active {
+        color: $fanapDark;
+    }
+    @include mq($max-width: $breakePoint_md) {
+        text-align: center;
     }
 }
 
@@ -408,10 +824,12 @@ textarea.fanexInput {
 
 .fanexBtnOrange {
     @extend .fanexBtn;
-    background-color: $fanapOrange;
-    color: #fff;
+    background: $fanapOrange url("images/pattern-w.png");
+    -webkit-background-size: 140%;
+    color: #fff !important;
     &:hover, &:focus, &:active {
-        background-color: darken($fanapOrange, 10%);
+        background: darken($fanapOrange, 10%) url("images/pattern-w.png");
+        -webkit-background-size: 140%;
         color: #fff;
     }
 }
@@ -431,8 +849,11 @@ textarea.fanexInput {
             float: left;
             a {
                 text-decoration: none;
+                i {
+                    vertical-align: middle;
+                }
             }
-            @include mq($max-width: 768px) {
+            @include mq($max-width: $breakePoint_md) {
                 float: none;
                 margin-bottom: 8px;
             }
@@ -442,7 +863,11 @@ textarea.fanexInput {
         }
     }
     .footerLeft {
+        padding-top: 3px;
         float: left;
+        @include mq($max-width: $breakePoint_md) {
+            margin-top: -4px;
+        }
         li {
             a {
                 padding-left: 0;
@@ -450,10 +875,10 @@ textarea.fanexInput {
                 color: $fanapDark;
                 @include transition(all .3s);
                 &:hover {
-                    color: $fanapOrange;
+                    opacity: 0.6;
                 }
             }
-            @include mq($max-width: 1200px) {
+            @include mq($max-width: $breakePoint_xl) {
                 a {
                     color: #fff;
                     &:hover {
@@ -481,7 +906,11 @@ textarea.fanexInput {
             }
         }
 
-        @include mq($max-width: 768px) {
+        li.copyright {
+            line-height: 28px;
+        }
+
+        @include mq($max-width: $breakePoint_md) {
             li.copyright {
                 display: none;
             }
@@ -493,6 +922,45 @@ textarea.fanexInput {
                 a {
                     font-size: 18px;
                     padding-right: 0;
+                }
+            }
+        }
+    }
+}
+
+.dashboard-footer {
+    padding: 45px 100px 35px;
+    margin-top: 30px;
+    background-color: $fanapDark !important;
+    @include mq($max-width: $breakePoint_xxl) {
+        padding: 35px 50px 25px;
+    }
+    @include mq($max-width: $breakePoint_sm) {
+        padding: 25px 15px 20px;
+    }
+    .footerLeft,
+    .footerRight {
+        li {
+            a {
+                color: #fff;
+                &:hover {
+                    opacity: 1;
+                    color: lighten($fanapOrange, 15%);
+                }
+            }
+        }
+    }
+}
+
+.dark-footer {
+    .footerLeft,
+    .footerRight {
+        li {
+            a {
+                color: $fanapDark;
+                &:hover {
+                    opacity: 1;
+                    color: $fanapOrange;
                 }
             }
         }
@@ -518,6 +986,496 @@ textarea.fanexInput {
         font-weight: 600;
         color: $fanapRed;
         text-align: center;
+    }
+}
+
+/* Sidebar */
+.white-card {
+    background-color: #fff;
+    padding: 40px 40px 20px;
+    @include mq($max-width: $breakePoint_sm) {
+        padding: 30px 30px 10px;
+        .profile-ul {
+            .profile-li {
+                a {
+                    font-size: 18px !important;
+                    i {
+                        font-size: 24px !important;
+                    }
+                }
+            }
+        }
+    }
+    color: $fanapDark;
+    p {
+        color: lighten($fanapDark, 20%);
+        font-size: 18px;
+        font-weight: 300;
+    }
+    h3 {
+        font-size: 48px;
+        font-weight: 600;
+        color: $fanapOrange;
+        text-align: center;
+        margin-top: 5px;
+    }
+    h3.alert {
+        color: $fanapRed;
+        font-size: 32px;
+        font-weight: 500;
+        margin-bottom: 0;
+    }
+    .steps-ul {
+        list-style: none;
+        padding: 20px 0 0 15px;
+        .steps-li {
+            color: $fanapGrey;
+            position: relative;
+            padding: 15px 0 40px 45px;
+            border-left: solid 1px $fanapGrey;
+            a {
+                color: $fanapOrange;
+                @include transition(all .3s);
+                text-decoration: none;
+                &:hover {
+                    color: lighten($fanapOrange, 15%);
+                }
+            }
+            .steps-number {
+                position: absolute;
+                left: -26px;
+                top: 0px;
+                width: 50px;
+                height: 50px;
+                @include border-radius(50%);
+                background-color: #fff;
+                border: solid 1px $fanapGrey;
+                text-align: center;
+                line-height: 50px;
+                font-size: 16px;
+                font-weight: 200;
+            }
+        }
+        .steps-li:last-child {
+            border: none;
+        }
+        .steps-li.done {
+            border-color: $fanapOrange;
+            color: $fanapOrange;
+            font-weight: 500;
+            .steps-number {
+                background-color: $fanapOrange;
+                color: #fff;
+                border-color: $fanapOrange;
+                font-weight: 400;
+            }
+        }
+        .steps-li.active {
+            border-color: $fanapOrange;
+            color: $fanapOrange;
+            font-weight: 500;
+            .steps-number {
+                background-color: #fff;
+                color: $fanapOrange;
+                border-color: $fanapOrange;
+                font-weight: 400;
+            }
+        }
+    }
+    .profile-ul {
+        list-style: none;
+        padding: 0px;
+        .profile-li {
+            margin: 0px 0 20px;
+            a {
+                font-size: 21px;
+                font-weight: 200;
+                color: $fanapGrey;
+                text-decoration: none;
+                @include transition(all .3s);
+                i {
+                    font-size: 30px;
+                    vertical-align: middle;
+                    padding-right: 13px;
+                    float: left;
+                }
+                &:hover {
+                    color: $fanapOrange;
+                }
+            }
+        }
+        .profile-li.active {
+            a {
+                color: $fanapOrange;
+                font-weight: 400;
+            }
+        }
+    }
+}
+
+.filter-ul {
+    margin: 35px 0 20px;
+    list-style: none;
+    padding: 0;
+    .filter-li {
+        display: inline-block;
+        padding: 0 20px;
+        height: 40px;
+        line-height: 40px;
+        background-color: transparent;
+        @include border-radius(20px);
+        @include transition(all .3s);
+        @include mq($max-width: $breakePoint_md) {
+            padding: 0 15px;
+        }
+        @include mq($max-width: $breakePoint_sm) {
+            padding: 0 10px;
+        }
+        a {
+            color: $fanapGreyDark;
+            text-decoration: none;
+            @include transition(all .3s);
+            &:hover {
+                color: $fanapOrange;
+            }
+            .mini-title,
+            .large-title {
+                @include text-overflow();
+            }
+            .large-title {
+                display: none;
+                @include mq($max-width: $breakePoint_md) {
+                    display: block;
+                }
+            }
+            .mini-title {
+                display: block;
+                @include mq($max-width: $breakePoint_md) {
+                    display: none;
+                }
+            }
+        }
+        i {
+            height: 30px;
+            width: 30px;
+            //margin-top: 5px;
+            -webkit-background-size: cover;
+            background-size: cover;
+            @include border-radius(50%);
+            display: block;
+            cursor: pointer;
+            vertical-align: middle;
+            &:before {
+                vertical-align: super !important;
+            }
+        }
+    }
+    .filter-li.flag {
+        filter: grayscale(1);
+        -webkit-filter: grayscale(1);
+        padding: 5px 10px 0 0;
+        opacity: 0.5;
+        @include transition(all .3s);
+        &:hover {
+            opacity: 1;
+            filter: grayscale(0);
+            -webkit-filter: grayscale(0);
+        }
+    }
+    .filter-li.active {
+        color: #fff;
+        background-color: $fanapGreyDark;
+        &:hover {
+            background-color: darken($fanapGreyDark, 15%);
+        }
+        a {
+            color: #fff;
+            &:hover {
+                color: #ffffff;
+            }
+        }
+    }
+    .filter-li.flag.active {
+        filter: grayscale(0);
+        -webkit-filter: grayscale(0);
+        opacity: 1;
+        background-color: transparent !important;
+    }
+    .filter-li-link {
+        @extend .filter-li;
+        overflow: hidden;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+.filter-ul.filter-right {
+    .filter-li {
+        float: right;
+        background-color: $fanapOrange;
+        &:hover {
+            background-color: darken($fanapOrange, 15%);
+        }
+        a {
+            color: #fff;
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+}
+
+.panel {
+    border: none;
+    @include border-radius(0 !important);
+    @include box-shadow(none !important);
+}
+
+.panel-group .panel + .panel {
+    margin-top: 15px;
+}
+
+.panel-default {
+    @include border-radius(0);
+    .panel-heading {
+        position: relative;
+        background-color: #fff;
+        height: 70px;
+        line-height: 70px;
+        @include border-radius(0);
+        border: none;
+        padding: 0 20px;
+        @include mq($max-width: $breakePoint_md) {
+            padding: 0 10px;
+        }
+        div {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: center;
+            padding-right: 2px !important;
+            padding-left: 2px !important;
+        }
+        div:first-child {
+            text-align: left;
+        }
+        .acc-main-icon {
+            color: $fanapOrange;
+            font-size: 28px;
+            vertical-align: top;
+            padding-right: 10px;
+            float: left;
+            &:before {
+                vertical-align: middle;
+            }
+            @include mq($max-width: $breakePoint_sm) {
+                font-size: 21px;
+                padding-right: 5px;
+            }
+        }
+        .acc-user {
+            font-weight: 300;
+            color: $fanapGreyDark;
+            font-size: 14px;
+            b {
+                font-weight: 400;
+                color: $fanapDark;
+            }
+        }
+        .acc-date {
+            color: $fanapGreyDark;
+        }
+        .acc-cash {
+            color: $fanapDark;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .acc-status {
+            i {
+                font-size: 16px;
+                padding-right: 5px;
+                &:before {
+                    vertical-align: middle;
+                }
+            }
+        }
+        .acc-status.pending {
+            color: $fanapOrange;
+        }
+        .acc-status.successful {
+            color: $fanapGreen;
+        }
+        .acc-status.failed {
+            color: $fanapRed;
+        }
+        .acc-type {
+            i {
+                &:before {
+                    font-size: 21px;
+                    color: $fanapGreyDark;
+                    vertical-align: middle;
+                }
+            }
+        }
+        .bnf-action-icons {
+            text-align: right;
+            a {
+                text-decoration: none;
+                i {
+                    color: $fanapGreyDark;
+                    font-size: 24px;
+                    padding: 0 5px;
+                    @include transition(all .3s);
+                    &:before {
+                        vertical-align: middle !important;
+                    }
+                }
+                &:hover {
+                    i {
+                        color: $fanapDark;
+                    }
+                }
+            }
+        }
+    }
+    .panel-heading.new::before {
+        content: '';
+        background-color: $fanapOrange;
+        width: 15px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .panel-heading.new {
+        @include mq($max-width: $breakePoint_md) {
+            background-color: $fanapOrange;
+            color: #fff !important;
+            .acc-main-icon,
+            .acc-user,
+            .acc-cash,
+            .acc-date {
+                color: #fff !important;
+                b {
+                    color: #fff !important;
+                }
+            }
+            .bnf-action-icons {
+                a {
+                    i {
+                        color: #fff;
+                    }
+                    &:hover {
+                        i {
+                            color: $fanapDark;
+                        }
+                    }
+                }
+            }
+            .accordion-toggle:after {
+                color: #fff !important;
+            }
+        }
+    }
+    .panel-body {
+        @include border-radius(0);
+        border-top: solid 1px $fanapGreyUltraLight !important;
+        .acc-info-left {
+            p {
+                color: $fanapGreyDark;
+                font-weight: 300;
+                @include text-overflow();
+            }
+        }
+        .acc-info-right {
+            p {
+                color: $fanapDark;
+                font-weight: 500;
+                @include mq($max-width: $breakePoint_lg) {
+                    text-align: right;
+                }
+                @include text-overflow();
+            }
+        }
+        .acc-factor {
+            @include mq($max-width: $breakePoint_lg) {
+                margin-top: 40px;
+            }
+            hr {
+                margin: 5px 0;
+            }
+            .acc-factor-sum {
+                color: $fanapOrange;
+            }
+            p.table-header {
+                background-color: #fff;
+                padding: 5px 0;
+                color: $fanapGreyDark;
+                font-weight: 500;
+                border-bottom: solid 1px $fanapGreyLight;
+                @include mq($max-width: $breakePoint_lg) {
+                    background-color: $fanapGreyDark;
+                    margin-left: -30px;
+                    margin-right: -30px;
+                    padding: 5px 30px;
+                    color: #fff;
+                }
+            }
+        }
+        a.notification-link {
+            @include transition(all .3s);
+            padding: 5px 0 20px;
+            color: $fanapGrey;
+            text-decoration: none;
+            font-size: 13px;
+            &:hover {
+                color: $fanapDark;
+            }
+            i {
+                vertical-align: middle;
+            }
+        }
+    }
+    .panel-body.new::before {
+        content: '';
+        background-color: $fanapOrange;
+        width: 15px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .panel-body.notification-body {
+        padding: 30px 20px;
+    }
+}
+
+.panel-heading .accordion-toggle:after {
+    font-family: 'fanex';
+    content: "\43";
+    float: right;
+    vertical-align: middle;
+    font-size: 21px;
+    color: $fanapGreyDark !important;
+    cursor: pointer;
+}
+
+.panel-heading .accordion-toggle.collapsed:after {
+    content: "\69";
+}
+
+#bnf-sidebar .white-card {
+    margin-top: 100px;
+    @include mq($max-width: $breakePoint_lg) {
+        margin-top: 20px;
+    }
+}
+
+#profile-sidebar .white-card {
+    margin-top: 30px;
+    @include mq($max-width: $breakePoint_lg) {
+        margin-top: 20px;
     }
 }
 
@@ -611,5 +1569,176 @@ textarea.fanexInput {
     40% {
         -webkit-transform: scale(1.0);
         transform: scale(1.0);
+    }
+}
+
+/* General styles for the modal */
+
+/*
+Styles for the html/body for special modal where we want 3d effects
+Note that we need a container wrapping all content on the page for the
+perspective effects (not including the modals and the overlay).
+*/
+.md-perspective,
+.md-perspective body {
+    height: 100%;
+    overflow: hidden;
+}
+
+.md-perspective body {
+    background: #222;
+    -webkit-perspective: 600px;
+    -moz-perspective: 600px;
+    perspective: 600px;
+}
+
+.container {
+    background: #e74c3c;
+    min-height: 100%;
+}
+
+.md-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    max-width: 630px;
+    min-width: 320px;
+    height: auto;
+    z-index: 200000;
+    visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.md-show {
+    visibility: visible;
+}
+
+.md-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+    z-index: 199999;
+    opacity: 0;
+    background: rgba(darken($fanapOrange, 30%), .8);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.md-show ~ .md-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+.md-content {
+    color: #fff;
+    background: lighten($fanapOrange, 3%);
+    position: relative;
+    margin: 0 auto;
+    h3 {
+        margin: 0;
+        padding: .8em .5em;
+        text-align: center;
+        font-size: 1.8em;
+        font-weight: 300;
+        opacity: 0.8;
+        background: darken($fanapOrange, 5%) url('images/pattern-w.png');
+        background-size: 100%;
+        -webkit-background-size: 100%;
+        border-radius: 3px 3px 0 0;
+    }
+    .md-body {
+        padding: 15px 40px 30px;
+        margin: 0;
+        font-weight: 300;
+        font-size: 1.15em;
+        p {
+            margin: 0;
+            padding: 10px 0;
+        }
+        .lang-ul {
+            padding: 10px 30px;
+            list-style: none;
+            li {
+                padding: 20px 0 10px;
+                a {
+                    @include transition(all .05s);
+                    color: $fanapGreyDark;
+                    text-decoration: none;
+                    font-size: 24px;
+                    font-weight: 300;
+                    color: #fff;
+                    text-align: center;
+                    &:hover {
+                        color: $fanapOrange;
+                        font-weight: 500;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+
+    }
+    button {
+        display: block;
+        margin: 0 auto;
+        font-size: 0.8em;
+    }
+}
+
+/* Effect 9: 3D flip vertical */
+.md-effect-9.md-modal {
+    -webkit-perspective: 1300px;
+    -moz-perspective: 1300px;
+    perspective: 1300px;
+}
+
+.md-effect-9 .md-content {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: rotateX(-70deg);
+    -moz-transform: rotateX(-70deg);
+    -ms-transform: rotateX(-70deg);
+    transform: rotateX(-70deg);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    opacity: 0;
+}
+
+.md-show.md-effect-9 .md-content {
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    -ms-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    opacity: 1;
+}
+
+.md-button {
+    border: none;
+    padding: 0.6em 3em;
+    background: darken($fanapOrange, 3%) url('images/pattern-w.png');
+    background-size: 140%;
+    -webkit-background-size: 140%;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    display: inline-block;
+    @include transition(all .3s);
+    &:hover {
+        background: darken($fanapOrange, 10%) url('images/pattern-w.png');
+        background-size: 140%;
+        -webkit-background-size: 140%;
     }
 }

@@ -61,7 +61,7 @@ trait TokenTrait
             $result = $this->tokenValidation($request->bearerToken());
             $result = json_decode($result->getBody()->getContents());
 
-            if (!$result->active) {
+            if (!$result || !$result->active) {
 
 //                $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
@@ -92,6 +92,24 @@ trait TokenTrait
             'form_params' => [
                 'grant_type'=>'refresh_token',
                 'refresh_token' => $token,
+                'client_id' => $id,
+                'client_secret' => $secret,
+            ]
+        ]);
+
+        return $res;
+    }
+
+    public function revokeToken($token)
+    {
+        $id = adapterAssignment()->getId();
+        $secret = adapterAssignment()->getSecret();
+
+        $client = new Client();
+        $res = $client->post('http://sandbox.fanapium.com/oauth2/token/revoke', [
+            'form_params' => [
+                'token_type_hint'=>'access_token',
+                'token' => $token,
                 'client_id' => $id,
                 'client_secret' => $secret,
             ]

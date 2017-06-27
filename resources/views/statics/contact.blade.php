@@ -3,12 +3,19 @@
 @section('styles')
     <style>
         a[title="Click to see this area on Google Maps"],
+        .gm-style div a div img,
         .gm-style-cc,
         .gmnoprint {
             opacity: 0;
+            display: none;
         }
         .bgWrapper {
             background-color: #333 !important;
+        }
+        @media only screen and (max-width: 1200px) {
+            .bgDivLeft {
+                display: none;
+            }
         }
     </style>
 @endsection
@@ -34,7 +41,7 @@
             {{-- Map and Static Pages Container --}}
             <div class="col-lg-6 col-md-12 p-0 indexWrapperInside indexRight">
                 <div class="addressWrapper">
-                    <h4>#123, 12th Noavari Ave, Pardis Tech Park, Tehran, Iran</h4>
+                    <h4>@lang('index.address')</h4>
                     <p><i class="icon-phone"></i> +98 21 7625 0515</p>
                     <p><i class="icon-fax"></i> +98 21 7625 0516</p>
                 </div>

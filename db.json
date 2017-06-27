@@ -1,0 +1,22 @@
+{
+  "auth": [
+    {
+        "auth": "true",
+        "date": "2015-08-05T08:40:51.620Z",
+        "message": {
+          "firstname": "test",
+          "lastname": "test",
+          "int'l_code": "79128370123",
+          "address": "test",
+          "postall_code": "576178823"
+        }
+      }
+  ],
+  "er": [
+    {
+        "er": "40000",
+        "date": "2015-08-05T08:40:51.620Z",
+        "ttl": "12355234"
+    }
+  ]
+}

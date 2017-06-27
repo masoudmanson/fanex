@@ -109,7 +109,7 @@ return [
         ],
         'amount' => [
             'required'  => "Please Enter an Amount.",
-            'min'  => "Please Enter an Valid Amount."
+            'min'  => "Please Enter a Valid Amount."
         ],
     ],
 

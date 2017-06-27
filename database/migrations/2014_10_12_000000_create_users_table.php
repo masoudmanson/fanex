@@ -14,10 +14,12 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+
             $table->increments('id');
             $table->integer('userId')->unique()->nullable();//maybe string
 //            $table->string('api_token')->nullable();
-            $table->string('api_token', 60)->unique();
+            $table->string('api_token', 60)->unique()->nullable();
             $table->string('firstname');
             $table->string('lastname');
 
@@ -32,7 +34,7 @@ class CreateUsersTable extends Migration
             $table->string('postal_code')->nullable();
             $table->string('tel')->nullable();
             $table->string('fax')->nullable();
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
 //            $table->string('password');
 //**
             $table->boolean('is_authorized')->nullable();
