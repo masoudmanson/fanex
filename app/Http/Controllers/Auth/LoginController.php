@@ -38,7 +38,7 @@ class LoginController extends Controller
     {
         if (!$request->session()->get('redirect_uri'))
 //            $request->redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/callback/profile';
-            $request->redirect_uri = 'http://' . $_SERVER['HTTP_HOST']  . '/profile';
+            $request->redirect_uri = $request->root()  . '/profile';
         else {
             $request->redirect_uri = $request->session()->get('redirect_uri');
 //            $request->queryString = $request->session()->get('query_string');
