@@ -40,7 +40,6 @@ class PaymentController extends Controller
 
     public function test(Request $request)
     {
-
 //        dd($request->input());
 //        dd(Auth::user()->api_token);
         $request->headers->set('authorization', 'Bearer ' . Auth::user()->api_token);
@@ -80,10 +79,10 @@ class PaymentController extends Controller
         $transaction->beneficiary_id = $beneficiary->id;
         $transaction->backlog_id = $id;
         $transaction->save();//todo : code cleaning
-        $transaction['hash'] = bcrypt($transaction);
+        $transaction['hash'] = Crypt::encryptString($transaction);
 
         $request->query->add(['beneficiary' => $beneficiary,
-//            'transaction_sign'=>$transaction['hash']
+            'transaction_sign' => $transaction['hash']
         ]);
         return Hash::check($beneficiary, $request->hash)
             ? response()->view('dashboard.proforma', $request->query(), 200)
@@ -102,14 +101,15 @@ class PaymentController extends Controller
 
         $id = base64_decode($_COOKIE['backlog']);
         $transaction = new Transaction();
-        $transaction->user_id = Auth::user();
+        $transaction->user_id = Auth::user()->id;
         $transaction->beneficiary_id = $beneficiary->id;
         $transaction->backlog_id = $id;
         $transaction->save();//todo : code cleaning
-        $transaction['hash'] = bcrypt($transaction);
+
+        $transaction['hash'] = Crypt::encryptString($transaction);
 
         $request->query->add(['beneficiary' => $beneficiary,
-//            'transaction_sign'=>$transaction['hash']
+            'transaction_sign' => $transaction['hash']
         ]);
 
         return $beneficiary->id
@@ -119,31 +119,39 @@ class PaymentController extends Controller
 
     public function issueInvoice(Request $request)
     {
-        $id = base64_decode($_COOKIE['backlog']);
+        $id = base64_decode($_COOKIE['backlog']); // todo: maybe it's better to do that with middleware. !important!
         $backlog = Backlog::findOrFail($id);
-        $result = $this->userInvoice($request,$backlog);
+        $result = $this->userInvoice($request, $backlog);
 
         $invoice = json_decode($result->getBody()->getContents());
 
-        if(!$invoice->hasError) {
+        if (!$invoice->hasError) {
 
-//            $transaction = Transaction::findOrFail(bcrypt($request->transaction_sign)->id);//todo : check it after masouds changes
-//            dd($transaction);
-//            $transaction->uri = $invoice->result->billNumber;
-//            $transaction->update();
+            $transaction = Transaction::findOrFail(json_decode(Crypt::decryptString($request->transaction_sign))->id);//todo : check it after masouds changes
+
+            $transaction->uri = $invoice->result->billNumber;
+            $transaction->update();
 
             return redirect("http://176.221.69.209:1031/v1/pbc/payinvoice/?invoiceId="
-                .$invoice->result->id."&redirectUri=http://" . $_SERVER['HTTP_HOST']  . "/invoice/show");
-            //todo : why still not redirect
-        }
-
-        else dd($invoice);  //todo: error handling
+                . $invoice->result->id . "&redirectUri=".$request->root() . "/invoice/show?billNumber=" . $transaction->uri);
+        } else dd($invoice);  //todo: error handling
 //        return view('dashboard.invoice');
     }
 
-    public function showInvoice()
+    public function showInvoice(Request $request)
     {
+        $result = $this->trackingInvoiceByBillNumber($request->billNumber);
+        $invoice = json_decode($result->getBody()->getContents());
+        dd($invoice);
+        //todo: if success, update db. if cannot, rollback (cancelInvoice)
+        //todo: if error
+        //$this->cancelInvoice($request->$billNumber);
         return view('dashboard.invoice');
+    }
+
+    public function updatePaymentCondition(Request $request)
+    {
+
     }
 
     /**

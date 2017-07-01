@@ -29,7 +29,7 @@
 
                     <div class="col-xs-3 col-sm-3 px-0">
                         <ul class="filter-ul filter-right">
-                            <li class="filter-li-link"><a href="/"><span class="mini-title">@lang('profile.newTrans')</span><span class="large-title">@lang('profile.newTransShort')</span></a></li>
+                            <li class="filter-li-link"><a href={{ route('index') }}><span class="mini-title">@lang('profile.newTrans')</span><span class="large-title">@lang('profile.newTransShort')</span></a></li>
                         </ul>
                     </div>
                 </div>

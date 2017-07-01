@@ -75,7 +75,7 @@ trait PlatformTrait
         return $res;
     }
 
-    public function userInvoice(Request $request , Backlog $backlog)
+    public function userInvoice(Request $request, Backlog $backlog)
     {
         $client = new Client();
         //business token must taken from sso
@@ -85,7 +85,7 @@ trait PlatformTrait
         $token = 'd35b0c351acd47cc87a76b1c4b07239a'; //biz static token
 
 //        $user_object = $this->getCurrentPlatformUser($request->bearerToken());
-        $user_object = $this->getCurrentPlatformUser($request->cookie('_token')['access']);
+        $user_object = $this->getCurrentPlatformUser($request->cookie('_token_')['access']);
 //        if (!$user->hasError)
 //        dd($user_object->getBody()->getContents());
         $json_input = $user_object->getBody()->getContents();
@@ -100,7 +100,7 @@ trait PlatformTrait
         $res = $client->post('http://sandbox.fanapium.com:8080/nzh/biz/issueInvoice', [
             'form_params' => [
                 //todo
-                'redirectURL' => 'http://' . $_SERVER['HTTP_HOST']  . '/invoice/show',
+                'redirectURL' => $request->root() . '/invoice/show',
                 'userId' => $userId,// get userId from his token: gholi = 204
                 'billNumber' => generateUniqueReferenceNumber(), //todo : make a random factor bill number , it's the same URN (Unique Reference Number)
                 'description' => 'for now we have no description',
@@ -131,16 +131,41 @@ trait PlatformTrait
         return $res;
     }
 
-//    public function issueInvoice()
-//    {
-//        $client = new Client();
-//        //business token must taken from sso
-//        $res = $client->get("http://http://176.221.69.209:1031/v1/pbc/payinvoice/", [
-//            'query' => [
-//                'invoiceId'=>'InvoiceId'
-//            ],
-//
-//        ]);
-//        return $res;
-//    }
+    public function trackingInvoiceByBillNumber($billNumber)
+    {
+        $client = new Client();
+        $token = 'd35b0c351acd47cc87a76b1c4b07239a'; //biz static token
+
+        $res = $client->post('http://sandbox.fanapium.com:8080/nzh/biz/getInvoiceList', [
+                'form_params' => [
+                    'billNumber' => $billNumber,
+                    'size' => 1,
+                    'firstId' => 0,
+//                    'isPayed' => true,
+//                    'isCanceled' => false,
+                ],
+                'headers' => [
+                    '_token_' => $token,
+                    '_token_issuer_' => 1
+                ]
+            ]
+        );
+        return $res;
+    }
+
+    public function cancelInvoice($invoice_id , $token = 'd35b0c351acd47cc87a76b1c4b07239a') //todo: get api_token from config or .env file
+    {
+        $client = new Client();
+        $res = $client->get('http://sandbox.fanapium.com:8080/nzh/biz/cancelInvoice', [
+            'query' =>
+                [
+                    'invoiceId' => $invoice_id
+                ],
+            'headers' => [
+                '_token_' => $token,
+                '_token_issuer_' => 1
+            ]
+        ]);
+        return $res;
+    }
 }
