@@ -9,7 +9,7 @@ $(document).ready(function () {
         $.each(JSON.parse(currencies), function( index, value ) {
             $('#exCurrency')
                 .append($("<option></option>")
-                    .attr("value",value)
+                    .attr("value",index)
                     .text(value));
         });
         $('#exCurrency').removeAttr('disabled');

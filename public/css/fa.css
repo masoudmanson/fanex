@@ -11926,7 +11926,7 @@ input::-webkit-inner-spin-button {
 }
 
 .fanex-text-orange {
-  color: #1abc9c !important;
+  color: #F58121 !important;
 }
 
 @media only screen and (max-width: 520px) {
@@ -11948,7 +11948,7 @@ input::-webkit-inner-spin-button {
 }
 
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-  color: #1abc9c;
+  color: #F58121;
 }
 
 .navbar-default .navbar-brand {
@@ -12082,11 +12082,11 @@ input::-webkit-inner-spin-button {
 }
 
 .dark-header .navbar-nav li.nav-item a.nav-link:hover, .dark-header .navbar-nav li.nav-item a.nav-link:active, .dark-header .navbar-nav li.nav-item a.nav-link:focus {
-  color: #1abc9c;
+  color: #F58121;
 }
 
 .dashboard-nav {
-  background: #1abc9c url("images/pattern-w.png");
+  background: #F58121 url("images/pattern-w.png");
   background-size: 50%;
   z-index: 4000;
 }
@@ -12096,11 +12096,11 @@ input::-webkit-inner-spin-button {
 }
 
 .dashboard-nav .navbar-brand:hover {
-  color: #0e6252;
+  color: #a85008;
 }
 
 .dashboard-nav ul li.nav-item a.nav-link:hover {
-  color: #07362c;
+  color: #783905;
 }
 
 .additional-wrapper {
@@ -12171,7 +12171,7 @@ input::-webkit-inner-spin-button {
 }
 
 .dashboard-wrapper .dash-subtitle {
-  color: #1abc9c;
+  color: #F58121;
   font-size: 24px;
   font-weight: 500;
   padding-bottom: 30px;
@@ -12230,7 +12230,7 @@ input::-webkit-inner-spin-button {
 
 .dashboard-wrapper .invoice-wrapper .invoice-factor .orange {
   font-weight: 500;
-  color: #1abc9c !important;
+  color: #F58121 !important;
 }
 
 .dashboard-wrapper .invoice-wrapper .invoice-factor .grey {
@@ -12281,7 +12281,7 @@ input::-webkit-inner-spin-button {
   height: 100vh;
   min-height: 200px;
   margin: auto;
-  background-color: #1abc9c;
+  background-color: #F58121;
   z-index: 0;
 }
 
@@ -12296,7 +12296,7 @@ input::-webkit-inner-spin-button {
 
 @media only screen and (max-width: 1200px) {
   .bgWrapper .bgDivLeft {
-    background: #1abc9c url("images/pattern.png");
+    background: #F58121 url("images/pattern.png");
   }
 }
 
@@ -12409,7 +12409,7 @@ input::-webkit-inner-spin-button {
 
 .indexWrapper .indexLeft .mainForm .tempAmount h2 #tempAmountCash, .indexWrapper .indexLeft .mainForm .tempAmount h2 #tempAmountCountry {
   font-weight: 500 !important;
-  color: #1abc9c;
+  color: #F58121;
 }
 
 .indexWrapper .indexLeft .mainForm .tempAmount h2 #tempAmountCountry {
@@ -12426,7 +12426,7 @@ input::-webkit-inner-spin-button {
 .indexWrapper .indexLeft .mainForm .tempAmount .calcAmount {
   font-size: 52px;
   font-weight: 600;
-  color: #1abc9c;
+  color: #F58121;
 }
 
 @media only screen and (max-width: 768px) {
@@ -12715,7 +12715,7 @@ div.fanexCaptcha {
 #search-input::before {
   content: '\51';
   font-family: 'fanex';
-  color: #1abc9c;
+  color: #F58121;
   font-size: 32px;
   position: absolute;
   position: absolute;
@@ -12840,7 +12840,7 @@ textarea.fanexInput, textarea.fanexInputWhite, textarea.fanexInputError, textare
 }
 
 .captchaRefresher:hover i {
-  color: #1abc9c;
+  color: #F58121;
 }
 
 a.btn {
@@ -12877,8 +12877,8 @@ a.btn {
 }
 
 .fanexBtnOutline:hover, .fanexBtnOutlineGrey:hover, .fanexBtnOutlineOrange:hover, .fanexBtnOutline:focus, .fanexBtnOutlineGrey:focus, .fanexBtnOutlineOrange:focus, .fanexBtnOutline:active, .fanexBtnOutlineGrey:active, .fanexBtnOutlineOrange:active {
-  border-color: #1abc9c;
-  background: #1abc9c url("images/pattern-w.png");
+  border-color: #F58121;
+  background: #F58121 url("images/pattern-w.png");
   background-size: 140%;
   -webkit-background-size: 140%;
   color: #fff;
@@ -12915,20 +12915,20 @@ a.btn {
 }
 
 .fanexBtnOrange {
-  background: #1abc9c url("images/pattern-w.png");
+  background: #F58121 url("images/pattern-w.png");
   -webkit-background-size: 140%;
   color: #fff !important;
 }
 
 .fanexBtnOrange:hover, .fanexBtnOrange:focus, .fanexBtnOrange:active {
-  background: #148f77 url("images/pattern-w.png");
+  background: #d9680a url("images/pattern-w.png");
   -webkit-background-size: 140%;
   color: #fff;
 }
 
 .fanexBtnOutlineOrange {
-  border-color: #1abc9c;
-  color: #1abc9c;
+  border-color: #F58121;
+  color: #F58121;
 }
 
 .fanexFooter ul {
@@ -13059,7 +13059,7 @@ a.btn {
 .dashboard-footer .footerLeft li a:hover,
 .dashboard-footer .footerRight li a:hover {
   opacity: 1;
-  color: #3ee4c4;
+  color: #f8ab6a;
 }
 
 .dark-footer .footerLeft li a,
@@ -13070,7 +13070,7 @@ a.btn {
 .dark-footer .footerLeft li a:hover,
 .dark-footer .footerRight li a:hover {
   opacity: 1;
-  color: #1abc9c;
+  color: #F58121;
 }
 
 #mainFormLoader {
@@ -13133,7 +13133,7 @@ a.btn {
 .white-card h3 {
   font-size: 48px;
   font-weight: 600;
-  color: #1abc9c;
+  color: #F58121;
   text-align: center;
   margin-top: 5px;
 }
@@ -13158,13 +13158,13 @@ a.btn {
 }
 
 .white-card .steps-ul .steps-li a {
-  color: #1abc9c;
+  color: #F58121;
   transition: all 0.3s;
   text-decoration: none;
 }
 
 .white-card .steps-ul .steps-li a:hover {
-  color: #3ee4c4;
+  color: #f8ab6a;
 }
 
 .white-card .steps-ul .steps-li .steps-number {
@@ -13187,28 +13187,28 @@ a.btn {
 }
 
 .white-card .steps-ul .steps-li.done {
-  border-color: #1abc9c;
-  color: #1abc9c;
+  border-color: #F58121;
+  color: #F58121;
   font-weight: 500;
 }
 
 .white-card .steps-ul .steps-li.done .steps-number {
-  background-color: #1abc9c;
+  background-color: #F58121;
   color: #fff;
-  border-color: #1abc9c;
+  border-color: #F58121;
   font-weight: 400;
 }
 
 .white-card .steps-ul .steps-li.active {
-  border-color: #1abc9c;
-  color: #1abc9c;
+  border-color: #F58121;
+  color: #F58121;
   font-weight: 500;
 }
 
 .white-card .steps-ul .steps-li.active .steps-number {
   background-color: #fff;
-  color: #1abc9c;
-  border-color: #1abc9c;
+  color: #F58121;
+  border-color: #F58121;
   font-weight: 400;
 }
 
@@ -13237,11 +13237,11 @@ a.btn {
 }
 
 .white-card .profile-ul .profile-li a:hover {
-  color: #1abc9c;
+  color: #F58121;
 }
 
 .white-card .profile-ul .profile-li.active a {
-  color: #1abc9c;
+  color: #F58121;
   font-weight: 400;
 }
 
@@ -13280,7 +13280,7 @@ a.btn {
 }
 
 .filter-ul .filter-li a:hover, .filter-ul .filter-li-link a:hover {
-  color: #1abc9c;
+  color: #F58121;
 }
 
 .filter-ul .filter-li a .mini-title, .filter-ul .filter-li-link a .mini-title,
@@ -13371,11 +13371,11 @@ a.btn {
 
 .filter-ul.filter-right .filter-li, .filter-ul.filter-right .filter-li-link {
   float: left;
-  background-color: #1abc9c;
+  background-color: #F58121;
 }
 
 .filter-ul.filter-right .filter-li:hover, .filter-ul.filter-right .filter-li-link:hover {
-  background-color: #117964;
+  background-color: #c15c09;
 }
 
 .filter-ul.filter-right .filter-li a, .filter-ul.filter-right .filter-li-link a {
@@ -13430,7 +13430,7 @@ a.btn {
 }
 
 .panel-default .panel-heading .acc-main-icon {
-  color: #1abc9c;
+  color: #F58121;
   font-size: 28px;
   vertical-align: top;
   padding-left: 10px;
@@ -13479,7 +13479,7 @@ a.btn {
 }
 
 .panel-default .panel-heading .acc-status.pending {
-  color: #1abc9c;
+  color: #F58121;
 }
 
 .panel-default .panel-heading .acc-status.successful {
@@ -13521,7 +13521,7 @@ a.btn {
 
 .panel-default .panel-heading.new::before {
   content: '';
-  background-color: #1abc9c;
+  background-color: #F58121;
   width: 15px;
   height: 100%;
   position: absolute;
@@ -13531,7 +13531,7 @@ a.btn {
 
 @media only screen and (max-width: 768px) {
   .panel-default .panel-heading.new {
-    background-color: #1abc9c;
+    background-color: #F58121;
     color: #fff !important;
   }
   .panel-default .panel-heading.new .acc-main-icon,
@@ -13595,7 +13595,7 @@ a.btn {
 }
 
 .panel-default .panel-body .acc-factor .acc-factor-sum {
-  color: #1abc9c;
+  color: #F58121;
 }
 
 .panel-default .panel-body .acc-factor p.table-header {
@@ -13634,7 +13634,7 @@ a.btn {
 
 .panel-default .panel-body.new::before {
   content: '';
-  background-color: #1abc9c;
+  background-color: #F58121;
   width: 15px;
   height: 100%;
   position: absolute;
@@ -13691,7 +13691,7 @@ a.btn {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: #1abc9c;
+  background-color: #F58121;
   opacity: 0.6;
   position: absolute;
   top: 0;
@@ -13734,7 +13734,7 @@ a.btn {
 .spinner2 > div {
   width: 18px;
   height: 18px;
-  background-color: #1abc9c;
+  background-color: #F58121;
   border-radius: 100%;
   display: inline-block;
   -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
@@ -13823,7 +13823,7 @@ perspective effects (not including the modals and the overlay).
   right: 0;
   z-index: 199999;
   opacity: 0;
-  background: rgba(7, 54, 44, 0.8);
+  background: rgba(120, 57, 5, 0.8);
   transition: all 0.3s;
 }
 
@@ -13834,7 +13834,7 @@ perspective effects (not including the modals and the overlay).
 
 .md-content {
   color: #fff;
-  background: #1cc9a7;
+  background: #f68930;
   position: relative;
   margin: 0 auto;
 }
@@ -13846,7 +13846,7 @@ perspective effects (not including the modals and the overlay).
   font-size: 1.8em;
   font-weight: 300;
   opacity: 0.8;
-  background: #17a689 url("images/pattern-w.png");
+  background: #f2730b url("images/pattern-w.png");
   background-size: 100%;
   -webkit-background-size: 100%;
   border-radius: 3px 3px 0 0;
@@ -13884,7 +13884,7 @@ perspective effects (not including the modals and the overlay).
 }
 
 .md-content .md-body .lang-ul li a:hover {
-  color: #1abc9c;
+  color: #F58121;
   font-weight: 500;
   color: #fff;
 }
@@ -13919,7 +13919,7 @@ perspective effects (not including the modals and the overlay).
 .md-button {
   border: none;
   padding: 0.6em 3em;
-  background: #18af91 url("images/pattern-w.png");
+  background: #f47912 url("images/pattern-w.png");
   background-size: 140%;
   -webkit-background-size: 140%;
   color: #fff;
@@ -13930,7 +13930,7 @@ perspective effects (not including the modals and the overlay).
 }
 
 .md-button:hover {
-  background: #148f77 url("images/pattern-w.png");
+  background: #d9680a url("images/pattern-w.png");
   background-size: 140%;
   -webkit-background-size: 140%;
 }
