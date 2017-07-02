@@ -33,6 +33,7 @@
                         </ul>
                     </div>
                 </div>
+                <br class="clear">
 
                 {{-- Table Wrapper --}}
                 <div class="row p-0 m-0">
@@ -76,9 +77,9 @@
                                             <i class="icon-delete" title="@lang('profile.bnfDelete')"></i>
                                         </a>
                                     </div>
-                                    <div class="col-md-1 col-sm-1 col-xs-1">
-                                        <span class="acc-arrow accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row1"></span>
-                                    </div>
+                                    <a class="col-md-1 col-sm-1 col-xs-1 accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row1">
+                                        <span class="acc-arrow"></span>
+                                    </a>
                                 </div>
                             </div>
                             <div id="row1" class="panel-collapse collapse">
@@ -199,9 +200,9 @@
                                             <i class="icon-delete" title="Delete Beneficiary"></i>
                                         </a>
                                     </div>
-                                    <div class="col-md-1 col-sm-1 col-xs-1">
-                                        <span class="acc-arrow accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row2"></span>
-                                    </div>
+                                    <a class="col-md-1 col-sm-1 col-xs-1 accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row2">
+                                        <span class="acc-arrow"></span>
+                                    </a>
                                 </div>
                             </div>
                             <div id="row2" class="panel-collapse collapse">
@@ -322,9 +323,9 @@
                                             <i class="icon-delete" title="Delete Beneficiary"></i>
                                         </a>
                                     </div>
-                                    <div class="col-md-1 col-sm-1 col-xs-1">
-                                        <span class="acc-arrow accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row3"></span>
-                                    </div>
+                                    <a class="col-md-1 col-sm-1 col-xs-1 accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row3">
+                                        <span class="acc-arrow"></span>
+                                    </a>
                                 </div>
                             </div>
                             <div id="row3" class="panel-collapse collapse">
@@ -445,9 +446,9 @@
                                             <i class="icon-delete" title="Delete Beneficiary"></i>
                                         </a>
                                     </div>
-                                    <div class="col-md-1 col-sm-1 col-xs-1">
-                                        <span class="acc-arrow accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row4"></span>
-                                    </div>
+                                    <a class="col-md-1 col-sm-1 col-xs-1 accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row4">
+                                        <span class="acc-arrow"></span>
+                                    </a>
                                 </div>
                             </div>
                             <div id="row4" class="panel-collapse collapse">

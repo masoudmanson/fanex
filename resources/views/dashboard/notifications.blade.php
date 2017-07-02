@@ -37,9 +37,9 @@
                                             <i class="icon-delete" title="@lang('profile.ntfDelete')"></i>
                                         </a>
                                     </div>
-                                    <div class="col-md-1 col-sm-1 col-xs-1">
-                                        <span class="acc-arrow accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row1"></span>
-                                    </div>
+                                    <a class="col-md-1 col-sm-1 col-xs-1 accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row1">
+                                        <span class="acc-arrow"></span>
+                                    </a>
                                 </div>
                             </div>
                             <div id="row1" class="panel-collapse collapse in">
@@ -72,9 +72,9 @@
                                             <i class="icon-delete" title="@lang('profile.ntfDelete')"></i>
                                         </a>
                                     </div>
-                                    <div class="col-md-1 col-sm-1 col-xs-1">
-                                        <span class="acc-arrow accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row2"></span>
-                                    </div>
+                                    <a class="col-md-1 col-sm-1 col-xs-1 accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row2">
+                                        <span class="acc-arrow"></span>
+                                    </a>
                                 </div>
                             </div>
                             <div id="row2" class="panel-collapse collapse">

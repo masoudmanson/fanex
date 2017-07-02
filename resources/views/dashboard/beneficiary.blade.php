@@ -114,7 +114,7 @@
                             </div>
 
                             {{-- Submit the form --}}
-                            <div class="col-xs-12 p-0">
+                            <div class="col-xs-12 p-0" style="float: none;">
                                 <input type="hidden" name="hash" value="" id="bnfSelectHash">
                                 <input type="submit" id="bnfSelectSubmit" class="btn fanexBtnOutlineGrey"
                                        value="@lang('payment.showProformaSelect')" style="display: none;"/>

@@ -20,7 +20,7 @@
                     <div class="col-xs-9 col-sm-9 px-0">
                         {{-- Filter List --}}
                         <ul class="filter-ul">
-                            <li class="filter-li active" data-filter="all"><a href="#"><span class="mini-title">@lang('profile.filterAll')</span><span class="large-title">@lang('profile.filterAllShort')</span></a></li>
+                            <li class="filter-li active" data-filter="all"><a href="#"><span class="mini-title">@lang('profile.filterAll')</span><span class="large-title"><i>@lang('profile.filterAllShort')</i></span></a></li>
                             <li class="filter-li" data-filter="successful"><a href="#"><span class="mini-title">@lang('profile.filterSucc')</span><span class="large-title"><i class="icon-check"></i></span></a></li>
                             <li class="filter-li" data-filter="pending"><a href="#"><span class="mini-title">@lang('profile.filterPend')</span><span class="large-title"><i class="icon-pending"></i></span></a></li>
                             <li class="filter-li" data-filter="failed"><a href="#"><span class="mini-title">@lang('profile.filterFail')</span><span class="large-title"><i class="icon-close"></i></span></a></li>
@@ -33,6 +33,7 @@
                         </ul>
                     </div>
                 </div>
+                <br class="clear">
 
                 {{-- Table Wrapper --}}
                 <div class="row p-0 m-0">
@@ -68,9 +69,9 @@
                                             <i class="icon-reciept"></i>
                                         </span>
                                     </div>
-                                    <div class="col-md-1 col-sm-1 col-xs-2">
-                                        <span class="acc-arrow accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row1" data-target="#row1"></span>
-                                    </div>
+                                    <a class="col-md-1 col-sm-1 col-xs-2 accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row1" data-target="#row1">
+                                        <span class="acc-arrow"></span>
+                                    </a>
                                 </div>
                             </div>
                             <div id="row1" class="panel-collapse collapse">
@@ -117,7 +118,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="panel panel-default filtered successful">
                             <div class="panel-heading">
                                 <div class="row p-0 m-0">
@@ -142,9 +142,9 @@
                                             <i class="icon-wallet"></i>
                                         </span>
                                     </div>
-                                    <div class="col-md-1 col-sm-1 col-xs-2">
-                                        <span class="acc-arrow accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row2" data-target="#row2"></span>
-                                    </div>
+                                    <a class="col-md-1 col-sm-1 col-xs-2 accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row2" data-target="#row2">
+                                        <span class="acc-arrow"></span>
+                                    </a>
                                 </div>
                             </div>
                             <div id="row2" class="panel-collapse collapse">
@@ -191,7 +191,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="panel panel-default filtered failed">
                             <div class="panel-heading">
                                 <div class="row p-0 m-0">
@@ -216,9 +215,9 @@
                                             <i class="icon-wallet"></i>
                                         </span>
                                     </div>
-                                    <div class="col-md-1 col-sm-1 col-xs-2">
-                                        <span class="acc-arrow accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row3" data-target="#row3"></span>
-                                    </div>
+                                    <a class="col-md-1 col-sm-1 col-xs-2 accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row3" data-target="#row3">
+                                        <span class="acc-arrow"></span>
+                                    </a>
                                 </div>
                             </div>
                             <div id="row3" class="panel-collapse collapse">
