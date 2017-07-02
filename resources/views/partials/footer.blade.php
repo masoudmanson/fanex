@@ -30,7 +30,7 @@
                     <a href="https://www.instagram.com/fanex_fanap/" target="_blank" class="nav-link"><i class="icon-instagram"></i></a>
                 </li>
                 <li class="copyright">
-                    <a href="/" style="font-size: 16px;">@lang('index.fanex') &copy; @lang('index.year', ['dateFa' => jdate()->format('%Y'), 'dateEn' => \Carbon\Carbon::now()->year ])</a>
+                    <a href="{{ route('index') }}" style="font-size: 16px;">@lang('index.fanex') &copy; @lang('index.year', ['dateFa' => jdate()->format('%Y'), 'dateEn' => \Carbon\Carbon::now()->year ])</a>
                 </li>
             </ul>
             <div class="clearfix"></div>

@@ -19,7 +19,6 @@ class HomeController extends Controller
     public function __construct()
     {
 //        $this->middleware('checkToken');
-
     }
 
     /**
@@ -34,9 +33,8 @@ class HomeController extends Controller
         $data = $this->CorpGetCountryData();
 
         // Country List Helper Function
-        $country_list = indexFormCountryList($data);
+        $country_list = indexFormCountryList($data, session('applocale'));
 
         return view('index', compact('user', 'country_list'));
     }
-
 }

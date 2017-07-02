@@ -53,8 +53,8 @@ function twoStepExploder($string , $first_delimiter = '&' , $second_delimiter = 
     return $result;
 }
 
-function indexFormCountryList($data) {
-    $multiLangCountries = Countries::lookup(session('applocale'))->mapWithKeys(function($country, $key) {
+function indexFormCountryList($data, $lang) {
+    $multiLangCountries = Countries::lookup($lang)->mapWithKeys(function($country, $key) {
         return $key == 'XK' ? [ 'KV' => $country ] : [ $key => $country ];
     });
 

@@ -20,7 +20,7 @@ class StaticsController extends Controller
         $data = $this->CorpGetCountryData();
 
         // Country List Helper Function
-        $this->countries = indexFormCountryList($data);
+        $this->countries = indexFormCountryList($data, session('applocale'));
     }
 
     /*
