@@ -24,6 +24,7 @@ class PaymentController extends Controller
     {
         $this->middleware('checkToken', ['only' => ['pay', 'invoice']]);
         $this->middleware('checkUser', ['only' => ['pay']]);
+        $this->middleware('checkLog', ['only' => ['proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
     }
 
     /**
@@ -73,12 +74,8 @@ class PaymentController extends Controller
     {
         $beneficiary = Beneficiary::findOrFail($request->bnf);
 
-        $id = base64_decode($_COOKIE['backlog']);
-        $transaction = new Transaction();
-        $transaction->user_id = Auth::user()->id;
-        $transaction->beneficiary_id = $beneficiary->id;
-        $transaction->backlog_id = $id;
-        $transaction->save();//todo : code cleaning
+        $transaction = $this->createNewTrans($beneficiary);
+
         $transaction['hash'] = Crypt::encryptString($transaction);
 
         $request->query->add(['beneficiary' => $beneficiary,
@@ -99,12 +96,7 @@ class PaymentController extends Controller
         $request['user_id'] = Auth::user()->id;
         $beneficiary = Beneficiary::create($request->all());
 
-        $id = base64_decode($_COOKIE['backlog']);
-        $transaction = new Transaction();
-        $transaction->user_id = Auth::user()->id;
-        $transaction->beneficiary_id = $beneficiary->id;
-        $transaction->backlog_id = $id;
-        $transaction->save();//todo : code cleaning
+        $transaction = $this->createNewTrans($beneficiary);
 
         $transaction['hash'] = Crypt::encryptString($transaction);
 
@@ -119,7 +111,7 @@ class PaymentController extends Controller
 
     public function issueInvoice(Request $request)
     {
-        $id = base64_decode($_COOKIE['backlog']); // todo: maybe it's better to do that with middleware. !important!
+        $id = decrypt($_COOKIE['backlog']); // todo: maybe it's better to do that with middleware. !important!
         $backlog = Backlog::findOrFail($id);
         $result = $this->userInvoice($request, $backlog);
 
@@ -132,7 +124,7 @@ class PaymentController extends Controller
             $transaction->uri = $invoice->result->billNumber;
             $transaction->update();
 
-            return redirect("http://176.221.69.209:1031/v1/pbc/payinvoice/?invoiceId="
+            return redirect("http://sandbox.fanapium.com:1031/v1/pbc/payinvoice/?invoiceId="
                 . $invoice->result->id . "&redirectUri=".$request->root() . "/invoice/show?billNumber=" . $transaction->uri);
         } else dd($invoice);  //todo: error handling
 //        return view('dashboard.invoice');
@@ -152,6 +144,21 @@ class PaymentController extends Controller
     public function updatePaymentCondition(Request $request)
     {
 
+    }
+
+    /**
+     * @param Beneficiary $beneficiary
+     * @return Transaction
+     */
+    public function createNewTrans(Beneficiary $beneficiary)
+    {
+        $id = decrypt($_COOKIE['backlog']);
+        $transaction = new Transaction();
+        $transaction->user_id = Auth::user()->id;
+        $transaction->beneficiary_id = $beneficiary->id;
+        $transaction->backlog_id = $id;
+        $transaction->save();//todo : code cleaning
+        return $transaction;
     }
 
     /**

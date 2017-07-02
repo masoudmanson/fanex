@@ -9,6 +9,7 @@ use App\Traits\LogTrait;
 use App\Traits\UptTrait;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -19,7 +20,8 @@ class UptController extends Controller
 
     public function test()
     {
-        dd($this->CorpGetCurrencyRate());
+//        dd($this->CorpGetCurrencyRate());
+        dd($this->CorpGetCountryData());
     }
 
 
@@ -52,6 +54,8 @@ class UptController extends Controller
         $upt_result = array();
         $amount = (float)($request->amount);
 
+//        dd($request->input());
+
         if ($request['currency'] == 'lira') {
             $upt_result = $this->UPTGetTExchangeData((float)($request->amount), 'TRY', 'EUR');
             $upt_rate = $upt_result['currency_rate'];
@@ -70,7 +74,7 @@ class UptController extends Controller
         $log = new Backlog();
         $log = $this->mainFormBackLog($log,$amount, $request, $upt_result, json_decode($EuroResult));
 
-        setcookie('backlog', base64_encode($log->id), time() + 600);
+        setcookie('backlog', encrypt($log->id), time() + 600);
 
         setcookie('ttl', time() + 600, time() + 600);
 
