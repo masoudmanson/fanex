@@ -51,12 +51,15 @@ input::-webkit-inner-spin-button {
         color: $fanapOrange;
     }
     .navbar-brand {
-        font-size: 42px;
+        font-size: 90px;
         color: $fanapGrey;
         font-weight: 500;
         padding-left: 0;
+        &:before {
+            line-height: 20px;
+        }
         @include mq($max-width: $breakePoint_sm) {
-            font-size: 32px !important;
+            font-size: 70px !important;
             padding-top: 20px !important;
         }
         @include transition(all .3s);
@@ -127,7 +130,7 @@ input::-webkit-inner-spin-button {
                         content: '';
                         position: absolute;
                         left: 5px;
-                        top: 25%;
+                        top: 32%;
                         width: 1px;
                         background-color: $fanapGreyLight;
                         height: 40%;
@@ -173,9 +176,13 @@ input::-webkit-inner-spin-button {
 
 .dashboard-nav {
     background: $fanapOrange url("images/pattern-w.png");
-    -webkit-background-size: 50%;
-    background-size: 50%;
+    -webkit-background-size: 40%;
+    background-size: 40%;
     z-index: 4000;
+    @include mq($max-width: $breakePoint_md) {
+        -webkit-background-size: 100%;
+        background-size: 100%;
+    }
     .navbar-brand {
         color: #fff;
         &:hover {

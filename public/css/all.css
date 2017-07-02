@@ -11896,6 +11896,10 @@ select.selectpicker {
   content: "\51";
 }
 
+.icon-fanex:before {
+  content: "\52";
+}
+
 * {
   outline: none !important;
 }
@@ -11952,16 +11956,20 @@ input::-webkit-inner-spin-button {
 }
 
 .navbar-default .navbar-brand {
-  font-size: 42px;
+  font-size: 90px;
   color: #949597;
   font-weight: 500;
   padding-left: 0;
   transition: all 0.3s;
 }
 
+.navbar-default .navbar-brand:before {
+  line-height: 20px;
+}
+
 @media only screen and (max-width: 520px) {
   .navbar-default .navbar-brand {
-    font-size: 32px !important;
+    font-size: 70px !important;
     padding-top: 20px !important;
   }
 }
@@ -12050,7 +12058,7 @@ input::-webkit-inner-spin-button {
     content: '';
     position: absolute;
     left: 5px;
-    top: 25%;
+    top: 32%;
     width: 1px;
     background-color: #F4F4F4;
     height: 40%;
@@ -12087,8 +12095,14 @@ input::-webkit-inner-spin-button {
 
 .dashboard-nav {
   background: #F58121 url("images/pattern-w.png");
-  background-size: 50%;
+  background-size: 40%;
   z-index: 4000;
+}
+
+@media only screen and (max-width: 768px) {
+  .dashboard-nav {
+    background-size: 100%;
+  }
 }
 
 .dashboard-nav .navbar-brand {
