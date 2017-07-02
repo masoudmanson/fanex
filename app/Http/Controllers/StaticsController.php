@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App;
 use App\Http\Requests\ContactFormRequest;
 use App\Mail\ContactMail;
+use App\Traits\UptTrait;
 use Barryvdh\DomPDF\Facade as PDF;
 use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
 use Mail;
@@ -12,12 +13,23 @@ use Redirect;
 
 class StaticsController extends Controller
 {
+    use UptTrait;
+
+    public function __construct()
+    {
+        $data = $this->CorpGetCountryData();
+
+        // Country List Helper Function
+        $this->countries = indexFormCountryList($data);
+    }
+
     /*
      * About Page
      */
     public function about()
     {
-        return view('statics.about');
+        $country_list = $this->countries;
+        return view('statics.about', compact('country_list'));
     }
 
     /*
@@ -25,7 +37,8 @@ class StaticsController extends Controller
      */
     public function terms()
     {
-        return view('statics.terms');
+        $country_list = $this->countries;
+        return view('statics.terms', compact('country_list'));
     }
 
     /*
