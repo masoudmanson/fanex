@@ -59,6 +59,14 @@ $(document).ready(function () {
         else
             $('#exAmount').val(accounting.formatMoney($('#exAmount').val(), "", 0));
     });
+
+    $('#exAmount').focus(function() {
+        console.log(parseInt($(this).val()));
+        if(parseInt($(this).val()) == 0) {
+            $(this).val('');
+        }
+    });
+
     $('#captcha, #exAmount').keyup(function (e) {
         $('.tempAmount').slideUp(300);
         $(this).focus();
