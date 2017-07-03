@@ -21,10 +21,10 @@
             {{-- Footer Right List --}}
             <ul class="footerRight">
                 <li class="hasIcon">
-                    <a href="#" class="nav-link"><i class="icon-twitter"></i></a>
+                    <a href="https://twitter.com/Fanex_fanap" target="_blank" class="nav-link"><i class="icon-twitter"></i></a>
                 </li>
                 <li class="hasIcon">
-                    <a href="#" class="nav-link"><i class="icon-linkedin"></i></a>
+                    <a href="https://t.me/fanex_fanap" target="_blank" class="nav-link"><i class="icon-telegram"></i></a>
                 </li>
                 <li class="hasIcon">
                     <a href="https://www.instagram.com/fanex_fanap/" target="_blank" class="nav-link"><i class="icon-instagram"></i></a>

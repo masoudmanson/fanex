@@ -13348,7 +13348,7 @@ a.btn {
 .filter-ul .filter-li.flag, .filter-ul .flag.filter-li-link {
   filter: grayscale(1);
   -webkit-filter: grayscale(1);
-  padding: 5px 10px 0 0;
+  padding: 5px 0 0 10px;
   opacity: 0.5;
   transition: all 0.3s;
 }

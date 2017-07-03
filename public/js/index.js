@@ -61,10 +61,8 @@ $(document).ready(function () {
     });
 
     $('#exAmount').focus(function() {
-        console.log(parseInt($(this).val()));
-        if(parseInt($(this).val()) == 0) {
+        if(parseInt($(this).val()) == 0)
             $(this).val('');
-        }
     });
 
     $('#captcha, #exAmount').keyup(function (e) {
@@ -78,7 +76,6 @@ $(document).ready(function () {
         }
     });
 
-    //About Page Scroll Bar
     $('html, body, .fanexMotto, .dropdown-menu .inner, textarea').niceScroll({
         cursorcolor: "#000",
         cursoropacitymin: 0.1,
@@ -196,12 +193,16 @@ function getAmount() {
                 });
             }
         }).done(function (response) {
+            var currency = $('#exCurrency').val();
             $('#mainFormLoader').fadeOut(200);
-            $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 2) + ' ' + $('#exCurrency').val());
+            if(currency === "EUR" || currency === "USD")
+                $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 2) + ' ' + $('#exCurrency').val());
+            else
+                $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 0) + ' ' + $('#exCurrency').val());
             $('#tempAmountCountry').text($("#exCountry option:selected").text());
             $('.calcAmount').text(accounting.formatMoney(response, "", 0));
             $('.tempAmount').slideDown(300);
-            $('#calcBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');//.trigger( "focusout" );
+            $('#calcBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
             $('#paymentBtn').removeAttr('disabled').addClass('fanexBtnOrange').removeClass('fanexBtnOutlineGrey');
             $('#captcha').focus();
             reloadCaptcha();
@@ -213,40 +214,30 @@ function getAmount() {
   | Change Language Modal
  */
 var ModalEffects = (function() {
-
     function init() {
-
         var overlay = document.querySelector( '.md-overlay' );
-
         [].slice.call( document.querySelectorAll( '.md-trigger' ) ).forEach( function( el, i ) {
-
             var modal = document.querySelector( '#' + el.getAttribute( 'data-modal' ) ),
                 close = modal.querySelector( '.md-close' );
-
             function removeModal( hasPerspective ) {
                 classie.remove( modal, 'md-show' );
-
                 if( hasPerspective ) {
                     classie.remove( document.documentElement, 'md-perspective' );
                 }
             }
-
             function removeModalHandler() {
                 removeModal( classie.has( el, 'md-setperspective' ) );
             }
-
             el.addEventListener( 'click', function( ev ) {
                 classie.add( modal, 'md-show' );
                 overlay.removeEventListener( 'click', removeModalHandler );
                 overlay.addEventListener( 'click', removeModalHandler );
-
                 if( classie.has( el, 'md-setperspective' ) ) {
                     setTimeout( function() {
                         classie.add( document.documentElement, 'md-perspective' );
                     }, 25 );
                 }
             });
-
             close.addEventListener( 'click', function( ev ) {
                 ev.stopPropagation();
                 removeModalHandler();
