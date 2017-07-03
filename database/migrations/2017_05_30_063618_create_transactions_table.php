@@ -21,7 +21,9 @@ class CreateTransactionsTable extends Migration
             $table->integer('beneficiary_id')->unsigned()->nullable();
             $table->integer('backlog_id')->unsigned()->nullable();
             $table->string('uri')->nullable();
-            $table->enum('status',['canceled','unsuccessful','successful'])->nullable();
+            $table->enum('bank_status',['canceled','failed','successful'])->nullable();
+            $table->enum('fanex_status',['pending','accepted','rejected'])->nullable();
+            $table->enum('upt_status',['successful','failed', 'rejected'])->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')

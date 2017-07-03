@@ -118,6 +118,7 @@ trait PlatformTrait
                 'address' => 'somewhere new',
                 'addressId' => 0,
                 'phoneNumber' => '09387181694',//maybe user's phone number
+                'preferredTaxRate' => 25
             ],
             'headers' => [
                 '_token_' => $token,
@@ -131,7 +132,7 @@ trait PlatformTrait
         return $res;
     }
 
-    public function trackingInvoiceByBillNumber($billNumber)
+    public function trackingInvoiceByBillNumber($billNumber) //the form parameters can be taken from arguments, according to needs
     {
         $client = new Client();
         $token = 'd35b0c351acd47cc87a76b1c4b07239a'; //biz static token

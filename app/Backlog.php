@@ -16,4 +16,10 @@ class Backlog extends Model
     {
         $this->attributes['upt_ttl'] = Carbon::createFromTimestamp($value)->toDateTimeString();
     }
+
+    public function transaction()
+    {
+        return $this->hasMany('App\Transaction');
+    }
+
 }

@@ -7,6 +7,7 @@ use App\Beneficiary;
 use App\Http\Requests\BeneficiaryRequest;
 use App\Traits\PlatformTrait;
 use App\Traits\TokenTrait;
+use App\Traits\UptTrait;
 use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ class PaymentController extends Controller
 {
     use TokenTrait;
     use PlatformTrait;
+    use UptTrait;
 
     public function __construct()
     {
@@ -116,7 +118,7 @@ class PaymentController extends Controller
         $result = $this->userInvoice($request, $backlog);
 
         $invoice = json_decode($result->getBody()->getContents());
-
+//dd($invoice);
         if (!$invoice->hasError) {
 
             $transaction = Transaction::findOrFail(json_decode(Crypt::decryptString($request->transaction_sign))->id);//todo : check it after masouds changes
@@ -125,7 +127,7 @@ class PaymentController extends Controller
             $transaction->update();
 
             return redirect("http://sandbox.fanapium.com:1031/v1/pbc/payinvoice/?invoiceId="
-                . $invoice->result->id . "&redirectUri=".$request->root() . "/invoice/show?billNumber=" . $transaction->uri);
+                . $invoice->result->id . "&redirectUri=" . $request->root() . "/invoice/show?billNumber=" . $transaction->uri);
         } else dd($invoice);  //todo: error handling
 //        return view('dashboard.invoice');
     }
@@ -134,9 +136,51 @@ class PaymentController extends Controller
     {
         $result = $this->trackingInvoiceByBillNumber($request->billNumber);
         $invoice = json_decode($result->getBody()->getContents());
-        dd($invoice);
-        //todo: if success, update db. if cannot, rollback (cancelInvoice)
-        //todo: if error
+
+        if (!$invoice->hasError && count($invoice->result) > 0) {
+            $result = $invoice->result[0];
+            if ($result->payed && !$result->canceled) {
+
+                $transaction = Transaction::findByBillNumber($result->billNumber)->firstOrFail();
+                $transaction->bank_status = 'successful';
+                $transaction->fanex_status = 'pending';
+
+//                if (!$flag)
+//                    $this->cancelInvoice($result->id);//
+
+                // todo** : do it after admin accept the payment , in a specific func.**
+                $upt_res = $this->CorpSendRequest($transaction, $transaction->user, $transaction->beneficiary, $transaction->backlog);// todo : it must written after fanex admin
+
+                if ($upt_res->CorpSendRequestResult->TransferRequestStatus->RESPONSE == 'Success') {
+                    $transaction->fanex_status = 'accepted';
+
+                    $result = $this->CorpSendRequestConfirm($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT);
+
+                    if ($result->CorpSendRequestConfirmResult->TransferConfirmStatus->RESPONSE == 'Success') {
+                        $transaction->upt_status = 'successful';
+                        $transaction->update();
+
+                    }
+                    else{
+                        $transaction->upt_status = 'failed'; //or rejected?
+                        $transaction->fanex_status = 'pending';
+                        $transaction->update();
+//                  $this->CorpCancelRequest($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT);
+//                  $this->CorpCancelConfirm($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT); // todo: check it later
+                    }
+                } else {
+                    //if ($cancel_res)
+//                    $transaction->fanex_status = 'pending'; // it's already on pending condition
+                    $transaction->upt_status = 'failed'; //?
+                    $transaction->update();
+                    // return ?
+                }
+            } else {
+//                    return error;
+                dd('there is no invoice to show');
+            }
+        }
+
         //$this->cancelInvoice($request->$billNumber);
         return view('dashboard.invoice');
     }
