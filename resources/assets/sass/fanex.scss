@@ -1186,7 +1186,7 @@ a.btn {
     .filter-li.flag {
         filter: grayscale(1);
         -webkit-filter: grayscale(1);
-        padding: 5px 10px 0 0;
+        padding: 5px 0 0 10px;
         opacity: 0.5;
         @include transition(all .3s);
         &:hover {
