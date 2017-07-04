@@ -38,7 +38,9 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('dashboard.index', compact('user'));
+
+        $transactions = $user->transaction;
+        return view('dashboard.index', compact('user','transactions'));
     }
 
     public function notifications()
