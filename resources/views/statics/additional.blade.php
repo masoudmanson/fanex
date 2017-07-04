@@ -21,7 +21,7 @@
         <div class="row m-0 p-0">
             <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12 col-lg-push-3 col-md-push-2 col-sm-push-1 white-div">
 
-                <div class="mainForm">
+                <div class="staticMainForm m-0">
                     {{-- Form Loading Container --}}
                     <div id="mainFormLoader" style="display:none;">
                         <div class="errors" style="display: none"></div>
