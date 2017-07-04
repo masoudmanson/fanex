@@ -101,7 +101,7 @@ class UserInformationController extends Controller
          * 3. save user data , given from datin and platform (userId)
          */
 
-
+dd('error');
 //        User::create($request->all());
 
         return redirect('producer');

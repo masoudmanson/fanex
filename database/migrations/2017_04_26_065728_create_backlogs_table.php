@@ -23,6 +23,7 @@ class CreateBacklogsTable extends Migration
             $table->string('upt_ttl')->nullable();
             $table->string('exchange_rate');
             $table->string('ttl');
+            $table->string('premium_amount');
             $table->string('payment_amount');
             $table->string('payment_type');//enum?
             $table->string('country');
