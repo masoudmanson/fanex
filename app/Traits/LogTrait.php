@@ -20,7 +20,7 @@ trait LogTrait
         $log->ip = $request->ip();
         $log->currency = $request->currency;
         $log->payment_amount = $amount;
-//        $log->request_amount = $request->amount; //todo: I think it has to be added to db
+        $log->premium_amount = $request->amount; //todo: I think it has to be added to db
         $log->country = $request->country;
         $log->ttl = time() + 600; //from sarrafi, or agreement
         $log->upt_ttl = time() + 600; //from upt, ws response

@@ -131,7 +131,7 @@ class PaymentController extends Controller
         $result = $this->userInvoice($request, $backlog);
 
         $invoice = json_decode($result->getBody()->getContents());
-//dd($invoice);
+
         if (!$invoice->hasError) {
 
             $transaction = Transaction::findOrFail(json_decode(Crypt::decryptString($request->transaction_sign))->id);//todo : check it after masouds changes
@@ -149,12 +149,12 @@ class PaymentController extends Controller
     {
         $result = $this->trackingInvoiceByBillNumber($request->billNumber);
         $invoice = json_decode($result->getBody()->getContents());
-
+//dd($invoice);
         if (!$invoice->hasError && count($invoice->result) > 0) {
-            $result = $invoice->result[0];
-            if ($result->payed && !$result->canceled) {
+            $invoice_result = $invoice->result[0];
+            if ($invoice_result->payed && !$invoice_result->canceled) {
 
-                $transaction = Transaction::findByBillNumber($result->billNumber)->firstOrFail();
+                $transaction = Transaction::findByBillNumber($invoice_result->billNumber)->firstOrFail();
                 $transaction->bank_status = 'successful';
                 $transaction->fanex_status = 'pending';
 
@@ -188,14 +188,19 @@ class PaymentController extends Controller
                     $transaction->update();
                     // return ?
                 }
+                $back_log = $transaction->backlog;
+                $beneficiary = $transaction->beneficiary;
+                return view('dashboard.invoice', compact('invoice_result','beneficiary','back_log'));
+
             } else {
 //                    return error;
                 dd('there is no invoice to show');
             }
+
         }
 
         //$this->cancelInvoice($request->$billNumber);
-        return view('dashboard.invoice');
+        return view('dashboard.invoice', compact(''));
     }
 
     public function updatePaymentCondition(Request $request)
