@@ -11,6 +11,7 @@ return [
     'bnfTitle' => 'Beneficiary Information',
     'bnfSelect' => 'Select Beneficiary',
     'bnfNew' => 'or Add a New One',
+    'bnfAddNew' => 'Add a New Beneficiary',
     'bnfFirstname' => 'Firstname',
     'bnfLastname' => 'Lastname',
     'bnfCC' => 'Account Number',

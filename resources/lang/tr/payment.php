@@ -11,6 +11,7 @@ return [
     'bnfTitle' => 'Faydalanıcı Bilgisi',
     'bnfSelect' => 'Faydalanıcı Seçiniz',
     'bnfNew' => 'Veya Yeni Bir Ekle',
+    'bnfAddNew' => 'Yeni Bir Faydalanıcı Ekle',
     'bnfFirstname' => 'İsim',
     'bnfLastname' => 'Soyadı',
     'bnfCC' => 'Hesap numarası',
