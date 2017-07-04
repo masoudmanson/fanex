@@ -152,6 +152,7 @@ class PaymentController extends Controller
 //dd($invoice);
         if (!$invoice->hasError && count($invoice->result) > 0) {
             $invoice_result = $invoice->result[0];
+            $invoice_result->paymentDate = ceil($invoice_result->paymentDate/1000);
             if ($invoice_result->payed && !$invoice_result->canceled) {
 
                 $transaction = Transaction::findByBillNumber($invoice_result->billNumber)->firstOrFail();
@@ -188,9 +189,7 @@ class PaymentController extends Controller
                     $transaction->update();
                     // return ?
                 }
-                $back_log = $transaction->backlog;
-                $beneficiary = $transaction->beneficiary;
-                return view('dashboard.invoice', compact('invoice_result','beneficiary','back_log'));
+                return view('dashboard.invoice', compact('invoice_result','transaction'));
 
             } else {
 //                    return error;
@@ -198,8 +197,6 @@ class PaymentController extends Controller
             }
 
         }
-
-        //$this->cancelInvoice($request->$billNumber);
         return view('dashboard.invoice', compact(''));
     }
 

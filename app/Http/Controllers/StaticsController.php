@@ -79,7 +79,7 @@ class StaticsController extends Controller
 </body>
 </html>
 ENDHTML;
-        $pdf->loadHTML("https://www.google.com/");
-        return $pdf->stream();
+        $pdf->loadHTML($html);
+        return $pdf->download();
     }
 }
