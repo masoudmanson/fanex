@@ -47,6 +47,8 @@ class BeneficiaryController extends Controller
     public function store(BeneficiaryRequest $request)
     {
 
+        $request['user_id'] = Auth::user()->id;
+
         Beneficiary::create($request->all());
 
         return redirect('beneficiaries');
