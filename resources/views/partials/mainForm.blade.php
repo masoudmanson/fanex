@@ -1,4 +1,4 @@
-<div class="mainForm">
+<div class="mainForm @if($beneficiary) staticMainForm @endif">
     {{-- Form Loading Container --}}
     <div id="mainFormLoader" style="display:none;">
         <div class="errors" style="display: none"></div>
@@ -8,9 +8,12 @@
             <div class="bounce3"></div>
         </div>
     </div>
-
-    <h1 class="pb-3 mt-0">@lang('index.formTitle')</h1>
-    <form action="/payment" method="get">
+    @if($beneficiary)
+        <h1 class="pb-5 mt-0 dash-title">@lang('index.formSendTo', ['name'=> '<b>'.$beneficiary->firstname.' '.$beneficiary->lastname.'</b>'])</h1>
+    @else
+        <h2 class="pb-3 mt-0">@lang('index.formTitle')</h2>
+    @endif
+    <form @if($beneficiary) action="/proforma/selected/{{ $beneficiary->id }}" method="post" @else action="/payment" method="get" @endif>
         {{ csrf_field() }}
 
         {{-- Destination Country --}}
@@ -46,8 +49,6 @@
                             name="currency"
                             id="exCurrency" disabled>
                         <option value="" selected="selected" disabled="disabled">@lang('index.formCurrency')</option>
-                        {{--<option value="lira">₺ Turkish Lira</option>--}}
-                        {{--<option value="euro">€ Euro</option>--}}
                     </select>
                 </div>
             </div>

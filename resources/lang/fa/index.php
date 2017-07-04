@@ -35,6 +35,7 @@ return [
     'formCurrency' =>  'واحد ارز',
     'formCountry' =>  'کشور مقصد را انتخاب کنید',
     'formCost' =>  'هزینه ی انتقال',
+    'formSendTo' => 'ارسال حواله به :name',
     'formTo' =>  'به',
     'formIs' =>  'می شود',
     'formRials' =>  'ريال',

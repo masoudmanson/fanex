@@ -95,6 +95,6 @@ class BeneficiaryController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 }

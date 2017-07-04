@@ -118,7 +118,7 @@ trait PlatformTrait
                 'address' => 'somewhere new',
                 'addressId' => 0,
                 'phoneNumber' => '09387181694',//maybe user's phone number
-                'preferredTaxRate' => 25
+                'preferredTaxRate' => 0
             ],
             'headers' => [
                 '_token_' => $token,

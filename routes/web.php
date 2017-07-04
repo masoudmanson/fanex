@@ -71,6 +71,8 @@ Route::get('/logout', 'Auth\LoginController@logout');
 Route::post('/invoice', 'PaymentController@issueInvoice');
 Route::get('/invoice/show', 'PaymentController@showInvoice');
 
+Route::get('/send/{beneficiary}', 'UserController@sendMoney');
+
 //Route::post('/pay', 'WalletController') ;
 
 Route::get('/test', 'PaymentController@test');
@@ -84,6 +86,7 @@ Route::get('/cookie', 'PaymentController@test');
 
 Route::resource('/additional-info', 'UserInformationController');
 Route::post('/proforma', 'PaymentController@proforma_with_new_bnf');
+Route::post('/proforma/selected/{beneficiary}', 'PaymentController@proforma_with_selected_bnf_profile');
 Route::post('/proforma/selected', 'PaymentController@proforma_with_selected_bnf');
 
 //    });

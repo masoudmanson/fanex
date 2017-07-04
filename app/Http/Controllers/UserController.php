@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Beneficiary;
 use App\Traits\TokenTrait;
+use App\Traits\UptTrait;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +13,7 @@ use Psr\Http\Message\ServerRequestInterface;
 class UserController extends Controller
 {
     use TokenTrait;
+    use UptTrait;
 
     public function __construct()
     {
@@ -46,6 +49,13 @@ class UserController extends Controller
     public function settings()
     {
         return view('dashboard.settings');
+    }
+
+    public function sendMoney(Beneficiary $beneficiary)
+    {
+        $data = $this->CorpGetCountryData();
+        $country_list = indexFormCountryList($data, session('applocale'));
+        return view('dashboard.send-money', compact('country_list', 'beneficiary'));
     }
 
     /**

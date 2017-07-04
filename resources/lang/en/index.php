@@ -34,6 +34,7 @@ return [
     'formCurrency' => 'Currency',
     'formCountry' => 'Select Destination Country',
     'formCost' => 'Cost of Transferring',
+    'formSendTo' => 'Sending Money to :name',
     'formTo' => 'to',
     'formIs' => 'is',
     'formRials' => 'Rials',

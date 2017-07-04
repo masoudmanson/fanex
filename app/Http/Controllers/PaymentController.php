@@ -26,7 +26,7 @@ class PaymentController extends Controller
     {
         $this->middleware('checkToken', ['only' => ['pay', 'invoice']]);
         $this->middleware('checkUser', ['only' => ['pay']]);
-        $this->middleware('checkLog', ['only' => ['proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
+        $this->middleware('checkLog', ['only' => ['proforma_with_selected_bnf_profile','proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
     }
 
     /**
@@ -86,6 +86,19 @@ class PaymentController extends Controller
         return Hash::check($beneficiary, $request->hash)
             ? response()->view('dashboard.proforma', $request->query(), 200)
             : redirect()->back()->withErrors(['msg', 'The Message']);
+    }
+
+    public function proforma_with_selected_bnf_profile(Request $request, Beneficiary $beneficiary)
+    {
+        $transaction = $this->createNewTrans($beneficiary);
+
+        $transaction['hash'] = Crypt::encryptString($transaction);
+
+        $request->query->add(['beneficiary' => $beneficiary,
+            'transaction_sign' => $transaction['hash']
+        ]);
+
+        return response()->view('dashboard.proforma', $request->query(), 200);
     }
 
 

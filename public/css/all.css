@@ -12339,126 +12339,6 @@ input::-webkit-inner-spin-button {
   z-index: 200;
 }
 
-.indexWrapper .indexLeft .mainForm {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 50px;
-  width: 100%;
-  margin: auto -70px auto 100px;
-  z-index: 300;
-}
-
-@media only screen and (max-width: 1400px) {
-  .indexWrapper .indexLeft .mainForm {
-    margin: auto -40px auto 50px;
-  }
-}
-
-@media only screen and (max-width: 1200px) {
-  .indexWrapper .indexLeft .mainForm {
-    margin: 50px auto;
-    width: calc(100% - 100px);
-    position: static;
-    top: 0;
-    left: 0;
-    -webkit-transform: translate(0, 0);
-            transform: translate(0, 0);
-  }
-}
-
-@media only screen and (max-width: 520px) {
-  .indexWrapper .indexLeft .mainForm {
-    margin: 0 auto;
-    width: 100%;
-    padding: 25px 30px 40px;
-  }
-}
-
-.indexWrapper .indexLeft .mainForm h1 {
-  color: #333333;
-  font-size: 32px;
-  font-weight: normal;
-}
-
-@media only screen and (max-width: 768px) {
-  .indexWrapper .indexLeft .mainForm h1 {
-    font-size: 24px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-}
-
-@media only screen and (max-width: 520px) {
-  .indexWrapper .indexLeft .mainForm h1 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-}
-
-.indexWrapper .indexLeft .mainForm .tempAmount {
-  text-align: center;
-}
-
-.indexWrapper .indexLeft .mainForm .tempAmount h2 {
-  color: #949597;
-  font-size: 18px;
-  font-weight: 300;
-  text-align: left;
-  line-height: 1.5em !important;
-}
-
-@media only screen and (max-width: 768px) {
-  .indexWrapper .indexLeft .mainForm .tempAmount h2 {
-    font-size: 16px;
-  }
-}
-
-.indexWrapper .indexLeft .mainForm .tempAmount h2 #tempAmountCash, .indexWrapper .indexLeft .mainForm .tempAmount h2 #tempAmountCountry {
-  font-weight: 500 !important;
-  color: #F58121;
-}
-
-.indexWrapper .indexLeft .mainForm .tempAmount h2 #tempAmountCountry {
-  color: #333333;
-}
-
-.indexWrapper .indexLeft .mainForm .tempAmount .tempAmountWrapper {
-  padding: 10px 0 20px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.indexWrapper .indexLeft .mainForm .tempAmount .calcAmount {
-  font-size: 52px;
-  font-weight: 600;
-  color: #F58121;
-}
-
-@media only screen and (max-width: 768px) {
-  .indexWrapper .indexLeft .mainForm .tempAmount .calcAmount {
-    font-size: 36px;
-  }
-}
-
-@media only screen and (max-width: 520px) {
-  .indexWrapper .indexLeft .mainForm .tempAmount .calcAmount {
-    font-size: 28px;
-  }
-}
-
-.indexWrapper .indexLeft .mainForm .tempAmount .tempCurrency {
-  color: #949597;
-}
-
 .indexWrapper .indexRight {
   z-index: 50;
 }
@@ -12479,8 +12359,8 @@ input::-webkit-inner-spin-button {
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
   height: 593px;
   width: 90%;
   margin: auto;
@@ -12498,8 +12378,8 @@ input::-webkit-inner-spin-button {
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
   text-align: center;
   color: #fff;
 }
@@ -12529,8 +12409,8 @@ input::-webkit-inner-spin-button {
   position: absolute;
   top: 75%;
   left: 50%;
+  transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
 }
 
 @media only screen and (max-width: 520px) {
@@ -12559,8 +12439,8 @@ input::-webkit-inner-spin-button {
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
   text-align: center;
   width: 70%;
   color: #fff;
@@ -12607,6 +12487,136 @@ input::-webkit-inner-spin-button {
   .indexWrapper .indexRight .staticHeader .fanexMotto {
     max-height: 2000px;
   }
+}
+
+.mainForm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 50px;
+  width: 100%;
+  margin: auto -70px auto 100px;
+  z-index: 300;
+}
+
+@media only screen and (max-width: 1400px) {
+  .mainForm {
+    margin: auto -40px auto 50px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .mainForm {
+    margin: 50px auto;
+    width: calc(100% - 100px);
+    position: static;
+    top: 0;
+    left: 0;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .mainForm {
+    margin: 0 auto;
+    width: 100%;
+    padding: 25px 30px 40px;
+  }
+}
+
+.mainForm h1 {
+  color: #333333;
+  font-size: 32px;
+  font-weight: normal;
+}
+
+@media only screen and (max-width: 768px) {
+  .mainForm h1 {
+    font-size: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .mainForm h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.mainForm .tempAmount {
+  text-align: center;
+}
+
+.mainForm .tempAmount h2 {
+  color: #949597;
+  font-size: 18px;
+  font-weight: 300;
+  text-align: left;
+  line-height: 1.5em !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .mainForm .tempAmount h2 {
+    font-size: 16px;
+  }
+}
+
+.mainForm .tempAmount h2 #tempAmountCash, .mainForm .tempAmount h2 #tempAmountCountry {
+  font-weight: 500 !important;
+  color: #F58121;
+}
+
+.mainForm .tempAmount h2 #tempAmountCountry {
+  color: #333333;
+}
+
+.mainForm .tempAmount .tempAmountWrapper {
+  padding: 10px 0 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mainForm .tempAmount .calcAmount {
+  font-size: 52px;
+  font-weight: 600;
+  color: #F58121;
+}
+
+@media only screen and (max-width: 768px) {
+  .mainForm .tempAmount .calcAmount {
+    font-size: 36px;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .mainForm .tempAmount .calcAmount {
+    font-size: 28px;
+  }
+}
+
+.mainForm .tempAmount .tempCurrency {
+  color: #949597;
+}
+
+.staticMainForm {
+  margin: 30px 0 0 0;
+  position: static;
+  top: 0;
+  left: 0;
+  transform: translate(0, 0);
+  -webkit-transform: translate(0, 0);
+  width: 100%;
 }
 
 .bootstrap-select .dropdown-toggle:focus {
@@ -12735,8 +12745,8 @@ div.fanexCaptcha {
   position: absolute;
   top: 50%;
   left: 0%;
+  transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
   left: 40px;
   z-index: 300;
 }
@@ -13105,16 +13115,16 @@ a.btn {
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
 }
 
 #mainFormLoader .errors {
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
   font-size: 32px;
   font-weight: 600;
   color: #F44336;
