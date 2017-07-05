@@ -13,6 +13,7 @@ class BeneficiaryController extends Controller
     public function __construct()
     {
         $this->middleware(['checkToken', 'checkUser']);
+        $this->middleware('checkLog', ['only' => ['createOrSelect']]);
     }
 
     /**
@@ -35,6 +36,16 @@ class BeneficiaryController extends Controller
     public function create()
     {
         return view("dashboard.add-beneficiary");
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createOrSelect()
+    {
+        return view("dashboard.beneficiary");
     }
 
     /**

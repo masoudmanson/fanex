@@ -50,6 +50,7 @@ class UserInformationController extends Controller
     public function store(Request $request)
     {
 
+
 //        $this->validate($request,[            //validate the form inputs if need to
 //            '*' => 'required',
 //            'email' => 'email',
@@ -86,11 +87,10 @@ class UserInformationController extends Controller
             //todo : save or update
 
             Auth::login($user);
-            $beneficiaries = $user->beneficiary()->get();
-            $data = array('state' => $request->state, 'beneficiaries' => $beneficiaries);
             //todo : check again if user was in his first time
 
-            return response()->view('dashboard.beneficiary', $data, 200);
+            return redirect()->route('createOrSelect');
+//            return response()->view('dashboard.beneficiary', $data, 200);
 //                ->header('authorization', 'Bearer ' . $request->token);
         }
 

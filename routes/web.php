@@ -85,6 +85,7 @@ Route::get('/ws', 'UptController@test');
 Route::get('/cookie', 'PaymentController@test');
 
 Route::resource('/additional-info', 'UserInformationController');
+Route::get('/beneficiary/select', 'BeneficiaryController@createOrSelect')->name('createOrSelect');
 Route::post('/proforma', 'PaymentController@proforma_with_new_bnf');
 Route::post('/proforma/selected/{beneficiary}', 'PaymentController@proforma_with_selected_bnf_profile');
 Route::post('/proforma/selected', 'PaymentController@proforma_with_selected_bnf');
