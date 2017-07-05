@@ -44,7 +44,7 @@
                             <div id="searchbox" class="panel-collapse collapse">
                             </div>
                         </div>
-
+                        
                         <div class="panel panel-default filtered pending">
                             <div class="panel-heading">
                                 <div class="row p-0 m-0">

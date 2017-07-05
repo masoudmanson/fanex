@@ -12,7 +12,7 @@ class BeneficiaryController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkToken');
+        $this->middleware(['checkToken', 'checkUser']);
     }
 
     /**
