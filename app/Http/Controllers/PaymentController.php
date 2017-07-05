@@ -126,7 +126,7 @@ class PaymentController extends Controller
 
     public function issueInvoice(Request $request)
     {
-        $id = decrypt($_COOKIE['backlog']); // todo: maybe it's better to do that with middleware. !important!
+        $id = decrypt($_COOKIE['backlog']);
         $backlog = Backlog::findOrFail($id);
         $result = $this->userInvoice($request, $backlog);
 
@@ -134,15 +134,15 @@ class PaymentController extends Controller
 
         if (!$invoice->hasError) {
 
-            $transaction = Transaction::findOrFail(json_decode(Crypt::decryptString($request->transaction_sign))->id);//todo : check it after masouds changes
+            $transaction = Transaction::findOrFail(json_decode(Crypt::decryptString($request->transaction_sign))->id);
 
             $transaction->uri = $invoice->result->billNumber;
             $transaction->update();
 
             return redirect("http://sandbox.fanapium.com:1031/v1/pbc/payinvoice/?invoiceId="
                 . $invoice->result->id . "&redirectUri=" . $request->root() . "/invoice/show?billNumber=" . $transaction->uri);
-        } else dd($invoice);  //todo: error handling
-//        return view('dashboard.invoice');
+        }
+        else dd($invoice);  //todo: error handling
     }
 
     public function showInvoice(Request $request)
@@ -152,10 +152,14 @@ class PaymentController extends Controller
 //dd($invoice);
         if (!$invoice->hasError && count($invoice->result) > 0) {
             $invoice_result = $invoice->result[0];
+
+            // Converting EPOCH timestamp to UNIX timestamp
             $invoice_result->paymentDate = ceil($invoice_result->paymentDate/1000);
             if ($invoice_result->payed && !$invoice_result->canceled) {
 
                 $transaction = Transaction::findByBillNumber($invoice_result->billNumber)->firstOrFail();
+                $transaction->payment_date = $invoice_result->paymentDate;
+                $transaction->vat = $invoice_result->vat;
                 $transaction->bank_status = 'successful';
                 $transaction->fanex_status = 'pending';
 
@@ -212,11 +216,20 @@ class PaymentController extends Controller
     public function createNewTrans(Beneficiary $beneficiary)
     {
         $id = decrypt($_COOKIE['backlog']);
+        $backlog = Backlog::findOrFail($id);
         $transaction = new Transaction();
+
         $transaction->user_id = Auth::user()->id;
         $transaction->beneficiary_id = $beneficiary->id;
         $transaction->backlog_id = $id;
-        $transaction->save();//todo : code cleaning
+        $transaction->exchange_rate = $backlog->exchange_rate;
+        $transaction->premium_amount = $backlog->premium_amount;
+        $transaction->payment_amount = $backlog->payment_amount;
+        $transaction->currency = $backlog->currency;
+        $transaction->payment_type = $backlog->payment_type;
+        $transaction->country = $backlog->country;
+
+        $transaction->save();
         return $transaction;
     }
 

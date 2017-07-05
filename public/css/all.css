@@ -11744,7 +11744,9 @@ select.selectpicker {
   content: "\64";
 }
 
-.icon-check:before {
+.icon-check:before,
+.icon-successful:before,
+.icon-accepted:before {
   content: "\65";
 }
 
@@ -11796,7 +11798,8 @@ select.selectpicker {
   content: "\71";
 }
 
-.icon-pending:before {
+.icon-pending:before,
+.icon-waiting:before {
   content: "\72";
 }
 
@@ -11880,7 +11883,9 @@ select.selectpicker {
   content: "\4d";
 }
 
-.icon-close:before {
+.icon-close:before,
+.icon-rejected:before,
+.icon-failed:before {
   content: "\4e";
 }
 
@@ -11921,15 +11926,21 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.fanex-text-red {
+.fanex-text-red,
+.fanex-text-failed,
+.fanex-text-rejected {
   color: #F44336 !important;
 }
 
-.fanex-text-green {
+.fanex-text-green,
+.fanex-text-successful,
+.fanex-text-accepted {
   color: #4CAF50 !important;
 }
 
-.fanex-text-orange {
+.fanex-text-orange,
+.fanex-text-pending,
+.fanex-text-waiting {
   color: #F58121 !important;
 }
 
@@ -12871,7 +12882,15 @@ a.btn {
   line-height: 46px;
 }
 
-.fanexBtn, .fanexBtnOutline, .fanexBtnOutlineGrey, .fanexBtnOutlineOrange, .fanexBtnNoline, .fanexBtnGrey, .fanexBtnOrange {
+a.btnMini {
+  line-height: 16px;
+}
+
+.btnRound {
+  border-radius: 100px !important;
+}
+
+.fanexBtn, .fanexBtnMini, .fanexBtnMiniOutline, .fanexBtnMiniOutlineGrey, .fanexBtnMiniOutlineOrange, .fanexBtnMiniNoline, .fanexBtnMiniOrange, .fanexBtnOutline, .fanexBtnOutlineGrey, .fanexBtnOutlineOrange, .fanexBtnNoline, .fanexBtnGrey, .fanexBtnOrange {
   height: 60px;
   font-weight: 300;
   font-size: 24px;
@@ -12885,12 +12904,18 @@ a.btn {
 }
 
 @media only screen and (max-width: 520px) {
-  .fanexBtn, .fanexBtnOutline, .fanexBtnOutlineGrey, .fanexBtnOutlineOrange, .fanexBtnNoline, .fanexBtnGrey, .fanexBtnOrange {
+  .fanexBtn, .fanexBtnMini, .fanexBtnMiniOutline, .fanexBtnMiniOutlineGrey, .fanexBtnMiniOutlineOrange, .fanexBtnMiniNoline, .fanexBtnMiniOrange, .fanexBtnOutline, .fanexBtnOutlineGrey, .fanexBtnOutlineOrange, .fanexBtnNoline, .fanexBtnGrey, .fanexBtnOrange {
     height: 50px;
   }
 }
 
-.fanexBtn.hasIcon, .hasIcon.fanexBtnOutline, .hasIcon.fanexBtnOutlineGrey, .hasIcon.fanexBtnOutlineOrange, .hasIcon.fanexBtnNoline, .hasIcon.fanexBtnGrey, .hasIcon.fanexBtnOrange {
+.fanexBtnMini, .fanexBtnMiniOutline, .fanexBtnMiniOutlineGrey, .fanexBtnMiniOutlineOrange, .fanexBtnMiniNoline, .fanexBtnMiniOrange {
+  height: 32px;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.fanexBtn.hasIcon, .hasIcon.fanexBtnMini, .hasIcon.fanexBtnMiniOutline, .hasIcon.fanexBtnMiniOutlineGrey, .hasIcon.fanexBtnMiniOutlineOrange, .hasIcon.fanexBtnMiniNoline, .hasIcon.fanexBtnMiniOrange, .hasIcon.fanexBtnOutline, .hasIcon.fanexBtnOutlineGrey, .hasIcon.fanexBtnOutlineOrange, .hasIcon.fanexBtnNoline, .hasIcon.fanexBtnGrey, .hasIcon.fanexBtnOrange {
   line-height: 52px !important;
 }
 
@@ -12901,6 +12926,20 @@ a.btn {
 }
 
 .fanexBtnOutline:hover, .fanexBtnOutlineGrey:hover, .fanexBtnOutlineOrange:hover, .fanexBtnOutline:focus, .fanexBtnOutlineGrey:focus, .fanexBtnOutlineOrange:focus, .fanexBtnOutline:active, .fanexBtnOutlineGrey:active, .fanexBtnOutlineOrange:active {
+  border-color: #F58121;
+  background: #F58121 url("images/pattern-w.png");
+  background-size: cover;
+  -webkit-background-size: cover;
+  color: #fff;
+}
+
+.fanexBtnMiniOutline, .fanexBtnMiniOutlineGrey, .fanexBtnMiniOutlineOrange {
+  background-color: transparent;
+  color: #949597;
+  border: solid 1px #F4F4F4;
+}
+
+.fanexBtnMiniOutline:hover, .fanexBtnMiniOutlineGrey:hover, .fanexBtnMiniOutlineOrange:hover, .fanexBtnMiniOutline:focus, .fanexBtnMiniOutlineGrey:focus, .fanexBtnMiniOutlineOrange:focus, .fanexBtnMiniOutline:active, .fanexBtnMiniOutlineGrey:active, .fanexBtnMiniOutlineOrange:active {
   border-color: #F58121;
   background: #F58121 url("images/pattern-w.png");
   background-size: cover;
@@ -12925,6 +12964,23 @@ a.btn {
   }
 }
 
+.fanexBtnMiniNoline {
+  background-color: transparent;
+  color: #949597;
+  border: none;
+  text-align: right;
+}
+
+.fanexBtnMiniNoline:hover, .fanexBtnMiniNoline:focus, .fanexBtnMiniNoline:active {
+  color: #333333;
+}
+
+@media only screen and (max-width: 768px) {
+  .fanexBtnMiniNoline {
+    text-align: center;
+  }
+}
+
 .fanexBtnGrey {
   background-color: #F4F4F4;
 }
@@ -12935,6 +12991,10 @@ a.btn {
 }
 
 .fanexBtnOutlineGrey {
+  border-color: #BBBBBB;
+}
+
+.fanexBtnMiniOutlineGrey {
   border-color: #BBBBBB;
 }
 
@@ -12952,7 +13012,26 @@ a.btn {
   color: #fff;
 }
 
+.fanexBtnMiniOrange {
+  background: #F58121 url("images/pattern-w.png");
+  background-size: cover;
+  -webkit-background-size: cover;
+  color: #fff !important;
+}
+
+.fanexBtnMiniOrange:hover, .fanexBtnMiniOrange:focus, .fanexBtnMiniOrange:active {
+  background: #d9680a url("images/pattern-w.png");
+  background-size: cover;
+  -webkit-background-size: cover;
+  color: #fff;
+}
+
 .fanexBtnOutlineOrange {
+  border-color: #F58121;
+  color: #F58121;
+}
+
+.fanexBtnMiniOutlineOrange {
   border-color: #F58121;
   color: #F58121;
 }
@@ -13561,20 +13640,38 @@ a.btn {
 }
 
 @media only screen and (max-width: 768px) {
+  .panel-default .panel-heading.new::before {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 768px) {
   .panel-default .panel-heading.new {
-    background-color: #F58121;
+    background: #F58121 url("images/pattern-w.png");
+    background-size: cover;
+    -webkit-background-size: cover;
     color: #fff !important;
   }
   .panel-default .panel-heading.new .acc-main-icon,
   .panel-default .panel-heading.new .acc-user,
   .panel-default .panel-heading.new .acc-cash,
-  .panel-default .panel-heading.new .acc-date {
+  .panel-default .panel-heading.new .acc-date,
+  .panel-default .panel-heading.new .acc-status {
     color: #fff !important;
   }
-  .panel-default .panel-heading.new .acc-main-icon b,
+  .panel-default .panel-heading.new .acc-main-icon b, .panel-default .panel-heading.new .acc-main-icon i, .panel-default .panel-heading.new .acc-main-icon span,
   .panel-default .panel-heading.new .acc-user b,
+  .panel-default .panel-heading.new .acc-user i,
+  .panel-default .panel-heading.new .acc-user span,
   .panel-default .panel-heading.new .acc-cash b,
-  .panel-default .panel-heading.new .acc-date b {
+  .panel-default .panel-heading.new .acc-cash i,
+  .panel-default .panel-heading.new .acc-cash span,
+  .panel-default .panel-heading.new .acc-date b,
+  .panel-default .panel-heading.new .acc-date i,
+  .panel-default .panel-heading.new .acc-date span,
+  .panel-default .panel-heading.new .acc-status b,
+  .panel-default .panel-heading.new .acc-status i,
+  .panel-default .panel-heading.new .acc-status span {
     color: #fff !important;
   }
   .panel-default .panel-heading.new .bnf-action-icons a i {

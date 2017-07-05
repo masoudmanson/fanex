@@ -56,7 +56,7 @@ class UptController extends Controller
 
 //        dd($request->input());
 
-        if ($request['currency'] == 'lira') {
+        if ($request['currency'] == 'TRY') {
             $upt_result = $this->UPTGetTExchangeData((float)($request->amount), 'TRY', 'EUR');
             $upt_rate = $upt_result['currency_rate'];
             $amount = $upt_rate*$amount ;

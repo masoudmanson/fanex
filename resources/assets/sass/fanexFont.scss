@@ -48,7 +48,9 @@
 .icon-chat:before {
     content: "\64";
 }
-.icon-check:before {
+.icon-check:before,
+.icon-successful:before,
+.icon-accepted:before {
     content: "\65";
 }
 .icon-code:before {
@@ -87,7 +89,8 @@
 .icon-mobile:before {
     content: "\71";
 }
-.icon-pending:before {
+.icon-pending:before,
+.icon-waiting:before {
     content: "\72";
 }
 .icon-phone:before {
@@ -150,7 +153,9 @@
 .icon-wallet:before {
     content: "\4d";
 }
-.icon-close:before {
+.icon-close:before,
+.icon-rejected:before,
+.icon-failed:before {
     content: "\4e";
 }
 .icon-exit:before {

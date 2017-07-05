@@ -24,6 +24,7 @@ return [
     'successful' => 'موفق',
     'filterPend' => 'در حال انجام',
     'pending' => 'در حال انجام',
+    'waiting' => 'در انتظار',
     'filterFail' => 'ناموفق',
     'failed' => 'ناموفق',
     'rejected' => 'برگشت خورده',
@@ -33,7 +34,8 @@ return [
     'newTransShort' => 'جدید',
     'searchHolder' => 'جستجو در تراکنش ها',
 
-    'titleTransfer' => 'انتقال به ',
+    'titleTransfer' => 'منتقل شده به ',
+    'titleIsTransferring' => 'انتقال به',
     'titleDate' => 'تاریخ تراکنش',
     'titleAmount' => 'مبلغ انتقالی',
     'titleStatus' => 'وضعیت',

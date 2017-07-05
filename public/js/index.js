@@ -136,6 +136,10 @@ $(document).ready(function () {
     else {
         $('#countdown').html(timeOut).addClass('alert shake animated');
     }
+
+    $('a.accordion-toggle').click(function(e) {
+        e.preventDefault();
+    });
 });
 
 function removeComma(amount) {

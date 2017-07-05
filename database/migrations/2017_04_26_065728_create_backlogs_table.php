@@ -19,14 +19,30 @@ class CreateBacklogsTable extends Migration
             $table->increments('id')->unsigned();
             $table->string('ip');
             $table->string('currency');
+            //todo : In case of making Fanex international we have to save both origin & destination currencies
+            //$table->string('origin_currency');
+            //$table->string('destination_currency');
             $table->string('upt_exchange_rate')->nullable();
             $table->string('upt_ttl')->nullable();
             $table->string('exchange_rate');
             $table->string('ttl');
             $table->string('premium_amount');
             $table->string('payment_amount');
-            $table->string('payment_type');//enum?
+            $table->string('payment_type');
             $table->string('country');
+
+            /*
+             * Optional Fields for data mining
+             */
+            $table->string('longitude')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('os')->nullable();
+            $table->string('browser')->nullable();
+            $table->string('device')->nullable();
+            $table->string('store')->nullable();
+            $table->string('udid')->nullable();
+            $table->string('timezone')->nullable();
+
             $table->timestamps();
         });
     }

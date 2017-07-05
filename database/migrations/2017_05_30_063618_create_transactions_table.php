@@ -24,6 +24,14 @@ class CreateTransactionsTable extends Migration
             $table->enum('bank_status',['canceled','failed','successful', 'waiting'])->default('waiting');
             $table->enum('fanex_status',['pending','accepted','rejected', 'waiting'])->default('waiting');
             $table->enum('upt_status',['successful','failed', 'rejected', 'waiting'])->default('waiting');
+            $table->string('currency')->nullable();
+            $table->string('exchange_rate')->nullable();
+            $table->string('premium_amount')->nullable();
+            $table->string('payment_amount')->nullable();
+            $table->string('vat')->nullable();
+            $table->string('payment_type')->nullable();
+            $table->timestamp('payment_date')->nullable();
+            $table->string('country')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')
