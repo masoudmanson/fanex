@@ -12,7 +12,7 @@ class Backlog extends Model
         $this->attributes['ttl'] = Carbon::createFromTimestamp($value)->toDateTimeString();
     }
 
-    public function setUpt_ttlAttribute($value)
+    public function setUptTtlAttribute($value)
     {
         $this->attributes['upt_ttl'] = Carbon::createFromTimestamp($value)->toDateTimeString();
     }

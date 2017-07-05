@@ -26,6 +26,7 @@ trait LogTrait
         $log->upt_ttl = time() + 600; //from upt, ws response
         $log->payment_type = 'transfer'; //from form
 
+
         if (isset($upt_result['currency_rate'])) {
             $log->upt_exchange_rate = $upt_result['currency_rate'];
         }

@@ -19,15 +19,21 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
-.fanex-text-red {
+.fanex-text-red,
+.fanex-text-failed,
+.fanex-text-rejected {
     color: $fanapRed !important;
 }
 
-.fanex-text-green {
+.fanex-text-green,
+.fanex-text-successful,
+.fanex-text-accepted {
     color: $fanapGreen !important;
 }
 
-.fanex-text-orange {
+.fanex-text-orange,
+.fanex-text-pending,
+.fanex-text-waiting {
     color: $fanapOrange !important;
 }
 
@@ -778,6 +784,14 @@ a.btn {
     line-height: 46px;
 }
 
+a.btnMini {
+    line-height: 16px;
+}
+
+.btnRound {
+    @include border-radius(100px !important);
+}
+
 .fanexBtn {
     height: 60px;
     font-weight: 300;
@@ -794,12 +808,33 @@ a.btn {
     }
 }
 
+.fanexBtnMini {
+    @extend .fanexBtn;
+    height: 32px;
+    font-weight: 300;
+    font-size: 14px;
+}
+
 .fanexBtn.hasIcon {
     line-height: 52px !important;
 }
 
 .fanexBtnOutline {
     @extend .fanexBtn;
+    background-color: transparent;
+    color: $fanapGrey;
+    border: solid 1px $fanapGreyLight;
+    &:hover, &:focus, &:active {
+        border-color: $fanapOrange;
+        background: $fanapOrange url("images/pattern-w.png");
+        background-size: cover;
+        -webkit-background-size: cover;
+        color: #fff;
+    }
+}
+
+.fanexBtnMiniOutline {
+    @extend .fanexBtnMini;
     background-color: transparent;
     color: $fanapGrey;
     border: solid 1px $fanapGreyLight;
@@ -826,6 +861,20 @@ a.btn {
     }
 }
 
+.fanexBtnMiniNoline {
+    @extend .fanexBtnMini;
+    background-color: transparent;
+    color: $fanapGrey;
+    border: none;
+    text-align: right;
+    &:hover, &:focus, &:active {
+        color: $fanapDark;
+    }
+    @include mq($max-width: $breakePoint_md) {
+        text-align: center;
+    }
+}
+
 .fanexBtnGrey {
     @extend .fanexBtn;
     background-color: $fanapGreyLight;
@@ -837,6 +886,11 @@ a.btn {
 
 .fanexBtnOutlineGrey {
     @extend .fanexBtnOutline;
+    border-color: $fanapGreyDark;
+}
+
+.fanexBtnMiniOutlineGrey {
+    @extend .fanexBtnMiniOutline;
     border-color: $fanapGreyDark;
 }
 
@@ -854,8 +908,28 @@ a.btn {
     }
 }
 
+.fanexBtnMiniOrange {
+    @extend .fanexBtnMini;
+    background: $fanapOrange url("images/pattern-w.png");
+    background-size: cover;
+    -webkit-background-size: cover;
+    color: #fff !important;
+    &:hover, &:focus, &:active {
+        background: darken($fanapOrange, 10%) url("images/pattern-w.png");
+        background-size: cover;
+        -webkit-background-size: cover;
+        color: #fff;
+    }
+}
+
 .fanexBtnOutlineOrange {
     @extend .fanexBtnOutline;
+    border-color: $fanapOrange;
+    color: $fanapOrange;
+}
+
+.fanexBtnMiniOutlineOrange {
+    @extend .fanexBtnMiniOutline;
     border-color: $fanapOrange;
     color: $fanapOrange;
 }
@@ -1371,17 +1445,24 @@ a.btn {
         position: absolute;
         top: 0;
         left: 0;
+        @include mq($max-width: $breakePoint_md) {
+            display: none;
+        }
     }
     .panel-heading.new {
         @include mq($max-width: $breakePoint_md) {
-            background-color: $fanapOrange;
+            background: $fanapOrange url('images/pattern-w.png');
+            background-size: cover;
+            -webkit-background-size: cover;
+
             color: #fff !important;
             .acc-main-icon,
             .acc-user,
             .acc-cash,
-            .acc-date {
+            .acc-date,
+            .acc-status {
                 color: #fff !important;
-                b {
+                b, i, span {
                     color: #fff !important;
                 }
             }

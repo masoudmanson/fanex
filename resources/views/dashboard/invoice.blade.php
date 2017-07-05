@@ -20,7 +20,7 @@
                     <div class="col-xs-12 p-0">
                         <h2 class="dash-subtitle">@lang('payment.invSubtitle')</h2>
                         <div class="invoice-wrapper mb-4">
-                            <h3 class="invoice-title">@lang('payment.invUser', ['user' => Auth::user()->firstname]) <span class="invoice-date">@lang('payment.invDate', ['dateEn' => \Carbon\Carbon::createFromTimestamp($invoice_result->paymentDate)->format('d M Y, H:i:s'), 'dateFa' => jdate($invoice_result->paymentDate)->format('%Y %B %d, H:i:s')])</span></h3>
+                            <h3 class="invoice-title">@lang('payment.invUser', ['user' => Auth::user()->firstname]) <span class="invoice-date">@lang('payment.invDate', ['dateEn' => $transaction->payment_date->format('d M Y, H:i:s'), 'dateFa' => jdate($transaction->payment_date)->format('%Y %B %d, H:i:s')])</span></h3>
                             <p>@lang('payment.invText')</p>
                             <p class="invoice-bnf">{{ $transaction->beneficiary->firstname . ' ' . $transaction->beneficiary->lastname }}</p>
 
@@ -41,7 +41,7 @@
                                             <p>@lang('payment.invAmount')</p>
                                         </div>
                                         <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
-                                            <p>{{ number_format($transaction->backlog->premium_amount, 2) . ' ' . $transaction->backlog->currency }}</p>
+                                            <p>{{ number_format($transaction->premium_amount, 2) . ' ' . $transaction->currency }}</p>
                                         </div>
                                     </li>
 
@@ -70,7 +70,7 @@
                                             <p>@lang('payment.invSum')</p>
                                         </div>
                                         <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
-                                            <p>{{ number_format($transaction->backlog->premium_amount, 2) . ' ' . $transaction->backlog->currency . ' + &rlm;' . number_format($invoice_result->vat) }} @lang('index.formRials')</p>
+                                            <p>{{ number_format($transaction->premium_amount, 2) . ' ' . $transaction->currency . ' + &rlm;' . number_format($invoice_result->vat) }} @lang('index.formRials')</p>
                                             <p class="acc-factor-sum">= {{ number_format($invoice_result->payableAmount) }} @lang('payment.invRials')</p>
                                         </div>
                                     </li>
@@ -91,7 +91,7 @@
                                             <p class="grey">@lang('payment.invBankStatus')</p>
                                         </div>
                                         <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
-                                            <p>@lang('profile.'.$transaction->bank_status)</p>
+                                            <p class="fanex-text-{{ $transaction->bank_status }}">@lang('profile.'.$transaction->bank_status)</p>
                                         </div>
                                     </li>
                                     <li class="row m-0">
@@ -99,7 +99,7 @@
                                             <p class="grey">@lang('payment.invFanexStatus')</p>
                                         </div>
                                         <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
-                                            <p>@lang('profile.'.$transaction->fanex_status)</p>
+                                            <p class="fanex-text-{{ $transaction->fanex_status }}">@lang('profile.'.$transaction->fanex_status)</p>
                                         </div>
                                     </li>
                                     <li class="row m-0">
@@ -107,7 +107,7 @@
                                             <p class="grey">@lang('payment.invUptStatus')</p>
                                         </div>
                                         <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
-                                            <p>@lang('profile.'.$transaction->upt_status)</p>
+                                            <p class="fanex-text-{{ $transaction->upt_status }}">@lang('profile.'.$transaction->upt_status)</p>
                                         </div>
                                     </li>
                             </ul>

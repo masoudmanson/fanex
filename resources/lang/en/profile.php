@@ -14,6 +14,7 @@ return [
     'successful' => 'Successful',
     'filterPend' => 'Pending',
     'pending' => 'Pending',
+    'waiting' => 'Waiting',
     'filterFail' => 'Failed',
     'failed' => 'Failed',
     'rejected' => 'Rejected',
@@ -24,6 +25,7 @@ return [
     'searchHolder' => 'Search in Transactions',
 
     'titleTransfer' => 'Transferred to',
+    'titleIsTransferring' => 'Transferring to',
     'titleDate' => 'Transaction Date',
     'titleAmount' => 'Transferred Amount',
     'titleStatus' => 'Transfer Status',

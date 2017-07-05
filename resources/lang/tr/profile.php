@@ -18,6 +18,7 @@ return [
     'successful' => 'Başarılı',
     'filterPend' => 'Asili',
     'pending' => 'Asili',
+    'waiting' => 'Bekleme',
     'filterFail' => 'Başarısız',
     'failed' => 'Başarısız',
     'rejected' => 'Reddedilen',
@@ -28,6 +29,7 @@ return [
     'searchHolder' => 'İşlemlerde Ara',
 
     'titleTransfer' => 'Transfer edildi',
+    'titleIsTransferring' => 'Şuraya Aktarılıyor',
     'titleDate' => 'İşlem Tarihi',
     'titleAmount' => 'Aktarılan Tutar',
     'titleStatus' => 'Transfer Durumu',
