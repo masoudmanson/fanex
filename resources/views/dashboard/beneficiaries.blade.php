@@ -91,6 +91,7 @@
                                         </a>
                                     </div>
                                 </div>
+
                                 <div id="{{ "row".$bnf->id }}" class="panel-collapse collapse">
                                     <div class="panel-body p-0">
                                         <div class="row m-0 p-0">
@@ -121,7 +122,7 @@
                                                     <i class="icon-globe bsIcon"></i>
                                                     <div class="form-control fanexInput fanexInputPanel"
                                                          id="bnf-ajax-address">
-                                                        {{ $bnf->address }}
+                                                        @if($bnf->address) {{ $bnf->address }} @else  <span class="opacity-50 unselectable" unselectable="on">@lang('payment.bnfAddr')</span> @endif
                                                     </div>
                                                 </div>
 
@@ -141,7 +142,7 @@
                                                     <i class="icon-fax bsIcon"></i>
                                                     <div class="form-control fanexInput fanexInputPanel"
                                                          id="bnf-ajax-fax">
-                                                        {{ $bnf->fax }}
+                                                        @if($bnf->fax) {{ $bnf->fax }} @else  <span class="opacity-50 unselectable" unselectable="on">@lang('payment.bnfFax')</span> @endif
                                                     </div>
                                                 </div>
 

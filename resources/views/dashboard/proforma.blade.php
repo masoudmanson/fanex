@@ -25,122 +25,119 @@
                                     <img src="{{ asset('css/images/app-icon.png') }}" alt="Fanex Logo">
                                 </div>
                                 <div class="col-xs-8 right-align">
-                                    <p>Date: @lang('payment.invDate', ['dateEn' => $date->format('d M Y, H:i:s'), 'dateFa' => jdate($date)->format('%Y %B %d, H:i:s')])</p>
+                                    <p>@lang('payment.date') @lang('payment.invDate', ['dateEn' => $date->format('d M Y, H:i:s'), 'dateFa' => jdate($date)->format('%Y %B %d, H:i:s')])</p>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <h2>Money Transfer Application</h2>
+                                    <h2>@lang('payment.prTitle')</h2>
 
-                                    <p>Transferring <span>1,500 EUR</span> by following Applicant to specified
-                                        beneficiary:</p>
+                                    <p>@lang('payment.prText', ['amount'=>'1500 EUR'])</p>
 
-                                    <div class="proforma-heading">
-                                        Applicant's Identification
-                                    </div>
+                                    <div class="proforma-heading">@lang('payment.prApplicant')</div>
 
                                     {{-- Applicant Details --}}
                                     <ul>
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>Mr./Ms./Co.:</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appTitle')</p></div>
                                             <div class="col-xs-12 col-sm-6">Masoud Amjadi</div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>Pass/Id./Reg.No:</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appId')</p></div>
                                             <div class="col-xs-12 col-sm-6">1640113886</div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>Date of Birth</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appDob')</p></div>
                                             <div class="col-xs-12 col-sm-6">26 June 1991</div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>Place of Birth</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appPob')</p></div>
                                             <div class="col-xs-12 col-sm-6">Iran</div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>Address</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appAddress')</p></div>
                                             <div class="col-xs-12 col-sm-6">#13, Zaratash Alley, Ghoddosi St., Ghasr
                                                 Sq., Tehran, Iran
                                             </div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>Postal Code</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appPostalCode')</p></div>
                                             <div class="col-xs-12 col-sm-6">12326-45879</div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>Tel</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appTel')</p></div>
                                             <div class="col-xs-12 col-sm-6">021 548 5874</div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>Mobile</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appMobile')</p></div>
                                             <div class="col-xs-12 col-sm-6">0914 840 1824</div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>Email Address</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appEmail')</p></div>
                                             <div class="col-xs-12 col-sm-6">masoudmanson@gmail.com</div>
                                         </li>
 
                                     </ul>
 
                                     <div class="proforma-heading">
-                                        Beneficiary Details
+                                        @lang('payment.prBeneficiary')
                                     </div>
 
                                     {{-- Beneficiary Details --}}
                                     <ul>
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>Name:</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.bnfName')</p></div>
                                             <div class="col-xs-12 col-sm-6">{{ $beneficiary->firstname . ' ' . $beneficiary->lastname }}</div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>Country:</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.bnfCountry')</p></div>
                                             <div class="col-xs-12 col-sm-6">{{ $countries[$beneficiary->country] }}
                                             </div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>Address:</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appAddress')</p></div>
                                             <div class="col-xs-12 col-sm-6">{{ $beneficiary->address }}
                                             </div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>Tel:</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appTel')</p></div>
                                             <div class="col-xs-12 col-sm-6">{{ $beneficiary->tel }}</div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>Fax:</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appFax')</p></div>
                                             <div class="col-xs-12 col-sm-6">{{ $beneficiary->fax }}</div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>Bank Name:</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.bnfBankName')</p></div>
                                             <div class="col-xs-12 col-sm-6">{{ $beneficiary->bank_name }}</div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>Branch Name/ Address:</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.bnfBranch')</p></div>
                                             <div class="col-xs-12 col-sm-6">{{ $beneficiary->branch_name }}</div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>Swift Code</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.bnfSwift')</p></div>
                                             <div class="col-xs-12 col-sm-6">{{ $beneficiary->swift_code }}</div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>iBan Code</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.bnfIban')</p></div>
                                             <div class="col-xs-12 col-sm-6">{{ $beneficiary->iban_code }}</div>
                                         </li>
 

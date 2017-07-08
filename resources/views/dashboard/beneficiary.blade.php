@@ -197,9 +197,9 @@
                                     @endif
                                     <i class="icon-globe bsIcon"></i>
 
-                                    <select class="form-control fanexInput selectpicker"
+                                    <select class="form-control fanexInput"
                                             data-style="fanexInput fanexInputWhite"
-                                            name="country">
+                                            name="country" id="bnfCountry">
                                         @foreach($countries as $key=>$value)
                                             <option value="{{ $key }}" class="enable">{{ $value }}</option>
                                         @endforeach
@@ -354,6 +354,8 @@
     <script>
         var beneficiaries = {!! $beneficiaries !!};
         $(document).ready(function () {
+            $('#bnfCountry').selectpicker('val', 'IR');
+
             $('#bnfSelect').on('change blur', function () {
                 $('#bnfSaveSubmit').fadeOut(200);
                 $('#bnfSelectSubmit').fadeIn(200);

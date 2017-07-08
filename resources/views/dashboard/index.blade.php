@@ -68,7 +68,7 @@
                                             </span>
                                         </div>
                                         <div class="col-md-2 hidden-xs hidden-sm" data-toggle="tooltip"
-                                             title="@lang('profile.titleDate')">
+                                             @if($transaction->uri && $transaction->payment_date) title="@lang('profile.titleDate')" @endif>
                                             <span class="acc-date">
                                                 @if($transaction->uri && $transaction->payment_date)
                                                     @lang('payment.invDate', ['dateEn' => $transaction->payment_date->format('d M Y'), 'dateFa' => jdate($transaction->payment_date)->format('%Y %B %d')])

@@ -24,17 +24,18 @@ class BeneficiaryRequest extends FormRequest
     public function rules()
     {
         return [
-        'firstname'=>'required|between:3,30',
-        'lastname'=>'required|between:3,50',
-        'account_number'=>'required|between:8,20',
-        'address'=>'required',
-        'tel'=>'required|between:11,15',
-        'fax'=>'required|between:11,15',
-        'bank_name'=>'required|string|between:3,40',
-        'branch_name'=>'required|string|between:3,60',
-//        'branch_address'=>'required|string|between:3,256',
-        'swift_code'=>'required|between:8,11',
-        'iban_code'=>'required|string|between:10,34',
-            ];
+            'firstname' => 'required|between:3,30',
+            'lastname' => 'required|between:3,50',
+            'account_number' => 'required|between:8,20',
+            'address' => '',
+            'tel' => 'required|between:11,15',
+            'fax' => 'between:11,15',
+            'country' => 'required',
+            'bank_name' => 'required|string|between:3,40',
+            'branch_name' => 'required|string|between:3,60',
+            'branch_address' => 'string|between:3,256',
+            'swift_code' => 'required|between:8,11',
+            'iban_code' => 'required|string|between:10,34'
+        ];
     }
 }

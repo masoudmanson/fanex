@@ -179,7 +179,7 @@
                             {{-- country --}}
                             <div class="form-group bsWrapper">
                                 @if($errors->first('country'))
-                                    <label for="address" class="fanexLabel">@lang('payment.bnfCountry')</label>
+                                    <label for="country" class="fanexLabel">@lang('payment.bnfCountry')</label>
                                 @endif
                                 <i class="icon-globe bsIcon"></i>
 
@@ -340,6 +340,7 @@
 @section('scripts')
     <script>
         $(document).ready(function () {
+            $('.selectpicker').selectpicker('val', 'IR');
         });
     </script>
 @endsection

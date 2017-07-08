@@ -115,7 +115,6 @@ class PaymentController extends Controller
         return response()->view('dashboard.proforma', $request->query(), 200);
     }
 
-
     /**
      * @param BeneficiaryRequest $request
      * @return \Illuminate\Http\RedirectResponse|Response
