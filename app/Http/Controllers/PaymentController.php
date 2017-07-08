@@ -54,7 +54,7 @@ class PaymentController extends Controller
 
     public function pay(Request $request)
     {
-        //todo keywords:state, base64,decode,view
+        //todo: check if it necessary to call createOrSelect route instead of these lines of code.
 
         $user = Auth::user();
 
@@ -240,6 +240,7 @@ class PaymentController extends Controller
         $transaction->payment_amount = $backlog->payment_amount;
         $transaction->currency = $backlog->currency;
         $transaction->payment_type = $backlog->payment_type;
+        $transaction->ttl = $backlog->ttl;
         $transaction->country = $backlog->country;
 
         $transaction->save();

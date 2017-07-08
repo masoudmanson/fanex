@@ -21,6 +21,11 @@ class Transaction extends Model
         return $query->where('uri', $billNumber); //unique ref. number
     }
 
+    public function scopeHasttl($query)
+    {
+        return $query->where('ttl', '>' , Carbon::now() );
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');
