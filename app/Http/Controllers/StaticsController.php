@@ -71,7 +71,9 @@ class StaticsController extends Controller
     public function proformaPdf()
     {
         $pdf = new PDF();
+        $pdf->useSubstitutions=false;
+        $pdf->simpleTables = true;
         $pdf->loadView('pdf.proforma');
-        return $pdf->Download('document.pdf');
+        return $pdf->Stream('document.pdf');
     }
 }

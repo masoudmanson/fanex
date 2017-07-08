@@ -19,7 +19,7 @@
                     {{-- Create a New Benificiary --}}
                     <div class="col-xs-12 p-0">
                         <h2 class="dash-subtitle">@lang('payment.prfSubtitle')</h2>
-                        <div class="proforma-wrapper mb-4">
+                        <div class="proforma-wrapper mb-4" id="pdfWrapper">
                             <div class="row">
                                 <div class="col-xs-4">
                                     <img src="{{ asset('css/images/app-icon.png') }}" alt="Fanex Logo">
@@ -144,7 +144,7 @@
                                     </ul>
 
                                     {{-- Print Proforma --}}
-                                    <a href="/pdf/proforma/{{ $pdf }}" class="invoice-print" data-toggle="tooltip"
+                                    <a href="#" class="invoice-print" data-toggle="tooltip" id="print-pdf"
                                        title="@lang('payment.print')">
                                         <i class="icon-printer"></i>
                                     </a>
@@ -201,5 +201,38 @@
                 }
             });
         });
+
+            var form = $('#pdfWrapper'),
+                cache_width = form.width(),
+                a4 = [595.28, 841.89]; // for a4 size paper width and height
+
+            $('#print-pdf').on('click', function() {
+                $('body').scrollTop(0);
+                createPDF();
+            });
+            //create pdf
+            function createPDF() {
+                getCanvas().then(function(canvas) {
+                    var
+                        img = canvas.toDataURL("image/png"),
+                        doc = new jsPDF({
+                            unit: 'px',
+                            format: 'a4'
+                        });
+                    doc.addImage(img, 'PNG', 5, 5);
+                    doc.save('invoice.pdf');
+                    form.width(cache_width);
+                });
+            }
+
+            // create canvas object
+            function getCanvas() {
+                form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');
+                return html2canvas(form, {
+                    imageTimeout: 2000,
+                    removeContainer: true
+                });
+            }
+
     </script>
 @endsection

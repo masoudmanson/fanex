@@ -12,7 +12,7 @@
                 <table>
                     <tr>
                         <td class="title">
-                            <img src="Group%209.png" style="width:100%; max-width:100px;">
+                            {{--<img src="Group%209.png" style="width:100%; max-width:100px;">--}}
                         </td>
 
                         <td>
