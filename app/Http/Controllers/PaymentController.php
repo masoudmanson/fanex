@@ -27,7 +27,7 @@ class PaymentController extends Controller
     {
         $this->middleware('checkToken', ['only' => ['pay', 'invoice']]);
         $this->middleware('checkUser', ['only' => ['pay']]);
-        $this->middleware('checkLog', ['only' => ['proforma_with_selected_bnf_profile','proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
+        $this->middleware('checkLog', ['only' => ['proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
     }
 
     /**
@@ -138,6 +138,24 @@ class PaymentController extends Controller
             : redirect()->back()->withErrors(['msg', 'The Message']);
     }
 
+    public function proforma_with_selected_transaction(Request $request, Transaction $transaction)
+    {
+        $beneficiary = $transaction->beneficiary;
+        $log = $transaction->backlog;
+
+        $transaction['hash'] = Crypt::encryptString($transaction);
+
+        $request->query->add(['beneficiary' => $beneficiary,
+            'transaction_sign' => $transaction['hash']
+        ]);
+
+        setcookie('backlog', encrypt($log->id), time() + $transaction->ttl); // or backlog ttl
+
+        setcookie('ttl', time() + $transaction->ttl, time() + $transaction->ttl);
+
+        return response()->view('dashboard.proforma', $request->query(), 200);
+    }
+
     public function issueInvoice(Request $request)
     {
         $id = decrypt($_COOKIE['backlog']);
@@ -155,20 +173,19 @@ class PaymentController extends Controller
 
             return redirect("http://sandbox.fanapium.com:1031/v1/pbc/payinvoice/?invoiceId="
                 . $invoice->result->id . "&redirectUri=" . $request->root() . "/invoice/show?billNumber=" . $transaction->uri);
-        }
-        else dd($invoice);  //todo: error handling
+        } else dd($invoice);  //todo: error handling
     }
 
     public function showInvoice(Request $request)
     {
         $result = $this->trackingInvoiceByBillNumber($request->billNumber);
         $invoice = json_decode($result->getBody()->getContents());
-//dd($invoice);
+
         if (!$invoice->hasError && count($invoice->result) > 0) {
             $invoice_result = $invoice->result[0];
 
             // Converting EPOCH timestamp to UNIX timestamp
-            $invoice_result->paymentDate = ceil($invoice_result->paymentDate/1000);
+            $invoice_result->paymentDate = ceil($invoice_result->paymentDate / 1000);
             if ($invoice_result->payed && !$invoice_result->canceled) {
 
                 $transaction = Transaction::findByBillNumber($invoice_result->billNumber)->firstOrFail();
@@ -192,8 +209,7 @@ class PaymentController extends Controller
                         $transaction->upt_status = 'successful';
                         $transaction->update();
 
-                    }
-                    else{
+                    } else {
                         $transaction->upt_status = 'failed'; //or rejected?
                         $transaction->fanex_status = 'pending';
                         $transaction->update();
@@ -207,7 +223,7 @@ class PaymentController extends Controller
                     $transaction->update();
                     // return ?
                 }
-                return view('dashboard.invoice', compact('invoice_result','transaction'));
+                return view('dashboard.invoice', compact('invoice_result', 'transaction'));
 
             } else {
 //                    return error;
