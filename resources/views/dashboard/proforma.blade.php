@@ -163,8 +163,7 @@
                         {{ csrf_field() }}
 
                         <div class="checkbox row mx-0 my-4 p-0">
-                            <label><input type="checkbox" id="proforma-terms" name="terms" value="1">I accept <a href="/terms">terms and
-                                    conditions</a> of FANEx</label>
+                            <label><input type="checkbox" id="proforma-terms" name="terms" value="1">@lang('payment.agreement')</label>
                         </div>
 
                         <div class="col-sm-6 col-xs-12 p-0 pb-md-0 pb-sm-4 pb-xs-4 pr-md-2 pr-lg-3">

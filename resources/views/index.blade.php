@@ -19,9 +19,9 @@
     <div class="container-fluid indexWrapper">
         <div class="row m-0">
             {{-- Form Container --}}
-            {{--<div class="col-lg-6 col-md-12 p-0 indexWrapperInside indexLeft">--}}
-                {{--@include('partials.mainForm', ['country_list'=>$country_list, 'beneficiary' => null])--}}
-            {{--</div>--}}
+            <div class="col-lg-6 col-md-12 p-0 indexWrapperInside indexLeft">
+                @include('partials.mainForm', ['country_list'=>$country_list, 'beneficiary' => null])
+            </div>
 
             {{-- Map and Static Pages Container --}}
             <div class="col-lg-6 col-md-12 p-0 indexWrapperInside indexRight">

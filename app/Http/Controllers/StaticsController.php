@@ -71,214 +71,139 @@ class StaticsController extends Controller
     public function proformaPdf()
     {
         $pdf = App::make('dompdf.wrapper');
-        $html =
-<<<'ENDHTML'
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>A simple, clean, and responsive HTML invoice template</title>
-    
-    <style>
-    .invoice-box{
-        max-width:800px;
-        margin:auto;
-        padding:30px;
-        border:1px solid #eee;
-        box-shadow:0 0 10px rgba(0, 0, 0, .15);
-        font-size:16px;
-        line-height:24px;
-        font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-        color:#555;
-    }
-    
-    .invoice-box table{
-        width:100%;
-        line-height:inherit;
-        text-align:left;
-    }
-    
-    .invoice-box table td{
-        padding:5px;
-        vertical-align:top;
-    }
-    
-    .invoice-box table tr td:nth-child(2){
-        text-align:right;
-    }
-    
-    .invoice-box table tr.top table td{
-        padding-bottom:20px;
-    }
-    
-    .invoice-box table tr.top table td.title{
-        font-size:45px;
-        line-height:45px;
-        color:#333;
-    }
-    
-    .invoice-box table tr.information table td{
-        padding-bottom:40px;
-    }
-    
-    .invoice-box table tr.heading td{
-        background:#eee;
-        border-bottom:1px solid #ddd;
-        font-weight:bold;
-    }
-    
-    .invoice-box table tr.details td{
-        padding-bottom:20px;
-    }
-    
-    .invoice-box table tr.item td{
-        border-bottom:1px solid #eee;
-    }
-    
-    .invoice-box table tr.item.last td{
-        border-bottom:none;
-    }
-    
-    .invoice-box table tr.total td:nth-child(2){
-        border-top:2px solid #eee;
-        font-weight:bold;
-    }
-    
-    @media only screen and (max-width: 600px) {
-        .invoice-box table tr.top table td{
-            width:100%;
-            display:block;
-            text-align:center;
-        }
-        
-        .invoice-box table tr.information table td{
-            width:100%;
-            display:block;
-            text-align:center;
-        }
-    }
-    </style>
-</head>
+        $html = '';
+        $html .= '
+                <div class="row p-0 m-0">
+                    <div class="col-xs-12 p-0">
+                        <h2 class="dash-subtitle">'.__('payment.prfSubtitle').'</h2>
+                        <div class="proforma-wrapper mb-4">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <img src="" alt="Fanex Logo">
+                                </div>
+                                <div class="col-xs-8 right-align">
+                                    <p>Date: '.__('payment.invDate', ['dateEn' => '7 July 2017', 'dateFa' => '17 تیر 1396']).'</p>
+                                </div>
+                            </div>
 
-<body>
-    <div class="invoice-box">
-        <table cellpadding="0" cellspacing="0">
-            <tr class="top">
-                <td colspan="2">
-                    <table>
-                        <tr>
-                            <td class="title">
-                                <img src="Group%209.png" style="width:100%; max-width:100px;">
-                            </td>
-                            
-                            <td>
-                                شماره فاکتور: 123<br>
-                                تاریخ: 17 تیر 1396<br>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            
-            <tr class="information">
-                <td colspan="2">
-                    <table>
-                        <tr>
-                            <td>
-                                سامانه برخط ارسال حواله بین المللی FANEx<br>
-                                ایران، تهران، پارک علم و فناوری پردیس<br>
-                                خ نوآوری 12، پلاک 123، ساختمان فناپ
-                            </td>
-                            
-                            <td>
-                                صرافی پاسارگاد<br>
-                                pasargadexchange.com<br>
-                                feedback@fanex.ir
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            
-            <tr>
-                <td>
-                    <h1>فرم درخواست صدور حواله</h1>
-                </td>
-            </tr>
-            
-            <tr class="heading">
-                <td>
-                    Payment Method
-                </td>
-                
-                <td>
-                    Check #
-                </td>
-            </tr>
-            
-            <tr class="details">
-                <td>
-                    Check
-                </td>
-                
-                <td>
-                    1000
-                </td>
-            </tr>
-            
-            <tr class="heading">
-                <td>
-                    Item
-                </td>
-                
-                <td>
-                    Price
-                </td>
-            </tr>
-            
-            <tr class="item">
-                <td>
-                    Website design
-                </td>
-                
-                <td>
-                    $300.00
-                </td>
-            </tr>
-            
-            <tr class="item">
-                <td>
-                    Hosting (3 months)
-                </td>
-                
-                <td>
-                    $75.00
-                </td>
-            </tr>
-            
-            <tr class="item last">
-                <td>
-                    Domain name (1 year)
-                </td>
-                
-                <td>
-                    $10.00
-                </td>
-            </tr>
-            
-            <tr class="total">
-                <td></td>
-                
-                <td>
-                   Total: $385.00
-                </td>
-            </tr>
-        </table>
-    </div>
-</body>
-</html>
-ENDHTML;
-        $pdf->loadHTML($html);
-        return $pdf->download();
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h2>Money Transfer Application</h2>
+
+                                    <p>Transferring <span>1,500 EUR</span> by following Applicant to specified
+                                        beneficiary:</p>
+
+                                    <div class="proforma-heading">
+                                        Applicant\'s Identification
+                                    </div>
+
+                                    <ul>
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6"><p>Mr./Ms./Co.:</p></div>
+                                            <div class="col-xs-12 col-sm-6">Masoud Amjadi</div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6"><p>Pass/Id./Reg.No:</p></div>
+                                            <div class="col-xs-12 col-sm-6">1640113886</div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6"><p>Date of Birth</p></div>
+                                            <div class="col-xs-12 col-sm-6">26 June 1991</div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6"><p>Place of Birth</p></div>
+                                            <div class="col-xs-12 col-sm-6">Iran</div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6"><p>Address</p></div>
+                                            <div class="col-xs-12 col-sm-6">#13, Zaratash Alley, Ghoddosi St., Ghasr
+                                                Sq., Tehran, Iran
+                                            </div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6"><p>Postal Code</p></div>
+                                            <div class="col-xs-12 col-sm-6">12326-45879</div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6"><p>Tel</p></div>
+                                            <div class="col-xs-12 col-sm-6">021 548 5874</div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6"><p>Mobile</p></div>
+                                            <div class="col-xs-12 col-sm-6">0914 840 1824</div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6"><p>Email Address</p></div>
+                                            <div class="col-xs-12 col-sm-6">masoudmanson@gmail.com</div>
+                                        </li>
+
+                                    </ul>
+
+                                    <div class="proforma-heading">
+                                        Beneficiary Details
+                                    </div>
+
+                                    <ul>
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6"><p>Name:</p></div>
+                                            <div class="col-xs-12 col-sm-6">Name</div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6"><p>Country:</p></div>
+                                            <div class="col-xs-12 col-sm-6">Country
+                                            </div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6"><p>Address:</p></div>
+                                            <div class="col-xs-12 col-sm-6">Address
+                                            </div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6"><p>Tel:</p></div>
+                                            <div class="col-xs-12 col-sm-6">Tel</div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6"><p>Fax:</p></div>
+                                            <div class="col-xs-12 col-sm-6">Fax</div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6"><p>Bank Name:</p></div>
+                                            <div class="col-xs-12 col-sm-6">Bank Name</div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6"><p>Branch Name/ Address:</p></div>
+                                            <div class="col-xs-12 col-sm-6">Branch Name/ Address</div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6"><p>Swift Code</p></div>
+                                            <div class="col-xs-12 col-sm-6">Swift Code</div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6"><p>iBan Code</p></div>
+                                            <div class="col-xs-12 col-sm-6">iBan Code</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+        return $pdf->loadHTML($html, 'A4', 'portrait')->download('bye.pdf');
     }
 }

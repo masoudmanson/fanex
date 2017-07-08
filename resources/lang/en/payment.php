@@ -28,6 +28,7 @@ return [
     'showProforma' => 'Show Proforma',
     'showProformaSelect' => 'Select and Go',
     'showProformaSave' => 'Save and Continue',
+    'agreement' => 'I accept <a href="/terms">terms and conditions</a> of FANEx',
 
 
     'stepsTitle' => 'Rates expire in:',
