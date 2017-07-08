@@ -19,11 +19,14 @@
                 <div class="row p-0 m-0 filter-wrapper">
                     <div class="col-xs-9 px-0">
                         <ul class="filter-ul">
-                            {{--<li class="filter-li active" data-filter="all" style="margin-right: 5px;"><a href="#"><span class="mini-title">@lang('profile.filterAllShort')</span><span class="large-title">@lang('profile.filterAllShort')</span></a></li>--}}
-                            {{--<li class="filter-li flag" data-filter="ir" title="Islamic Republic of Iran"><i class="flag-icon-squared flag-icon-ir"></i></li>--}}
-                            {{--<li class="filter-li flag" data-filter="tr" title="Turkey"><i class="flag-icon-squared flag-icon-tr"></i></li>--}}
-                            {{--<li class="filter-li flag" data-filter="us" title="United States of America"><i class="flag-icon-squared flag-icon-us"></i></li>--}}
-                            {{--<li class="filter-li flag" data-filter="uk" title="United Kingdom"><i class="flag-icon-squared flag-icon-gb-eng"></i></li>--}}
+                            <li class="filter-li active" data-filter="all" style="margin-right: 5px;"><a href="#"><span
+                                            class="mini-title">@lang('profile.filterAllShort')</span><span
+                                            class="large-title">@lang('profile.filterAllShort')</span></a></li>
+                            @foreach($filter_countries as $index => $country)
+                                <li class="filter-li flag" data-filter="{{ $country }}"
+                                    title="{{ $countries[$country] }}"><i
+                                            class="flag-icon-squared flag-icon-{{ strtolower($country) }}"></i></li>
+                            @endforeach
                         </ul>
                     </div>
 
@@ -48,7 +51,7 @@
                             </div>
                         </div>
                         @foreach($beneficiaries as $bnf)
-                            <div class="panel panel-default filtered ctr-ir">
+                            <div class="panel panel-default filtered ctr-{{ $bnf->country }}">
                                 <div class="panel-heading">
                                     <div class="row p-0 m-0">
                                         <div class="col-md-3 col-sm-3 col-xs-5" data-toggle="tooltip"
@@ -56,14 +59,14 @@
                                             <i class="icon-user acc-main-icon hidden-xs"></i>
                                             <span class="acc-user"><b>{{ $bnf->firstname . ' ' . $bnf->lastname }}</b></span>
                                         </div>
-                                        <div class="col-md-3 col-sm-3 hidden-xs" data-toggle="tooltip"
+                                        <div class="col-md-2 col-sm-3 hidden-xs" data-toggle="tooltip"
                                              title="@lang('payment.bnfCC')">
                                             <span class="acc-date">{{ $bnf->account_number }}</span>
                                         </div>
-                                        {{--<div class="col-md-1 hidden-sm hidden-xs" data-toggle="tooltip"--}}
-                                             {{--title="@lang('profile.bnfCountry')">--}}
-                                            {{--<span class="acc-cash">Iran</span>--}}
-                                        {{--</div>--}}
+                                        <div class="col-md-1 hidden-sm hidden-xs" data-toggle="tooltip"
+                                             title="@lang('profile.bnfCountry')">
+                                            <span class="acc-cash">{{ $countries[$bnf->country] }}</span>
+                                        </div>
                                         <div class="col-md-2 hidden-sm hidden-xs" data-toggle="tooltip"
                                              title="@lang('payment.bnfPhone')">
                                             <span class="acc-date">{{ $bnf->tel }}</span>
@@ -73,7 +76,7 @@
                                                 <i class="icon-trans" title="@lang('profile.bnfSendMoney')"></i>
                                             </a>
                                             {{--<a href="/">--}}
-                                                {{--<i class="icon-chat hidden-xs" title="@lang('profile.bnfSendMsg')"></i>--}}
+                                            {{--<i class="icon-chat hidden-xs" title="@lang('profile.bnfSendMsg')"></i>--}}
                                             {{--</a>--}}
                                             <a href="">
                                                 <i class="icon-edit" title="@lang('profile.bnfEdit')"></i>
@@ -96,30 +99,21 @@
                                                 <div class="form-group bsWrapper" data-toggle="tooltip"
                                                      title="@lang('profile.bnfName')">
                                                     <i class="icon-user bsIcon"></i>
-                                                    <div class="form-control fanexInput fanexInputPanel" id="bnf-ajax-firstname">
+                                                    <div class="form-control fanexInput fanexInputPanel"
+                                                         id="bnf-ajax-firstname">
                                                         {{ $bnf->firstname . ' ' . $bnf->lastname }}
                                                     </div>
                                                 </div>
 
-                                                {{-- Account Number --}}
+                                                {{--Country --}}
                                                 <div class="form-group bsWrapper" data-toggle="tooltip"
-                                                     title="@lang('payment.bnfCC')">
-                                                    <i class="icon-card bsIcon"></i>
+                                                     title="@lang('profile.bnfCountry')">
+                                                    <i class="icon-globe bsIcon"></i>
                                                     <div class="form-control fanexInput fanexInputPanel"
-                                                         id="bnf-ajax-accountnumber">
-                                                        {{ $bnf->account_number }}
+                                                         id="bnf-ajax-country">
+                                                        {{ $countries[$bnf->country] }}
                                                     </div>
                                                 </div>
-
-                                                {{-- Country --}}
-                                                {{--<div class="form-group bsWrapper" data-toggle="tooltip"--}}
-                                                     {{--title="@lang('profile.bnfCountry')">--}}
-                                                    {{--<i class="icon-globe bsIcon"></i>--}}
-                                                    {{--<div class="form-control fanexInput fanexInputPanel"--}}
-                                                         {{--id="bnf-ajax-country">--}}
-                                                        {{--Iran--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
 
                                                 {{-- Address --}}
                                                 <div class="form-group bsWrapper" data-toggle="tooltip"
@@ -140,6 +134,17 @@
                                                         {{ $bnf->tel }}
                                                     </div>
                                                 </div>
+
+                                                {{--Fax Number --}}
+                                                <div class="form-group bsWrapper" data-toggle="tooltip"
+                                                     title="@lang('payment.bnfFax')">
+                                                    <i class="icon-fax bsIcon"></i>
+                                                    <div class="form-control fanexInput fanexInputPanel"
+                                                         id="bnf-ajax-fax">
+                                                        {{ $bnf->fax }}
+                                                    </div>
+                                                </div>
+
                                             </div>
 
                                             {{-- Left Column --}}
@@ -164,6 +169,16 @@
                                                     </div>
                                                 </div>
 
+                                                {{-- Account Number --}}
+                                                <div class="form-group bsWrapper" data-toggle="tooltip"
+                                                     title="@lang('payment.bnfCC')">
+                                                    <i class="icon-card bsIcon"></i>
+                                                    <div class="form-control fanexInput fanexInputPanel"
+                                                         id="bnf-ajax-accountnumber">
+                                                        {{ $bnf->account_number }}
+                                                    </div>
+                                                </div>
+
                                                 {{-- Swift Code --}}
                                                 <div class="form-group bsWrapper" data-toggle="tooltip"
                                                      title="@lang('payment.bnfSwift')">
@@ -178,19 +193,12 @@
                                                 <div class="form-group bsWrapper" data-toggle="tooltip"
                                                      title="@lang('payment.bnfIban')">
                                                     <i class="icon-code bsIcon"></i>
-                                                    <div class="form-control fanexInput fanexInputPanel" id="bnf-ajax-iban">
+                                                    <div class="form-control fanexInput fanexInputPanel"
+                                                         id="bnf-ajax-iban">
                                                         {{ $bnf->iban_code }}
                                                     </div>
                                                 </div>
 
-                                                {{-- Fax Number --}}
-                                                {{--<div class="form-group bsWrapper" data-toggle="tooltip"--}}
-                                                     {{--title="@lang('payment.bnfFax')">--}}
-                                                    {{--<i class="icon-fax bsIcon"></i>--}}
-                                                    {{--<div class="form-control fanexInput fanexInputPanel" id="bnf-ajax-fax">--}}
-                                                        {{--{{ $bnf->fax }}--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
                                             </div>
                                         </div>
                                     </div>

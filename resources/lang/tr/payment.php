@@ -15,6 +15,7 @@ return [
     'bnfFirstname' => 'İsim',
     'bnfLastname' => 'Soyadı',
     'bnfCC' => 'Hesap numarası',
+    'bnfCountry' => 'Ülke',
     'bnfAddr' => 'Adres',
     'bnfPhone' => 'Telefon numarası',
     'bnfFax' => 'Faks numarası',

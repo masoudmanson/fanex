@@ -93,3 +93,9 @@ function indexFormCountryList($data, $lang) {
     arsort($country_list);
     return $country_list;
 }
+
+function countries($lang) {
+    return $countries = Countries::lookup($lang)->mapWithKeys(function($country, $key) {
+        return $key == 'XK' ? [ 'KV' => $country ] : [ $key => $country ];
+    });
+}

@@ -15,6 +15,7 @@ return [
     'bnfFirstname' => 'Firstname',
     'bnfLastname' => 'Lastname',
     'bnfCC' => 'Account Number',
+    'bnfCountry' => 'Country',
     'bnfAddr' => 'Address',
     'bnfPhone' => 'Phone Number',
     'bnfFax' => 'Fax Number',

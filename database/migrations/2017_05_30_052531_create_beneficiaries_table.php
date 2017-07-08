@@ -22,8 +22,9 @@ class CreateBeneficiariesTable extends Migration
             $table->string('lastname');
             $table->string('account_number')->unique();
             $table->text('address');
+            $table->string('country')->nullable();
             $table->string('tel');
-            $table->string('fax');
+            $table->string('fax')->nullable();
             $table->string('bank_name');
             $table->string('branch_name');
             $table->text('branch_address')->nullable();

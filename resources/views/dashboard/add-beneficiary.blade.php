@@ -176,6 +176,26 @@
                                 @endif
                             </div>
 
+                            {{-- country --}}
+                            <div class="form-group bsWrapper">
+                                @if($errors->first('country'))
+                                    <label for="address" class="fanexLabel">@lang('payment.bnfCountry')</label>
+                                @endif
+                                <i class="icon-globe bsIcon"></i>
+
+                                <select class="form-control fanexInput selectpicker"
+                                        data-style="fanexInput fanexInputWhite"
+                                        name="country">
+                                    @foreach($countries as $key=>$value)
+                                        <option value="{{ $key }}" class="enable">{{ $value }}</option>
+                                    @endforeach
+                                </select>
+
+                                @if($errors->first('country'))
+                                    <div class="fanexDanger">{{ $errors->first('country') }}</div>
+                                @endif
+                            </div>
+
                             {{-- Address --}}
                             <div class="form-group bsWrapper">
                                 @if($errors->first('address'))

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Backlog;
 use App\Beneficiary;
+use Countries;
 use App\Http\Requests\BeneficiaryRequest;
 use App\Traits\PlatformTrait;
 use App\Traits\TokenTrait;
@@ -63,8 +64,12 @@ class PaymentController extends Controller
         }
 
         $request->query->add(['beneficiaries' => $beneficiaries]);
-        return response()->view('dashboard.beneficiary', $request->query(), 200);//->withCookie($cookie);
-//            ->header('authorization', 'Bearer ' . $request->bearerToken());
+
+        $countries = countries(session('applocale'));
+
+        $request->query->add(['countries' => $countries]);
+
+        return response()->view('dashboard.beneficiary', $request->query(), 200);
     }
 
 
@@ -78,11 +83,20 @@ class PaymentController extends Controller
 
         $transaction = $this->createNewTrans($beneficiary);
 
+        $proforma_date = $transaction['created_at'];
+        $pdf_id = $transaction['id'];
+
         $transaction['hash'] = Crypt::encryptString($transaction);
 
+        $countries = countries(session('applocale'));
+
         $request->query->add(['beneficiary' => $beneficiary,
-            'transaction_sign' => $transaction['hash']
+            'transaction_sign' => $transaction['hash'],
+            'countries' => $countries,
+            'date' => $proforma_date,
+            'pdf' => $pdf_id
         ]);
+
         return Hash::check($beneficiary, $request->hash)
             ? response()->view('dashboard.proforma', $request->query(), 200)
             : redirect()->back()->withErrors(['msg', 'The Message']);

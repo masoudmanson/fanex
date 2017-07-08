@@ -40,74 +40,82 @@
                             {{-- Show Beneficiary information --}}
                             <div id="bnf-ajax-div" style="display: none;">
                                 {{-- Firstname --}}
-                                <div class="form-group bsWrapper">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfFirstname')">
                                     <i class="icon-user bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-name">
-                                        Beneficiary Name
+                                        @lang('payment.bnfFirstname')
                                     </div>
                                 </div>
 
                                 {{-- Account Number --}}
-                                <div class="form-group bsWrapper">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfCC')">
                                     <i class="icon-card bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-accountnumber">
-                                        Account Number
+                                        @lang('payment.bnfCC')
+                                    </div>
+                                </div>
+
+                                {{-- Country --}}
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfCountry')">
+                                    <i class="icon-globe bsIcon"></i>
+                                    <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-country">
+                                        @lang('payment.bnfCountry')
                                     </div>
                                 </div>
 
                                 {{-- Address --}}
-                                <div class="form-group bsWrapper">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfAddr')">
                                     <i class="icon-globe bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-address">
-                                        Beneficiary Address
+                                        @lang('payment.bnfAddr')
                                     </div>
                                 </div>
 
                                 {{-- Phone Number --}}
-                                <div class="form-group bsWrapper">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfPhone')">
                                     <i class="icon-mobile bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-phone">
-                                        Mobile
+                                        @lang('payment.bnfPhone')
                                     </div>
                                 </div>
 
                                 {{-- Fax Number --}}
-                                <div class="form-group bsWrapper">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfFax')">
                                     <i class="icon-fax bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-fax">
-                                        Fax Number
+                                        @lang('payment.bnfFax')
                                     </div>
                                 </div>
 
                                 {{-- Bank Name --}}
-                                <div class="form-group bsWrapper">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfBank')">
                                     <i class="icon-bank bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-bankname">
-                                        Bank Name
+                                        @lang('payment.bnfBank')
                                     </div>
                                 </div>
 
                                 {{-- Branch Address --}}
-                                <div class="form-group bsWrapper">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfBranch')">
                                     <i class="icon-branch bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-branch">
-                                        Branch Address
+                                        @lang('payment.bnfBranch')
                                     </div>
                                 </div>
 
                                 {{-- Swift Code --}}
-                                <div class="form-group bsWrapper">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfSwift')">
                                     <i class="icon-swift bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-swift">
-                                        Swift Code
+                                        @lang('payment.bnfSwift')
                                     </div>
                                 </div>
 
                                 {{-- iBan Number --}}
-                                <div class="form-group bsWrapper">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfIban')">
                                     <i class="icon-code bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-iban">
-                                        iBan Number
+                                        @lang('payment.bnfIban')
                                     </div>
                                 </div>
 
@@ -179,6 +187,26 @@
 
                                     @if($errors->first('account_number'))
                                         <div class="fanexDanger">{{ $errors->first('account_number') }}</div>
+                                    @endif
+                                </div>
+
+                                {{-- country --}}
+                                <div class="form-group bsWrapper">
+                                    @if($errors->first('country'))
+                                        <label for="address" class="fanexLabel">@lang('payment.bnfCountry')</label>
+                                    @endif
+                                    <i class="icon-globe bsIcon"></i>
+
+                                    <select class="form-control fanexInput selectpicker"
+                                            data-style="fanexInput fanexInputWhite"
+                                            name="country">
+                                        @foreach($countries as $key=>$value)
+                                            <option value="{{ $key }}" class="enable">{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @if($errors->first('country'))
+                                        <div class="fanexDanger">{{ $errors->first('country') }}</div>
                                     @endif
                                 </div>
 
@@ -339,6 +367,7 @@
                 $('#bnf-ajax-name').text(bnf.firstname + ' ' + bnf.lastname);
                 $('#bnf-ajax-accountnumber').text(bnf.account_number);
                 $('#bnf-ajax-address').text(bnf.address);
+                $('#bnf-ajax-country').text(bnf.country);
                 $('#bnf-ajax-phone').text(bnf.tel);
                 $('#bnf-ajax-fax').text(bnf.fax);
                 $('#bnf-ajax-bankname').text(bnf.bank_name);

@@ -100,4 +100,4 @@ Route::post('/calculate', 'UptController@calculateRemittance')->name('calculate'
 
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
 
-Route::get('pdf', 'StaticsController@pdf');
+Route::get('pdf/proforma/{id}', 'StaticsController@proformaPdf');

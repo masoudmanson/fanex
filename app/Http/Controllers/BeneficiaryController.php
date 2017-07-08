@@ -6,10 +6,10 @@ use App\Beneficiary;
 use App\Http\Requests\BeneficiaryRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Countries;
 
 class BeneficiaryController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware(['checkToken', 'checkUser']);
@@ -25,7 +25,16 @@ class BeneficiaryController extends Controller
     {
         $user = Auth::user();
         $beneficiaries = $user->beneficiary()->get();
-        return view('dashboard.beneficiaries', compact('beneficiaries'));
+
+        $countries = countries(session('applocale'));
+
+        $filter_countries = array();
+        foreach ($beneficiaries as $beneficiary) {
+            if(!in_array($beneficiary->country, $filter_countries))
+                array_push($filter_countries, $beneficiary->country);
+        }
+
+        return view('dashboard.beneficiaries', compact('beneficiaries', 'countries', 'filter_countries'));
     }
 
     /**
@@ -35,7 +44,9 @@ class BeneficiaryController extends Controller
      */
     public function create()
     {
-        return view("dashboard.add-beneficiary");
+        $countries = countries(session('applocale'));
+
+        return view("dashboard.add-beneficiary", compact('countries'));
     }
 
     /**
@@ -43,7 +54,7 @@ class BeneficiaryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createOrSelect()
+    public function createOrSelect(Request $request)
     {
         return view("dashboard.beneficiary");
     }

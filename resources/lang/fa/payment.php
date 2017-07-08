@@ -15,6 +15,7 @@ return [
     'bnfFirstname' => 'نام',
     'bnfLastname' => 'نام خانوادگی',
     'bnfCC' => 'شماره حساب',
+    'bnfCountry' => 'کشور',
     'bnfAddr' => 'آدرس',
     'bnfPhone' => 'شماره تلفن',
     'bnfFax' => 'شماره فکس',

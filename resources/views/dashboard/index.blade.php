@@ -79,7 +79,7 @@
                                         </div>
                                         <div class="col-md-2 col-sm-3 col-xs-3" data-toggle="tooltip"
                                              title="@lang('profile.titleAmount')">
-                                            <span class="acc-cash">{{ $transaction->premium_amount.' &lrm;'. $transaction->currency }}</span>
+                                            <span class="acc-cash">{{ number_format($transaction->premium_amount).' &lrm;'. $transaction->currency }}</span>
                                         </div>
                                         <div class="col-md-2 col-sm-3 col-xs-2" data-toggle="tooltip"
                                              title="@lang('profile.titleStatus')">
@@ -151,13 +151,13 @@
                                                 </div>
                                                 <div class="col-xs-7 p-0 m-0 acc-info-right">
                                                     <p class="table-header">@lang('payment.invCost')</p>
-                                                    <p>{{ number_format($transaction->premium_amount, 2) . ' ' . $transaction->currency }}</p>
+                                                    <p>{{ number_format($transaction->premium_amount, 0) . ' ' . $transaction->currency }}</p>
                                                     <p>0</p>
                                                     <p>{{ number_format($transaction->vat) }} @lang('index.formRials')</p>
                                                     <hr>
-                                                    <p>{{ number_format($transaction->premium_amount, 2) . ' ' . $transaction->currency . ' + &rlm;' . number_format($transaction->vat) }} @lang('index.formRials')</p>
+                                                    <p>{{ number_format($transaction->premium_amount, 0) . ' ' . $transaction->currency . ' + &rlm;' . number_format($transaction->vat) }} @lang('index.formRials')</p>
                                                     <p class="acc-factor-sum">
-                                                        = {{ number_format($transaction->payment_amount) }} @lang('payment.invRials')</p>
+                                                        = {{ number_format($transaction->payment_amount+$transaction->vat) }} @lang('payment.invRials')</p>
                                                 </div>
 
                                                 @if(!$transaction->uri)
