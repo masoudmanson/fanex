@@ -71,9 +71,10 @@
                                              @if($transaction->uri && $transaction->payment_date) title="@lang('profile.titleDate')" @endif>
                                             <span class="acc-date">
                                                 @if($transaction->uri && $transaction->payment_date)
+                                                {{--@if(!$transaction->can_pay)--}}
                                                     @lang('payment.invDate', ['dateEn' => $transaction->payment_date->format('d M Y'), 'dateFa' => jdate($transaction->payment_date)->format('%Y %B %d')])
                                                 @else
-                                                    <a href="{{ route('index') }}" class="btn btnMini btnRound fanexBtnMiniOutlineGrey">@lang('index.pay')</a>
+                                                    <a href="/proforma/transaction/{{ $transaction->id }}" class="btn btnMini btnRound fanexBtnMiniOutlineGrey">@lang('index.pay')</a>
                                                 @endif
                                             </span>
                                         </div>
