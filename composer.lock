@@ -1392,16 +1392,16 @@
         },
         {
             "name": "petercoles/multilingual-country-list",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/petercoles/Multilingual-Country-List.git",
-                "reference": "57cc0b34544f39bd811a17371edaec38fc320fba"
+                "reference": "57ce7060d36ceee4357621463efcd269dc2ce3c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/petercoles/Multilingual-Country-List/zipball/57cc0b34544f39bd811a17371edaec38fc320fba",
-                "reference": "57cc0b34544f39bd811a17371edaec38fc320fba",
+                "url": "https://api.github.com/repos/petercoles/Multilingual-Country-List/zipball/57ce7060d36ceee4357621463efcd269dc2ce3c6",
+                "reference": "57ce7060d36ceee4357621463efcd269dc2ce3c6",
                 "shasum": ""
             },
             "require": {
@@ -1438,7 +1438,7 @@
                 "country lookup",
                 "laravel"
             ],
-            "time": "2016-05-06T23:53:03+00:00"
+            "time": "2017-06-27T09:59:30+00:00"
         },
         {
             "name": "phenx/php-font-lib",
