@@ -1446,11 +1446,7 @@
                 "country lookup",
                 "laravel"
             ],
-<<<<<<< HEAD
-            "time": "2017-06-27T09:59:30+00:00"
-=======
             "time": "2017-06-27T13:09:21+00:00"
->>>>>>> ab11da1dc0c7b16d3b505f450726d6b20e05e301
         },
         {
             "name": "phenx/php-font-lib",
