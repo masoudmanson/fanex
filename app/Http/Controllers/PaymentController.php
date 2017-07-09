@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Backlog;
 use App\Beneficiary;
+use Countries;
 use App\Http\Requests\BeneficiaryRequest;
 use App\Traits\PlatformTrait;
 use App\Traits\TokenTrait;
+use App\Traits\UptTrait;
 use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,11 +21,13 @@ class PaymentController extends Controller
 {
     use TokenTrait;
     use PlatformTrait;
+    use UptTrait;
 
     public function __construct()
     {
         $this->middleware('checkToken', ['only' => ['pay', 'invoice']]);
         $this->middleware('checkUser', ['only' => ['pay']]);
+        $this->middleware('checkLog', ['only' => ['proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
     }
 
     /**
@@ -40,7 +44,6 @@ class PaymentController extends Controller
 
     public function test(Request $request)
     {
-
 //        dd($request->input());
 //        dd(Auth::user()->api_token);
         $request->headers->set('authorization', 'Bearer ' . Auth::user()->api_token);
@@ -51,7 +54,7 @@ class PaymentController extends Controller
 
     public function pay(Request $request)
     {
-        //todo keywords:state, base64,decode,view
+        //todo: check if it necessary to call createOrSelect route instead of these lines of code.
 
         $user = Auth::user();
 
@@ -61,8 +64,12 @@ class PaymentController extends Controller
         }
 
         $request->query->add(['beneficiaries' => $beneficiaries]);
-        return response()->view('dashboard.beneficiary', $request->query(), 200);//->withCookie($cookie);
-//            ->header('authorization', 'Bearer ' . $request->bearerToken());
+
+        $countries = countries(session('applocale'));
+
+        $request->query->add(['countries' => $countries]);
+
+        return response()->view('dashboard.beneficiary', $request->query(), 200);
     }
 
 
@@ -74,20 +81,38 @@ class PaymentController extends Controller
     {
         $beneficiary = Beneficiary::findOrFail($request->bnf);
 
-        $id = base64_decode($_COOKIE['backlog']);
-        $transaction = new Transaction();
-        $transaction->user_id = Auth::user()->id;
-        $transaction->beneficiary_id = $beneficiary->id;
-        $transaction->backlog_id = $id;
-        $transaction->save();//todo : code cleaning
-        $transaction['hash'] = bcrypt($transaction);
+        $transaction = $this->createNewTrans($beneficiary);
+
+        $proforma_date = $transaction['created_at'];
+        $pdf_id = $transaction['id'];
+
+        $transaction['hash'] = Crypt::encryptString($transaction);
+
+        $countries = countries(session('applocale'));
 
         $request->query->add(['beneficiary' => $beneficiary,
-//            'transaction_sign'=>$transaction['hash']
+            'transaction_sign' => $transaction['hash'],
+            'countries' => $countries,
+            'date' => $proforma_date,
+            'pdf' => $pdf_id
         ]);
+
         return Hash::check($beneficiary, $request->hash)
             ? response()->view('dashboard.proforma', $request->query(), 200)
             : redirect()->back()->withErrors(['msg', 'The Message']);
+    }
+
+    public function proforma_with_selected_bnf_profile(Request $request, Beneficiary $beneficiary)
+    {
+        $transaction = $this->createNewTrans($beneficiary);
+
+        $transaction['hash'] = Crypt::encryptString($transaction);
+
+        $request->query->add(['beneficiary' => $beneficiary,
+            'transaction_sign' => $transaction['hash']
+        ]);
+
+        return response()->view('dashboard.proforma', $request->query(), 200);
     }
 
 
@@ -100,16 +125,12 @@ class PaymentController extends Controller
         $request['user_id'] = Auth::user()->id;
         $beneficiary = Beneficiary::create($request->all());
 
-        $id = base64_decode($_COOKIE['backlog']);
-        $transaction = new Transaction();
-        $transaction->user_id = Auth::user();
-        $transaction->beneficiary_id = $beneficiary->id;
-        $transaction->backlog_id = $id;
-        $transaction->save();//todo : code cleaning
-        $transaction['hash'] = bcrypt($transaction);
+        $transaction = $this->createNewTrans($beneficiary);
+
+        $transaction['hash'] = Crypt::encryptString($transaction);
 
         $request->query->add(['beneficiary' => $beneficiary,
-//            'transaction_sign'=>$transaction['hash']
+            'transaction_sign' => $transaction['hash']
         ]);
 
         return $beneficiary->id
@@ -117,33 +138,130 @@ class PaymentController extends Controller
             : redirect()->back()->withErrors(['msg', 'The Message']);
     }
 
+    public function proforma_with_selected_transaction(Request $request, Transaction $transaction)
+    {
+        $beneficiary = $transaction->beneficiary;
+        $log = $transaction->backlog;
+
+        $transaction['hash'] = Crypt::encryptString($transaction);
+
+        $request->query->add(['beneficiary' => $beneficiary,
+            'transaction_sign' => $transaction['hash']
+        ]);
+
+        setcookie('backlog', encrypt($log->id), time() + $transaction->ttl); // or backlog ttl
+
+        setcookie('ttl', time() + $transaction->ttl, time() + $transaction->ttl);
+
+        return response()->view('dashboard.proforma', $request->query(), 200);
+    }
+
     public function issueInvoice(Request $request)
     {
-        $id = base64_decode($_COOKIE['backlog']);
+        $id = decrypt($_COOKIE['backlog']);
         $backlog = Backlog::findOrFail($id);
-        $result = $this->userInvoice($request,$backlog);
+        $result = $this->userInvoice($request, $backlog);
 
         $invoice = json_decode($result->getBody()->getContents());
 
-        if(!$invoice->hasError) {
+        if (!$invoice->hasError) {
 
-//            $transaction = Transaction::findOrFail(bcrypt($request->transaction_sign)->id);//todo : check it after masouds changes
-//            dd($transaction);
-//            $transaction->uri = $invoice->result->billNumber;
-//            $transaction->update();
+            $transaction = Transaction::findOrFail(json_decode(Crypt::decryptString($request->transaction_sign))->id);
 
-            return redirect("http://176.221.69.209:1031/v1/pbc/payinvoice/?invoiceId="
-                .$invoice->result->id."&redirectUri=http://" . $_SERVER['HTTP_HOST']  . "/invoice/show");
-            //todo : why still not redirect
-        }
+            $transaction->uri = $invoice->result->billNumber;
+            $transaction->update();
 
-        else dd($invoice);  //todo: error handling
-//        return view('dashboard.invoice');
+            return redirect("http://sandbox.fanapium.com:1031/v1/pbc/payinvoice/?invoiceId="
+                . $invoice->result->id . "&redirectUri=" . $request->root() . "/invoice/show?billNumber=" . $transaction->uri);
+        } else dd($invoice);  //todo: error handling
     }
 
-    public function showInvoice()
+    public function showInvoice(Request $request)
     {
-        return view('dashboard.invoice');
+        $result = $this->trackingInvoiceByBillNumber($request->billNumber);
+        $invoice = json_decode($result->getBody()->getContents());
+
+        if (!$invoice->hasError && count($invoice->result) > 0) {
+            $invoice_result = $invoice->result[0];
+
+            // Converting EPOCH timestamp to UNIX timestamp
+            $invoice_result->paymentDate = ceil($invoice_result->paymentDate / 1000);
+            if ($invoice_result->payed && !$invoice_result->canceled) {
+
+                $transaction = Transaction::findByBillNumber($invoice_result->billNumber)->firstOrFail();
+                $transaction->payment_date = $invoice_result->paymentDate;
+                $transaction->vat = $invoice_result->vat;
+                $transaction->bank_status = 'successful';
+                $transaction->fanex_status = 'pending';
+
+//                if (!$flag)
+//                    $this->cancelInvoice($result->id);//
+
+                // todo** : do it after admin accept the payment , in a specific func.**
+                $upt_res = $this->CorpSendRequest($transaction, $transaction->user, $transaction->beneficiary, $transaction->backlog);// todo : it must written after fanex admin
+
+                if ($upt_res->CorpSendRequestResult->TransferRequestStatus->RESPONSE == 'Success') {
+                    $transaction->fanex_status = 'accepted';
+
+                    $result = $this->CorpSendRequestConfirm($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT);
+
+                    if ($result->CorpSendRequestConfirmResult->TransferConfirmStatus->RESPONSE == 'Success') {
+                        $transaction->upt_status = 'successful';
+                        $transaction->update();
+
+                    } else {
+                        $transaction->upt_status = 'failed'; //or rejected?
+                        $transaction->fanex_status = 'pending';
+                        $transaction->update();
+//                  $this->CorpCancelRequest($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT);
+//                  $this->CorpCancelConfirm($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT); // todo: check it later
+                    }
+                } else {
+                    //if ($cancel_res)
+//                    $transaction->fanex_status = 'pending'; // it's already on pending condition
+                    $transaction->upt_status = 'failed'; //?
+                    $transaction->update();
+                    // return ?
+                }
+                return view('dashboard.invoice', compact('invoice_result', 'transaction'));
+
+            } else {
+//                    return error;
+                dd('there is no invoice to show');
+            }
+
+        }
+        return view('dashboard.invoice', compact(''));
+    }
+
+    public function updatePaymentCondition(Request $request)
+    {
+
+    }
+
+    /**
+     * @param Beneficiary $beneficiary
+     * @return Transaction
+     */
+    public function createNewTrans(Beneficiary $beneficiary)
+    {
+        $id = decrypt($_COOKIE['backlog']);
+        $backlog = Backlog::findOrFail($id);
+        $transaction = new Transaction();
+
+        $transaction->user_id = Auth::user()->id;
+        $transaction->beneficiary_id = $beneficiary->id;
+        $transaction->backlog_id = $id;
+        $transaction->exchange_rate = $backlog->exchange_rate;
+        $transaction->premium_amount = $backlog->premium_amount;
+        $transaction->payment_amount = $backlog->payment_amount;
+        $transaction->currency = $backlog->currency;
+        $transaction->payment_type = $backlog->payment_type;
+        $transaction->ttl = $backlog->ttl;
+        $transaction->country = $backlog->country;
+
+        $transaction->save();
+        return $transaction;
     }
 
     /**

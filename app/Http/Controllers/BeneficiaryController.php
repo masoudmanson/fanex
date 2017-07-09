@@ -6,13 +6,14 @@ use App\Beneficiary;
 use App\Http\Requests\BeneficiaryRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Countries;
 
 class BeneficiaryController extends Controller
 {
-
     public function __construct()
     {
-        $this->middleware('checkToken');
+        $this->middleware(['checkToken', 'checkUser']);
+        $this->middleware('checkLog', ['only' => ['createOrSelect']]);
     }
 
     /**
@@ -24,7 +25,16 @@ class BeneficiaryController extends Controller
     {
         $user = Auth::user();
         $beneficiaries = $user->beneficiary()->get();
-        return view('dashboard.beneficiaries', compact('beneficiaries'));
+
+        $countries = countries(session('applocale'));
+
+        $filter_countries = array();
+        foreach ($beneficiaries as $beneficiary) {
+            if (!in_array($beneficiary->country, $filter_countries))
+                array_push($filter_countries, $beneficiary->country);
+        }
+
+        return view('dashboard.beneficiaries', compact('beneficiaries', 'countries', 'filter_countries'));
     }
 
     /**
@@ -34,7 +44,31 @@ class BeneficiaryController extends Controller
      */
     public function create()
     {
-        return view("dashboard.add-beneficiary");
+        $countries = countries(session('applocale'));
+
+        return view("dashboard.add-beneficiary", compact('countries'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function createOrSelect(Request $request)
+    {
+        $user = Auth::user();
+
+        $beneficiaries = $user->beneficiary()->get();
+        foreach ($beneficiaries as $beneficiary) {
+            $beneficiary['hash'] = bcrypt($beneficiary);
+        }
+
+        $countries = countries(session('applocale'));
+
+        $request->query->add(['beneficiaries' => $beneficiaries, 'countries' => $countries]);
+
+        return view("dashboard.beneficiary", $request->query());
     }
 
     /**
@@ -47,6 +81,8 @@ class BeneficiaryController extends Controller
     public function store(BeneficiaryRequest $request)
     {
 
+        $request['user_id'] = Auth::user()->id;
+
         Beneficiary::create($request->all());
 
         return redirect('beneficiaries');
@@ -56,7 +92,7 @@ class BeneficiaryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -67,7 +103,7 @@ class BeneficiaryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -78,8 +114,8 @@ class BeneficiaryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -90,11 +126,11 @@ class BeneficiaryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+
     }
 }

@@ -50,13 +50,13 @@ class UserInformationController extends Controller
     public function store(Request $request)
     {
 
+
 //        $this->validate($request,[            //validate the form inputs if need to
 //            '*' => 'required',
 //            'email' => 'email',
 //            'password' => 'min:3|confirmed',
 //        ]);
-
-        $request->headers->set('authorization', 'Bearer ' . $request->cookie('_token')['access']);
+        $request->headers->set('authorization', 'Bearer ' . $request->cookie('_token_')['access']);
 
         $dotin_response = $this->dotinCredential($request->account_number, $request->mobile);
         $dotin_result = json_decode($dotin_response->getBody()->getContents());
@@ -68,18 +68,14 @@ class UserInformationController extends Controller
 
 //            if(!$sso_result->hasError && $sso_result->result){
 //            if(!$sso_result->hasError && $sso_result->result){
-
             $result = $this->followBusiness($request->bearerToken());
             $follow_res = json_decode($result->getBody()->getContents());
 //            if(!$follow_res->hassError)
 
-
             //todo
-            $result = $this->getCurrentPlatformUser($request->cookie('_token')['access']);
+            $result = $this->getCurrentPlatformUser($request->cookie('_token_')['access']);
             $platform_user = json_decode($result->getBody()->getContents());
-
             $user = User::firstOrNew(array('userId' => $platform_user->result->userId));
-
             $user->userId = $platform_user->result->userId;
             $user->firstname = $dotin_result[0]->message->firstname;
             $user->lastname = $dotin_result[0]->message->lastname;
@@ -91,11 +87,10 @@ class UserInformationController extends Controller
             //todo : save or update
 
             Auth::login($user);
-            $beneficiaries = $user->beneficiary()->get();
-            $data = array('state' => $request->state, 'beneficiaries' => $beneficiaries);
             //todo : check again if user was in his first time
 
-            return response()->view('dashboard.beneficiary', $data, 200);
+            return redirect()->route('createOrSelect');
+//            return response()->view('dashboard.beneficiary', $data, 200);
 //                ->header('authorization', 'Bearer ' . $request->token);
         }
 
@@ -106,7 +101,7 @@ class UserInformationController extends Controller
          * 3. save user data , given from datin and platform (userId)
          */
 
-
+dd('error');
 //        User::create($request->all());
 
         return redirect('producer');

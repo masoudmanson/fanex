@@ -30,6 +30,7 @@ return [
     'formCurrency' =>  'Para Birimi',
     'formCountry' =>  'Hedef Ülkeyi Seç',
     'formCost' =>  'Aktarma Maliyeti',
+    'formSendTo' => ':name\'a Para Gönder',
     'formTo' =>  'to',
     'formIs' =>  'olur',
     'formRials' =>  'Rials',

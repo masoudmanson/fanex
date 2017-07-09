@@ -68,8 +68,10 @@ Route::get('/notifications', 'UserController@notifications');
 Route::get('/settings', 'UserController@settings');
 Route::get('/logout', 'Auth\LoginController@logout');
 //        Route::get('/proforma', 'PaymentController@proforma');
-Route::get('/invoice', 'PaymentController@issueInvoice');
+Route::post('/invoice', 'PaymentController@issueInvoice');
 Route::get('/invoice/show', 'PaymentController@showInvoice');
+
+Route::get('/send/{beneficiary}', 'UserController@sendMoney');
 
 //Route::post('/pay', 'WalletController') ;
 
@@ -83,7 +85,10 @@ Route::get('/ws', 'UptController@test');
 Route::get('/cookie', 'PaymentController@test');
 
 Route::resource('/additional-info', 'UserInformationController');
+Route::get('/beneficiary/select', 'BeneficiaryController@createOrSelect')->name('createOrSelect');
 Route::post('/proforma', 'PaymentController@proforma_with_new_bnf');
+Route::post('/proforma/selected/{beneficiary}', 'PaymentController@proforma_with_selected_bnf_profile');
+Route::get('/proforma/transaction/{transaction}', 'PaymentController@proforma_with_selected_transaction')->name('proforma_with_transaction');
 Route::post('/proforma/selected', 'PaymentController@proforma_with_selected_bnf');
 
 //    });
@@ -96,4 +101,4 @@ Route::post('/calculate', 'UptController@calculateRemittance')->name('calculate'
 
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
 
-Route::get('pdf', 'StaticsController@pdf');
+Route::get('pdf/proforma/{id}', 'StaticsController@proformaPdf');

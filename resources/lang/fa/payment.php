@@ -11,9 +11,11 @@ return [
     'bnfTitle' => 'اطلاعات دریافت کننده',
     'bnfSelect' => 'گیرنده را انتخاب کنید',
     'bnfNew' => 'یا گیرنده جدید اضافه نمائید',
+    'bnfAddNew' => 'افزودن گیرنده ی جدید',
     'bnfFirstname' => 'نام',
     'bnfLastname' => 'نام خانوادگی',
     'bnfCC' => 'شماره حساب',
+    'bnfCountry' => 'کشور',
     'bnfAddr' => 'آدرس',
     'bnfPhone' => 'شماره تلفن',
     'bnfFax' => 'شماره فکس',
@@ -26,6 +28,7 @@ return [
     'showProforma' => 'پیش فاکتور',
     'showProformaSelect' => 'انتخاب و ادامه',
     'showProformaSave' => 'ذخیره و ادامه',
+    'agreement' => 'من با <a href="/terms">قوانین و مقررات</a>  FANEx موافق هستم',
 
     /*
     |--------------------------------------------------------------------------
@@ -70,7 +73,9 @@ return [
     'invSum' => 'مجموع',
     'invRials' => 'ريال',
     'invTrans' => 'کد پیگیری تراکنش',
-    'invStatus' => 'وضعیت تراکنش',
+    'invBankStatus' => 'وضعیت پرداخت بانکی',
+    'invFanexStatus' => 'وضعیت حواله در Fanex',
+    'invUptStatus' => 'وضعیت انتقال حواله',
     'invRegards' => 'با تشکر',
     'invFanex' => 'تیم FANEx',
     'invAll' => 'مشاهده ی تراکنش ها',

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 // Color Variables
-$fanapOrange: #1abc9c;//lighten(#a30b3b, 12%);//#F58121;//
+$fanapOrange: #F58121;//lighten(#a30b3b, 12%);//
 $fanapDark: #333333;
 $fanapGrey: #949597;
 $fanapGreyLight: #F4F4F4;
@@ -44,6 +44,7 @@ $breakePoint_xxl: "1400px";
     top: $top;
     left: $left;
     transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
 }
 
 @mixin text-overflow(){

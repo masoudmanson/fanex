@@ -17,6 +17,7 @@
         "morilog/jalali": "^2.2",
         "petercoles/multilingual-country-list": "^1.2",
         "symfony/psr-http-message-bridge": "^1.0",
+        "yajra/laravel-oci8": "5.4.*",
         "zendframework/zend-diactoros": "^1.4"
     },
     "require-dev": {

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Beneficiary;
 use App\Traits\TokenTrait;
+use App\Traits\UptTrait;
+use App\Transaction;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Psr\Http\Message\ServerRequestInterface;
@@ -11,6 +15,7 @@ use Psr\Http\Message\ServerRequestInterface;
 class UserController extends Controller
 {
     use TokenTrait;
+    use UptTrait;
 
     public function __construct()
     {
@@ -32,10 +37,22 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        return view('dashboard.index', compact('user'));
+
+        $transactions = $user->transaction()->paginate(10);
+
+        foreach ($transactions as $transaction) {
+            $transaction['can_pay'] = false;
+            if ($transaction->ttl > Carbon::now() && empty($transaction->uri)) {
+                $transaction['can_pay'] = true;
+            }
+        }
+        if ($request->ajax())
+            return response()->json(view('dashboard.index', compact('user', 'transactions'))->render());
+
+        return view('dashboard.index', compact('user', 'transactions'));
     }
 
     public function notifications()
@@ -46,6 +63,13 @@ class UserController extends Controller
     public function settings()
     {
         return view('dashboard.settings');
+    }
+
+    public function sendMoney(Beneficiary $beneficiary)
+    {
+        $data = $this->CorpGetCountryData();
+        $country_list = indexFormCountryList($data, session('applocale'));
+        return view('dashboard.send-money', compact('country_list', 'beneficiary'));
     }
 
     /**

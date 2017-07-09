@@ -37,9 +37,9 @@
                                             <i class="icon-delete" title="@lang('profile.ntfDelete')"></i>
                                         </a>
                                     </div>
-                                    <div class="col-md-1 col-sm-1 col-xs-1">
-                                        <span class="acc-arrow accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row1"></span>
-                                    </div>
+                                    <a class="col-md-1 col-sm-1 col-xs-1 accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row1">
+                                        <span class="acc-arrow"></span>
+                                    </a>
                                 </div>
                             </div>
                             <div id="row1" class="panel-collapse collapse in">
@@ -59,10 +59,10 @@
                                 <div class="row p-0 m-0">
                                     <div class="col-md-4 col-sm-6 col-xs-9" data-toggle="tooltip" title="@lang('profile.ntfTitle')">
                                         <i class="icon-chat acc-main-icon hidden-xs"></i>
-                                        <span class="acc-user"><b>Puleto Rikhtam :V</b></span>
+                                        <span class="acc-user"><b>@lang('profile.ntfSucc')</b></span>
                                     </div>
                                     <div class="col-md-3 col-sm-4 hidden-xs" data-toggle="tooltip" title="@lang('profile.ntfSender')">
-                                        <span class="acc-cash">Emad Ghorbani Nia</span>
+                                        <span class="acc-cash">@lang('profile.ntfFanex')</span>
                                     </div>
                                     <div class="col-md-3 hidden-sm hidden-xs" data-toggle="tooltip" title="@lang('profile.ntfTime')">
                                         <span class="acc-date">{{ \Carbon\Carbon::now()->format("d M Y, H:i:s") }}</span>
@@ -72,9 +72,9 @@
                                             <i class="icon-delete" title="@lang('profile.ntfDelete')"></i>
                                         </a>
                                     </div>
-                                    <div class="col-md-1 col-sm-1 col-xs-1">
-                                        <span class="acc-arrow accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row2"></span>
-                                    </div>
+                                    <a class="col-md-1 col-sm-1 col-xs-1 accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#row2">
+                                        <span class="acc-arrow"></span>
+                                    </a>
                                 </div>
                             </div>
                             <div id="row2" class="panel-collapse collapse">

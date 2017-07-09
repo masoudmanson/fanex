@@ -185,6 +185,11 @@ return [
         Cornford\Googlmapper\MapperServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         PeterColes\Countries\CountriesServiceProvider::class,
+
+        /*
+         * Oracle DB Service Provider
+         */
+        Yajra\Oci8\Oci8ServiceProvider::class,
     ],
 
     /*
