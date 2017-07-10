@@ -22,8 +22,8 @@ class CheckUserExist
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->hasCookie('_token_'))
-            $access_token = $request->cookie('_token_')['access'];
+        if ($request->hasCookie('token'))
+            $access_token = $request->cookie('token')['access'];
         elseif ($access_token = $request->bearerToken());
 
             $result = $this->getCurrentPlatformUser($access_token);

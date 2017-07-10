@@ -99,7 +99,7 @@ trait PlatformTrait
         $token = '0c9e54ee15174cbda4a68b06318a8c14'; //biz static token
 
 //        $user_object = $this->getCurrentPlatformUser($request->bearerToken());
-        $user_object = $this->getCurrentPlatformUser($request->cookie('_token_')['access']);
+        $user_object = $this->getCurrentPlatformUser($request->cookie('token')['access']);
 //        if (!$user->hasError)
 //        dd($user_object->getBody()->getContents());
         $json_input = $user_object->getBody()->getContents();
