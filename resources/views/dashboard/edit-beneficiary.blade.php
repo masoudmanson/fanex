@@ -19,7 +19,7 @@
 
                 <div class="row p-0 m-0 filter-wrapper">
                     <div class="col-xs-11 px-0">
-                        <h2 class="dash-subtitle m-0">@lang('profile.bnfEdit') {{ $beneficiary->firstname . ' ' . $beneficiary->lastname }}</h2>
+                        <h2 class="dash-subtitle m-0">@lang('payment.bnfEdit') {{ $beneficiary->firstname . ' ' . $beneficiary->lastname }}</h2>
                     </div>
 
                     <div class="col-xs-1 px-0">
@@ -29,10 +29,10 @@
                 {{-- Table Wrapper --}}
                 <div class="row p-0 m-0">
                     {{-- Add Beneficiary Form --}}
-                    <form action="/beneficiaries" method="post" id="add-bnf-form">
+                    <form action="/beneficiaries" method="POST" id="add-bnf-form">
                         {{ csrf_field() }}
-                        <input name="_method" type="hidden" value="PUT">
-
+                        {{--<input name="_method" type="hidden" value="PATCH">--}}
+                        {{ method_field('PATCH') }}
                         {{-- Firstname --}}
                         <div class="form-group bsWrapper">
                             @if($errors->first('firstname'))
@@ -43,7 +43,7 @@
                                    class="form-control fanexInput @if($errors->first('firstname')) fanexInputError @else fanexInputWhite @endif"
                                    id="bnf-firstname"
                                    name="firstname" placeholder="@lang('payment.bnfFirstname')" autocomplete="off"
-                                   value="{{ old('firstname') }}">
+                                   value="{{ $beneficiary->firstname }}">
 
                             @if($errors->first('firstname'))
                                 <div class="fanexDanger">{{ $errors->first('firstname') }}</div>
@@ -62,7 +62,7 @@
                                        class="form-control fanexInput  @if($errors->first('lastname')) fanexInputError @else fanexInputWhite @endif"
                                        id="bnf-lastname"
                                        name="lastname" placeholder="@lang('payment.bnfLastname')"
-                                       autocomplete="off" value="{{ old('lastname') }}">
+                                       autocomplete="off" value="{{ $beneficiary->lastname }}">
                                 @if($errors->first('lastname'))
                                     <div class="fanexDanger">{{ $errors->first('lastname') }}</div>
                                 @endif
@@ -78,7 +78,7 @@
                                        class="form-control fanexInput credit-card @if($errors->first('account_number')) fanexInputError @else fanexInputWhite @endif numberTextField"
                                        id="bnf-accountnumber"
                                        name="account_number" placeholder="@lang('payment.bnfCC')" autocomplete="off"
-                                       value="{{ old('account_number') }}">
+                                       value="{{ $beneficiary->account_number }}">
 
                                 @if($errors->first('account_number'))
                                     <div class="fanexDanger">{{ $errors->first('account_number') }}</div>
@@ -115,7 +115,7 @@
                                        class="form-control fanexInput  @if($errors->first('address')) fanexInputError @else fanexInputWhite @endif"
                                        id="bnf-address"
                                        name="address" placeholder="@lang('payment.bnfAddr')" autocomplete="off"
-                                       value="{{ old('address') }}">
+                                       value="{{ $beneficiary->address }}">
 
                                 @if($errors->first('address'))
                                     <div class="fanexDanger">{{ $errors->first('address') }}</div>
@@ -132,7 +132,7 @@
                                        class="form-control fanexInput  @if($errors->first('tel')) fanexInputError @else fanexInputWhite @endif numberTextField"
                                        id="bnf-phone"
                                        name="tel" placeholder="@lang('payment.bnfPhone')" autocomplete="off"
-                                       value="{{ old('tel') }}">
+                                       value="{{ $beneficiary->tel }}">
 
                                 @if($errors->first('tel'))
                                     <div class="fanexDanger">{{ $errors->first('tel') }}</div>
@@ -149,7 +149,7 @@
                                        class="form-control fanexInput  @if($errors->first('fax')) fanexInputError @else fanexInputWhite @endif numberTextField"
                                        id="bnf-fax"
                                        name="fax" placeholder="@lang('payment.bnfFax')" autocomplete="off"
-                                       value="{{ old('fax') }}">
+                                       value="{{ $beneficiary->fax }}">
 
                                 @if($errors->first('fax'))
                                     <div class="fanexDanger">{{ $errors->first('fax') }}</div>
@@ -166,7 +166,7 @@
                                        class="form-control fanexInput  @if($errors->first('bank_name')) fanexInputError @else fanexInputWhite @endif"
                                        id="bnf-bankname"
                                        name="bank_name" placeholder="@lang('payment.bnfBank')" autocomplete="off"
-                                       value="{{ old('bank_name') }}">
+                                       value="{{ $beneficiary->bank_name }}">
 
                                 @if($errors->first('bank_name'))
                                     <div class="fanexDanger">{{ $errors->first('bank_name') }}</div>
@@ -183,7 +183,7 @@
                                        class="form-control fanexInput  @if($errors->first('branch_name')) fanexInputError @else fanexInputWhite @endif"
                                        id="bnf-branch"
                                        name="branch_name" placeholder="@lang('payment.bnfBranch')"
-                                       autocomplete="off" value="{{ old('branch_name') }}">
+                                       autocomplete="off" value="{{ $beneficiary->branch_name }}">
 
                                 @if($errors->first('branch_name'))
                                     <div class="fanexDanger">{{ $errors->first('branch_name') }}</div>
@@ -200,7 +200,7 @@
                                        class="form-control fanexInput  @if($errors->first('swift_code')) fanexInputError @else fanexInputWhite @endif numberTextField"
                                        id="bnf-swift"
                                        name="swift_code" placeholder="@lang('payment.bnfSwift')" autocomplete="off"
-                                       value="{{ old('swift_code') }}">
+                                       value="{{ $beneficiary->swift_code }}">
 
                                 @if($errors->first('swift_code'))
                                     <div class="fanexDanger">{{ $errors->first('swift_code') }}</div>
@@ -217,7 +217,7 @@
                                        class="form-control fanexInput  @if($errors->first('iban_code')) fanexInputError @else fanexInputWhite @endif numberTextField"
                                        id="bnf-iban"
                                        name="iban_code" placeholder="@lang('payment.bnfIban')" autocomplete="off"
-                                       value="{{ old('iban_code') }}">
+                                       value="{{ $beneficiary->iban_code }}">
 
                                 @if($errors->first('iban_code'))
                                     <div class="fanexDanger">{{ $errors->first('iban_code') }}</div>

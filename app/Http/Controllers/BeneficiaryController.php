@@ -67,7 +67,6 @@ class BeneficiaryController extends Controller
         $countries = countries(session('applocale'));
 
         $request->query->add(['beneficiaries' => $beneficiaries, 'countries' => $countries]);
-
         return view("dashboard.beneficiary", $request->query());
     }
 
