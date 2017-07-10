@@ -78,7 +78,7 @@
                                             {{--<a href="/">--}}
                                             {{--<i class="icon-chat hidden-xs" title="@lang('profile.bnfSendMsg')"></i>--}}
                                             {{--</a>--}}
-                                            <a href="">
+                                            <a href="/beneficiaries/{{ $bnf->id }}/edit">
                                                 <i class="icon-edit" title="@lang('profile.bnfEdit')"></i>
                                             </a>
                                             <a href="">

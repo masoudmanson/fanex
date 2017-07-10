@@ -41,6 +41,7 @@ return [
 
     // Beneficiaries Page
     'addNew' => 'Add New',
+    'bnfEdit' => 'Editing',
     'bnfSearch' => 'Search in Beneficiaries',
     'bnfName' => 'Beneficiary Name',
     'bnfCountry' => 'Country',
