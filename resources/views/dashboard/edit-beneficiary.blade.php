@@ -19,7 +19,7 @@
 
                 <div class="row p-0 m-0 filter-wrapper">
                     <div class="col-xs-11 px-0">
-                        <h2 class="dash-subtitle m-0">@lang('payment.bnfEdit') {{ $beneficiary->firstname . ' ' . $beneficiary->lastname }}</h2>
+                        <h2 class="dash-subtitle m-0">@lang('payment.bnfEdit', ['user' => $beneficiary->firstname . ' ' . $beneficiary->lastname])</h2>
                     </div>
 
                     <div class="col-xs-1 px-0">

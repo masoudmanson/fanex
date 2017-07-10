@@ -12,7 +12,7 @@ return [
     'bnfSelect' => 'Select Beneficiary',
     'bnfNew' => 'or Add a New One',
     'bnfAddNew' => 'Add a New Beneficiary',
-    'bnfEdit' => 'Edit',
+    'bnfEdit' => 'Edit :user',
     'bnfFirstname' => 'Firstname',
     'bnfLastname' => 'Lastname',
     'bnfCC' => 'Account Number',
@@ -85,4 +85,5 @@ return [
     'invFanex' => 'FANEx Team.',
     'invAll' => 'All Transactions',
     'print' => 'Print The Invoice',
+    'accept' => 'Please Agree to the Terms & Conditions',
 ];

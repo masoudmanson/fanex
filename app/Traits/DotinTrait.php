@@ -19,18 +19,10 @@ trait DotinTrait
         $body["Account_number"] = "8615239123"; //$request->acc
         $body["Mobile_number"] = "09167871238"; //$request->mobile
 
-//        $token = $request->token;
         $token = "ABCASDNKCDEF";
 
         $client = new Client();
-//        $res = $client->post('https://private-3df4f-fanex.apiary-mock.com/dotin', [
         $res = $client->get('http://localhost:3000/auth', [ //er:euro to rial
-//            'headers' => [
-//                'Authorization' => 'Bearer ' . $token,
-//                'Content-Type' => 'application/json'
-//
-//            ],
-
         ]);
 
         return $res;

@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     $('#exCountry, #exCurrency').change(function () {
         $('.tempAmount').slideUp(300);
-        if ($('#captcha').val().length == 5 && removeComma($('#exAmount').val()) > 9 && $('#exCountry').val() != null && $('#exCurrency').val() != null)
+        if ($('#captcha').val().length == 5 && removeComma($('#exAmount').val()) > 0 && $('#exCountry').val() != null && $('#exCurrency').val() != null)
             $('#calcBtn').removeAttr('disabled').removeClass('fanexBtnOutlineOrange').addClass('fanexBtnOrange');
         else {
             $('#paymentBtn').attr({'disabled': 'disabled'});

@@ -12,6 +12,7 @@ return [
     'bnfSelect' => 'Faydalanıcı Seçiniz',
     'bnfNew' => 'Veya Yeni Bir Ekle',
     'bnfAddNew' => 'Yeni Bir Faydalanıcı Ekle',
+    'bnfEdit' => ':user\'u Düzenleme',
     'bnfFirstname' => 'İsim',
     'bnfLastname' => 'Soyadı',
     'bnfCC' => 'Hesap numarası',
@@ -62,4 +63,5 @@ return [
     'invFanex' => 'FANEx Takımı.',
     'invAll' => 'Tüm İşlemler',
     'print' => 'Fatura Yazdır',
+    'accept' => 'Lütfen Şartlar ve Koşulları Kabul Edin',
 ];

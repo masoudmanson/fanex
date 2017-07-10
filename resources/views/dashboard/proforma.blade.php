@@ -33,7 +33,7 @@
                                 <div class="col-xs-12">
                                     <h2>@lang('payment.prTitle')</h2>
 
-                                    <p>@lang('payment.prText', ['amount'=>'1500 EUR'])</p>
+                                    <p>@lang('payment.prText', ['amount'=>$amount])</p>
 
                                     <div class="proforma-heading">@lang('payment.prApplicant')</div>
 
@@ -202,7 +202,7 @@
                         <div class="col-sm-6 col-xs-12 p-0 pl-md-2 pb-md-0 pb-sm-4 pb-xs-4  pl-lg-3">
                             <input type="hidden" value="{{ $transaction_sign }}" name="transaction_sign">
                             <input type="submit" disabled="disabled" id="proforma-btn" class="btn fanexBtnOutlineGrey"
-                                   value="@lang('payment.prfPay')" title="Please Agree to the Terms & Conditions">
+                                   value="@lang('payment.prfPay')" title="@lang('payment.accept')">
                         </div>
                     </form>
                 </div>

@@ -94,7 +94,8 @@ class PaymentController extends Controller
             'transaction_sign' => $transaction['hash'],
             'countries' => $countries,
             'date' => $proforma_date,
-            'user' => $user
+            'user' => $user,
+            'amount' => $transaction['premium_amount'].' '.$transaction['currency']
         ]);
 
         return Hash::check($beneficiary, $request->hash)
@@ -116,7 +117,8 @@ class PaymentController extends Controller
             'transaction_sign' => $transaction['hash'],
             'countries' => $countries,
             'date' => $proforma_date,
-            'user' => $user
+            'user' => $user,
+            'amount' => $transaction['premium_amount'].' '.$transaction['currency']
         ]);
 
         return response()->view('dashboard.proforma', $request->query(), 200);
@@ -142,7 +144,8 @@ class PaymentController extends Controller
             'transaction_sign' => $transaction['hash'],
             'countries' => $countries,
             'date' => $proforma_date,
-            'user' => $user
+            'user' => $user,
+            'amount' => $transaction['premium_amount'].' '.$transaction['currency']
         ]);
 
         return $beneficiary->id
@@ -165,7 +168,8 @@ class PaymentController extends Controller
             'transaction_sign' => $transaction['hash'],
             'countries' => $countries,
             'date' => $proforma_date,
-            'user' => $user
+            'user' => $user,
+            'amount' => $transaction['premium_amount'].' '.$transaction['currency']
         ]);
         $diff = \Carbon\Carbon::now()->diffInSeconds($transaction->ttl);
         setcookie('backlog', encrypt($log->id), time()+$diff, '/');
