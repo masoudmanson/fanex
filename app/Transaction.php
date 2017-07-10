@@ -10,7 +10,8 @@ class Transaction extends Model
     protected $table = 'transactions';
 
     protected $dates = [
-        'payment_date'
+        'payment_date',
+        'ttl'
     ];
 
     public function setPaymentDateAttribute($value)

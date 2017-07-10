@@ -19,6 +19,30 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+.opacity-100 {
+    opacity: 1;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+opacity-30 {
+    opacity: 0.3;
+}
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.unselectable {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
 .fanex-text-red,
 .fanex-text-failed,
 .fanex-text-rejected {

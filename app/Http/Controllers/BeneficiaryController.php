@@ -108,7 +108,9 @@ class BeneficiaryController extends Controller
      */
     public function edit(Beneficiary $beneficiary)
     {
-        return view('beneficiaryEdit', compact('beneficiary'));
+        $countries = countries(session('applocale'));
+
+        return view('dashboard.edit-beneficiary', compact('beneficiary', 'countries'));
     }
 
     /**

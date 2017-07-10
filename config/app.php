@@ -175,17 +175,13 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
         \App\Providers\SSOServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
         Morilog\Jalali\JalaliServiceProvider::class,
         Cornford\Googlmapper\MapperServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
         PeterColes\Countries\CountriesServiceProvider::class,
-
         /*
          * Oracle DB Service Provider
          */
@@ -238,13 +234,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
         'jDate' => Morilog\Jalali\Facades\jDate::class,
         'Mapper' => Cornford\Googlmapper\Facades\MapperFacade::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
         'Countries' => PeterColes\Countries\CountriesFacade::class,
+        'PDF' => ZanySoft\LaravelPDF\Facades\PDF::class
     ],
-
 ];

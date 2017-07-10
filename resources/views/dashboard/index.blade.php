@@ -57,7 +57,7 @@
                         </div>
                         @foreach($transactions as $transaction)
                             <div class="panel panel-default filtered {{ $transaction->upt_status }}">
-                                <div class="panel-heading @if(!$transaction->uri || !$transaction->payment_date) new @endif">
+                                <div class="panel-heading @if($transaction->can_pay) new @endif">
                                     <div class="row p-0 m-0">
                                         <div class="col-md-4 col-sm-4 col-xs-5" data-toggle="tooltip"
                                              title="@lang('profile.titleTransfer')">
@@ -68,13 +68,17 @@
                                             </span>
                                         </div>
                                         <div class="col-md-2 hidden-xs hidden-sm" data-toggle="tooltip"
-                                             title="@lang('profile.titleDate')">
+                                             @if(!$transaction->can_pay && $transaction->payment_date) title="@lang('profile.titleDate')" @endif>
                                             <span class="acc-date">
-                                                @if($transaction->uri && $transaction->payment_date)
-                                                {{--@if(!$transaction->can_pay)--}}
-                                                    @lang('payment.invDate', ['dateEn' => $transaction->payment_date->format('d M Y'), 'dateFa' => jdate($transaction->payment_date)->format('%Y %B %d')])
+                                                @if(!$transaction->can_pay)
+                                                    @if($transaction->payment_date)
+                                                        @lang('payment.invDate', ['dateEn' => $transaction->payment_date->format('d M Y'), 'dateFa' => jdate($transaction->payment_date)->format('%Y %B %d')])
+                                                    @else
+                                                        @lang('payment.invDate', ['dateEn' => $transaction->ttl->format('d M Y'), 'dateFa' => jdate($transaction->ttl)->format('%Y %B %d')])
+                                                    @endif
                                                 @else
-                                                    <a href="/proforma/transaction/{{ $transaction->id }}" class="btn btnMini btnRound fanexBtnMiniOutlineGrey">@lang('index.pay')</a>
+                                                    <a href="/proforma/transaction/{{ $transaction->id }}"
+                                                       class="btn btnMini btnRound fanexBtnMiniOutlineGrey">@lang('index.pay')</a>
                                                 @endif
                                             </span>
                                         </div>
@@ -161,8 +165,9 @@
                                                         = {{ number_format($transaction->payment_amount+$transaction->vat) }} @lang('payment.invRials')</p>
                                                 </div>
 
-                                                @if(!$transaction->uri)
-                                                    <a href="{{ route('index') }}" class="hidden-md hidden-lg btn btnMini btnRound fanexBtnMiniOutlineOrange">@lang('index.pay')</a>
+                                                @if($transaction->can_pay)
+                                                    <a href="/proforma/transaction/{{ $transaction->id }}"
+                                                       class="hidden-md hidden-lg btn btnMini btnRound fanexBtnMiniOutlineOrange">@lang('index.pay')</a>
                                                 @endif
                                             </div>
                                         </div>

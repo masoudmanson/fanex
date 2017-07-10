@@ -81,10 +81,10 @@ class PaymentController extends Controller
     {
         $beneficiary = Beneficiary::findOrFail($request->bnf);
 
+        $user = Auth::user();
         $transaction = $this->createNewTrans($beneficiary);
 
         $proforma_date = $transaction['created_at'];
-        $pdf_id = $transaction['id'];
 
         $transaction['hash'] = Crypt::encryptString($transaction);
 
@@ -94,7 +94,7 @@ class PaymentController extends Controller
             'transaction_sign' => $transaction['hash'],
             'countries' => $countries,
             'date' => $proforma_date,
-            'pdf' => $pdf_id
+            'user' => $user
         ]);
 
         return Hash::check($beneficiary, $request->hash)
@@ -106,15 +106,21 @@ class PaymentController extends Controller
     {
         $transaction = $this->createNewTrans($beneficiary);
 
+        $user = Auth::user();
+        $proforma_date = $transaction['created_at'];
+        $countries = countries(session('applocale'));
+
         $transaction['hash'] = Crypt::encryptString($transaction);
 
         $request->query->add(['beneficiary' => $beneficiary,
-            'transaction_sign' => $transaction['hash']
+            'transaction_sign' => $transaction['hash'],
+            'countries' => $countries,
+            'date' => $proforma_date,
+            'user' => $user
         ]);
 
         return response()->view('dashboard.proforma', $request->query(), 200);
     }
-
 
     /**
      * @param BeneficiaryRequest $request
@@ -123,14 +129,20 @@ class PaymentController extends Controller
     public function proforma_with_new_bnf(BeneficiaryRequest $request)
     {
         $request['user_id'] = Auth::user()->id;
+        $user = Auth::user();
         $beneficiary = Beneficiary::create($request->all());
 
         $transaction = $this->createNewTrans($beneficiary);
 
+        $proforma_date = $transaction['created_at'];
+        $countries = countries(session('applocale'));
         $transaction['hash'] = Crypt::encryptString($transaction);
 
         $request->query->add(['beneficiary' => $beneficiary,
-            'transaction_sign' => $transaction['hash']
+            'transaction_sign' => $transaction['hash'],
+            'countries' => $countries,
+            'date' => $proforma_date,
+            'user' => $user
         ]);
 
         return $beneficiary->id
@@ -145,13 +157,19 @@ class PaymentController extends Controller
 
         $transaction['hash'] = Crypt::encryptString($transaction);
 
+        $user = Auth::user();
+        $proforma_date = $log->created_at;
+        $countries = countries(session('applocale'));
+
         $request->query->add(['beneficiary' => $beneficiary,
-            'transaction_sign' => $transaction['hash']
+            'transaction_sign' => $transaction['hash'],
+            'countries' => $countries,
+            'date' => $proforma_date,
+            'user' => $user
         ]);
-
-        setcookie('backlog', encrypt($log->id), time() + $transaction->ttl); // or backlog ttl
-
-        setcookie('ttl', time() + $transaction->ttl, time() + $transaction->ttl);
+        $diff = \Carbon\Carbon::now()->diffInSeconds($transaction->ttl);
+        setcookie('backlog', encrypt($log->id), time()+$diff, '/');
+        setcookie('ttl', time()+$diff, time() + $diff, '/');
 
         return response()->view('dashboard.proforma', $request->query(), 200);
     }

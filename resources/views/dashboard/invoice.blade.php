@@ -19,7 +19,7 @@
                     {{-- Create a New Benificiary --}}
                     <div class="col-xs-12 p-0">
                         <h2 class="dash-subtitle">@lang('payment.invSubtitle')</h2>
-                        <div class="invoice-wrapper mb-4">
+                        <div class="invoice-wrapper mb-4" id="pdfWrapper">
                             <h3 class="invoice-title">@lang('payment.invUser', ['user' => Auth::user()->firstname]) <span class="invoice-date">@lang('payment.invDate', ['dateEn' => $transaction->payment_date->format('d M Y, H:i:s'), 'dateFa' => jdate($transaction->payment_date)->format('%Y %B %d, H:i:s')])</span></h3>
                             <p>@lang('payment.invText')</p>
                             <p class="invoice-bnf">{{ $transaction->beneficiary->firstname . ' ' . $transaction->beneficiary->lastname }}</p>
@@ -116,7 +116,10 @@
                             <div class="regards">
                                 <p class="grey">@lang('payment.invRegards')</p>
                                 @lang('payment.invFanex')
-                                <a href="/" class="invoice-print" data-toggle="tooltip" title="@lang('payment.print')"><i class="icon-printer"></i></a>
+                                <a href="#" class="invoice-print" data-toggle="tooltip" id="print-pdf"
+                                   title="@lang('payment.print')">
+                                    <i class="icon-printer"></i>
+                                </a>
                             </div>
                         </div>
                     </div>

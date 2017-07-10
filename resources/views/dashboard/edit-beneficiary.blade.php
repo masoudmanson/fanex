@@ -19,7 +19,7 @@
 
                 <div class="row p-0 m-0 filter-wrapper">
                     <div class="col-xs-11 px-0">
-                        <h2 class="dash-subtitle m-0">@lang('payment.bnfAddNew')</h2>
+                        <h2 class="dash-subtitle m-0">@lang('profile.bnfEdit') {{ $beneficiary->firstname . ' ' . $beneficiary->lastname }}</h2>
                     </div>
 
                     <div class="col-xs-1 px-0">
@@ -28,10 +28,10 @@
 
                 {{-- Table Wrapper --}}
                 <div class="row p-0 m-0">
-
                     {{-- Add Beneficiary Form --}}
                     <form action="/beneficiaries" method="post" id="add-bnf-form">
                         {{ csrf_field() }}
+                        <input name="_method" type="hidden" value="PUT">
 
                         {{-- Firstname --}}
                         <div class="form-group bsWrapper">
