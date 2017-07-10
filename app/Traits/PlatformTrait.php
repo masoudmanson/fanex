@@ -41,7 +41,6 @@ trait PlatformTrait
         $client = new Client();
         $res = $client->get('http://sandbox.fanapium.com:8081/nzh/getUserProfile', [
             'headers' => [
-//                'authorization' => 'bearer '.$token
                 '_token_' => $token,
                 '_token_issuer_' => 1
             ]

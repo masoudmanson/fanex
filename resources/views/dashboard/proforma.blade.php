@@ -39,52 +39,72 @@
 
                                     {{-- Applicant Details --}}
                                     <ul>
-                                        <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appTitle')</p></div>
-                                            <div class="col-xs-12 col-sm-6">Masoud Amjadi</div>
-                                        </li>
+                                        @if($user->firstname && $user->lastname)
+                                            <li class="row mx-0">
+                                                <div class="col-xs-12 col-sm-6"><p>@lang('payment.appTitle')</p></div>
+                                                <div class="col-xs-12 col-sm-6">{{ $user->firstname . ' ' . $user->lastname }}</div>
+                                            </li>
+                                        @endif
 
-                                        <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appId')</p></div>
-                                            <div class="col-xs-12 col-sm-6">1640113886</div>
-                                        </li>
+                                        @if($user->identity_number)
+                                            <li class="row mx-0">
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <p>@lang('payment.appId')</p></div>
+                                                <div class="col-xs-12 col-sm-6">{{ $user->identity_number }}</div>
+                                            </li>
+                                        @endif
 
-                                        <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appDob')</p></div>
-                                            <div class="col-xs-12 col-sm-6">26 June 1991</div>
-                                        </li>
+                                        @if($user->date_of_birth)
+                                            <li class="row mx-0">
+                                                <div class="col-xs-12 col-sm-6"><p>@lang('payment.appDob')</p>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6">@lang('payment.invDate', ['dateEn' => $user->date_of_birth->format('d M Y, H:i:s'), 'dateFa' => jdate($user->date_of_birth)->format('%Y %B %d, H:i:s')])</div>
+                                            </li>
+                                        @endif
 
-                                        <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appPob')</p></div>
-                                            <div class="col-xs-12 col-sm-6">Iran</div>
-                                        </li>
+                                        @if($user->place_of_birth)
+                                            <li class="row mx-0">
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <p>@lang('payment.appPob')</p></div>
+                                                <div class="col-xs-12 col-sm-6">{{ $user->place_of_birth }}</div>
+                                            </li>
+                                        @endif
 
-                                        <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appAddress')</p></div>
-                                            <div class="col-xs-12 col-sm-6">#13, Zaratash Alley, Ghoddosi St., Ghasr
-                                                Sq., Tehran, Iran
-                                            </div>
-                                        </li>
+                                        @if($user->address)
+                                            <li class="row mx-0">
+                                                <div class="col-xs-12 col-sm-6"><p>@lang('payment.appAddress')</p></div>
+                                                <div class="col-xs-12 col-sm-6">{{ $user->address }}</div>
+                                            </li>
+                                        @endif
 
-                                        <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appPostalCode')</p></div>
-                                            <div class="col-xs-12 col-sm-6">12326-45879</div>
-                                        </li>
+                                        @if($user->postal_code)
+                                            <li class="row mx-0">
+                                                <div class="col-xs-12 col-sm-6"><p>@lang('payment.appPostalCode')</p>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6">{{ $user->postal_code }}</div>
+                                            </li>
+                                        @endif
 
-                                        <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appTel')</p></div>
-                                            <div class="col-xs-12 col-sm-6">021 548 5874</div>
-                                        </li>
+                                        @if($user->tel)
+                                            <li class="row mx-0">
+                                                <div class="col-xs-12 col-sm-6"><p>@lang('payment.appTel')</p></div>
+                                                <div class="col-xs-12 col-sm-6">{{ $user->tel }}</div>
+                                            </li>
+                                        @endif
 
-                                        <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appMobile')</p></div>
-                                            <div class="col-xs-12 col-sm-6">0914 840 1824</div>
-                                        </li>
+                                        @if($user->mobile)
+                                            <li class="row mx-0">
+                                                <div class="col-xs-12 col-sm-6"><p>@lang('payment.appMobile')</p></div>
+                                                <div class="col-xs-12 col-sm-6">{{ $user->mobile }}</div>
+                                            </li>
+                                        @endif
 
-                                        <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p>@lang('payment.appEmail')</p></div>
-                                            <div class="col-xs-12 col-sm-6">masoudmanson@gmail.com</div>
-                                        </li>
+                                        @if($user->email)
+                                            <li class="row mx-0">
+                                                <div class="col-xs-12 col-sm-6"><p>@lang('payment.appEmail')</p></div>
+                                                <div class="col-xs-12 col-sm-6">{{ $user->email }}</div>
+                                            </li>
+                                        @endif
 
                                     </ul>
 
@@ -107,7 +127,12 @@
 
                                         <li class="row mx-0">
                                             <div class="col-xs-12 col-sm-6"><p>@lang('payment.appAddress')</p></div>
-                                            <div class="col-xs-12 col-sm-6">{{ $beneficiary->address }}
+                                            <div class="col-xs-12 col-sm-6">
+                                                @if($beneficiary->address)
+                                                    {{ $beneficiary->address }}
+                                                @else
+                                                    -
+                                                @endif
                                             </div>
                                         </li>
 
@@ -118,7 +143,13 @@
 
                                         <li class="row mx-0">
                                             <div class="col-xs-12 col-sm-6"><p>@lang('payment.appFax')</p></div>
-                                            <div class="col-xs-12 col-sm-6">{{ $beneficiary->fax }}</div>
+                                            <div class="col-xs-12 col-sm-6">
+                                                @if($beneficiary->fax)
+                                                    {{ $beneficiary->fax }}
+                                                @else
+                                                    -
+                                                @endif
+                                            </div>
                                         </li>
 
                                         <li class="row mx-0">
@@ -160,7 +191,8 @@
                         {{ csrf_field() }}
 
                         <div class="checkbox row mx-0 my-4 p-0">
-                            <label><input type="checkbox" id="proforma-terms" name="terms" value="1">@lang('payment.agreement')</label>
+                            <label><input type="checkbox" id="proforma-terms" name="terms"
+                                          value="1">@lang('payment.agreement')</label>
                         </div>
 
                         <div class="col-sm-6 col-xs-12 p-0 pb-md-0 pb-sm-4 pb-xs-4 pr-md-2 pr-lg-3">
@@ -188,12 +220,12 @@
 
 @section('scripts')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#proforma-btn').attr('disabled', 'disabled');
             $('#proforma-terms').attr('checked', false);
 
-            $('#proforma-terms').change(function() {
-                if(this.checked) {
+            $('#proforma-terms').change(function () {
+                if (this.checked) {
                     $('#proforma-btn').removeAttr('disabled');
                 }
                 else {
@@ -201,38 +233,5 @@
                 }
             });
         });
-
-            var form = $('#pdfWrapper'),
-                cache_width = form.width(),
-                a4 = [595.28, 841.89]; // for a4 size paper width and height
-
-            $('#print-pdf').on('click', function() {
-                $('body').scrollTop(0);
-                createPDF();
-            });
-            //create pdf
-            function createPDF() {
-                getCanvas().then(function(canvas) {
-                    var
-                        img = canvas.toDataURL("image/png"),
-                        doc = new jsPDF({
-                            unit: 'px',
-                            format: 'a4'
-                        });
-                    doc.addImage(img, 'PNG', 5, 5);
-                    doc.save('invoice.pdf');
-                    form.width(cache_width);
-                });
-            }
-
-            // create canvas object
-            function getCanvas() {
-                form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');
-                return html2canvas(form, {
-                    imageTimeout: 2000,
-                    removeContainer: true
-                });
-            }
-
     </script>
 @endsection

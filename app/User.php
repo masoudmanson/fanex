@@ -27,6 +27,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $dates = [
+        'date_of_birth'
+    ];
 
     public function scopeFindByUserId($query,$userId)
     {

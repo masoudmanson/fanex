@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     protected $dates = [
-        'payment_date'
+        'payment_date',
+        'ttl'
     ];
 
     public function setPaymentDateAttribute($value)

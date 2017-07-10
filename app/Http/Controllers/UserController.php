@@ -44,9 +44,15 @@ class UserController extends Controller
         $transactions = $user->transaction()->paginate(10);
 
         foreach ($transactions as $transaction) {
-            $transaction['can_pay'] = false;
-            if ($transaction->ttl > Carbon::now() && empty($transaction->uri)) {
-                $transaction['can_pay'] = true;
+            if (empty($transaction->uri)) {
+                if ($transaction->ttl > Carbon::now()) {
+                    $transaction['can_pay'] = true;
+                } else {
+                    $transaction->bank_status = 'failed';
+                    $transaction->fanex_status = 'rejected';
+                    $transaction->upt_status = 'failed';
+                    $transaction->update();
+                }
             }
         }
         if ($request->ajax())

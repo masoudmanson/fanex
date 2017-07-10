@@ -21,7 +21,7 @@ class CreateBeneficiariesTable extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('account_number')->unique();
-            $table->text('address');
+            $table->text('address')->nullable();
             $table->string('country')->nullable();
             $table->string('tel');
             $table->string('fax')->nullable();
