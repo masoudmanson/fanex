@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Backlog extends Model
 {
+    protected $table = 'backlogs';
+
     public function setTtlAttribute($value)
     {
         $this->attributes['ttl'] = Carbon::createFromTimestamp($value)->toDateTimeString();
