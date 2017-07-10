@@ -368,10 +368,12 @@
 
                 $('#bnf-ajax-name').text(bnf.firstname + ' ' + bnf.lastname);
                 $('#bnf-ajax-accountnumber').text(bnf.account_number);
-                $('#bnf-ajax-address').text(bnf.address);
+                if(bnf.address)
+                    $('#bnf-ajax-address').text(bnf.address);
                 $('#bnf-ajax-country').text(bnf.country);
                 $('#bnf-ajax-phone').text(bnf.tel);
-                $('#bnf-ajax-fax').text(bnf.fax);
+                if(bnf.fax)
+                    $('#bnf-ajax-fax').text(bnf.fax);
                 $('#bnf-ajax-bankname').text(bnf.bank_name);
                 $('#bnf-ajax-branch').text(bnf.branch_name);
                 $('#bnf-ajax-swift').text(bnf.swift_code);

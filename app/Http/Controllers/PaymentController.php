@@ -181,7 +181,6 @@ class PaymentController extends Controller
         $result = $this->userInvoice($request, $backlog);
 
         $invoice = json_decode($result->getBody()->getContents());
-
         if (!$invoice->hasError) {
 
             $transaction = Transaction::findOrFail(json_decode(Crypt::decryptString($request->transaction_sign))->id);
@@ -189,9 +188,11 @@ class PaymentController extends Controller
             $transaction->uri = $invoice->result->billNumber;
             $transaction->update();
 
-            return redirect("http://sandbox.fanapium.com:1031/v1/pbc/payinvoice/?invoiceId="
+            return redirect(config('urls.private')."pbc/payinvoice/?invoiceId="
                 . $invoice->result->id . "&redirectUri=" . $request->root() . "/invoice/show?billNumber=" . $transaction->uri);
-        } else dd($invoice);  //todo: error handling
+        }
+        else
+            dd($invoice);  //todo: error handling
     }
 
     public function showInvoice(Request $request)

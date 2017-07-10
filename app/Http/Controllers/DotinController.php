@@ -26,7 +26,6 @@ class DotinController extends Controller
             'headers' => [
                 'Authorization' => 'Bearer ' . $token
             ],
-
         ]);
 
         return $res;

@@ -38,6 +38,7 @@ return [
     'sso' => [
         'id' => env('CLIENT_ID'),
         'secret' => env('CLIENT_SECRET'),
+        'api' => env('API_TOKEN'),
     ],
 
 ];

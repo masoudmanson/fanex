@@ -21,11 +21,10 @@ trait PlatformTrait
     {
         $token = $request->bearerToken();
 
-//        $nick = $request['nickname'];
         $nick = $request->nickname;
 
         $client = new Client();
-        $res = $client->request('GET', 'http://sandbox.fanapium.com:8081/aut/registerWithSSO/', [
+        $res = $client->request('GET', config('urls.platform').'aut/registerWithSSO/', [
             'query' => ['nickname' => $nick],
             'headers' => [
                 '_token_' => $token,
@@ -39,7 +38,7 @@ trait PlatformTrait
     public function getCurrentPlatformUser($token)
     {
         $client = new Client();
-        $res = $client->get('http://sandbox.fanapium.com:8081/nzh/getUserProfile', [
+        $res = $client->get(config('urls.platform').'nzh/getUserProfile', [
             'headers' => [
                 '_token_' => $token,
                 '_token_issuer_' => 1
@@ -50,10 +49,10 @@ trait PlatformTrait
 
     public function getOtt()
     {
-        $token = '0c9e54ee15174cbda4a68b06318a8c14'; //biz static token
+        $token = config('services.sso.api');
         $client = new Client();
         //businessId should receive from getBusiness.however it's static in platform db.
-        $res = $client->get('http://sandbox.fanapium.com:8081/nzh/ott/', [
+        $res = $client->get(config('urls.platform').'nzh/ott', [
             'headers' => [
                 '_token_' => $token,
                 '_token_issuer_' => 1
@@ -66,7 +65,7 @@ trait PlatformTrait
     {
         $client = new Client();
         //businessId should receive from getBusiness.however it's static in platform db.
-        $res = $client->get('http://sandbox.fanapium.com:8081/nzh/follow/?businessId=22&follow=true', [
+        $res = $client->get(config('urls.platform').'nzh/follow/?businessId=42&follow=true', [
             'headers' => [
                 '_token_' => $token,
                 '_token_issuer_' => 1
@@ -79,7 +78,7 @@ trait PlatformTrait
     {
         $client = new Client();
         //business token must taken from sso
-        $res = $client->get('http://sandbox.fanapium.com:8081/nzh/getUserBusiness', [
+        $res = $client->get(config('urls.platform').'nzh/getUserBusiness', [
             'headers' => [
                 '_token_' => $token,// get business token and put in here
                 '_token_issuer_' => 1
@@ -91,32 +90,21 @@ trait PlatformTrait
     public function userInvoice(Request $request, Backlog $backlog)
     {
         $client = new Client();
-        //business token must taken from sso
 
-//        $token_object = $this->refreshToken('33dc287af5f34f9bb9534f0bf6687866'); //token must taken from setting or register from a service provider
-//        $token = json_decode($token_object->getBody()->getContents())->access_token;
-        $token = '0c9e54ee15174cbda4a68b06318a8c14'; //biz static token
-
-//        $user_object = $this->getCurrentPlatformUser($request->bearerToken());
+        $token = config('services.sso.api');
+//dd($token);
         $user_object = $this->getCurrentPlatformUser($request->cookie('token')['access']);
-//        if (!$user->hasError)
-//        dd($user_object->getBody()->getContents());
         $json_input = $user_object->getBody()->getContents();
         $userId = json_decode($json_input)->result->userId;
-
         $result = $this->getOtt();
         $json = $result->getBody()->getContents();
         $ott = json_decode($json)->ott;
-//        else
-
         //redirect to login? or refresh the user token ,,,
         // *hint: if refresh token was needed, get the user refresh token from its db row
         //todo how can I know user object on db, if his token expired and I don't have his userId??
 
-        $res = $client->get('http://sandbox.fanapium.com:8081/nzh/biz/issueInvoice', [
-//            'form_params' => [
+        $res = $client->get(config('urls.platform').'nzh/biz/issueInvoice', [
             'query' => [
-                //todo
                 'redirectURL' => $request->root() . '/invoice/show',
                 'userId' => $userId,// get userId from his token: gholi = 204
                 'billNumber' => generateUniqueReferenceNumber(), //todo : make a random factor bill number , it's the same URN (Unique Reference Number)
@@ -150,9 +138,9 @@ trait PlatformTrait
     public function trackingInvoiceByBillNumber($billNumber) //the form parameters can be taken from arguments, according to needs
     {
         $client = new Client();
-        $token = '0c9e54ee15174cbda4a68b06318a8c14'; //biz static token
+        $token = config('services.sso.api'); //biz static token
 
-        $res = $client->post('http://sandbox.fanapium.com:8081/nzh/biz/getInvoiceList', [
+        $res = $client->post(config('urls.platform').'nzh/biz/getInvoiceList', [
                 'form_params' => [
                     'billNumber' => $billNumber,
                     'size' => 1,
@@ -172,7 +160,7 @@ trait PlatformTrait
     public function cancelInvoice($invoice_id , $token = 'd35b0c351acd47cc87a76b1c4b07239a') //todo: get api_token from config or .env file
     {
         $client = new Client();
-        $res = $client->get('http://sandbox.fanapium.com:8080/nzh/biz/cancelInvoice', [
+        $res = $client->get(config('urls.platform').'nzh/biz/cancelInvoice', [
             'query' =>
                 [
                     'invoiceId' => $invoice_id

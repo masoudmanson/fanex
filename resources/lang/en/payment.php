@@ -30,7 +30,7 @@ return [
     'showProformaSelect' => 'Select and Go',
     'showProformaSave' => 'Save and Continue',
     'date' => 'Date:',
-    'agreement' => 'I accept <a href="/terms">terms and conditions</a> of FANEx',
+    'agreement' => 'I accept <a href="/terms" target="_blank">terms and conditions</a> of FANEx',
     'prTitle' => 'Money Transfer Application',
     'prText' => 'Transferring <span>:amount</span> by following Applicant to specified beneficiary:',
     'prApplicant' => 'Applicant\'s Identification',

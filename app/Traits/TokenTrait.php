@@ -20,7 +20,7 @@ trait TokenTrait
         $secret = adapterAssignment()->getSecret();
 
         $client = new Client();
-        $res = $client->post('http://sandbox.fanapium.com/oauth2/token', [
+        $res = $client->post(config('urls.sso').'oauth2/token', [
             "form_params" => [
                 "grant_type" => 'authorization_code',
                 "code" => $code,
@@ -41,7 +41,7 @@ trait TokenTrait
         $secret = adapterAssignment()->getSecret();
 
         $client = new Client();
-        $res = $client->post('http://sandbox.fanapium.com/oauth2/token/info', [
+        $res = $client->post(config('urls.sso').'oauth2/token/info', [
             'form_params' => [
 //                'token_type_hint'=>'refresh_token',
 //                'token'=>$refresh,
@@ -88,7 +88,7 @@ trait TokenTrait
         $secret = adapterAssignment()->getSecret();
 
         $client = new Client();
-        $res = $client->post('http://sandbox.fanapium.com/oauth2/token', [
+        $res = $client->post(config('urls.sso').'oauth2/token', [
             'form_params' => [
                 'grant_type'=>'refresh_token',
                 'refresh_token' => $token,
@@ -106,7 +106,7 @@ trait TokenTrait
         $secret = adapterAssignment()->getSecret();
 
         $client = new Client();
-        $res = $client->post('http://sandbox.fanapium.com/oauth2/token/revoke', [
+        $res = $client->post(config('urls.sso').'oauth2/token/revoke', [
             'form_params' => [
                 'token_type_hint'=>'access_token',
                 'token' => $token,

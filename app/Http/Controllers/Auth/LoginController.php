@@ -37,32 +37,21 @@ class LoginController extends Controller
     public function showLoginForm(Request $request)
     {
         if (!$request->session()->get('redirect_uri'))
-//            $request->redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/callback/profile';
             $request->redirect_uri = $request->root()  . '/profile';
         else {
             $request->redirect_uri = $request->session()->get('redirect_uri');
-//            $request->queryString = $request->session()->get('query_string');
-//            $request->redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/callback'.'/'.$redirect_uri;
         }
-
         $id = adapterAssignment()->getId();
-
-        return Redirect::away('http://sandbox.fanapium.com/oauth2/authorize/?client_id='
+        return Redirect::away(config('urls.sso').'oauth2/authorize/?client_id='
             . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri
-//            . '&state=' . $request->queryString
             . '&prompt=login');
-
-//        return \Redirect::away('http://sandbox.fanapium.com/oauth2/authorize?'.$queryString);
-//        return \redirect('http://sandbox.fanapium.com/oauth2/authorize?'.$queryString);
-
-        //sso login form
     }
 
     public function logout(Request $request)
     {
         Auth::logout();
 
-        return Redirect::away('http://sandbox.fanapium.com/oauth2/logout/?continue=' . $request->root());
+        return Redirect::away(config('urls.sso').'oauth2/logout/?continue=' . $request->root());
     }
 
     public function showRegistrationForm()
@@ -72,23 +61,4 @@ class LoginController extends Controller
          */
     }
 
-
-//    use AuthenticatesUsers;
-//
-//    /**
-//     * Where to redirect users after login.
-//     *
-//     * @var string
-//     */
-//    protected $redirectTo = '/home';
-//
-//    /**
-//     * Create a new controller instance.
-//     *
-//     * @return void
-//     */
-//    public function __construct()
-//    {
-//        $this->middleware('guest', ['except' => 'logout']);
-//    }
 }

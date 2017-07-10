@@ -63,24 +63,17 @@ class UserInformationController extends Controller
 
         if ($dotin_result[0]->auth) {
 
-//            $sso_response = $this->registerWithSSO($request);
-//            $sso_result = json_decode($sso_response->getBody()->getContents());
-
-//            if(!$sso_result->hasError && $sso_result->result){
-//            if(!$sso_result->hasError && $sso_result->result){
             $result = $this->followBusiness($request->bearerToken());
             $follow_res = json_decode($result->getBody()->getContents());
-//            if(!$follow_res->hassError)
 
             //todo
             $result = $this->getCurrentPlatformUser($request->cookie('token')['access']);
             $platform_user = json_decode($result->getBody()->getContents());
             $user = User::firstOrNew(array('userId' => $platform_user->result->userId));
             $user->userId = $platform_user->result->userId;
-            $user->firstname = $dotin_result[0]->message->firstname;
-            $user->lastname = $dotin_result[0]->message->lastname;
-//                $user->api_token = $request->bearerToken();
-//                $user->api_token = $request->token;
+            $user->firstname = $platform_user->result->firstName;
+            $user->lastname = $platform_user->result->lastName;
+            $user->mobile = $platform_user->result->cellphoneNumber;
 
             $user->save();
 
@@ -90,8 +83,6 @@ class UserInformationController extends Controller
             //todo : check again if user was in his first time
 
             return redirect()->route('createOrSelect');
-//            return response()->view('dashboard.beneficiary', $data, 200);
-//                ->header('authorization', 'Bearer ' . $request->token);
         }
 
 //        }
@@ -101,7 +92,6 @@ class UserInformationController extends Controller
          * 3. save user data , given from datin and platform (userId)
          */
 
-dd('error');
 //        User::create($request->all());
 
         return redirect('producer');

@@ -54,7 +54,13 @@
 <script>
     var csrfToken = $('meta[name="csrf-token"]').attr('content');
     var timeOut = "@lang('index.timeout')";
-
+    $.ajaxSetup(
+        {
+            headers:
+                {
+                    'X-CSRF-Token': csrfToken
+                }
+        });
     $(document).ready(function () {
         @if(\Illuminate\Support\Facades\App::isLocale('fa'))
 //            $('*').persiaNumber();
