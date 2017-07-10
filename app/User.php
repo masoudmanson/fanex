@@ -31,6 +31,8 @@ class User extends Authenticatable
         'date_of_birth'
     ];
 
+    protected $table = 'users';
+
     public function scopeFindByUserId($query,$userId)
     {
         return $query->where('userId', $userId);

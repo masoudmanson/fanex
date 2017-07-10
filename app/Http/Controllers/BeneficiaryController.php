@@ -92,45 +92,51 @@ class BeneficiaryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param Beneficiary $beneficiary
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Beneficiary $beneficiary)
     {
-        //
+        return view('beneficiary', compact('beneficiary'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param Beneficiary $beneficiary
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Beneficiary $beneficiary)
     {
-        //
+        return view('beneficiaryEdit', compact('beneficiary'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param Beneficiary $beneficiary
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Beneficiary $beneficiary)
     {
-        //
+        $beneficiary->update($request->all());
+
+        return redirect()->route('beneficiary.show', $beneficiary->id); //??
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param Beneficiary $beneficiary
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Beneficiary $beneficiary)
     {
+        $beneficiary->delete();
+
+        return redirect()->route('beneficiary.list');
 
     }
 }

@@ -182,7 +182,10 @@ return [
         Morilog\Jalali\JalaliServiceProvider::class,
         Cornford\Googlmapper\MapperServiceProvider::class,
         PeterColes\Countries\CountriesServiceProvider::class,
-        ZanySoft\LaravelPDF\PdfServiceProvider::class,
+        /*
+         * Oracle DB Service Provider
+         */
+        Yajra\Oci8\Oci8ServiceProvider::class,
     ],
 
     /*

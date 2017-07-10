@@ -17,8 +17,7 @@ class CreateUsersTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->increments('id');
-            $table->integer('userId')->unique()->nullable();//maybe string
-//            $table->string('api_token')->nullable();
+            $table->integer('userId')->unique()->nullable();
             $table->string('api_token', 60)->unique()->nullable();
             $table->string('firstname');
             $table->string('lastname');
@@ -35,7 +34,6 @@ class CreateUsersTable extends Migration
             $table->string('tel')->nullable();
             $table->string('fax')->nullable();
             $table->string('email')->unique()->nullable();
-//            $table->string('password');
 //**
             $table->boolean('is_authorized')->nullable();
             $table->rememberToken();

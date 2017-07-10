@@ -18,6 +18,6 @@ class CheckLogExist
         if(isset($_COOKIE['backlog'])){
             return $next($request);
         }
-        return redirect('/home')->withErrors(['msg', 'The Message']);
+        return redirect('/')->withErrors(['msg', 'The Message']);
     }
 }
