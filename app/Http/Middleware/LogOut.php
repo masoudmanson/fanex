@@ -22,9 +22,9 @@ class LogOut
 
         setcookie('ttl','', -60, "/", "", false, false);
 
-        if ($request->hasCookie('_token_')) {
-            $this->revokeToken($request->cookie('_token_')['access']);
-            $cookie = cookie('_token_', '', -6000);
+        if ($request->hasCookie('token')) {
+            $this->revokeToken($request->cookie('token')['access']);
+            $cookie = cookie('token', '', -6000);
             return $response->withCookie($cookie);
         }
 

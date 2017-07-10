@@ -56,7 +56,7 @@ class UserInformationController extends Controller
 //            'email' => 'email',
 //            'password' => 'min:3|confirmed',
 //        ]);
-        $request->headers->set('authorization', 'Bearer ' . $request->cookie('_token_')['access']);
+        $request->headers->set('authorization', 'Bearer ' . $request->cookie('token')['access']);
 
         $dotin_response = $this->dotinCredential($request->account_number, $request->mobile);
         $dotin_result = json_decode($dotin_response->getBody()->getContents());
@@ -73,7 +73,7 @@ class UserInformationController extends Controller
 //            if(!$follow_res->hassError)
 
             //todo
-            $result = $this->getCurrentPlatformUser($request->cookie('_token_')['access']);
+            $result = $this->getCurrentPlatformUser($request->cookie('token')['access']);
             $platform_user = json_decode($result->getBody()->getContents());
             $user = User::firstOrNew(array('userId' => $platform_user->result->userId));
             $user->userId = $platform_user->result->userId;

@@ -27,8 +27,8 @@ class CheckTokenExist
      */
     public function handle($request, Closure $next)
     {
-        if ($request->hasCookie('_token_')) {
-            $token = $request->cookie('_token_');
+        if ($request->hasCookie('token')) {
+            $token = $request->cookie('token');
 
             $result = $this->tokenValidation($token['access']);
             $result = json_decode($result->getBody()->getContents());
@@ -39,7 +39,7 @@ class CheckTokenExist
 
                 $token_array = array('access' => $token_object->access_token, 'refresh' => $token_object->refresh_token);
 
-                $cookie = cookie('_token_', $token_array, $token_object->expires_in / 60,
+                $cookie = cookie('token', $token_array, $token_object->expires_in / 60,
                     '', '', FALSE, FALSE);
 
                 return $next($request)->withCookie($cookie);
@@ -51,7 +51,7 @@ class CheckTokenExist
             $token_object = json_decode($result->getBody()->getContents());
             $token_array = array('access' => $token_object->access_token, 'refresh' => $token_object->refresh_token);
 
-            $cookie = cookie('_token_', $token_array, $token_object->expires_in / 60,
+            $cookie = cookie('token', $token_array, $token_object->expires_in / 60,
                 '', '', false, false);
 
             $request->headers->set('authorization', 'Bearer ' . $token_object->access_token);
