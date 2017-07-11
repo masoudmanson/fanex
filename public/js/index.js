@@ -175,6 +175,7 @@ function getAmount() {
             url: '/calculate',
             data: {
                 '_token': csrfToken,
+                'X-CSRF-TOKEN': csrfToken,
                 "amount": parseFloat($('#exAmount').val().replace(/,/g, '')),
                 "currency": $('#exCurrency').val(),
                 "country": $('#exCountry').val(),

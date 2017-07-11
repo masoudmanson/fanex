@@ -38,7 +38,7 @@ trait PlatformTrait
     public function getCurrentPlatformUser($token)
     {
         $client = new Client();
-        $res = $client->get(config('urls.platform').'nzh/getUserProfile', [
+        $res = $client->get(config('urls.platform').'nzh/getUserProfile/', [
             'headers' => [
                 '_token_' => $token,
                 '_token_issuer_' => 1
@@ -52,7 +52,7 @@ trait PlatformTrait
         $token = config('services.sso.api');
         $client = new Client();
         //businessId should receive from getBusiness.however it's static in platform db.
-        $res = $client->get(config('urls.platform').'nzh/ott', [
+        $res = $client->get(config('urls.platform').'nzh/ott/', [
             'headers' => [
                 '_token_' => $token,
                 '_token_issuer_' => 1
@@ -78,7 +78,7 @@ trait PlatformTrait
     {
         $client = new Client();
         //business token must taken from sso
-        $res = $client->get(config('urls.platform').'nzh/getUserBusiness', [
+        $res = $client->get(config('urls.platform').'nzh/getUserBusiness/', [
             'headers' => [
                 '_token_' => $token,// get business token and put in here
                 '_token_issuer_' => 1
@@ -103,7 +103,7 @@ trait PlatformTrait
         // *hint: if refresh token was needed, get the user refresh token from its db row
         //todo how can I know user object on db, if his token expired and I don't have his userId??
 
-        $res = $client->get(config('urls.platform').'nzh/biz/issueInvoice', [
+        $res = $client->get(config('urls.platform').'nzh/biz/issueInvoice/', [
             'query' => [
                 'redirectURL' => $request->root() . '/invoice/show',
                 'userId' => $userId,// get userId from his token: gholi = 204
@@ -140,7 +140,7 @@ trait PlatformTrait
         $client = new Client();
         $token = config('services.sso.api'); //biz static token
 
-        $res = $client->post(config('urls.platform').'nzh/biz/getInvoiceList', [
+        $res = $client->post(config('urls.platform').'nzh/biz/getInvoiceList/', [
                 'form_params' => [
                     'billNumber' => $billNumber,
                     'size' => 1,
@@ -160,7 +160,7 @@ trait PlatformTrait
     public function cancelInvoice($invoice_id , $token = 'd35b0c351acd47cc87a76b1c4b07239a') //todo: get api_token from config or .env file
     {
         $client = new Client();
-        $res = $client->get(config('urls.platform').'nzh/biz/cancelInvoice', [
+        $res = $client->get(config('urls.platform').'nzh/biz/cancelInvoice/', [
             'query' =>
                 [
                     'invoiceId' => $invoice_id

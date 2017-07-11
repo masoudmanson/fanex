@@ -32,7 +32,7 @@
                     {{-- Add Beneficiary Form --}}
                     <form action="/beneficiaries" method="post" id="add-bnf-form">
                         {{ csrf_field() }}
-
+                        {{--<input id="token" type="hidden" value="{{$encrypted_token}}">--}}
                         {{-- Firstname --}}
                         <div class="form-group bsWrapper">
                             @if($errors->first('firstname'))

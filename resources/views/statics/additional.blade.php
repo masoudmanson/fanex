@@ -36,7 +36,7 @@
 
                     <form action="additional-info" method="post">
                         {{ csrf_field() }}
-
+                        {{--<input id="token" type="hidden" value="{{$encrypted_token}}">--}}
                         <input type="hidden" name="state" value="{{$state}}" id="state" style="display: none">
 
                         {{-- Nickname --}}

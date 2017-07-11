@@ -1,3 +1,7 @@
+<?php
+    $encrypter = app('Illuminate\Encryption\Encrypter');
+    $encrypted_token = $encrypter->encrypt(csrf_token());
+?>
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
 <head>
@@ -58,7 +62,8 @@
         {
             headers:
                 {
-                    'X-CSRF-Token': csrfToken
+                    'X-CSRF-Token': csrfToken,
+                    '_token': csrfToken
                 }
         });
     $(document).ready(function () {

@@ -12,7 +12,7 @@
 
     <form action="/contact" method="post">
         {{ csrf_field() }}
-
+        {{--<input id="token" type="hidden" value="{{$encrypted_token}}">--}}
         {{-- Name + Email --}}
         <div class="row">
             {{-- Name --}}

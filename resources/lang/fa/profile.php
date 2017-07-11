@@ -9,7 +9,7 @@ return [
 
     'welcome' => 'خوش آمدید',
     'menuTrans' => 'تراکنش ها',
-    'menuBnf' => 'دریافت کننده ها',
+    'menuBnf' => 'گیرنده ها',
     'menuNotify' => 'اطلاعیه ها',
 
     /*

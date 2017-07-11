@@ -13,9 +13,9 @@
     @else
         <h2 class="pb-3 mt-0">@lang('index.formTitle')</h2>
     @endif
-    <form @if($beneficiary) action="/proforma/selected/{{ $beneficiary->id }}" method="post" @else action="/payment" method="get" @endif>
+    <form @if($beneficiary) action="{{ route('proforma_with_selected_bnf_profile', ['beneficiary' => $beneficiary->id]) }}" method="post" @else action="{{ route('payment') }}" method="get" @endif>
         {{ csrf_field() }}
-
+        {{--<input id="token" type="hidden" value="{{$encrypted_token}}">--}}
         {{-- Destination Country --}}
         <div class="form-group bsWrapper">
             <i class="icon-globe bsIcon"></i>

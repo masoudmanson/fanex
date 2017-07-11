@@ -43,8 +43,7 @@ class LoginController extends Controller
         }
         $id = adapterAssignment()->getId();
         return Redirect::away(config('urls.sso').'oauth2/authorize/?client_id='
-            . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri
-            . '&prompt=login');
+            . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri);
     }
 
     public function logout(Request $request)

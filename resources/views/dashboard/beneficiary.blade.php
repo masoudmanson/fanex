@@ -19,9 +19,9 @@
                         <h2 class="dash-subtitle">@lang('payment.bnfSelect')</h2>
 
                         {{-- Select Beneficiary Box --}}
-                        <form action="/proforma/selected" method="POST" id="select-bnf-form">
+                        <form action="{{ route('proforma_with_selected_bnf') }}" method="POST" id="select-bnf-form">
                             {{ csrf_field() }}
-
+                            {{--<input id="token" type="hidden" value="{{$encrypted_token}}">--}}
                             {{-- Existing Beneficiaries --}}
                             <div class="form-group bsWrapper mim">
                                 <i class="icon-user bsIcon"></i>
@@ -135,9 +135,9 @@
                         <h2 class="dash-subtitle">@lang('payment.bnfNew')</h2>
 
                         {{-- Add Beneficiary Form --}}
-                        <form action="/proforma" method="post" id="add-bnf-form">
+                        <form action="{{ route('proforma_with_new_bnf') }}" method="post" id="add-bnf-form">
                             {{ csrf_field() }}
-
+                            {{--<input id="token" type="hidden" value="{{$encrypted_token}}">--}}
                             {{-- Firstname --}}
                             <div class="form-group bsWrapper">
                                 @if($errors->first('firstname'))

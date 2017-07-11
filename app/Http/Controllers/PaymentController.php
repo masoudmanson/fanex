@@ -25,8 +25,8 @@ class PaymentController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkToken', ['only' => ['pay', 'invoice']]);
-        $this->middleware('checkUser', ['only' => ['pay']]);
+        $this->middleware('checkToken', ['only' => ['proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice', 'pay', 'invoice']]);
+        $this->middleware('checkUser', ['only' => ['pay', 'proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
         $this->middleware('checkLog', ['only' => ['proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
     }
 

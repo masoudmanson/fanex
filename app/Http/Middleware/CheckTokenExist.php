@@ -62,9 +62,9 @@ class CheckTokenExist
 
         }
 
-        if(Auth::user()) {
-            Auth::logout();
-        }
+//        if(Auth::user()) {
+//            Auth::logout();
+//        }
 
 //        $queryString = $request->getQueryString();
 

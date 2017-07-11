@@ -31,6 +31,7 @@
                     {{-- Add Beneficiary Form --}}
                     <form action="/beneficiaries" method="POST" id="add-bnf-form">
                         {{ csrf_field() }}
+                        {{--<input id="token" type="hidden" value="{{$encrypted_token}}">--}}
                         {{--<input name="_method" type="hidden" value="PATCH">--}}
                         {{ method_field('PATCH') }}
                         {{-- Firstname --}}

@@ -187,9 +187,9 @@
 
                 {{-- Form Actions --}}
                 <div class="row p-0 m-0">
-                    <form action="/invoice" method="post">
+                        <form action="{{ route('issue_invoice') }}" method="post">
                         {{ csrf_field() }}
-
+                            {{--<input id="token" type="hidden" value="{{$encrypted_token}}">--}}
                         <div class="checkbox row mx-0 my-4 p-0">
                             <label><input type="checkbox" id="proforma-terms" name="terms"
                                           value="1">@lang('payment.agreement')</label>
