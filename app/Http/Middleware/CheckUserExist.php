@@ -24,28 +24,32 @@ class CheckUserExist
     {
         if ($request->hasCookie('token'))
             $access_token = $request->cookie('token')['access'];
-        elseif ($access_token = $request->bearerToken());
+        elseif ($access_token = $request->bearerToken()) ;
 
-            $result = $this->getCurrentPlatformUser($access_token);
-            $platform_user = json_decode($result->getBody()->getContents());
-            $id = $platform_user->result->userId;
+        $result = $this->getCurrentPlatformUser($access_token);
+        $platform_user = json_decode($result->getBody()->getContents());
+        $id = $platform_user->result->userId;
 
-            if (User::findByUserId($id)->first()) {
-                $user = User::findByUserId($id)->first();
+        if (User::findByUserId($id)->first()) {
+            $user = User::findByUserId($id)->first();
 
-                Auth::login($user);
-
+            //todo : this is only for test, to find out in csrf-token problem is related to user seasion or not.
+            if (Auth::check())
                 return $next($request);
-            } else {
 
-                $data = array(
-                    'redirect_uri' => $request->url(),
-                    'state' => $request->state,
-                );
+            Auth::login($user);
 
-                return response()->view('statics.additional', $data, 200);
+            return $next($request);
+        } else {
+
+            $data = array(
+                'redirect_uri' => $request->url(),
+                'state' => $request->state,
+            );
+
+            return response()->view('statics.additional', $data, 200);
 //                    ->header('authorization', 'Bearer ' . $token);
-            }
-
         }
+
+    }
 }

@@ -13,7 +13,6 @@ trait TokenTrait
 
     public function getToken(Request $request)
     {
-//        $parameters = $request->getQueryParams('code');
         $code = $request['code'];
 
         $id = adapterAssignment()->getId();
@@ -35,16 +34,12 @@ trait TokenTrait
 
     public function tokenValidation($token)
     {
-//        $token = $request->access_token;
-//        $refresh = $request->refresh_token;
         $id = adapterAssignment()->getId();
         $secret = adapterAssignment()->getSecret();
 
         $client = new Client();
         $res = $client->post(config('urls.sso').'oauth2/token/info', [
             'form_params' => [
-//                'token_type_hint'=>'refresh_token',
-//                'token'=>$refresh,
                 'token' => $token,
                 'client_id' => $id,
                 'client_secret' => $secret,
@@ -54,7 +49,7 @@ trait TokenTrait
         return $res;
     }
 
-    public function checkToken(Request $request)
+    public function checkToken(Request $request) //delete if was unused.
     {
         if ($request->hasHeader('authorization')) {
 
@@ -62,8 +57,6 @@ trait TokenTrait
             $result = json_decode($result->getBody()->getContents());
 
             if (!$result || !$result->active) {
-
-//                $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
                 return redirect('login')->with([
                     'redirect_uri' => $redirect_uri = $request->url(),
@@ -80,7 +73,6 @@ trait TokenTrait
         }
         return false;
     }
-
 
     public function refreshToken($token)
     {

@@ -62,11 +62,9 @@ class CheckTokenExist
 
         }
 
-//        if(Auth::user()) {
-//            Auth::logout();
-//        }
-
-//        $queryString = $request->getQueryString();
+        if(Auth::user()) {
+            Auth::logout();
+        }
 
         return redirect('login')->with([
             'redirect_uri' => $request->url(),
