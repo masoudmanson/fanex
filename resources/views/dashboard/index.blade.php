@@ -57,7 +57,7 @@
                         </div>
                         @foreach($transactions as $transaction)
                             <div class="panel panel-default filtered {{ $transaction->upt_status }}">
-                                <div class="panel-heading @if($transaction->can_pay) new @endif">
+                                <div class="panel-heading @if($transaction->can_pay) newRed @endif">
                                     <div class="row p-0 m-0">
                                         <div class="col-md-4 col-sm-4 col-xs-5" data-toggle="tooltip"
                                              title="@lang('profile.titleTransfer')">
@@ -167,7 +167,7 @@
 
                                                 @if($transaction->can_pay)
                                                     <a href="/proforma/transaction/{{ $transaction->id }}"
-                                                       class="hidden-md hidden-lg btn btnMini btnRound fanexBtnMiniOutlineOrange">@lang('index.pay')</a>
+                                                       class="hidden-md hidden-lg btn btnMini btnRound fanexBtnMiniOutlineGrey">@lang('index.pay')</a>
                                                 @endif
                                             </div>
                                         </div>

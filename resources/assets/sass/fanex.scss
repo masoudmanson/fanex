@@ -979,6 +979,14 @@ a.btnMini {
 .fanexBtnMiniOutlineGrey {
     @extend .fanexBtnMiniOutline;
     border-color: $fanapGreyDark;
+
+    &:hover, &:focus, &:active {
+        border-color: $fanapBourdux;
+        background: $fanapBourdux url("images/pattern-w.png");
+        background-size: cover;
+        -webkit-background-size: cover;
+        color: #fff;
+    }
 }
 
 .fanexBtnOrange {
@@ -1568,6 +1576,26 @@ a.btnMini {
             .accordion-toggle:after {
                 color: #fff !important;
             }
+        }
+    }
+
+    .panel-heading.newRed::before {
+        content: '';
+        background-color: $fanapBourdux;
+        width: 15px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        @include mq($max-width: $breakePoint_md) {
+            display: none;
+        }
+    }
+    .panel-heading.newRed {
+        @extend .panel-heading.new;
+
+        @include mq($max-width: $breakePoint_md) {
+            background: $fanapBourdux url('images/pattern-w.png');
         }
     }
     .panel-body {

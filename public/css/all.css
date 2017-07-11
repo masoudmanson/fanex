@@ -13095,6 +13095,14 @@ a.btnMini {
   border-color: #BBBBBB;
 }
 
+.fanexBtnMiniOutlineGrey:hover, .fanexBtnMiniOutlineGrey:focus, .fanexBtnMiniOutlineGrey:active {
+  border-color: #dc0f50;
+  background: #dc0f50 url("images/pattern-w.png");
+  background-size: cover;
+  -webkit-background-size: cover;
+  color: #fff;
+}
+
 .fanexBtnOrange {
   background: #F58121 url("images/pattern-w.png");
   background-size: cover;
@@ -13726,7 +13734,7 @@ a.btnMini {
   color: #333333;
 }
 
-.panel-default .panel-heading.new::before {
+.panel-default .panel-heading.new::before, .panel-default .panel-heading.newRed::before {
   content: '';
   background-color: #F58121;
   width: 15px;
@@ -13737,48 +13745,70 @@ a.btnMini {
 }
 
 @media only screen and (max-width: 768px) {
-  .panel-default .panel-heading.new::before {
+  .panel-default .panel-heading.new::before, .panel-default .panel-heading.newRed::before {
     display: none;
   }
 }
 
 @media only screen and (max-width: 768px) {
-  .panel-default .panel-heading.new {
+  .panel-default .panel-heading.new, .panel-default .panel-heading.newRed {
     background: #F58121 url("images/pattern-w.png");
     background-size: cover;
     -webkit-background-size: cover;
     color: #fff !important;
   }
-  .panel-default .panel-heading.new .acc-main-icon,
-  .panel-default .panel-heading.new .acc-user,
-  .panel-default .panel-heading.new .acc-cash,
-  .panel-default .panel-heading.new .acc-date,
-  .panel-default .panel-heading.new .acc-status {
+  .panel-default .panel-heading.new .acc-main-icon, .panel-default .panel-heading.newRed .acc-main-icon,
+  .panel-default .panel-heading.new .acc-user, .panel-default .panel-heading.newRed .acc-user,
+  .panel-default .panel-heading.new .acc-cash, .panel-default .panel-heading.newRed .acc-cash,
+  .panel-default .panel-heading.new .acc-date, .panel-default .panel-heading.newRed .acc-date,
+  .panel-default .panel-heading.new .acc-status, .panel-default .panel-heading.newRed .acc-status {
     color: #fff !important;
   }
-  .panel-default .panel-heading.new .acc-main-icon b, .panel-default .panel-heading.new .acc-main-icon i, .panel-default .panel-heading.new .acc-main-icon span,
-  .panel-default .panel-heading.new .acc-user b,
-  .panel-default .panel-heading.new .acc-user i,
-  .panel-default .panel-heading.new .acc-user span,
-  .panel-default .panel-heading.new .acc-cash b,
-  .panel-default .panel-heading.new .acc-cash i,
-  .panel-default .panel-heading.new .acc-cash span,
-  .panel-default .panel-heading.new .acc-date b,
-  .panel-default .panel-heading.new .acc-date i,
-  .panel-default .panel-heading.new .acc-date span,
-  .panel-default .panel-heading.new .acc-status b,
-  .panel-default .panel-heading.new .acc-status i,
-  .panel-default .panel-heading.new .acc-status span {
+  .panel-default .panel-heading.new .acc-main-icon b, .panel-default .panel-heading.newRed .acc-main-icon b, .panel-default .panel-heading.new .acc-main-icon i, .panel-default .panel-heading.newRed .acc-main-icon i, .panel-default .panel-heading.new .acc-main-icon span, .panel-default .panel-heading.newRed .acc-main-icon span,
+  .panel-default .panel-heading.new .acc-user b, .panel-default .panel-heading.newRed .acc-user b,
+  .panel-default .panel-heading.new .acc-user i, .panel-default .panel-heading.newRed .acc-user i,
+  .panel-default .panel-heading.new .acc-user span, .panel-default .panel-heading.newRed .acc-user span,
+  .panel-default .panel-heading.new .acc-cash b, .panel-default .panel-heading.newRed .acc-cash b,
+  .panel-default .panel-heading.new .acc-cash i, .panel-default .panel-heading.newRed .acc-cash i,
+  .panel-default .panel-heading.new .acc-cash span, .panel-default .panel-heading.newRed .acc-cash span,
+  .panel-default .panel-heading.new .acc-date b, .panel-default .panel-heading.newRed .acc-date b,
+  .panel-default .panel-heading.new .acc-date i, .panel-default .panel-heading.newRed .acc-date i,
+  .panel-default .panel-heading.new .acc-date span, .panel-default .panel-heading.newRed .acc-date span,
+  .panel-default .panel-heading.new .acc-status b, .panel-default .panel-heading.newRed .acc-status b,
+  .panel-default .panel-heading.new .acc-status i, .panel-default .panel-heading.newRed .acc-status i,
+  .panel-default .panel-heading.new .acc-status span, .panel-default .panel-heading.newRed .acc-status span {
     color: #fff !important;
   }
-  .panel-default .panel-heading.new .bnf-action-icons a i {
+  .panel-default .panel-heading.new .bnf-action-icons a i, .panel-default .panel-heading.newRed .bnf-action-icons a i {
     color: #fff;
   }
-  .panel-default .panel-heading.new .bnf-action-icons a:hover i {
+  .panel-default .panel-heading.new .bnf-action-icons a:hover i, .panel-default .panel-heading.newRed .bnf-action-icons a:hover i {
     color: #333333;
   }
-  .panel-default .panel-heading.new .accordion-toggle:after {
+  .panel-default .panel-heading.new .accordion-toggle:after, .panel-default .panel-heading.newRed .accordion-toggle:after {
     color: #fff !important;
+  }
+}
+
+.panel-default .panel-heading.newRed::before {
+  content: '';
+  background-color: #dc0f50;
+  width: 15px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@media only screen and (max-width: 768px) {
+  .panel-default .panel-heading.newRed::before {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .panel-default .panel-heading.newRed {
+    background: #dc0f50 url("images/pattern-w.png");
   }
 }
 
