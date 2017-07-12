@@ -65,14 +65,13 @@ class UptController extends Controller
 //        $result = $this->getEuroExchangeRate();
 
 //        $EuroResult = $result->getBody()->getContents();
-
         $EuroER = 4000;//($EuroResult)[0]->er;
 
         $amount = ceil($EuroER*$amount);
 
         //write to backlog
         $log = new Backlog();
-        $log = $this->mainFormBackLog($log,$amount, $request, $upt_result, json_decode($EuroResult));
+        $log = $this->mainFormBackLog($log,$amount, $request, $upt_result, $EuroER);
 
         setcookie('backlog', encrypt($log->id), time() + 600);
 

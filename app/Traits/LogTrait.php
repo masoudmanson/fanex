@@ -31,8 +31,11 @@ trait LogTrait
             $log->upt_exchange_rate = $upt_result['currency_rate'];
         }
 
-        if (isset($euro_result[0]->er)) {
-            $log->exchange_rate = $euro_result[0]->er;
+//        if (isset($euro_result[0]->er)) {
+//            $log->exchange_rate = $euro_result[0]->er;
+//        }
+        if (isset($euro_result)) {
+            $log->exchange_rate = $euro_result;
         }
         $log->save();
         return $log;
