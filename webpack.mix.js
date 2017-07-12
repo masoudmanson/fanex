@@ -19,6 +19,7 @@ mix.webpackConfig({
  */
 
 mix.copy('node_modules/nicescroll/jquery.nicescroll.js', 'public/js');
+mix.copy('node_modules/sweetalert2/dist/sweetalert2.js', 'public/js');
 mix.copy('node_modules/formvalidation/dist/css/formValidation.min.css', 'public/css');
 
 mix.sass('resources/assets/sass/all.scss', 'public/css')

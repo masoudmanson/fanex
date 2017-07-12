@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         @foreach($beneficiaries as $bnf)
-                            <div class="panel panel-default filtered ctr-{{ $bnf->country }}">
+                            <div class="panel panel-default filtered ctr-{{ $bnf->country }}" id="bnf-{{ $bnf->id }}">
                                 <div class="panel-heading">
                                     <div class="row p-0 m-0">
                                         <div class="col-md-3 col-sm-3 col-xs-5" data-toggle="tooltip"
@@ -81,7 +81,8 @@
                                             <a href="/beneficiaries/{{ $bnf->id }}/edit">
                                                 <i class="icon-edit" title="@lang('profile.bnfEdit')"></i>
                                             </a>
-                                            <a href="">
+
+                                            <a href="javascript:;" onclick="deleteBnf({{ $bnf->id }})">
                                                 <i class="icon-delete" title="@lang('profile.bnfDelete')"></i>
                                             </a>
                                         </div>
@@ -234,5 +235,45 @@
                 }
             });
         });
+
+        function deleteBnf(bnf) {
+            swal({
+                title: '{{ __('js.swalTitleAreYouSure') }}',
+                text: "{{ __('js.swalDeleteText') }}",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#4CAF50',
+                cancelButtonColor: '#F44336',
+                confirmButtonText: '{{ __('js.swalDeleteYes') }}',
+                cancelButtonText: '{{ __('js.swalDeleteNo') }}',
+                showLoaderOnConfirm: true,
+                preConfirm: function () {
+                    return new Promise(function (resolve) {
+                        $.ajax({
+                            method: 'DELETE',
+                            url: '/beneficiaries/'+bnf,
+                            data: {
+                                '_token': csrfToken,
+                                'X-CSRF-TOKEN': csrfToken
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                swal(
+                                    '{{ __('js.swalErrorTitle') }}',
+                                    '{{ __('js.swalErrorText') }}',
+                                    'error'
+                                )
+                            }
+                        }).done(function (response) {
+                            $('#bnf-'+bnf).slideUp();
+                            swal(
+                                '{{ __('js.swalDeleted') }}',
+                                '{{ __('js.swalDeletedText') }}',
+                                'success'
+                            );
+                        });
+                    })
+                }
+            });
+        }
     </script>
 @endsection

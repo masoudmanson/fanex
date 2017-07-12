@@ -24,7 +24,7 @@ class BeneficiaryController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $beneficiaries = $user->beneficiary()->get();
+        $beneficiaries = $user->beneficiary()->available()->get();
 
         $countries = countries(session('applocale'));
 
@@ -123,31 +123,17 @@ class BeneficiaryController extends Controller
     {
         $beneficiary->update($request->all());
 
-        $user = Auth::user();
-        $beneficiaries = $user->beneficiary()->get();
-
-        $countries = countries(session('applocale'));
-
-        $filter_countries = array();
-        foreach ($beneficiaries as $beneficiary) {
-            if (!in_array($beneficiary->country, $filter_countries))
-                array_push($filter_countries, $beneficiary->country);
-        }
-
-        return view('dashboard.beneficiaries', compact('beneficiaries', 'countries', 'filter_countries'));
+        return redirect()->action('BeneficiaryController@index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Beneficiary $beneficiary
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Beneficiary $beneficiary)
+    public function destroy(Beneficiary $beneficiary, Request $request)
     {
-        $beneficiary->delete();
+        $beneficiary->is_deleted = 1;
+        $beneficiary->save();
 
-        return redirect()->route('beneficiary.list');
+        if ($request->ajax())
+            return response()->json(true);
 
+        return redirect()->action('BeneficiaryController@index');
     }
 }

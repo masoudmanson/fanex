@@ -4,7 +4,7 @@
 
 html,
 body {
-    font-family: 'Roboto', 'IRANSans', tahoma, sans-serif;
+    font-family: 'Roboto', 'IRANSans', tahoma, sans-serif !important;
     background-color: $fanapGreyLight;
     direction: ltr;
 }
@@ -1980,5 +1980,15 @@ perspective effects (not including the modals and the overlay).
         background: darken($fanapOrange, 10%) url('images/pattern-w.png');
         background-size: 140%;
         -webkit-background-size: 140%;
+    }
+}
+
+.swal2-modal {
+    font-family: 'Roboto', 'IRANSans', tahoma, sans-serif !important;
+    @include border-radius(0 !important);
+    .swal2-styled {
+        font-weight: 300;
+        @include border-radius(0);
+        font-size: 16px;
     }
 }
