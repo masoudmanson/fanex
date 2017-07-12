@@ -1,5 +1,5 @@
 <?php
-
+//var_dump(php_info());
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
