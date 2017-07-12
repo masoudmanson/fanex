@@ -18,7 +18,6 @@ class CreateUsersTable extends Migration
 
             $table->increments('id');
             $table->integer('userId')->unique()->nullable();
-            $table->string('api_token', 60)->unique()->nullable();
             $table->string('firstname');
             $table->string('lastname');
 
