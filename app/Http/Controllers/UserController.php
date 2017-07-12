@@ -41,8 +41,8 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $transactions = $user->transactions;//->paginate(10);
-dd($transactions)
+        $transactions = $user->transactions;
+        
         foreach ($transactions as $transaction) {
             if (empty($transaction->uri)) {
                 if ($transaction->ttl > Carbon::now()) {
