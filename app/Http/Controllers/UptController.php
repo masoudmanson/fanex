@@ -62,11 +62,11 @@ class UptController extends Controller
             $amount = $upt_rate*$amount ;
         }
 
-        $result = $this->getEuroExchangeRate();
+//        $result = $this->getEuroExchangeRate();
 
-        $EuroResult = $result->getBody()->getContents();
+//        $EuroResult = $result->getBody()->getContents();
 
-        $EuroER = json_decode($EuroResult)[0]->er;
+        $EuroER = 4000;//($EuroResult)[0]->er;
 
         $amount = ceil($EuroER*$amount);
 

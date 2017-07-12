@@ -107,7 +107,7 @@
                     $('#mainFormLoader').fadeIn(200);
                     clearTimeout(timer);
                     timer = setTimeout(function () {
-                        console.log('raft');
+                        console.log('Searching for: "'+keyword+'"');
                         x = $.ajax({
                             method: 'get',
                             url: '/search/beneficiary',

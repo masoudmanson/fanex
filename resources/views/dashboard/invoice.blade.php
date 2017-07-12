@@ -18,9 +18,20 @@
                 <div class="row p-0 m-0">
                     {{-- Create a New Benificiary --}}
                     <div class="col-xs-12 p-0">
-                        <h2 class="dash-subtitle">@lang('payment.invSubtitle')</h2>
+
+
+                        @if($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <h2 class="alert alert-danger">{{ $error }}</h2>
+                            @endforeach
+                        @else
+                            <h2 class="dash-subtitle">@lang('payment.invSubtitle')</h2>
+                        @endif
+
                         <div class="invoice-wrapper mb-4" id="pdfWrapper">
-                            <h3 class="invoice-title">@lang('payment.invUser', ['user' => Auth::user()->firstname]) <span class="invoice-date">@lang('payment.invDate', ['dateEn' => $transaction->payment_date->format('d M Y, H:i:s'), 'dateFa' => jdate($transaction->payment_date)->format('%Y %B %d, H:i:s')])</span></h3>
+                            <h3 class="invoice-title">@lang('payment.invUser', ['user' => Auth::user()->firstname])
+                                <span class="invoice-date">@lang('payment.invDate', ['dateEn' => $transaction->payment_date->format('d M Y, H:i:s'), 'dateFa' => jdate($transaction->payment_date)->format('%Y %B %d, H:i:s')])</span>
+                            </h3>
                             <p>@lang('payment.invText')</p>
                             <p class="invoice-bnf">{{ $transaction->beneficiary->firstname . ' ' . $transaction->beneficiary->lastname }}</p>
 
@@ -71,7 +82,8 @@
                                         </div>
                                         <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
                                             <p>{{ number_format($transaction->premium_amount, 2) . ' ' . $transaction->currency . ' + &rlm;' . number_format($invoice_result->vat) }} @lang('index.formRials')</p>
-                                            <p class="acc-factor-sum">= {{ number_format($invoice_result->payableAmount) }} @lang('payment.invRials')</p>
+                                            <p class="acc-factor-sum">
+                                                = {{ number_format($invoice_result->payableAmount) }} @lang('payment.invRials')</p>
                                         </div>
                                     </li>
 
@@ -110,7 +122,7 @@
                                             <p class="fanex-text-{{ $transaction->upt_status }}">@lang('profile.'.$transaction->upt_status)</p>
                                         </div>
                                     </li>
-                            </ul>
+                                </ul>
                             </div>
 
                             <div class="regards">
