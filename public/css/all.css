@@ -14821,6 +14821,7 @@ opacity-30 {
 
 .fanex-text-red,
 .fanex-text-failed,
+.fanex-text-canceled,
 .fanex-text-rejected {
   color: #F44336 !important;
 }
@@ -14835,6 +14836,29 @@ opacity-30 {
 .fanex-text-pending,
 .fanex-text-waiting {
   color: #F58121 !important;
+}
+
+.alert {
+  border-radius: 0 !important;
+  color: #fff !important;
+  border: none !important;
+  font-size: 28px !important;
+  font-weight: 200;
+}
+
+.alert-danger {
+  background-color: #F44336 !important;
+  padding-left: 50px;
+}
+
+.alert-danger::before {
+  font-family: 'fanex';
+  content: '\4e';
+  color: #fff;
+  font-size: 24px;
+  position: absolute;
+  left: 15px;
+  top: 37px;
 }
 
 @media only screen and (max-width: 520px) {
