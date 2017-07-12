@@ -17090,3 +17090,9 @@ perspective effects (not including the modals and the overlay).
   border-radius: 0;
   font-size: 16px;
 }
+
+mark, .mark {
+  background-color: #fde2cc;
+  font-weight: 400;
+  color: #000;
+}

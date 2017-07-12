@@ -1992,3 +1992,9 @@ perspective effects (not including the modals and the overlay).
         font-size: 16px;
     }
 }
+
+mark, .mark {
+    background-color: lighten($fanapOrange, 35%);
+    font-weight: 400;
+    color: #000;
+}

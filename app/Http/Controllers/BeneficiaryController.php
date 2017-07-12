@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Beneficiary;
 use App\Http\Requests\BeneficiaryRequest;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Countries;
@@ -135,5 +136,29 @@ class BeneficiaryController extends Controller
             return response()->json(true);
 
         return redirect()->action('BeneficiaryController@index');
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->get('keyword');
+        $user = Auth::user();
+        if($keyword == '') {
+            $beneficiaries = $user->beneficiary;
+        }
+        else {
+            $beneficiaries = Beneficiary::available()->where('beneficiaries.user_id', '=', $user->id)
+                ->where(function ($query) use ($keyword) {
+                    $query->where('beneficiaries.firstname', 'like', "%$keyword%")
+                        ->orWhere('beneficiaries.lastname', 'like', "%$keyword%")
+                        ->orWhere('beneficiaries.account_number', 'like', "%$keyword%")
+                        ->orWhere('beneficiaries.swift_code', 'like', "%$keyword%")
+                        ->orWhere('beneficiaries.iban_code', 'like', "%$keyword%")
+                        ->orWhere('beneficiaries.tel', 'like', "%$keyword%");
+                })->get();
+        }
+        $countries = countries(session('applocale'));
+
+        if ($request->ajax())
+            return view('partials.beneficiaty-list-item', compact('beneficiaries', 'countries'));
     }
 }
