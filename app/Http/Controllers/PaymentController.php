@@ -188,7 +188,7 @@ class PaymentController extends Controller
 
             return response()->view('dashboard.proforma', $request->query(), 200);
         }
-        return redirect()->back()->withErrors(['msg', "You haven't access to pay this transaction"]);
+        return redirect()->back()->withErrors(['msg', "You haven't access to pay this transaction"]); // todo : make a lang
     }
 
     public function issueInvoice(Request $request)
@@ -271,7 +271,7 @@ class PaymentController extends Controller
             }
 
         }
-        $error = 'تراکنش با خطا مواجه است';
+        $error = 'تراکنش با خطا مواجه است'; // todo: make a lang
         return view('dashboard.invoice', compact('error'));
     }
 

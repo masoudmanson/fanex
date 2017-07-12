@@ -43,7 +43,7 @@ class LoginController extends Controller
         }
         $id = adapterAssignment()->getId();
         return Redirect::away(config('urls.sso') . 'oauth2/authorize/?client_id='
-            . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri);
+            . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri . '&scope=profile write');
     }
 
     public function logout(Request $request)
@@ -55,12 +55,12 @@ class LoginController extends Controller
 
     public function showRegistrationForm(Request $request)
     {
-        $request->redirect_uri = $request->root() . '/profile';
+        $request->redirect_uri = $request->root() . '/profile/';
 
         $id = adapterAssignment()->getId();
 
-        return Redirect::away(config('urls.sso') . 'oauth2/authorize/?client_id=
-        ' . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri . '&prompt=signup');
+        return Redirect::away(config('urls.sso') . 'oauth2/authorize/?client_id='
+            . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri.'&prompt=signup' );
 
     }
 

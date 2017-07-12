@@ -62,7 +62,6 @@ class UserInformationController extends Controller
         $dotin_result = json_decode($dotin_response->getBody()->getContents());
 
         if ($dotin_result[0]->auth) {
-
             $result = $this->followBusiness($request->bearerToken());
             $follow_res = json_decode($result->getBody()->getContents());
 
@@ -71,9 +70,25 @@ class UserInformationController extends Controller
             $platform_user = json_decode($result->getBody()->getContents());
             $user = User::firstOrNew(array('userId' => $platform_user->result->userId));
             $user->userId = $platform_user->result->userId;
-            $user->firstname = $platform_user->result->firstName;
-            $user->lastname = $platform_user->result->lastName;
-            $user->mobile = $platform_user->result->cellphoneNumber;
+
+            if (isset($platform_user->result->firstName)) // todo : get from user if platform doesn't have first/last name
+                $user->firstname = $platform_user->result->firstName;
+            else
+//                $user->firstname = $dotin_result[0]->message->firstname;
+                $user->firstname = 'test';
+
+            if (isset($platform_user->result->lastName)) // todo : get from user if platform doesn't have first/last name
+                $user->lastname = $platform_user->result->lastName;
+            else
+//                $user->lastname = $dotin_result[0]->message->lastname;
+                $user->lastname = 'test';
+
+            if (isset($platform_user->result->cellphoneNumber)) // todo : get from user if platform doesn't have first/last name
+                $user->mobile = $platform_user->result->cellphoneNumber;
+            else
+//                $user->lastname = $dotin_result[0]->message->lastname;
+                $user->mobile = 'test';
+
 
             $user->save();
 
