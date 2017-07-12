@@ -41,7 +41,8 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $transactions = $user->transaction();//->paginate(10);
+        $transactions = $user->transaction;//->paginate(10);
+//dd($transactions);
 
         foreach ($transactions as $transaction) {
             if (empty($transaction->uri)) {
