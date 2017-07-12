@@ -81,54 +81,62 @@ class PaymentController extends Controller
     {
         $beneficiary = Beneficiary::findOrFail($request->bnf);
 
-        $user = Auth::user();
-        $transaction = $this->createNewTrans($beneficiary);
+        $user_of_bfn = $beneficiary->user;
+        if (Auth::user() == $user_of_bfn) {
+            $user = Auth::user();
+            $transaction = $this->createNewTrans($beneficiary);
 
-        $proforma_date = $transaction['created_at'];
+            $proforma_date = $transaction['created_at'];
 
-        $transaction['hash'] = Crypt::encryptString($transaction);
+            $transaction['hash'] = Crypt::encryptString($transaction);
 
-        $countries = countries(session('applocale'));
+            $countries = countries(session('applocale'));
 
-        $request->query->add(['beneficiary' => $beneficiary,
-            'transaction_sign' => $transaction['hash'],
-            'countries' => $countries,
-            'date' => $proforma_date,
-            'user' => $user,
-            'amount' => $transaction['premium_amount'].' '.$transaction['currency']
-        ]);
+            $request->query->add(['beneficiary' => $beneficiary,
+                'transaction_sign' => $transaction['hash'],
+                'countries' => $countries,
+                'date' => $proforma_date,
+                'user' => $user,
+                'amount' => $transaction['premium_amount'] . ' ' . $transaction['currency']
+            ]);
 
-        return Hash::check($beneficiary, $request->hash)
-            ? response()->view('dashboard.proforma', $request->query(), 200)
-            : redirect()->back()->withErrors(['msg', 'The Message']);
+            return Hash::check($beneficiary, $request->hash)
+                ? response()->view('dashboard.proforma', $request->query(), 200)
+                : redirect()->back()->withErrors(['msg', 'The Message']);
+        }
+        return redirect()->back()->withErrors(['msg', "You haven't access to pay this transaction"]);
     }
 
     public function proforma_with_selected_bnf_profile(Request $request, Beneficiary $beneficiary)
     {
         $transaction = $this->createNewTrans($beneficiary);
 
-        $user = Auth::user();
-        $proforma_date = $transaction['created_at'];
-        $countries = countries(session('applocale'));
+        $user_of_bfn = $beneficiary->user;
+        if (Auth::user() == $user_of_bfn) {
+            $user = Auth::user();
+            $proforma_date = $transaction['created_at'];
+            $countries = countries(session('applocale'));
 
-        $transaction['hash'] = Crypt::encryptString($transaction);
+            $transaction['hash'] = Crypt::encryptString($transaction);
 
-        $request->query->add(['beneficiary' => $beneficiary,
-            'transaction_sign' => $transaction['hash'],
-            'countries' => $countries,
-            'date' => $proforma_date,
-            'user' => $user,
-            'amount' => $transaction['premium_amount'].' '.$transaction['currency']
-        ]);
+            $request->query->add(['beneficiary' => $beneficiary,
+                'transaction_sign' => $transaction['hash'],
+                'countries' => $countries,
+                'date' => $proforma_date,
+                'user' => $user,
+                'amount' => $transaction['premium_amount'] . ' ' . $transaction['currency']
+            ]);
 
-        return response()->view('dashboard.proforma', $request->query(), 200);
+            return response()->view('dashboard.proforma', $request->query(), 200);
+        }
+        return redirect()->back()->withErrors(['msg', "You haven't access to pay this transaction"]);
     }
 
     /**
      * @param BeneficiaryRequest $request
      * @return \Illuminate\Http\RedirectResponse|Response
      */
-    public function proforma_with_new_bnf(BeneficiaryRequest $request)
+    public function proforma_with_new_bnf(BeneficiaryRequest $request) //todo : is it necessary to check Auth::user with bnf->user here??!
     {
         $request['user_id'] = Auth::user()->id;
         $user = Auth::user();
@@ -158,24 +166,29 @@ class PaymentController extends Controller
         $beneficiary = $transaction->beneficiary;
         $log = $transaction->backlog;
 
-        $transaction['hash'] = Crypt::encryptString($transaction);
+        $user_of_bfn = $beneficiary->user;
+        if (Auth::user() == $user_of_bfn) {
 
-        $user = Auth::user();
-        $proforma_date = $log->created_at;
-        $countries = countries(session('applocale'));
+            $transaction['hash'] = Crypt::encryptString($transaction);
 
-        $request->query->add(['beneficiary' => $beneficiary,
-            'transaction_sign' => $transaction['hash'],
-            'countries' => $countries,
-            'date' => $proforma_date,
-            'user' => $user,
-            'amount' => $transaction['premium_amount'].' '.$transaction['currency']
-        ]);
-        $diff = \Carbon\Carbon::now()->diffInSeconds($transaction->ttl);
-        setcookie('backlog', encrypt($log->id), time()+$diff, '/');
-        setcookie('ttl', time()+$diff, time() + $diff, '/');
+            $user = Auth::user();
+            $proforma_date = $log->created_at;
+            $countries = countries(session('applocale'));
 
-        return response()->view('dashboard.proforma', $request->query(), 200);
+            $request->query->add(['beneficiary' => $beneficiary,
+                'transaction_sign' => $transaction['hash'],
+                'countries' => $countries,
+                'date' => $proforma_date,
+                'user' => $user,
+                'amount' => $transaction['premium_amount'] . ' ' . $transaction['currency']
+            ]);
+            $diff = \Carbon\Carbon::now()->diffInSeconds($transaction->ttl);
+            setcookie('backlog', encrypt($log->id), time() + $diff, '/');
+            setcookie('ttl', time() + $diff, time() + $diff, '/');
+
+            return response()->view('dashboard.proforma', $request->query(), 200);
+        }
+        return redirect()->back()->withErrors(['msg', "You haven't access to pay this transaction"]);
     }
 
     public function issueInvoice(Request $request)
@@ -206,12 +219,12 @@ class PaymentController extends Controller
 
         if (!$invoice->hasError && count($invoice->result) > 0) {
             $invoice_result = $invoice->result[0];
+            $transaction = Transaction::findByBillNumber($invoice_result->billNumber)->firstOrFail();
 
             // Converting EPOCH timestamp to UNIX timestamp
             $invoice_result->paymentDate = ceil($invoice_result->paymentDate / 1000);
             if ($invoice_result->payed && !$invoice_result->canceled) {
 
-                $transaction = Transaction::findByBillNumber($invoice_result->billNumber)->firstOrFail();
                 $transaction->payment_date = $invoice_result->paymentDate;
                 $transaction->vat = $invoice_result->vat;
                 $transaction->bank_status = 'successful';
@@ -249,12 +262,14 @@ class PaymentController extends Controller
                 return view('dashboard.invoice', compact('invoice_result', 'transaction'));
 
             } else {
-//                    return error;
-                dd('there is no invoice to show');
+                $transaction->bank_status = 'canceled';
+                $transaction->update();
+                return view('dashboard.invoice', compact('invoice_result', 'transaction'));
             }
 
         }
-        return view('dashboard.invoice', compact(''));
+        $error = 'تراکنش با خطا مواجه است';
+        return view('dashboard.invoice', compact('error'));
     }
 
     public function updatePaymentCondition(Request $request)

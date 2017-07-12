@@ -37,12 +37,12 @@ class LoginController extends Controller
     public function showLoginForm(Request $request)
     {
         if (!$request->session()->get('redirect_uri'))
-            $request->redirect_uri = $request->root()  . '/profile';
+            $request->redirect_uri = $request->root() . '/profile';
         else {
             $request->redirect_uri = $request->session()->get('redirect_uri');
         }
         $id = adapterAssignment()->getId();
-        return Redirect::away(config('urls.sso').'oauth2/authorize/?client_id='
+        return Redirect::away(config('urls.sso') . 'oauth2/authorize/?client_id='
             . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri);
     }
 
@@ -50,14 +50,18 @@ class LoginController extends Controller
     {
         Auth::logout();
 
-        return Redirect::away(config('urls.sso').'oauth2/logout/?continue=' . $request->root());
+        return Redirect::away(config('urls.sso') . 'oauth2/logout/?continue=' . $request->root());
     }
 
-    public function showRegistrationForm()
+    public function showRegistrationForm(Request $request)
     {
-        /*
-         *  http://demo.fanapium.com:12594/oauth2/authorize/?client_id=474c4fbdbf159b1560e8c230&response_type=token&redirect_uri=http://fanapium.com&prompt=signup
-         */
+        $request->redirect_uri = $request->root() . '/profile';
+
+        $id = adapterAssignment()->getId();
+
+        return Redirect::away(config('urls.sso') . 'oauth2/authorize/?client_id=
+        ' . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri . '&prompt=signup');
+
     }
 
 }

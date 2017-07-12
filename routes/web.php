@@ -49,7 +49,6 @@ Route::get('/send/{beneficiary}', 'UserController@sendMoney');
 //Route::get('/payment', 'PaymentController@pay')->name('payment'); //todo: load beneficiary page, go to beneficiary controller?
 
 Route::resource('/additional-info', 'UserInformationController');
-
 Route::get('/beneficiary/select', 'BeneficiaryController@createOrSelect')->name('createOrSelect');
 Route::post('/proforma', 'PaymentController@proforma_with_new_bnf')->name('proforma_with_new_bnf');
 Route::post('/proforma/selected/{beneficiary}', 'PaymentController@proforma_with_selected_bnf_profile')->name('proforma_with_selected_bnf_profile');
@@ -66,6 +65,3 @@ Route::post('/calculate', 'UptController@calculateRemittance')->name('calculate'
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
 
 Route::get('pdf/proforma/{id}', 'StaticsController@proformaPdf');
-
-Route::get('/callback/{callback}', 'CallbackController@callbackHandler');
-Route::get('/ws', 'UptController@test');
