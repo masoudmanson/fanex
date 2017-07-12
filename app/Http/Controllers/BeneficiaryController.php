@@ -123,8 +123,18 @@ class BeneficiaryController extends Controller
     {
         $beneficiary->update($request->all());
 
-        return redirect()->route('beneficiary.show', $beneficiary->id); //??
+        $user = Auth::user();
+        $beneficiaries = $user->beneficiary()->get();
 
+        $countries = countries(session('applocale'));
+
+        $filter_countries = array();
+        foreach ($beneficiaries as $beneficiary) {
+            if (!in_array($beneficiary->country, $filter_countries))
+                array_push($filter_countries, $beneficiary->country);
+        }
+
+        return view('dashboard.beneficiaries', compact('beneficiaries', 'countries', 'filter_countries'));
     }
 
     /**
