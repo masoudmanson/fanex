@@ -65,3 +65,5 @@ Route::post('/calculate', 'UptController@calculateRemittance')->name('calculate'
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
 
 Route::get('pdf/proforma/{id}', 'StaticsController@proformaPdf');
+
+Route::get('/search/beneficiary', 'BeneficiaryController@search');

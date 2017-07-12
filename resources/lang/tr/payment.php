@@ -49,7 +49,7 @@ return [
     'invSubtitle' => 'Ödeme İşleminiz Bitti',
     'invUser' => 'Sayin Mr. :user',
     'invDate' => ':dateEn',
-    'invText' => 'FANEx\'i kullandığınız için teşekkür ederiz. Ödemeniz başarıyla yapıldı. Aşağıdaki ödemeyi yaptınız:',
+    'invText' => 'FANEx\'i kullandığınız için teşekkür ederiz. Aşağıdaki ödemeyi yaptınız:',
     'invItem' => 'Madde',
     'invCost' => 'Maliyet',
     'invAmount' => 'Miktar:',

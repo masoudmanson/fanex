@@ -263,8 +263,11 @@ class PaymentController extends Controller
 
             } else {
                 $transaction->bank_status = 'canceled';
+                $transaction->fanex_status = 'rejected';
+                $transaction->upt_status = 'failed';
+                $transaction->payment_date = time();
                 $transaction->update();
-                return view('dashboard.invoice', compact('invoice_result', 'transaction'));
+                return view('dashboard.invoice', compact('invoice_result', 'transaction'))->withErrors(['msg' => 'Transaction Failed!']);;
             }
 
         }

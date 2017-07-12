@@ -71,7 +71,7 @@ return [
     'invSubtitle' => 'Your Payment Transaction has Ended',
     'invUser' => 'Dear Mr. :user',
     'invDate' => ':dateEn',
-    'invText' => 'Thank you for using FANEx. Your payment was done successfully. You have made the following payment to:',
+    'invText' => 'Thank you for using FANEx. You have made the following payment to:',
     'invItem' => 'Item',
     'invCost' => 'Cost',
     'invAmount' => 'Prem. Amount:',

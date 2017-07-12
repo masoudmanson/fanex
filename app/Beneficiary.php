@@ -17,4 +17,9 @@ class Beneficiary extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function scopeAvailable($query)
+    {
+        return $query->where('is_deleted', 0);
+    }
+
 }

@@ -43,6 +43,7 @@
 <script src="{{ mix('js/scripts.js') }}"></script>
 <script src="{{ asset('js/accounting.min.js') }}"></script>
 <script src="{{ asset('js/jquery.nicescroll.js') }}"></script>
+<script src="{{ asset('js/sweetalert2.js') }}"></script>
 <script src="{{ asset('js/jquery.sticky-kit.min.js') }}"></script>
 <script src="{{ asset('js/jquery.countdown.min.js') }}"></script>
 <script src="{{ asset('js/classie.js') }}"></script>
@@ -72,8 +73,8 @@
 {{-- Yielding Pages Scripts --}}
 @yield('scripts')
 
-@if(config('app.env') == 'local')
-    <script src="http://localhost:35729/livereload.js"></script>
-@endif
+{{--@if(config('app.env') == 'local')--}}
+    {{--<script src="http://localhost:35729/livereload.js"></script>--}}
+{{--@endif--}}
 </body>
 </html>

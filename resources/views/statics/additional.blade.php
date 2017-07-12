@@ -34,7 +34,7 @@
 
                     <h1 class="pb-3 mt-0">@lang('index.additionalTitle')</h1>
 
-                    <form action="additional-info" method="post">
+                    <form action="/additional-info" method="post">
                         {{ csrf_field() }}
                         {{--<input id="token" type="hidden" value="{{$encrypted_token}}">--}}
                         <input type="hidden" name="state" value="{{$state}}" id="state" style="display: none">

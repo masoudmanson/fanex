@@ -4,7 +4,7 @@
 
 html,
 body {
-    font-family: 'Roboto', 'IRANSans', tahoma, sans-serif;
+    font-family: 'Roboto', 'IRANSans', tahoma, sans-serif !important;
     background-color: $fanapGreyLight;
     direction: ltr;
 }
@@ -45,6 +45,7 @@ opacity-30 {
 
 .fanex-text-red,
 .fanex-text-failed,
+.fanex-text-canceled,
 .fanex-text-rejected {
     color: $fanapRed !important;
 }
@@ -59,6 +60,28 @@ opacity-30 {
 .fanex-text-pending,
 .fanex-text-waiting {
     color: $fanapOrange !important;
+}
+
+.alert {
+    @include border-radius(0 !important);
+    color: #fff !important;
+    border: none !important;
+    font-size: 28px !important;
+    font-weight: 200;
+}
+
+.alert-danger {
+    background-color: $fanapRed !important;
+    padding-left: 50px;
+    &::before {
+        font-family: 'fanex';
+        content: '\4e';
+        color: #fff;
+        font-size: 24px;
+        position: absolute;
+        left: 15px;
+        top: 37px;
+    }
 }
 
 @include mq($max-width: $breakePoint_sm) {
@@ -1981,4 +2004,20 @@ perspective effects (not including the modals and the overlay).
         background-size: 140%;
         -webkit-background-size: 140%;
     }
+}
+
+.swal2-modal {
+    font-family: 'Roboto', 'IRANSans', tahoma, sans-serif !important;
+    @include border-radius(0 !important);
+    .swal2-styled {
+        font-weight: 300;
+        @include border-radius(0);
+        font-size: 16px;
+    }
+}
+
+mark, .mark {
+    background-color: lighten($fanapOrange, 35%);
+    font-weight: 400;
+    color: #000;
 }

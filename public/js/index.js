@@ -169,49 +169,47 @@ function reloadCaptcha() {
 
 function getAmount() {
     $('#mainFormLoader').fadeIn(200);
-    setTimeout(function () {
-        $.ajax({
-            method: 'POST',
-            url: '/calculate',
-            data: {
-                '_token': csrfToken,
-                'X-CSRF-TOKEN': csrfToken,
-                "amount": parseFloat($('#exAmount').val().replace(/,/g, '')),
-                "currency": $('#exCurrency').val(),
-                "country": $('#exCountry').val(),
-                "captcha": $('#captcha').val()
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                $('#calcBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
-                reloadCaptcha();
-                var json = $.parseJSON(xhr.responseText);
-                $(json).each(function (i, val) {
-                    $('#mainFormLoader .spinner2').fadeOut(200);
-                    $.each(val, function (k, v) {
-                        $('#mainFormLoader .errors').fadeIn(200).html(v);
-                        setTimeout(function () {
-                            $('#mainFormLoader, #mainFormLoader .errors').fadeOut(200);
-                            $('#mainFormLoader .spinner2').fadeIn();
-                        }, 2000);
-                    });
-                });
-            }
-        }).done(function (response) {
-            var currency = $('#exCurrency').val();
-            $('#mainFormLoader').fadeOut(200);
-            if(currency === "EUR" || currency === "USD")
-                $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 2) + ' ' + $('#exCurrency').val());
-            else
-                $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 0) + ' ' + $('#exCurrency').val());
-            $('#tempAmountCountry').text($("#exCountry option:selected").text());
-            $('.calcAmount').text(accounting.formatMoney(response, "", 0));
-            $('.tempAmount').slideDown(300);
+    $.ajax({
+        method: 'POST',
+        url: '/calculate',
+        data: {
+            '_token': csrfToken,
+            'X-CSRF-TOKEN': csrfToken,
+            "amount": parseFloat($('#exAmount').val().replace(/,/g, '')),
+            "currency": $('#exCurrency').val(),
+            "country": $('#exCountry').val(),
+            "captcha": $('#captcha').val()
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
             $('#calcBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
-            $('#paymentBtn').removeAttr('disabled').addClass('fanexBtnOrange').removeClass('fanexBtnOutlineGrey');
-            $('#captcha').focus();
             reloadCaptcha();
-        });
-    }, 1000);
+            var json = $.parseJSON(xhr.responseText);
+            $(json).each(function (i, val) {
+                $('#mainFormLoader .spinner2').fadeOut(200);
+                $.each(val, function (k, v) {
+                    $('#mainFormLoader .errors').fadeIn(200).html(v);
+                    setTimeout(function () {
+                        $('#mainFormLoader, #mainFormLoader .errors').fadeOut(200);
+                        $('#mainFormLoader .spinner2').fadeIn();
+                    }, 2000);
+                });
+            });
+        }
+    }).done(function (response) {
+        var currency = $('#exCurrency').val();
+        $('#mainFormLoader').fadeOut(200);
+        if(currency === "EUR" || currency === "USD")
+            $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 2) + ' ' + $('#exCurrency').val());
+        else
+            $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 0) + ' ' + $('#exCurrency').val());
+        $('#tempAmountCountry').text($("#exCountry option:selected").text());
+        $('.calcAmount').text(accounting.formatMoney(response, "", 0));
+        $('.tempAmount').slideDown(300);
+        $('#calcBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
+        $('#paymentBtn').removeAttr('disabled').addClass('fanexBtnOrange').removeClass('fanexBtnOutlineGrey');
+        $('#captcha').focus();
+        reloadCaptcha();
+    });
 }
 
 /*

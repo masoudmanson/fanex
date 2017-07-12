@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Beneficiary;
 use App\Http\Requests\BeneficiaryRequest;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Countries;
@@ -24,7 +25,7 @@ class BeneficiaryController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $beneficiaries = $user->beneficiary()->get();
+        $beneficiaries = $user->beneficiary()->available()->get();
 
         $countries = countries(session('applocale'));
 
@@ -123,31 +124,41 @@ class BeneficiaryController extends Controller
     {
         $beneficiary->update($request->all());
 
-        $user = Auth::user();
-        $beneficiaries = $user->beneficiary()->get();
-
-        $countries = countries(session('applocale'));
-
-        $filter_countries = array();
-        foreach ($beneficiaries as $beneficiary) {
-            if (!in_array($beneficiary->country, $filter_countries))
-                array_push($filter_countries, $beneficiary->country);
-        }
-
-        return view('dashboard.beneficiaries', compact('beneficiaries', 'countries', 'filter_countries'));
+        return redirect()->action('BeneficiaryController@index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Beneficiary $beneficiary
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Beneficiary $beneficiary)
+    public function destroy(Beneficiary $beneficiary, Request $request)
     {
-        $beneficiary->delete();
+        $beneficiary->is_deleted = 1;
+        $beneficiary->save();
 
-        return redirect()->route('beneficiary.list');
+        if ($request->ajax())
+            return response()->json(true);
 
+        return redirect()->action('BeneficiaryController@index');
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->get('keyword');
+        $user = Auth::user();
+        if($keyword == '') {
+            $beneficiaries = $user->beneficiary;
+        }
+        else {
+            $beneficiaries = Beneficiary::available()->where('beneficiaries.user_id', '=', $user->id)
+                ->where(function ($query) use ($keyword) {
+                    $query->where('beneficiaries.firstname', 'like', "%$keyword%")
+                        ->orWhere('beneficiaries.lastname', 'like', "%$keyword%")
+                        ->orWhere('beneficiaries.account_number', 'like', "%$keyword%")
+                        ->orWhere('beneficiaries.swift_code', 'like', "%$keyword%")
+                        ->orWhere('beneficiaries.iban_code', 'like', "%$keyword%")
+                        ->orWhere('beneficiaries.tel', 'like', "%$keyword%");
+                })->get();
+        }
+        $countries = countries(session('applocale'));
+
+        if ($request->ajax())
+            return view('partials.beneficiaty-list-item', compact('beneficiaries', 'countries'));
     }
 }
