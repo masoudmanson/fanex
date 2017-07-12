@@ -12790,6 +12790,20 @@ opacity-30 {
   }
 }
 
+.mandatoryField {
+  position: relative;
+}
+
+.mandatoryField::before {
+  content: '';
+  width: 4px;
+  background-color: #f12d6b;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .fanexInputWhite {
   background-color: #fff;
 }

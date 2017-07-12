@@ -17,7 +17,7 @@
             {{-- Beneficiary Info Form Container --}}
             <div class="col-lg-9 col-md-8 col-sm-12 p-0">
                 <div class="row p-0 m-0 filter-wrapper">
-                    <div class="col-xs-9 px-0">
+                    <div class="col-xs-7 px-0">
                         <ul class="filter-ul">
                             <li class="filter-li active" data-filter="all" style="margin-right: 5px;"><a href="#"><span
                                             class="mini-title">@lang('profile.filterAllShort')</span><span
@@ -30,7 +30,7 @@
                         </ul>
                     </div>
 
-                    <div class="col-xs-3 px-0">
+                    <div class="col-xs-5 px-0">
                         <ul class="filter-ul filter-right">
                             <li class="filter-li-link"><a href="/beneficiaries/create">@lang('profile.addNew')</a></li>
                         </ul>

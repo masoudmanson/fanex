@@ -21,7 +21,6 @@
                         {{-- Select Beneficiary Box --}}
                         <form action="{{ route('proforma_with_selected_bnf') }}" method="POST" id="select-bnf-form">
                             {{ csrf_field() }}
-                            {{--<input id="token" type="hidden" value="{{$encrypted_token}}">--}}
                             {{-- Existing Beneficiaries --}}
                             <div class="form-group bsWrapper mim">
                                 <i class="icon-user bsIcon"></i>
@@ -40,7 +39,7 @@
                             {{-- Show Beneficiary information --}}
                             <div id="bnf-ajax-div" style="display: none;">
                                 {{-- Firstname --}}
-                                <div class="form-group bsWrapper" title="@lang('payment.bnfFirstname')">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfFormFirstname')">
                                     <i class="icon-user bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-name">
                                         @lang('payment.bnfFirstname')
@@ -48,7 +47,7 @@
                                 </div>
 
                                 {{-- Account Number --}}
-                                <div class="form-group bsWrapper" title="@lang('payment.bnfCC')">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfFormCC')">
                                     <i class="icon-card bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-accountnumber">
                                         @lang('payment.bnfCC')
@@ -56,7 +55,7 @@
                                 </div>
 
                                 {{-- Country --}}
-                                <div class="form-group bsWrapper" title="@lang('payment.bnfCountry')">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfFormCountry')">
                                     <i class="icon-globe bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-country">
                                         @lang('payment.bnfCountry')
@@ -64,7 +63,7 @@
                                 </div>
 
                                 {{-- Address --}}
-                                <div class="form-group bsWrapper" title="@lang('payment.bnfAddr')">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfFormAddr')">
                                     <i class="icon-globe bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-address">
                                         @lang('payment.bnfAddr')
@@ -72,7 +71,7 @@
                                 </div>
 
                                 {{-- Phone Number --}}
-                                <div class="form-group bsWrapper" title="@lang('payment.bnfPhone')">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfFormPhone')">
                                     <i class="icon-mobile bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-phone">
                                         @lang('payment.bnfPhone')
@@ -80,7 +79,7 @@
                                 </div>
 
                                 {{-- Fax Number --}}
-                                <div class="form-group bsWrapper" title="@lang('payment.bnfFax')">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfFormFax')">
                                     <i class="icon-fax bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-fax">
                                         @lang('payment.bnfFax')
@@ -88,7 +87,7 @@
                                 </div>
 
                                 {{-- Bank Name --}}
-                                <div class="form-group bsWrapper" title="@lang('payment.bnfBank')">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfFormBank')">
                                     <i class="icon-bank bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-bankname">
                                         @lang('payment.bnfBank')
@@ -96,7 +95,7 @@
                                 </div>
 
                                 {{-- Branch Address --}}
-                                <div class="form-group bsWrapper" title="@lang('payment.bnfBranch')">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfFormBranch')">
                                     <i class="icon-branch bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-branch">
                                         @lang('payment.bnfBranch')
@@ -104,7 +103,7 @@
                                 </div>
 
                                 {{-- Swift Code --}}
-                                <div class="form-group bsWrapper" title="@lang('payment.bnfSwift')">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfFormSwift')">
                                     <i class="icon-swift bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-swift">
                                         @lang('payment.bnfSwift')
@@ -112,7 +111,7 @@
                                 </div>
 
                                 {{-- iBan Number --}}
-                                <div class="form-group bsWrapper" title="@lang('payment.bnfIban')">
+                                <div class="form-group bsWrapper" title="@lang('payment.bnfFormIban')">
                                     <i class="icon-code bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-iban">
                                         @lang('payment.bnfIban')
@@ -137,198 +136,8 @@
                         {{-- Add Beneficiary Form --}}
                         <form action="{{ route('proforma_with_new_bnf') }}" method="post" id="add-bnf-form">
                             {{ csrf_field() }}
-                            {{--<input id="token" type="hidden" value="{{$encrypted_token}}">--}}
-                            {{-- Firstname --}}
-                            <div class="form-group bsWrapper">
-                                @if($errors->first('firstname'))
-                                    <label for="firstname" class="fanexLabel">@lang('payment.bnfFirstname')</label>
-                                @endif
-                                <i class="icon-user bsIcon"></i>
-                                <input type="text"
-                                       class="form-control fanexInput @if($errors->first('firstname')) fanexInputError @else fanexInputWhite @endif"
-                                       id="bnf-firstname"
-                                       name="firstname" placeholder="@lang('payment.bnfFirstname')" autocomplete="off"
-                                       value="{{ old('firstname') }}">
 
-                                @if($errors->first('firstname'))
-                                    <div class="fanexDanger">{{ $errors->first('firstname') }}</div>
-                                @endif
-                            </div>
-
-                            <div id="add-new-bnf-ajax">
-
-                                {{-- Lastname --}}
-                                <div class="form-group bsWrapper">
-                                    @if($errors->first('lastname'))
-                                        <label for="lastname" class="fanexLabel">@lang('payment.bnfLastname')</label>
-                                    @endif
-                                    <i class="icon-user bsIcon"></i>
-                                    <input type="text"
-                                           class="form-control fanexInput  @if($errors->first('lastname')) fanexInputError @else fanexInputWhite @endif"
-                                           id="bnf-lastname"
-                                           name="lastname" placeholder="@lang('payment.bnfLastname')"
-                                           autocomplete="off" value="{{ old('lastname') }}">
-                                    @if($errors->first('lastname'))
-                                        <div class="fanexDanger">{{ $errors->first('lastname') }}</div>
-                                    @endif
-                                </div>
-
-                                {{-- Account Number --}}
-                                <div class="form-group bsWrapper">
-                                    @if($errors->first('account_number'))
-                                        <label for="account_number" class="fanexLabel">@lang('payment.bnfCC')</label>
-                                    @endif
-                                    <i class="icon-card bsIcon"></i>
-                                    <input type="text"
-                                           class="form-control fanexInput  @if($errors->first('account_number')) fanexInputError @else fanexInputWhite @endif numberTextField"
-                                           id="bnf-accountnumber"
-                                           name="account_number" placeholder="@lang('payment.bnfCC')" autocomplete="off"
-                                           value="{{ old('account_number') }}">
-
-                                    @if($errors->first('account_number'))
-                                        <div class="fanexDanger">{{ $errors->first('account_number') }}</div>
-                                    @endif
-                                </div>
-
-                                {{-- country --}}
-                                <div class="form-group bsWrapper">
-                                    @if($errors->first('country'))
-                                        <label for="address" class="fanexLabel">@lang('payment.bnfCountry')</label>
-                                    @endif
-                                    <i class="icon-globe bsIcon"></i>
-
-                                    <select class="form-control fanexInput"
-                                            data-style="fanexInput fanexInputWhite"
-                                            name="country" id="bnfCountry">
-                                        @foreach($countries as $key=>$value)
-                                            <option value="{{ $key }}" class="enable">{{ $value }}</option>
-                                        @endforeach
-                                    </select>
-
-                                    @if($errors->first('country'))
-                                        <div class="fanexDanger">{{ $errors->first('country') }}</div>
-                                    @endif
-                                </div>
-
-                                {{-- Address --}}
-                                <div class="form-group bsWrapper">
-                                    @if($errors->first('address'))
-                                        <label for="address" class="fanexLabel">@lang('payment.bnfAddr')</label>
-                                    @endif
-                                    <i class="icon-globe bsIcon"></i>
-                                    <input type="text"
-                                           class="form-control fanexInput  @if($errors->first('address')) fanexInputError @else fanexInputWhite @endif"
-                                           id="bnf-address"
-                                           name="address" placeholder="@lang('payment.bnfAddr')" autocomplete="off"
-                                           value="{{ old('address') }}">
-
-                                    @if($errors->first('address'))
-                                        <div class="fanexDanger">{{ $errors->first('address') }}</div>
-                                    @endif
-                                </div>
-
-                                {{-- Phone Number --}}
-                                <div class="form-group bsWrapper">
-                                    @if($errors->first('tel'))
-                                        <label for="tel" class="fanexLabel">@lang('payment.bnfPhone')</label>
-                                    @endif
-                                    <i class="icon-mobile bsIcon"></i>
-                                    <input type="text"
-                                           class="form-control fanexInput  @if($errors->first('tel')) fanexInputError @else fanexInputWhite @endif numberTextField"
-                                           id="bnf-phone"
-                                           name="tel" placeholder="@lang('payment.bnfPhone')" autocomplete="off"
-                                           value="{{ old('tel') }}">
-
-                                    @if($errors->first('tel'))
-                                        <div class="fanexDanger">{{ $errors->first('tel') }}</div>
-                                    @endif
-                                </div>
-
-                                {{-- Fax Number --}}
-                                <div class="form-group bsWrapper">
-                                    @if($errors->first('fax'))
-                                        <label for="fax" class="fanexLabel">@lang('payment.bnfFax')</label>
-                                    @endif
-                                    <i class="icon-fax bsIcon"></i>
-                                    <input type="text"
-                                           class="form-control fanexInput  @if($errors->first('fax')) fanexInputError @else fanexInputWhite @endif numberTextField"
-                                           id="bnf-fax"
-                                           name="fax" placeholder="@lang('payment.bnfFax')" autocomplete="off"
-                                           value="{{ old('fax') }}">
-
-                                    @if($errors->first('fax'))
-                                        <div class="fanexDanger">{{ $errors->first('fax') }}</div>
-                                    @endif
-                                </div>
-
-                                {{-- Bank Name --}}
-                                <div class="form-group bsWrapper">
-                                    @if($errors->first('bank_name'))
-                                        <label for="bank_name" class="fanexLabel">@lang('payment.bnfBank')</label>
-                                    @endif
-                                    <i class="icon-bank bsIcon"></i>
-                                    <input type="text"
-                                           class="form-control fanexInput  @if($errors->first('bank_name')) fanexInputError @else fanexInputWhite @endif"
-                                           id="bnf-bankname"
-                                           name="bank_name" placeholder="@lang('payment.bnfBank')" autocomplete="off"
-                                           value="{{ old('bank_name') }}">
-
-                                    @if($errors->first('bank_name'))
-                                        <div class="fanexDanger">{{ $errors->first('bank_name') }}</div>
-                                    @endif
-                                </div>
-
-                                {{-- Branch Address --}}
-                                <div class="form-group bsWrapper">
-                                    @if($errors->first('branch_name'))
-                                        <label for="branch_name" class="fanexLabel">@lang('payment.bnfBranch')</label>
-                                    @endif
-                                    <i class="icon-branch bsIcon"></i>
-                                    <input type="text"
-                                           class="form-control fanexInput  @if($errors->first('branch_name')) fanexInputError @else fanexInputWhite @endif"
-                                           id="bnf-branch"
-                                           name="branch_name" placeholder="@lang('payment.bnfBranch')"
-                                           autocomplete="off" value="{{ old('branch_name') }}">
-
-                                    @if($errors->first('branch_name'))
-                                        <div class="fanexDanger">{{ $errors->first('branch_name') }}</div>
-                                    @endif
-                                </div>
-
-                                {{-- Swift Code --}}
-                                <div class="form-group bsWrapper">
-                                    @if($errors->first('swift_code'))
-                                        <label for="swift_code" class="fanexLabel">@lang('payment.bnfSwift')</label>
-                                    @endif
-                                    <i class="icon-swift bsIcon"></i>
-                                    <input type="text"
-                                           class="form-control fanexInput  @if($errors->first('swift_code')) fanexInputError @else fanexInputWhite @endif numberTextField"
-                                           id="bnf-swift"
-                                           name="swift_code" placeholder="@lang('payment.bnfSwift')" autocomplete="off"
-                                           value="{{ old('swift_code') }}">
-
-                                    @if($errors->first('swift_code'))
-                                        <div class="fanexDanger">{{ $errors->first('swift_code') }}</div>
-                                    @endif
-                                </div>
-
-                                {{-- iBan Number --}}
-                                <div class="form-group bsWrapper">
-                                    @if($errors->first('iban_code'))
-                                        <label for="iban_code" class="fanexLabel">@lang('payment.bnfIban')</label>
-                                    @endif
-                                    <i class="icon-code bsIcon"></i>
-                                    <input type="text"
-                                           class="form-control fanexInput  @if($errors->first('iban_code')) fanexInputError @else fanexInputWhite @endif numberTextField"
-                                           id="bnf-iban"
-                                           name="iban_code" placeholder="@lang('payment.bnfIban')" autocomplete="off"
-                                           value="{{ old('iban_code') }}">
-
-                                    @if($errors->first('iban_code'))
-                                        <div class="fanexDanger">{{ $errors->first('iban_code') }}</div>
-                                    @endif
-                                </div>
-                            </div>
+                            @include('partials.new-beneficiary')
 
                             {{-- Form Submition --}}
                             <div class="col-xs-12 p-0 sb-4">
@@ -353,6 +162,7 @@
 @section('scripts')
     <script>
         var beneficiaries = {!! $beneficiaries !!};
+        var countries = {!! $countries !!};
         $(document).ready(function () {
             $('#bnfCountry').selectpicker('val', 'IR');
 
@@ -363,16 +173,18 @@
                 $('#add-new-bnf-ajax').slideUp(200);
 
                 var bnf_id = $(this).val();
-                var bnf = $.grep(beneficiaries, function(e){ return e.id == bnf_id; })[0];
+                var bnf = $.grep(beneficiaries, function (e) {
+                    return e.id == bnf_id;
+                })[0];
                 $('#bnfSelectHash').val(bnf.hash);
 
                 $('#bnf-ajax-name').text(bnf.firstname + ' ' + bnf.lastname);
                 $('#bnf-ajax-accountnumber').text(bnf.account_number);
-                if(bnf.address)
+                if (bnf.address)
                     $('#bnf-ajax-address').text(bnf.address);
-                $('#bnf-ajax-country').text(bnf.country);
+                $('#bnf-ajax-country').text(countries[bnf.country]);
                 $('#bnf-ajax-phone').text(bnf.tel);
-                if(bnf.fax)
+                if (bnf.fax)
                     $('#bnf-ajax-fax').text(bnf.fax);
                 $('#bnf-ajax-bankname').text(bnf.bank_name);
                 $('#bnf-ajax-branch').text(bnf.branch_name);

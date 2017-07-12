@@ -701,6 +701,19 @@ opacity-30 {
         line-height: 50px;
     }
 }
+.mandatoryField {
+    position: relative;
+}
+
+.mandatoryField::before {
+    content: '';
+    width: 4px;
+    background-color: lighten($fanapBourdux, 10%);
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 
 .fanexInputWhite {
     @extend .fanexInput;
