@@ -184,7 +184,7 @@ class PaymentController extends Controller
             ]);
             $diff = \Carbon\Carbon::now()->diffInSeconds($transaction->ttl);
             setcookie('backlog', encrypt($log->id), time() + $diff, '/');
-            setcookie('ttl', time() + $diff, time() + $diff, '/');
+            setcookie('ttl', $diff, time() + $diff, '/');
 
             return response()->view('dashboard.proforma', $request->query(), 200);
         }
