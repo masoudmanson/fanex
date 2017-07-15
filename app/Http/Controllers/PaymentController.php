@@ -199,7 +199,7 @@ class PaymentController extends Controller
                 'amount' => $transaction['premium_amount'] . ' ' . $transaction['currency'],
                 'finish_time' => $finish_time
             ]);
-//            $diff = \Carbon\Carbon::now()->diffInSeconds($transaction->ttl);
+            $diff = \Carbon\Carbon::now()->diffInSeconds($transaction->ttl);
             setcookie('backlog', encrypt($log->id), time() + $diff, '/');
 //            setcookie('ttl', time()+$diff, time() + $diff, '/');
 
