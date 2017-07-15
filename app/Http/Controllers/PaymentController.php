@@ -37,19 +37,13 @@ class PaymentController extends Controller
      */
     public function index()
     {
-
-//        return view('test' , compact('redirect_uri'));
         return view('test');
     }
 
     public function test(Request $request)
     {
-//        dd($request->input());
-//        dd(Auth::user()->api_token);
         $request->headers->set('authorization', 'Bearer ' . Auth::user()->api_token);
-
         return $this->userInvoice($request);
-
     }
 
 //    public function pay(Request $request)
@@ -92,12 +86,15 @@ class PaymentController extends Controller
 
             $countries = countries(session('applocale'));
 
+            $finish_time = strtotime($transaction['ttl']) - time();
+
             $request->query->add(['beneficiary' => $beneficiary,
                 'transaction_sign' => $transaction['hash'],
                 'countries' => $countries,
                 'date' => $proforma_date,
                 'user' => $user,
-                'amount' => $transaction['premium_amount'] . ' ' . $transaction['currency']
+                'amount' => $transaction['premium_amount'] . ' ' . $transaction['currency'],
+                'finish_time' => $finish_time
             ]);
 
             return Hash::check($beneficiary, $request->hash)
@@ -119,12 +116,15 @@ class PaymentController extends Controller
 
             $transaction['hash'] = Crypt::encryptString($transaction);
 
+            $finish_time = strtotime($transaction['ttl']) - time();
+
             $request->query->add(['beneficiary' => $beneficiary,
                 'transaction_sign' => $transaction['hash'],
                 'countries' => $countries,
                 'date' => $proforma_date,
                 'user' => $user,
-                'amount' => $transaction['premium_amount'] . ' ' . $transaction['currency']
+                'amount' => $transaction['premium_amount'] . ' ' . $transaction['currency'],
+                'finish_time' => $finish_time
             ]);
 
             return response()->view('dashboard.proforma', $request->query(), 200);
@@ -148,12 +148,15 @@ class PaymentController extends Controller
         $countries = countries(session('applocale'));
         $transaction['hash'] = Crypt::encryptString($transaction);
 
+        $finish_time = strtotime($transaction['ttl']) - time();
+
         $request->query->add(['beneficiary' => $beneficiary,
             'transaction_sign' => $transaction['hash'],
             'countries' => $countries,
             'date' => $proforma_date,
             'user' => $user,
-            'amount' => $transaction['premium_amount'].' '.$transaction['currency']
+            'amount' => $transaction['premium_amount'].' '.$transaction['currency'],
+            'finish_time' => $finish_time
         ]);
 
         return $beneficiary->id
@@ -186,16 +189,19 @@ class PaymentController extends Controller
             $proforma_date = $log->created_at;
             $countries = countries(session('applocale'));
 
+            $finish_time = strtotime($transaction['ttl']) - time();
+
             $request->query->add(['beneficiary' => $beneficiary,
                 'transaction_sign' => $transaction['hash'],
                 'countries' => $countries,
                 'date' => $proforma_date,
                 'user' => $user,
-                'amount' => $transaction['premium_amount'] . ' ' . $transaction['currency']
+                'amount' => $transaction['premium_amount'] . ' ' . $transaction['currency'],
+                'finish_time' => $finish_time
             ]);
-            $diff = \Carbon\Carbon::now()->diffInSeconds($transaction->ttl);
+//            $diff = \Carbon\Carbon::now()->diffInSeconds($transaction->ttl);
             setcookie('backlog', encrypt($log->id), time() + $diff, '/');
-            setcookie('ttl', time()+$diff, time() + $diff, '/');
+//            setcookie('ttl', time()+$diff, time() + $diff, '/');
 
             return response()->view('dashboard.proforma', $request->query(), 200);
         }
@@ -228,21 +234,22 @@ class PaymentController extends Controller
         $result = $this->trackingInvoiceByBillNumber($request->billNumber);
         $invoice = json_decode($result->getBody()->getContents());
 
+        $finish_time = 0;
+
         if (!$invoice->hasError && count($invoice->result) > 0) {
             $invoice_result = $invoice->result[0];
             $transaction = Transaction::findByBillNumber($invoice_result->billNumber)->firstOrFail();
 
             // Converting EPOCH timestamp to UNIX timestamp
             $invoice_result->paymentDate = ceil($invoice_result->paymentDate / 1000);
+            $finish_time = strtotime($transaction->ttl) - time();
+
             if ($invoice_result->payed && !$invoice_result->canceled) {
 
                 $transaction->payment_date = $invoice_result->paymentDate;
                 $transaction->vat = $invoice_result->vat;
                 $transaction->bank_status = 'successful';
                 $transaction->fanex_status = 'pending';
-
-//                if (!$flag)
-//                    $this->cancelInvoice($result->id);//
 
                 // todo** : do it after admin accept the payment , in a specific func.**
                 $upt_res = $this->CorpSendRequest($transaction, $transaction->user, $transaction->beneficiary, $transaction->backlog);// todo : it must written after fanex admin
@@ -270,7 +277,7 @@ class PaymentController extends Controller
                     $transaction->update();
                     // return ?
                 }
-                return view('dashboard.invoice', compact('invoice_result', 'transaction'));
+                return view('dashboard.invoice', compact('invoice_result', 'transaction', 'finish_time'));
 
             } else {
                 $transaction->bank_status = 'canceled';
@@ -278,12 +285,12 @@ class PaymentController extends Controller
                 $transaction->upt_status = 'failed';
                 $transaction->payment_date = time();
                 $transaction->update();
-                return view('dashboard.invoice', compact('invoice_result', 'transaction'))->withErrors(['msg' => __('payment.transFailed')]);;
+                return view('dashboard.invoice', compact('invoice_result', 'transaction', 'finish_time'))->withErrors(['msg' => __('payment.transFailed')]);;
             }
 
         }
         $error = __('payment.transFailed');
-        return view('dashboard.invoice', compact('error'));
+        return view('dashboard.invoice', compact('error', 'finish_time'));
     }
 
     public function updatePaymentCondition(Request $request)
