@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Beneficiary;
+use App\Traits\PlatformTrait;
 use App\Traits\TokenTrait;
 use App\Traits\UptTrait;
 use App\Transaction;
@@ -16,6 +17,7 @@ class UserController extends Controller
 {
     use TokenTrait;
     use UptTrait;
+    use PlatformTrait;
 
     public function __construct()
     {
@@ -51,6 +53,17 @@ class UserController extends Controller
                     $transaction->fanex_status = 'rejected';
                     $transaction->upt_status = 'failed';
                     $transaction->update();
+                }
+            }
+            else {
+                $reference = $this->trackingInvoiceByBillNumber($transaction->uri);
+                $invoice = json_decode($reference->getBody()->getContents());
+                if(isset($invoice->result[0])) {
+                    if ($invoice->result[0]->canceled) {
+                        $transaction->bank_status = 'canceled';
+                    } elseif ($invoice->result[0]->payed) {
+                        $transaction->bank_status = 'successful';
+                    }
                 }
             }
         }
