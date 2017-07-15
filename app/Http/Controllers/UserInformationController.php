@@ -58,10 +58,10 @@ class UserInformationController extends Controller
 //        ]);
         $request->headers->set('authorization', 'Bearer ' . $request->cookie('token')['access']);
 
-        $dotin_response = $this->dotinCredential($request->account_number, $request->mobile);
-        $dotin_result = json_decode($dotin_response->getBody()->getContents());
+//        $dotin_response = $this->dotinCredential($request->account_number, $request->mobile);
+//        $dotin_result = json_decode($dotin_response->getBody()->getContents());
 
-        if ($dotin_result[0]->auth) {
+//        if ($dotin_result[0]->auth) {
             $result = $this->followBusiness($request->bearerToken());
             $follow_res = json_decode($result->getBody()->getContents());
 
@@ -87,7 +87,7 @@ class UserInformationController extends Controller
                 $user->mobile = $platform_user->result->cellphoneNumber;
             else
 //                $user->lastname = $dotin_result[0]->message->lastname;
-                $user->mobile = 'test';
+                $user->mobile = '0';
 
 
             $user->save();
@@ -98,7 +98,7 @@ class UserInformationController extends Controller
             //todo : check again if user was in his first time
 
             return redirect()->route('createOrSelect');
-        }
+//        }
 
 //        }
         /*
@@ -106,10 +106,6 @@ class UserInformationController extends Controller
          * 2.register user to platform
          * 3. save user data , given from datin and platform (userId)
          */
-
-//        User::create($request->all());
-
-        return redirect('producer');
 
     }
 
