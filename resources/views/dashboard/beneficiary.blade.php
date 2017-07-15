@@ -50,7 +50,7 @@
                                 <div class="form-group bsWrapper" title="@lang('payment.bnfFormCC')">
                                     <i class="icon-card bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-accountnumber">
-                                        @lang('payment.bnfCC')
+                                        @lang('payment.bnfFormCC')
                                     </div>
                                 </div>
 
@@ -58,7 +58,7 @@
                                 <div class="form-group bsWrapper" title="@lang('payment.bnfFormCountry')">
                                     <i class="icon-globe bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-country">
-                                        @lang('payment.bnfCountry')
+                                        @lang('payment.bnfFormCountry')
                                     </div>
                                 </div>
 
@@ -66,7 +66,7 @@
                                 <div class="form-group bsWrapper" title="@lang('payment.bnfFormAddr')">
                                     <i class="icon-globe bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-address">
-                                        @lang('payment.bnfAddr')
+                                        @lang('payment.bnfFormAddr')
                                     </div>
                                 </div>
 
@@ -74,7 +74,7 @@
                                 <div class="form-group bsWrapper" title="@lang('payment.bnfFormPhone')">
                                     <i class="icon-mobile bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-phone">
-                                        @lang('payment.bnfPhone')
+                                        @lang('payment.bnfFormPhone')
                                     </div>
                                 </div>
 
@@ -82,7 +82,7 @@
                                 <div class="form-group bsWrapper" title="@lang('payment.bnfFormFax')">
                                     <i class="icon-fax bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-fax">
-                                        @lang('payment.bnfFax')
+                                        @lang('payment.bnfFormFax')
                                     </div>
                                 </div>
 
@@ -90,7 +90,7 @@
                                 <div class="form-group bsWrapper" title="@lang('payment.bnfFormBank')">
                                     <i class="icon-bank bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-bankname">
-                                        @lang('payment.bnfBank')
+                                        @lang('payment.bnfFormBank')
                                     </div>
                                 </div>
 
@@ -98,7 +98,7 @@
                                 <div class="form-group bsWrapper" title="@lang('payment.bnfFormBranch')">
                                     <i class="icon-branch bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-branch">
-                                        @lang('payment.bnfBranch')
+                                        @lang('payment.bnfFormBranch')
                                     </div>
                                 </div>
 
@@ -106,7 +106,7 @@
                                 <div class="form-group bsWrapper" title="@lang('payment.bnfFormSwift')">
                                     <i class="icon-swift bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-swift">
-                                        @lang('payment.bnfSwift')
+                                        @lang('payment.bnfFormSwift')
                                     </div>
                                 </div>
 
@@ -114,7 +114,7 @@
                                 <div class="form-group bsWrapper" title="@lang('payment.bnfFormIban')">
                                     <i class="icon-code bsIcon"></i>
                                     <div class="form-control fanexInput fanexInputWhite" id="bnf-ajax-iban">
-                                        @lang('payment.bnfIban')
+                                        @lang('payment.bnfFormIban')
                                     </div>
                                 </div>
 
@@ -163,6 +163,11 @@
     <script>
         var beneficiaries = {!! $beneficiaries !!};
         var countries = {!! $countries !!};
+
+        // Countdown Rates Exiration Time
+        var finish = {{ $finish_time }};
+        countdown(finish);
+
         $(document).ready(function () {
             $('#bnfCountry').selectpicker('val', 'IR');
 

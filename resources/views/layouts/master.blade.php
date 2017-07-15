@@ -7,10 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {{-- SSO Header --}}
-    {{--<meta name="sso_token" content="{{ Request::bearerToken('authorization') }}">--}}
-    {{--<meta name="sso_token" content="{{ csrf_token() }}">--}}
-
     {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -47,7 +43,7 @@
 <script src="{{ asset('js/jquery.sticky-kit.min.js') }}"></script>
 <script src="{{ asset('js/jquery.countdown.min.js') }}"></script>
 <script src="{{ asset('js/classie.js') }}"></script>
-<script src="{{ asset('js/persianumber.min.js') }}"></script>
+<script src="{{ asset('js/ServerDate.js') }}"></script>
 <script type="text/javascript" src="//cdn.rawgit.com/MrRio/jsPDF/master/dist/jspdf.min.js"></script>
 <script type="text/javascript" src="//cdn.rawgit.com/niklasvh/html2canvas/0.5.0-alpha2/dist/html2canvas.min.js"></script>
 
