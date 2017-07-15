@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Backlog;
 use App\Beneficiary;
 use App\Http\Requests\BeneficiaryRequest;
 use App\User;
@@ -65,9 +66,13 @@ class BeneficiaryController extends Controller
             $beneficiary['hash'] = bcrypt($beneficiary);
         }
 
+        $id = decrypt($_COOKIE['backlog']);
+        $backlog = Backlog::findOrFail($id);
+        $finish_time = strtotime($backlog->ttl) - time();
+
         $countries = countries(session('applocale'));
 
-        $request->query->add(['beneficiaries' => $beneficiaries, 'countries' => $countries]);
+        $request->query->add(['beneficiaries' => $beneficiaries, 'countries' => $countries, 'finish_time' => $finish_time]);
         return view("dashboard.beneficiary", $request->query());
     }
 

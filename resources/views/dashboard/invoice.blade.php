@@ -161,6 +161,10 @@
 
 @section('scripts')
     <script>
+        // Countdown Rates Exiration Time
+        var finish = {{ $finish_time }};
+        countdown(finish);
+
         $(document).ready(function () {
         });
     </script>
