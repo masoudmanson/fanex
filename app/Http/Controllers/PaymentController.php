@@ -267,11 +267,11 @@ class PaymentController extends Controller
                 $transaction->upt_status = 'failed';
                 $transaction->payment_date = time();
                 $transaction->update();
-                return view('dashboard.invoice', compact('invoice_result', 'transaction'))->withErrors(['msg' => 'Transaction Failed!']);;
+                return view('dashboard.invoice', compact('invoice_result', 'transaction'))->withErrors(['msg' => __('payment.transFailed')]);;
             }
 
         }
-        $error = 'تراکنش با خطا مواجه است'; // todo: make a lang
+        $error = __('payment.transFailed');
         return view('dashboard.invoice', compact('error'));
     }
 

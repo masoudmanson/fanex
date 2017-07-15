@@ -23,6 +23,7 @@ return [
     'newTrans' => 'New Transaction',
     'newTransShort' => 'New',
     'searchHolder' => 'Search in Transactions',
+    'noTrans' => 'There are no Transactions to show.',
 
     'titleTransfer' => 'Transferred to',
     'titleIsTransferring' => 'Transferring to',

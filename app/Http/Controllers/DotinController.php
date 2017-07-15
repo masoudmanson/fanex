@@ -10,7 +10,7 @@ class DotinController extends Controller
 
     public function showDotinForm()
     {
-        dd('form view');
+//        dd('form view');
     }
 
     public function dotinAuthorization(Request $request)//ServerRequestInterface $request

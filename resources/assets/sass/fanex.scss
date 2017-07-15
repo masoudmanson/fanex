@@ -71,11 +71,25 @@ opacity-30 {
 }
 
 .alert-danger {
-    background-color: $fanapRed !important;
+    background: $fanapRed url("images/pattern-w.png");
     padding-left: 50px;
     &::before {
         font-family: 'fanex';
         content: '\4e';
+        color: #fff;
+        font-size: 24px;
+        position: absolute;
+        left: 15px;
+        top: 37px;
+    }
+}
+
+.alert-success {
+    background: $fanapGreen url("images/pattern-w.png");
+    padding-left: 50px;
+    &::before {
+        font-family: 'fanex';
+        content: '\65';
         color: #fff;
         font-size: 24px;
         position: absolute;
@@ -1705,6 +1719,14 @@ a.btnMini {
     .panel-body.notification-body {
         padding: 30px 20px;
     }
+}
+
+
+.no-results {
+    font-weight: 200;
+    color: $fanapGrey;
+    font-size: 24px;
+    text-align: center;
 }
 
 a.accordion-toggle {

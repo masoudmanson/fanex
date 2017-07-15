@@ -50,9 +50,8 @@
                                 </div>
                             </div>
                         </div>
-                        <br class="clear">
 
-                        <div style="position: relative">
+                        <div style="position: relative; margin-top: 15px;">
                             {{-- Form Loading Container --}}
                             <div id="mainFormLoader" style="display:none;">
                                 <div class="errors" style="display: none"></div>

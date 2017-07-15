@@ -27,6 +27,7 @@ return [
     'newTrans' => 'Yeni İşlem',
     'newTransShort' => 'Yeni',
     'searchHolder' => 'İşlemlerde Ara',
+    'noTrans' => 'Gösterilecek hiçbir İşlem yok.',
 
     'titleTransfer' => 'Transfer edildi',
     'titleIsTransferring' => 'Şuraya Aktarılıyor',

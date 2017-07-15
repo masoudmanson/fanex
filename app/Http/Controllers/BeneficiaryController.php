@@ -60,7 +60,7 @@ class BeneficiaryController extends Controller
     {
         $user = Auth::user();
 
-        $beneficiaries = $user->beneficiary()->get();
+        $beneficiaries = $user->beneficiary()->available()->get();
         foreach ($beneficiaries as $beneficiary) {
             $beneficiary['hash'] = bcrypt($beneficiary);
         }

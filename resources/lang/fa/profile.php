@@ -33,6 +33,7 @@ return [
     'newTrans' => 'تراکنش جدید',
     'newTransShort' => 'جدید',
     'searchHolder' => 'جستجو در تراکنش ها',
+    'noTrans' => 'تراکنشی برای نمایش وجود ندارد.',
 
     'titleTransfer' => 'منتقل شده به ',
     'titleIsTransferring' => 'انتقال به',

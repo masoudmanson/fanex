@@ -66,4 +66,6 @@ return [
     'invAll' => 'Tüm İşlemler',
     'print' => 'Fatura Yazdır',
     'accept' => 'Lütfen Şartlar ve Koşulları Kabul Edin',
+    'transFailed' => 'İşlem başarısız kaldi!',
+    'transSuccess' => 'İşlem Başarıyla yapıldı.',
 ];

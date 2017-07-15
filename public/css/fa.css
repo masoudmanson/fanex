@@ -14847,13 +14847,28 @@ opacity-30 {
 }
 
 .alert-danger {
-  background-color: #F44336 !important;
+  background: #F44336 url("images/pattern-w.png");
   padding-right: 50px;
 }
 
 .alert-danger::before {
   font-family: 'fanex';
   content: '\4e';
+  color: #fff;
+  font-size: 24px;
+  position: absolute;
+  right: 15px;
+  top: 37px;
+}
+
+.alert-success {
+  background: #4CAF50 url("images/pattern-w.png");
+  padding-right: 50px;
+}
+
+.alert-success::before {
+  font-family: 'fanex';
+  content: '\65';
   color: #fff;
   font-size: 24px;
   position: absolute;
@@ -16806,6 +16821,13 @@ a.btnMini {
 
 .panel-default .panel-body.notification-body {
   padding: 30px 20px;
+}
+
+.no-results {
+  font-weight: 200;
+  color: #949597;
+  font-size: 24px;
+  text-align: center;
 }
 
 a.accordion-toggle {

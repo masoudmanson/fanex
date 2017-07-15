@@ -27,7 +27,7 @@
     @yield('styles')
 </head>
 
-<body>
+<body class="m-0 p-0">
 
 {{-- Yielding Page Content --}}
 @yield('header')
