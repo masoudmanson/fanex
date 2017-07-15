@@ -125,8 +125,8 @@ $(document).ready(function () {
     var ttl = readCookie('ttl');
 
     if (!isNaN(ttl)) {
-        // var tenMins = new Date().getTime() + ((ttl * 1000) - new Date().getTime());
-        var tenMins = new Date().getTime() + (ttl * 1000);
+        var tenMins = new Date().getTime() + ((ttl * 1000) - new Date().getTime());
+        // var tenMins = new Date().getTime() + (ttl * 1000);
         $('#countdown').countdown(tenMins, function (event) {
             $(this).html(event.strftime('%M:%S'));
         }).on('finish.countdown', function () {
