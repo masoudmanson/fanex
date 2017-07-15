@@ -25,7 +25,8 @@
                                 <h2 class="alert alert-danger">{{ $error }}</h2>
                             @endforeach
                         @else
-                            <h2 class="dash-subtitle">@lang('payment.invSubtitle')</h2>
+                            <h2 class="alert alert-success">@lang('payment.invSubtitle')</h2>
+                            {{--<h2 class="dash-subtitle">@lang('payment.invSubtitle')</h2>--}}
                         @endif
 
                         <div class="invoice-wrapper mb-4" id="pdfWrapper">

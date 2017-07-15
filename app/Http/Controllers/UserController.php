@@ -40,8 +40,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-
-        $transactions = $user->transactions;
+        $transactions = $user->transaction;
 
         foreach ($transactions as $transaction) {
             if (empty($transaction->uri)) {

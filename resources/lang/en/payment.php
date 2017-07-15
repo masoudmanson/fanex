@@ -88,4 +88,6 @@ return [
     'invAll' => 'All Transactions',
     'print' => 'Print The Invoice',
     'accept' => 'Please Agree to the Terms & Conditions',
+    'transFailed' => 'Transaction Failed!',
+    'transSuccess' => 'Transaction has Successfully done.',
 ];
