@@ -61,8 +61,12 @@ class UserController extends Controller
                 if(isset($invoice->result[0])) {
                     if ($invoice->result[0]->canceled) {
                         $transaction->bank_status = 'canceled';
+                        $transaction->fanex_status = 'rejected';
+                        $transaction->upt_status = 'failed';
                     } elseif ($invoice->result[0]->payed) {
                         $transaction->bank_status = 'successful';
+//                        $transaction->fanex_status = 'successful'; //todo : how do I know?!
+//                        $transaction->upt_status = 'successful'; //
                     }
                 }
             }

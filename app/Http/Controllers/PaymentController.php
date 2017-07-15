@@ -25,9 +25,9 @@ class PaymentController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkToken', ['only' => ['proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice', 'pay', 'invoice']]);
-        $this->middleware('checkUser', ['only' => ['pay', 'proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
-        $this->middleware('checkLog', ['only' => ['proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
+        $this->middleware('checkToken', ['only' => ['proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
+        $this->middleware('checkUser' , ['only' => ['proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
+        $this->middleware('checkLog'  , ['only' => ['proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
     }
 
     /**
@@ -52,25 +52,25 @@ class PaymentController extends Controller
 
     }
 
-    public function pay(Request $request)
-    {
-        //todo: check if it necessary to call createOrSelect route instead of these lines of code.
-
-        $user = Auth::user();
-
-        $beneficiaries = $user->beneficiary()->get();
-        foreach ($beneficiaries as $beneficiary) {
-            $beneficiary['hash'] = bcrypt($beneficiary);
-        }
-
-        $request->query->add(['beneficiaries' => $beneficiaries]);
-
-        $countries = countries(session('applocale'));
-
-        $request->query->add(['countries' => $countries]);
-
-        return response()->view('dashboard.beneficiary', $request->query(), 200);
-    }
+//    public function pay(Request $request)
+//    {
+//        //todo: check if it necessary to call createOrSelect route instead of these lines of code.
+//
+//        $user = Auth::user();
+//
+//        $beneficiaries = $user->beneficiary()->get();
+//        foreach ($beneficiaries as $beneficiary) {
+//            $beneficiary['hash'] = bcrypt($beneficiary);
+//        }
+//
+//        $request->query->add(['beneficiaries' => $beneficiaries]);
+//
+//        $countries = countries(session('applocale'));
+//
+//        $request->query->add(['countries' => $countries]);
+//
+//        return response()->view('dashboard.beneficiary', $request->query(), 200);
+//    }
 
 
     /**
@@ -166,8 +166,19 @@ class PaymentController extends Controller
         $beneficiary = $transaction->beneficiary;
         $log = $transaction->backlog;
 
-        $user_of_bfn = $beneficiary->user;
-        if (Auth::user() == $user_of_bfn) {
+        $user_of_bnf = $beneficiary->user;
+        if (Auth::user() == $user_of_bnf) {
+
+            if($transaction->uri){
+                $reference = $this->trackingInvoiceByBillNumber($transaction->uri);
+                $invoice = json_decode($reference->getBody()->getContents());
+
+                if (!$invoice->hasError && count($invoice->result) > 0) {
+
+                    return redirect()->back()->withErrors(['msg', "This transaction has already been done."]); // todo : make a lang
+                    //todo : redirect to a single page
+                }
+            }
 
             $transaction['hash'] = Crypt::encryptString($transaction);
 
