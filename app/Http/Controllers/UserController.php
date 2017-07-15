@@ -61,8 +61,12 @@ class UserController extends Controller
                 if(isset($invoice->result[0])) {
                     if ($invoice->result[0]->canceled) {
                         $transaction->bank_status = 'canceled';
+                        $transaction->fanex_status = 'rejected';
+                        $transaction->upt_status = 'failed';
                     } elseif ($invoice->result[0]->payed) {
                         $transaction->bank_status = 'successful';
+//                        $transaction->fanex_status = 'successful'; //todo : how do I know?!
+//                        $transaction->upt_status = 'successful'; //
                     }
                 }
             }
@@ -155,4 +159,27 @@ class UserController extends Controller
     {
         //
     }
+
+
+    public function search(Request $request)
+    {
+        $keyword = $request->get('keyword');
+        $user = Auth::user();
+        if($keyword == '') {
+            $transactions = $user->transaction;
+        }
+        else {
+            $transactions = Transaction::join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
+            ->where('transactions.user_id', '=', $user->id)
+                ->where(function ($query) use ($keyword) {
+                    $query->where('transactions.uri', 'like', "%$keyword%")
+                        ->orWhere('transactions.premium_amount', 'like', "%$keyword%")
+                        ->orWhere('beneficiaries.firstname', 'like', "%$keyword%")
+                        ->orWhere('beneficiaries.lastname', 'like', "%$keyword%");
+                })->get();
+        }
+        if ($request->ajax())
+            return view('partials.transaction-list-item', compact('transactions'));
+    }
+
 }
