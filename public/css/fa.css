@@ -12830,8 +12830,12 @@ body.swal2-iosfix {
   content: "\51";
 }
 
-.icon-fanex:before {
+.icon-fanex-new:before {
   content: "\52";
+}
+
+.icon-fanex:before {
+  content: "\53";
 }
 
 .w-25 {
