@@ -45,9 +45,16 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($exception instanceof TokenMismatchException){
-            // Catch it here and do what you want. For example...
-            return redirect()->back()->withInput()->with('errors', 'Your session has expired');
+//        if ($exception instanceof TokenMismatchException){
+//            // Catch it here and do what you want. For example...
+//            return redirect()->back()->withInput()->with('errors', 'Your session has expired');
+//        }
+
+        if($this->isHttpException($exception)){
+            if (view()->exists('errors.'.$exception->getStatusCode()))
+            {
+                return response()->view('errors.'.$exception->getStatusCode(), array('exception' => $exception) , $exception->getStatusCode() );
+            }
         }
 
         return parent::render($request, $exception);
