@@ -67,7 +67,7 @@ $(document).ready(function () {
     $('#captcha, #exAmount').keyup(function (e) {
         $('.tempAmount').slideUp(300);
         $(this).focus();
-        if ($('#captcha').val().length == 5 && removeComma($('#exAmount').val()) > 9 && $('#exCountry').val() != null && $('#exCurrency').val() != null)
+        if ($('#captcha').val().length == 5 && removeComma($('#exAmount').val()) > 0 && $('#exCountry').val() != null && $('#exCurrency').val() != null)
             $('#calcBtn').removeAttr('disabled').removeClass('fanexBtnOutlineOrange').addClass('fanexBtnOrange');
         else {
             $('#paymentBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
@@ -95,7 +95,7 @@ $(document).ready(function () {
             "offset_top": 25
         });
         $('#profile-sidebar').stick_in_parent({
-            "offset_top": 95
+            "offset_top": 75
         });
     }
     else {
@@ -114,28 +114,13 @@ $(document).ready(function () {
                 "offset_top": 25
             });
             $('#profile-sidebar').stick_in_parent({
-                "offset_top": 95
+                "offset_top": 75
             });
         }
         else {
             $('#bnf-sidebar, #profile-sidebar').trigger("sticky_kit:detach");
         }
     });
-
-    // var ttl = readCookie('ttl');
-    //
-    // if (!isNaN(ttl)) {
-    //     var tenMins = new Date().getTime() + ((ttl * 1000) - new Date().getTime());
-    //     // var tenMins = new Date().getTime() + (ttl * 1000);
-    //     $('#countdown').countdown(tenMins, function (event) {
-    //         $(this).html(event.strftime('%M:%S'));
-    //     }).on('finish.countdown', function () {
-    //         $('#countdown').html(timeOut).addClass('alert shake animated');
-    //     });
-    // }
-    // else {
-    //     $('#countdown').html(timeOut).addClass('alert shake animated');
-    // }
 
     $('a.accordion-toggle').click(function(e) {
         e.preventDefault();
@@ -269,6 +254,7 @@ var ModalEffects = (function() {
 
 var form = $('#pdfWrapper'),
     cache_width = form.width(),
+    cache_height = form.height(),
     a4 = [595.28, 990.89]; // for a4 size paper width and height
 
 var canvasImage,
@@ -280,9 +266,9 @@ var imagePieces = [];
 
 // on create pdf button click
 $('#print-pdf').on('click', function () {
-    $('body').scrollTop(0);
     imagePieces = [];
     imagePieces.length = 0;
+    window.scrollTo(0, 0);
     main();
 });
 
@@ -298,9 +284,19 @@ function main() {
 // create canvas object
 function getCanvas() {
     form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');
+    form.addClass('pdf');
+
     return html2canvas(form, {
+        onrendered: function(canvas) {
+            theCanvas = canvas;
+            document.body.appendChild(canvas);
+            form.removeClass('pdf');
+        },
         imageTimeout: 2000,
-        removeContainer: true
+        removeContainer: true,
+        letterRendering: false,
+        background: "#fff",
+        logging: true
     });
 }
 
@@ -312,10 +308,10 @@ function splitImage(e) {
             ctx = canvas.getContext('2d');
         canvas.width = formWidth;
         canvas.height = winHeight;
-        //                    source region                   dest. region
+        canvas.background = "#fff";
         ctx.drawImage(canvasImage, 0, i * winHeight, formWidth, winHeight, 0, 0, canvas.width, canvas.height);
 
-        imagePieces.push(canvas.toDataURL("image/jpeg"));
+        imagePieces.push(canvas.toDataURL("image/png"));
     }
     console.log(imagePieces.length);
     createPDF();
@@ -329,11 +325,12 @@ function createPDF() {
         format: 'a4'
     });
     imagePieces.forEach(function (img) {
-        doc.addImage(img, 'JPEG', 10, 10);
+        doc.addImage(img, 'PNG', 0, 0);
         if (totalPieces)
             doc.addPage();
         totalPieces--;
     });
     doc.save('invoice.pdf');
     form.width(cache_width);
+    form.height(cache_height);
 }

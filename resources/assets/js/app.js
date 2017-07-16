@@ -6,10 +6,10 @@
  */
 
 require('./bootstrap');
-require('formvalidation/dist/js/formValidation.min');
-require('formvalidation/dist/js/language/fa_IR');
-require('formvalidation/dist/js/language/en_US');
-require('formvalidation/dist/js/language/tr_TR');
+// require('formvalidation/dist/js/formValidation.min');
+// require('formvalidation/dist/js/language/fa_IR');
+// require('formvalidation/dist/js/language/en_US');
+// require('formvalidation/dist/js/language/tr_TR');
 
 
 /**

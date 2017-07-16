@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('styles')
-
 @endsection
 
 @section('header')
@@ -9,6 +8,7 @@
 @endsection
 
 @section('content')
+
     <div class="container-fluid dashboard-wrapper">
         <div class="row m-0">
             <h1 class="dash-title"><b>@lang('payment.invTitle')</b></h1>
@@ -18,17 +18,13 @@
                 <div class="row p-0 m-0">
                     {{-- Create a New Benificiary --}}
                     <div class="col-xs-12 p-0">
-
-
                         @if($errors->any())
                             @foreach ($errors->all() as $error)
                                 <h2 class="alert alert-danger">{{ $error }}</h2>
                             @endforeach
                         @else
                             <h2 class="alert alert-success">@lang('payment.invSubtitle')</h2>
-                            {{--<h2 class="dash-subtitle">@lang('payment.invSubtitle')</h2>--}}
                         @endif
-
                         <div class="invoice-wrapper mb-4" id="pdfWrapper">
                             <h3 class="invoice-title">@lang('payment.invUser', ['user' => Auth::user()->firstname])
                                 <span class="invoice-date">@lang('payment.invDate', ['dateEn' => $transaction->payment_date->format('d M Y, H:i:s'), 'dateFa' => jdate($transaction->payment_date)->format('%Y %B %d, H:i:s')])</span>
@@ -164,8 +160,5 @@
         // Countdown Rates Exiration Time
         var finish = {{ $finish_time }};
         countdown(finish);
-
-        $(document).ready(function () {
-        });
     </script>
 @endsection
