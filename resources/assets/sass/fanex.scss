@@ -411,19 +411,29 @@ opacity-30 {
                     color: $fanapDark;
                     font-weight: 500;
                 }
+                .orange {
+                    font-weight: 500;
+                    color: $fanapOrange;
+                }
+                .grey {
+                    color: $fanapGreyDark;
+                }
+                .acc-factor-sum {
+                    color: $fanapGreyDark;
+                }
             }
             hr {
                 margin: 7px 0;
             }
             .acc-factor-sum {
-                color: $fanapGreyDark !important;
+                color: $fanapGreyDark;
             }
             .orange {
                 font-weight: 500;
-                color: $fanapOrange !important;
+                color: $fanapOrange;
             }
             .grey {
-                color: $fanapGreyDark !important;
+                color: $fanapGreyDark;
             }
             p.table-header {
                 background-color: #fff;
