@@ -492,7 +492,7 @@ opacity-30 {
         width: 100%;
     }
     .indexWrapperInside {
-        height: calc(100vh - 160px);
+        height: calc(100vh - 170px);
         min-height: 600px;
         position: relative;
         @include mq($max-width: $breakePoint_xl) {
