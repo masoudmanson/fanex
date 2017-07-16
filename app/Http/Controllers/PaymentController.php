@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Backlog;
 use App\Beneficiary;
+use Carbon\Carbon;
 use Countries;
 use App\Http\Requests\BeneficiaryRequest;
 use App\Traits\PlatformTrait;
@@ -39,33 +40,19 @@ class PaymentController extends Controller
     {
         return view('test');
     }
-
-    public function test(Request $request)
+    public function test()
     {
-        $request->headers->set('authorization', 'Bearer ' . Auth::user()->api_token);
-        return $this->userInvoice($request);
+
+        $clientIpaddress = $_SERVER['REMOTE_ADDR'];
+        dd($clientIpaddress);
+// get ip address
+        if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)) {
+            // get ip address
+            $clientIpaddress = array_pop(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']));
+            // echo ip address
+            echo $clientIpaddress;
+        }
     }
-
-//    public function pay(Request $request)
-//    {
-//        //todo: check if it necessary to call createOrSelect route instead of these lines of code.
-//
-//        $user = Auth::user();
-//
-//        $beneficiaries = $user->beneficiary()->get();
-//        foreach ($beneficiaries as $beneficiary) {
-//            $beneficiary['hash'] = bcrypt($beneficiary);
-//        }
-//
-//        $request->query->add(['beneficiaries' => $beneficiaries]);
-//
-//        $countries = countries(session('applocale'));
-//
-//        $request->query->add(['countries' => $countries]);
-//
-//        return response()->view('dashboard.beneficiary', $request->query(), 200);
-//    }
-
 
     /**
      * @param Request $request
@@ -78,7 +65,7 @@ class PaymentController extends Controller
         $user_of_bfn = $beneficiary->user;
         if (Auth::user() == $user_of_bfn) {
             $user = Auth::user();
-            $transaction = $this->createNewTrans($beneficiary);
+            $transaction = $this->createOrGetTrans($beneficiary);
 
             $proforma_date = $transaction['created_at'];
 
@@ -106,7 +93,7 @@ class PaymentController extends Controller
 
     public function proforma_with_selected_bnf_profile(Request $request, Beneficiary $beneficiary)
     {
-        $transaction = $this->createNewTrans($beneficiary);
+        $transaction = $this->createOrGetTrans($beneficiary);
 
         $user_of_bfn = $beneficiary->user;
         if (Auth::user() == $user_of_bfn) {
@@ -142,7 +129,7 @@ class PaymentController extends Controller
         $user = Auth::user();
         $beneficiary = Beneficiary::create($request->all());
 
-        $transaction = $this->createNewTrans($beneficiary);
+        $transaction = $this->createOrGetTrans($beneficiary);
 
         $proforma_date = $transaction['created_at'];
         $countries = countries(session('applocale'));
@@ -199,7 +186,7 @@ class PaymentController extends Controller
                 'amount' => $transaction['premium_amount'] . ' ' . $transaction['currency'],
                 'finish_time' => $finish_time
             ]);
-            $diff = \Carbon\Carbon::now()->diffInSeconds($transaction->ttl);
+            $diff = Carbon::now()->diffInSeconds($transaction->ttl);
             setcookie('backlog', encrypt($log->id), time() + $diff, '/');
 
             return response()->view('dashboard.proforma', $request->query(), 200);
@@ -301,24 +288,28 @@ class PaymentController extends Controller
      * @param Beneficiary $beneficiary
      * @return Transaction
      */
-    public function createNewTrans(Beneficiary $beneficiary)
+    public function createOrGetTrans(Beneficiary $beneficiary)
     {
         $id = decrypt($_COOKIE['backlog']);
         $backlog = Backlog::findOrFail($id);
-        $transaction = new Transaction();
 
-        $transaction->user_id = Auth::user()->id;
-        $transaction->beneficiary_id = $beneficiary->id;
-        $transaction->backlog_id = $id;
-        $transaction->exchange_rate = $backlog->exchange_rate;
-        $transaction->premium_amount = $backlog->premium_amount;
-        $transaction->payment_amount = $backlog->payment_amount;
-        $transaction->currency = $backlog->currency;
-        $transaction->payment_type = $backlog->payment_type;
-        $transaction->ttl = $backlog->ttl;
-        $transaction->country = $backlog->country;
+        $transaction = Backlog::find($id)->transaction;
+        if(!$transaction) {
+            $transaction = new Transaction();
 
-        $transaction->save();
+            $transaction->user_id = Auth::user()->id;
+            $transaction->beneficiary_id = $beneficiary->id;
+            $transaction->backlog_id = $id;
+            $transaction->exchange_rate = $backlog->exchange_rate;
+            $transaction->premium_amount = $backlog->premium_amount;
+            $transaction->payment_amount = $backlog->payment_amount;
+            $transaction->currency = $backlog->currency;
+            $transaction->payment_type = $backlog->payment_type;
+            $transaction->ttl = $backlog->ttl;
+            $transaction->country = $backlog->country;
+
+            $transaction->save();
+        }
         return $transaction;
     }
 

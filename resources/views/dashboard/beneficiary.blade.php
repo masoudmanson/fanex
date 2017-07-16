@@ -19,7 +19,7 @@
                         <h2 class="dash-subtitle">@lang('payment.bnfSelect')</h2>
 
                         {{-- Select Beneficiary Box --}}
-                        <form action="{{ route('proforma_with_selected_bnf') }}" method="POST" id="select-bnf-form">
+                        <form action="{{ route('proforma_with_selected_bnf') }}" method="GET" id="select-bnf-form">
                             {{ csrf_field() }}
                             {{-- Existing Beneficiaries --}}
                             <div class="form-group bsWrapper mim">
