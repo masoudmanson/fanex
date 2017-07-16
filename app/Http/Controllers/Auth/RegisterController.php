@@ -6,6 +6,8 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -39,6 +41,22 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+
+    public function showRegistrationForm(Request $request)
+    {
+        $request->redirect_uri = $request->root() . '/profile/';
+
+        $id = adapterAssignment()->getId();
+
+        return Redirect::away(config('urls.sso') . 'oauth2/authorize/?client_id='
+            . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri.'&prompt=signup' );
+
+    }
+
+
+    /*
+    'cause we have no registration and login form, we no need to these lines for now.
+    */
     /**
      * Get a validator for an incoming registration request.
      *
