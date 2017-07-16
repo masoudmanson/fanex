@@ -122,21 +122,6 @@ $(document).ready(function () {
         }
     });
 
-    // var ttl = readCookie('ttl');
-    //
-    // if (!isNaN(ttl)) {
-    //     var tenMins = new Date().getTime() + ((ttl * 1000) - new Date().getTime());
-    //     // var tenMins = new Date().getTime() + (ttl * 1000);
-    //     $('#countdown').countdown(tenMins, function (event) {
-    //         $(this).html(event.strftime('%M:%S'));
-    //     }).on('finish.countdown', function () {
-    //         $('#countdown').html(timeOut).addClass('alert shake animated');
-    //     });
-    // }
-    // else {
-    //     $('#countdown').html(timeOut).addClass('alert shake animated');
-    // }
-
     $('a.accordion-toggle').click(function(e) {
         e.preventDefault();
     });

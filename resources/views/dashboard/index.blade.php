@@ -66,7 +66,7 @@
                                     <div class="bounce3"></div>
                                 </div>
                             </div>
-                            <div id="ajax-beneficiary-list">
+                            <div id="ajax-transaction-list">
                                 @include('partials.transaction-list-item', ['transactions' => $transactions])
                             </div>
                         </div>
@@ -132,7 +132,7 @@
                                 response = response.replace(pattern, "<mark>$1</mark>");
                                 response = response.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4");
                             }
-                            $('#ajax-beneficiary-list').html(response);
+                            $('#ajax-transaction-list').html(response);
                         });
                     }, 1500);
                 }

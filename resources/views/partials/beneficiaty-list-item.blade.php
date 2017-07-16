@@ -35,7 +35,7 @@
                     </a>
                 </div>
                 <a class="col-md-1 col-sm-1 col-xs-1 accordion-toggle" data-toggle="collapse"
-                   data-parent="#accordion" href="{{ "#row".$bnf->id }}">
+                   data-parent="#ajax-beneficiary-list" href="{{ "#row".$bnf->id }}">
                     <span class="acc-arrow"></span>
                 </a>
             </div>
