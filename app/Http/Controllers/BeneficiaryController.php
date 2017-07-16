@@ -156,8 +156,8 @@ class BeneficiaryController extends Controller
                     $query->where('beneficiaries.firstname', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.lastname', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.account_number', 'like', "%$keyword%")
-                        ->orWhere('beneficiaries.swift_code', 'like', "%$keyword%")
-                        ->orWhere('beneficiaries.iban_code', 'like', "%$keyword%")
+//                        ->orWhere('beneficiaries.swift_code', 'like', "%$keyword%")
+//                        ->orWhere('beneficiaries.iban_code', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.tel', 'like', "%$keyword%");
                 })->get();
         }

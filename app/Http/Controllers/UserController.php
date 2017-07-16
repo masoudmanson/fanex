@@ -159,4 +159,27 @@ class UserController extends Controller
     {
         //
     }
+
+
+    public function search(Request $request)
+    {
+        $keyword = $request->get('keyword');
+        $user = Auth::user();
+        if($keyword == '') {
+            $transactions = $user->transaction;
+        }
+        else {
+            $transactions = Transaction::join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
+            ->where('transactions.user_id', '=', $user->id)
+                ->where(function ($query) use ($keyword) {
+                    $query->where('transactions.uri', 'like', "%$keyword%")
+                        ->orWhere('transactions.premium_amount', 'like', "%$keyword%")
+                        ->orWhere('beneficiaries.firstname', 'like', "%$keyword%")
+                        ->orWhere('beneficiaries.lastname', 'like', "%$keyword%");
+                })->get();
+        }
+        if ($request->ajax())
+            return view('partials.transaction-list-item', compact('transactions'));
+    }
+
 }
