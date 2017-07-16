@@ -43,7 +43,6 @@
 <script src="{{ asset('js/jquery.sticky-kit.min.js') }}"></script>
 <script src="{{ asset('js/jquery.countdown.min.js') }}"></script>
 <script src="{{ asset('js/classie.js') }}"></script>
-<script src="{{ asset('js/ServerDate.js') }}"></script>
 <script type="text/javascript" src="//cdn.rawgit.com/MrRio/jsPDF/master/dist/jspdf.min.js"></script>
 <script type="text/javascript" src="//cdn.rawgit.com/niklasvh/html2canvas/0.5.0-alpha2/dist/html2canvas.min.js"></script>
 

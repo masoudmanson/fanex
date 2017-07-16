@@ -45,7 +45,7 @@
                     </div>
                     <a class="col-md-1 col-sm-1 col-xs-2 accordion-toggle"
                        data-toggle="collapse"
-                       data-parent="#accordion" href="#row{{ $transaction->id }}"
+                       data-parent="#ajax-transaction-list" href="#row{{ $transaction->id }}"
                        data-target="#row{{ $transaction->id }}">
                         <span class="acc-arrow"></span>
                     </a>

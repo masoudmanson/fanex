@@ -53,15 +53,4 @@ class LoginController extends Controller
         return Redirect::away(config('urls.sso') . 'oauth2/logout/?continue=' . $request->root());
     }
 
-    public function showRegistrationForm(Request $request)
-    {
-        $request->redirect_uri = $request->root() . '/profile/';
-
-        $id = adapterAssignment()->getId();
-
-        return Redirect::away(config('urls.sso') . 'oauth2/authorize/?client_id='
-            . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri.'&prompt=signup' );
-
-    }
-
 }
