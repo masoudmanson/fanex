@@ -7,6 +7,7 @@ body {
     font-family: 'Roboto', 'IRANSans', tahoma, sans-serif !important;
     background-color: $fanapGreyLight;
     direction: ltr;
+    //text-align: left;
 }
 
 input[type=number] {
@@ -354,7 +355,7 @@ opacity-30 {
                     background-color: $fanapGreyUltraLight;
                 }
                 div:first-child p {
-                    color: $fanapGrey !important;
+                    color: $fanapGrey;
                     margin: 0;
                 }
             }
@@ -2043,4 +2044,42 @@ mark, .mark {
     background-color: lighten($fanapOrange, 35%);
     font-weight: 400;
     color: #000;
+}
+
+#pdfWrapper {
+    text-align: left !important;
+    font-family: 'IRANSans', Tahoma !important;
+}
+
+.pdf {
+    text-align: left !important;
+    color: #000 !important;
+    font-family: 'IRANSans', Tahoma !important;
+    .invoice-print {
+        display: none;
+    }
+    hr,
+    .table-header {
+        border-color: #bbb !important;
+    }
+    .invoice-date,
+    .table-header,
+    .acc-info-left p,
+    .acc-factor-sum,
+    .grey,
+    .orange,
+    .green,
+    .fanex-text-rejected,
+    .fanex-text-canceled,
+    .fanex-text-successful,
+    .fanex-text-failed,
+    .proforma-wrapper h2,
+    .invoice-bnf,
+    .proforma-h2,
+    .proforma-p,
+    .proforma-p span,
+    #fanex-logo {
+        color: #000 !important;
+        font-family: 'IRANSans', Tahoma !important;
+    }
 }
