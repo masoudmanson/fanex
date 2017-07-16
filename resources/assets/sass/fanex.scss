@@ -164,11 +164,11 @@ opacity-30 {
 
 .navbar {
     z-index: 1000;
-    padding: 30px 100px;
+    padding: 20px 100px;
     margin: 0;
     @include border-radius(0);
     @include mq($max-width: $breakePoint_xxl) {
-        padding: 30px 50px;
+        padding: 15px 50px;
     }
     @include mq($max-width: $breakePoint_sm) {
         padding: 10px;
@@ -283,12 +283,12 @@ opacity-30 {
 
 .dashboard-wrapper {
     min-height: 95vh;
-    padding: 160px 100px 30px;
+    padding: 100px 100px 30px;
     @include mq($max-width: $breakePoint_xxl) {
-        padding: 130px 50px 30px;
+        padding: 100px 50px 30px;
     }
     @include mq($max-width: $breakePoint_sm) {
-        padding: 120px 30px 20px;
+        padding: 90px 30px 20px;
     }
     #bnf-ajax-div {
         min-height: 603px;
@@ -492,7 +492,7 @@ opacity-30 {
         width: 100%;
     }
     .indexWrapperInside {
-        height: calc(100vh - 210px);
+        height: calc(100vh - 160px);
         min-height: 600px;
         position: relative;
         @include mq($max-width: $breakePoint_xl) {
