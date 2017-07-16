@@ -2,7 +2,7 @@
 
 @section('styles')
     <script src="{{ asset('js/ammap.js') }}"></script>
-    <script src="{{ asset('js/worldHigh.js') }}"></script>
+    <script src="{{ asset('js/worldLow.js') }}"></script>
     <script src="{{ asset('js/black.js') }}"></script>
     <script src="{{ asset('js/export.min.js') }}"></script>
 @endsection
@@ -51,7 +51,7 @@
             "theme": "black",
             "projection": "miller",
             "dataProvider": {
-                "map": "worldHigh",
+                "map": "worldLow",
                 "zoomLevel": 1,
                 "areas": [{
                     "title": "@lang('index.iran')",
