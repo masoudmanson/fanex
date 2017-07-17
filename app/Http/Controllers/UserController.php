@@ -43,7 +43,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $transactions = $user->transaction;
+        $transactions = $user->transaction()->paginate(10);
 
         foreach ($transactions as $transaction) {
             if (empty($transaction->uri)) {
@@ -59,6 +59,13 @@ class UserController extends Controller
             else {
                 $reference = $this->trackingInvoiceByBillNumber($transaction->uri);
                 $invoice = json_decode($reference->getBody()->getContents());
+
+//                if($transaction->upt_ref) {
+//                    $res = $this->UptGetTransferList($transaction->upt_ref);
+//                    $status = $res->GetTransferListResult->GETTRANSFERLISTSTATUS->RESPONSE;
+//                    if($status == 'Success');
+//                }
+
                 if(isset($invoice->result[0])) {
                     if ($invoice->result[0]->canceled) {
                         $transaction->bank_status = 'canceled';
