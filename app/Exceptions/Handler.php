@@ -6,6 +6,8 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Session\TokenMismatchException;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 class Handler extends ExceptionHandler
 {
@@ -45,16 +47,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-//        if ($exception instanceof TokenMismatchException){
-//            // Catch it here and do what you want. For example...
-//            return redirect()->back()->withInput()->with('errors', 'Your session has expired');
-//        }
+        if (Session::has('applocale')) {
+            App::setLocale(Session::get('applocale'));
+        }
 
         if($this->isHttpException($exception)){
-            if (view()->exists('errors.'.$exception->getStatusCode()))
-            {
-                return response()->view('errors.'.$exception->getStatusCode(), array('exception' => $exception) , $exception->getStatusCode() );
-            }
+            return response()->view('errors.error', array('exception' => $exception) , $exception->getStatusCode());
         }
 
         return parent::render($request, $exception);

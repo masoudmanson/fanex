@@ -283,7 +283,7 @@ opacity-30 {
 }
 
 .dashboard-wrapper {
-    min-height: 95vh;
+    min-height: 85vh;
     padding: 100px 100px 30px;
     @include mq($max-width: $breakePoint_xxl) {
         padding: 100px 50px 30px;
@@ -470,6 +470,30 @@ opacity-30 {
                 }
             }
         }
+    }
+}
+
+.error-page {
+    padding-top: 30px;
+    .error-heading {
+        font-size: 72px;
+        font-weight: 600;
+        color: $fanapOrange;
+        text-align: center;
+    }
+    .error-content {
+        text-align: center;
+        color: $fanapDark;
+    }
+}
+
+.error-desc {
+    width: 90%;
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+    .error-play {
+        color: $fanapGreyDark;
     }
 }
 

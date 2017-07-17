@@ -42,6 +42,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+
+        dd(session('applocale'));
         $user = Auth::user();
         $transactions = $user->transaction;
 
