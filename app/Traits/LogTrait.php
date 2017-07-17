@@ -17,7 +17,7 @@ trait LogTrait
 
     public function mainFormBackLog(Backlog $log,$amount, Request $request, $upt_result, $euro_result)
     {
-        $log->ip = $request->ip();
+        $log->ip = $this->getClientIp();
         $log->currency = $request->currency;
         $log->payment_amount = $amount;
         $log->premium_amount = $request->amount; //todo: I think it has to be added to db
@@ -39,5 +39,14 @@ trait LogTrait
         }
         $log->save();
         return $log;
+    }
+
+    public function getClientIp()
+    {
+        $externalContent = file_get_contents('http://checkip.dyndns.com/');
+        preg_match('/Current IP Address: \[?([:.0-9a-fA-F]+)\]?/', $externalContent, $m);
+        $externalIp = $m[1];
+
+        return $externalIp;
     }
 }

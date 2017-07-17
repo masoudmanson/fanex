@@ -40,19 +40,6 @@ class PaymentController extends Controller
     {
         return view('test');
     }
-    public function test()
-    {
-
-        $clientIpaddress = $_SERVER['REMOTE_ADDR'];
-        dd($clientIpaddress);
-// get ip address
-        if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)) {
-            // get ip address
-            $clientIpaddress = array_pop(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']));
-            // echo ip address
-            echo $clientIpaddress;
-        }
-    }
 
     /**
      * @param Request $request
