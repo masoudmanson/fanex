@@ -49,11 +49,11 @@ Route::get('/send/{beneficiary}', 'UserController@sendMoney');
 //Route::get('/payment', 'PaymentController@pay')->name('payment'); //todo: load beneficiary page, go to beneficiary controller?
 
 Route::resource('/additional-info', 'UserInformationController');
-Route::get('/beneficiary/select', 'BeneficiaryController@createOrSelect')->name('createOrSelect');
+Route::any('/beneficiary/select', 'BeneficiaryController@createOrSelect')->name('createOrSelect');
 Route::post('/proforma', 'PaymentController@proforma_with_new_bnf')->name('proforma_with_new_bnf');
 Route::post('/proforma/selected/{beneficiary}', 'PaymentController@proforma_with_selected_bnf_profile')->name('proforma_with_selected_bnf_profile');
 Route::get('/proforma/transaction/{transaction}', 'PaymentController@proforma_with_selected_transaction')->name('proforma_with_transaction');
-Route::post('/proforma/selected', 'PaymentController@proforma_with_selected_bnf')->name('proforma_with_selected_bnf');
+Route::get('/proforma/selected', 'PaymentController@proforma_with_selected_bnf')->name('proforma_with_selected_bnf');
 
 
 Route::get('/get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'flat') {
@@ -68,3 +68,5 @@ Route::get('pdf/proforma/{id}', 'StaticsController@proformaPdf');
 
 Route::get('/search/beneficiary', 'BeneficiaryController@search');
 Route::get('/search/transaction', 'UserController@search');
+
+Route::get('/test' , 'PaymentController@test');

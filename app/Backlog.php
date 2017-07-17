@@ -21,7 +21,7 @@ class Backlog extends Model
 
     public function transaction()
     {
-        return $this->hasMany('App\Transaction');
+        return $this->hasOne('App\Transaction');
     }
 
 }
