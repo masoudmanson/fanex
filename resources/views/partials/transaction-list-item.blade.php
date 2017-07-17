@@ -120,6 +120,7 @@
             </div>
         </div>
     @endforeach
+    {{ $transactions->links() }}
 @else
     <h2 class="no-results">@lang('profile.noTrans')</h2>
 @endif

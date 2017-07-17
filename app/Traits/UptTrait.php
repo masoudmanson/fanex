@@ -183,8 +183,7 @@ trait UptTrait
 
         return $return;
     }
-
-
+    
     public function CorpCancelConfirm($upt_ref)
     {
         $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?WSDL';
@@ -205,6 +204,29 @@ trait UptTrait
         ));
 
         $return = $client->CorpCancelConfirm($body_params);
+
+        return $return;
+    }
+
+    public function UptGetTransferList($upt_ref)
+    {
+        $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?WSDL';
+        $client = new SoapClient($url, array("soap_version" => SOAP_1_1, "trace" => 1));
+
+        $user_param = array(
+            'Username' => "2818",
+            'Password' => "1"
+        );
+
+        $header = new SoapHeader('http://tempuri.org/', 'WsSystemUserInfo', $user_param, false);
+
+        $client->__setSoapHeaders($header);
+
+        $body_params = array('obj' => array(
+            'UPTREF' => $upt_ref,
+        ));
+
+        $return = $client->GetTransferList($body_params);
 
         return $return;
     }
