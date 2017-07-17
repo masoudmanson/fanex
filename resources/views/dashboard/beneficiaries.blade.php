@@ -85,16 +85,33 @@
 
         $(document).ready(function () {
             $('.filter-li').on('click', function () {
+                $('#mainFormLoader').fadeIn(200);
                 $('.filter-li').removeClass('active');
                 $(this).addClass('active');
                 var filter = $(this).attr('data-filter');
-                if (filter == 'all') {
-                    $('.filtered').slideDown(200);
-                }
-                else {
-                    $('.filtered').slideUp(200);
-                    $('.filtered.ctr-' + filter).slideDown(200);
-                }
+                    $.ajax({
+                        method: 'get',
+                        url: '/search/beneficiary/'+filter,
+                        data: {
+                            '_token': csrfToken,
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            console.log(thrownError);
+                        }
+                    }).done(function (response) {
+                        $('#mainFormLoader').fadeOut(200);
+//                        if(keyword.length >= 3) {
+//                            keyword = keyword.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*");
+//                            var pattern = new RegExp("(" + keyword + ")", "gi");
+//
+//                            response = response.replace(pattern, "<mark>$1</mark>");
+//                            response = response.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4");
+//                        }
+                        $('#ajax-beneficiary-list').html(response);
+                    });
+//                    $('.filtered').slideUp(200);
+//                    $('.filtered.ctr-' + filter).slideDown(200);
             });
 
             $('#beneficiary-search').keyup(function (e) {

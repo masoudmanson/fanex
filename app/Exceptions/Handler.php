@@ -52,18 +52,18 @@ class Handler extends ExceptionHandler
             App::setLocale(Session::get('applocale'));
         }
 
-        if ($exception instanceof \Symfony\Component\Debug\Exception\FatalErrorException) {
-            $status = 500;
-        } else {
-            $status = $exception->getStatusCode();
-        }
+//        if ($exception instanceof \Symfony\Component\Debug\Exception\FatalErrorException) {
+//            $status = 500;
+//        } else {
+//            $status = $exception->getStatusCode();
+//        }
 
 //        if($this->isHttpException($exception)){
-            return response()->view('errors.error', array('exception' => $exception, 'status' => $status) , $status);
+//            return response()->view('errors.error', array('exception' => $exception, 'status' => $status) , $status);
 //            return response()->view('errors.error', array('exception' => $exception) , $exception->getStatusCode());
 //        }
 
-//        return parent::render($request, $exception);
+        return parent::render($request, $exception);
     }
 
     /**

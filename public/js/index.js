@@ -111,7 +111,7 @@ $(document).ready(function () {
         }
         if ($(window).width() > 993) {
             $('#bnf-sidebar').stick_in_parent({
-                "offset_top": 25
+                "offset_top": 0
             });
             $('#profile-sidebar').stick_in_parent({
                 "offset_top": 75

@@ -18,6 +18,17 @@ class BeneficiaryController extends Controller
         $this->middleware('checkLog', ['only' => ['createOrSelect']]);
     }
 
+    public function filterCountires()
+    {
+        $beneficiaries = Auth::user()->beneficiary()->available()->get();
+        $filter_countries = array();
+        foreach ($beneficiaries as $beneficiary) {
+            if (!in_array($beneficiary->country, $filter_countries))
+                array_push($filter_countries, $beneficiary->country);
+        }
+        return $filter_countries;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,15 +37,9 @@ class BeneficiaryController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $beneficiaries = $user->beneficiary()->available()->get();
-
+        $beneficiaries = $user->beneficiary()->available()->paginate(5);
         $countries = countries(session('applocale'));
-
-        $filter_countries = array();
-        foreach ($beneficiaries as $beneficiary) {
-            if (!in_array($beneficiary->country, $filter_countries))
-                array_push($filter_countries, $beneficiary->country);
-        }
+        $filter_countries = $this->filterCountires();
 
         return view('dashboard.beneficiaries', compact('beneficiaries', 'countries', 'filter_countries'));
     }
@@ -148,7 +153,7 @@ class BeneficiaryController extends Controller
         $keyword = $request->get('keyword');
         $user = Auth::user();
         if($keyword == '') {
-            $beneficiaries = $user->beneficiary;
+            $beneficiaries = $user->beneficiary()->paginate(5);
         }
         else {
             $beneficiaries = Beneficiary::available()->where('beneficiaries.user_id', '=', $user->id)
@@ -156,14 +161,39 @@ class BeneficiaryController extends Controller
                     $query->where('beneficiaries.firstname', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.lastname', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.account_number', 'like', "%$keyword%")
-//                        ->orWhere('beneficiaries.swift_code', 'like', "%$keyword%")
-//                        ->orWhere('beneficiaries.iban_code', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.tel', 'like', "%$keyword%");
-                })->get();
+                })->paginate(5);
         }
         $countries = countries(session('applocale'));
 
         if ($request->ajax())
             return view('partials.beneficiaty-list-item', compact('beneficiaries', 'countries'));
+        else {
+            $filter_countries = $this->filterCountires();
+
+            return view('dashboard.beneficiaries', compact('beneficiaries', 'countries', 'filter_countries'));
+        }
+    }
+
+    public function searchCountry(Request $request, $country)
+    {
+        $keyword = $country;
+        $user = Auth::user();
+        if($keyword == 'all') {
+            $beneficiaries = $user->beneficiary()->paginate(5);
+        }
+        else {
+            $beneficiaries = Beneficiary::available()->where('beneficiaries.user_id', '=', $user->id)
+                ->where("beneficiaries.country", '=', $country)->paginate(5);
+        }
+        $countries = countries(session('applocale'));
+
+        if ($request->ajax())
+            return view('partials.beneficiaty-list-item', compact('beneficiaries', 'countries'));
+        else {
+            $filter_countries = $this->filterCountires();
+
+            return view('dashboard.beneficiaries', compact('beneficiaries', 'countries', 'filter_countries'));
+        }
     }
 }

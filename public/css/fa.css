@@ -17234,3 +17234,41 @@ mark, .mark {
   color: #000 !important;
   font-family: 'IRANSans', Tahoma !important;
 }
+
+.pagination li span, .pagination li a {
+  background-color: transparent;
+  border-color: transparent;
+  border-radius: 0 !important;
+  color: #333333;
+  transition: all 0.3s;
+}
+
+.pagination li span:hover, .pagination li a:hover {
+  border-color: transparent;
+  background-color: #e7e7e7;
+}
+
+.pagination .disabled span, .pagination .disabled a {
+  background-color: transparent;
+  border-color: transparent;
+  border-radius: 0 !important;
+  color: #BBBBBB;
+}
+
+.pagination .disabled:hover {
+  border-color: transparent;
+  background-color: #e7e7e7;
+}
+
+.pagination .active span, .pagination .active a {
+  background-color: #ccc;
+  color: #fff;
+  font-weight: 500;
+  border: solid 1px #ccc;
+}
+
+.pagination .active span:hover, .pagination .active a:hover {
+  color: #fff;
+  border-color: #b3b2b2;
+  background-color: #b3b2b2;
+}

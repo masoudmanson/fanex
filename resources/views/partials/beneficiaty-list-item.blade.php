@@ -155,3 +155,5 @@
         </div>
     </div>
 @endforeach
+
+{{ $beneficiaries->links() }}
