@@ -16,5 +16,5 @@
         "500Text"  =>  "İsteklerle ilgili bir şeyler ters gitti. Sorunu çözüyoruz. Lütfen sabırlı olun.",
 
         "playText"  =>  "↑ tuşuna basın ve oyuna başlayın",
-        "backText"  =>  "Veya Anasayfaya dönün",
+        "backText"  =>  "Anasayfaya dön",
     ];

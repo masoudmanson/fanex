@@ -16,5 +16,5 @@
         "500Text"  =>  "Something went wrong with requests. We are fixing the problem. Please be patient.",
 
         "playText"  =>  "Press ↑ and start to play",
-        "backText"  =>  "or Go back to Home page",
+        "backText"  =>  "or Go Home",
     ];
