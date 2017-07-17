@@ -8,6 +8,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Session\TokenMismatchException;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use Psy\Exception\FatalErrorException;
 
 class Handler extends ExceptionHandler
 {
@@ -51,11 +52,18 @@ class Handler extends ExceptionHandler
             App::setLocale(Session::get('applocale'));
         }
 
-        if($this->isHttpException($exception)){
-            return response()->view('errors.error', array('exception' => $exception) , $exception->getStatusCode());
+        if ($exception instanceof \Symfony\Component\Debug\Exception\FatalErrorException) {
+            $status = 500;
+        } else {
+            $status = $exception->getStatusCode();
         }
 
-        return parent::render($request, $exception);
+//        if($this->isHttpException($exception)){
+            return response()->view('errors.error', array('exception' => $exception, 'status' => $status) , $status);
+//            return response()->view('errors.error', array('exception' => $exception) , $exception->getStatusCode());
+//        }
+
+//        return parent::render($request, $exception);
     }
 
     /**

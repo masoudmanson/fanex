@@ -11,18 +11,18 @@
 @section('content')
     <div class="container-fluid dashboard-wrapper">
         <div class="error-page">
-            <h2 class="error-heading">{{ $exception->getStatusCode() }}</h2>
+            <h2 class="error-heading">{{ $status }}</h2>
             <div class="error-content">
                 <h3><i class="fa fa-warning text-yellow"></i>
-                    @if(Lang::has('errors.'.$exception->getStatusCode().'Title'))
-                        @lang('errors.'.$exception->getStatusCode().'Title')
+                    @if(Lang::has('errors.'.$status.'Title'))
+                        @lang('errors.'.$status.'Title')
                     @else
                         @lang('errors.errorTitle')
                     @endif
                 </h3>
                 <p>
-                    @if(Lang::has('errors.'.$exception->getStatusCode().'Text'))
-                        @lang('errors.'.$exception->getStatusCode().'Text')
+                    @if(Lang::has('errors.'.$status.'Text'))
+                        @lang('errors.'.$status.'Text')
                     @else
                         @lang('errors.errorText')
                     @endif
