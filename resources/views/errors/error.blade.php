@@ -66,4 +66,9 @@
 
 @section('scripts')
     <script src="{{ asset('js/t-rex.js') }}"></script>
+    <script>
+        document.addEventListener("keydown", function(event) {
+            console.log(event.which);
+        });
+    </script>
 @endsection
