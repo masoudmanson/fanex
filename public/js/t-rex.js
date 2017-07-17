@@ -307,7 +307,8 @@
          * Load and decode base 64 encoded sounds.
          */
         loadSounds: function () {
-            if (!IS_IOS) {
+            // if (!IS_IOS) {
+            if (0) {
                 this.audioContext = new AudioContext();
 
                 var resourceTemplate =

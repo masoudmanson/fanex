@@ -15945,6 +15945,12 @@ a.btn {
   line-height: 46px;
 }
 
+@media only screen and (max-width: 520px) {
+  a.btn {
+    line-height: 34px;
+  }
+}
+
 a.btnMini {
   line-height: 16px;
 }
