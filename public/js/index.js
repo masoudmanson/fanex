@@ -289,7 +289,6 @@ function getCanvas() {
     return html2canvas(form, {
         onrendered: function(canvas) {
             theCanvas = canvas;
-            document.body.appendChild(canvas);
             form.removeClass('pdf');
         },
         imageTimeout: 2000,
