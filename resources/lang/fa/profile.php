@@ -34,6 +34,7 @@ return [
     'newTransShort' => 'جدید',
     'searchHolder' => 'جستجو در تراکنش ها',
     'noTrans' => 'تراکنشی برای نمایش وجود ندارد.',
+    'noBnfs' => 'گیرنده ای برای نمایش وجود ندارد.',
 
     'titleTransfer' => 'منتقل شده به ',
     'titleIsTransferring' => 'انتقال به',

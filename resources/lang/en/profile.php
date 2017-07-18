@@ -24,6 +24,7 @@ return [
     'newTransShort' => 'New',
     'searchHolder' => 'Search in Transactions',
     'noTrans' => 'There are no Transactions to show.',
+    'noBnfs' => 'There are no Beneficiaries to show.',
 
     'titleTransfer' => 'Transferred to',
     'titleIsTransferring' => 'Transferring to',

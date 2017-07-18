@@ -25,16 +25,8 @@ class UserController extends Controller
         $this->middleware('checkUser');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+    public function payable($transactions)
     {
-        $user = Auth::user();
-        $transactions = $user->transaction()->paginate(10);
 
         foreach ($transactions as $transaction) {
             if (empty($transaction->uri)) {
@@ -70,6 +62,22 @@ class UserController extends Controller
                 }
             }
         }
+
+        return $transactions;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $user = Auth::user();
+        $transactions = $user->transaction()->paginate(10);
+
+        $transactions = $this->payable($transactions);
 
         if ($request->ajax())
             return response()->json(view('partials.transaction-list-item', compact('transactions'))->render());
@@ -166,6 +174,7 @@ class UserController extends Controller
         $user = Auth::user();
         if($keyword == '') {
             $transactions = $user->transaction()->paginate(10);
+            $transactions = $this->payable($transactions);
         }
         else {
             $transactions = Transaction::select("transactions.*", "beneficiaries.firstname", "beneficiaries.lastname")
@@ -176,7 +185,9 @@ class UserController extends Controller
                         ->orWhere('transactions.premium_amount', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.firstname', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.lastname', 'like', "%$keyword%");
-                })->paginate(10);
+                })->orderby("transactions.id", "desc")->paginate(10);
+
+            $transactions = $this->payable($transactions);
         }
         if ($request->ajax())
             return response()->json(view('partials.transaction-list-item', compact('transactions'))->render());
@@ -192,12 +203,14 @@ class UserController extends Controller
     {
         $user = Auth::user();
         if($status == 'all') {
-            $transactions = $user->transaction()->paginate(10);
+            $transactions = $user->transaction()->orderby("transactions.id", "desc")->paginate(10);
+            $transactions = $this->payable($transactions);
         }
         else {
             $transactions = Transaction::join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
                 ->where('transactions.user_id', '=', $user->id)
-                ->where('transactions.upt_status', '=', $status)->paginate(10);
+                ->where('transactions.upt_status', '=', $status)->orderby("transactions.id", "desc")->paginate(10);
+            $transactions = $this->payable($transactions);
         }
         if ($request->ajax())
             return response()->json(view('partials.transaction-list-item', compact('transactions'))->render());

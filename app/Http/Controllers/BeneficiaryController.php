@@ -155,7 +155,7 @@ class BeneficiaryController extends Controller
     {
         $user = Auth::user();
         if($keyword == '') {
-            $beneficiaries = $user->beneficiary()->paginate(10);
+            $beneficiaries = $user->beneficiary()->orderby("beneficiaries.id", "desc")->paginate(10);
         }
         else {
             $beneficiaries = Beneficiary::available()->where('beneficiaries.user_id', '=', $user->id)
@@ -164,7 +164,7 @@ class BeneficiaryController extends Controller
                         ->orWhere('beneficiaries.lastname', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.account_number', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.tel', 'like', "%$keyword%");
-                })->paginate(10);
+                })->orderby("beneficiaries.id", "desc")->paginate(10);
         }
         $countries = countries(session('applocale'));
 
@@ -187,7 +187,7 @@ class BeneficiaryController extends Controller
         }
         else {
             $beneficiaries = Beneficiary::available()->where('beneficiaries.user_id', '=', $user->id)
-                ->where("beneficiaries.country", '=', $country)->paginate(10);
+                ->where("beneficiaries.country", '=', $country)->orderby("beneficiaries.id", "desc")->paginate(10);
         }
         $countries = countries(session('applocale'));
 
