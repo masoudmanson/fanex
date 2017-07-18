@@ -155,7 +155,7 @@ class BeneficiaryController extends Controller
     {
         $user = Auth::user();
         if($keyword == '') {
-            $beneficiaries = $user->beneficiary()->orderby("beneficiaries.id", "desc")->paginate(10);
+            $beneficiaries = $user->beneficiary()->available()->orderby("beneficiaries.id", "desc")->paginate(10);
         }
         else {
             $beneficiaries = Beneficiary::available()->where('beneficiaries.user_id', '=', $user->id)
@@ -183,7 +183,7 @@ class BeneficiaryController extends Controller
         $keyword = $country;
         $user = Auth::user();
         if($keyword == 'all') {
-            $beneficiaries = $user->beneficiary()->paginate(10);
+            $beneficiaries = $user->beneficiary()->available()->paginate(10);
         }
         else {
             $beneficiaries = Beneficiary::available()->where('beneficiaries.user_id', '=', $user->id)
