@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\CustomException;
+use Exception;
 use App\Backlog;
 use App\Beneficiary;
 use Carbon\Carbon;
@@ -73,9 +75,9 @@ class PaymentController extends Controller
 
             return Hash::check($beneficiary, $request->hash)
                 ? response()->view('dashboard.proforma', $request->query(), 200)
-                : redirect()->back()->withErrors(['msg', 'The Message']);
+                : abort('402');
         }
-        return redirect()->back()->withErrors(['msg', "You haven't access to pay this transaction"]);
+        return abort('401');
     }
 
     public function proforma_with_selected_bnf_profile(Request $request, Beneficiary $beneficiary)
@@ -103,7 +105,7 @@ class PaymentController extends Controller
 
             return response()->view('dashboard.proforma', $request->query(), 200);
         }
-        return redirect()->back()->withErrors(['msg', "You haven't access to pay this transaction"]);
+        return abort('401');
     }
 
     /**
@@ -135,7 +137,8 @@ class PaymentController extends Controller
 
         return $beneficiary->id
             ? response()->view('dashboard.proforma', $request->query(), 200)
-            : redirect()->back()->withErrors(['msg', 'The Message']);
+//            : redirect()->back()->withErrors(['msg', 'The Message']);
+            : abort('402');
     }
 
     public function proforma_with_selected_transaction(Request $request, Transaction $transaction)
@@ -178,7 +181,8 @@ class PaymentController extends Controller
 
             return response()->view('dashboard.proforma', $request->query(), 200);
         }
-        return redirect()->back()->withErrors(['msg', "You haven't access to pay this transaction"]); // todo : make a lang
+        return abort('401');
+//        throw new CustomException();
     }
 
     public function issueInvoice(Request $request)
@@ -199,7 +203,7 @@ class PaymentController extends Controller
                 . $invoice->result->id . "&redirectUri=" . $request->root() . "/invoice/show?billNumber=" . $transaction->uri);
         }
         else
-            dd($invoice);  //todo: error handling
+            return abort('402');
     }
 
     public function showInvoice(Request $request)
@@ -265,11 +269,6 @@ class PaymentController extends Controller
         }
         $error = __('payment.transFailed');
         return view('dashboard.invoice', compact('error', 'finish_time'));
-    }
-
-    public function updatePaymentCondition(Request $request)
-    {
-
     }
 
     /**
