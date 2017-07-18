@@ -21,16 +21,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkToken'
-//            [
-//                'only' =>
-//                    [
-//                        'show',
-//                        'index'
-//                    ]
-//            ]
-        );
-
+        $this->middleware('checkToken');
         $this->middleware('checkUser');
     }
 
@@ -43,7 +34,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $transactions = $user->transaction;
+        $transactions = $user->transaction()->paginate(10);
 
         foreach ($transactions as $transaction) {
             if (empty($transaction->uri)) {
@@ -59,6 +50,13 @@ class UserController extends Controller
             else {
                 $reference = $this->trackingInvoiceByBillNumber($transaction->uri);
                 $invoice = json_decode($reference->getBody()->getContents());
+
+//                if($transaction->upt_ref) {
+//                    $res = $this->UptGetTransferList($transaction->upt_ref);
+//                    $status = $res->GetTransferListResult->GETTRANSFERLISTSTATUS->RESPONSE;
+//                    if($status == 'Success');
+//                }
+
                 if(isset($invoice->result[0])) {
                     if ($invoice->result[0]->canceled) {
                         $transaction->bank_status = 'canceled';
@@ -72,8 +70,9 @@ class UserController extends Controller
                 }
             }
         }
+
         if ($request->ajax())
-            return response()->json(view('dashboard.index', compact('user', 'transactions'))->render());
+            return response()->json(view('partials.transaction-list-item', compact('transactions'))->render());
 
         return view('dashboard.index', compact('user', 'transactions'));
     }
@@ -162,25 +161,49 @@ class UserController extends Controller
     }
 
 
-    public function search(Request $request)
+    public function search(Request $request, $keyword)
     {
-        $keyword = $request->get('keyword');
         $user = Auth::user();
         if($keyword == '') {
-            $transactions = $user->transaction;
+            $transactions = $user->transaction()->paginate(10);
         }
         else {
-            $transactions = Transaction::join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
+            $transactions = Transaction::select("transactions.*", "beneficiaries.firstname", "beneficiaries.lastname")
+            ->join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
             ->where('transactions.user_id', '=', $user->id)
                 ->where(function ($query) use ($keyword) {
                     $query->where('transactions.uri', 'like', "%$keyword%")
                         ->orWhere('transactions.premium_amount', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.firstname', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.lastname', 'like', "%$keyword%");
-                })->get();
+                })->paginate(10);
         }
         if ($request->ajax())
-            return view('partials.transaction-list-item', compact('transactions'));
+            return response()->json(view('partials.transaction-list-item', compact('transactions'))->render());
+        else {
+            $user = Auth::user();
+            return view('dashboard.index', compact('user', 'transactions'));
+        }
     }
 
+
+
+    public function searchStatus(Request $request, $status)
+    {
+        $user = Auth::user();
+        if($status == 'all') {
+            $transactions = $user->transaction()->paginate(10);
+        }
+        else {
+            $transactions = Transaction::join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
+                ->where('transactions.user_id', '=', $user->id)
+                ->where('transactions.upt_status', '=', $status)->paginate(10);
+        }
+        if ($request->ajax())
+            return response()->json(view('partials.transaction-list-item', compact('transactions'))->render());
+        else {
+            $user = Auth::user();
+            return view('dashboard.index', compact('user', 'transactions'));
+        }
+    }
 }

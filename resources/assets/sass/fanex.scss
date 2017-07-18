@@ -2078,7 +2078,7 @@ perspective effects (not including the modals and the overlay).
 }
 
 mark, .mark {
-    background-color: lighten($fanapOrange, 35%);
+    background-color: lighten($fanapBourdux, 35%);
     font-weight: 400;
     color: #000;
 }
@@ -2118,5 +2118,46 @@ mark, .mark {
     #fanex-logo {
         color: #000 !important;
         font-family: 'IRANSans', Tahoma !important;
+    }
+}
+
+.pagination {
+    li {
+        span, a {
+            background-color: transparent;
+            border-color: transparent;
+            @include border-radius(0 !important);
+            color: $fanapDark;
+            @include transition(all .3s);
+            &:hover {
+                border-color: transparent;
+                background-color: darken($fanapGreyLight, 5%);
+            }
+        }
+    }
+    .disabled {
+        span, a {
+            background-color: transparent;
+            border-color: transparent;
+            @include border-radius(0 !important);
+            color: $fanapGreyDark;
+        }
+        &:hover {
+            border-color: transparent;
+            background-color: darken($fanapGreyLight, 5%);
+        }
+    }
+    .active {
+        span, a {
+            background-color: #ccc;
+            color: #fff;
+            font-weight: 500;
+            border: solid 1px #ccc;
+            &:hover {
+                color: #fff;
+                border-color: darken(#ccc, 10%);
+                background-color: darken(#ccc, 10%);
+            }
+        }
     }
 }

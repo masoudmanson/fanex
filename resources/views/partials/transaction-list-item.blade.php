@@ -43,15 +43,15 @@
                             <i class="icon-reciept"></i>
                         </span>
                     </div>
-                    <a class="col-md-1 col-sm-1 col-xs-2 accordion-toggle"
-                       data-toggle="collapse"
-                       data-parent="#ajax-transaction-list" href="#row{{ $transaction->id }}"
-                       data-target="#row{{ $transaction->id }}">
+
+                    <a class="col-md-1 col-sm-1 col-xs-1 accordion-toggle" data-toggle="collapse"
+                       data-parent="#ajax-transaction-list" href="{{ "#row".$transaction->id }}">
                         <span class="acc-arrow"></span>
                     </a>
                 </div>
             </div>
-            <div id="row{{ $transaction->id }}" class="panel-collapse collapse">
+
+            <div id="{{ "row".$transaction->id }}" class="panel-collapse collapse">
                 <div class="panel-body">
                     <div class="row m-0 p-0">
                         <div class="col-sm-12 col-md-7">
@@ -120,6 +120,7 @@
             </div>
         </div>
     @endforeach
+    {{ $transactions->links() }}
 @else
     <h2 class="no-results">@lang('profile.noTrans')</h2>
 @endif

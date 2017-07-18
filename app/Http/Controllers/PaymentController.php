@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\CustomException;
+use Exception;
 use App\Backlog;
 use App\Beneficiary;
 use Carbon\Carbon;
@@ -73,9 +75,9 @@ class PaymentController extends Controller
 
             return Hash::check($beneficiary, $request->hash)
                 ? response()->view('dashboard.proforma', $request->query(), 200)
-                : redirect()->back()->withErrors(['msg', 'The Message']);
+                : abort('402');
         }
-        return redirect()->back()->withErrors(['msg', "You haven't access to pay this transaction"]);
+        return abort('401');
     }
 
     public function proforma_with_selected_bnf_profile(Request $request, Beneficiary $beneficiary)
@@ -103,7 +105,7 @@ class PaymentController extends Controller
 
             return response()->view('dashboard.proforma', $request->query(), 200);
         }
-        return redirect()->back()->withErrors(['msg', "You haven't access to pay this transaction"]);
+        return abort('401');
     }
 
     /**
@@ -135,7 +137,8 @@ class PaymentController extends Controller
 
         return $beneficiary->id
             ? response()->view('dashboard.proforma', $request->query(), 200)
-            : redirect()->back()->withErrors(['msg', 'The Message']);
+//            : redirect()->back()->withErrors(['msg', 'The Message']);
+            : abort('402');
     }
 
     public function proforma_with_selected_transaction(Request $request, Transaction $transaction)
@@ -178,7 +181,8 @@ class PaymentController extends Controller
 
             return response()->view('dashboard.proforma', $request->query(), 200);
         }
-        return redirect()->back()->withErrors(['msg', "You haven't access to pay this transaction"]); // todo : make a lang
+        return abort('401');
+//        throw new CustomException();
     }
 
     public function issueInvoice(Request $request)
@@ -199,7 +203,7 @@ class PaymentController extends Controller
                 . $invoice->result->id . "&redirectUri=" . $request->root() . "/invoice/show?billNumber=" . $transaction->uri);
         }
         else
-            dd($invoice);  //todo: error handling
+            return abort('402');
     }
 
     public function showInvoice(Request $request)
@@ -229,6 +233,7 @@ class PaymentController extends Controller
 
                 if ($upt_res->CorpSendRequestResult->TransferRequestStatus->RESPONSE == 'Success') {
                     $transaction->fanex_status = 'accepted';
+                    $transaction->upt_ref = $upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT;
 
                     $result = $this->CorpSendRequestConfirm($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT);
 
@@ -266,11 +271,6 @@ class PaymentController extends Controller
         return view('dashboard.invoice', compact('error', 'finish_time'));
     }
 
-    public function updatePaymentCondition(Request $request)
-    {
-
-    }
-
     /**
      * @param Beneficiary $beneficiary
      * @return Transaction
@@ -298,71 +298,5 @@ class PaymentController extends Controller
             $transaction->save();
         }
         return $transaction;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
