@@ -79,8 +79,9 @@ class UserController extends Controller
                 }
             }
         }
+
         if ($request->ajax())
-            return response()->json(view('dashboard.index', compact('user', 'transactions'))->render());
+            return response()->json(view('partials.transaction-list-item', compact('transactions'))->render());
 
         return view('dashboard.index', compact('user', 'transactions'));
     }
@@ -169,25 +170,49 @@ class UserController extends Controller
     }
 
 
-    public function search(Request $request)
+    public function search(Request $request, $keyword)
     {
-        $keyword = $request->get('keyword');
         $user = Auth::user();
         if($keyword == '') {
-            $transactions = $user->transaction;
+            $transactions = $user->transaction()->paginate(10);
         }
         else {
-            $transactions = Transaction::join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
+            $transactions = Transaction::select("transactions.*", "beneficiaries.firstname", "beneficiaries.lastname")
+            ->join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
             ->where('transactions.user_id', '=', $user->id)
                 ->where(function ($query) use ($keyword) {
                     $query->where('transactions.uri', 'like', "%$keyword%")
                         ->orWhere('transactions.premium_amount', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.firstname', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.lastname', 'like', "%$keyword%");
-                })->get();
+                })->paginate(10);
         }
         if ($request->ajax())
-            return view('partials.transaction-list-item', compact('transactions'));
+            return response()->json(view('partials.transaction-list-item', compact('transactions'))->render());
+        else {
+            $user = Auth::user();
+            return view('dashboard.index', compact('user', 'transactions'));
+        }
     }
 
+
+
+    public function searchStatus(Request $request, $status)
+    {
+        $user = Auth::user();
+        if($status == 'all') {
+            $transactions = $user->transaction()->paginate(10);
+        }
+        else {
+            $transactions = Transaction::join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
+                ->where('transactions.user_id', '=', $user->id)
+                ->where('transactions.upt_status', '=', $status)->paginate(10);
+        }
+        if ($request->ajax())
+            return response()->json(view('partials.transaction-list-item', compact('transactions'))->render());
+        else {
+            $user = Auth::user();
+            return view('dashboard.index', compact('user', 'transactions'));
+        }
+    }
 }

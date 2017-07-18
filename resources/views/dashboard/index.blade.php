@@ -87,51 +87,108 @@
         var timer;
         var x;
 
+        $(window).on('hashchange', function () {
+            if (window.location.hash) {
+                var page = window.location.hash.replace('#', '');
+                if (page == Number.NaN || page <= 0) {
+                    return false;
+                } else {
+                    getBeneficiaries(page);
+                }
+            }
+        });
+
+        function getBeneficiaries(url) {
+            var keyword = $('#transaction-search').val();
+
+            $('#mainFormLoader').fadeIn(200);
+            $.ajax({
+                url: url,
+                dataType: 'json',
+            }).done(function (data) {
+                $('#mainFormLoader').fadeOut(200);
+                if(keyword.length > 0) {
+                    keyword = keyword.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*");
+                    var pattern = new RegExp("([^\/])(" + keyword + ")([^\?])", "gi");
+                    data = data.replace(pattern, "$1<mark>$2</mark>$3");
+                    data = data.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4");
+                }
+                $('#ajax-transaction-list').html(data);
+            }).fail(function () {
+                console.log('Posts could not be loaded.');
+            });
+        }
+
         $(document).ready(function () {
+            $(document).on('click', '.pagination a', function (e) {
+                e.preventDefault();
+                getBeneficiaries($(this).attr('href'));
+            });
+
             $('.filter-li').on('click', function () {
+                $('#transaction-search').val('');
+                $('#mainFormLoader').fadeIn(200);
                 $('.filter-li').removeClass('active');
                 $(this).addClass('active');
                 var filter = $(this).attr('data-filter');
-                if (filter == 'all') {
-                    $('.filtered').slideDown(200);
-                }
-                else {
-                    $('.filtered').slideUp(200);
-                    $('.filtered.' + filter).slideDown(200);
-                }
+                $.ajax({
+                    method: 'get',
+                    url: '/search/transaction/status/' + filter,
+                    data: {
+                        '_token': csrfToken,
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log(thrownError);
+                    }
+                }).done(function (response) {
+                    $('#mainFormLoader').fadeOut(200);
+                    $('#ajax-transaction-list').html(response);
+                });
             });
-
 
             $('#transaction-search').keyup(function (e) {
                 if (x) {
                     x.abort()
                 }
                 var keyword = $(this).val();
-                if (keyword.length == 0 || keyword.length >= 2) {
+                if(keyword.length == 0) {
+                    $('#mainFormLoader').fadeIn(200);
+                    x = $.ajax({
+                        method: 'get',
+                        url: '/profile',
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            console.log(thrownError);
+                        }
+                    }).done(function (response) {
+                        $('#mainFormLoader').fadeOut(200);
+                        $('#ajax-transaction-list').html(response);
+                    });
+                }
+                else if (keyword.length >= 2) {
                     $('#mainFormLoader').fadeIn(200);
                     clearTimeout(timer);
+
                     timer = setTimeout(function () {
                         console.log('Searching for: "'+keyword+'"');
                         x = $.ajax({
                             method: 'get',
-                            url: '/search/transaction',
+                            url: '/search/transaction/' + keyword,
                             data: {
                                 '_token': csrfToken,
-                                'X-CSRF-TOKEN': csrfToken,
-                                "keyword": keyword,
+                                'X-CSRF-TOKEN': csrfToken
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
                                 console.log(thrownError);
                             }
                         }).done(function (response) {
                             $('#mainFormLoader').fadeOut(200);
-                            if(keyword.length >= 2) {
-                                keyword = keyword.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*");
-                                var pattern = new RegExp("(" + keyword + ")", "gi");
 
-                                response = response.replace(pattern, "<mark>$1</mark>");
-                                response = response.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4");
-                            }
+                            keyword = keyword.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*");
+                            var pattern = new RegExp("([^\/])(" + keyword + ")([^\?])", "gi");
+                            response = response.replace(pattern, "$1<mark>$2</mark>$3");
+                            response = response.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4");
+
                             $('#ajax-transaction-list').html(response);
                         });
                     }, 1500);

@@ -34,12 +34,15 @@ class BeneficiaryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
         $beneficiaries = $user->beneficiary()->available()->paginate(5);
         $countries = countries(session('applocale'));
         $filter_countries = $this->filterCountires();
+
+        if ($request->ajax())
+            return response()->json(view('partials.beneficiaty-list-item', compact('beneficiaries', 'countries'))->render());
 
         return view('dashboard.beneficiaries', compact('beneficiaries', 'countries', 'filter_countries'));
     }
@@ -148,12 +151,11 @@ class BeneficiaryController extends Controller
         return redirect()->action('BeneficiaryController@index');
     }
 
-    public function search(Request $request)
+    public function search(Request $request, $keyword)
     {
-        $keyword = $request->get('keyword');
         $user = Auth::user();
         if($keyword == '') {
-            $beneficiaries = $user->beneficiary()->paginate(5);
+            $beneficiaries = $user->beneficiary()->paginate(10);
         }
         else {
             $beneficiaries = Beneficiary::available()->where('beneficiaries.user_id', '=', $user->id)
@@ -162,15 +164,16 @@ class BeneficiaryController extends Controller
                         ->orWhere('beneficiaries.lastname', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.account_number', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.tel', 'like', "%$keyword%");
-                })->paginate(5);
+                })->paginate(10);
         }
         $countries = countries(session('applocale'));
 
+
         if ($request->ajax())
-            return view('partials.beneficiaty-list-item', compact('beneficiaries', 'countries'));
+            return response()->json(view('partials.beneficiaty-list-item', compact('beneficiaries', 'countries'))->render());
+
         else {
             $filter_countries = $this->filterCountires();
-
             return view('dashboard.beneficiaries', compact('beneficiaries', 'countries', 'filter_countries'));
         }
     }
@@ -180,16 +183,17 @@ class BeneficiaryController extends Controller
         $keyword = $country;
         $user = Auth::user();
         if($keyword == 'all') {
-            $beneficiaries = $user->beneficiary()->paginate(5);
+            $beneficiaries = $user->beneficiary()->paginate(10);
         }
         else {
             $beneficiaries = Beneficiary::available()->where('beneficiaries.user_id', '=', $user->id)
-                ->where("beneficiaries.country", '=', $country)->paginate(5);
+                ->where("beneficiaries.country", '=', $country)->paginate(10);
         }
         $countries = countries(session('applocale'));
 
         if ($request->ajax())
-            return view('partials.beneficiaty-list-item', compact('beneficiaries', 'countries'));
+            return response()->json(view('partials.beneficiaty-list-item', compact('beneficiaries', 'countries'))->render());
+
         else {
             $filter_countries = $this->filterCountires();
 
