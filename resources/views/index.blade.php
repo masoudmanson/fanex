@@ -60,10 +60,6 @@
                     "title": "@lang('index.turkey')",
                     "id": "TR",
                     "showAsSelected": true
-                }, {
-                    "title": "@lang('index.usa')",
-                    "id": "US",
-                    "showAsSelected": true
                 }],
             },
             "balloon": {
