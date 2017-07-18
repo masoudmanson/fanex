@@ -28,6 +28,7 @@ return [
     'newTransShort' => 'Yeni',
     'searchHolder' => 'İşlemlerde Ara',
     'noTrans' => 'Gösterilecek hiçbir İşlem yok.',
+    'noBnfs' => 'Gösterilecek hiçbir Faydalanıcı yok.',
 
     'titleTransfer' => 'Transfer edildi',
     'titleIsTransferring' => 'Şuraya Aktarılıyor',
