@@ -51,7 +51,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#exAmount').blur(function() {
+    $('#exAmount').keyup(function() {
         var currency = $('#exCurrency').val();
         if(currency === "EUR" || currency === "USD")
             $('#exAmount').val(accounting.formatMoney($('#exAmount').val(), "", 2));
