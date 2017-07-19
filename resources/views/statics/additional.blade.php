@@ -36,8 +36,25 @@
 
                     <form action="/additional-info" method="post">
                         {{ csrf_field() }}
-                        {{--<input id="token" type="hidden" value="{{$encrypted_token}}">--}}
+
                         <input type="hidden" name="state" value="{{$state}}" id="state" style="display: none">
+
+                        {{-- Select Authorizer --}}
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label for="authorizer" class="fanexLabel">@lang('index.formAuthorizer') :</label>
+                                <div class="form-group bsWrapper">
+                                    <i class="icon-coin bsIcon"></i>
+                                    <select class="form-control fanexInput selectpicker" data-style="fanexInput"
+                                            name="authorizer"
+                                            id="authorizer">
+                                        <option value="" selected="selected" disabled="disabled">@lang('index.formAuthorizer')</option>
+                                        <option value="fanap">@lang('index.fanapium')</option>
+                                        <option value="dotin">@lang('index.dotin')</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
                         {{-- Nickname --}}
                         <div class="row">

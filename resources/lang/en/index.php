@@ -53,4 +53,7 @@ return [
     'EUR' => '€ Euro',
     'USD' => '$ US Dollar',
     'TRY' => '‎₺ Turkish Lira',
+    'formAuthorizer' => '‎Select Authorizer',
+    'fanapium' => '‎Fanapium',
+    'dotin' => 'Pasargad Bank',
 ];
