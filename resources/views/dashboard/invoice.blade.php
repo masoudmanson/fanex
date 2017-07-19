@@ -58,7 +58,7 @@
                                             <p>@lang('payment.invExp')</p>
                                         </div>
                                         <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
-                                            <p>0</p>
+                                            <p>0 @lang('index.formRials')</p>
                                         </div>
                                     </li>
 
