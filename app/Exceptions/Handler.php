@@ -64,11 +64,11 @@ class Handler extends ExceptionHandler
         }
 
 //        if($this->isHttpException($exception)){
-            return response()->view('errors.error', array('exception' => $exception, 'status' => $status) , $status);
+            //return response()->view('errors.error', array('exception' => $exception, 'status' => $status) , $status);
 //            return response()->view('errors.error', array('exception' => $exception) , $exception->getStatusCode());
 //        }
 
-//        return parent::render($request, $exception);
+        return parent::render($request, $exception);
     }
 
     /**

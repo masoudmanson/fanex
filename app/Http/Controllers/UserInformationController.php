@@ -8,6 +8,7 @@ use App\Traits\PlatformTrait;
 use App\Traits\TokenTrait;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -35,7 +36,7 @@ class UserInformationController extends Controller
      */
     public function index()
     {
-        $identifiers = Identifier::all();
+        $identifiers = Identifier::available()->get();
 
         return view('statics.additional', compact('identifiers'));
     }
@@ -125,10 +126,12 @@ class UserInformationController extends Controller
      * @param Identifier $identifier
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request , Identifier $identifier)
+    public function show(Request $request , $identifier)
     {
+        $identifier = Identifier::findOrFail($identifier);
+        $identifier = $identifier->toArray();
         if ($request->ajax())
-            return view('partials.identifier-item', compact('identifier'));
+            return view('partials.identifier-form', compact('identifier'));
         return view('identifier', compact('identifier'));
     }
 

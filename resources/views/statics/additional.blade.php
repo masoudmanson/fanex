@@ -6,6 +6,7 @@
             background: #f4f4f4 url({{ asset('css/images/pattern.png') }});
             background-size: 30%;
         }
+
         .navbar-right {
             display: none;
         }
@@ -37,7 +38,7 @@
                     <form action="/additional-info" method="post">
                         {{ csrf_field() }}
 
-                        <input type="hidden" name="state" value="{{$state}}" id="state" style="display: none">
+                        {{--<input type="hidden" name="state" value="{{$state}}" id="state" style="display: none">--}}
 
                         {{-- Select Authorizer --}}
                         <div class="row">
@@ -48,45 +49,18 @@
                                     <select class="form-control fanexInput selectpicker" data-style="fanexInput"
                                             name="authorizer"
                                             id="authorizer">
-                                        <option value="" selected="selected" disabled="disabled">@lang('index.formAuthorizer')</option>
-                                        <option value="fanap">@lang('index.fanapium')</option>
-                                        <option value="dotin">@lang('index.dotin')</option>
+                                        <option value="" selected="selected"
+                                                disabled="disabled">@lang('index.formAuthorizer')</option>
+                                        @foreach($identifiers as $identifier)
+                                            <option value="{{ $identifier->id }}">@lang('index.'.$identifier->name)</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                         </div>
 
-                        {{-- Nickname --}}
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="form-group bsWrapper">
-                                    <i class="icon-user bsIcon"></i>
-                                    <input type="text" class="form-control fanexInput" id="nickname"
-                                           name="nickname" placeholder="@lang('index.additionalUsername')" autocomplete="off">
-                                </div>
-                            </div>
-                        </div>
+                        <div id="identifier-ajax-form">
 
-                        {{-- Mobile Number --}}
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="form-group bsWrapper">
-                                    <i class="icon-mobile bsIcon"></i>
-                                    <input type="text" class="form-control fanexInput numberTextField" id="mobile"
-                                           name="mobile" placeholder="@lang('index.additionalMobile')" autocomplete="off">
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- Account Number --}}
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="form-group bsWrapper">
-                                    <i class="icon-card bsIcon"></i>
-                                    <input type="text" class="form-control fanexInput numberTextField" id="account"
-                                           name="account_number" placeholder="@lang('index.additionalCC')" autocomplete="off">
-                                </div>
-                            </div>
                         </div>
 
                         {{-- Form Submition --}}
@@ -96,8 +70,9 @@
                             </div>
                             {{-- Go For Payment --}}
                             <div class="col-sm-6 col-xs-12 pl-md-2">
-                                <input type="hidden" value="{{ $state }}" name="state">
-                                <input type="submit" class="btn fanexBtnOutlineGrey" value="@lang('index.continue')" name="payment"/>
+                                {{--<input type="hidden" value="{{ $state }}" name="state">--}}
+                                <input type="submit" class="btn fanexBtnOutlineGrey" id="continue_btn" value="@lang('index.continue')"
+                                       name="payment" disabled="disabled"/>
                             </div>
                         </div>
 
@@ -115,5 +90,30 @@
 
 @section('scripts')
     <script src="{{ asset('js/index.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#continue_btn').attr('disabled', 'disabled');
+            $('#authorizer').val('');
+            $('.selectpicker').selectpicker('refresh');
+
+            $('#authorizer').on('change', function() {
+                var identifier = $(this).val();
+                $.ajax({
+                    method: 'get',
+                    url: '/additional-info/'+identifier,
+                    data: {
+                        '_token': csrfToken,
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log(xhr.response);
+                    }
+                }).done(function (response) {
+                    $('#identifier-ajax-form').html(response);
+                    $('#continue_btn').removeAttr('disabled');
+                });
+            });
+        });
+    </script>
 @endsection
 
