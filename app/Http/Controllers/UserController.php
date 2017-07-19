@@ -25,16 +25,8 @@ class UserController extends Controller
         $this->middleware('checkUser');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+    public function payable($transactions)
     {
-        $user = Auth::user();
-        $transactions = $user->transaction()->paginate(10);
 
         foreach ($transactions as $transaction) {
             if (empty($transaction->uri)) {
@@ -70,8 +62,25 @@ class UserController extends Controller
                 }
             }
         }
+
+        return $transactions;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $user = Auth::user();
+        $transactions = $user->transaction()->paginate(10);
+
+        $transactions = $this->payable($transactions);
+
         if ($request->ajax())
-            return response()->json(view('dashboard.index', compact('user', 'transactions'))->render());
+            return response()->json(view('partials.transaction-list-item', compact('transactions'))->render());
 
         return view('dashboard.index', compact('user', 'transactions'));
     }
@@ -160,25 +169,54 @@ class UserController extends Controller
     }
 
 
-    public function search(Request $request)
+    public function search(Request $request, $keyword)
     {
-        $keyword = $request->get('keyword');
         $user = Auth::user();
         if($keyword == '') {
-            $transactions = $user->transaction;
+            $transactions = $user->transaction()->paginate(10);
+            $transactions = $this->payable($transactions);
         }
         else {
-            $transactions = Transaction::join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
+            $transactions = Transaction::select("transactions.*", "beneficiaries.firstname", "beneficiaries.lastname")
+            ->join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
             ->where('transactions.user_id', '=', $user->id)
                 ->where(function ($query) use ($keyword) {
                     $query->where('transactions.uri', 'like', "%$keyword%")
                         ->orWhere('transactions.premium_amount', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.firstname', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.lastname', 'like', "%$keyword%");
-                })->get();
+                })->orderby("transactions.id", "desc")->paginate(10);
+
+            $transactions = $this->payable($transactions);
         }
         if ($request->ajax())
-            return view('partials.transaction-list-item', compact('transactions'));
+            return response()->json(view('partials.transaction-list-item', compact('transactions'))->render());
+        else {
+            $user = Auth::user();
+            return view('dashboard.index', compact('user', 'transactions'));
+        }
     }
 
+
+
+    public function searchStatus(Request $request, $status)
+    {
+        $user = Auth::user();
+        if($status == 'all') {
+            $transactions = $user->transaction()->orderby("transactions.id", "desc")->paginate(10);
+            $transactions = $this->payable($transactions);
+        }
+        else {
+            $transactions = Transaction::join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
+                ->where('transactions.user_id', '=', $user->id)
+                ->where('transactions.upt_status', '=', $status)->orderby("transactions.id", "desc")->paginate(10);
+            $transactions = $this->payable($transactions);
+        }
+        if ($request->ajax())
+            return response()->json(view('partials.transaction-list-item', compact('transactions'))->render());
+        else {
+            $user = Auth::user();
+            return view('dashboard.index', compact('user', 'transactions'));
+        }
+    }
 }

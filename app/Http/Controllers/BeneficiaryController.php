@@ -18,23 +18,31 @@ class BeneficiaryController extends Controller
         $this->middleware('checkLog', ['only' => ['createOrSelect']]);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function filterCountires()
     {
-        $user = Auth::user();
-        $beneficiaries = $user->beneficiary()->available()->get();
-
-        $countries = countries(session('applocale'));
-
+        $beneficiaries = Auth::user()->beneficiary()->available()->get();
         $filter_countries = array();
         foreach ($beneficiaries as $beneficiary) {
             if (!in_array($beneficiary->country, $filter_countries))
                 array_push($filter_countries, $beneficiary->country);
         }
+        return $filter_countries;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $user = Auth::user();
+        $beneficiaries = $user->beneficiary()->available()->paginate(5);
+        $countries = countries(session('applocale'));
+        $filter_countries = $this->filterCountires();
+
+        if ($request->ajax())
+            return response()->json(view('partials.beneficiaty-list-item', compact('beneficiaries', 'countries'))->render());
 
         return view('dashboard.beneficiaries', compact('beneficiaries', 'countries', 'filter_countries'));
     }
@@ -143,12 +151,11 @@ class BeneficiaryController extends Controller
         return redirect()->action('BeneficiaryController@index');
     }
 
-    public function search(Request $request)
+    public function search(Request $request, $keyword)
     {
-        $keyword = $request->get('keyword');
         $user = Auth::user();
         if($keyword == '') {
-            $beneficiaries = $user->beneficiary;
+            $beneficiaries = $user->beneficiary()->available()->orderby("beneficiaries.id", "desc")->paginate(10);
         }
         else {
             $beneficiaries = Beneficiary::available()->where('beneficiaries.user_id', '=', $user->id)
@@ -156,14 +163,41 @@ class BeneficiaryController extends Controller
                     $query->where('beneficiaries.firstname', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.lastname', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.account_number', 'like', "%$keyword%")
-//                        ->orWhere('beneficiaries.swift_code', 'like', "%$keyword%")
-//                        ->orWhere('beneficiaries.iban_code', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.tel', 'like', "%$keyword%");
-                })->get();
+                })->orderby("beneficiaries.id", "desc")->paginate(10);
+        }
+        $countries = countries(session('applocale'));
+
+
+        if ($request->ajax())
+            return response()->json(view('partials.beneficiaty-list-item', compact('beneficiaries', 'countries'))->render());
+
+        else {
+            $filter_countries = $this->filterCountires();
+            return view('dashboard.beneficiaries', compact('beneficiaries', 'countries', 'filter_countries'));
+        }
+    }
+
+    public function searchCountry(Request $request, $country)
+    {
+        $keyword = $country;
+        $user = Auth::user();
+        if($keyword == 'all') {
+            $beneficiaries = $user->beneficiary()->available()->paginate(10);
+        }
+        else {
+            $beneficiaries = Beneficiary::available()->where('beneficiaries.user_id', '=', $user->id)
+                ->where("beneficiaries.country", '=', $country)->orderby("beneficiaries.id", "desc")->paginate(10);
         }
         $countries = countries(session('applocale'));
 
         if ($request->ajax())
-            return view('partials.beneficiaty-list-item', compact('beneficiaries', 'countries'));
+            return response()->json(view('partials.beneficiaty-list-item', compact('beneficiaries', 'countries'))->render());
+
+        else {
+            $filter_countries = $this->filterCountires();
+
+            return view('dashboard.beneficiaries', compact('beneficiaries', 'countries', 'filter_countries'));
+        }
     }
 }

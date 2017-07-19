@@ -1,3 +1,4 @@
+@if(count($beneficiaries) > 0)
 @foreach($beneficiaries as $bnf)
     <div class="panel panel-default filtered ctr-{{ $bnf->country }}" id="bnf-{{ $bnf->id }}">
         <div class="panel-heading">
@@ -155,3 +156,7 @@
         </div>
     </div>
 @endforeach
+{{ $beneficiaries->links() }}
+@else
+    <h2 class="no-results">@lang('profile.noBnfs')</h2>
+@endif

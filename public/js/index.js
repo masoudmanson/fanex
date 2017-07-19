@@ -75,13 +75,24 @@ $(document).ready(function () {
         }
     });
 
-    $('html, body, .fanexMotto, .dropdown-menu .inner, textarea').niceScroll({
+    $('body, .fanexMotto, .dropdown-menu .inner, textarea').niceScroll({
         cursorcolor: "#000",
         cursoropacitymin: 0.1,
         cursoropacitymax: 0.3,
         cursorwidth: "5px",
         cursorborder: "none",
         cursorborderradius: "5px"
+    });
+
+    $('#accordion').on('shown.bs.collapse', function () {
+        $('body').niceScroll({
+            cursorcolor: "#000",
+            cursoropacitymin: 0.1,
+            cursoropacitymax: 0.3,
+            cursorwidth: "5px",
+            cursorborder: "none",
+            cursorborderradius: "5px"
+        }).resize();
     });
 
     var $iW = $(window).innerWidth();
@@ -111,7 +122,7 @@ $(document).ready(function () {
         }
         if ($(window).width() > 993) {
             $('#bnf-sidebar').stick_in_parent({
-                "offset_top": 25
+                "offset_top": 0
             });
             $('#profile-sidebar').stick_in_parent({
                 "offset_top": 75
