@@ -47,8 +47,10 @@ class CheckUserExist
                 'state' => $request->state,
             );
 
-            return response()->view('statics.additional', $data, 200);
-//                    ->header('authorization', 'Bearer ' . $token);
+//            return response()->view('statics.additional', $data, 200);
+
+            return redirect('/additional-info');
+
         }
 
     }

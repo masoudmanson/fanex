@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Identifier;
 use App\Traits\DotinTrait;
 use App\Traits\PlatformTrait;
 use App\Traits\TokenTrait;
@@ -21,14 +22,22 @@ class UserInformationController extends Controller
         $this->middleware('checkToken', ['only' => ['store']]);
     }
 
+    public function test()
+    {
+        $test = new Identifier();
+        dd($test);
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
+        $identifiers = Identifier::all();
 
+        return view('statics.additional', compact('identifiers'));
     }
 
     /**
@@ -112,12 +121,15 @@ class UserInformationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param Request $request
+     * @param Identifier $identifier
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request , Identifier $identifier)
     {
-        //
+        if ($request->ajax())
+            return view('partials.identifier-item', compact('identifier'));
+        return view('identifier', compact('identifier'));
     }
 
     /**
