@@ -109,7 +109,9 @@ return [
         ],
         'amount' => [
             'required'  => "Please Enter an Amount.",
-            'min'  => "Please Enter a Valid Amount."
+            'min'  => "Please Enter a Valid Amount.",
+            'max'  => "Please Enter a Valid Amount.",
+            'regex' => "Please Inter an Amount Between 10 to 10000."
         ],
     ],
 
