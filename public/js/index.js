@@ -1,5 +1,7 @@
 $(document).ready(function () {
     $('.selectpicker').selectpicker();
+    $('#exCountry').val('');
+    $('.selectpicker').selectpicker('refresh');
     $('#paymentBtn, #calcBtn').attr({'disabled': 'disabled'});
 
     $('#exCountry').change(function () {

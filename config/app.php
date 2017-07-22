@@ -238,7 +238,6 @@ return [
         'jDate' => Morilog\Jalali\Facades\jDate::class,
         'Mapper' => Cornford\Googlmapper\Facades\MapperFacade::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
-        'Countries' => PeterColes\Countries\CountriesFacade::class,
-        'PDF' => ZanySoft\LaravelPDF\Facades\PDF::class
+        'Countries' => PeterColes\Countries\CountriesFacade::class
     ],
 ];

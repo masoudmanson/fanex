@@ -38,7 +38,7 @@
                     <form action="/additional-info" method="post">
                         {{ csrf_field() }}
 
-                        {{--<input type="hidden" name="state" value="{{$state}}" id="state" style="display: none">--}}
+                        <input type="hidden" name="state" value="{{$state}}" id="state" style="display: none">
 
                         {{-- Select Authorizer --}}
                         <div class="row">
@@ -70,7 +70,7 @@
                             </div>
                             {{-- Go For Payment --}}
                             <div class="col-sm-6 col-xs-12 pl-md-2">
-                                {{--<input type="hidden" value="{{ $state }}" name="state">--}}
+                                <input type="hidden" value="{{ $state }}" name="state">
                                 <input type="submit" class="btn fanexBtnOutlineGrey" id="continue_btn" value="@lang('index.continue')"
                                        name="payment" disabled="disabled"/>
                             </div>
