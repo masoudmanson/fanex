@@ -60,7 +60,7 @@ class Handler extends ExceptionHandler
             $status = 500;
         }
         else {
-            $status = $exception->getStatusCode();
+            $status = $exception->getCode();
         }
 
 //        if($this->isHttpException($exception)){

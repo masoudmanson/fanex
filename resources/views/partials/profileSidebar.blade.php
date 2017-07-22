@@ -14,11 +14,11 @@
                     <i class="icon-user"></i> @lang('profile.menuBnf')
                 </a>
             </li>
-            <li class="profile-li @if($page == "notifications") active @endif">
-                <a href="/notifications">
-                    <i class="icon-chat"></i> @lang('profile.menuNotify')
-                </a>
-            </li>
+            {{--<li class="profile-li @if($page == "notifications") active @endif">--}}
+                {{--<a href="/notifications">--}}
+                    {{--<i class="icon-chat"></i> @lang('profile.menuNotify')--}}
+                {{--</a>--}}
+            {{--</li>--}}
             {{--<li class="profile-li @if($page == "settings") active @endif">--}}
                 {{--<a href="/settings">--}}
                     {{--<i class="icon-settings"></i> Settings--}}
