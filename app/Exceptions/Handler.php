@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use Psy\Exception\FatalErrorException;
 
-class Handler extends ExceptionHandler
+//class Handler extends ExceptionHandler
+class Handler extends \GrahamCampbell\Exceptions\NewExceptionHandler
 {
     /**
      * A list of the exception types that should not be reported.
@@ -56,12 +57,12 @@ class Handler extends ExceptionHandler
 //            $status = $exception->getCode();
 //        }
 //        else
-        if ($exception instanceof \Symfony\Component\Debug\Exception\FatalErrorException) {
-            $status = 500;
-        }
-        else {
-            $status = $exception->getCode();
-        }
+//        if ($exception instanceof \Symfony\Component\Debug\Exception\FatalErrorException) {
+//            $status = 500;
+//        }
+//        else {
+//            $status = $exception->getStatusCode();
+//        }
 
 //        if($this->isHttpException($exception)){
             //return response()->view('errors.error', array('exception' => $exception, 'status' => $status) , $status);
