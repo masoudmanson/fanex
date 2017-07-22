@@ -60,15 +60,15 @@ class Handler extends ExceptionHandler
             $status = 500;
         }
         else {
-            $status = $exception->getStatusCode();
+            $status = $exception->getCode();
         }
 
 //        if($this->isHttpException($exception)){
-            return response()->view('errors.error', array('exception' => $exception, 'status' => $status) , $status);
+            //return response()->view('errors.error', array('exception' => $exception, 'status' => $status) , $status);
 //            return response()->view('errors.error', array('exception' => $exception) , $exception->getStatusCode());
 //        }
 
-//        return parent::render($request, $exception);
+        return parent::render($request, $exception);
     }
 
     /**

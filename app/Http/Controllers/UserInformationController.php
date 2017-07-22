@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Identifier;
 use App\Traits\DotinTrait;
 use App\Traits\PlatformTrait;
 use App\Traits\TokenTrait;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,14 +23,22 @@ class UserInformationController extends Controller
         $this->middleware('checkToken', ['only' => ['store']]);
     }
 
+    public function test()
+    {
+        $test = new Identifier();
+        dd($test);
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
+        $identifiers = Identifier::available()->get();
 
+        return view('statics.additional', compact('identifiers'));
     }
 
     /**
@@ -112,12 +122,17 @@ class UserInformationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param Request $request
+     * @param Identifier $identifier
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request , $identifier)
     {
-        //
+        $identifier = Identifier::findOrFail($identifier);
+        $identifier = $identifier->toArray();
+        if ($request->ajax())
+            return view('partials.identifier-form', compact('identifier'));
+        return view('identifier', compact('identifier'));
     }
 
     /**

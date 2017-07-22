@@ -102,7 +102,7 @@
                             <div class="col-xs-7 p-0 m-0 acc-info-right">
                                 <p class="table-header">@lang('payment.invCost')</p>
                                 <p>{{ number_format($transaction->premium_amount, 0) . ' ' . $transaction->currency }}</p>
-                                <p>0</p>
+                                <p>0 @lang('index.formRials')</p>
                                 <p>{{ number_format($transaction->vat) }} @lang('index.formRials')</p>
                                 <hr>
                                 <p>{{ number_format($transaction->premium_amount, 0) . ' ' . $transaction->currency . ' + &rlm;' . number_format($transaction->vat) }} @lang('index.formRials')</p>
