@@ -3,11 +3,13 @@
 namespace App\Exceptions;
 
 use Exception;
+use HttpResponseException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Session\TokenMismatchException;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
 use Psy\Exception\FatalErrorException;
 
 class Handler extends ExceptionHandler
