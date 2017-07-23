@@ -14,13 +14,6 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-//Route::group(
-//    [
-//        'prefix' => LaravelLocalization::setLocale(),
-//        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
-//    ],
-//    function () {
-
 Route::get('/', 'HomeController@index')->name('index');
 
 Route::get('/about', 'StaticsController@about');
@@ -45,8 +38,6 @@ Route::post('/invoice', 'PaymentController@issueInvoice')->name('issue_invoice')
 Route::get('/invoice/show', 'PaymentController@showInvoice')->name('show_invoice');
 
 Route::get('/send/{beneficiary}', 'UserController@sendMoney');
-
-//Route::get('/payment', 'PaymentController@pay')->name('payment'); //todo: load beneficiary page, go to beneficiary controller?
 
 Route::resource('/additional-info', 'UserInformationController');
 Route::any('/beneficiary/select', 'BeneficiaryController@createOrSelect')->name('createOrSelect');
@@ -77,6 +68,3 @@ Route::get('/search/beneficiary/country/{country}', 'BeneficiaryController@searc
 Route::get('/search/beneficiary/{keyword}', 'BeneficiaryController@search');
 Route::get('/search/transaction/status/{status}', 'UserController@searchStatus');
 Route::get('/search/transaction/{keyword}', 'UserController@search');
-
-Route::get('/test','UserInformationController@test');
-Route::get('/test/additional','UserInformationController@index');

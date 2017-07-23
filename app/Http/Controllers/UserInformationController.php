@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Identifier;
 use App\Traits\DotinTrait;
+use App\Traits\IdentifierTrait;
 use App\Traits\PlatformTrait;
 use App\Traits\TokenTrait;
 use App\User;
@@ -17,16 +18,11 @@ class UserInformationController extends Controller
     use TokenTrait;
     use DotinTrait;
     use PlatformTrait;
+    use IdentifierTrait;
 
     public function __construct()
     {
-        $this->middleware('checkToken', ['only' => ['store']]);
-    }
-
-    public function test()
-    {
-        $test = new Identifier();
-        dd($test);
+        $this->middleware('checkToken', ['only' => ['index','store']]);
     }
 
     /**
@@ -59,8 +55,6 @@ class UserInformationController extends Controller
      */
     public function store(Request $request)
     {
-
-
 //        $this->validate($request,[            //validate the form inputs if need to
 //            '*' => 'required',
 //            'email' => 'email',
@@ -68,38 +62,25 @@ class UserInformationController extends Controller
 //        ]);
         $request->headers->set('authorization', 'Bearer ' . $request->cookie('token')['access']);
 
-//        $dotin_response = $this->dotinCredential($request->account_number, $request->mobile);
-//        $dotin_result = json_decode($dotin_response->getBody()->getContents());
+        $identifier_json_response = $this->Identifier_detector($request);
+        $identifier_response = json_decode($identifier_json_response, true);
 
-//        if ($dotin_result[0]->auth) {
+        if (!$identifier_response['hasError']) {
+            $identity = $identifier_response['result'];
+
             $result = $this->followBusiness($request->bearerToken());
             $follow_res = json_decode($result->getBody()->getContents());
 
-            //todo
-            $result = $this->getCurrentPlatformUser($request->cookie('token')['access']);
-            $platform_user = json_decode($result->getBody()->getContents());
-            $user = User::firstOrNew(array('userId' => $platform_user->result->userId));
-            $user->userId = $platform_user->result->userId;
+            //todo : when user must registered in platform?!
+//            $result = $this->getCurrentPlatformUser($request->cookie('token')['access']);
+//            $platform_user = json_decode($result->getBody()->getContents());
+            $user = User::firstOrNew(array('userId' => $identity['userId']));
+            $user->userId = $identity['userId'];
 
-            if (isset($platform_user->result->firstName)) // todo : get from user if platform doesn't have first/last name
-                $user->firstname = $platform_user->result->firstName;
-            else
-//                $user->firstname = $dotin_result[0]->message->firstname;
-                $user->firstname = 'test';
+            $user->firstname = $identity['firstName'];
 
-            if (isset($platform_user->result->lastName)) // todo : get from user if platform doesn't have first/last name
-                $user->lastname = $platform_user->result->lastName;
-            else
-//                $user->lastname = $dotin_result[0]->message->lastname;
-                $user->lastname = 'test';
-
-            if (isset($platform_user->result->cellphoneNumber)) // todo : get from user if platform doesn't have first/last name
-                $user->mobile = $platform_user->result->cellphoneNumber;
-            else
-//                $user->lastname = $dotin_result[0]->message->lastname;
-                $user->mobile = '0';
-
-
+            $user->lastname = $identity['lastName'];
+            //todo ... other data
             $user->save();
 
             //todo : save or update
@@ -111,11 +92,14 @@ class UserInformationController extends Controller
 //        }
 
 //        }
-        /*
-         * 1. datin.
-         * 2.register user to platform
-         * 3. save user data , given from datin and platform (userId)
-         */
+            /*
+             * 1. datin.
+             * 2.register user to platform
+             * 3. save user data , given from datin and platform (userId)
+             */
+        }
+        else
+           return abort(401);
 
     }
 
@@ -126,7 +110,7 @@ class UserInformationController extends Controller
      * @param Identifier $identifier
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request , $identifier)
+    public function show(Request $request, $identifier)
     {
         $identifier = Identifier::findOrFail($identifier);
         $identifier = $identifier->toArray();
