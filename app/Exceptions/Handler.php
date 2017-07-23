@@ -70,6 +70,11 @@ class Handler extends ExceptionHandler
             $status = $exception->getCode();
             return response()->view('errors.error', array('exception' => $exception, 'status' => $status), $status);
         }
+        elseif ($exception instanceof \RuntimeException) {
+//            return $this->unauthenticated($request, $exception);
+            $status = $exception->getCode();
+            return response()->view('errors.error', array('exception' => $exception, 'status' => $status), $status);
+        }
 //        else {
 //            $status = $exception->getCode();
 //        }
