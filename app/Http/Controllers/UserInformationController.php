@@ -30,11 +30,13 @@ class UserInformationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $additional_data = $request->session()->get('redirect_uri');
+
         $identifiers = Identifier::available()->get();
 
-        return view('statics.additional', compact('identifiers'));
+        return view('statics.additional', compact('identifiers','additional_data'));
     }
 
     /**
@@ -88,7 +90,8 @@ class UserInformationController extends Controller
             Auth::login($user);
             //todo : check again if user was in his first time
 
-            return redirect()->route('createOrSelect');
+//            return redirect()->route('createOrSelect');
+            return redirect($request->additional);
 //        }
 
 //        }

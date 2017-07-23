@@ -21,7 +21,6 @@
                     @endif
                 </h3>
                 <p>
-                    {{$exception}}
                     @if(Lang::has('errors.'.$status.'Text'))
                         @lang('errors.'.$status.'Text')
                     @else

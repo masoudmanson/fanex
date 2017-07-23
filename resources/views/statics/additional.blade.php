@@ -70,7 +70,7 @@
                             </div>
                             {{-- Go For Payment --}}
                             <div class="col-sm-6 col-xs-12 pl-md-2">
-                                {{--<input type="hidden" value="{{ $state }}" name="state">--}}
+                                <input type="hidden" value="{{ $additional_data }}" name="additional">
                                 <input type="submit" class="btn fanexBtnOutlineGrey" id="continue_btn" value="@lang('index.continue')"
                                        name="payment" disabled="disabled"/>
                             </div>

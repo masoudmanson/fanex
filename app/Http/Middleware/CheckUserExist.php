@@ -42,14 +42,9 @@ class CheckUserExist
             return $next($request);
         } else {
 
-            $data = array(
-                'redirect_uri' => $request->url(),
-                'state' => $request->state,
-            );
+                $redirect_uri =  $request->getRequestUri();
 
-//            return response()->view('statics.additional', $data, 200);
-
-            return redirect('/additional-info');
+            return redirect('/additional-info')->with(compact('redirect_uri'));
 
         }
 
