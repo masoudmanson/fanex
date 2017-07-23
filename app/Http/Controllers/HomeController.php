@@ -30,7 +30,8 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
-        $data = $this->CorpGetCountryData();
+//        $data = $this->CorpGetCountryData();
+        $data = '';
         $country_list = indexFormCountryList($data, session('applocale'));
 
         return view('index', compact('user', 'country_list'));

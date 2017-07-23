@@ -39,8 +39,6 @@ Route::get('/invoice/show', 'PaymentController@showInvoice')->name('show_invoice
 
 Route::get('/send/{beneficiary}', 'UserController@sendMoney');
 
-//Route::get('/payment', 'PaymentController@pay')->name('payment'); //todo: load beneficiary page, go to beneficiary controller?
-
 Route::resource('/additional-info', 'UserInformationController');
 Route::any('/beneficiary/select', 'BeneficiaryController@createOrSelect')->name('createOrSelect');
 Route::post('/proforma', 'PaymentController@proforma_with_new_bnf')->name('proforma_with_new_bnf');
