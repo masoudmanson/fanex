@@ -2,11 +2,15 @@
 
 namespace App\Http\Middleware;
 
+use App\Traits\PlatformTrait;
+use App\Traits\TokenTrait;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
 class CheckTokenHome
 {
+    use TokenTrait;
+    use PlatformTrait;
     /**
      * Handle an incoming request.
      *
