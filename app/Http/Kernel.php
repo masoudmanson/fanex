@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
 
         //my middleware
         'checkToken' => \App\Http\Middleware\CheckTokenExist::class,
+        'checkTokenHome' => \App\Http\Middleware\CheckTokenHome::class,
         'checkUser' => \App\Http\Middleware\CheckUserExist::class,
         'checkLog' => \App\Http\Middleware\CheckLogExist::class,
         'logOut' => \App\Http\Middleware\LogOut::class,

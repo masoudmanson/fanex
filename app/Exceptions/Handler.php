@@ -3,15 +3,17 @@
 namespace App\Exceptions;
 
 use Exception;
+use HttpResponseException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Session\TokenMismatchException;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
 use Psy\Exception\FatalErrorException;
 
 //class Handler extends ExceptionHandler
-class Handler extends \GrahamCampbell\Exceptions\NewExceptionHandler
+class Handler extends ExceptionHandler
 {
     /**
      * A list of the exception types that should not be reported.
@@ -32,7 +34,7 @@ class Handler extends \GrahamCampbell\Exceptions\NewExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $exception
+     * @param  \Exception $exception
      * @return void
      */
     public function report(Exception $exception)
@@ -43,8 +45,8 @@ class Handler extends \GrahamCampbell\Exceptions\NewExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Exception $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
@@ -53,19 +55,25 @@ class Handler extends \GrahamCampbell\Exceptions\NewExceptionHandler
             App::setLocale(Session::get('applocale'));
         }
 
-//        if ($exception instanceof CustomException) {
+        if ($exception instanceof CustomException) {
+            $status = $exception->getCode();
+            return response()->view('errors.error', array('exception' => $exception, 'status' => $status), $status);
+        } elseif ($exception instanceof \Symfony\Component\Debug\Exception\FatalErrorException) {
+            $status = 500;
+            return response()->view('errors.error', array('exception' => $exception, 'status' => $status), $status);
+        } elseif ($exception instanceof HttpResponseException) {
+//            return $exception->getResponse();
+            $status = $exception->getCode();
+            return response()->view('errors.error', array('exception' => $exception, 'status' => $status), $status);
+        } elseif ($exception instanceof AuthenticationException) {
+//            return $this->unauthenticated($request, $exception);
+            $status = $exception->getCode();
+            return response()->view('errors.error', array('exception' => $exception, 'status' => $status), $status);
+        }
+//        else {
 //            $status = $exception->getCode();
 //        }
-//        else
-//        if ($exception instanceof \Symfony\Component\Debug\Exception\FatalErrorException) {
-//            $status = 500;
-//        }
-//        else {
-//            $status = $exception->getStatusCode();
-//        }
-
 //        if($this->isHttpException($exception)){
-            //return response()->view('errors.error', array('exception' => $exception, 'status' => $status) , $status);
 //            return response()->view('errors.error', array('exception' => $exception) , $exception->getStatusCode());
 //        }
 
@@ -75,8 +83,8 @@ class Handler extends \GrahamCampbell\Exceptions\NewExceptionHandler
     /**
      * Convert an authentication exception into an unauthenticated response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Auth\AuthenticationException $exception
      * @return \Illuminate\Http\Response
      */
     protected function unauthenticated($request, AuthenticationException $exception)

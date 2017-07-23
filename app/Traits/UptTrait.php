@@ -110,16 +110,16 @@ trait UptTrait
 
             'SENDER_COUNTRY_CODE' => 'IR', // todo:later it should be detect automatically
             'SENDER_NATIONALITY' => 'IR', // todo: " " " "
-//            'SENDER_NAME' => Auth::user()->firstname, //todo : auth user name / $user->firstname
-//            'SENDER_SURNAME' => Auth::user()->lastname,
-            'SENDER_NAME' => 'SEMaH CAN',
-            'SENDER_SURNAME' =>'sAKAR',
+            'SENDER_NAME' => Auth::user()->firstname, //todo : auth user name / $user->firstname
+            'SENDER_SURNAME' => Auth::user()->lastname,
+//            'SENDER_NAME' => 'SEMaH CAN',
+//            'SENDER_SURNAME' =>'sAKAR',
 //            'BENEFICIARY_COUNTRY_CODE' => $backlog->country,// todo: "to"
             'BENEFICIARY_COUNTRY_CODE' => 'TR',// todo: "to"
-//            'BENEFICIARY_NAME' => $beneficiary->firstname, //todo : bnf firstname
-//            'BENEFICIARY_SURNAME' => $beneficiary->lastname, // todo: bnf lastname
-            'BENEFICIARY_NAME' => 'Neslihan', //todo : bnf firstname
-            'BENEFICIARY_SURNAME' => 'Elver', // todo: bnf lastname
+            'BENEFICIARY_NAME' => $beneficiary->firstname, //todo : bnf firstname
+            'BENEFICIARY_SURNAME' => $beneficiary->lastname, // todo: bnf lastname
+//            'BENEFICIARY_NAME' => 'Neslihan', //todo : bnf firstname
+//            'BENEFICIARY_SURNAME' => 'Elver', // todo: bnf lastname
             'TRANSACTION_TYPE' => '001', // todo:which type we have to use?!
 //            'MONEY_TAKEN_CURRENCY' => 'EUR', // todo ? I think it is EUR
             'MONEY_TAKEN'=>'0',

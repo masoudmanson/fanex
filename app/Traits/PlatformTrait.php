@@ -107,7 +107,7 @@ trait PlatformTrait
             'query' => [
                 'redirectURL' => $request->root() . '/invoice/show',
                 'userId' => $userId,// get userId from his token: gholi = 204
-                'billNumber' => generateUniqueReferenceNumber(), //todo : make a random factor bill number , it's the same URN (Unique Reference Number)
+                'billNumber' => generateUniqueReferenceNumber(),
                 'description' => 'for now we have no description',
                 'deadline' => jDate::forge('now')->format('Y/m/d'), //persian date in format yyyy/mm/dd
                 'productId[]' => 0, //I've no idea

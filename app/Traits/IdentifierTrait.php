@@ -8,21 +8,32 @@
 
 namespace App\Traits;
 
-use GuzzleHttp\Client;
+use App\Identifier;
 use Illuminate\Http\Request;
 
 trait IdentifierTrait
 {
 
-    public function fanapium_identification($acc, $mobile)
+    public function Identifier_detector(Request $request)
     {
-//        $body["Account_number"] = "8615239123"; //$request->acc
-//        $body["Mobile_number"] = "09167871238"; //$request->mobile
+        $id = $request->authorizer;
+        $identifier = Identifier::findOrFail($id);
+        return call_user_func(array($this, $identifier->name . '_identification'), $request->cookie('token')['access']);
+    }
 
-        $client = new Client();
-        $res = $client->get('http://localhost:3000/auth', [ //
-        ]);
+    public function fanapium_identification($token)
+    {
+        $result = $this->getCurrentPlatformUser($token);
+        $platform_user = json_decode($result->getBody()->getContents());
 
-        return $res;
+        if (!$platform_user->hasError) {
+            return json_encode(array('hasError' => $platform_user->hasError , 'result' =>$platform_user->result),true);
+        }
+        return json_encode(array('hasError' => $platform_user->hasError , 'message' =>$platform_user->message , 'code'=>$platform_user->errorCode),true);
+    }
+
+    public function dotin_identification()
+    {
+
     }
 }
