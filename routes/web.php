@@ -14,13 +14,6 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-//Route::group(
-//    [
-//        'prefix' => LaravelLocalization::setLocale(),
-//        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
-//    ],
-//    function () {
-
 Route::get('/', 'HomeController@index')->name('index');
 
 Route::get('/about', 'StaticsController@about');
@@ -77,6 +70,3 @@ Route::get('/search/beneficiary/country/{country}', 'BeneficiaryController@searc
 Route::get('/search/beneficiary/{keyword}', 'BeneficiaryController@search');
 Route::get('/search/transaction/status/{status}', 'UserController@searchStatus');
 Route::get('/search/transaction/{keyword}', 'UserController@search');
-
-Route::get('/test','UserInformationController@test');
-Route::get('/test/additional','UserInformationController@index');
