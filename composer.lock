@@ -4,56 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0490788e10b8941d1de314fe2d8e3423",
+    "content-hash": "afce4d1c53c6e2c061c6a2de5ed1947f",
     "packages": [
-        {
-            "name": "barryvdh/laravel-dompdf",
-            "version": "v0.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/barryvdh/laravel-dompdf.git",
-                "reference": "22ee9cb8e0ac0d5f11633d1194280ab40b2bba1f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-dompdf/zipball/22ee9cb8e0ac0d5f11633d1194280ab40b2bba1f",
-                "reference": "22ee9cb8e0ac0d5f11633d1194280ab40b2bba1f",
-                "shasum": ""
-            },
-            "require": {
-                "dompdf/dompdf": "^0.8",
-                "illuminate/support": "5.1.x|5.2.x|5.3.x|5.4.x",
-                "php": ">=5.5.9"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.8-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Barryvdh\\DomPDF\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Barry vd. Heuvel",
-                    "email": "barryvdh@gmail.com"
-                }
-            ],
-            "description": "A DOMPDF Wrapper for Laravel",
-            "keywords": [
-                "dompdf",
-                "laravel",
-                "pdf"
-            ],
-            "time": "2017-02-19T06:45:54+00:00"
-        },
         {
             "name": "caouecs/laravel-lang",
             "version": "3.0.35",
@@ -181,33 +133,33 @@
         },
         {
             "name": "doctrine/inflector",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "90b2128806bfde671b6952ab8bea493942c1fdae"
+                "reference": "e11d84c6e018beedd929cff5220969a3c6d1d462"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/90b2128806bfde671b6952ab8bea493942c1fdae",
-                "reference": "90b2128806bfde671b6952ab8bea493942c1fdae",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/e11d84c6e018beedd929cff5220969a3c6d1d462",
+                "reference": "e11d84c6e018beedd929cff5220969a3c6d1d462",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2"
+                "php": "^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.*"
+                "phpunit/phpunit": "^6.2"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Doctrine\\Common\\Inflector\\": "lib/"
+                "psr-4": {
+                    "Doctrine\\Common\\Inflector\\": "lib/Doctrine/Common/Inflector"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -244,69 +196,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2015-11-06T14:35:42+00:00"
-        },
-        {
-            "name": "dompdf/dompdf",
-            "version": "v0.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dompdf/dompdf.git",
-                "reference": "0f418c6b58fdeafc2a0e80eb1fa5e644e185089c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/0f418c6b58fdeafc2a0e80eb1fa5e644e185089c",
-                "reference": "0f418c6b58fdeafc2a0e80eb1fa5e644e185089c",
-                "shasum": ""
-            },
-            "require": {
-                "ext-dom": "*",
-                "ext-gd": "*",
-                "ext-mbstring": "*",
-                "phenx/php-font-lib": "0.5.*",
-                "phenx/php-svg-lib": "0.2.*",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.8.*",
-                "squizlabs/php_codesniffer": "2.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-develop": "0.7-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Dompdf\\": "src/"
-                },
-                "classmap": [
-                    "lib/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-2.1"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Ménager",
-                    "email": "fabien.menager@gmail.com"
-                },
-                {
-                    "name": "Brian Sweeney",
-                    "email": "eclecticgeek@gmail.com"
-                },
-                {
-                    "name": "Gabriel Bull",
-                    "email": "me@gabrielbull.com"
-                }
-            ],
-            "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
-            "homepage": "https://github.com/dompdf/dompdf",
-            "time": "2017-02-16T02:40:40+00:00"
+            "time": "2017-07-22T12:18:28+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -349,75 +239,6 @@
                 "parser"
             ],
             "time": "2017-05-14T14:47:48+00:00"
-        },
-        {
-            "name": "graham-campbell/exceptions",
-            "version": "v9.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/GrahamCampbell/Laravel-Exceptions.git",
-                "reference": "b2001ce4e992ca473af6f470cddfcf6e0a83430d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/GrahamCampbell/Laravel-Exceptions/zipball/b2001ce4e992ca473af6f470cddfcf6e0a83430d",
-                "reference": "b2001ce4e992ca473af6f470cddfcf6e0a83430d",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "5.1.*|5.2.*|5.3.*|5.4.*",
-                "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*",
-                "paragonie/random_compat": "^1.1|^2.0",
-                "php": ">=5.5.9",
-                "psr/log": "^1.0",
-                "symfony/debug": "^2.7|^3.0",
-                "symfony/http-foundation": "^2.7|^3.0"
-            },
-            "require-dev": {
-                "filp/whoops": "^1.1|^2.0",
-                "graham-campbell/testbench": "^3.1",
-                "mockery/mockery": "^0.9.4",
-                "phpunit/phpunit": "^4.8|^5.0"
-            },
-            "suggest": {
-                "filp/whoops": "Enables use of the debug displayer."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "9.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GrahamCampbell\\Exceptions\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Graham Campbell",
-                    "email": "graham@alt-three.com"
-                }
-            ],
-            "description": "Provides A Powerful Error Response System For Both Development And Production",
-            "keywords": [
-                "Graham Campbell",
-                "GrahamCampbell",
-                "Laravel Exceptions",
-                "Laravel-Exceptions",
-                "error",
-                "errors",
-                "exception",
-                "exceptions",
-                "framework",
-                "laravel",
-                "whoops"
-            ],
-            "time": "2017-01-21T16:49:20+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -759,16 +580,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.4.28",
+            "version": "v5.4.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "442511fc62121085d184355e4f964c88942bbecb"
+                "reference": "b9a64955f4278f45ac348a6e000b5ecc85da167a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/442511fc62121085d184355e4f964c88942bbecb",
-                "reference": "442511fc62121085d184355e4f964c88942bbecb",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/b9a64955f4278f45ac348a6e000b5ecc85da167a",
+                "reference": "b9a64955f4278f45ac348a6e000b5ecc85da167a",
                 "shasum": ""
             },
             "require": {
@@ -884,20 +705,20 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-06-30T13:43:07+00:00"
+            "time": "2017-07-19T19:26:19+00:00"
         },
         {
             "name": "laravel/tinker",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/tinker.git",
-                "reference": "7eb2e281395131897407285672ef5532e87e17f9"
+                "reference": "203978fd67f118902acff95925847e70b72e3daf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/tinker/zipball/7eb2e281395131897407285672ef5532e87e17f9",
-                "reference": "7eb2e281395131897407285672ef5532e87e17f9",
+                "url": "https://api.github.com/repos/laravel/tinker/zipball/203978fd67f118902acff95925847e70b72e3daf",
+                "reference": "203978fd67f118902acff95925847e70b72e3daf",
                 "shasum": ""
             },
             "require": {
@@ -947,7 +768,7 @@
                 "laravel",
                 "psysh"
             ],
-            "time": "2017-06-01T16:31:26+00:00"
+            "time": "2017-07-13T13:11:05+00:00"
         },
         {
             "name": "league/flysystem",
@@ -1518,80 +1339,6 @@
             "time": "2017-06-27T13:09:21+00:00"
         },
         {
-            "name": "phenx/php-font-lib",
-            "version": "0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/PhenX/php-font-lib.git",
-                "reference": "19ad2bebc35be028fcc0221025fcbf3d436a3962"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/PhenX/php-font-lib/zipball/19ad2bebc35be028fcc0221025fcbf3d436a3962",
-                "reference": "19ad2bebc35be028fcc0221025fcbf3d436a3962",
-                "shasum": ""
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "FontLib\\": "src/FontLib"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Ménager",
-                    "email": "fabien.menager@gmail.com"
-                }
-            ],
-            "description": "A library to read, parse, export and make subsets of different types of font files.",
-            "homepage": "https://github.com/PhenX/php-font-lib",
-            "time": "2017-02-11T10:58:43+00:00"
-        },
-        {
-            "name": "phenx/php-svg-lib",
-            "version": "v0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/PhenX/php-svg-lib.git",
-                "reference": "de291bec8449b89acfe85691b5c71434797959dc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/PhenX/php-svg-lib/zipball/de291bec8449b89acfe85691b5c71434797959dc",
-                "reference": "de291bec8449b89acfe85691b5c71434797959dc",
-                "shasum": ""
-            },
-            "require": {
-                "sabberworm/php-css-parser": "6.0.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Svg\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Ménager",
-                    "email": "fabien.menager@gmail.com"
-                }
-            ],
-            "description": "A library to read, parse and export to PDF SVG files.",
-            "homepage": "https://github.com/PhenX/php-svg-lib",
-            "time": "2016-12-13T20:25:45+00:00"
-        },
-        {
             "name": "psr/http-message",
             "version": "1.0.1",
             "source": {
@@ -1690,16 +1437,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.8.9",
+            "version": "v0.8.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "58a31cc4404c8f632d8c557bc72056af2d3a83db"
+                "reference": "7ab97e5a32202585309f3ee35a0c08d2a8e588b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/58a31cc4404c8f632d8c557bc72056af2d3a83db",
-                "reference": "58a31cc4404c8f632d8c557bc72056af2d3a83db",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/7ab97e5a32202585309f3ee35a0c08d2a8e588b1",
+                "reference": "7ab97e5a32202585309f3ee35a0c08d2a8e588b1",
                 "shasum": ""
             },
             "require": {
@@ -1759,7 +1506,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2017-07-06T14:53:52+00:00"
+            "time": "2017-07-22T15:14:19+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -1844,47 +1591,6 @@
             "time": "2017-03-26T20:37:53+00:00"
         },
         {
-            "name": "sabberworm/php-css-parser",
-            "version": "6.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sabberworm/PHP-CSS-Parser.git",
-                "reference": "9ea4b00c569b19f731d0c2e0e802055877ff40c2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sabberworm/PHP-CSS-Parser/zipball/9ea4b00c569b19f731d0c2e0e802055877ff40c2",
-                "reference": "9ea4b00c569b19f731d0c2e0e802055877ff40c2",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Sabberworm\\CSS": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Raphael Schweikert"
-                }
-            ],
-            "description": "Parser for CSS Files written in PHP",
-            "homepage": "http://www.sabberworm.com/blog/2010/6/10/php-css-parser",
-            "keywords": [
-                "css",
-                "parser",
-                "stylesheet"
-            ],
-            "time": "2015-08-24T08:48:52+00:00"
-        },
-        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.4.8",
             "source": {
@@ -1940,7 +1646,7 @@
         },
         {
             "name": "symfony/console",
-            "version": "v3.3.4",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
@@ -2009,7 +1715,7 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v3.3.4",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
@@ -2062,7 +1768,7 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v3.3.4",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
@@ -2118,7 +1824,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v3.3.4",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -2181,7 +1887,7 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v3.3.4",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -2230,16 +1936,16 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v3.3.4",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "f347a5f561b03db95ed666959db42bbbf429b7e5"
+                "reference": "e307abe4b79ccbbfdced9b91c132fd128f456bc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/f347a5f561b03db95ed666959db42bbbf429b7e5",
-                "reference": "f347a5f561b03db95ed666959db42bbbf429b7e5",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/e307abe4b79ccbbfdced9b91c132fd128f456bc5",
+                "reference": "e307abe4b79ccbbfdced9b91c132fd128f456bc5",
                 "shasum": ""
             },
             "require": {
@@ -2279,20 +1985,20 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2017-06-24T09:29:48+00:00"
+            "time": "2017-07-17T14:07:10+00:00"
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v3.3.4",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "33f87c957122cfbd9d90de48698ee074b71106ea"
+                "reference": "16ceea64d23abddf58797a782ae96a5242282cd8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/33f87c957122cfbd9d90de48698ee074b71106ea",
-                "reference": "33f87c957122cfbd9d90de48698ee074b71106ea",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/16ceea64d23abddf58797a782ae96a5242282cd8",
+                "reference": "16ceea64d23abddf58797a782ae96a5242282cd8",
                 "shasum": ""
             },
             "require": {
@@ -2365,7 +2071,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2017-07-05T13:28:15+00:00"
+            "time": "2017-07-17T19:08:23+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2428,16 +2134,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v3.3.4",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "5ab8949b682b1bf9d4511a228b5e045c96758c30"
+                "reference": "07432804942b9f6dd7b7377faf9920af5f95d70a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/5ab8949b682b1bf9d4511a228b5e045c96758c30",
-                "reference": "5ab8949b682b1bf9d4511a228b5e045c96758c30",
+                "url": "https://api.github.com/repos/symfony/process/zipball/07432804942b9f6dd7b7377faf9920af5f95d70a",
+                "reference": "07432804942b9f6dd7b7377faf9920af5f95d70a",
                 "shasum": ""
             },
             "require": {
@@ -2473,7 +2179,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2017-07-03T08:12:02+00:00"
+            "time": "2017-07-13T13:05:09+00:00"
         },
         {
             "name": "symfony/psr-http-message-bridge",
@@ -2537,7 +2243,7 @@
         },
         {
             "name": "symfony/routing",
-            "version": "v3.3.4",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
@@ -2615,7 +2321,7 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v3.3.4",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
@@ -2680,16 +2386,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v3.3.4",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "9ee920bba1d2ce877496dcafca7cbffff4dbe08a"
+                "reference": "0f32b62d21991700250fed5109b092949007c5b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/9ee920bba1d2ce877496dcafca7cbffff4dbe08a",
-                "reference": "9ee920bba1d2ce877496dcafca7cbffff4dbe08a",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/0f32b62d21991700250fed5109b092949007c5b3",
+                "reference": "0f32b62d21991700250fed5109b092949007c5b3",
                 "shasum": ""
             },
             "require": {
@@ -2744,7 +2450,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2017-07-05T13:02:37+00:00"
+            "time": "2017-07-10T14:18:27+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -2845,19 +2551,20 @@
         },
         {
             "name": "yajra/laravel-oci8",
-            "version": "v5.4.4",
+            "version": "v5.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yajra/laravel-oci8.git",
-                "reference": "6f851d75db5d800361e068d037e75cbe7ebd4175"
+                "reference": "47e622acb11bb339abc61e198647c8226612668d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yajra/laravel-oci8/zipball/6f851d75db5d800361e068d037e75cbe7ebd4175",
-                "reference": "6f851d75db5d800361e068d037e75cbe7ebd4175",
+                "url": "https://api.github.com/repos/yajra/laravel-oci8/zipball/47e622acb11bb339abc61e198647c8226612668d",
+                "reference": "47e622acb11bb339abc61e198647c8226612668d",
                 "shasum": ""
             },
             "require": {
+                "ext-oci8": ">=2.0.0",
                 "illuminate/database": "5.4.*",
                 "illuminate/support": "5.4.*",
                 "php": ">=5.6.4",
@@ -2896,7 +2603,7 @@
                 "oracle",
                 "pdo_oci"
             ],
-            "time": "2017-02-17T02:50:09+00:00"
+            "time": "2017-07-14T01:39:38+00:00"
         },
         {
             "name": "yajra/laravel-pdo-via-oci8",
@@ -4356,7 +4063,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.3.4",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",

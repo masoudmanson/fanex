@@ -55,7 +55,6 @@ class UserInformationController extends Controller
      */
     public function store(Request $request)
     {
-
 //        $this->validate($request,[            //validate the form inputs if need to
 //            '*' => 'required',
 //            'email' => 'email',
