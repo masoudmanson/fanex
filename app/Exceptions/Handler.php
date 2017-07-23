@@ -69,10 +69,6 @@ class Handler extends ExceptionHandler
 //            return $this->unauthenticated($request, $exception);
             $status = $exception->getCode();
             return response()->view('errors.error', array('exception' => $exception, 'status' => $status), $status);
-        } elseif ($exception instanceof ValidationException) {
-            $status = $exception->getCode();
-            return response()->view('errors.error', array('exception' => $exception, 'status' => $status), $status);
-//            return $this->convertValidationExceptionToResponse($exception, $request);
         }
 //        else {
 //            $status = $exception->getCode();
