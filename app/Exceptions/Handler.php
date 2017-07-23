@@ -13,7 +13,7 @@ use Illuminate\Validation\ValidationException;
 use Psy\Exception\FatalErrorException;
 
 //class Handler extends ExceptionHandler
-class Handler extends \GrahamCampbell\Exceptions\NewExceptionHandler
+class Handler extends ExceptionHandler
 {
     /**
      * A list of the exception types that should not be reported.
