@@ -41,7 +41,8 @@
                                     <ul>
                                         @if($user->firstname && $user->lastname)
                                             <li class="row mx-0">
-                                                <div class="col-xs-12 col-sm-6"><p class="proforma-p">@lang('payment.appTitle')</p></div>
+                                                <div class="col-xs-12 col-sm-6"><p
+                                                            class="proforma-p">@lang('payment.appTitle')</p></div>
                                                 <div class="col-xs-12 col-sm-6">{{ $user->firstname . ' ' . $user->lastname }}</div>
                                             </li>
                                         @endif
@@ -56,7 +57,8 @@
 
                                         @if($user->date_of_birth)
                                             <li class="row mx-0">
-                                                <div class="col-xs-12 col-sm-6"><p class="proforma-p">@lang('payment.appDob')</p>
+                                                <div class="col-xs-12 col-sm-6"><p
+                                                            class="proforma-p">@lang('payment.appDob')</p>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-6">@lang('payment.invDate', ['dateEn' => $user->date_of_birth->format('d M Y, H:i:s'), 'dateFa' => jdate($user->date_of_birth)->format('%Y %B %d, H:i:s')])</div>
                                             </li>
@@ -72,14 +74,16 @@
 
                                         @if($user->address)
                                             <li class="row mx-0">
-                                                <div class="col-xs-12 col-sm-6"><p class="proforma-p">@lang('payment.appAddress')</p></div>
+                                                <div class="col-xs-12 col-sm-6"><p
+                                                            class="proforma-p">@lang('payment.appAddress')</p></div>
                                                 <div class="col-xs-12 col-sm-6">{{ $user->address }}</div>
                                             </li>
                                         @endif
 
                                         @if($user->postal_code)
                                             <li class="row mx-0">
-                                                <div class="col-xs-12 col-sm-6"><p class="proforma-p">@lang('payment.appPostalCode')</p>
+                                                <div class="col-xs-12 col-sm-6"><p
+                                                            class="proforma-p">@lang('payment.appPostalCode')</p>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-6">{{ $user->postal_code }}</div>
                                             </li>
@@ -87,21 +91,24 @@
 
                                         @if($user->tel)
                                             <li class="row mx-0">
-                                                <div class="col-xs-12 col-sm-6"><p class="proforma-p">@lang('payment.appTel')</p></div>
+                                                <div class="col-xs-12 col-sm-6"><p
+                                                            class="proforma-p">@lang('payment.appTel')</p></div>
                                                 <div class="col-xs-12 col-sm-6">{{ $user->tel }}</div>
                                             </li>
                                         @endif
 
                                         @if($user->mobile)
                                             <li class="row mx-0">
-                                                <div class="col-xs-12 col-sm-6"><p class="proforma-p">@lang('payment.appMobile')</p></div>
+                                                <div class="col-xs-12 col-sm-6"><p
+                                                            class="proforma-p">@lang('payment.appMobile')</p></div>
                                                 <div class="col-xs-12 col-sm-6">{{ $user->mobile }}</div>
                                             </li>
                                         @endif
 
                                         @if($user->email)
                                             <li class="row mx-0">
-                                                <div class="col-xs-12 col-sm-6"><p class="proforma-p">@lang('payment.appEmail')</p></div>
+                                                <div class="col-xs-12 col-sm-6"><p
+                                                            class="proforma-p">@lang('payment.appEmail')</p></div>
                                                 <div class="col-xs-12 col-sm-6">{{ $user->email }}</div>
                                             </li>
                                         @endif
@@ -115,60 +122,65 @@
                                     {{-- Beneficiary Details --}}
                                     <ul>
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p class="proforma-p">@lang('payment.bnfName')</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p
+                                                        class="proforma-p">@lang('payment.bnfName')</p></div>
                                             <div class="col-xs-12 col-sm-6">{{ $beneficiary->firstname . ' ' . $beneficiary->lastname }}</div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p class="proforma-p">@lang('payment.bnfCountry')</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p
+                                                        class="proforma-p">@lang('payment.bnfCountry')</p></div>
                                             <div class="col-xs-12 col-sm-6">{{ $countries[$beneficiary->country] }}
                                             </div>
                                         </li>
 
-                                        <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p class="proforma-p">@lang('payment.appAddress')</p></div>
-                                            <div class="col-xs-12 col-sm-6">
-                                                @if($beneficiary->address)
+                                        @if($beneficiary->address)
+                                            <li class="row mx-0">
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <p class="proforma-p">@lang('payment.appAddress')</p></div>
+                                                <div class="col-xs-12 col-sm-6">
                                                     {{ $beneficiary->address }}
-                                                @else
-                                                    -
-                                                @endif
-                                            </div>
-                                        </li>
+                                                </div>
+                                            </li>
+                                        @endif
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p class="proforma-p">@lang('payment.appTel')</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p
+                                                        class="proforma-p">@lang('payment.appTel')</p></div>
                                             <div class="col-xs-12 col-sm-6">{{ $beneficiary->tel }}</div>
                                         </li>
 
-                                        <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p class="proforma-p">@lang('payment.appFax')</p></div>
-                                            <div class="col-xs-12 col-sm-6">
-                                                @if($beneficiary->fax)
+                                        @if($beneficiary->fax)
+                                            <li class="row mx-0">
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <p class="proforma-p">@lang('payment.appFax')</p></div>
+                                                <div class="col-xs-12 col-sm-6">
                                                     {{ $beneficiary->fax }}
-                                                @else
-                                                    -
-                                                @endif
-                                            </div>
-                                        </li>
+                                                </div>
+                                            </li>
+                                        @endif
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p class="proforma-p">@lang('payment.bnfBankName')</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p
+                                                        class="proforma-p">@lang('payment.bnfBankName')</p></div>
                                             <div class="col-xs-12 col-sm-6">{{ $beneficiary->bank_name }}</div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p class="proforma-p">@lang('payment.bnfBranch')</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p
+                                                        class="proforma-p">@lang('payment.bnfBranch')</p></div>
                                             <div class="col-xs-12 col-sm-6">{{ $beneficiary->branch_name }}</div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p class="proforma-p">@lang('payment.bnfSwift')</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p
+                                                        class="proforma-p">@lang('payment.bnfSwift')</p></div>
                                             <div class="col-xs-12 col-sm-6">{{ $beneficiary->swift_code }}</div>
                                         </li>
 
                                         <li class="row mx-0">
-                                            <div class="col-xs-12 col-sm-6"><p class="proforma-p">@lang('payment.bnfIban')</p></div>
+                                            <div class="col-xs-12 col-sm-6"><p
+                                                        class="proforma-p">@lang('payment.bnfIban')</p></div>
                                             <div class="col-xs-12 col-sm-6">{{ $beneficiary->iban_code }}</div>
                                         </li>
 
@@ -187,9 +199,8 @@
 
                 {{-- Form Actions --}}
                 <div class="row p-0 m-0">
-                        <form action="{{ route('issue_invoice') }}" method="post">
+                    <form action="{{ route('issue_invoice') }}" method="post">
                         {{ csrf_field() }}
-                            {{--<input id="token" type="hidden" value="{{$encrypted_token}}">--}}
                         <div class="checkbox row mx-0 my-4 p-0">
                             <label><input type="checkbox" id="proforma-terms" name="terms"
                                           value="1">@lang('payment.agreement')</label>
