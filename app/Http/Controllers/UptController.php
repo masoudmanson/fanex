@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Backlog;
 use App\Beneficiary;
+use App\Currency;
 use App\Http\Requests\RemittanceForm;
+use App\Rate;
 use App\Traits\LogTrait;
 use App\Traits\UptTrait;
 use GuzzleHttp\Client;
@@ -20,9 +22,13 @@ class UptController extends Controller
 
     public function getEuroExchangeRate()
     {
-        $client = new Client();
-        $U_to_R = $client->get('http://localhost:3000/er');
-        return $U_to_R;
+//        $client = new Client();
+//        $U_to_R = $client->get('http://localhost:3000/er');
+//        return $U_to_R;
+        $rates = Rate::last();
+//        $rates->exchanger;
+//        $rates->currency;
+        return $rates->rate;
     }
 
     public function getLiraExchangeRate(Request $request)
@@ -47,9 +53,7 @@ class UptController extends Controller
             $amount = $upt_rate*$amount ;
         }
 
-//        $result = $this->getEuroExchangeRate();
-//        $EuroResult = $result->getBody()->getContents();
-        $EuroER = 4000;//($EuroResult)[0]->er;
+        $EuroER = $this->getEuroExchangeRate();
 
         $amount = ceil($EuroER*$amount);
 

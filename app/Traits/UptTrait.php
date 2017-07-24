@@ -110,10 +110,10 @@ trait UptTrait
 
             'SENDER_COUNTRY_CODE' => 'IR', // todo:later it should be detect automatically
             'SENDER_NATIONALITY' => 'IR', // todo: " " " "
-            'SENDER_NAME' => Auth::user()->firstname, //todo : auth user name / $user->firstname
-            'SENDER_SURNAME' => Auth::user()->lastname,
-//            'SENDER_NAME' => 'SEMaH CAN',
-//            'SENDER_SURNAME' =>'sAKAR',
+//            'SENDER_NAME' => Auth::user()->firstname, //todo : auth user name / $user->firstname
+//            'SENDER_SURNAME' => Auth::user()->lastname,
+            'SENDER_NAME' => 'SEMaH CAN',
+            'SENDER_SURNAME' =>'sAKAR',
 //            'BENEFICIARY_COUNTRY_CODE' => $backlog->country,// todo: "to"
             'BENEFICIARY_COUNTRY_CODE' => 'TR',// todo: "to"
             'BENEFICIARY_NAME' => $beneficiary->firstname, //todo : bnf firstname
