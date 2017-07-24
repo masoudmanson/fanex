@@ -150,11 +150,11 @@ function countdown(ttl) {
         $('#countdown').countdown(tenMins, function (event) {
             $(this).html(event.strftime('%M:%S'));
         }).on('finish.countdown', function () {
-            $('#countdown').html(timeOut).addClass('alert shake animated');
+            $('#countdown').html(timeOut).addClass('shake animated');
         });
     }
     else {
-        $('#countdown').html(timeOut).addClass('alert shake animated');
+        $('#countdown').html(timeOut).addClass('shake animated');
     }
 }
 
