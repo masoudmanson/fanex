@@ -64,7 +64,7 @@ return [
 
     'prfTitle' => 'Proforma',
     'prfSubtitle' => 'Primary Proforma of your request',
-    'prfBack' => 'Back to Bnf. Select',
+    'prfBack' => 'Back',
     'prfPay' => 'Pay',
 
     'invTitle' => 'Receipt',

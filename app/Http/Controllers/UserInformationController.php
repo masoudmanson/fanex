@@ -79,9 +79,10 @@ class UserInformationController extends Controller
             $user = User::firstOrNew(array('userId' => $identity['userId']));
             $user->userId = $identity['userId'];
 
-            $user->firstname = $identity['firstName'];
+            $user->firstname = $identity['firstName'] ? isset($identity['firstName'])  :  abort(401);
 
-            $user->lastname = $identity['lastName'];
+            $user->lastname = $identity['lastName'] ? isset($identity['lastName'])  :  abort(401);
+
             //todo ... other data
             $user->save();
 
