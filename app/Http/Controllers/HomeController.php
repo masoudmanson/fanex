@@ -20,6 +20,7 @@ class HomeController extends Controller
     {
 //        $this->middleware('checkToken');
         $this->middleware('checkTokenHome');
+        $this->middleware('checkUserHome');
     }
 
     /**
