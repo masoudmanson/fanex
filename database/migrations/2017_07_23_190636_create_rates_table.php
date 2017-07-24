@@ -20,6 +20,7 @@ class CreateRatesTable extends Migration
             $table->integer('exchanger_id')->unsigned()->nullable();
             $table->integer('currency_id')->unsigned()->nullable();
             $table->float('rate');
+            $table->string('ip')->nullable();
             $table->timestamps();
 
             $table->foreign('exchanger_id')->references('id')->on('exchangers')

@@ -15,6 +15,9 @@
         "500Title"  =>  "Hoop! Birşeyler yanlış gitti",
         "500Text"  =>  "İsteklerle ilgili bir şeyler ters gitti. Sorunu çözüyoruz. Lütfen sabırlı olun.",
 
+        "2000Title"  =>  "Hata! Veritabanı sorgularıyla ilgili bir şeyler ters gitti.",
+        "2000Text"  =>  "Sorguda bir sorun var ve yürütemiyor.",
+
         "playText"  =>  "↑ tuşuna basın ve oyuna başlayın",
         "backText"  =>  "Anasayfaya dön",
     ];

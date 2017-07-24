@@ -12,6 +12,8 @@
 
     <title>{{ config('app.name', 'FanEx') }}</title>
 
+    <link rel="shortcut icon" href="{{ asset('css/images/favicon.png') }}" />
+
     {{-- General Styles --}}
     @if(\Illuminate\Support\Facades\App::isLocale('fa'))
         <link href="{{ asset('css/fa.css') }}" rel="stylesheet">
@@ -58,18 +60,10 @@
                     '_token': csrfToken
                 }
         });
-    $(document).ready(function () {
-        @if(\Illuminate\Support\Facades\App::isLocale('fa'))
-//            $('*').persiaNumber();
-        @endif
-    });
 </script>
 
 {{-- Yielding Pages Scripts --}}
 @yield('scripts')
 
-{{--@if(config('app.env') == 'local')--}}
-    {{--<script src="http://localhost:35729/livereload.js"></script>--}}
-{{--@endif--}}
 </body>
 </html>
