@@ -60,9 +60,9 @@
     </div>
 @endsection
 
-@section('footer')
-    @include('partials.footer', ['type' => 'dashboard'])
-@endsection
+{{--@section('footer')--}}
+    {{--@include('partials.footer', ['type' => 'dashboard'])--}}
+{{--@endsection--}}
 
 @section('scripts')
     <script src="{{ asset('js/t-rex.js') }}"></script>

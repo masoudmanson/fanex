@@ -14,8 +14,14 @@ class CreateExchangersTable extends Migration
     public function up()
     {
         Schema::create('exchangers', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+
             $table->increments('id')->unsigned();
             $table->string('exchanger_name');
+            $table->string('username');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ class CreateRatesTable extends Migration
             $table->increments('id')->unsigned();;
             $table->integer('exchanger_id')->unsigned()->nullable();
             $table->integer('currency_id')->unsigned()->nullable();
-            $table->string('rate');
+            $table->float('rate');
             $table->timestamps();
 
             $table->foreign('exchanger_id')->references('id')->on('exchangers')

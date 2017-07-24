@@ -23,19 +23,46 @@ class BeneficiaryRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'firstname' => 'required|between:3,30',
-            'lastname' => 'required|between:3,50',
-            'account_number' => 'required|unique:beneficiaries|between:8,20',
-            'address' => 'sometimes|nullable|string|between:3,256',
-            'tel' => 'required|between:11,15',
-            'fax' => 'nullable|between:11,15',
-            'country' => 'required',
-            'bank_name' => 'required|string|between:3,40',
-            'branch_name' => 'required|string|between:3,60',
-            'branch_address' => 'string|between:3,256',
-            'swift_code' => 'required|between:8,11',
-            'iban_code' => 'required|string|between:10,34'
-        ];
+        switch ($this->method()) {
+            case 'GET':
+            case 'DELETE': {
+                return [];
+            }
+            case 'POST': {
+                return [
+                    'firstname' => 'required|between:3,30',
+                    'lastname' => 'required|between:3,50',
+                    'account_number' => 'required|unique:beneficiaries|between:8,20',
+                    'address' => 'sometimes|nullable|string|between:3,256',
+                    'tel' => 'required|between:11,15',
+                    'fax' => 'nullable|between:11,15',
+                    'country' => 'required',
+                    'bank_name' => 'required|string|between:3,40',
+                    'branch_name' => 'required|string|between:3,60',
+                    'branch_address' => 'string|between:3,256',
+                    'swift_code' => 'required|between:8,11',
+                    'iban_code' => 'required|string|between:10,34'
+                ];
+            }
+            case 'PUT':
+            case 'PATCH': {
+                return [
+                    'firstname' => 'required|between:3,30',
+                    'lastname' => 'required|between:3,50',
+                    'account_number' => 'required|between:8,20',
+                    'address' => 'sometimes|nullable|string|between:3,256',
+                    'tel' => 'required|between:11,15',
+                    'fax' => 'nullable|between:11,15',
+                    'country' => 'required',
+                    'bank_name' => 'required|string|between:3,40',
+                    'branch_name' => 'required|string|between:3,60',
+                    'branch_address' => 'string|between:3,256',
+                    'swift_code' => 'required|between:8,11',
+                    'iban_code' => 'required|string|between:10,34'
+                ];
+            }
+            default:
+                break;
+        }
     }
 }

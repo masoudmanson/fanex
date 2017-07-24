@@ -32,6 +32,8 @@ class CreateTransactionsTable extends Migration
             $table->string('payment_type')->nullable();
             $table->timestamp('payment_date')->nullable();
             $table->string('country')->nullable();
+            $table->string('upt_ref')->nullable();
+            $table->string('ttl')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')
