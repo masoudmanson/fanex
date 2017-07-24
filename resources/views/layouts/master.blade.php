@@ -12,6 +12,8 @@
 
     <title>{{ config('app.name', 'FanEx') }}</title>
 
+    <link rel="shortcut icon" href="{{ asset('css/images/favicon.png') }}" />
+
     {{-- General Styles --}}
     @if(\Illuminate\Support\Facades\App::isLocale('fa'))
         <link href="{{ asset('css/fa.css') }}" rel="stylesheet">
