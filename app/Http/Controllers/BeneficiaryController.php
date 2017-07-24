@@ -133,7 +133,7 @@ class BeneficiaryController extends Controller
      * @param Beneficiary $beneficiary
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Beneficiary $beneficiary)
+    public function update(BeneficiaryRequest $request, Beneficiary $beneficiary)
     {
         $beneficiary->update($request->all());
 

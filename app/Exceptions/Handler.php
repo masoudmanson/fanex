@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 use Psy\Exception\FatalErrorException;
 
-//class Handler extends ExceptionHandler
 class Handler extends ExceptionHandler
 {
     /**
@@ -57,31 +56,20 @@ class Handler extends ExceptionHandler
 
         if ($exception instanceof CustomException) {
             $status = $exception->getCode();
-            return response()->view('errors.error', array('exception' => $exception, 'status' => $status), $status);
         } elseif ($exception instanceof \Symfony\Component\Debug\Exception\FatalErrorException) {
             $status = 500;
-            return response()->view('errors.error', array('exception' => $exception, 'status' => $status), $status);
         } elseif ($exception instanceof HttpResponseException) {
-//            return $exception->getResponse();
-            $status = $exception->getCode();
-            return response()->view('errors.error', array('exception' => $exception, 'status' => $status), $status);
+            $status = $exception->getStatusCode();
         } elseif ($exception instanceof AuthenticationException) {
-//            return $this->unauthenticated($request, $exception);
             $status = $exception->getCode();
-            return response()->view('errors.error', array('exception' => $exception, 'status' => $status), $status);
-        }
-        elseif ($exception instanceof \RuntimeException) {
-//            return $this->unauthenticated($request, $exception);
+        } elseif ($exception instanceof \Illuminate\Database\QueryException) {
+            $status = 2000;
+        } elseif ($exception instanceof \RuntimeException) {
             $status = $exception->getCode();
-            return response()->view('errors.error', array('exception' => $exception, 'status' => $status), $status);
         }
-//        else {
-//            $status = $exception->getCode();
-//        }
-//        if($this->isHttpException($exception)){
-//            return response()->view('errors.error', array('exception' => $exception) , $exception->getStatusCode());
-//        }
 
+        if(isset($status))
+            return response()->view('errors.error', array('exception' => $exception, 'status' => $status), 200);
         return parent::render($request, $exception);
     }
 

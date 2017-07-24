@@ -220,7 +220,8 @@ function getAmount() {
         $('.tempAmount').slideDown(300);
         $('#calcBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
         $('#paymentBtn').removeAttr('disabled').addClass('fanexBtnOrange').removeClass('fanexBtnOutlineGrey');
-        $('#captcha').focus();
+        // $('#captcha').focus();
+        $('#exCountry').focus();
         reloadCaptcha();
     });
 }

@@ -33,6 +33,7 @@ class CreateBeneficiariesTable extends Migration
             $table->string('routing_aba')->nullable();
             $table->string('transit_sort_code')->nullable();
             $table->string('blz_bsb')->nullable();
+            $table->boolean('is_deleted')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')
