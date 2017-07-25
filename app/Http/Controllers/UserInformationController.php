@@ -57,11 +57,6 @@ class UserInformationController extends Controller
      */
     public function store(Request $request)
     {
-//        $this->validate($request,[            //validate the form inputs if need to
-//            '*' => 'required',
-//            'email' => 'email',
-//            'password' => 'min:3|confirmed',
-//        ]);
         $request->headers->set('authorization', 'Bearer ' . $request->cookie('token')['access']);
 
         $identifier_json_response = $this->Identifier_detector($request);
@@ -79,23 +74,19 @@ class UserInformationController extends Controller
             $user = User::firstOrNew(array('userId' => $identity['userId']));
             $user->userId = $identity['userId'];
 
-            $user->firstname = $identity['firstName'] ? isset($identity['firstName'])  :  abort(401);
-
-            $user->lastname = $identity['lastName'] ? isset($identity['lastName'])  :  abort(401);
-
+            if(!isset($identity['firstName']) || !isset($identity['lastName']))
+                abort(401);
+            else {
+                $user->firstname = $identity['firstName'];
+                $user->lastname = $identity['lastName'];
+            }
             //todo ... other data
             $user->save();
-
             //todo : save or update
-
-            Auth::login($user);
+            Auth::attempt();
+//            Auth::login($user);
             //todo : check again if user was in his first time
-
-//            return redirect()->route('createOrSelect');
             return redirect($request->additional);
-//        }
-
-//        }
             /*
              * 1. datin.
              * 2.register user to platform
