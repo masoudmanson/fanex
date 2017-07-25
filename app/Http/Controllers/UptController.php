@@ -20,6 +20,12 @@ class UptController extends Controller
     use UptTrait;
     use LogTrait;
 
+    public function getExchangeRate($currency)
+    {
+        $rate_obj = Currency::last($currency)->rates()->last();
+        return $rate_obj->rate;
+    }
+
     public function getEuroExchangeRate()
     {
 //        $client = new Client();
@@ -45,23 +51,34 @@ class UptController extends Controller
     public function calculateRemittance(RemittanceForm $request)
     {
         $upt_result = array();
+        $EuroER = 1 ;
         $amount = (float)($request->amount);
 
         if ($request['currency'] == 'TRY') {
-            $upt_result = $this->UPTGetTExchangeData((float)($request->amount), 'TRY', 'EUR');
-            $upt_rate = $upt_result['currency_rate'];
-            $amount = $upt_rate*$amount ;
+//            $upt_result = $this->UPTGetTExchangeData((float)($request->amount), 'TRY', 'EUR');
+//            $upt_rate = $upt_result['currency_rate'];
+            $upt_rate = $this->getExchangeRate('TRY');
+            $amount = $upt_rate * ($amount + $this->calculateCommission($amount , 'TRY'));
         }
 
-        $EuroER = $this->getEuroExchangeRate();
+        else {
+//        $EuroER = $this->getEuroExchangeRate();
+            $EuroER = $this->getExchangeRate('EUR');
 
-        $amount = ceil($EuroER*$amount);
+            $amount = ceil($EuroER * ($amount + $this->calculateCommission($amount, 'EUR')));
+        }
 
         //write to backlog
         $log = new Backlog();
-        $log = $this->mainFormBackLog($log,$amount, $request, $upt_result, $EuroER);
+        $log = $this->mainFormBackLog($log, $amount, $request, $upt_result, $EuroER);
         setcookie('backlog', encrypt($log->id), time() + 600);
 //        setcookie('ttl', time()+600, time() + 600);
-        return  $amount;
+        return $amount;
+    }
+
+    public function calculateCommission($amount, $currency)
+    {
+         $wage = $currency == 'TRY' ? (0.5 * $amount) + 20 : (0.5 * $amount) + 5;
+        return $wage;
     }
 }
