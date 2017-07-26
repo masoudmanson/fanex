@@ -95,7 +95,7 @@ class UserController extends Controller
         return view('dashboard.settings');
     }
 
-    public function sendMoney(Beneficiary $beneficiary)
+    public function sendMoney(Beneficiaryn $beneficiary)
     {
         $data = $this->CorpGetCountryData();
         $country_list = indexFormCountryList($data, session('applocale'));

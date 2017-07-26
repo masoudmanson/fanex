@@ -15,6 +15,9 @@
         "500Title"  =>  "Oops! Something went wrong.",
         "500Text"  =>  "Something went wrong with requests. We are fixing the problem. Please be patient.",
 
+        "1000Title"  =>  "Oops! Something went wrong.",
+        "1000Text"  =>  "Something went wrong with requests. We are fixing the problem. Please be patient.",
+
         "2000Title"  =>  "Oops! Something is wrong with Database.",
         "2000Text"  =>  "There is a problem with Database Query. Please try later.",
 

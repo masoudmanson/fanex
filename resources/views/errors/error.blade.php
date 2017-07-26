@@ -11,7 +11,7 @@
 @section('content')
     <div class="container-fluid dashboard-wrapper">
         <div class="error-page">
-            <h2 class="error-heading">{{ $status }}</h2>
+            <h2 class="error-heading">@if($status == 1000) <b>:\</b> @else {{ $status }} @endif</h2>
             <div class="error-content">
                 <h3><i class="fa fa-warning text-yellow"></i>
                     @if(Lang::has('errors.'.$status.'Title'))
