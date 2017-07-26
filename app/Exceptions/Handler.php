@@ -53,14 +53,17 @@ class Handler extends ExceptionHandler
         if (Session::has('applocale')) {
             App::setLocale(Session::get('applocale'));
         }
-
         if ($exception instanceof CustomException) {
             $status = $exception->getCode();
+        } elseif ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+            $status = $exception->getStatusCode();
+        } elseif ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
+            $status = 404;
         } elseif ($exception instanceof \Symfony\Component\Debug\Exception\FatalErrorException) {
             $status = 500;
         } elseif ($exception instanceof HttpResponseException) {
-            $status = $exception->getStatusCode();
-        } elseif ($exception instanceof AuthenticationException) {
+            $status = $exception->getCode();
+        }  elseif ($exception instanceof AuthenticationException) {
             $status = $exception->getCode();
         } elseif ($exception instanceof \Illuminate\Database\QueryException) {
             $status = 2000;
@@ -70,7 +73,9 @@ class Handler extends ExceptionHandler
 
         if(isset($status))
             return response()->view('errors.error', array('exception' => $exception, 'status' => $status), 200);
-        return parent::render($request, $exception);
+
+        return response()->view('errors.error', array('exception' => $exception, 'status' => 1000), 200);
+//        return parent::render($request, $exception);
     }
 
     /**
