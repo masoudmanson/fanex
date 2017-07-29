@@ -15,11 +15,11 @@
     @endif
     <form @if($beneficiary) action="{{ route('proforma_with_selected_bnf_profile', ['beneficiary' => $beneficiary->id]) }}" method="post" @else action="{{ route('createOrSelect') }}" method="post" @endif>
         {{ csrf_field() }}
-        {{--<input id="token" type="hidden" value="{{$encrypted_token}}">--}}
+
         {{-- Destination Country --}}
         <div class="form-group bsWrapper">
             <i class="icon-globe bsIcon"></i>
-            <select class="form-control fanexInput selectpicker indexSelectBox" data-style="fanexInput" name="country"
+            <select class="form-control fanexInput selectpicker indexSelectBox fanex-border" data-style="fanexInput" name="country"
                     id="exCountry">
                 <option value="" selected="selected" disabled="disabled">@lang('index.formCountry')</option>
 
@@ -33,23 +33,26 @@
 
         {{-- Amount + Currency --}}
         <div class="row">
-            {{-- Amount --}}
+            {{-- Currency --}}
             <div class="col-md-6 col-sm-12 pr-lg-2">
                 <div class="form-group bsWrapper">
-                    <i class="icon-change bsIcon"></i>
-                    <input type="text" class="form-control fanexInput numberTextField" id="exAmount"
-                           name="amount" placeholder="@lang('index.formAmount')" autocomplete="off">
-                </div>
-            </div>
-            {{-- Currency --}}
-            <div class="col-md-6 col-sm-12 pl-lg-2">
-                <div class="form-group bsWrapper">
                     <i class="icon-coin bsIcon"></i>
-                    <select class="form-control fanexInput selectpicker" data-style="fanexInput"
+                    <select class="form-control fanexInput selectpicker disabledForm" data-style="fanexInput"
                             name="currency"
                             id="exCurrency" disabled>
                         <option value="" selected="selected" disabled="disabled">@lang('index.formCurrency')</option>
                     </select>
+                </div>
+            </div>
+
+            {{-- Amount --}}
+            <div class="col-md-6 col-sm-12 pl-lg-2">
+                <div class="form-group bsWrapper">
+                    <i class="icon-change bsIcon"></i>
+                    {{--<input type="text" class="form-control fanexInput numberTextField" id="exAmount"--}}
+                           {{--name="amount" placeholder="@lang('index.formAmount')" autocomplete="off">--}}
+                    <input type="text" class="form-control fanexInput disabledForm" id="exAmount"
+                           name="amount" placeholder="@lang('index.formAmount')" autocomplete="off">
                 </div>
             </div>
         </div>
@@ -71,7 +74,7 @@
             <div class="col-sm-6 col-xs-12 pl-md-2">
                 <div class="form-group bsWrapper">
                     <i class="icon-check bsIcon"></i>
-                    <input type="text" class="form-control fanexInput" name="captcha" id="captcha"
+                    <input type="text" class="form-control fanexInput disabledForm" name="captcha" id="captcha"
                            placeholder="@lang('index.formCaptcha')">
                 </div>
             </div>
@@ -91,13 +94,14 @@
         <div class="row">
             {{-- Calculate Amount --}}
             <div class="col-sm-6 col-xs-12 pr-md-2 mb-xs-4">
-                <input type="button" class="btn fanexBtnOutlineOrange" value=@lang('index.calculate') id="calcBtn"
+                <input type="button" class="btn fanexBtnOutlineOrange disabledForm" value=@lang('index.calculate') id="calcBtn"
                        onclick="getAmount()" disabled/>
             </div>
             {{-- Go For Payment --}}
             <div class="col-sm-6 col-xs-12 pl-md-2">
-                <input type="submit" class="btn fanexBtnOutlineGrey" id="paymentBtn"
+                <input type="submit" class="btn fanexBtnOutlineGrey disabledForm" id="paymentBtn"
                        value=@lang('index.pay') name="payment" disabled/>
+                <input type="text" id="fakeInput" name="fakeInput" style="height:0;width:0;opacity: 0">
             </div>
         </div>
 

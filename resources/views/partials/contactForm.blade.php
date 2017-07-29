@@ -50,7 +50,7 @@
         <div class="row">
             {{-- Send Contact Mail --}}
             <div class="col-sm-6 col-xs-12 pl-md-2 pull-right">
-                <input type="submit" class="btn fanexBtnOutlineOrange" value="Send"/>
+                <input type="submit" class="btn fanexBtnOutlineOrange" value="@lang('index.contactBtn')"/>
                 {{--<div class="btn fanexBtnOutlineOrange hasIcon" onclick="sendMail()"><i class="icon-telegram"></i></div>--}}
             </div>
         </div>

@@ -105,7 +105,7 @@
             <input type="text"
                    class="form-control fanexInput  @if($errors->first('tel')) fanexInputError @else fanexInputWhite @endif numberTextField"
                    id="bnf-phone"
-                   name="tel" placeholder="@lang('payment.bnfFormPhone')" autocomplete="off"
+                   name="tel" placeholder="@lang('payment.bnfFormPhone')  @lang('payment.bnfFormPhoneSample')" autocomplete="off"
                    value="{{ old('tel') }}">
         </div>
 

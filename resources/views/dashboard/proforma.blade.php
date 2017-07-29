@@ -22,7 +22,7 @@
                         <div class="proforma-wrapper mb-4" id="pdfWrapper">
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p style="font-size: 36px;" class="fanex-text-orange" id="fanex-logo">FANEx</p>
+                                    <p class="fanex-text-orange" id="fanex-logo"><i class="icon-fanex"></i></p>
                                 </div>
                                 <div class="col-xs-8 right-align">
                                     <p>@lang('payment.date') @lang('payment.invDate', ['dateEn' => $date->format('d M Y, H:i:s'), 'dateFa' => jdate($date)->format('%Y %B %d, H:i:s')])</p>
@@ -33,11 +33,46 @@
                                 <div class="col-xs-12">
                                     <h2 class="proforma-h2">@lang('payment.prTitle')</h2>
 
-                                    <p class="proforma-p">@lang('payment.prText', ['amount'=>$amount])</p>
+                                    <p class="proforma-p">@lang('payment.prText', ['amount'=>number_format($amount, 2).' '.$currency])</p>
 
-                                    <div class="proforma-heading">@lang('payment.prApplicant')</div>
+                                    {{-- Payment Details --}}
+                                    <div class="proforma-heading">@lang('payment.prPayment')</div>
+                                    <ul>
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6">
+                                                <p class="proforma-p">@lang('payment.invAmount')</p>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6">{{ number_format($amount, 2) . ' ' . $currency }}</div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6">
+                                                <p class="proforma-p">@lang('payment.invExp')</p>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6">0 @lang('index.formRials')</div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6">
+                                                <p class="proforma-p">@lang('payment.invTax')</p>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6">0 @lang('index.formRials')</div>
+                                        </li>
+
+                                        <li class="row mx-0">
+                                            <div class="col-xs-12 col-sm-6">
+                                                <p class="proforma-p">@lang('payment.invSum')</p>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6">
+                                                <p>{{ number_format($amount, 2) . ' ' . $currency . ' + &rlm; 0' }} @lang('index.formRials')</p>
+                                                <p class="acc-factor-sum">
+                                                    = {{ number_format($amount, 2) . ' ' . $currency}} </p>
+                                            </div>
+                                        </li>
+                                    </ul>
 
                                     {{-- Applicant Details --}}
+                                    <div class="proforma-heading">@lang('payment.prApplicant')</div>
                                     <ul>
                                         @if($user->firstname && $user->lastname)
                                             <li class="row mx-0">
@@ -190,6 +225,7 @@
                                     <a href="#" class="invoice-print" data-toggle="tooltip" id="print-pdf"
                                        title="@lang('payment.print')">
                                         <i class="icon-printer"></i>
+                                        <span>@lang('payment.print')</span>
                                     </a>
                                 </div>
                             </div>

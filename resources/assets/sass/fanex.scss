@@ -44,6 +44,10 @@ opacity-30 {
     user-select: none;
 }
 
+.fanex-border {
+    border: solid 1px #aaa !important;
+}
+
 .fanex-text-red,
 .fanex-text-failed,
 .fanex-text-canceled,
@@ -331,6 +335,11 @@ opacity-30 {
                 color: $fanapOrange;
             }
         }
+        p#fanex-logo {
+            font-size: 120px;
+            position: absolute;
+            margin-top: -45px;
+        }
         h2 {
             color: $fanapGreyDark;
             font-size: 24px;
@@ -364,10 +373,17 @@ opacity-30 {
             float: right;
             margin-top: 10px;
             text-decoration: none;
+            text-align: center;
             i {
                 font-size: 42px;
                 color: $fanapGreyDark;
                 @include transition(all .3s);
+            }
+            span {
+                margin-top: -15px;
+                color: $fanapGreyDark;
+                font-size: 12px;
+                display: block;
             }
             &:hover {
                 i {
@@ -453,16 +469,29 @@ opacity-30 {
                 font-weight: 300;
                 font-size: 75%;
             }
+            i.team {
+                margin-top: -25px;
+                font-size: 80px;
+                position: absolute;
+                color: #666;
+            }
         }
 
         .invoice-print {
             float: right;
-            margin-top: -15px;
+            margin-top: -25px;
             text-decoration: none;
+            text-align: center;
             i {
                 font-size: 42px;
                 color: $fanapGreyDark;
                 @include transition(all .3s);
+            }
+            span {
+                margin-top: -15px;
+                color: $fanapGreyDark;
+                font-size: 12px;
+                display: block;
             }
             &:hover {
                 i {
@@ -773,6 +802,7 @@ opacity-30 {
         line-height: 50px;
     }
 }
+
 .mandatoryField {
     position: relative;
 }
@@ -1758,7 +1788,6 @@ a.btnMini {
         padding: 30px 20px;
     }
 }
-
 
 .no-results {
     font-weight: 200;

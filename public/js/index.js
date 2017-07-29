@@ -1,36 +1,137 @@
 $(document).ready(function () {
     $('.selectpicker').selectpicker();
-    $('#exCountry').val('');
+    $('#exCountry').val('').focus();
     $('.selectpicker').selectpicker('refresh');
-    $('#paymentBtn, #calcBtn').attr({'disabled': 'disabled'});
+    $('.disabledForm').attr({'disabled': 'disabled', 'title': indexFormCountry});
+
 
     $('#exCountry').change(function () {
         var currencies = $("#exCountry option:selected").attr('data-currency');
         $('#exCurrency').find('option').remove().end();
-        $.each(JSON.parse(currencies), function( index, value ) {
+        $.each(JSON.parse(currencies), function (index, value) {
             $('#exCurrency')
-                .append($("<option></option>")
-                    .attr("value",index)
-                    .text(value));
+                .append($("<option data-sign='" + value.sign + "'></option>")
+                    .attr("value", index)
+                    .text(value.sign + " " + value.name));
         });
-        $('#exCurrency').removeAttr('disabled');
+        $('.fanexInput').removeClass('fanex-border');
+        $('#exCurrency').removeAttr('disabled').addClass('fanex-border').focus();
+        $('.disabledForm').attr({'title': indexFormCurrency});
         $('.selectpicker').selectpicker('refresh');
+    });
+
+    $('#exCurrency').change(function () {
+        $('.fanexInput').removeClass('fanex-border');
+        $('#exAmount').removeAttr('disabled').addClass('fanex-border').focus();
+        $('.disabledForm').attr({'title': indexFormAmount});
+    });
+
+    $('#exAmount').keyup(function () {
+        // console.log($("#exAmount").maskMoney('unmasked')[0]);
+        // console.log($("#exAmount").priceToFloat());
+        // if($('#exAmount').maskMoney('unmasked')[0] > 9) {
+        if ($('#exAmount').val().length > 1) {
+            $('#exAmount').removeClass('fanex-border');
+            $('#captcha').removeAttr('disabled').addClass('fanex-border');
+            $('.disabledForm').attr({'title': indexFormCaptcha});
+        } else {
+            document.onkeyup = null;
+            $('#captcha').removeClass('fanex-border');
+            $('#exAmount').addClass('fanex-border');
+            $('#captcha').attr({'disabled': 'disabled', 'title': indexFormAmount});
+        }
+    });
+
+    $('#captcha').keyup(function () {
+        if ($(this).val().length == 5) {
+            $('#captcha').removeClass('fanex-border');
+            $('#calcBtn').removeAttr('disabled').removeClass('fanexBtnOutlineOrange').addClass('fanexBtnOrange');
+            $('.disabledForm').attr({'title': indexFormCalculate});
+            document.onkeyup = function (event) {
+                if (event.which == 13 || event.keyCode == 13) {
+                    $('#calcBtn').click();
+                }
+            };
+        } else {
+            document.onkeyup = null;
+            $('#captcha').addClass('fanex-border');
+            $('#calcBtn').attr({'disabled': 'disabled', 'title': indexFormCaptcha});
+        }
     });
 
     $('#exCountry, #exCurrency').change(function () {
         $('.tempAmount').slideUp(300);
-        if ($('#captcha').val().length == 5 && removeComma($('#exAmount').val()) > 0 && $('#exCountry').val() != null && $('#exCurrency').val() != null)
-            $('#calcBtn').removeAttr('disabled').removeClass('fanexBtnOutlineOrange').addClass('fanexBtnOrange');
-        else {
-            $('#paymentBtn').attr({'disabled': 'disabled'});
-            $('#calcBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
-        }
 
         var currency = $('#exCurrency').val();
-        if(currency === "EUR" || currency === "USD")
-            $('#exAmount').val(accounting.formatMoney($('#exAmount').val(), "", 2));
-        else
-            $('#exAmount').val(accounting.formatMoney($('#exAmount').val(), "", 0));
+        var amount = 0;
+        if (currency === "EUR" || currency === "USD") {
+            amount = Number($("#exAmount").unmask()) / 100;
+        } else if (currency === "TRY") {
+            amount = Number($("#exAmount").unmask());
+        }
+
+        if ($('#captcha').val().length == 5 && amount > 9 && $('#exCountry').val() != null && $('#exCurrency').val() != null){
+            $('#calcBtn').removeAttr('disabled').removeClass('fanexBtnOutlineOrange').addClass('fanexBtnOrange');
+            $('.disabledForm').attr({'title': indexFormCalculate});
+            document.onkeyup = function (event) {
+                if (event.which == 13 || event.keyCode == 13) {
+                    $('#calcBtn').click();
+                }
+            };
+        }
+        else {
+            $('#paymentBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
+            $('#calcBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
+            document.onkeyup = null;
+        }
+
+        $('#exAmount').val('').unpriceFormat();
+
+        var sign = $('#exCurrency option:selected').attr('data-sign');
+
+        if (currency === "EUR" || currency === "USD") {
+            $('#exAmount').priceFormat({
+                limit: 7,
+                centsLimit: 2,
+                prefix: sign + ' '
+            });
+        }
+        else if (currency === "TRY") {
+            $('#exAmount').priceFormat({
+                limit: 5,
+                centsLimit: 0,
+                prefix: sign + ' '
+            });
+        }
+
+        $('.selectpicker').selectpicker('refresh');
+    });
+
+    $('#captcha, #exAmount').keyup(function (e) {
+        $('.tempAmount').slideUp(300);
+
+        var currency = $('#exCurrency').val();
+        var amount = 0;
+        if (currency === "EUR" || currency === "USD") {
+            amount = Number($("#exAmount").unmask()) / 100;
+        } else if (currency === "TRY") {
+            amount = Number($("#exAmount").unmask());
+        }
+
+        $(this).focus();
+        if ($('#captcha').val().length == 5 && amount > 9 && $('#exCountry').val() != null && $('#exCurrency').val() != null){
+            $('#calcBtn').removeAttr('disabled').removeClass('fanexBtnOutlineOrange').addClass('fanexBtnOrange');
+            document.onkeyup = function (event) {
+                if (event.which == 13 || event.keyCode == 13) {
+                    $('#calcBtn').click();
+                }
+            };
+        }
+        else {
+            $('#paymentBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
+            $('#calcBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
+            document.onkeyup = null;
+        }
     });
 
     $(".numberTextField").keydown(function (e) {
@@ -50,30 +151,6 @@ $(document).ready(function () {
         // Ensure that it is a number and stop the keypress
         if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
             e.preventDefault();
-        }
-    });
-
-    $('#exAmount').blur(function() {
-        var currency = $('#exCurrency').val();
-        if(currency === "EUR" || currency === "USD")
-            $('#exAmount').val(accounting.formatMoney($('#exAmount').val(), "", 2));
-        else
-            $('#exAmount').val(accounting.formatMoney($('#exAmount').val(), "", 0));
-    });
-
-    $('#exAmount').focus(function() {
-        if(parseInt($(this).val()) == 0)
-            $(this).val('');
-    });
-
-    $('#captcha, #exAmount').keyup(function (e) {
-        $('.tempAmount').slideUp(300);
-        $(this).focus();
-        if ($('#captcha').val().length == 5 && removeComma($('#exAmount').val()) > 0 && $('#exCountry').val() != null && $('#exCurrency').val() != null)
-            $('#calcBtn').removeAttr('disabled').removeClass('fanexBtnOutlineOrange').addClass('fanexBtnOrange');
-        else {
-            $('#paymentBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
-            $('#calcBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
         }
     });
 
@@ -135,10 +212,78 @@ $(document).ready(function () {
         }
     });
 
-    $('a.accordion-toggle').click(function(e) {
+    $('a.accordion-toggle').click(function (e) {
         e.preventDefault();
     });
 });
+
+function getAmount() {
+    var currency = $('#exCurrency').val();
+    var amount = 0;
+    if (currency === "EUR" || currency === "USD") {
+        amount = Number($("#exAmount").unmask()) / 100;
+    } else if (currency === "TRY") {
+        amount = Number($("#exAmount").unmask());
+    }
+
+    $('#mainFormLoader').fadeIn(200);
+    $.ajax({
+        method: 'POST',
+        url: '/calculate',
+        data: {
+            '_token': csrfToken,
+            'X-CSRF-TOKEN': csrfToken,
+            // "amount": parseFloat($('#exAmount').maskMoney('unmasked')[0]),
+            // "amount": $('#exAmount').val(),
+            "amount": amount,
+            "currency": $('#exCurrency').val(),
+            "country": $('#exCountry').val(),
+            "captcha": $('#captcha').val()
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            document.onkeyup = null;
+            $('#calcBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
+            reloadCaptcha();
+            var json = $.parseJSON(xhr.responseText);
+            $(json).each(function (i, val) {
+                $('#mainFormLoader .spinner2').fadeOut(200);
+                $.each(val, function (k, v) {
+                    $('#mainFormLoader .errors').fadeIn(200).html(v);
+                    setTimeout(function () {
+                        $('#mainFormLoader, #mainFormLoader .errors').fadeOut(200);
+                        $('#mainFormLoader .spinner2').fadeIn();
+                    }, 2000);
+                });
+            });
+        }
+    }).done(function (response) {
+        $('.disabledForm').removeAttr('title');
+        $('#paymentBtn').attr({'title': indexFormPay});
+
+        var currency = $('#exCurrency').val();
+        $('#mainFormLoader').fadeOut(200);
+        if (currency === "EUR" || currency === "USD")
+            $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 2) + ' ' + $('#exCurrency').val());
+        else
+            $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 0) + ' ' + $('#exCurrency').val());
+        $('#tempAmountCountry').text($("#exCountry option:selected").text());
+        $('.calcAmount').text(accounting.formatMoney(response, "", 0));
+        $('.tempAmount').slideDown(300);
+        $('#calcBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
+        $('#paymentBtn').removeAttr('disabled').addClass('fanexBtnOrange').removeClass('fanexBtnOutlineGrey');
+        $('#fakeInput').focus();
+        reloadCaptcha();
+
+        document.onkeyup = function (event) {
+            event.preventDefault();
+            if (event.which == 13 || event.keyCode == 13) {
+                $('#paymentBtn').click();
+            }
+        };
+
+    });
+}
+
 
 function removeComma(amount) {
     return parseFloat(amount.replace(/,/g, ''));
@@ -180,86 +325,44 @@ function reloadCaptcha() {
     });
 }
 
-function getAmount() {
-    $('#mainFormLoader').fadeIn(200);
-    $.ajax({
-        method: 'POST',
-        url: '/calculate',
-        data: {
-            '_token': csrfToken,
-            'X-CSRF-TOKEN': csrfToken,
-            "amount": parseFloat($('#exAmount').val().replace(/,/g, '')),
-            "currency": $('#exCurrency').val(),
-            "country": $('#exCountry').val(),
-            "captcha": $('#captcha').val()
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            $('#calcBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
-            reloadCaptcha();
-            var json = $.parseJSON(xhr.responseText);
-            $(json).each(function (i, val) {
-                $('#mainFormLoader .spinner2').fadeOut(200);
-                $.each(val, function (k, v) {
-                    $('#mainFormLoader .errors').fadeIn(200).html(v);
-                    setTimeout(function () {
-                        $('#mainFormLoader, #mainFormLoader .errors').fadeOut(200);
-                        $('#mainFormLoader .spinner2').fadeIn();
-                    }, 2000);
-                });
-            });
-        }
-    }).done(function (response) {
-        var currency = $('#exCurrency').val();
-        $('#mainFormLoader').fadeOut(200);
-        if(currency === "EUR" || currency === "USD")
-            $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 2) + ' ' + $('#exCurrency').val());
-        else
-            $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 0) + ' ' + $('#exCurrency').val());
-        $('#tempAmountCountry').text($("#exCountry option:selected").text());
-        $('.calcAmount').text(accounting.formatMoney(response, "", 0));
-        $('.tempAmount').slideDown(300);
-        $('#calcBtn').attr({'disabled': 'disabled'}).removeClass('fanexBtnOrange').addClass('fanexBtnOutlineOrange');
-        $('#paymentBtn').removeAttr('disabled').addClass('fanexBtnOrange').removeClass('fanexBtnOutlineGrey');
-        // $('#captcha').focus();
-        $('#exCountry').focus();
-        reloadCaptcha();
-    });
-}
-
 /*
-  | Change Language Modal
+ | Change Language Modal
  */
-var ModalEffects = (function() {
+var ModalEffects = (function () {
     function init() {
-        var overlay = document.querySelector( '.md-overlay' );
-        [].slice.call( document.querySelectorAll( '.md-trigger' ) ).forEach( function( el, i ) {
-            var modal = document.querySelector( '#' + el.getAttribute( 'data-modal' ) ),
-                close = modal.querySelector( '.md-close' );
-            function removeModal( hasPerspective ) {
-                classie.remove( modal, 'md-show' );
-                if( hasPerspective ) {
-                    classie.remove( document.documentElement, 'md-perspective' );
+        var overlay = document.querySelector('.md-overlay');
+        [].slice.call(document.querySelectorAll('.md-trigger')).forEach(function (el, i) {
+            var modal = document.querySelector('#' + el.getAttribute('data-modal')),
+                close = modal.querySelector('.md-close');
+
+            function removeModal(hasPerspective) {
+                classie.remove(modal, 'md-show');
+                if (hasPerspective) {
+                    classie.remove(document.documentElement, 'md-perspective');
                 }
             }
+
             function removeModalHandler() {
-                removeModal( classie.has( el, 'md-setperspective' ) );
+                removeModal(classie.has(el, 'md-setperspective'));
             }
-            el.addEventListener( 'click', function( ev ) {
-                classie.add( modal, 'md-show' );
-                overlay.removeEventListener( 'click', removeModalHandler );
-                overlay.addEventListener( 'click', removeModalHandler );
-                if( classie.has( el, 'md-setperspective' ) ) {
-                    setTimeout( function() {
-                        classie.add( document.documentElement, 'md-perspective' );
-                    }, 25 );
+
+            el.addEventListener('click', function (ev) {
+                classie.add(modal, 'md-show');
+                overlay.removeEventListener('click', removeModalHandler);
+                overlay.addEventListener('click', removeModalHandler);
+                if (classie.has(el, 'md-setperspective')) {
+                    setTimeout(function () {
+                        classie.add(document.documentElement, 'md-perspective');
+                    }, 25);
                 }
             });
-            close.addEventListener( 'click', function( ev ) {
+            close.addEventListener('click', function (ev) {
                 ev.stopPropagation();
                 removeModalHandler();
             });
-        } );
+        });
     }
+
     init();
 })();
 
@@ -301,7 +404,7 @@ function getCanvas() {
     form.addClass('pdf');
 
     return html2canvas(form, {
-        onrendered: function(canvas) {
+        onrendered: function (canvas) {
             theCanvas = canvas;
             form.removeClass('pdf');
         },

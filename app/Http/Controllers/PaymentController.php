@@ -69,7 +69,8 @@ class PaymentController extends Controller
                 'countries' => $countries,
                 'date' => $proforma_date,
                 'user' => $user,
-                'amount' => $transaction['premium_amount'] . ' ' . $transaction['currency'],
+                'amount' => $transaction['premium_amount'],
+                'currency' => $transaction['currency'],
                 'finish_time' => $finish_time
             ]);
 
@@ -99,7 +100,8 @@ class PaymentController extends Controller
                 'countries' => $countries,
                 'date' => $proforma_date,
                 'user' => $user,
-                'amount' => $transaction['premium_amount'] . ' ' . $transaction['currency'],
+                'amount' => $transaction['premium_amount'],
+                'currency' => $transaction['currency'],
                 'finish_time' => $finish_time
             ]);
 
@@ -131,7 +133,8 @@ class PaymentController extends Controller
             'countries' => $countries,
             'date' => $proforma_date,
             'user' => $user,
-            'amount' => $transaction['premium_amount'].' '.$transaction['currency'],
+            'amount' => $transaction['premium_amount'],
+            'currency' => $transaction['currency'],
             'finish_time' => $finish_time
         ]);
 

@@ -17,7 +17,9 @@ class CreateCurrenciesTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->increments('id')->unsigned();;
-            $table->enum('type',['EUR','TRY', 'USD'])->default('EUR');
+            $table->enum('type',['EUR','TRY', 'USD', 'GBP', 'ریال', 'CNY'])->default('EUR');
+            $table->enum('sign',['€','₺', '$', '£', '﷼', '¥'])->default('€');
+            $table->enum('name',['Euro','Turkish Lira', 'Dollar', 'Pound', '﷼', 'Yuan'])->default('Euro');
 
             $table->timestamps();
         });
