@@ -51,6 +51,7 @@ class UptController extends Controller
     public function calculateRemittance(RemittanceForm $request)
     {
         $upt_result = array();
+        $upt_rate = 1;
         $EuroER = 1 ;
         $amount = (float)($request->amount);
 
@@ -58,7 +59,7 @@ class UptController extends Controller
 //            $upt_result = $this->UPTGetTExchangeData((float)($request->amount), 'TRY', 'EUR');
 //            $upt_rate = $upt_result['currency_rate'];
             $upt_rate = $this->getExchangeRate('TRY');
-            $amount = $upt_rate * ($amount + $this->calculateCommission($amount , 'TRY'));
+            $amount = ceil($upt_rate * ($amount + $this->calculateCommission($amount , 'TRY')));
         }
 
         else {
@@ -70,7 +71,7 @@ class UptController extends Controller
 
         //write to backlog
         $log = new Backlog();
-        $log = $this->mainFormBackLog($log, $amount, $request, $upt_result, $EuroER);
+        $log = $this->mainFormBackLog($log, $amount, $request, $upt_rate, $EuroER);
         setcookie('backlog', encrypt($log->id), time() + 600);
 //        setcookie('ttl', time()+600, time() + 600);
         return $amount;
@@ -78,7 +79,7 @@ class UptController extends Controller
 
     public function calculateCommission($amount, $currency)
     {
-         $wage = $currency == 'TRY' ? (0.5 * $amount) + 20 : (0.5 * $amount) + 5;
+         $wage = $currency == 'TRY' ? (0.005 * $amount) + 20 : (0.005 * $amount) + 5;
         return $wage;
     }
 }

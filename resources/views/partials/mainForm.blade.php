@@ -13,7 +13,7 @@
     @else
         <h2 class="pb-3 mt-0">@lang('index.formTitle')</h2>
     @endif
-    <form @if($beneficiary) action="{{ route('proforma_with_selected_bnf_profile', ['beneficiary' => $beneficiary->id]) }}" method="post" @else action="{{ route('createOrSelect') }}" method="post" @endif>
+    <form @if($beneficiary) action="{{ route('proforma_with_selected_bnf_profile', ['beneficiary' => $beneficiary->id]) }}" method="get" @else action="{{ route('createOrSelect') }}" method="post" @endif>
         {{ csrf_field() }}
 
         {{-- Destination Country --}}

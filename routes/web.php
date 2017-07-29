@@ -42,7 +42,7 @@ Route::get('/send/{beneficiary}', 'UserController@sendMoney');
 Route::resource('/additional-info', 'UserInformationController');
 Route::any('/beneficiary/select', 'BeneficiaryController@createOrSelect')->name('createOrSelect');
 Route::post('/proforma', 'PaymentController@proforma_with_new_bnf')->name('proforma_with_new_bnf');
-Route::post('/proforma/selected/{beneficiary}', 'PaymentController@proforma_with_selected_bnf_profile')->name('proforma_with_selected_bnf_profile');
+Route::get('/proforma/selected/{beneficiary}', 'PaymentController@proforma_with_selected_bnf_profile')->name('proforma_with_selected_bnf_profile');
 Route::get('/proforma/transaction/{transaction}', 'PaymentController@proforma_with_selected_transaction')->name('proforma_with_transaction');
 Route::get('/proforma/selected', 'PaymentController@proforma_with_selected_bnf')->name('proforma_with_selected_bnf');
 
