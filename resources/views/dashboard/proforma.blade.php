@@ -222,7 +222,8 @@
                                     </ul>
 
                                     {{-- Print Proforma --}}
-                                    <a href="#" class="invoice-print" data-toggle="tooltip" id="print-pdf"
+                                    {{--<a href="#" class="invoice-print" data-toggle="tooltip" id="print-pdf"--}}
+                                    <a href="" class="invoice-print" data-toggle="tooltip" id="pdf-test"
                                        title="@lang('payment.print')">
                                         <i class="icon-printer"></i>
                                         <span>@lang('payment.print')</span>
@@ -234,7 +235,7 @@
                 </div>
 
                 {{-- Form Actions --}}
-                <div class="row p-0 m-0">
+                <div class="row p-0 m-0 not-print">
                     <form action="{{ route('issue_invoice') }}" method="post">
                         {{ csrf_field() }}
                         <div class="checkbox row mx-0 my-4 p-0">

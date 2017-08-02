@@ -176,7 +176,8 @@ class PaymentController extends Controller
                 'countries' => $countries,
                 'date' => $proforma_date,
                 'user' => $user,
-                'amount' => $transaction['premium_amount'] . ' ' . $transaction['currency'],
+                'amount' => $transaction['premium_amount'],
+                'currency' => $transaction['currency'],
                 'finish_time' => $finish_time
             ]);
             $diff = Carbon::now()->diffInSeconds($transaction->ttl);
@@ -228,10 +229,10 @@ class PaymentController extends Controller
 
             if ($result->CorpSendRequestConfirmResult->TransferConfirmStatus->RESPONSE == 'Success') {
 
-                dd($upt_res);
+//                dd($upt_res);
             }
             else {
-                dd('nashod');
+//                dd('nashod');
             }
 
             // Converting EPOCH timestamp to UNIX timestamp
@@ -304,7 +305,10 @@ class PaymentController extends Controller
             $transaction->user_id = Auth::user()->id;
             $transaction->beneficiary_id = $beneficiary->id;
             $transaction->backlog_id = $id;
-            $transaction->exchange_rate = $backlog->exchange_rate;
+            if($backlog->currency == 'TRY')
+                $transaction->exchange_rate = $backlog->upt_exchange_rate;
+            else
+                $transaction->exchange_rate = $backlog->exchange_rate;
             $transaction->premium_amount = $backlog->premium_amount;
             $transaction->payment_amount = $backlog->payment_amount;
             $transaction->currency = $backlog->currency;

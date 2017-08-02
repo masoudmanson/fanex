@@ -103,9 +103,9 @@ trait UptTrait
         $client->__setSoapHeaders($header);
 
         $body_params = array('obj' => array(
-//            'CORRESPONDENT_PARITY'=>'0',
-//            'CORRESPONDENT_EXPENSE'=>'0',
-//            'CORRESPONDENT_COMMISSION'=>'0', // these three parameter weren't on document and didn't used in postman even.but here, it seems necessary
+            'CORRESPONDENT_PARITY'=>'0',
+            'CORRESPONDENT_EXPENSE'=>'0',
+            'CORRESPONDENT_COMMISSION'=>'0', // these three parameter weren't on document and didn't used in postman even.but here, it seems necessary
 
 //            'CORRESPONDENT_REF' => 4767693121639458,
 //            'SENDER_CUSTOMER_ID' =>3,
@@ -156,8 +156,8 @@ trait UptTrait
 //             'CORRESPONDENT_COMMISSION'0
         ));
 
-        $return = $client->CorpSendRequest($body_params);
-//        $return = $client->__SoapCall('CorpSendRequest', $body_params);
+//        $return = $client->CorpSendRequest($body_params);
+        $return = $client->__SoapCall('CorpSendRequest', $body_params);
 
 //        dd($return);
         return $return;

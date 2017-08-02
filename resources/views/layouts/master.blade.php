@@ -48,7 +48,6 @@
 <script src="{{ asset('js/html2canvas.js') }}"></script>
 <script src="{{ asset('js/jspdf.debug.js') }}"></script>
 <script src="{{ asset('js/input-mask.min.js') }}" data-autoinit="true"></script>
-{{--<script src="{{ asset('js/jquery.maskMoney.min.js') }}"></script>--}}
 <script src="{{ asset('js/jquery.priceformat.min.js') }}"></script>
 
 <script src="{{ asset('js/index.js') }}"></script>
