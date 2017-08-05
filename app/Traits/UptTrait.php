@@ -87,15 +87,15 @@ trait UptTrait
         return $return;
     }
 
-    public function CorpSendRequest(Transaction $transaction , User $user , Beneficiary $beneficiary , Backlog $backlog)
+    public function CorpSendRequest(Transaction $transaction, User $user, Beneficiary $beneficiary, Backlog $backlog)
     {
         $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?wsdl';
-//        $client = new SoapClient($url, array("soap_version" => SOAP_1_2, "trace" => 1));
-        $client = new SoapClient($url);
+        $client = new SoapClient($url, array("soap_version" => SOAP_1_2, "trace" => 1));
+//        $client = new SoapClient($url);
 
         $user_param = array(
-            'Username' => "2818",
-            'Password' => "1"
+            'Username' => "2818", //9590
+            'Password' => "1" //
         );
 
         $header = new SoapHeader('http://tempuri.org/', 'WsSystemUserInfo', $user_param);
@@ -103,60 +103,92 @@ trait UptTrait
         $client->__setSoapHeaders($header);
 
         $body_params = array('obj' => array(
-//            'CORRESPONDENT_PARITY'=>'0',
-//            'CORRESPONDENT_EXPENSE'=>'0',
-//            'CORRESPONDENT_COMMISSION'=>'0', // these three parameter weren't on document and didn't used in postman even.but here, it seems necessary
-
-//            'CORRESPONDENT_REF' => 4767693121639458,
-//            'SENDER_CUSTOMER_ID' =>3,
-//            'SENDER_CITIZENSHIP_NO'=>11675357016,
-//            'SENDER_ID_PROVIDER_COUNTRY'=>'TR',
-//            'SENDER_ID_TYPE'=>'NCZ',
-//            'SENDER_BIRTHDATE'=>'10/08/1988',
-//            'SENDER_BIRTHPLACE'=> BAKIRKsY
-//            'SENDER_GSM_COUNTRY_CODE'=> 0090
-//            'SENDER_GSM_NO'=> 5457403530
-//            'SENDER_ADRESS'=> JAWHARAT SOHAR AL WATANIYA TRAD CONT FATHIA MUB JAWHARAT SOHAR AL WATANIYA TRAD CONT FATHIA MUB
-//            'SENDER_GENDER'M
-//            'SENDER_ID_PROVIDER_PLACE'ROP
-//            'SENDER_ID_GENERATED_DATE'
-//            'SENDER_POSTAL_CODE'=>118
-//            'SENDER_HOME_PHONE_NO'=>+968-94075647
-
-//            'BENEFICIARY_BIRTHDATE'=> 02/04/1900
-//            'BENEFICIARY_BANK_BIC_CODE'=>
-//            'BENEFICIARY_BANK_CODE'=>
-//            'BENEFICIARY_BRANCH_CODE'=>
-
             'SENDER_COUNTRY_CODE' => 'IR', // todo:later it should be detect automatically
             'SENDER_NATIONALITY' => 'IR', // todo: " " " "
-//            'SENDER_NAME' => Auth::user()->firstname,
-//            'SENDER_SURNAME' => Auth::user()->lastname,
+
+            'SENDER_CITIZENSHIP_NO' => '14695448',
+            'SENDER_ID_TYPE' => 'pasport',
             'SENDER_ID_NO'=>'3',
+
             'SENDER_NAME' => 'pooria',
             'SENDER_SURNAME' => 'pahlevani',
-//            'BENEFICIARY_COUNTRY_CODE' => $backlog->country,// todo: "to"
             'BENEFICIARY_COUNTRY_CODE' => 'TR',// todo: "to"
-//            'BENEFICIARY_NAME' => $beneficiary->firstname, //todo : bnf firstname
-//            'BENEFICIARY_SURNAME' => $beneficiary->lastname, // todo: bnf lastname
             'BENEFICIARY_NAME' => 'Akif', //todo : bnf firstname
             'BENEFICIARY_SURNAME' => 'Selcuk', // todo: bnf lastname
+            'BENEFICIARY_GSM_COUNTRY_CODE' => '0090',
+            'BENEFICIARY_GSM_NO' => '5057181936',
+            'BENEFICIARY_IBAN' => 'TR290006400000164310007808',
             'TRANSACTION_TYPE' => '002', // todo:which type we have to use?!
+            'AMOUNT' => '1000', // todo ?
+            'AMOUNT_CURRENCY' => 'TRY',
+            'MONEY_TAKEN' => '0',
 
-            'BENEFICIARY_GSM_COUNTRY_CODE'=>'0090',
-            'BENEFICIARY_GSM_NO'=>'5057181936',
-            'BENEFICIARY_IBAN'=>'TR290006400000164310007809',
-
-//            'MONEY_TAKEN_CURRENCY' => 'EUR', // todo ? I think it is EUR
-            'MONEY_TAKEN'=>'0',
-//            'AMOUNT' => $backlog->payment_amount, // todo ?
-            'AMOUNT' => 100, // todo ?
-//            'AMOUNT_CURRENCY' => $backlog->currency, // currency
-            'AMOUNT_CURRENCY' => 'TRY', // currency
-//             'CORRESPONDENT_COMMISSION'0
+            'CORRESPONDENT_PARITY' => '0',
+            'CORRESPONDENT_EXPENSE' => '0',
+            'CORRESPONDENT_COMMISSION' => '0',
         ));
+        //'CORRESPONDENT_PARITY' => '0',
+        //'CORRESPONDENT_EXPENSE' => '0',
+        //'CORRESPONDENT_COMMISSION' => '0',
 
-        $return = $client->CorpSendRequest($body_params);
+//            'MONEY_TAKEN_CURRENCY' => 'TRY',
+//            'CORRESPONDENT_COMMISSION'=>0,
+//            'AMOUNT' => $backlog->payment_amount, // todo ?
+
+
+//        <tem:
+//        SENDER_COUNTRY_CODE > IR</tem:SENDER_COUNTRY_CODE >
+//            <tem:SENDER_CUSTOMER_ID ></tem:SENDER_CUSTOMER_ID >
+//            <tem:SENDER_NATIONALITY > IR</tem:SENDER_NATIONALITY >
+//            <tem:SENDER_CITIZENSHIP_NO ></tem:SENDER_CITIZENSHIP_NO >
+//            <tem:SENDER_ID_PROVIDER_COUNTRY ></tem:SENDER_ID_PROVIDER_COUNTRY >
+//            <tem:SENDER_ID_TYPE ></tem:SENDER_ID_TYPE >
+//            <tem:SENDER_ID_NO > 3</tem:SENDER_ID_NO >
+//            <tem:SENDER_NAME > Pooria</tem:SENDER_NAME >
+//            <tem:SENDER_SURNAME > Pahlevani</tem:SENDER_SURNAME >
+//            <tem:SENDER_MOTHER_NAME ></tem:SENDER_MOTHER_NAME >
+//            <tem:SENDER_FATHER_NAME ></tem:SENDER_FATHER_NAME >
+//            <tem:SENDER_BIRTHDATE ></tem:SENDER_BIRTHDATE >
+//            <tem:SENDER_BIRTHPLACE ></tem:SENDER_BIRTHPLACE >
+//            <tem:SENDER_GSM_COUNTRY_CODE ></tem:SENDER_GSM_COUNTRY_CODE >
+//            <tem:SENDER_GSM_NO ></tem:SENDER_GSM_NO >
+//            <tem:SENDER_EMAIL ></tem:SENDER_EMAIL >
+//            <tem:SENDER_ADRESS ></tem:SENDER_ADRESS >
+//            <tem:SENDER_GENDER ></tem:SENDER_GENDER >
+//            <tem:SENDER_ID_PROVIDER_PLACE ></tem:SENDER_ID_PROVIDER_PLACE >
+//            <tem:SENDER_ID_GENERATED_DATE ></tem:SENDER_ID_GENERATED_DATE >
+//            <tem:SENDER_POSTAL_CODE ></tem:SENDER_POSTAL_CODE >
+//            <tem:SENDER_HOME_PHONE_NO ></tem:SENDER_HOME_PHONE_NO >
+//            <tem:MONEY_RESOURCE ></tem:MONEY_RESOURCE >
+//            <tem:SEND_REASON ></tem:SEND_REASON >
+//            <tem:BENEFICIARY_COUNTRY_CODE > TR</tem:BENEFICIARY_COUNTRY_CODE >
+//            <tem:BENEFICIARY_NAME > Akif</tem:BENEFICIARY_NAME >
+//            <tem:BENEFICIARY_SURNAME > Kenger</tem:BENEFICIARY_SURNAME >
+//            <tem:BENEFICIARY_GSM_COUNTRY_CODE > 0090</tem:BENEFICIARY_GSM_COUNTRY_CODE >
+//            <tem:BENEFICIARY_GSM_NO > 5057181936</tem:BENEFICIARY_GSM_NO >
+//            <tem:BENEFICIARY_EMAIL ></tem:BENEFICIARY_EMAIL >
+//            <tem:BENEFICIARY_FATHER_NAME ></tem:BENEFICIARY_FATHER_NAME >
+//            <tem:BENEFICIARY_BIRTHDATE ></tem:BENEFICIARY_BIRTHDATE >
+//            <tem:NARRATIVE ></tem:NARRATIVE >
+//            <tem:BENEFICIARY_BANK_BIC_CODE ></tem:BENEFICIARY_BANK_BIC_CODE >
+//            <tem:BENEFICIARY_BANK_CODE ></tem:BENEFICIARY_BANK_CODE >
+//            <tem:BENEFICIARY_BRANCH_CODE ></tem:BENEFICIARY_BRANCH_CODE >
+//            <tem:BENEFICIARY_ACCOUNT_NO ></tem:BENEFICIARY_ACCOUNT_NO >
+//            <tem:BENEFICIARY_IBAN > TR290006400000164310007808</tem:BENEFICIARY_IBAN >
+//            <tem:BENEFICIARY_CREDITCARD_NO ></tem:BENEFICIARY_CREDITCARD_NO >
+//            <tem:BENEFICIARY_CORPORATION_CODE ></tem:BENEFICIARY_CORPORATION_CODE >
+//            <tem:BENEFICIARY_OFFICE_CODE ></tem:BENEFICIARY_OFFICE_CODE >
+//            <tem:TRANSACTION_TYPE > 002</tem:TRANSACTION_TYPE >
+//            <tem:SECURITY_QUESTION_ID ></tem:SECURITY_QUESTION_ID >
+//            <tem:SECURITY_QUESTION_ANSWER ></tem:SECURITY_QUESTION_ANSWER >
+//            <tem:MONEY_TAKEN > 0</tem:MONEY_TAKEN >
+//            <tem:MONEY_TAKEN_CURRENCY ></tem:MONEY_TAKEN_CURRENCY >
+//            <tem:AMOUNT > 100</tem:AMOUNT >
+//            <tem:AMOUNT_CURRENCY >TRY</tem:AMOUNT_CURRENCY >
+//            <tem:OFFICE_REFERENCE_CODE ></tem:OFFICE_REFERENCE_CODE >
+//            <tem:EFT_TYPE ></tem:EFT_TYPE >
+
+    $return = $client->CorpSendRequest($body_params);
 //        $return = $client->__SoapCall('CorpSendRequest', $body_params);
 
 //        dd($return);
@@ -209,7 +241,7 @@ trait UptTrait
 
         return $return;
     }
-    
+
     public function CorpCancelConfirm($upt_ref)
     {
         $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?WSDL';
