@@ -4,8 +4,6 @@ $(document).ready(function () {
     $('.selectpicker').selectpicker('refresh');
     $('.disabledForm').attr({'disabled': 'disabled', 'title': indexFormCountry});
 
-
-
     $('#pdf-test').on('click', function (e) {
         e.preventDefault();
         console.log("Getting ready to print the document.");
@@ -33,9 +31,6 @@ $(document).ready(function () {
         $('.invoice-print').fadeIn(300);
 
     });
-
-
-
 
     $('#exCountry').change(function () {
         var currencies = $("#exCountry option:selected").attr('data-currency');
@@ -315,7 +310,6 @@ function getAmount() {
 
     });
 }
-
 
 function removeComma(amount) {
     return parseFloat(amount.replace(/,/g, ''));
