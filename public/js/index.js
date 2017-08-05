@@ -5,6 +5,38 @@ $(document).ready(function () {
     $('.disabledForm').attr({'disabled': 'disabled', 'title': indexFormCountry});
 
 
+
+    $('#pdf-test').on('click', function (e) {
+        e.preventDefault();
+        console.log("Getting ready to print the document.");
+        if (!window.print) {
+            alert("You need NS4.x to use this print button!")
+            return
+        }
+
+        console.log("Hiding extra stuff from page.");
+
+        $('#bnf-sidebar').hide();
+        $('.dash-title').hide();
+        $('.dash-subtitle').hide();
+        $('.not-print').hide();
+        $('.invoice-print').hide();
+
+        window.print();
+
+        console.log("Displaying hided stuff again.");
+
+        $('#bnf-sidebar').fadeIn(300);
+        $('.dash-title').fadeIn(300);
+        $('.dash-subtitle').fadeIn(300);
+        $('.not-print').fadeIn(300);
+        $('.invoice-print').fadeIn(300);
+
+    });
+
+
+
+
     $('#exCountry').change(function () {
         var currencies = $("#exCountry option:selected").attr('data-currency');
         $('#exCurrency').find('option').remove().end();

@@ -25,7 +25,7 @@ class RemittanceForm extends FormRequest
     {
         return [
             'captcha' => 'required|captcha',
-            'amount'  => 'required|numeric|between:10,9999.99'
+            'amount'  => 'required|numeric|between:10,10000.01'
         ];
     }
 }

@@ -103,6 +103,7 @@ trait UptTrait
         $client->__setSoapHeaders($header);
 
         $body_params = array('obj' => array(
+
             'SENDER_COUNTRY_CODE' => 'IR', // todo:later it should be detect automatically
             'SENDER_NATIONALITY' => 'IR', // todo: " " " "
 
@@ -134,7 +135,6 @@ trait UptTrait
 //            'MONEY_TAKEN_CURRENCY' => 'TRY',
 //            'CORRESPONDENT_COMMISSION'=>0,
 //            'AMOUNT' => $backlog->payment_amount, // todo ?
-
 
 //        <tem:
 //        SENDER_COUNTRY_CODE > IR</tem:SENDER_COUNTRY_CODE >
@@ -190,6 +190,7 @@ trait UptTrait
 
     $return = $client->CorpSendRequest($body_params);
 //        $return = $client->__SoapCall('CorpSendRequest', $body_params);
+
 
 //        dd($return);
         return $return;
