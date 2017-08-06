@@ -39,7 +39,8 @@ $(document).ready(function () {
             $('#exCurrency')
                 .append($("<option data-sign='" + value.sign + "'></option>")
                     .attr("value", index)
-                    .text(value.sign + " " + value.name));
+                    .text(value.name));
+                    // .text(value.sign + " " + value.name));
         });
         $('.fanexInput').removeClass('fanex-border');
         $('#exCurrency').removeAttr('disabled').addClass('fanex-border').focus();
@@ -290,9 +291,9 @@ function getAmount() {
         var currency = $('#exCurrency').val();
         $('#mainFormLoader').fadeOut(200);
         if (currency === "EUR" || currency === "USD")
-            $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 2) + ' ' + $('#exCurrency').val());
+            $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 2) + ' ' + $("#exCurrency option:selected").text());
         else
-            $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 0) + ' ' + $('#exCurrency').val());
+            $('#tempAmountCash').text(accounting.formatMoney($('#exAmount').val(), "", 0) + ' ' + $("#exCurrency option:selected").text());
         $('#tempAmountCountry').text($("#exCountry option:selected").text());
         $('.calcAmount').text(accounting.formatMoney(response, "", 0));
         $('.tempAmount').slideDown(300);

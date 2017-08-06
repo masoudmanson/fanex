@@ -101,12 +101,14 @@ function indexFormCountryList($data, $lang)
             "currency" => array(
                 "EUR" => array(
                     'type' => 'EUR',
-                    'name' => 'Euro',
+//                    'name' => 'Euro',
+                    'name' => __('index.EUR'),
                     'sign' => '€'
                 ),
                 "TRY" => array(
                     'type' => 'TRY',
-                    'name' => 'Tukish Lira',
+//                    'name' => 'Tukish Lira',
+                    'name' => __('index.TRY'),
                     'sign' => '₺'
                 )
             )
