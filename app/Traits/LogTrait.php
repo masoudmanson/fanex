@@ -28,8 +28,8 @@ trait LogTrait
         $log->payment_type = 'transfer'; //from form
 
 
-        if (isset($upt_result['currency_rate'])) {
-            $log->upt_exchange_rate = $upt_result['currency_rate'];
+        if (isset($upt_result)) {
+            $log->upt_exchange_rate = $upt_result;
         }
 
 //        if (isset($euro_result[0]->er)) {
