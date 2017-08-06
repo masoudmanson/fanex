@@ -17,7 +17,7 @@ trait LogTrait
 
     public function mainFormBackLog(Backlog $log,$amount, Request $request, $upt_result, $euro_result=0)
     {
-//        $log->ip = $this->getClientIp();
+        $log->ip = $this->getClientIp();
         $log->ip = $request->ip();
         $log->currency = $request->currency;
         $log->payment_amount = $amount;
@@ -44,10 +44,12 @@ trait LogTrait
 
     public function getClientIp()
     {
-        $externalContent = file_get_contents('http://checkip.dyndns.com/');
-        preg_match('/Current IP Address: \[?([:.0-9a-fA-F]+)\]?/', $externalContent, $m);
-        $externalIp = $m[1];
+//        $externalContent = file_get_contents('http://checkip.dyndns.com/');
+//        preg_match('/Current IP Address: \[?([:.0-9a-fA-F]+)\]?/', $externalContent, $m);
+//        $externalIp = $m[1];
+//        return $externalIp;
+        $ip = $_SERVER['REMOTE_ADDR']?:($_SERVER['HTTP_X_FORWARDED_FOR']?:$_SERVER['HTTP_CLIENT_IP']);
+        return $ip;
 
-        return $externalIp;
     }
 }

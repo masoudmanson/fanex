@@ -16,4 +16,11 @@ return [
     'swalErrorText' => 'Error in Deleting!',
     'swalDeleted' => 'Deleted!',
     'swalDeletedText' => 'Beneficiary has been deleted!',
+
+    'indexFormCountry'  =>  'Please Select Country First',
+    'indexFormCurrency'  =>  'Please Select Currency',
+    'indexFormAmount'  =>  'Please Enter a valid amount',
+    'indexFormCaptcha'  =>  'Enter the Captcha',
+    'indexFormCalculate'  =>  'You have to Calculate first',
+    'indexFormPay'  =>  'You Can Pay Now',
 ];

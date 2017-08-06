@@ -29,8 +29,7 @@
                             <h3 class="invoice-title">@lang('payment.invUser', ['user' => Auth::user()->firstname])
                                 <span class="invoice-date">@lang('payment.invDate', ['dateEn' => $transaction->payment_date->format('d M Y, H:i:s'), 'dateFa' => jdate($transaction->payment_date)->format('%Y %B %d, H:i:s')])</span>
                             </h3>
-                            <p>@lang('payment.invText')</p>
-                            <p class="invoice-bnf">{{ $transaction->beneficiary->firstname . ' ' . $transaction->beneficiary->lastname }}</p>
+                            <p>@lang('payment.invText', ['name' => $transaction->beneficiary->firstname . ' ' . $transaction->beneficiary->lastname])</p>
 
                             {{-- Invoice Table --}}
                             <div class="row m-0 p-0">
@@ -124,12 +123,14 @@
 
                             <div class="regards">
                                 <p class="grey">@lang('payment.invRegards')</p>
-                                @lang('payment.invFanex')
+                                <i class="icon-fanex team"></i>
                                 <a href="#" class="invoice-print" data-toggle="tooltip" id="print-pdf"
                                    title="@lang('payment.print')">
                                     <i class="icon-printer"></i>
+                                    <span>@lang('payment.print')</span>
                                 </a>
                             </div>
+                            <br><br>
                         </div>
                     </div>
                 </div>

@@ -47,6 +47,19 @@ trait PlatformTrait
         return $res;
     }
 
+//    public function getCurrentPlatformUser($token)
+//    {
+//        $client = new Client();
+//        $res = $client->get(config('urls.sso').'users/', [
+//            'headers' => [
+////                '_token_' => $token,
+////                '_token_issuer_' => 1
+//            'authorization' =>'Bearer '. $token
+//            ]
+//        ]);
+//        return $res;
+//    }
+
     public function getOtt()
     {
         $token = config('services.sso.api');
@@ -83,6 +96,23 @@ trait PlatformTrait
                 '_token_' => $token,// get business token and put in here
                 '_token_issuer_' => 1
             ]
+        ]);
+        return $res;
+    }
+
+    public function getBusinessCredit()
+    {
+        $token = config('services.sso.api');
+        $client = new Client();
+        //business token must taken from sso
+        $res = $client->get(config('urls.platform').'nzh/biz/getCredit', [
+            'headers' => [
+                '_token_' => $token,// get business token and put in here
+                '_token_issuer_' => 1
+            ],
+            'query' => [
+                'guildCode' => 'FINANCIAL_GUILD'
+            ],
         ]);
         return $res;
     }
@@ -169,6 +199,28 @@ trait PlatformTrait
                 '_token_' => $token,
                 '_token_issuer_' => 1
             ]
+        ]);
+        return $res;
+    }
+
+    public function chargeUserWallet($user , $charge_amount)
+    {
+        $token = config('services.sso.api');
+        $client = new Client();
+        //business token must taken from sso
+        $res = $client->get(config('urls.platform').'nzh/biz/transferToFollower', [
+            'headers' => [
+                '_token_' => $token,// get business token and put in here
+                '_token_issuer_' => 1
+            ],
+            'query' => [
+                'guildCode' => 'FINANCIAL_GUILD',
+                'amount' => $charge_amount,
+                'userId' => $user->userId, //todo : ???
+                'description' => 'بازگشت مبلغ واریز شده به حساب کاربری، به دلیل برگشت حواله',
+//                'currencyCode' => '',
+
+            ],
         ]);
         return $res;
     }

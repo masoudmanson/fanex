@@ -92,15 +92,24 @@ function indexFormCountryList($data, $lang)
 //
 //    arsort($country_list);
 
-
+    $country_name = Countries::lookup($lang)['TR'];
     $country_list = array(
         "TR" => array(
             "enable" => 1,
             "code" => "TR",
-            "name" => "Turkey",
+            "name" => $country_name,
             "currency" => array(
-                "EUR" => "€ Euro",
-                "TRY" => "‎₺ Turkish Lira")
+                "EUR" => array(
+                    'type' => 'EUR',
+                    'name' => 'Euro',
+                    'sign' => '€'
+                ),
+                "TRY" => array(
+                    'type' => 'TRY',
+                    'name' => 'Tukish Lira',
+                    'sign' => '₺'
+                )
+            )
         )
     );
 

@@ -47,11 +47,19 @@
 <script src="{{ asset('js/classie.js') }}"></script>
 <script src="{{ asset('js/html2canvas.js') }}"></script>
 <script src="{{ asset('js/jspdf.debug.js') }}"></script>
+<script src="{{ asset('js/input-mask.min.js') }}" data-autoinit="true"></script>
+<script src="{{ asset('js/jquery.priceformat.min.js') }}"></script>
 
 <script src="{{ asset('js/index.js') }}"></script>
 <script>
     var csrfToken = $('meta[name="csrf-token"]').attr('content');
     var timeOut = "@lang('index.timeout')";
+    var indexFormCountry = "@lang('js.indexFormCountry')";
+    var indexFormCurrency = "@lang('js.indexFormCurrency')";
+    var indexFormAmount = "@lang('js.indexFormAmount')";
+    var indexFormCaptcha = "@lang('js.indexFormCaptcha')";
+    var indexFormCalculate = "@lang('js.indexFormCalculate')";
+    var indexFormPay = "@lang('js.indexFormPay')";
     $.ajaxSetup(
         {
             headers:
