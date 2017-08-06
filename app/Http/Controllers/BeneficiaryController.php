@@ -160,8 +160,8 @@ class BeneficiaryController extends Controller
         else {
             $beneficiaries = Beneficiary::available()->where('beneficiaries.user_id', '=', $user->id)
                 ->where(function ($query) use ($keyword) {
-                    $query->where('beneficiaries.firstname', 'like', "%$keyword%")
-                        ->orWhere('beneficiaries.lastname', 'like', "%$keyword%")
+                    $query->whereRaw("regexp_like(beneficiaries.firstname, '$keyword', 'i')")
+                        ->orWhereRaw("regexp_like(beneficiaries.lastname, '$keyword', 'i')")
                         ->orWhere('beneficiaries.account_number', 'like', "%$keyword%")
                         ->orWhere('beneficiaries.tel', 'like', "%$keyword%");
                 })->orderby("beneficiaries.id", "desc")->paginate(10);

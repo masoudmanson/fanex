@@ -168,7 +168,6 @@ class UserController extends Controller
         //
     }
 
-
     public function search(Request $request, $keyword)
     {
         $user = Auth::user();
@@ -182,9 +181,11 @@ class UserController extends Controller
             ->where('transactions.user_id', '=', $user->id)
                 ->where(function ($query) use ($keyword) {
                     $query->where('transactions.uri', 'like', "%$keyword%")
-                        ->orWhere('transactions.premium_amount', 'like', "%$keyword%")
-                        ->orWhere('beneficiaries.firstname', 'like', "%$keyword%")
-                        ->orWhere('beneficiaries.lastname', 'like', "%$keyword%");
+                          ->orWhereRaw("regexp_like(beneficiaries.firstname, '$keyword', 'i')")
+                          ->orWhereRaw("regexp_like(beneficiaries.lastname, '$keyword', 'i')");
+//                        ->orWhere('transactions.premium_amount', 'like', "%$keyword%")
+//                        ->orWhere('beneficiaries.firstname', 'like', "%$keyword%")
+//                        ->orWhere('beneficiaries.lastname', 'like', "%$keyword%");
                 })->orderby("transactions.id", "desc")->paginate(10);
 
             $transactions = $this->payable($transactions);
@@ -196,8 +197,6 @@ class UserController extends Controller
             return view('dashboard.index', compact('user', 'transactions'));
         }
     }
-
-
 
     public function searchStatus(Request $request, $status)
     {
