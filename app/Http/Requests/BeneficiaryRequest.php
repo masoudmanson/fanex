@@ -40,8 +40,10 @@ class BeneficiaryRequest extends FormRequest
                     'bank_name' => 'required|string|between:3,40',
                     'branch_name' => 'required|string|between:3,60',
                     'branch_address' => 'string|between:3,256',
-                    'swift_code' => 'required|between:8,11',
-                    'iban_code' => 'required|string|between:10,34'
+                    'swift_code' => 'required|bic',
+//                    between:8,11',
+                    'iban_code' => 'required|iban|'
+//                    string|between:10,34'
                 ];
             }
             case 'PUT':

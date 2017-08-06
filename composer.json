@@ -9,6 +9,7 @@
         "caouecs/laravel-lang": "~3.0",
         "cornford/googlmapper": "2.*",
         "guzzlehttp/guzzle": "~6.0",
+        "intervention/validation": "^1.2",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "maatwebsite/excel": "^2.1",
