@@ -42,7 +42,8 @@ $(document).ready(function () {
                     .text(value.name));
         });
         $('.fanexInput').removeClass('fanex-border');
-        $('#exCurrency').removeAttr('disabled').addClass('fanex-border').focus();
+        $('#exCurrency').addClass('fanex-border').focus();
+        $('.exCurrency').removeAttr('disabled');
         $('.disabledForm').attr({'title': indexFormCurrency});
         $('.selectpicker').selectpicker('refresh');
     });

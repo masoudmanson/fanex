@@ -1,6 +1,8 @@
 
 window._ = require('lodash');
 
+import 'babel-polyfill';
+
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -14,6 +16,7 @@ try {
 
     require('bootstrap-select');
 } catch (e) {}
+
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
