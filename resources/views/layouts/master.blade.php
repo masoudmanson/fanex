@@ -60,6 +60,7 @@
     var indexFormCaptcha = "@lang('js.indexFormCaptcha')";
     var indexFormCalculate = "@lang('js.indexFormCalculate')";
     var indexFormPay = "@lang('js.indexFormPay')";
+    var AMOUNT_LIMIT_MIN = 0;
     $.ajaxSetup(
         {
             headers:

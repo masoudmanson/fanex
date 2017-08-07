@@ -40,7 +40,6 @@ $(document).ready(function () {
                 .append($("<option data-sign='" + value.sign + "'></option>")
                     .attr("value", index)
                     .text(value.name));
-                    // .text(value.sign + " " + value.name));
         });
         $('.fanexInput').removeClass('fanex-border');
         $('#exCurrency').removeAttr('disabled').addClass('fanex-border').focus();
@@ -55,9 +54,6 @@ $(document).ready(function () {
     });
 
     $('#exAmount').keyup(function () {
-        // console.log($("#exAmount").maskMoney('unmasked')[0]);
-        // console.log($("#exAmount").priceToFloat());
-        // if($('#exAmount').maskMoney('unmasked')[0] > 9) {
         if ($('#exAmount').val().length > 1) {
             $('#exAmount').removeClass('fanex-border');
             $('#captcha').removeAttr('disabled').addClass('fanex-border');
@@ -98,7 +94,7 @@ $(document).ready(function () {
             amount = Number($("#exAmount").unmask());
         }
 
-        if ($('#captcha').val().length == 5 && amount > 9 && $('#exCountry').val() != null && $('#exCurrency').val() != null){
+        if ($('#captcha').val().length == 5 && amount > AMOUNT_LIMIT_MIN && $('#exCountry').val() != null && $('#exCurrency').val() != null){
             $('#calcBtn').removeAttr('disabled').removeClass('fanexBtnOutlineOrange').addClass('fanexBtnOrange');
             $('.disabledForm').attr({'title': indexFormCalculate});
             document.onkeyup = function (event) {
@@ -147,7 +143,7 @@ $(document).ready(function () {
         }
 
         $(this).focus();
-        if ($('#captcha').val().length == 5 && amount > 9 && $('#exCountry').val() != null && $('#exCurrency').val() != null){
+        if ($('#captcha').val().length == 5 && amount > AMOUNT_LIMIT_MIN && $('#exCountry').val() != null && $('#exCurrency').val() != null){
             $('#calcBtn').removeAttr('disabled').removeClass('fanexBtnOutlineOrange').addClass('fanexBtnOrange');
             document.onkeyup = function (event) {
                 if (event.which == 13 || event.keyCode == 13) {
