@@ -37,9 +37,9 @@
             <div class="col-md-6 col-sm-12 pr-lg-2">
                 <div class="form-group bsWrapper">
                     <i class="icon-coin bsIcon"></i>
-                    <select class="form-control fanexInput selectpicker disabledForm" data-style="fanexInput"
+                    <select class="form-control fanexInput selectpicker disabledForm exCurrency" data-style="fanexInput"
                             name="currency"
-                            id="exCurrency" disabled>
+                            id="exCurrency" disabled="disabled">
                         <option value="" selected="selected" disabled="disabled">@lang('index.formCurrency')</option>
                     </select>
                 </div>
