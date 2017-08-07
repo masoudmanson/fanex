@@ -75,7 +75,7 @@ class UserInformationController extends Controller
             $user->userId = $identity['userId'];
 
             if(!isset($identity['firstName']) || !isset($identity['lastName']))
-                abort(401);
+                return abort(401);
             else {
                 $user->firstname = $identity['firstName'];
                 $user->lastname = $identity['lastName'];
