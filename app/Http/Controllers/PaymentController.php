@@ -222,18 +222,18 @@ class PaymentController extends Controller
             $invoice_result = $invoice->result[0];
             $transaction = Transaction::findByBillNumber($invoice_result->billNumber)->firstOrFail();
 
-            $upt_res = $this->CorpSendRequest($transaction, $transaction->user, $transaction->beneficiary, $transaction->backlog);// todo : it must written after fanex admin
-
-            dd($upt_res);
-
-            $result = $this->CorpSendRequestConfirm($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT);
-
-            if ($result->CorpSendRequestConfirmResult->TransferConfirmStatus->RESPONSE == 'Success') {
-
-//                dd($upt_res);
-            } else {
-//                dd('nashod');
-            }
+//            $upt_res = $this->CorpSendRequest($transaction, $transaction->user, $transaction->beneficiary, $transaction->backlog);// todo : it must written after fanex admin
+//
+//            dd($upt_res);
+//
+//            $result = $this->CorpSendRequestConfirm($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT);
+//
+//            if ($result->CorpSendRequestConfirmResult->TransferConfirmStatus->RESPONSE == 'Success') {
+//
+////                dd($upt_res);
+//            } else {
+////                dd('nashod');
+//            }
 
             // Converting EPOCH timestamp to UNIX timestamp
             $invoice_result->paymentDate = ceil($invoice_result->paymentDate / 1000);
@@ -273,6 +273,7 @@ class PaymentController extends Controller
 //                    $transaction->update();
 //                    // return ?
 //                }
+                $transaction->update();
                 return view('dashboard.invoice', compact('invoice_result', 'transaction', 'finish_time'));
 
             } else {

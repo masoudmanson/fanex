@@ -95,7 +95,7 @@ trait UptTrait
 
         $user_param = array(
             'Username' => "2818", //9590
-            'Password' => "1" //
+            'Password' => "1" ////Fanex@123456!
         );
 
         $header = new SoapHeader('http://tempuri.org/', 'WsSystemUserInfo', $user_param);
