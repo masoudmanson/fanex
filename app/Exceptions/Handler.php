@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 use Psy\Exception\FatalErrorException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -55,7 +56,13 @@ class Handler extends ExceptionHandler
         }
         if ($exception instanceof CustomException) {
             $status = $exception->getCode();
-        } elseif ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+        }
+        /* added for userInformation exception */
+        elseif ($exception instanceof HttpException) {
+            $status = $exception->getStatusCode();
+        }
+        /*                                    */
+        elseif ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
             $status = $exception->getStatusCode();
         } elseif ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
             $status = 404;
@@ -71,8 +78,8 @@ class Handler extends ExceptionHandler
             $status = $exception->getCode();
         }
 
-//        if(isset($status))
-//            return response()->view('errors.error', array('exception' => $exception, 'status' => $status), 200);
+        if(isset($status))
+            return response()->view('errors.error', array('exception' => $exception, 'status' => $status), 200);
 //
 //        return response()->view('errors.error', array('exception' => $exception, 'status' => 1000), 200);
         return parent::render($request, $exception);

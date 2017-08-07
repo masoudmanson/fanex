@@ -18,7 +18,7 @@ trait LogTrait
     public function mainFormBackLog(Backlog $log,$amount, Request $request, $upt_result, $euro_result=0)
     {
         $log->ip = $this->getClientIp();
-        $log->ip = $request->ip();
+//        $log->ip = $request->ip();
         $log->currency = $request->currency;
         $log->payment_amount = $amount;
         $log->premium_amount = $request->amount; //todo: I think it has to be added to db
