@@ -224,7 +224,7 @@ class PaymentController extends Controller
 
             $upt_res = $this->CorpSendRequest($transaction, $transaction->user, $transaction->beneficiary, $transaction->backlog);// todo : it must written after fanex admin
 
-            dd($upt_res);
+//            dd($upt_res);
 
             $result = $this->CorpSendRequestConfirm($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT);
 

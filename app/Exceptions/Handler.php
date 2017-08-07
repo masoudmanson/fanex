@@ -78,10 +78,9 @@ class Handler extends ExceptionHandler
             $status = $exception->getCode();
         }
 
-        if(isset($status))
-            return response()->view('errors.error', array('exception' => $exception, 'status' => $status), 200);
-//
-//        return response()->view('errors.error', array('exception' => $exception, 'status' => 1000), 200);
+//        if(isset($status))
+//            return response()->view('errors.error', array('exception' => $exception, 'status' => $status), 200);
+
         return parent::render($request, $exception);
     }
 
