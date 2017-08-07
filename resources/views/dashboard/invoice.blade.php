@@ -124,7 +124,8 @@
                             <div class="regards">
                                 <p class="grey">@lang('payment.invRegards')</p>
                                 <i class="icon-fanex team"></i>
-                                <a href="#" class="invoice-print" data-toggle="tooltip" id="print-pdf"
+                                {{--<a href="#" class="invoice-print" data-toggle="tooltip" id="print-pdf"--}}
+                                <a href="" class="invoice-print" data-toggle="tooltip" id="pdf-test"
                                    title="@lang('payment.print')">
                                     <i class="icon-printer"></i>
                                     <span>@lang('payment.print')</span>
@@ -136,7 +137,7 @@
                 </div>
 
                 {{-- Form Actions --}}
-                <div class="row p-0 m-0">
+                <div class="row p-0 m-0  not-print">
                     <div class="col-sm-6 col-xs-12 p-0 pb-md-0 pb-sm-4 pb-xs-4 pr-md-2 pr-lg-3">
                         <a href="/" class="btn fanexBtnNoline">@lang('payment.backHome')</a>
                     </div>
