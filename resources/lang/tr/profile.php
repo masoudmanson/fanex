@@ -6,6 +6,7 @@ return [
     'menuTrans' => 'işlemler',
     'menuBnf' => 'Faydalanıcılar',
     'menuNotify' => 'Bildirimler',
+    'menuBalance' => 'Hesap Bakiyesi',
 
     // Transactions Page
     'filterAll' => 'Tüm İşlemler',
