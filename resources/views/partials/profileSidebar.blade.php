@@ -31,8 +31,18 @@
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
-                    {{--<input id="token" type="hidden" value="{{$encrypted_token}}">--}}
                 </form>
+            </li>
+        </ul>
+    </div>
+
+    <div class="white-card mt-4">
+        <ul class="profile-ul">
+            <li class="profile-li">
+                <a href="https://gw.fanapium.com/v1/pbc/BuyCredit/?redirectUri=http://85.133.159.140:12801/profile&callUri=http://85.133.159.140:12801">
+                    <i class="icon-card"></i> @lang('profile.menuBalance')
+                </a>
+                <iframe src="https://gw.fanapium.com/v1/pbc/getcredit" id="myIframe" frameborder="0" style="width: 100%; max-height: 40px;"></iframe>
             </li>
         </ul>
     </div>
