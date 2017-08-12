@@ -752,9 +752,15 @@ opacity-30 {
     width: 100%;
 }
 
-.bootstrap-select .dropdown-toggle:focus {
-    outline: none !important;
-    box-shadow: none !important;
+.bootstrap-select > .dropdown-toggle {
+    width: 99.9% !important;
+}
+
+.bootstrap-select {
+    .dropdown-toggle:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
 }
 
 .bsWrapper {
@@ -2196,6 +2202,10 @@ mark, .mark {
 }
 
 @media print {
-    @page { margin: 0; }
-    body { margin: 1.6cm; }
+    @page {
+        margin: 0;
+    }
+    body {
+        margin: 1.6cm;
+    }
 }

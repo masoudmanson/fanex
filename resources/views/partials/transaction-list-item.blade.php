@@ -44,7 +44,7 @@
                         </span>
                     </div>
 
-                    <a class="col-md-1 col-sm-1 col-xs-1 accordion-toggle" data-toggle="collapse"
+                    <a class="col-md-1 col-sm-1 col-xs-1 accordion-toggle status-handler" data-id="{{ $transaction->id }}" data-toggle="collapse"
                        data-parent="#ajax-transaction-list" href="{{ "#row".$transaction->id }}">
                         <span class="acc-arrow"></span>
                     </a>

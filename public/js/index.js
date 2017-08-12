@@ -189,6 +189,7 @@ $(document).ready(function () {
     });
 
     $('#accordion').on('shown.bs.collapse', function () {
+        $(this).addClass('opened');
         $('body').niceScroll({
             cursorcolor: "#000",
             cursoropacitymin: 0.1,
@@ -239,6 +240,10 @@ $(document).ready(function () {
 
     $('a.accordion-toggle').click(function (e) {
         e.preventDefault();
+    });
+
+    $('.status-handler').on('click', function() {
+
     });
 });
 
