@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class BeneficiaryRequest extends FormRequest
 {
@@ -32,7 +33,10 @@ class BeneficiaryRequest extends FormRequest
                 return [
                     'firstname' => 'required|between:3,30',
                     'lastname' => 'required|between:3,50',
-                    'account_number' => 'required|unique:beneficiaries|between:8,20',
+//                     'account_number' => 'unique:beneficiaries,account_number,' . Auth::user()->id . 'user_id' ,
+//                    'account_number' => 'required|unique_with:beneficiaries,user_id',
+                    'account_number' => 'required|between:8,20',
+//                    'account_number' => 'required|unique:beneficiaries|between:8,20',
                     'address' => 'sometimes|nullable|string|between:3,256',
                     'tel' => 'required|between:11,15',
                     'fax' => 'nullable|between:11,15',

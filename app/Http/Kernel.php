@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         'checkUser' => \App\Http\Middleware\CheckUserExist::class,
         'checkUserHome' => \App\Http\Middleware\CheckUserHome::class,
         'checkLog' => \App\Http\Middleware\CheckLogExist::class,
+        'checkTtl' => \App\Http\Middleware\CheckTtlExist::class,
         'logOut' => \App\Http\Middleware\LogOut::class,
 //        'language' => \App\Http\Middleware\Language::class,
 

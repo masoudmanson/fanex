@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Session;
 
 class CheckLogExist
 {
@@ -18,6 +19,9 @@ class CheckLogExist
         if(isset($_COOKIE['backlog'])){
             return $next($request);
         }
-        return redirect('/')->withErrors(['msg', 'The Message']);
+//        Session::flash('message', 'This is a message!');
+//        Session::flash('alert-class', 'alert-danger');
+        $request->session()->flash('alert-danger', 'time over! please try again and get a new rate.');
+        return redirect('/');
     }
 }

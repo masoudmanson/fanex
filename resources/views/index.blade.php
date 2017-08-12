@@ -21,6 +21,20 @@
             {{-- Form Container --}}
             <div class="col-lg-6 col-md-12 p-0 indexWrapperInside indexLeft">
                 @include('partials.mainForm', ['country_list'=>$country_list, 'beneficiary' => null])
+                {{--@if ($errors->any())--}}
+                    {{--@foreach ($errors->all() as $error)--}}
+
+                        <div class="flash-message">
+                            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                                @if(Session::has('alert-' . $msg))
+
+                                    <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                                @endif
+                            @endforeach
+                        </div> <!-- end .flash-message -->
+
+                    {{--@endforeach--}}
+                {{--@endif--}}
             </div>
 
             {{-- Map and Static Pages Container --}}

@@ -33,6 +33,7 @@ class PaymentController extends Controller
         $this->middleware('checkToken', ['only' => ['proforma_with_selected_transaction', 'proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
         $this->middleware('checkUser', ['only' => ['proforma_with_selected_transaction', 'proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
         $this->middleware('checkLog', ['only' => ['proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
+        $this->middleware('checkTtl', ['only' => ['issueInvoice']]);
     }
 
     /**
@@ -160,7 +161,9 @@ class PaymentController extends Controller
 
                 if (!$invoice->hasError && count($invoice->result) > 0) {
 
-                    return redirect()->back()->withErrors(['msg', "This transaction has already been done."]); // todo : make a lang
+                    $request->session()->flash('alert-danger', 'This transaction has already been done.');
+                    return redirect('/');
+//                    return redirect()->back()->withErrors(['msg', "This transaction has already been done."]); // todo : make a lang
                     //todo : redirect to a single page
                 }
             }

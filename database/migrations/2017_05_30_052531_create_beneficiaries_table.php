@@ -20,7 +20,8 @@ class CreateBeneficiariesTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->string('firstname');
             $table->string('lastname');
-            $table->string('account_number')->unique();
+//            $table->string('account_number')->unique();
+            $table->string('account_number');
             $table->text('address')->nullable();
             $table->string('country')->nullable();
             $table->string('tel');
@@ -35,6 +36,8 @@ class CreateBeneficiariesTable extends Migration
             $table->string('blz_bsb')->nullable();
             $table->boolean('is_deleted')->default(0);
             $table->timestamps();
+
+            $table->unique(['user_id', 'account_number']);
 
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('set null');
