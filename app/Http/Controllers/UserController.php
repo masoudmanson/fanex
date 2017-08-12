@@ -70,7 +70,8 @@ class UserController extends Controller
             }
             $transaction->update();
         }
-        return json_encode($transaction);
+//        return json_encode($transaction);
+        return json_encode(['bank_status' => $transaction->bank_status,'fanex_status' => $transaction->fanex_status,'upt_status' => $transaction->upt_status]);
     }
 
     /**
