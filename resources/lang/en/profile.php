@@ -6,6 +6,7 @@ return [
     'menuTrans' => 'Transactions',
     'menuBnf' => 'Beneficiaries',
     'menuNotify' => 'Notifications',
+    'menuBalance' => 'Account Balance',
 
     // Transactions Page
     'filterAll' => 'All Transactions',

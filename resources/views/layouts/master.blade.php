@@ -15,7 +15,7 @@
 
     <title>{{ config('app.name', 'FanEx') }}</title>
 
-    <link rel="shortcut icon" href="{{ asset('css/images/favicon.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('css/images/favicon.png') }}"/>
 
     {{-- General Styles --}}
     @if(\Illuminate\Support\Facades\App::isLocale('fa'))
@@ -55,23 +55,22 @@
 
 <script src="{{ asset('js/index.js') }}"></script>
 <script>
-    var csrfToken = $('meta[name="csrf-token"]').attr('content');
-    var timeOut = "@lang('index.timeout')";
-    var indexFormCountry = "@lang('js.indexFormCountry')";
-    var indexFormCurrency = "@lang('js.indexFormCurrency')";
-    var indexFormAmount = "@lang('js.indexFormAmount')";
-    var indexFormCaptcha = "@lang('js.indexFormCaptcha')";
-    var indexFormCalculate = "@lang('js.indexFormCalculate')";
-    var indexFormPay = "@lang('js.indexFormPay')";
-    var AMOUNT_LIMIT_MIN = 0;
-    $.ajaxSetup(
-        {
-            headers:
-                {
-                    'X-CSRF-Token': csrfToken,
-                    '_token': csrfToken
-                }
-        });
+  var csrfToken = $('meta[name="csrf-token"]').attr('content');
+  var timeOut = '@lang('index.timeout')';
+  var indexFormCountry = '@lang('js.indexFormCountry')';
+  var indexFormCurrency = '@lang('js.indexFormCurrency')';
+  var indexFormAmount = '@lang('js.indexFormAmount')';
+  var indexFormCaptcha = '@lang('js.indexFormCaptcha')';
+  var indexFormCalculate = '@lang('js.indexFormCalculate')';
+  var indexFormPay = '@lang('js.indexFormPay')';
+  var AMOUNT_LIMIT_MIN = 0;
+  $.ajaxSetup(
+      {
+        headers: {
+          'X-CSRF-Token': csrfToken,
+          '_token': csrfToken,
+        },
+      });
 </script>
 
 {{-- Yielding Pages Scripts --}}
