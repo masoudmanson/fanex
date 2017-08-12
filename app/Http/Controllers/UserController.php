@@ -70,7 +70,7 @@ class UserController extends Controller
             }
             $transaction->update();
         }
-        return $transaction;
+        return json_encode($transaction);
     }
 
     /**
