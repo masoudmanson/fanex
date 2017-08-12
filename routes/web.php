@@ -68,3 +68,5 @@ Route::get('/search/beneficiary/country/{country}', 'BeneficiaryController@searc
 Route::get('/search/beneficiary/{keyword}', 'BeneficiaryController@search');
 Route::get('/search/transaction/status/{status}', 'UserController@searchStatus');
 Route::get('/search/transaction/{keyword}', 'UserController@search');
+
+Route::get('/transaction/status/update/{transaction}','UserController@update_transaction_status');

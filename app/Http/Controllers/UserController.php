@@ -27,7 +27,6 @@ class UserController extends Controller
 
     public function payable($transactions)
     {
-
         foreach ($transactions as $transaction) {
             if (empty($transaction->uri)) {
                 if ($transaction->ttl > Carbon::now()) {
@@ -39,31 +38,39 @@ class UserController extends Controller
                     $transaction->update();
                 }
             }
-            else {
-                $reference = $this->trackingInvoiceByBillNumber($transaction->uri);
-                $invoice = json_decode($reference->getBody()->getContents());
+        }
+        return $transactions;
+    }
 
-//                if($transaction->upt_ref) {
-//                    $res = $this->UptGetTransferList($transaction->upt_ref);
-//                    $status = $res->GetTransferListResult->GETTRANSFERLISTSTATUS->RESPONSE;
-//                    if($status == 'Success');
-//                }
+    public function update_transaction_status(Transaction $transaction)
+    {
+        if($transaction->uri) {
+            $reference = $this->trackingInvoiceByBillNumber($transaction->uri);
+            $invoice = json_decode($reference->getBody()->getContents());
 
-                if(isset($invoice->result[0])) {
-                    if ($invoice->result[0]->canceled) {
-                        $transaction->bank_status = 'canceled';
-                        $transaction->fanex_status = 'rejected';
+                if($transaction->upt_ref) {
+                    $res = $this->UptGetTransferList($transaction->upt_ref);
+                    $status = $res->GetTransferListResult->GETTRANSFERLISTSTATUS->RESPONSE;
+                    if($status == 'Success'){
+                        $transaction->upt_status = 'successful';
+                    }
+                    else{
                         $transaction->upt_status = 'failed';
-                    } elseif ($invoice->result[0]->payed) {
-                        $transaction->bank_status = 'successful';
-//                        $transaction->fanex_status = 'successful'; //todo : how do I know?!
-//                        $transaction->upt_status = 'successful'; //
                     }
                 }
-            }
-        }
 
-        return $transactions;
+            if (isset($invoice->result[0])) {
+                if ($invoice->result[0]->canceled) {
+                    $transaction->bank_status = 'canceled';
+                    $transaction->fanex_status = 'rejected';
+                    $transaction->upt_status = 'failed';
+                } elseif ($invoice->result[0]->payed) {
+                    $transaction->bank_status = 'successful';
+                }
+            }
+            $transaction->update();
+        }
+        return json_encode($transaction);
     }
 
     /**
@@ -171,18 +178,17 @@ class UserController extends Controller
     public function search(Request $request, $keyword)
     {
         $user = Auth::user();
-        if($keyword == '') {
+        if ($keyword == '') {
             $transactions = $user->transaction()->paginate(10);
             $transactions = $this->payable($transactions);
-        }
-        else {
+        } else {
             $transactions = Transaction::select("transactions.*", "beneficiaries.firstname", "beneficiaries.lastname")
-            ->join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
-            ->where('transactions.user_id', '=', $user->id)
+                ->join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
+                ->where('transactions.user_id', '=', $user->id)
                 ->where(function ($query) use ($keyword) {
                     $query->where('transactions.uri', 'like', "%$keyword%")
-                          ->orWhereRaw("regexp_like(beneficiaries.firstname, '$keyword', 'i')")
-                          ->orWhereRaw("regexp_like(beneficiaries.lastname, '$keyword', 'i')");
+                        ->orWhereRaw("regexp_like(beneficiaries.firstname, '$keyword', 'i')")
+                        ->orWhereRaw("regexp_like(beneficiaries.lastname, '$keyword', 'i')");
 //                        ->orWhere('transactions.premium_amount', 'like', "%$keyword%")
 //                        ->orWhere('beneficiaries.firstname', 'like', "%$keyword%")
 //                        ->orWhere('beneficiaries.lastname', 'like', "%$keyword%");
@@ -201,11 +207,10 @@ class UserController extends Controller
     public function searchStatus(Request $request, $status)
     {
         $user = Auth::user();
-        if($status == 'all') {
+        if ($status == 'all') {
             $transactions = $user->transaction()->orderby("transactions.id", "desc")->paginate(10);
             $transactions = $this->payable($transactions);
-        }
-        else {
+        } else {
             $transactions = Transaction::join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
                 ->where('transactions.user_id', '=', $user->id)
                 ->where('transactions.upt_status', '=', $status)->orderby("transactions.id", "desc")->paginate(10);

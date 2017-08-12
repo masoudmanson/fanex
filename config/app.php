@@ -183,6 +183,10 @@ return [
         Cornford\Googlmapper\MapperServiceProvider::class,
         PeterColes\Countries\CountriesServiceProvider::class,
         Intervention\Validation\ValidationServiceProvider::class,
+
+
+        App\Providers\ValidationServiceProvider::class,
+
         /*
          * Oracle DB Service Provider
          */
