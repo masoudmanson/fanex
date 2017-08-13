@@ -70,3 +70,16 @@ Route::get('/search/transaction/status/{status}', 'UserController@searchStatus')
 Route::get('/search/transaction/{keyword}', 'UserController@search');
 
 Route::get('/transaction/status/update/{transaction}','UserController@update_transaction_status');
+
+Route::get('/email', function()
+{
+    $beautymail = app()->make(Snowfire\Beautymail\Beautymail::class);
+    $beautymail->send('emails.welcome', [], function($message)
+    {
+        $message
+            ->from('fanex.fanap@gmail.com')
+            ->to('masoudmanson@gmail.com', 'Masoud Amjadi')
+            ->subject('Welcome!');
+    });
+
+});

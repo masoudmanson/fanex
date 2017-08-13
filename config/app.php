@@ -170,6 +170,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -183,9 +184,8 @@ return [
         Cornford\Googlmapper\MapperServiceProvider::class,
         PeterColes\Countries\CountriesServiceProvider::class,
         Intervention\Validation\ValidationServiceProvider::class,
-
-
         App\Providers\ValidationServiceProvider::class,
+        Snowfire\Beautymail\BeautymailServiceProvider::class,
 
         /*
          * Oracle DB Service Provider
@@ -205,7 +205,6 @@ return [
     */
 
     'aliases' => [
-
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
