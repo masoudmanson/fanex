@@ -79,7 +79,7 @@ Route::get('/email', function()
     ], function($message)
     {
         $message
-            ->from('mailtrap.io')
+            ->from('fanex@mailtrap.io')
             ->to('masoudmanson@gmail.com', 'Masoud Amjadi')
             ->subject('Welcome!');
     });
