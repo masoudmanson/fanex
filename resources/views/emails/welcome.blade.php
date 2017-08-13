@@ -4,12 +4,7 @@
 
     @include ('beautymail::templates.sunny.heading' , [
         'heading' => 'Thank You!',
-        'level' => 'h2',
-        'logo' => [
-            'path' => '/css/images/favicon.png',
-            'width' => 200,
-            'height' => 70
-        ]
+        'level' => 'h2'
     ])
 
     @include('beautymail::templates.sunny.contentStart')
