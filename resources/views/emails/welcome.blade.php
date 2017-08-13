@@ -3,13 +3,19 @@
 @section('content')
 
     @include ('beautymail::templates.sunny.heading' , [
-        'heading' => 'Hello!',
-        'level' => 'h1',
+        'heading' => 'Thank You!',
+        'level' => 'h2',
+        'logo' => [
+            'path' => '/css/images/favicon.png',
+            'width' => 200,
+            'height' => 70
+        ]
     ])
 
     @include('beautymail::templates.sunny.contentStart')
 
-    <p>Today will be a great day!</p>
+    <p>Dear <b>{{ $senderName or '' }}</b>,</p>
+    <p>Thank you for sharing your thoughts and feedback with us. We are trying so hard to deliver the best Online Exchange Service you wish for.</p>
 
     @include('beautymail::templates.sunny.contentEnd')
 
