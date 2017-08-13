@@ -16,8 +16,8 @@
     @include('beautymail::templates.sunny.contentEnd')
 
     @include('beautymail::templates.sunny.button', [
-        	'title' => 'Click me',
-        	'link' => 'http://google.com'
+        	'title' => 'Visit FANEx',
+        	'link' => '185.133.159.140:12801'
     ])
 
 @stop
