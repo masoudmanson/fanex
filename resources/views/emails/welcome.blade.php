@@ -1,20 +1,21 @@
-@extends('beautymail::templates.widgets')
+@extends('beautymail::templates.sunny')
 
 @section('content')
 
-    @include('beautymail::templates.widgets.articleStart', ['logo' => '/css/images/favicon.png'])
+    @include ('beautymail::templates.sunny.heading' , [
+        'heading' => 'Hello!',
+        'level' => 'h1',
+    ])
 
-    <h4 class="secondary"><strong>Hello</strong></h4>
-    <p>This is a test</p>
+    @include('beautymail::templates.sunny.contentStart')
 
-    @include('beautymail::templates.widgets.articleEnd')
+    <p>Today will be a great day!</p>
 
+    @include('beautymail::templates.sunny.contentEnd')
 
-    @include('beautymail::templates.widgets.newfeatureStart')
-
-    <h4 class="secondary"><strong>Hello World again</strong></h4>
-    <p>This is another test</p>
-
-    @include('beautymail::templates.widgets.newfeatureEnd')
+    @include('beautymail::templates.sunny.button', [
+        	'title' => 'Click me',
+        	'link' => 'http://google.com'
+    ])
 
 @stop
