@@ -126,6 +126,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes'           => [
+        'contactText'      => 'Contact Text',
+    ],
 
 ];

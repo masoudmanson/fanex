@@ -12,7 +12,6 @@
 
     <form action="/contact" method="post">
         {{ csrf_field() }}
-        {{--<input id="token" type="hidden" value="{{$encrypted_token}}">--}}
         {{-- Name + Email --}}
         <div class="row">
             {{-- Name --}}
@@ -21,6 +20,10 @@
                     <i class="icon-user bsIcon"></i>
                     <input type="text" class="form-control fanexInput" id="name"
                            name="name" placeholder="@lang('index.contactName')" autocomplete="off">
+
+                    @if($errors->first('name'))
+                        <div class="fanexDanger">{{ $errors->first('name') }}</div>
+                    @endif
                 </div>
             </div>
             {{-- Email --}}
@@ -30,6 +33,10 @@
                         <i class="icon-mail bsIcon"></i>
                         <input type="text" class="form-control fanexInput" id="email"
                                name="email" placeholder="@lang('index.contactMail')" autocomplete="off">
+
+                        @if($errors->first('email'))
+                            <div class="fanexDanger">{{ $errors->first('email') }}</div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -41,6 +48,9 @@
                 <div class="form-group bsWrapper">
                     <div class="form-group bsWrapper">
                         <textarea class="fanexInput" name="contactText" id="contactText" placeholder="@lang('index.contactText')"></textarea>
+                        @if($errors->first('contactText'))
+                            <div class="fanexDanger">{{ $errors->first('contactText') }}</div>
+                        @endif
                     </div>
                 </div>
             </div>

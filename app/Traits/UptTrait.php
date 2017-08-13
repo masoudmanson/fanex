@@ -249,8 +249,10 @@ trait UptTrait
         $client = new SoapClient($url, array("soap_version" => SOAP_1_1, "trace" => 1));
 
         $user_param = array(
-            'Username' => "2818",
-            'Password' => "1"
+            'Username' => "9590",
+//            'Username' => "2818",
+//            'Password' => "1"
+            'Password' => "Fanex@123456!"
         );
 
         $header = new SoapHeader('http://tempuri.org/', 'WsSystemUserInfo', $user_param, false);
@@ -269,12 +271,14 @@ trait UptTrait
 
     public function UptGetTransferList($upt_ref)
     {
-        $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?WSDL';
+        $url = 'https://upt.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?wsdl';
         $client = new SoapClient($url, array("soap_version" => SOAP_1_1, "trace" => 1));
 
         $user_param = array(
-            'Username' => "2818",
-            'Password' => "1"
+            'Username' => "9590",
+//            'Username' => "2818",
+//            'Password' => "1"
+            'Password' => "Fanex@123456!"
         );
 
         $header = new SoapHeader('http://tempuri.org/', 'WsSystemUserInfo', $user_param, false);

@@ -128,7 +128,7 @@ return [
     */
 
     'attributes'           => [
-        //
+        'contactText'      => 'Iletişim metni',
     ],
 
 ];

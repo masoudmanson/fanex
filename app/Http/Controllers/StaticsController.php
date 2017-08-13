@@ -63,17 +63,4 @@ class StaticsController extends Controller
 
         return \Redirect::route('contact')->with('message', 'Thanks for contacting us!');
     }
-
-
-    /**
-     * @return mixed
-     */
-    public function proformaPdf()
-    {
-        $pdf = new PDF();
-        $pdf->useSubstitutions=false;
-        $pdf->simpleTables = true;
-        $pdf->loadView('pdf.proforma');
-        return $pdf->Stream('document.pdf');
-    }
 }

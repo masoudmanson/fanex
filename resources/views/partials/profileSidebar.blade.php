@@ -36,13 +36,14 @@
         </ul>
     </div>
 
-    <div class="white-card mt-4">
-        <ul class="profile-ul">
-            <li class="profile-li">
+    <div class="white-card mt-4 pt-5 pb-3">
+        <ul class="profile-ul mb-0">
+            <li class="profile-li mb-0">
                 <a href="https://gw.fanapium.com/v1/pbc/BuyCredit/?redirectUri=http://85.133.159.140:12801/profile&callUri=http://85.133.159.140:12801">
-                    <i class="icon-card"></i> @lang('profile.menuBalance')
+                    {{--<i class="icon-card"></i> @lang('profile.menuBalance')--}}
+                    @lang('profile.menuBalance')
                 </a>
-                <iframe src="https://gw.fanapium.com/v1/pbc/getcredit" id="myIframe" frameborder="0" style="width: 100%; max-height: 40px;"></iframe>
+                <iframe src="https://gw.fanapium.com/v1/pbc/getcredit" id="myIframe" frameborder="0" style="width: 100%; max-height: 45px;"></iframe>
             </li>
         </ul>
     </div>

@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-md-2 col-sm-3 col-xs-2" data-toggle="tooltip"
                          title="@lang('profile.titleStatus')">
-                        <span class="acc-status fanex-text-{{ $transaction->upt_status }}">
+                        <span class="acc-status fanex-text-{{ $transaction->upt_status }}  ajax-status">
                             <i class="icon-{{ $transaction->upt_status }}"></i>
                             <span class="hidden-xs">@lang('profile.'.$transaction->upt_status)</span>
                         </span>
@@ -44,7 +44,7 @@
                         </span>
                     </div>
 
-                    <a class="col-md-1 col-sm-1 col-xs-1 accordion-toggle" data-toggle="collapse"
+                    <a class="col-md-1 col-sm-1 col-xs-1 accordion-toggle status-handler" data-id="{{ $transaction->id }}" data-toggle="collapse"
                        data-parent="#ajax-transaction-list" href="{{ "#row".$transaction->id }}">
                         <span class="acc-arrow"></span>
                     </a>
@@ -83,9 +83,9 @@
                                 @endif
 
                                 <p>@lang('profile.titleToAcc')</p>
-                                <p class="fanex-text-{{ $transaction->bank_status }}">@lang('profile.'.$transaction->bank_status)</p>
-                                <p class="fanex-text-{{ $transaction->fanex_status }}">@lang('profile.'.$transaction->fanex_status)</p>
-                                <p class="fanex-text-{{ $transaction->upt_status }}">@lang('profile.'.$transaction->upt_status)
+                                <p class="fanex-text-{{ $transaction->bank_status }} ajax-status">@lang('profile.'.$transaction->bank_status)</p>
+                                <p class="fanex-text-{{ $transaction->fanex_status }} ajax-status">@lang('profile.'.$transaction->fanex_status)</p>
+                                <p class="fanex-text-{{ $transaction->upt_status }} ajax-status">@lang('profile.'.$transaction->upt_status)
                                     (@lang('payment.invDate', ['dateEn' => $transaction->updated_at->format('d M Y, H:i:s'), 'dateFa' => jdate($transaction->updated_at)->format('%Y %B %d, H:i:s')])
                                     )</p>
                             </div>
