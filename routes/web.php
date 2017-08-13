@@ -74,7 +74,11 @@ Route::get('/transaction/status/update/{transaction}','UserController@update_tra
 Route::get('/email', function()
 {
     $beautymail = app()->make(Snowfire\Beautymail\Beautymail::class);
-    $beautymail->send('emails.welcome', [], function($message)
+    $beautymail->send('emails.welcome', ['logo' => [
+        'path' => '/css/images/favicon.png',
+        'width' => 200,
+        'height' => 70
+    ]], function($message)
     {
         $message
             ->from('fanap.fanex@gmail.com')

@@ -10,7 +10,8 @@
     @include('beautymail::templates.sunny.contentStart')
 
     <p>Dear <b>{{ $senderName or '' }}</b>,</p>
-    <p>Thank you for sharing your thoughts and feedback with us. We are trying so hard to deliver the best Online Exchange Service you wish for.</p>
+    <p>Thank you for sharing your thoughts and feedback with us. We are trying so hard to deliver the best Online
+        Exchange Service you wish for.</p>
 
     @include('beautymail::templates.sunny.contentEnd')
 
