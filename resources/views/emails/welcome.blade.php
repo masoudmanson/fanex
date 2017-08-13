@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('beautymail::templates.widgets.articleStart')
+    @include('beautymail::templates.widgets.articleStart', ['logo' => '/css/images/favicon.png'])
 
     <h4 class="secondary"><strong>Hello</strong></h4>
     <p>This is a test</p>
