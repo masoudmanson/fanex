@@ -81,5 +81,4 @@ Route::get('/email', function()
             ->to('masoudmanson@gmail.com', 'Masoud Amjadi')
             ->subject('Welcome!');
     });
-
 });
