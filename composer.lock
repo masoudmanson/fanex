@@ -1050,20 +1050,20 @@
         },
         {
             "name": "mcamara/laravel-localization",
-            "version": "v1.2.6",
+            "version": "v1.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mcamara/laravel-localization.git",
-                "reference": "2177e05d5cf35efea3a43c0f1785a3edd816347f"
+                "reference": "5f7e0e646d5c2374b8adaf1757599e043cd0994d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mcamara/laravel-localization/zipball/2177e05d5cf35efea3a43c0f1785a3edd816347f",
-                "reference": "2177e05d5cf35efea3a43c0f1785a3edd816347f",
+                "url": "https://api.github.com/repos/mcamara/laravel-localization/zipball/5f7e0e646d5c2374b8adaf1757599e043cd0994d",
+                "reference": "5f7e0e646d5c2374b8adaf1757599e043cd0994d",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "~5.2",
+                "laravel/framework": "~5.2, ~5.3, ~5.4",
                 "php": ">=5.6.0"
             },
             "require-dev": {
@@ -1071,6 +1071,16 @@
                 "phpunit/phpunit": "5.4.*"
             },
             "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mcamara\\LaravelLocalization\\LaravelLocalizationServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaravelLocalization": "Mcamara\\LaravelLocalization\\Facades\\LaravelLocalization"
+                    }
+                }
+            },
             "autoload": {
                 "classmap": [],
                 "psr-0": {
@@ -1095,20 +1105,20 @@
                 "localization",
                 "php"
             ],
-            "time": "2017-05-18T10:22:35+00:00"
+            "time": "2017-08-08T04:41:28+00:00"
         },
         {
             "name": "mews/captcha",
-            "version": "v2.1.4",
+            "version": "v2.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mewebstudio/captcha.git",
-                "reference": "ada76309e55fcbd3bb5604f4fd0dd357dec35823"
+                "reference": "9e4436a11d5b2427a006017fcb39b0013c662492"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mewebstudio/captcha/zipball/ada76309e55fcbd3bb5604f4fd0dd357dec35823",
-                "reference": "ada76309e55fcbd3bb5604f4fd0dd357dec35823",
+                "url": "https://api.github.com/repos/mewebstudio/captcha/zipball/9e4436a11d5b2427a006017fcb39b0013c662492",
+                "reference": "9e4436a11d5b2427a006017fcb39b0013c662492",
                 "shasum": ""
             },
             "require": {
@@ -1152,7 +1162,7 @@
                 "laravel5 Captcha",
                 "laravel5 Security"
             ],
-            "time": "2016-07-19T09:01:51+00:00"
+            "time": "2017-08-08T13:11:53+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3468,16 +3478,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "3.2.1",
+            "version": "3.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "183824db76118b9dddffc7e522b91fa175f75119"
+                "reference": "4aada1f93c72c35e22fb1383b47fee43b8f1d157"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/183824db76118b9dddffc7e522b91fa175f75119",
-                "reference": "183824db76118b9dddffc7e522b91fa175f75119",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/4aada1f93c72c35e22fb1383b47fee43b8f1d157",
+                "reference": "4aada1f93c72c35e22fb1383b47fee43b8f1d157",
                 "shasum": ""
             },
             "require": {
@@ -3509,7 +3519,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2017-08-04T20:55:59+00:00"
+            "time": "2017-08-08T06:39:58+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",

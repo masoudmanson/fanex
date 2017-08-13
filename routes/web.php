@@ -77,7 +77,7 @@ Route::get('/email', function()
     $beautymail->send('emails.welcome', [], function($message)
     {
         $message
-            ->from('fanex.fanap@gmail.com')
+            ->from('fanap.fanex@gmail.com')
             ->to('masoudmanson@gmail.com', 'Masoud Amjadi')
             ->subject('Welcome!');
     });
