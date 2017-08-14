@@ -1953,7 +1953,7 @@
                 "html",
                 "laravel"
             ],
-            "time": "2017-04-05 13:17:37"
+            "time": "2017-04-05T13:17:37+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
