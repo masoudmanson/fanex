@@ -71,35 +71,57 @@ opacity-30 {
     @include border-radius(0 !important);
     color: #fff !important;
     border: none !important;
-    font-size: 28px !important;
+    font-size: 16px !important;
     font-weight: 200;
 }
 
 .alert-danger {
-    background: $fanapRed url("images/pattern-w.png");
-    padding-left: 50px;
-    &::before {
-        font-family: 'fanex';
-        content: '\4e';
-        color: #fff;
-        font-size: 24px;
-        position: absolute;
-        left: 15px;
-        top: 37px;
-    }
-}
+     background: $fanapRed url("images/pattern-w.png");
+ }
 
 .alert-success {
     background: $fanapGreen url("images/pattern-w.png");
-    padding-left: 50px;
-    &::before {
-        font-family: 'fanex';
-        content: '\65';
-        color: #fff;
-        font-size: 24px;
-        position: absolute;
-        left: 15px;
-        top: 37px;
+}
+
+.alert-warning {
+    background: $fanapOrange url("images/pattern-w.png");
+}
+
+.bnf-auto-content {
+    .alert {
+        @include border-radius(0 !important);
+        color: #fff !important;
+        border: none !important;
+        font-size: 28px !important;
+        font-weight: 200;
+    }
+
+    .alert-danger {
+        background: $fanapRed url("images/pattern-w.png");
+        padding-left: 50px;
+        &::before {
+            font-family: 'fanex';
+            content: '\4e';
+            color: #fff;
+            font-size: 24px;
+            position: absolute;
+            left: 15px;
+            top: 37px;
+        }
+    }
+
+    .alert-success {
+        background: $fanapGreen url("images/pattern-w.png");
+        padding-left: 50px;
+        &::before {
+            font-family: 'fanex';
+            content: '\65';
+            color: #fff;
+            font-size: 24px;
+            position: absolute;
+            left: 15px;
+            top: 37px;
+        }
     }
 }
 
@@ -1933,7 +1955,7 @@ a.accordion-toggle {
 
 // Spinner 3
 .spinner3 {
-    margin:left;
+    margin: left;
     width: 70px;
     text-align: left;
 }
