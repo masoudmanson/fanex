@@ -25,7 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('account_number')->nullable();
             $table->string('mobile')->nullable();
             $table->enum('gender', ['Mr.', 'Ms.', 'Co.'])->nullable();
-            $table->enum('identity_number', ['passport', 'national', 'registration', 'national_id'])->nullable();
+            $table->enum('identity_type', ['passport', 'national', 'registration', 'national_id'])->nullable();
+            $table->string('identity_number')->nullable();
             $table->string('address')->nullable();
             $table->string('place_of_birth')->nullable();
             $table->string('date_of_birth')->nullable();
