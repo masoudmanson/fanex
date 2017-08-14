@@ -63,6 +63,16 @@
   var indexFormCaptcha = '@lang('js.indexFormCaptcha')';
   var indexFormCalculate = '@lang('js.indexFormCalculate')';
   var indexFormPay = '@lang('js.indexFormPay')';
+  var statuses = {
+      'successful' : '@lang('profile.successful')',
+      'pending' : '@lang('profile.pending')',
+      'waiting' : '@lang('profile.waiting')',
+      'failed' : '@lang('profile.failed')',
+      'rejected' : '@lang('profile.rejected')',
+      'canceled' : '@lang('profile.canceled')',
+      'accepted' : '@lang('profile.accepted')'
+  };
+
   var AMOUNT_LIMIT_MIN = 0;
   $.ajaxSetup(
       {

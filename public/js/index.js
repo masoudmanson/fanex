@@ -274,7 +274,7 @@ $(document).ready(function() {
 
   $('.status-handler').on('click', function() {
     var trans_id = $(this).attr('data-id');
-    $('.ajax-status').html('<div class="spinner3"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
+    $('.status-container-'+trans_id+' .ajax-status').html('<div class="spinner3"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
     $.ajax({
       method: 'get',
       url: '/transaction/status/update/' + trans_id,
@@ -286,20 +286,16 @@ $(document).ready(function() {
         console.log(thrownError);
       },
     }).done(function(response) {
-      console.log(response);
       var result = $.parseJSON(response);
-      $(result).each(function(i, val) {
-        $('.transLoader .spinner2').fadeOut(200);
-        $.each(val, function(k, v) {
-          $('#mainFormLoader .errors').fadeIn(200).html(v);
-          setTimeout(function() {
-            $('#mainFormLoader, #mainFormLoader .errors').fadeOut(200);
-            $('#mainFormLoader .spinner2').fadeIn();
-          }, 2000);
-        });
-      });
+      var bank = result.bank_status;
+      var fanex = result.fanex_status;
+      var upt = result.upt_status;
+      $('#header-status-'+trans_id).html('<span class="acc-status fanex-text-'+result.upt_status+' ajax-status"><i class="icon-'+result.upt_status+'"></i><span class="hidden-xs">'+statuses[upt]+'</span></span>');
+      $('#bank-status-'+trans_id).html(statuses[bank]);
+      $('#fanex-status-'+trans_id).html(statuses[fanex]);
+      $('#upt-status-'+trans_id).html(statuses[upt]);
     }).fail(function() {
-      console.log('Posts could not be loaded.');
+      console.log('There is problem in Loading the new statuses');
     });
   });
 });

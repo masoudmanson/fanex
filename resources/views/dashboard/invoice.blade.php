@@ -16,7 +16,7 @@
             {{-- Beneficiary Info Form Container --}}
             <div class="col-lg-9 col-md-8 col-sm-12 p-0 bnf-auto-content">
                 <div class="row p-0 m-0">
-                    {{-- Create a New Benificiary --}}
+
                     <div class="col-xs-12 p-0">
                         @if($errors->any())
                             @foreach ($errors->all() as $error)
@@ -25,6 +25,7 @@
                         @else
                             <h2 class="alert alert-success">@lang('payment.invSubtitle')</h2>
                         @endif
+
                         <div class="invoice-wrapper mb-4" id="pdfWrapper">
                             <h3 class="invoice-title">@lang('payment.invUser', ['user' => Auth::user()->firstname])
                                 <span class="invoice-date">@lang('payment.invDate', ['dateEn' => $transaction->payment_date->format('d M Y, H:i:s'), 'dateFa' => jdate($transaction->payment_date)->format('%Y %B %d, H:i:s')])</span>

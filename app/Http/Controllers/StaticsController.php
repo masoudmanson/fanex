@@ -53,13 +53,23 @@ class StaticsController extends Controller
      */
     public function sendMail(ContactFormRequest $request)
     {
-        $content = [
-            'title'=> $request->get('name'),
-            'body'=> $request->get('contactText'),
-            'button' => 'Go to Fanex'
-        ];
-        $receiverAddress = $request->get('email');
-        Mail::to($receiverAddress)->send(new ContactMail($content));
+        $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+        $beautymail->send('emails.contact', [
+            'senderName' => 'FANEx Team',
+            'firstname' => $request->get('name'),
+            'logo' => [
+                'path' => 'http://185.104.229.163:12800/vendor/beautymail/assets/images/sunny/logo.png',
+                'width' => 150,
+                'height' => 50
+            ],
+            'css' => ".footer-text {padding:0; margin: 0 !important; color: #999; font-family: Tahoma;}"
+        ], function($message) use ($request)
+        {
+            $message
+                ->from('fanex@fanap.ir')
+                ->to($request->get('email'), $request->get('name'))
+                ->subject('Thank You!');
+        });
 
         return \Redirect::route('contact')->with('message', 'Thanks for contacting us!');
     }
