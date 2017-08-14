@@ -272,7 +272,10 @@ $(document).ready(function() {
     e.preventDefault();
   });
 
-  $('.status-handler').on('click', function() {
+});
+
+$(document).on('click', '.status-handler.collapsed', function(){
+  // $('.status-handler').on('click', function() {
     var trans_id = $(this).attr('data-id');
     $('.status-container-'+trans_id+' .ajax-status').html('<div class="spinner3"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
     $.ajax({
@@ -297,7 +300,7 @@ $(document).ready(function() {
     }).fail(function() {
       console.log('There is problem in Loading the new statuses');
     });
-  });
+  // });
 });
 
 function getAmount() {
