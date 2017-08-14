@@ -277,6 +277,30 @@ class PaymentController extends Controller
 //                    // return ?
 //                }
                 $transaction->update();
+
+                if(Auth::user()->email) {
+                    // Email to User
+                    $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+                    $beautymail->send('emails.invoice', [
+                        'senderName' => 'FANEx Team',
+                        'firstname' => Auth::user()->firstname . ' ' . Auth::user()->lastname,
+                        'logo' => [
+                            'path' => 'http://185.104.229.163:12800/vendor/beautymail/assets/images/sunny/logo.png',
+                            'width' => 150,
+                            'height' => 50
+                        ],
+                        'css' => ".footer-text {padding:0; margin: 0 !important; color: #999; font-family: Tahoma;}",
+                        'transaction' => $transaction,
+                        'invoice_result' => $invoice_result,
+                        'transaction_status' => true
+                    ], function ($message) use ($request) {
+                        $message
+                            ->from('fanex@fanap.ir')
+                            ->to(Auth::user()->email, Auth::user()->firstname . ' ' . Auth::user()->lastname)
+                            ->subject('Thank You!');
+                    });
+                }
+
                 return view('dashboard.invoice', compact('invoice_result', 'transaction', 'finish_time'));
 
             } else {
@@ -285,6 +309,29 @@ class PaymentController extends Controller
                 $transaction->upt_status = 'failed';
                 $transaction->payment_date = time();
                 $transaction->update();
+                if(Auth::user()->email) {
+                    // Email to User
+                    $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+                    $beautymail->send('emails.invoice', [
+                        'senderName' => 'FANEx Team',
+                        'firstname' => Auth::user()->firstname . ' ' . Auth::user()->lastname,
+                        'logo' => [
+                            'path' => 'http://185.104.229.163:12800/vendor/beautymail/assets/images/sunny/logo.png',
+                            'width' => 150,
+                            'height' => 50
+                        ],
+                        'css' => ".footer-text {padding:0; margin: 0 !important; color: #999; font-family: Tahoma;}",
+                        'transaction' => $transaction,
+                        'invoice_result' => $invoice_result,
+                        'transaction_status' => false
+                    ], function ($message) use ($request) {
+                        $message
+                            ->from('fanex@fanap.ir')
+                            ->to(Auth::user()->email, Auth::user()->firstname . ' ' . Auth::user()->lastname)
+                            ->subject('Thank You!');
+                    });
+                }
+
                 return view('dashboard.invoice', compact('invoice_result', 'transaction', 'finish_time'))->withErrors(['msg' => __('payment.transFailed')]);;
             }
 

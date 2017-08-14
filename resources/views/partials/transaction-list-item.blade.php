@@ -1,6 +1,6 @@
 @if(count($transactions) > 0)
     @foreach($transactions as $transaction)
-        <div class="panel panel-default filtered {{ $transaction->upt_status }}">
+        <div class="panel panel-default filtered {{ $transaction->upt_status }} status-container-{{ $transaction->id }}">
             <div class="panel-heading @if($transaction->can_pay) newRed @endif">
                 <div class="row p-0 m-0">
                     <div class="col-md-4 col-sm-4 col-xs-5" data-toggle="tooltip"
@@ -31,7 +31,7 @@
                         <span class="acc-cash">{{ number_format($transaction->premium_amount).' &lrm;'. $transaction->currency }}</span>
                     </div>
                     <div class="col-md-2 col-sm-3 col-xs-2" data-toggle="tooltip"
-                         title="@lang('profile.titleStatus')">
+                         title="@lang('profile.titleStatus')" id="header-status-{{ $transaction->id }}">
                         <span class="acc-status fanex-text-{{ $transaction->upt_status }}  ajax-status">
                             <i class="icon-{{ $transaction->upt_status }}"></i>
                             <span class="hidden-xs">@lang('profile.'.$transaction->upt_status)</span>
@@ -44,7 +44,7 @@
                         </span>
                     </div>
 
-                    <a class="col-md-1 col-sm-1 col-xs-1 accordion-toggle status-handler" data-id="{{ $transaction->id }}" data-toggle="collapse"
+                    <a class="col-md-1 col-sm-1 col-xs-1 accordion-toggle status-handler collapsed" data-id="{{ $transaction->id }}" data-toggle="collapse"
                        data-parent="#ajax-transaction-list" href="{{ "#row".$transaction->id }}">
                         <span class="acc-arrow"></span>
                     </a>
@@ -83,9 +83,9 @@
                                 @endif
 
                                 <p>@lang('profile.titleToAcc')</p>
-                                <p class="fanex-text-{{ $transaction->bank_status }} ajax-status">@lang('profile.'.$transaction->bank_status)</p>
-                                <p class="fanex-text-{{ $transaction->fanex_status }} ajax-status">@lang('profile.'.$transaction->fanex_status)</p>
-                                <p class="fanex-text-{{ $transaction->upt_status }} ajax-status">@lang('profile.'.$transaction->upt_status)
+                                <p class="fanex-text-{{ $transaction->bank_status }} ajax-status" id="bank-status-{{ $transaction->id }}">@lang('profile.'.$transaction->bank_status)</p>
+                                <p class="fanex-text-{{ $transaction->fanex_status }} ajax-status"  id="fanex-status-{{ $transaction->id }}">@lang('profile.'.$transaction->fanex_status)</p>
+                                <p class="fanex-text-{{ $transaction->upt_status }} ajax-status" id="upt-status-{{ $transaction->id }}">@lang('profile.'.$transaction->upt_status)
                                     (@lang('payment.invDate', ['dateEn' => $transaction->updated_at->format('d M Y, H:i:s'), 'dateFa' => jdate($transaction->updated_at)->format('%Y %B %d, H:i:s')])
                                     )</p>
                             </div>

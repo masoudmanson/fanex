@@ -188,6 +188,7 @@ class UserController extends Controller
                 ->where('transactions.user_id', '=', $user->id)
                 ->where(function ($query) use ($keyword) {
                     $query->where('transactions.uri', 'like', "%$keyword%")
+                        ->orWhere('beneficiaries.account_number', 'like', "%$keyword%")
                         ->orWhereRaw("regexp_like(beneficiaries.firstname, '$keyword', 'i')")
                         ->orWhereRaw("regexp_like(beneficiaries.lastname, '$keyword', 'i')");
 //                        ->orWhere('transactions.premium_amount', 'like', "%$keyword%")
