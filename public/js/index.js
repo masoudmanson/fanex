@@ -275,9 +275,11 @@ $(document).ready(function() {
            var new_search_keyword = search_key + ' ' + search_command;
            $('.search-input').val(new_search_keyword);
            setCaretPosition("transaction-search", new_search_keyword.length);
+           setCaretPosition("beneficiary-search", new_search_keyword.length);
        }
        else {
            setCaretPosition("transaction-search", search_key.search(search_command)+search_command.length);
+           setCaretPosition("beneficiary-search", search_key.search(search_command)+search_command.length);
        }
     });
 });

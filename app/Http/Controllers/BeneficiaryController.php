@@ -151,8 +151,69 @@ class BeneficiaryController extends Controller
         return redirect()->action('BeneficiaryController@index');
     }
 
-    public function search(Request $request, $keyword)
+    public function search(Request $request)
     {
+        $user = Auth::user();
+        $keyword = $request->keyword;
+        if ($keyword == '') {
+            $beneficiaries = $user->beneficiary()->available()->orderby("beneficiaries.id", "desc")->paginate(10);
+        } else {
+            preg_match_all('/(?:(name|account|mobile):)([^: ]+(?:\s+[^: ]+\b(?!:))*)/xi', $keyword, $matches, PREG_SET_ORDER);
+            $result = array();
+            foreach ($matches as $match) {
+                if (isset($result[$match[1]])) {
+                    $result[$match[1]] = $result[$match[1]] . ' ' . $match[2];
+                } else
+                    $result[$match[1]] = $match[2];
+            }
+
+            if ($result) {
+                $beneficiaries = Beneficiary::available()->where('beneficiaries.user_id', '=', $user->id);
+
+                foreach ($result as $k => $v) {
+                    if (strtolower($k) == 'name') {
+                        if (preg_match("/^[a-zA-Z\s]+$/", $v)) {
+                            $name = preg_replace('/\s+/', '', $v);
+                            $beneficiaries->whereRaw("regexp_like(beneficiaries.firstname||beneficiaries.lastname, '$name', 'i')");
+                        }
+                    }
+                    if (strtolower($k) == 'account') {
+                        $beneficiaries->whereRaw("regexp_like(beneficiaries.account_number, '$v', 'i')");
+                    }
+                    if (strtolower($k) == 'mobile') {
+                        $beneficiaries->whereRaw("regexp_like(beneficiaries.tel, '$v', 'i')");
+                    }
+                }
+                $beneficiaries = $beneficiaries->orderby("beneficiaries.id", "desc")->paginate(10);
+            } else {
+                $beneficiaries = Beneficiary::available()->where('beneficiaries.user_id', '=', $user->id)
+                    ->where(function ($query) use ($keyword) {
+                        $query->whereRaw("regexp_like(beneficiaries.firstname, '$keyword', 'i')")
+                            ->orWhereRaw("regexp_like(beneficiaries.lastname, '$keyword', 'i')")
+                            ->orWhere('beneficiaries.account_number', 'like', "%$keyword%")
+                            ->orWhere('beneficiaries.tel', 'like', "%$keyword%");
+                    })->orderby("beneficiaries.id", "desc")->paginate(10);
+            }
+        }
+
+        $countries = countries(session('applocale'));
+
+        if ($request->ajax())
+            return response()->json(view('partials.beneficiaty-list-item', compact('beneficiaries', 'countries'))->render());
+
+        else {
+            $filter_countries = $this->filterCountires();
+            return view('dashboard.beneficiaries', compact('beneficiaries', 'countries', 'filter_countries'));
+        }
+
+
+
+
+
+
+
+
+
         $user = Auth::user();
         if($keyword == '') {
             $beneficiaries = $user->beneficiary()->available()->orderby("beneficiaries.id", "desc")->paginate(10);
