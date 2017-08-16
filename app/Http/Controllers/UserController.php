@@ -44,20 +44,19 @@ class UserController extends Controller
 
     public function update_transaction_status(Transaction $transaction)
     {
-        if($transaction->uri) {
+        if ($transaction->uri) {
             $reference = $this->trackingInvoiceByBillNumber($transaction->uri);
             $invoice = json_decode($reference->getBody()->getContents());
 
-                if($transaction->upt_ref) {
-                    $res = $this->UptGetTransferList($transaction->upt_ref);
-                    $status = $res->GetTransferListResult->GETTRANSFERLISTSTATUS->RESPONSE;
-                    if($status == 'Success'){
-                        $transaction->upt_status = 'successful';
-                    }
-                    else{
-                        $transaction->upt_status = 'failed';
-                    }
+            if ($transaction->upt_ref) {
+                $res = $this->UptGetTransferList($transaction->upt_ref);
+                $status = $res->GetTransferListResult->GETTRANSFERLISTSTATUS->RESPONSE;
+                if ($status == 'Success') {
+                    $transaction->upt_status = 'successful';
+                } else {
+                    $transaction->upt_status = 'failed';
                 }
+            }
 
             if (isset($invoice->result[0])) {
                 if ($invoice->result[0]->canceled) {
@@ -71,7 +70,7 @@ class UserController extends Controller
             $transaction->update();
         }
 //        return json_encode($transaction);
-        return json_encode(['bank_status' => $transaction->bank_status,'fanex_status' => $transaction->fanex_status,'upt_status' => $transaction->upt_status]);
+        return json_encode(['bank_status' => $transaction->bank_status, 'fanex_status' => $transaction->fanex_status, 'upt_status' => $transaction->upt_status]);
     }
 
     /**
@@ -105,7 +104,10 @@ class UserController extends Controller
 
     public function sendMoney(Beneficiary $beneficiary)
     {
-        $data = $this->CorpGetCountryData();
+//        $data = $this->CorpGetCountryData();
+//        $country_list = indexFormCountryList($data, session('applocale'));
+
+        $data = '';
         $country_list = indexFormCountryList($data, session('applocale'));
         return view('dashboard.send-money', compact('country_list', 'beneficiary'));
     }
@@ -176,27 +178,64 @@ class UserController extends Controller
         //
     }
 
-    public function search(Request $request, $keyword)
+    /**
+     * @param Request $request
+     * @return Regex Search
+     */
+    public function search(Request $request)
     {
         $user = Auth::user();
+        $keyword = $request->keyword;
         if ($keyword == '') {
             $transactions = $user->transaction()->paginate(10);
             $transactions = $this->payable($transactions);
         } else {
-            $transactions = Transaction::select("transactions.*", "beneficiaries.firstname", "beneficiaries.lastname")
-                ->join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
-                ->where('transactions.user_id', '=', $user->id)
-                ->where(function ($query) use ($keyword) {
-                    $query->where('transactions.uri', 'like', "%$keyword%")
-                        ->orWhere('beneficiaries.account_number', 'like', "%$keyword%")
-                        ->orWhereRaw("regexp_like(beneficiaries.firstname, '$keyword', 'i')")
-                        ->orWhereRaw("regexp_like(beneficiaries.lastname, '$keyword', 'i')");
-//                        ->orWhere('transactions.premium_amount', 'like', "%$keyword%")
-//                        ->orWhere('beneficiaries.firstname', 'like', "%$keyword%")
-//                        ->orWhere('beneficiaries.lastname', 'like', "%$keyword%");
-                })->orderby("transactions.id", "desc")->paginate(10);
+            preg_match_all('/(?:(name|transaction|account|amount|date):)([^: ]+(?:\s+[^: ]+\b(?!:))*)/xi', $keyword, $matches, PREG_SET_ORDER);
+            $result = array();
+            foreach ($matches as $match) {
+                if (isset($result[$match[1]])) {
+                    $result[$match[1]] = $result[$match[1]] . ' ' . $match[2];
+                } else
+                    $result[$match[1]] = $match[2];
+            }
 
-            $transactions = $this->payable($transactions);
+            if ($result) {
+                $transactions = Transaction::select("transactions.*", "beneficiaries.firstname", "beneficiaries.lastname", "beneficiaries.account_number")
+                    ->join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
+                    ->where('transactions.user_id', '=', $user->id);
+                foreach ($result as $k => $v) {
+                    if (strtolower($k) == 'name') {
+                        if (preg_match("/^[a-zA-Z\s]+$/", $v)) {
+                            $name = preg_replace('/\s+/', '', $v);
+                            $transactions->whereRaw("regexp_like(firstname||lastname, asciistr(convert('$name', 'UTF8')), 'i')");
+                        }
+                    }
+                    if (strtolower($k) == 'transaction') {
+                        $transactions->whereRaw("regexp_like(uri, '$v', 'i')");
+                    }
+                    if (strtolower($k) == 'account') {
+                        $transactions->whereRaw("regexp_like(account_number, '$v', 'i')");
+                    }
+                    if (strtolower($k) == 'amount') {
+                        $transactions->whereRaw("regexp_like(premium_amount, '$v', 'i')");
+                    }
+                }
+                $transactions = $transactions->orderby("transactions.id", "desc")->paginate(10);
+                $transactions = $this->payable($transactions);
+            } else {
+                $transactions = Transaction::select("transactions.*", "beneficiaries.firstname", "beneficiaries.lastname")
+                    ->join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
+                    ->where('transactions.user_id', '=', $user->id)
+                    ->where(function ($query) use ($keyword) {
+                        $query->where('transactions.uri', 'like', "%$keyword%")
+                            ->orWhere('beneficiaries.account_number', 'like', "%$keyword%")
+                            ->orWhereRaw("regexp_like(beneficiaries.firstname, '$keyword', 'i')")
+                            ->orWhereRaw("regexp_like(beneficiaries.lastname, '$keyword', 'i')")
+                            ->orWhere('transactions.premium_amount', 'like', "%$keyword%");
+                    })->orderby("transactions.id", "desc")->paginate(10);
+
+                $transactions = $this->payable($transactions);
+            }
         }
         if ($request->ajax())
             return response()->json(view('partials.transaction-list-item', compact('transactions'))->render());

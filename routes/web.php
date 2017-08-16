@@ -59,7 +59,8 @@ Route::get('pdf/proforma/{id}', 'StaticsController@proformaPdf');
 
 
 Route::get('/search/beneficiary', 'BeneficiaryController@search');
-Route::get('/search/transaction', 'UserController@search');
+Route::post('/search/transaction', 'UserController@search');
+//Route::get('/search/transaction', 'UserController@search');
 
 
 

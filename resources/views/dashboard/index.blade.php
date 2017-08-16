@@ -50,9 +50,48 @@
                     <div class="panel-group" id="accordion">
                         {{-- Search Box --}}
                         <div class="panel panel-default search" id="search-input">
-                            <input type="text" class="panel-heading fanexInputWhite search-filter"
-                                   placeholder="@lang('profile.searchHolder')" id="transaction-search">
+                            <div class="panel-heading p-0 m-0">
+                                <div class="row p-0 m-0">
+                                    <div class="col-xs-2 col-sm-1">
+                                        <a class="accordion-toggle" id="search-button"></a>
+                                    </div>
+
+                                    <div class="col-xs-8 col-sm-10">
+                                        <input type="text"
+                                               class="fanexInputWhite noShadow search-filter p-0 search-input"
+                                               placeholder="@lang('profile.searchHolder')"
+                                               id="transaction-search">
+                                    </div>
+
+                                    <div class="col-xs-2 col-sm-1">
+                                        <a class="accordion-toggle status-handler help-link collapsed"
+                                           data-toggle="collapse"
+                                           data-parent="#search-input"
+                                           href="#searchbox">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div id="searchbox" class="panel-collapse collapse">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h5 class="text-info">@lang('profile.srchHelpTitle')
+                                            <small>@lang('profile.srchHelpText')</small>
+                                        </h5>
+                                        <ul>
+                                            <li class="search-command" data-command="name:"><p>@lang('profile.srchHelpName')</p></li>
+                                            <li class="search-command" data-command="account:"><p>@lang('profile.srchHelpAccount')</p></li>
+                                            <li class="search-command" data-command="transaction:"><p>@lang('profile.srchHelpTransaction')</p></li>
+                                            <li class="search-command" data-command="amount:"><p>@lang('profile.srchHelpAmount')</p></li>
+                                            {{--<li class="search-command" data-command="date:"><p>@lang('profile.srchHelpDate')</p></li>--}}
+                                        </ul>
+                                        <br>
+                                        <p class="tip">@lang('profile.srchHelpTip1')</p>
+                                        <p class="tip">@lang('profile.srchHelpTip2')</p>
+                                        <p class="tip">@lang('profile.srchHelpTip3')</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -84,15 +123,52 @@
 
 @section('scripts')
     <script>
-        var timer;
-        var x;
+        $(document).ready(function() {
+            $(document).on('click', '.pagination a', function(e) {
+                e.preventDefault();
+                getBeneficiaries($(this).attr('href'));
+            });
 
-        $(window).on('hashchange', function () {
+            $('.filter-li').on('click', function() {
+                $('#transaction-search').val('');
+                $('#mainFormLoader').fadeIn(200);
+                $('.filter-li').removeClass('active');
+                $(this).addClass('active');
+                var filter = $(this).attr('data-filter');
+                $.ajax({
+                    method: 'get',
+                    url: '/search/transaction/status/' + filter,
+                    data: {
+                        '_token': csrfToken,
+                        'X-CSRF-TOKEN': csrfToken,
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        console.log(thrownError);
+                    },
+                }).done(function(response) {
+                    $('#mainFormLoader').fadeOut(200);
+                    $('#ajax-transaction-list').html(response);
+                });
+            });
+
+            $('#transaction-search').keyup(function(event) {
+                if (event.which == 13 || event.keyCode == 13) {
+                    search($(this).val());
+                }
+            });
+
+            $('#search-button').on('click', function() {
+                search($(this).val());
+            });
+        });
+
+        $(window).on('hashchange', function() {
             if (window.location.hash) {
                 var page = window.location.hash.replace('#', '');
                 if (page == Number.NaN || page <= 0) {
                     return false;
-                } else {
+                }
+                else {
                     getBeneficiaries(page);
                 }
             }
@@ -105,95 +181,18 @@
             $.ajax({
                 url: url,
                 dataType: 'json',
-            }).done(function (data) {
+            }).done(function(data) {
                 $('#mainFormLoader').fadeOut(200);
-                if(keyword.length > 0) {
-                    keyword = keyword.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*");
-                    var pattern = new RegExp("([^\/])(" + keyword + ")([^\?])", "gi");
-                    data = data.replace(pattern, "$1<mark>$2</mark>$3");
-                    data = data.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4");
+                if (keyword.length > 0) {
+                    keyword = keyword.replace(/(\s+)/, '(<[^>]+>)*$1(<[^>]+>)*');
+                    var pattern = new RegExp('([^\/])(' + keyword + ')([^\?])', 'gi');
+                    data = data.replace(pattern, '$1<mark>$2</mark>$3');
+                    data = data.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, '$1</mark>$2<mark>$4');
                 }
                 $('#ajax-transaction-list').html(data);
-            }).fail(function () {
+            }).fail(function() {
                 console.log('Posts could not be loaded.');
             });
         }
-
-        $(document).ready(function () {
-            $(document).on('click', '.pagination a', function (e) {
-                e.preventDefault();
-                getBeneficiaries($(this).attr('href'));
-            });
-
-            $('.filter-li').on('click', function () {
-                $('#transaction-search').val('');
-                $('#mainFormLoader').fadeIn(200);
-                $('.filter-li').removeClass('active');
-                $(this).addClass('active');
-                var filter = $(this).attr('data-filter');
-                $.ajax({
-                    method: 'get',
-                    url: '/search/transaction/status/' + filter,
-                    data: {
-                        '_token': csrfToken,
-                        'X-CSRF-TOKEN': csrfToken
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        console.log(thrownError);
-                    }
-                }).done(function (response) {
-                    $('#mainFormLoader').fadeOut(200);
-                    $('#ajax-transaction-list').html(response);
-                });
-            });
-
-            $('#transaction-search').keyup(function (e) {
-                if (x) {
-                    x.abort()
-                }
-                var keyword = $(this).val();
-                if(keyword.length == 0) {
-                    $('#mainFormLoader').fadeIn(200);
-                    x = $.ajax({
-                        method: 'get',
-                        url: '/profile',
-                        error: function (xhr, ajaxOptions, thrownError) {
-                            console.log(thrownError);
-                        }
-                    }).done(function (response) {
-                        $('#mainFormLoader').fadeOut(200);
-                        $('#ajax-transaction-list').html(response);
-                    });
-                }
-                else if (keyword.length >= 2) {
-                    $('#mainFormLoader').fadeIn(200);
-                    clearTimeout(timer);
-
-                    timer = setTimeout(function () {
-                        console.log('Searching for: "'+keyword+'"');
-                        x = $.ajax({
-                            method: 'get',
-                            url: '/search/transaction/' + keyword,
-                            data: {
-                                '_token': csrfToken,
-                                'X-CSRF-TOKEN': csrfToken
-                            },
-                            error: function (xhr, ajaxOptions, thrownError) {
-                                console.log(thrownError);
-                            }
-                        }).done(function (response) {
-                            $('#mainFormLoader').fadeOut(200);
-
-                            keyword = keyword.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*");
-                            var pattern = new RegExp("([^\/])(" + keyword + ")([^\?])", "gi");
-                            response = response.replace(pattern, "$1<mark>$2</mark>$3");
-                            response = response.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4");
-
-                            $('#ajax-transaction-list').html(response);
-                        });
-                    }, 1500);
-                }
-            });
-        });
     </script>
 @endsection

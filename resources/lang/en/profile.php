@@ -8,6 +8,18 @@ return [
     'menuNotify' => 'Notifications',
     'menuBalance' => 'Account Balance',
 
+    // Search Help
+    'srchHelpTitle' => 'Search Help',
+    'srchHelpText' => 'You can try these commands in order to filter results more specifically.',
+    'srchHelpName' => 'name:  <span>To search for a specific name <span class="example">(e.x. name:John Doe)</span></span>',
+    'srchHelpAccount' => 'account:  <span>To search for a specific Account number <span class="example">(e.x. account:6387760345235001)</span></span>',
+    'srchHelpTransaction' => 'transaction:  <span>To search for a specific Transaction <span class="example">(e.x. transaction:79905503W7x49683)</span></span>',
+    'srchHelpAmount' => 'amount:  <span>To search for a specific Premium Amount <span class="example">(e.x. amount:1500)</span></span>',
+    'srchHelpDate' => 'date:  <span>To search for a specific Date <span class="example">(e.x. date:2017-04-15 , YYYY-MM-DD)</span></span>',
+    'srchHelpTip1' => '-- The general rule is like <span class="example">[Key][Semicolon][Search Keyword][Space][key][Semicolon][Search Keyword]...</span>',
+    'srchHelpTip2' => '-- You can use multiple commands together <span class="example">(e.x. name:John Doe acount:6387760345235001)</span>',
+    'srchHelpTip3' => '-- You can search by clicking on search icon on the left, or pressing <span class="example">Enter</span> key on your keyboard.',
+
     // Transactions Page
     'filterAll' => 'All Transactions',
     'filterAllShort' => 'All',
@@ -27,7 +39,7 @@ return [
     'noTrans' => 'There are no Transactions to show.',
     'noBnfs' => 'There are no Beneficiaries to show.',
 
-    'titleTransfer' => 'Transferred to',
+    'titleTransfer' => 'Transfer to',
     'titleIsTransferring' => 'Transferring to',
     'titleDate' => 'Transaction Date',
     'titleAmount' => 'Transferred Amount',
