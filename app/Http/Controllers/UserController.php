@@ -198,17 +198,14 @@ class UserController extends Controller
                 } else
                     $result[$match[1]] = $match[2];
             }
-
             if ($result) {
                 $transactions = Transaction::select("transactions.*", "beneficiaries.firstname", "beneficiaries.lastname", "beneficiaries.account_number")
                     ->join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
                     ->where('transactions.user_id', '=', $user->id);
                 foreach ($result as $k => $v) {
                     if (strtolower($k) == 'name') {
-                        if (preg_match("/^[a-zA-Z\s]+$/", $v)) {
-                            $name = preg_replace('/\s+/', '', $v);
-                            $transactions->whereRaw("regexp_like(firstname||lastname, '$name', 'i')");
-                        }
+                        $name = preg_replace('/\s+/', '', $v);
+                        $transactions->whereRaw("regexp_like(firstname||lastname, '$name', 'i')");
                     }
                     if (strtolower($k) == 'transaction') {
                         $transactions->whereRaw("regexp_like(uri, '$v', 'i')");
@@ -217,8 +214,7 @@ class UserController extends Controller
                         $transactions->whereRaw("regexp_like(account_number, '$v', 'i')");
                     }
                     if (strtolower($k) == 'amount') {
-//                        $transactions->whereRaw("regexp_like(premium_amount, '$v', 'i')");
-                        $transactions->where("premium_amount",$v);
+                        $transactions->where("premium_amount", $v);
                     }
                 }
                 $transactions = $transactions->orderby("transactions.id", "desc")->paginate(10);
