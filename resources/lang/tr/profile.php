@@ -8,6 +8,18 @@ return [
     'menuNotify' => 'Bildirimler',
     'menuBalance' => 'Hesap Bakiyesi',
 
+    // Search Help
+    'srchHelpTitle' => 'Yardım İstesi',
+    'srchHelpText' => 'Sonuçları daha net bir şekilde filtrelemek için bu komutları deneyebilirsiniz.',
+    'srchHelpName' => 'name: <span>Belirli bir adı aramak için <span class = "example"> (e.x. name: John Doe) </span> </span>',
+    'srchHelpAccount' => 'account: <span>Belirli bir Hesap numarası aramak için <span class = "example"> (e.x. account: 6387760345235001)</span></span>',
+    'srchHelpTransaction' => 'transaction: <span>Belirli bir İşlemi aramak için <span class="example">(e.x. transaction:79905503W7x49683)</span></span>',
+    'srchHelpAmount' => 'amount: <span>Belirli bir Prim Miktarı aramak için <span class="example">(e.x. amount:1500)</span></span>',
+    'srchHelpDate' => 'date: <span>Belirli bir Tarihi aramak için <span class="example">(e.x. date:2017-04-15 , YYYY-MM-DD)</span></span>',
+    'srchHelpTip1' => '-- Genel kural buyladi <span class="example">[Key][Semicolon][Search Keyword][Space][key][Semicolon][Search Keyword]...</span>',
+    'srchHelpTip2' => '-- Birden fazla komutu birlikte kullanabilirsiniz <span class="example">(e.x. name:John Doe acount:6387760345235001)</span>',
+    'srchHelpTip3' => '-- Sol taraftaki arama simgesini tıklayarak veya klavyenizdeki <span class = "example"> Enter </span> tuşuna basarak arama yapabilirsiniz.',
+
     // Transactions Page
     'filterAll' => 'Tüm İşlemler',
     'filterAllShort' => 'Hep',

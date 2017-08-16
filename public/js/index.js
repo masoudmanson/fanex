@@ -275,7 +275,6 @@ $(document).ready(function() {
 });
 
 $(document).on('click', '.status-handler.collapsed', function(){
-  // $('.status-handler').on('click', function() {
     var trans_id = $(this).attr('data-id');
     $('.status-container-'+trans_id+' .ajax-status').html('<div class="spinner3"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
     $.ajax({
@@ -289,18 +288,21 @@ $(document).on('click', '.status-handler.collapsed', function(){
         console.log(thrownError);
       },
     }).done(function(response) {
+      $(this).parent().find('.ajax-status').attr('class',
+          function(i, c){
+            return c.replace(/(^|\s)fanex-text-\S+/g, '');
+          });
       var result = $.parseJSON(response);
       var bank = result.bank_status;
       var fanex = result.fanex_status;
       var upt = result.upt_status;
       $('#header-status-'+trans_id).html('<span class="acc-status fanex-text-'+result.upt_status+' ajax-status"><i class="icon-'+result.upt_status+'"></i><span class="hidden-xs">'+statuses[upt]+'</span></span>');
-      $('#bank-status-'+trans_id).html(statuses[bank]);
-      $('#fanex-status-'+trans_id).html(statuses[fanex]);
-      $('#upt-status-'+trans_id).html(statuses[upt]);
+      $('#bank-status-'+trans_id).html(statuses[bank]).addClass('fanex-text-'+statuses[bank].toLowerCase());
+      $('#fanex-status-'+trans_id).html(statuses[fanex]).addClass('fanex-text-'+statuses[fanex].toLowerCase());
+      $('#upt-status-'+trans_id).html(statuses[upt]).addClass('fanex-text-'+statuses[upt].toLowerCase());
     }).fail(function() {
       console.log('There is problem in Loading the new statuses');
     });
-  // });
 });
 
 function getAmount() {

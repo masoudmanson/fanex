@@ -176,27 +176,94 @@ class UserController extends Controller
         //
     }
 
-    public function search(Request $request, $keyword)
+//    public function search(Request $request, $keyword)
+//    {
+//        $user = Auth::user();
+//        if ($keyword == '') {
+//            $transactions = $user->transaction()->paginate(10);
+//            $transactions = $this->payable($transactions);
+//        } else {
+//            $transactions = Transaction::select("transactions.*", "beneficiaries.firstname", "beneficiaries.lastname")
+//                ->join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
+//                ->where('transactions.user_id', '=', $user->id)
+//                ->where(function ($query) use ($keyword) {
+//                    $query->where('transactions.uri', 'like', "%$keyword%")
+//                        ->orWhere('beneficiaries.account_number', 'like', "%$keyword%")
+//                        ->orWhereRaw("regexp_like(beneficiaries.firstname, '$keyword', 'i')")
+//                        ->orWhereRaw("regexp_like(beneficiaries.lastname, '$keyword', 'i')");
+////                        ->orWhere('transactions.premium_amount', 'like', "%$keyword%")
+////                        ->orWhere('beneficiaries.firstname', 'like', "%$keyword%")
+////                        ->orWhere('beneficiaries.lastname', 'like', "%$keyword%");
+//                })->orderby("transactions.id", "desc")->paginate(10);
+//
+//            $transactions = $this->payable($transactions);
+//        }
+//        if ($request->ajax())
+//            return response()->json(view('partials.transaction-list-item', compact('transactions'))->render());
+//        else {
+//            $user = Auth::user();
+//            return view('dashboard.index', compact('user', 'transactions'));
+//        }
+//    }
+
+
+    public function search(Request $request)
     {
         $user = Auth::user();
+        $keyword = $request->keyword;
         if ($keyword == '') {
             $transactions = $user->transaction()->paginate(10);
             $transactions = $this->payable($transactions);
         } else {
-            $transactions = Transaction::select("transactions.*", "beneficiaries.firstname", "beneficiaries.lastname")
-                ->join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
-                ->where('transactions.user_id', '=', $user->id)
-                ->where(function ($query) use ($keyword) {
-                    $query->where('transactions.uri', 'like', "%$keyword%")
-                        ->orWhere('beneficiaries.account_number', 'like', "%$keyword%")
-                        ->orWhereRaw("regexp_like(beneficiaries.firstname, '$keyword', 'i')")
-                        ->orWhereRaw("regexp_like(beneficiaries.lastname, '$keyword', 'i')");
-//                        ->orWhere('transactions.premium_amount', 'like', "%$keyword%")
-//                        ->orWhere('beneficiaries.firstname', 'like', "%$keyword%")
-//                        ->orWhere('beneficiaries.lastname', 'like', "%$keyword%");
-                })->orderby("transactions.id", "desc")->paginate(10);
+            preg_match_all('/(?:(name|transaction|account|amount|date):)([^: ]+(?:\s+[^: ]+\b(?!:))*)/xi', $keyword, $matches, PREG_SET_ORDER);
+            $result = array();
+            foreach ($matches as $match) {
+                if (isset($result[$match[1]])) {
+                    $result[$match[1]] = $result[$match[1]] . ' ' . $match[2];
+                } else
+                    $result[$match[1]] = $match[2];
+            }
 
-            $transactions = $this->payable($transactions);
+            if($result) {
+                $transactions = Transaction::select("transactions.*", "beneficiaries.firstname", "beneficiaries.lastname")
+                    ->join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
+                    ->where('transactions.user_id', '=', $user->id)
+                    ->where(function ($query) use ($result) {
+                        $query->orWhereRaw("regexp_like(beneficiaries.firstname, '%mos%', 'i')")
+                            ->orWhereRaw("regexp_like(beneficiaries.lastname, '%mos%', 'i')");
+//                        foreach ($result as $k => $v) {
+//                            switch (strtolower($k)) {
+//                                case 'name':
+//                                    if (preg_match("/^[a-zA-Z\s]+$/", $v)) {
+//                                        $query->orWhere('beneficiaries.firstname', 'like', "%$v%")
+//                                            ->orWhere('beneficiaries.lastname', 'like', "%$v%");
+//                                    }
+//                                    break;
+//
+//                                case 'transaction':
+//                                    $query->orWhere('transactions.uri', 'like', "%$v%");
+//                                    break;
+//
+//                                case 'account':
+//                                    $query->orWhere('beneficiaries.account_number', 'like', "%$v%");
+//                                    break;
+//
+//                                case 'amount':
+//                                    $query->orWhere('transactions.premium_amount', 'like', "%$v%");
+//                                    break;
+//
+//                                default:
+//                                    break;
+//                            }
+//                        }
+                    })->orderby("transactions.id", "desc")->paginate(10);
+                dd($transactions);
+                $transactions = $this->payable($transactions);
+            }
+            else {
+                $transactions = Transaction::where('id',0)->paginate(10);
+                $transactions = $this->payable($transactions);
+            }
         }
         if ($request->ajax())
             return response()->json(view('partials.transaction-list-item', compact('transactions'))->render());

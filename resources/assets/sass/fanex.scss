@@ -7,7 +7,8 @@ body {
     font-family: 'Roboto', 'IRANSans', tahoma, sans-serif !important;
     background-color: $fanapGreyLight;
     direction: ltr;
-    //text-align: left;
+    height: 100%;
+    overflow-x: hidden;
 }
 
 input[type=number] {
@@ -76,8 +77,8 @@ opacity-30 {
 }
 
 .alert-danger {
-     background: $fanapRed url("images/pattern-w.png");
- }
+    background: $fanapRed url("images/pattern-w.png");
+}
 
 .alert-success {
     background: $fanapGreen url("images/pattern-w.png");
@@ -851,7 +852,7 @@ opacity-30 {
     &:hover, &:active, &:focus {
         color: $fanapDark;
         background-color: #fff;
-        @include box-shadow(0 0 7px rgba(0, 0, 0, 0.2) !important);
+        @include box-shadow(0 0 7px rgba(0, 0, 0, 0.2));
     }
 }
 
@@ -898,25 +899,47 @@ div.fanexCaptcha {
     }
 }
 
-#search-input::before {
-    content: '\51';
+#search-input #search-button {
+    text-decoration: none;
+}
+
+#search-input #search-button::after {
     font-family: 'fanex';
+    content: "\51";
+    vertical-align: middle;
+    cursor: pointer;
+    padding-right: 15px;
     color: $fanapOrange;
     font-size: 32px;
-    position: absolute;
-    @include absolut-center($top: 50%, $left: 0%);
-    left: 40px;
-    z-index: 300;
     @include mq($max-width: $breakePoint_md) {
-        left: 30px;
+        left: 25px;
     }
+}
+
+.noShadow {
+    @include box-shadow(none !important);
+    &:hover, &:active, &:focus {
+        @include box-shadow(none !important);
+    }
+}
+
+#search-input .panel-heading .accordion-toggle.status-handler:after {
+    font-family: 'fanex';
+    content: "\54";
+    float: right;
+    vertical-align: middle;
+    font-size: 21px;
+    color: $fanapGreyDark !important;
+    cursor: pointer;
+    padding-right: 15px;
 }
 
 .search-filter {
     font-size: 26px;
     color: #666 !important;
     font-weight: 100;
-    padding-left: 63px !important;
+    height: 70px;
+    line-height: 70px;
     &::before {
         content: '\51';
         font-family: 'fanex';
@@ -926,6 +949,37 @@ div.fanexCaptcha {
     }
     @include mq($max-width: $breakePoint_sm) {
         font-size: 16px;
+    }
+}
+
+#searchbox {
+    border-top: solid 1px $fanapGreyUltraLight;
+    padding: 15px 30px;
+    h5 {
+        font-size: 18px;
+        color: $fanapGrey;
+        font-weight: 300;
+        padding-bottom: 10px;
+    }
+    ul {
+        li {
+            cursor: pointer;
+            p {
+                color: $fanapBourdux;
+                span {
+                    color: $fanapDark;
+                    .example {
+                        color: $fanapGrey;
+                    }
+                }
+            }
+        }
+    }
+    .tip {
+        color: $fanapDark;
+        .example {
+            color: $fanapGrey;
+        }
     }
 }
 
@@ -1264,6 +1318,10 @@ a.btnMini {
 }
 
 .dashboard-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    //height: 120px;
     padding: 45px 100px 35px;
     margin-top: 30px;
     background-color: $fanapDark !important;
@@ -1832,7 +1890,7 @@ a.accordion-toggle {
     text-align: center;
 }
 
-.panel-heading .accordion-toggle:after {
+.panel-heading .accordion-toggle.status-handler:after {
     font-family: 'fanex';
     content: "\43";
     float: right;
@@ -1842,7 +1900,7 @@ a.accordion-toggle {
     cursor: pointer;
 }
 
-.panel-heading .accordion-toggle.collapsed:after {
+.panel-heading .accordion-toggle.status-handler.collapsed:after {
     content: "\69";
 }
 
