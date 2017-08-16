@@ -17,12 +17,8 @@ class CreateExchangersTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->increments('id')->unsigned();
-            $table->integer('userId')->unique()->nullable();
             $table->string('exchanger_name');
-            $table->string('username');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
+
             $table->timestamps();
         });
     }

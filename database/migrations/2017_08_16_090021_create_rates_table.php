@@ -6,24 +6,24 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateRatesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+/**
+* Run the migrations.
+*
+* @return void
+*/
     public function up()
     {
         Schema::create('rates', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->increments('id')->unsigned();;
-            $table->integer('exchanger_id')->unsigned()->nullable();
+            $table->integer('exchanger_user_id')->unsigned()->nullable();
             $table->integer('currency_id')->unsigned()->nullable();
             $table->float('rate');
             $table->string('ip')->nullable();
             $table->timestamps();
 
-            $table->foreign('exchanger_id')->references('id')->on('exchangers')
+            $table->foreign('exchanger_user_id')->references('id')->on('exchanger_users')
                 ->onUpdate('cascade')->onDelete('set null');
 
             $table->foreign('currency_id')->references('id')->on('currencies')
@@ -31,15 +31,15 @@ class CreateRatesTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+/**
+* Reverse the migrations.
+*
+* @return void
+*/
     public function down()
     {
         Schema::table('rates', function($table) {
-            $table->dropForeign(['exchanger_id']);
+            $table->dropForeign(['exchanger_user_id']);
             $table->dropForeign(['currency_id']);
         });
 
