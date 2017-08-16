@@ -178,13 +178,13 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        \App\Providers\SSOServiceProvider::class,
+        App\Providers\SSOServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
         Morilog\Jalali\JalaliServiceProvider::class,
         Cornford\Googlmapper\MapperServiceProvider::class,
         PeterColes\Countries\CountriesServiceProvider::class,
-        Intervention\Validation\ValidationServiceProvider::class,
         App\Providers\ValidationServiceProvider::class,
+        Intervention\Validation\ValidationServiceProvider::class,
         Snowfire\Beautymail\BeautymailServiceProvider::class,
 
         /*

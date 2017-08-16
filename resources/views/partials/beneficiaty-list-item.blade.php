@@ -35,7 +35,7 @@
                         <i class="icon-delete" title="@lang('profile.bnfDelete')"></i>
                     </a>
                 </div>
-                <a class="col-md-1 col-sm-1 col-xs-1 accordion-toggle" data-toggle="collapse"
+                <a class="col-md-1 col-sm-1 col-xs-1 accordion-toggle status-handler collapsed" data-toggle="collapse"
                    data-parent="#ajax-beneficiary-list" href="{{ "#row".$bnf->id }}">
                     <span class="acc-arrow"></span>
                 </a>

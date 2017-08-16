@@ -58,13 +58,13 @@
 
                                     <div class="col-xs-8 col-sm-10">
                                         <input type="text"
-                                               class="fanexInputWhite noShadow search-filter p-0"
+                                               class="fanexInputWhite noShadow search-filter p-0 search-input"
                                                placeholder="@lang('profile.searchHolder')"
                                                id="transaction-search">
                                     </div>
 
                                     <div class="col-xs-2 col-sm-1">
-                                        <a class="accordion-toggle status-handler collapsed"
+                                        <a class="accordion-toggle status-handler help-link collapsed"
                                            data-toggle="collapse"
                                            data-parent="#search-input"
                                            href="#searchbox">
@@ -80,11 +80,11 @@
                                             <small>@lang('profile.srchHelpText')</small>
                                         </h5>
                                         <ul>
-                                            <li><p>@lang('profile.srchHelpName')</p></li>
-                                            <li><p>@lang('profile.srchHelpAccount')</p></li>
-                                            <li><p>@lang('profile.srchHelpTransaction')</p></li>
-                                            <li><p>@lang('profile.srchHelpAmount')</p></li>
-                                            <li><p>@lang('profile.srchHelpDate')</p></li>
+                                            <li class="search-command" data-command="name:"><p>@lang('profile.srchHelpName')</p></li>
+                                            <li class="search-command" data-command="account:"><p>@lang('profile.srchHelpAccount')</p></li>
+                                            <li class="search-command" data-command="transaction:"><p>@lang('profile.srchHelpTransaction')</p></li>
+                                            <li class="search-command" data-command="amount:"><p>@lang('profile.srchHelpAmount')</p></li>
+                                            {{--<li class="search-command" data-command="date:"><p>@lang('profile.srchHelpDate')</p></li>--}}
                                         </ul>
                                         <br>
                                         <p class="tip">@lang('profile.srchHelpTip1')</p>
@@ -123,42 +123,6 @@
 
 @section('scripts')
     <script>
-        var timer;
-        var x;
-
-        $(window).on('hashchange', function() {
-            if (window.location.hash) {
-                var page = window.location.hash.replace('#', '');
-                if (page == Number.NaN || page <= 0) {
-                    return false;
-                }
-                else {
-                    getBeneficiaries(page);
-                }
-            }
-        });
-
-        function getBeneficiaries(url) {
-            var keyword = $('#transaction-search').val();
-
-            $('#mainFormLoader').fadeIn(200);
-            $.ajax({
-                url: url,
-                dataType: 'json',
-            }).done(function(data) {
-                $('#mainFormLoader').fadeOut(200);
-                if (keyword.length > 0) {
-                    keyword = keyword.replace(/(\s+)/, '(<[^>]+>)*$1(<[^>]+>)*');
-                    var pattern = new RegExp('([^\/])(' + keyword + ')([^\?])', 'gi');
-                    data = data.replace(pattern, '$1<mark>$2</mark>$3');
-                    data = data.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, '$1</mark>$2<mark>$4');
-                }
-                $('#ajax-transaction-list').html(data);
-            }).fail(function() {
-                console.log('Posts could not be loaded.');
-            });
-        }
-
         $(document).ready(function() {
             $(document).on('click', '.pagination a', function(e) {
                 e.preventDefault();
@@ -198,48 +162,37 @@
             });
         });
 
-        function search(keyword) {
-            console.log(keyword);
-            if (keyword.length == 0) {
-                $('#mainFormLoader').fadeIn(200);
-                x = $.ajax({
-                    method: 'get',
-                    url: '/profile',
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        console.log(thrownError);
-                    },
-                }).done(function(response) {
-                    $('#mainFormLoader').fadeOut(200);
-                    $('#ajax-transaction-list').html(response);
-                });
+        $(window).on('hashchange', function() {
+            if (window.location.hash) {
+                var page = window.location.hash.replace('#', '');
+                if (page == Number.NaN || page <= 0) {
+                    return false;
+                }
+                else {
+                    getBeneficiaries(page);
+                }
             }
-            else if (keyword.length >= 2) {
-                console.log('injam');
-                $('#mainFormLoader').fadeIn(200);
-                $.ajax({
-                    method: 'post',
-//                    url: '/search/transaction/' + keyword,
-                    url: '/search/transaction',
-                    data: {
-                        '_token': csrfToken,
-                        'X-CSRF-TOKEN': csrfToken,
-                        'keyword':keyword
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        console.log(thrownError);
-                    },
-                }).done(function(response) {
-                    $('#mainFormLoader').fadeOut(200);
+        });
 
+        function getBeneficiaries(url) {
+            var keyword = $('#transaction-search').val();
+
+            $('#mainFormLoader').fadeIn(200);
+            $.ajax({
+                url: url,
+                dataType: 'json',
+            }).done(function(data) {
+                $('#mainFormLoader').fadeOut(200);
+                if (keyword.length > 0) {
                     keyword = keyword.replace(/(\s+)/, '(<[^>]+>)*$1(<[^>]+>)*');
                     var pattern = new RegExp('([^\/])(' + keyword + ')([^\?])', 'gi');
-                    response = response.replace(pattern, '$1<mark>$2</mark>$3');
-                    response = response.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,
-                        '$1</mark>$2<mark>$4');
-
-                    $('#ajax-transaction-list').html(response);
-                });
-            }
+                    data = data.replace(pattern, '$1<mark>$2</mark>$3');
+                    data = data.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, '$1</mark>$2<mark>$4');
+                }
+                $('#ajax-transaction-list').html(data);
+            }).fail(function() {
+                console.log('Posts could not be loaded.');
+            });
         }
     </script>
 @endsection
