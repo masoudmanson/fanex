@@ -36,8 +36,12 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique()->nullable();
 //**
             $table->boolean('is_authorized')->nullable();
+            $table->integer('identifier_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+//            $table->foreign('identifier_id')->references('id')->on('identifiers')
+//                ->onUpdate('cascade')->onDelete('set null');
         });
     }
 
@@ -48,6 +52,10 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+//        Schema::table('users', function($table) {
+//            $table->dropForeign(['identifier_id']);
+//        });
+
         Schema::dropIfExists('users');
     }
 }
