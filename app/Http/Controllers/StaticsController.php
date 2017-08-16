@@ -24,7 +24,9 @@ class StaticsController extends Controller
      */
     public function about()
     {
-        $data = $this->CorpGetCountryData();
+//        $data = $this->CorpGetCountryData();
+//        $country_list = indexFormCountryList($data, session('applocale'));
+        $data = '';
         $country_list = indexFormCountryList($data, session('applocale'));
         return view('statics.about', compact('country_list'));
     }
@@ -34,7 +36,9 @@ class StaticsController extends Controller
      */
     public function terms()
     {
-        $data = $this->CorpGetCountryData();
+//        $data = $this->CorpGetCountryData();
+//        $country_list = indexFormCountryList($data, session('applocale'));
+        $data = '';
         $country_list = indexFormCountryList($data, session('applocale'));
         return view('statics.terms', compact('country_list'));
     }

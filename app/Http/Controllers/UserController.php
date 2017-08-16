@@ -207,7 +207,7 @@ class UserController extends Controller
                     if (strtolower($k) == 'name') {
                         if (preg_match("/^[a-zA-Z\s]+$/", $v)) {
                             $name = preg_replace('/\s+/', '', $v);
-                            $transactions->whereRaw("regexp_like(firstname||lastname, asciistr(convert('$name', 'UTF8')), 'i')");
+                            $transactions->whereRaw("regexp_like(firstname||lastname, '$name', 'i')");
                         }
                     }
                     if (strtolower($k) == 'transaction') {
@@ -217,7 +217,8 @@ class UserController extends Controller
                         $transactions->whereRaw("regexp_like(account_number, '$v', 'i')");
                     }
                     if (strtolower($k) == 'amount') {
-                        $transactions->whereRaw("regexp_like(premium_amount, '$v', 'i')");
+//                        $transactions->whereRaw("regexp_like(premium_amount, '$v', 'i')");
+                        $transactions->where("premium_amount",$v);
                     }
                 }
                 $transactions = $transactions->orderby("transactions.id", "desc")->paginate(10);

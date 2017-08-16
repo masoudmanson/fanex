@@ -20,13 +20,14 @@ return [
      */
     'srchHelpTitle' => 'راهنمای جستجو',
     'srchHelpText' => 'می توانید از دستورات زیر برای جستجوی تخصصی تر استفاده نمائید.',
-    'srchHelpName' => 'name:  <span>برای جستجوی یک اسم خاص <span class="example">(e.x. name:John Doe)</span></span>',
-    'srchHelpAccount' => 'account:  <span>برای جستجوی یک شماره حساب مشخص <span class="example">(e.x. account:6387760345235001)</span></span>',
-    'srchHelpTransaction' => 'transaction:  <span>برای جستجوی یک تراکنش مشخص <span class="example">(e.x. transaction:79905503W7x49683)</span></span>',
-    'srchHelpAmount' => 'amount:  <span>برای جستجوی مبلغ مشخص <span class="example">(e.x. amount:1500)</span></span>',
-    'srchHelpDate' => 'date:  <span>برای جستجوی تاریخ مشخص <span class="example">(e.x. date:2017-04-15 , YYYY-MM-DD)</span></span>',
+    'srchHelpName' => 'name:  <span>برای جستجوی یک اسم خاص <span class="example">(مثال: name:John Doe)</span></span>',
+    'srchHelpAccount' => 'account:  <span>برای جستجوی یک شماره حساب مشخص <span class="example">(مثال: account:6387760345235001)</span></span>',
+    'srchHelpTransaction' => 'transaction:  <span>برای جستجوی یک تراکنش مشخص <span class="example">(مثال: transaction:79905503W7x49683)</span></span>',
+    'srchHelpAmount' => 'amount:  <span>برای جستجوی مبلغ مشخص <span class="example">(مثال: amount:1500)</span></span>',
+    'srchHelpMobile' => 'mobile:  <span>برای جستجوی شماره موبایلی مشخص <span class="example">(مثال: mobile:09126666666)</span></span>',
+    'srchHelpDate' => 'date:  <span>برای جستجوی تاریخ مشخص <span class="example">(مثال: date:2017-04-15 , YYYY-MM-DD)</span></span>',
     'srchHelpTip1' => '-- قانون کلی جستجو به شرح روبرو می باشد  <span class="example">[Key][Semicolon][Search Keyword][Space][key][Semicolon][Search Keyword]...</span>',
-    'srchHelpTip2' => '-- شما می توانید از چندین دستور همزمان استفاده کنید <span class="example">(e.x. name:John Doe acount:6387760345235001)</span>',
+    'srchHelpTip2' => '-- شما می توانید از چندین دستور همزمان استفاده کنید <span class="example">(مثال: name:John Doe acount:6387760345235001)</span>',
     'srchHelpTip3' => '-- برای انجام جستجو، کافیست بر روی دکمه ی جستجوی سمت راست کلیک کرده و یا دکمه <span class="example">Enter</span> را از روی صفحه کلید خود فشار دهید.',
 
 

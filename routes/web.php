@@ -57,13 +57,8 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@
 
 Route::get('pdf/proforma/{id}', 'StaticsController@proformaPdf');
 
-
-Route::get('/search/beneficiary', 'BeneficiaryController@search');
+Route::post('/search/beneficiary', 'BeneficiaryController@search');
 Route::post('/search/transaction', 'UserController@search');
-//Route::get('/search/transaction', 'UserController@search');
-
-
-
 
 Route::get('/search/beneficiary/country/{country}', 'BeneficiaryController@searchCountry');
 Route::get('/search/beneficiary/{keyword}', 'BeneficiaryController@search');

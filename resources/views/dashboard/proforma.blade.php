@@ -66,7 +66,7 @@
                                             <div class="col-xs-12 col-sm-6">
                                                 <p>{{ number_format($amount, 2) . ' ' . $currency . ' + &rlm; 0' }} @lang('index.formRials')</p>
                                                 <p class="acc-factor-sum">
-                                                    = {{ number_format($amount, 2) . ' ' . $currency}} </p>
+                                                   = {{ number_format($payable, 2) }}  @lang('index.formRials')</p>
                                             </div>
                                         </li>
                                     </ul>
