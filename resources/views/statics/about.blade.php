@@ -52,5 +52,10 @@
 @endsection
 
 @section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#main-content-wrapper').css({'padding-bottom':0});
+        });
+    </script>
     <script src="{{ asset('js/index.js') }}"></script>
 @endsection
