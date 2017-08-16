@@ -71,7 +71,8 @@
                             {{-- Go For Payment --}}
                             <div class="col-sm-6 col-xs-12 pl-md-2">
                                 <input type="hidden" value="{{ $additional_data }}" name="additional">
-                                <input type="submit" class="btn fanexBtnOutlineGrey" id="continue_btn" value="@lang('index.continue')"
+                                <input type="submit" class="btn fanexBtnOutlineGrey" id="continue_btn"
+                                       value="@lang('index.continue')"
                                        name="payment" disabled="disabled"/>
                             </div>
                         </div>
@@ -91,7 +92,8 @@
 @section('scripts')
     <script src="{{ asset('js/index.js') }}"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
+            $('#main-content-wrapper').css({'padding-bottom': 0});
             $('#continue_btn').attr('disabled', 'disabled');
             $('#authorizer').val('');
             $('.selectpicker').selectpicker('refresh');
@@ -100,15 +102,15 @@
                 var identifier = $(this).val();
                 $.ajax({
                     method: 'get',
-                    url: '/additional-info/'+identifier,
+                    url: '/additional-info/' + identifier,
                     data: {
                         '_token': csrfToken,
-                        'X-CSRF-TOKEN': csrfToken
+                        'X-CSRF-TOKEN': csrfToken,
                     },
-                    error: function (xhr, ajaxOptions, thrownError) {
+                    error: function(xhr, ajaxOptions, thrownError) {
                         console.log(xhr.response);
-                    }
-                }).done(function (response) {
+                    },
+                }).done(function(response) {
                     $('#identifier-ajax-form').html(response);
                     $('#continue_btn').removeAttr('disabled');
                 });
