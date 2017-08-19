@@ -93,4 +93,6 @@ return [
     'accept' => 'Lütfen Şartlar ve Koşulları Kabul Edin',
     'transFailed' => 'İşlem başarısız kaldi!',
     'transSuccess' => 'İşlem Başarıyla yapıldı.',
+    'errorDone' => 'Bu İşlem zaten yapıldı.',
+    'errorTtl' => 'Zaman aşımı! Oranlar doldu, lütfen yeni oranlarla tekrar deneyin.',
 ];

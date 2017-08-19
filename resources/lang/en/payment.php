@@ -93,4 +93,6 @@ return [
     'accept' => 'Please Agree to the Terms & Conditions',
     'transFailed' => 'Transaction Failed!',
     'transSuccess' => 'Transaction has Successfully done.',
+    'errorDone' => 'This Transaction has already been done.',
+    'errorTtl' => 'Time out! Rates has been expired, please try again with new rates.',
 ];

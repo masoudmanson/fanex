@@ -164,10 +164,8 @@ class PaymentController extends Controller
 
                 if (!$invoice->hasError && count($invoice->result) > 0) {
 
-                    $request->session()->flash('alert-danger', 'This transaction has already been done.');
+                    $request->session()->flash('alert-danger', __('payment.errorDone'));
                     return redirect('/');
-//                    return redirect()->back()->withErrors(['msg', "This transaction has already been done."]); // todo : make a lang
-                    //todo : redirect to a single page
                 }
             }
 

@@ -21,7 +21,7 @@ class CheckLogExist
         }
 //        Session::flash('message', 'This is a message!');
 //        Session::flash('alert-class', 'alert-danger');
-        $request->session()->flash('alert-danger', 'time over! please try again and get a new rate.');
+        $request->session()->flash('alert-danger', __('payment.errorTtl'));
         return redirect('/');
     }
 }
