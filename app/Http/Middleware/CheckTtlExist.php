@@ -21,7 +21,7 @@ class CheckTtlExist
         $transaction = Transaction::findOrFail(json_decode(Crypt::decryptString($request->transaction_sign))->id);
 
         if(Carbon::now()>$transaction->ttl){
-            $request->session()->flash('alert-danger', 'time over! please try again and get a new rate.');
+            $request->session()->flash('alert-danger', __('payment.errorTtl'));
             return redirect('/');
         }
 
