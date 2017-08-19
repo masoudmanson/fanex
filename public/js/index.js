@@ -210,18 +210,20 @@ $(document).ready(function() {
         }
     });
 
-    $('#main-content-wrapper, .fanexMotto, .dropdown-menu .inner, textarea').
-        niceScroll({
-            cursorcolor: '#000',
-            cursoropacitymin: 0.1,
-            cursoropacitymax: 0.3,
-            cursorwidth: '5px',
-            cursorborder: 'none',
-            cursorborderradius: '5px',
-        });
+    // $('html, .fanexMotto, .dropdown-menu .inner, textarea').niceScroll({
+    var nice = $('html, .fanexMotto, .dropdown-menu .inner, textarea').niceScroll({
+        cursorcolor: '#000',
+        cursoropacitymin: 0.1,
+        cursoropacitymax: 0.3,
+        cursorwidth: '5px',
+        cursorborder: 'none',
+        cursorborderradius: '5px',
+        horizrailenabled:false
+    });
 
     $('#accordion').on('shown.bs.collapse', function() {
         $(this).addClass('opened');
+        nice.resize();
     });
 
     var $iW = $(window).innerWidth();
@@ -284,7 +286,7 @@ $(document).ready(function() {
     });
 });
 
-$(document).on('click', '.status-handler.collapsed:not(.help-link)', function() {
+$(document).on('click', '#ajax-transaction-list .status-handler.collapsed:not(.help-link)', function() {
         var trans_id = $(this).attr('data-id');
         $('.status-container-' + trans_id + ' .ajax-status').
             html(
