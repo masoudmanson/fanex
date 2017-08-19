@@ -33,7 +33,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/profile" class="nav-link">{{ Auth::user()->firstname }}</a>
+                    <a href="/profile" class="nav-link">
+                        @if(isset(Auth::user()->firstname)){{ Auth::user()->firstname }}
+                        @else{{Auth::user()->firstname_latin}}
+                        @endif
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link"

@@ -34,6 +34,7 @@ class PaymentController extends Controller
         $this->middleware('checkUser', ['only' => ['proforma_with_selected_transaction', 'proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
         $this->middleware('checkLog', ['only' => ['proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
         $this->middleware('checkTtl', ['only' => ['issueInvoice']]);
+        $this->middleware('authorized', ['only' => ['issueInvoice']]);
     }
 
     /**
