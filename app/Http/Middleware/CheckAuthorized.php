@@ -19,12 +19,12 @@ class CheckAuthorized
     {
         $identifier = Identifier::other()->first();
         if (Auth::user()->identifier_id = $identifier->id) {
-            $request->session()->flash('alert-success', 'masoud I love u :D');
+            $request->session()->flash('alert-success', __('auth.otherMsg'));
             return redirect('/');
         }
         else if(!Auth::user()->is_authorized)
         {
-            $request->session()->flash('alert-danger', 'You are not authorized yet');
+            $request->session()->flash('alert-danger', __('auth.notAuth'));
             return redirect('/');
         }
         return $next($request);
