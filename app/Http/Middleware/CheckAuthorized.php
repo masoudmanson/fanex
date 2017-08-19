@@ -18,7 +18,7 @@ class CheckAuthorized
     public function handle($request, Closure $next)
     {
         $identifier = Identifier::other()->first();
-        if (Auth::user()->identifier_id = $identifier->id) {
+        if (Auth::user()->identifier_id == $identifier->id) {
             $request->session()->flash('alert-success', __('auth.otherMsg'));
             return redirect('/');
         }
