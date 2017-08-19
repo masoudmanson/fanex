@@ -77,7 +77,7 @@ return [
     'invText' => 'Thank you for using FANEx to send money to <b>:name</b>.',
     'invItem' => 'Item',
     'invCost' => 'Cost',
-    'invAmount' => 'Prem. Amount:',
+    'invAmount' => 'Premium Amount:',
     'invExp' => 'Expense:',
     'invTax' => 'Tax:',
     'invSum' => 'Sum',

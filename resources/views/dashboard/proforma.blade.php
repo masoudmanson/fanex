@@ -33,7 +33,7 @@
                                 <div class="col-xs-12">
                                     <h2 class="proforma-h2">@lang('payment.prTitle')</h2>
 
-                                    <p class="proforma-p">@lang('payment.prText', ['amount'=>number_format($amount, 2).' '.$currency])</p>
+                                    {{--<p class="proforma-p">@lang('payment.prText', ['amount'=>number_format($amount, 2).' '.$currency])</p>--}}
 
                                     {{-- Payment Details --}}
                                     <div class="proforma-heading">@lang('payment.prPayment')</div>

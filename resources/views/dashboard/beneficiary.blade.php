@@ -168,29 +168,32 @@
         var finish = {{ $finish_time }};
         countdown(finish);
 
-        $(document).ready(function () {
-            $('#bnfCountry').selectpicker('val', 'IR');
+        $(document).ready(function() {
+            var old_country = ('{{ old('country') }}') ? '{{ old('country') }}' : 'IR';
+            $('#bnfCountry').selectpicker('val', old_country);
 
-            $('#bnfSelect').on('change blur', function () {
+            $('#bnfSelect').on('change blur', function() {
                 $('#bnfSaveSubmit').fadeOut(200);
                 $('#bnfSelectSubmit').fadeIn(200);
-                $('#add-bnf-form').css({"opacity": 0.5});
+                $('#add-bnf-form').css({'opacity': 0.5});
                 $('#add-new-bnf-ajax').slideUp(200);
 
                 var bnf_id = $(this).val();
-                var bnf = $.grep(beneficiaries, function (e) {
+                var bnf = $.grep(beneficiaries, function(e) {
                     return e.id == bnf_id;
                 })[0];
                 $('#bnfSelectHash').val(bnf.hash);
 
                 $('#bnf-ajax-name').text(bnf.firstname + ' ' + bnf.lastname);
                 $('#bnf-ajax-accountnumber').text(bnf.account_number);
-                if (bnf.address)
+                if (bnf.address) {
                     $('#bnf-ajax-address').text(bnf.address);
+                }
                 $('#bnf-ajax-country').text(countries[bnf.country]);
                 $('#bnf-ajax-phone').text(bnf.tel);
-                if (bnf.fax)
+                if (bnf.fax) {
                     $('#bnf-ajax-fax').text(bnf.fax);
+                }
                 $('#bnf-ajax-bankname').text(bnf.bank_name);
                 $('#bnf-ajax-branch').text(bnf.branch_name);
                 $('#bnf-ajax-swift').text(bnf.swift_code);
@@ -199,10 +202,10 @@
                 $('#bnf-ajax-div').slideDown(300);
             });
 
-            $('#add-bnf-form input').on('focus', function () {
+            $('#add-bnf-form input').on('focus', function() {
                 $('#bnfSelect').val(0);
                 $('.selectpicker').selectpicker('refresh');
-                $('#add-bnf-form').css({"opacity": 1});
+                $('#add-bnf-form').css({'opacity': 1});
                 $('#add-new-bnf-ajax').slideDown(200);
                 $('#bnf-ajax-div').slideUp(300);
                 $('#bnfSaveSubmit').fadeIn(200);

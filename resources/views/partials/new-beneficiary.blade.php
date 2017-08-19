@@ -67,7 +67,7 @@
 
         <select class="form-control fanexInput selectpicker"
                 data-style="fanexInput fanexInputWhite"
-                name="country" id="bnfCountry">
+                name="country" id="bnfCountry" value="{{ old('country') }}>
             @foreach($countries as $key=>$value)
                 <option value="{{ $key }}" class="enable">{{ $value }}</option>
             @endforeach
