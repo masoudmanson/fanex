@@ -7,6 +7,7 @@ return [
     'menuBnf' => 'Beneficiaries',
     'menuNotify' => 'Notifications',
     'menuBalance' => 'Account Balance',
+    'menuBalanceAdd' => 'Charge',
 
     // Search Help
     'srchHelpTitle' => 'Search Help',

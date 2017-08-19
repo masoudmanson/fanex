@@ -1192,7 +1192,7 @@ a.btnMini {
         background: $fanapBourdux url("images/pattern-w.png");
         background-size: cover;
         -webkit-background-size: cover;
-        color: #fff;
+        color: #fff !important;
     }
 }
 
@@ -1399,10 +1399,13 @@ a.btnMini {
         .profile-ul {
             .profile-li {
                 a {
-                    font-size: 18px !important;
+                    font-size: 16px;
                     i {
                         font-size: 24px !important;
                     }
+                }
+                a.text-small {
+                    font-size: 14px;
                 }
             }
         }
@@ -1489,7 +1492,7 @@ a.btnMini {
         .profile-li {
             margin: 0px 0 20px;
             a {
-                font-size: 21px;
+                font-size: 18px;
                 font-weight: 200;
                 color: $fanapGrey;
                 text-decoration: none;
@@ -1503,6 +1506,9 @@ a.btnMini {
                 &:hover {
                     color: $fanapOrange;
                 }
+            }
+            a.text-small {
+                font-size: 16px;
             }
         }
         .profile-li.active {

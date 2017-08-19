@@ -289,8 +289,7 @@ $(document).ready(function() {
 $(document).on('click', '#ajax-transaction-list .status-handler.collapsed:not(.help-link)', function() {
         var trans_id = $(this).attr('data-id');
         $('.status-container-' + trans_id + ' .ajax-status').
-            html(
-                '<div class="spinner3"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
+            html('<div class="spinner3"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
         $.ajax({
             method: 'get',
             url: '/transaction/status/update/' + trans_id,
@@ -347,6 +346,23 @@ function setCaretPosition(elemId, caretPos) {
                 elem.focus();
         }
     }
+}
+
+function createSelection(field, start, end) {
+    field = document.getElementById(field);
+    if( field.createTextRange ) {
+        var selRange = field.createTextRange();
+        selRange.collapse(true);
+        selRange.moveStart('character', start);
+        selRange.moveEnd('character', end-start);
+        selRange.select();
+    } else if( field.setSelectionRange ) {
+        field.setSelectionRange(start, end);
+    } else if( field.selectionStart ) {
+        field.selectionStart = start;
+        field.selectionEnd = end;
+    }
+    field.focus();
 }
 
 function search(keyword) {

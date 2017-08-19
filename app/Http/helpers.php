@@ -99,12 +99,12 @@ function indexFormCountryList($data, $lang)
             "code" => "TR",
             "name" => $country_name,
             "currency" => array(
-                "EUR" => array(
-                    'type' => 'EUR',
-//                    'name' => 'Euro',
-                    'name' => __('index.EUR'),
-                    'sign' => '€'
-                ),
+//                "EUR" => array(
+//                    'type' => 'EUR',
+////                    'name' => 'Euro',
+//                    'name' => __('index.EUR'),
+//                    'sign' => '€'
+//                ),
                 "TRY" => array(
                     'type' => 'TRY',
 //                    'name' => 'Tukish Lira',

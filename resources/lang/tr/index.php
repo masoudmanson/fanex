@@ -47,6 +47,9 @@ return [
     'additionalmobile' => 'Telefon numaranızı girin',
     'additionalcc' => 'Hesap Numaranızı Girin',
     'additionalaccount_number' => 'Hesap Numaranızı Girin',
+    'additionalfirstname' => 'İlk adınızı girin',
+    'additionallastname' => 'Soyadınızı Giriniz',
+    'additionalidentity_number' => 'Ulusal Kimlik Numaranızı Girin',
     'continue' => 'Devam et',
     'timeout' => 'Zaman Aşimi!',
     'language' => 'TR',
@@ -57,5 +60,6 @@ return [
     'TRY' => '‎₺ Türk Lirası',
     'formAuthorizer' => 'Yetkilendirici\'yi seçin',
     'fanapium' => '‎Fanapium',
-    'dotin' => 'Pasargad Bankası',
+    'pasargad' => 'Pasargad Bankası',
+    'other' => 'Diğer Tanımlayıcılar',
 ];
