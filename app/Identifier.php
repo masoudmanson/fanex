@@ -12,6 +12,7 @@ class Identifier extends Model
         'created_at',
         'updated_at',
         'status',
+        'exchanger_id',
         'name'
     ];
 //
@@ -30,5 +31,10 @@ class Identifier extends Model
     public function scopeAvailable($query)
     {
         return $query->where('status', '=', '1');
+    }
+
+    public function scopeOther($query)
+    {
+        return $query->where('name', '=' , 'other');
     }
 }

@@ -22,7 +22,7 @@ class UserInformationController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkToken', ['only' => ['index','store']]);
+        $this->middleware('checkToken', ['only' => ['index', 'store']]);
     }
 
     /**
@@ -36,7 +36,7 @@ class UserInformationController extends Controller
 
         $identifiers = Identifier::available()->get();
 
-        return view('statics.additional', compact('identifiers','additional_data'));
+        return view('statics.additional', compact('identifiers', 'additional_data'));
     }
 
     /**
@@ -68,19 +68,29 @@ class UserInformationController extends Controller
             $result = $this->followBusiness($request->bearerToken());
             $follow_res = json_decode($result->getBody()->getContents());
 
-            //todo : when user must registered in platform?!
-//            $result = $this->getCurrentPlatformUser($request->cookie('token')['access']);
-//            $platform_user = json_decode($result->getBody()->getContents());
             $user = User::firstOrNew(array('userId' => $identity['userId']));
             $user->userId = $identity['userId'];
-
-            if(!isset($identity['firstName']) || !isset($identity['lastName']))
-                return abort(401);
-            else {
+//
+//            if(!isset($identity['firstName']) || !isset($identity['lastName']))
+//                return abort(401);
+//            else {
+//                $user->firstname = $identity['firstName'];
+//                $user->lastname = $identity['lastName'];
+//            }
+            if (isset($identity['firstName']) && isset($identity['lastName'])) {
                 $user->firstname = $identity['firstName'];
                 $user->lastname = $identity['lastName'];
             }
+            $user->firstname_latin = $identity['firstName_latin'];
+            $user->lastname_latin = $identity['lastName_latin'];
+
             //todo ... other data
+            $user->identifier_id = $identity['identifier_id'];
+
+            if (Identifier::find($user->identifier_id)->name == 'other')
+                $user->is_authorized = 0;
+            else
+                $user->is_authorized = 1;
             $user->save();
             //todo : save or update
             Auth::attempt();
@@ -92,9 +102,8 @@ class UserInformationController extends Controller
              * 2.register user to platform
              * 3. save user data , given from datin and platform (userId)
              */
-        }
-        else
-           return abort(401);
+        } else
+            return abort(401);
 
     }
 

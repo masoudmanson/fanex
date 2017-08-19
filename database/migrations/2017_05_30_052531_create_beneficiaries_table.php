@@ -35,6 +35,7 @@ class CreateBeneficiariesTable extends Migration
             $table->string('transit_sort_code')->nullable();
             $table->string('blz_bsb')->nullable();
             $table->boolean('is_deleted')->default(0);
+            $table->text('json_history')->nullable();
             $table->timestamps();
 
             $table->unique(['user_id', 'account_number']);

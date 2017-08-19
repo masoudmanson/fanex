@@ -16,4 +16,10 @@ return [
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
+    /*
+     * my custom messages
+     */
+    'notAuth' => 'You are not authorized yet.',
+    'otherMsg' => 'Please refer to the exchanger with relevant identification documents , for your authorization.'
+
 ];
