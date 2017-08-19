@@ -74,6 +74,9 @@ Transactions: (i) which exceed certain amounts; (ii) to certain destinations; (i
     'additionalmobile' => 'Enter Your Mobile Number',
     'additionalcc' => 'Enter Your Account Number',
     'additionalaccount_number' => 'Enter Your Account Number',
+    'additionalfirstname' => 'Enter Your Firstname',
+    'additionallastname' => 'Enter Your Lastname',
+    'additionalidentity_number' => 'Enter Your National Identity Number',
     'continue' => 'Continue',
     'timeout' => 'Time Out!',
     'language' => 'EN',
@@ -84,5 +87,6 @@ Transactions: (i) which exceed certain amounts; (ii) to certain destinations; (i
     'TRY' => '‎₺ Turkish Lira',
     'formAuthorizer' => '‎Select Authorizer',
     'fanapium' => '‎Fanapium',
-    'dotin' => 'Pasargad Bank',
+    'pasargad' => 'Pasargad Bank',
+    'other' => 'Other Identifiers',
 ];

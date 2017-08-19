@@ -34,6 +34,7 @@ class PaymentController extends Controller
         $this->middleware('checkUser', ['only' => ['proforma_with_selected_transaction', 'proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
         $this->middleware('checkLog', ['only' => ['proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
         $this->middleware('checkTtl', ['only' => ['issueInvoice']]);
+        $this->middleware('authorized', ['only' => ['issueInvoice']]);
     }
 
     /**
@@ -227,19 +228,6 @@ class PaymentController extends Controller
             $invoice_result = $invoice->result[0];
             $transaction = Transaction::findByBillNumber($invoice_result->billNumber)->firstOrFail();
 
-//            $upt_res = $this->CorpSendRequest($transaction, $transaction->user, $transaction->beneficiary, $transaction->backlog);// todo : it must written after fanex admin
-//
-//            dd($upt_res);
-//
-//            $result = $this->CorpSendRequestConfirm($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT);
-//
-//            if ($result->CorpSendRequestConfirmResult->TransferConfirmStatus->RESPONSE == 'Success') {
-//
-////                dd($upt_res);
-//            } else {
-////                dd('nashod');
-//            }
-
             // Converting EPOCH timestamp to UNIX timestamp
             $invoice_result->paymentDate = ceil($invoice_result->paymentDate / 1000);
             $finish_time = strtotime($transaction->ttl) - time();
@@ -252,33 +240,34 @@ class PaymentController extends Controller
                 $transaction->fanex_status = 'pending';
 
                 // todo** : do it after admin accept the payment , in a specific func.**
-//                $upt_res = $this->CorpSendRequest($transaction, $transaction->user, $transaction->beneficiary, $transaction->backlog);// todo : it must written after fanex admin
-//
-//                if ($upt_res->CorpSendRequestResult->TransferRequestStatus->RESPONSE == 'Success') {
-//                    $transaction->fanex_status = 'accepted';
-//                    $transaction->upt_ref = $upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT;
-//
-//                    $result = $this->CorpSendRequestConfirm($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT);
-//
-//                    if ($result->CorpSendRequestConfirmResult->TransferConfirmStatus->RESPONSE == 'Success') {
-//                        $transaction->upt_status = 'successful';
-//                        $transaction->update();
-//
-//                    } else {
-//                        $transaction->upt_status = 'failed'; //or rejected?
-//                        $transaction->fanex_status = 'pending';
-//                        $transaction->update();
-////                  $this->CorpCancelRequest($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT);
-////                  $this->CorpCancelConfirm($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT); // todo: check it later
-//                    }
-//                } else {
-//                    //if ($cancel_res)
-////                    $transaction->fanex_status = 'pending'; // it's already on pending condition
-//                    $transaction->upt_status = 'failed'; //?
-//                    $transaction->update();
-//                    // return ?
-//                }
-                $transaction->update();
+                $upt_res = $this->CorpSendRequest($transaction, $transaction->user, $transaction->beneficiary, $transaction->backlog);
+
+                if ($upt_res->CorpSendRequestResult->TransferRequestStatus->RESPONSE == 'Success') {
+                    $transaction->fanex_status = 'accepted';
+                    $transaction->upt_ref = $upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT;
+
+                    $result = $this->CorpSendRequestConfirm($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT);
+
+                    if ($result->CorpSendRequestConfirmResult->TransferConfirmStatus->RESPONSE == 'Success') {
+                        $transaction->upt_status = 'successful';
+                        $transaction->update();
+
+                    } else {
+                        $transaction->upt_status = 'failed'; //or rejected?
+                        $transaction->fanex_status = 'pending';
+                        $transaction->update();
+//                  $this->CorpCancelRequest($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT);
+//                  $this->CorpCancelConfirm($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT); // todo: check it later
+//                        return json_encode(array('status' => false, 'msg' => 'تایید ارسال حواله با خطا روبرو شد')); //upt request has problem.
+                    }
+                } else {
+                    //if ($cancel_res)
+//                    $transaction->fanex_status = 'pending'; // it's already on pending condition
+                    $transaction->upt_status = 'failed'; //?
+                    $transaction->update();
+//                    return json_encode(array('status' => false, 'msg' => 'درخواست ارسال با خطا روبرو شد')); //upt request has problem.
+                }
+//                $transaction->update();
 
                 if(Auth::user()->email) {
                     // Email to User

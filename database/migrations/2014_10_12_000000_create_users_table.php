@@ -18,8 +18,10 @@ class CreateUsersTable extends Migration
 
             $table->increments('id');
             $table->integer('userId')->unique()->nullable();
-            $table->string('firstname');
-            $table->string('lastname');
+            $table->string('firstname')->nullable();
+            $table->string('lastname')->nullable();
+            $table->string('firstname_latin')->nullable();
+            $table->string('lastname_latin')->nullable();
 
 //** should be encrypted
             $table->string('account_number')->nullable();

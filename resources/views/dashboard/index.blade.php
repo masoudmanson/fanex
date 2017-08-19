@@ -60,7 +60,7 @@
                                         <input type="text"
                                                class="fanexInputWhite noShadow search-filter p-0 search-input"
                                                placeholder="@lang('profile.searchHolder')"
-                                               id="transaction-search">
+                                               id="transaction-search" name="transaction-search">
                                     </div>
 
                                     <div class="col-xs-2 col-sm-1">

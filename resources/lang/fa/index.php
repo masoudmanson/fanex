@@ -47,6 +47,9 @@ return [
     'additionalmobile' => 'شماره موبایل خود را وارد نمائید',
     'additionalcc' => 'شماره حساب خود را وارد نمائید',
     'additionalaccount_number' => 'شماره حساب خود را وارد نمائید',
+    'additionalfirstname' => 'نام خود را وارد کنید',
+    'additionallastname' => 'نام خانوادگی خود را وارد کنید',
+    'additionalidentity_number' => 'کد ملی خود را وارد کنید',
     'continue' => 'ادامه',
     'timeout' => 'پایان زمان!',
     'language' => 'فا',
@@ -57,5 +60,6 @@ return [
     'TRY' => 'لیره ترکیه ‎₺',
     'formAuthorizer' => 'انتخاب احراز هویت کننده',
     'fanapium' => 'فناپیوم',
-    'dotin' => 'بانک پاسارگاد',
+    'pasargad' => 'بانک پاسارگاد',
+    'other' => 'احراز کنندگان دیگر',
 ];

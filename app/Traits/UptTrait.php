@@ -42,12 +42,15 @@ trait UptTrait
 
     public function CorpGetCountryData()
     {
-        $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?WSDL';
+//        $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?WSDL';
+        $url = 'https://upt.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?wsdl';
         $client = new SoapClient($url, array("soap_version" => SOAP_1_1, "trace" => 1));
 
         $user_param = array(
-            'Username' => "2818",
-            'Password' => "1"
+            'Username' => "9590",
+//            'Username' => "2818",
+//            'Password' => "1"
+            'Password' => "Fanex@123456!"
         );
 
         $header = new SoapHeader('http://tempuri.org/', 'WsSystemUserInfo', $user_param, false);
@@ -63,12 +66,15 @@ trait UptTrait
 
     public function CorpGetCurrencyRate($amount = 0, $from = 'EUR', $to = 'TRY')
     {
-        $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?WSDL';
+//        $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?WSDL';
+        $url = 'https://upt.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?wsdl';
         $client = new SoapClient($url, array("soap_version" => SOAP_1_1, "trace" => 1));
 
         $user_param = array(
-            'Username' => "2818",
-            'Password' => "1"
+            'Username' => "9590",
+//            'Username' => "2818",
+//            'Password' => "1"
+            'Password' => "Fanex@123456!"
         );
 
         $header = new SoapHeader('http://tempuri.org/', 'WsSystemUserInfo', $user_param, false);
@@ -89,108 +95,77 @@ trait UptTrait
 
     public function CorpSendRequest(Transaction $transaction, User $user, Beneficiary $beneficiary, Backlog $backlog)
     {
-        $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?wsdl';
+//        $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?wsdl';
+        $url = 'https://upt.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?wsdl';
         $client = new SoapClient($url, array("soap_version" => SOAP_1_2, "trace" => 1));
 //        $client = new SoapClient($url);
 
         $user_param = array(
-            'Username' => "2818", //9590
-            'Password' => "1" ////Fanex@123456!
+            'Username' => "9590",
+//            'Username' => "2818",
+//            'Password' => "1"
+            'Password' => "Fanex@123456!"
         );
 
-        $header = new SoapHeader('http://tempuri.org/', 'WsSystemUserInfo', $user_param);
+        $header = new SoapHeader('http://tempuri.org/', 'WsSystemUserInfo', $user_param,true);
 
         $client->__setSoapHeaders($header);
 
         $body_params = array('obj' => array(
+            'CORRESPONDENT_PARITY'=>'0',
+            'CORRESPONDENT_EXPENSE'=>'0',
+            'CORRESPONDENT_COMMISSION'=>'0', // these three parameter weren't on document and didn't used in postman even.but here, it seems necessary
+//            'SENDER_CITIZENSHIP_NO' => '14695448',
+//            'SENDER_ID_TYPE' => 'pasport',
+//            'SENDER_ID_NO'=>'3',
 
             'SENDER_COUNTRY_CODE' => 'IR', // todo:later it should be detect automatically
             'SENDER_NATIONALITY' => 'IR', // todo: " " " "
-
-            'SENDER_CITIZENSHIP_NO' => '14695448',
-            'SENDER_ID_TYPE' => 'pasport',
-            'SENDER_ID_NO'=>'3',
-
-            'SENDER_NAME' => 'pooria',
-            'SENDER_SURNAME' => 'pahlevani',
+//            'SENDER_NAME' => Auth::user()->firstname,
+//            'SENDER_SURNAME' => Auth::user()->lastname,
+            'SENDER_NAME' => Auth::user()->firstname_latin,
+            'SENDER_SURNAME' => Auth::user()->lastname_latin,
+//            'BENEFICIARY_COUNTRY_CODE' => $backlog->country,// todo: "to"
             'BENEFICIARY_COUNTRY_CODE' => 'TR',// todo: "to"
-            'BENEFICIARY_NAME' => 'Akif', //todo : bnf firstname
-            'BENEFICIARY_SURNAME' => 'Selcuk', // todo: bnf lastname
+            'BENEFICIARY_NAME' => $beneficiary->firstname, //todo : bnf firstname
+            'BENEFICIARY_SURNAME' => $beneficiary->lastname, // todo: bnf lastname
+//            'BENEFICIARY_NAME' => 'masoud', //todo : bnf firstname
+//            'BENEFICIARY_SURNAME' => 'test', // todo: bnf lastname
             'BENEFICIARY_GSM_COUNTRY_CODE' => '0090',
-            'BENEFICIARY_GSM_NO' => '5057181936',
-            'BENEFICIARY_IBAN' => 'TR290006400000164310007808',
+//            'BENEFICIARY_GSM_NO' => '5057181936',
+//            'BENEFICIARY_GSM_NO' => '5314093654', //farzad sarseyfi mobile
+            'BENEFICIARY_GSM_NO' => $beneficiary->tel, //farzad sarseyfi mobile
+//            'BENEFICIARY_IBAN' => 'TR290006400000164310007808',
+            'BENEFICIARY_IBAN' => $beneficiary->iban_code,
+
             'TRANSACTION_TYPE' => '002', // todo:which type we have to use?!
-            'AMOUNT' => '1000', // todo ?
-            'AMOUNT_CURRENCY' => 'TRY',
-            'MONEY_TAKEN' => '0',
-
-            'CORRESPONDENT_PARITY' => '0',
-            'CORRESPONDENT_EXPENSE' => '0',
-            'CORRESPONDENT_COMMISSION' => '0',
-        ));
-        //'CORRESPONDENT_PARITY' => '0',
-        //'CORRESPONDENT_EXPENSE' => '0',
-        //'CORRESPONDENT_COMMISSION' => '0',
-
-//            'MONEY_TAKEN_CURRENCY' => 'TRY',
-//            'CORRESPONDENT_COMMISSION'=>0,
+//            'MONEY_TAKEN_CURRENCY' => 'EUR', // todo ? I think it is EUR
+            'MONEY_TAKEN'=>'0',
+//            'MONEY_TAKEN_CURRENCY' => 'TRY', // todo ? I think it is EUR
 //            'AMOUNT' => $backlog->payment_amount, // todo ?
+            'AMOUNT' => $transaction->premium_amount, // todo ?
+//            'AMOUNT_CURRENCY' => $backlog->currency, // currency
+//            'AMOUNT_CURRENCY' => 'TRY', // currency
+            'AMOUNT_CURRENCY' => $transaction->currency, // currency
 
-//        <tem:
-//        SENDER_COUNTRY_CODE > IR</tem:SENDER_COUNTRY_CODE >
-//            <tem:SENDER_CUSTOMER_ID ></tem:SENDER_CUSTOMER_ID >
-//            <tem:SENDER_NATIONALITY > IR</tem:SENDER_NATIONALITY >
-//            <tem:SENDER_CITIZENSHIP_NO ></tem:SENDER_CITIZENSHIP_NO >
-//            <tem:SENDER_ID_PROVIDER_COUNTRY ></tem:SENDER_ID_PROVIDER_COUNTRY >
-//            <tem:SENDER_ID_TYPE ></tem:SENDER_ID_TYPE >
-//            <tem:SENDER_ID_NO > 3</tem:SENDER_ID_NO >
-//            <tem:SENDER_NAME > Pooria</tem:SENDER_NAME >
-//            <tem:SENDER_SURNAME > Pahlevani</tem:SENDER_SURNAME >
-//            <tem:SENDER_MOTHER_NAME ></tem:SENDER_MOTHER_NAME >
-//            <tem:SENDER_FATHER_NAME ></tem:SENDER_FATHER_NAME >
-//            <tem:SENDER_BIRTHDATE ></tem:SENDER_BIRTHDATE >
-//            <tem:SENDER_BIRTHPLACE ></tem:SENDER_BIRTHPLACE >
-//            <tem:SENDER_GSM_COUNTRY_CODE ></tem:SENDER_GSM_COUNTRY_CODE >
-//            <tem:SENDER_GSM_NO ></tem:SENDER_GSM_NO >
-//            <tem:SENDER_EMAIL ></tem:SENDER_EMAIL >
-//            <tem:SENDER_ADRESS ></tem:SENDER_ADRESS >
-//            <tem:SENDER_GENDER ></tem:SENDER_GENDER >
-//            <tem:SENDER_ID_PROVIDER_PLACE ></tem:SENDER_ID_PROVIDER_PLACE >
-//            <tem:SENDER_ID_GENERATED_DATE ></tem:SENDER_ID_GENERATED_DATE >
-//            <tem:SENDER_POSTAL_CODE ></tem:SENDER_POSTAL_CODE >
-//            <tem:SENDER_HOME_PHONE_NO ></tem:SENDER_HOME_PHONE_NO >
-//            <tem:MONEY_RESOURCE ></tem:MONEY_RESOURCE >
-//            <tem:SEND_REASON ></tem:SEND_REASON >
-//            <tem:BENEFICIARY_COUNTRY_CODE > TR</tem:BENEFICIARY_COUNTRY_CODE >
-//            <tem:BENEFICIARY_NAME > Akif</tem:BENEFICIARY_NAME >
-//            <tem:BENEFICIARY_SURNAME > Kenger</tem:BENEFICIARY_SURNAME >
-//            <tem:BENEFICIARY_GSM_COUNTRY_CODE > 0090</tem:BENEFICIARY_GSM_COUNTRY_CODE >
-//            <tem:BENEFICIARY_GSM_NO > 5057181936</tem:BENEFICIARY_GSM_NO >
-//            <tem:BENEFICIARY_EMAIL ></tem:BENEFICIARY_EMAIL >
-//            <tem:BENEFICIARY_FATHER_NAME ></tem:BENEFICIARY_FATHER_NAME >
-//            <tem:BENEFICIARY_BIRTHDATE ></tem:BENEFICIARY_BIRTHDATE >
-//            <tem:NARRATIVE ></tem:NARRATIVE >
-//            <tem:BENEFICIARY_BANK_BIC_CODE ></tem:BENEFICIARY_BANK_BIC_CODE >
-//            <tem:BENEFICIARY_BANK_CODE ></tem:BENEFICIARY_BANK_CODE >
-//            <tem:BENEFICIARY_BRANCH_CODE ></tem:BENEFICIARY_BRANCH_CODE >
-//            <tem:BENEFICIARY_ACCOUNT_NO ></tem:BENEFICIARY_ACCOUNT_NO >
-//            <tem:BENEFICIARY_IBAN > TR290006400000164310007808</tem:BENEFICIARY_IBAN >
-//            <tem:BENEFICIARY_CREDITCARD_NO ></tem:BENEFICIARY_CREDITCARD_NO >
-//            <tem:BENEFICIARY_CORPORATION_CODE ></tem:BENEFICIARY_CORPORATION_CODE >
-//            <tem:BENEFICIARY_OFFICE_CODE ></tem:BENEFICIARY_OFFICE_CODE >
-//            <tem:TRANSACTION_TYPE > 002</tem:TRANSACTION_TYPE >
-//            <tem:SECURITY_QUESTION_ID ></tem:SECURITY_QUESTION_ID >
-//            <tem:SECURITY_QUESTION_ANSWER ></tem:SECURITY_QUESTION_ANSWER >
-//            <tem:MONEY_TAKEN > 0</tem:MONEY_TAKEN >
-//            <tem:MONEY_TAKEN_CURRENCY ></tem:MONEY_TAKEN_CURRENCY >
-//            <tem:AMOUNT > 100</tem:AMOUNT >
-//            <tem:AMOUNT_CURRENCY >TRY</tem:AMOUNT_CURRENCY >
-//            <tem:OFFICE_REFERENCE_CODE ></tem:OFFICE_REFERENCE_CODE >
-//            <tem:EFT_TYPE ></tem:EFT_TYPE >
+            // new parameters :|
 
-    $return = $client->CorpSendRequest($body_params);
+//            "CORP_MONEY_ACCOUNTING_TAKEN_OUT"=>$transaction->premium_amount,
+//            "CORP_MONEY_ACCOUNTING_TAKEN_EXC_RATE_OUT"=> 1,
+//            "CORP_EXPENSE_ACCOUNTING_TAKEN_OUT"=> 0,
+//            "CORP_EXPENSE_ACCOUNTING_TAKEN_EXC_RATE_OUT"=>1,
+////            "CORP_EXPENSE_AMOUNT_OUT"=> (0.005 * $transaction->premium_amount) + 20,
+//            "CORP_EXPENSE_AMOUNT_OUT"=> 0,
+//            "CORP_MONEY_TAKEN_OUT"=> 0,
+//            "CORP_MONEY_TAKEN_EXC_RATE_OUT"=> 0,
+//            "CORP_AMOUNT_OUT"=> $transaction->premium_amount,
+//            "CORP_AMOUNT_EXC_RATE_OUT"=> 0,
+        ));
+
+//        dd($body_params);
+
+        $return = $client->CorpSendRequest($body_params);
 //        $return = $client->__SoapCall('CorpSendRequest', $body_params);
-
 
 //        dd($return);
         return $return;
@@ -198,12 +173,13 @@ trait UptTrait
 
     public function CorpSendRequestConfirm($upt_ref)
     {
-        $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?WSDL';
+        //        $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?wsdl';
+        $url = 'https://upt.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?wsdl';
         $client = new SoapClient($url, array("soap_version" => SOAP_1_1, "trace" => 1));
 
         $user_param = array(
-            'Username' => "2818",
-            'Password' => "1"
+            'Username' => "9590",
+            'Password' => "Fanex@123456!"
         );
 
         $header = new SoapHeader('http://tempuri.org/', 'WsSystemUserInfo', $user_param, false);
@@ -221,12 +197,15 @@ trait UptTrait
 
     public function CorpCancelRequest($upt_ref)
     {
-        $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?WSDL';
+//        $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?WSDL';
+        $url = 'https://upt.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?wsdl';
         $client = new SoapClient($url, array("soap_version" => SOAP_1_1, "trace" => 1));
 
         $user_param = array(
-            'Username' => "2818",
-            'Password' => "1"
+            'Username' => "9590",
+//            'Username' => "2818",
+//            'Password' => "1"
+            'Password' => "Fanex@123456!"
         );
 
         $header = new SoapHeader('http://tempuri.org/', 'WsSystemUserInfo', $user_param, false);
@@ -245,7 +224,8 @@ trait UptTrait
 
     public function CorpCancelConfirm($upt_ref)
     {
-        $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?WSDL';
+//        $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?WSDL';
+        $url = 'https://upt.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?wsdl';
         $client = new SoapClient($url, array("soap_version" => SOAP_1_1, "trace" => 1));
 
         $user_param = array(
@@ -271,13 +251,12 @@ trait UptTrait
 
     public function UptGetTransferList($upt_ref)
     {
+        //        $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?wsdl';
         $url = 'https://upt.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?wsdl';
         $client = new SoapClient($url, array("soap_version" => SOAP_1_1, "trace" => 1));
 
         $user_param = array(
             'Username' => "9590",
-//            'Username' => "2818",
-//            'Password' => "1"
             'Password' => "Fanex@123456!"
         );
 

@@ -7,6 +7,7 @@ return [
     'menuBnf' => 'Faydalanıcılar',
     'menuNotify' => 'Bildirimler',
     'menuBalance' => 'Hesap Bakiyesi',
+    'menuBalanceAdd' => 'Şarj Etmek',
 
     // Search Help
     'srchHelpTitle' => 'Yardım İstesi',
