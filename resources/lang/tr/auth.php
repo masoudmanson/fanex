@@ -16,4 +16,9 @@ return [
     'failed'   => 'Bu kullanıcı bilgileri, bizim verilerimizle eşleşmiyor.',
     'throttle' => 'Çok fazla oturum açma girişimi. Lütfen :seconds saniye içinde tekrar deneyin.',
 
+    /*
+     * my custom messages
+     */
+    'notAuth' => 'Henüz yetkilendirilmemişsiniz.',
+    'otherMsg' => 'Yetkilendirmeniz için lütfen ilgili tanımlama belgelerine sahip eşanjör bakıniz.'
 ];
