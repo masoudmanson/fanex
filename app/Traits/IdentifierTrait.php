@@ -32,6 +32,7 @@ trait IdentifierTrait
         if (!$platform_user->hasError) {
             $platform_user->result->firstName_latin = $request->firstname;
             $platform_user->result->lastName_latin = $request->lastname;
+            $platform_user->result->identifier_id  = $request->authorizer;
             return json_encode(array('hasError' => $platform_user->hasError, 'result' => $platform_user->result), true);
         }
         return json_encode(array('hasError' => $platform_user->hasError, 'message' => $platform_user->message, 'code' => $platform_user->errorCode), true);
