@@ -279,6 +279,31 @@ $(document).ready(function() {
            setCaretPosition("beneficiary-search", new_search_keyword.length);
        }
        else {
+           // var myString = search_key;
+           // var myRegexp = /(?:(name|transaction|account|amount|date):)([^: ]+(?:\s+[^: ]+\b(?!:))*)/gi;
+           // var match = myRegexp.exec(myString);
+           // var matches = new Array();
+           // matches.push({"key" : match[1], "value" : match[2], "index" : match.index});
+           // while (match != null) {
+           //     console.log(match[0]);
+           //     match = myRegexp.exec(myString);
+           //     if(match)
+           //          matches.push({"key" : match[1], "value" : match[2], "index" : match.index});
+           // }
+           // // while () {
+           // //     // matched text: match[0]
+           // //     // match start: match.index
+           // //     // capturing group n: match[n]
+           // //     console.log(match[0]);
+           // //     match = myRegexp.exec(myString);
+           // //     matches.push(match);
+           // // }
+           // console.log(matches);
+           // matches.each(function(index ) {
+           //     console.log(index);
+           // });
+           // console.log(jQuery.inArray( "name", matches ));
+
            setCaretPosition("transaction-search", search_key.search(search_command)+search_command.length);
            setCaretPosition("beneficiary-search", search_key.search(search_command)+search_command.length);
        }
