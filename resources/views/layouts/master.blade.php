@@ -29,7 +29,7 @@
 </head>
 
 <body class="m-0 p-0" id="main-body">
-<div id="main-content-wrapper">
+{{--<div id="main-content-wrapper">--}}
     {{-- Yielding Page Content --}}
     @yield('header')
 
@@ -38,7 +38,7 @@
 
     {{-- Yielding Page Content --}}
     @yield('footer')
-</div>
+{{--</div>--}}
 {{-- General Scripts --}}
 <script src="{{ mix('js/app.js') }}"></script>
 <script src="{{ mix('js/scripts.js') }}"></script>
