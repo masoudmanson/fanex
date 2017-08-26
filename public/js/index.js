@@ -210,7 +210,7 @@ $(document).ready(function() {
         }
     });
 
-    var nice = $('body, .fanexMotto, .dropdown-menu .inner, textarea').niceScroll({
+    var nice = $('html, body, .fanexMotto, .dropdown-menu .inner, textarea').niceScroll({
         cursorcolor: '#000',
         cursoropacitymin: 0.1,
         cursoropacitymax: 0.3,
