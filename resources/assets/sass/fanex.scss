@@ -1016,7 +1016,7 @@ textarea.fanexInput {
     margin: 0;
     border-top: 0;
     padding: 0;
-    max-height: 500px !important;
+    max-height: 350px !important;
     border: solid 1px darken($fanapGreyLight, 5%);
     @include border-radius(0);
     @include box-shadow(none !important);

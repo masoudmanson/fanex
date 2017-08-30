@@ -138,11 +138,11 @@ trait PlatformTrait
                 'redirectURL' => $request->root() . '/invoice/show',
                 'userId' => $userId,// get userId from his token: gholi = 204
                 'billNumber' => generateUniqueReferenceNumber(),
-                'description' => 'for now we have no description',
+                'description' => __('payment.payDescription', ["amount" => number_format($backlog->premium_amount), "currency" => $backlog->currency]),
                 'deadline' => jDate::forge('now')->format('Y/m/d'), //persian date in format yyyy/mm/dd
                 'productId[]' => 0, //I've no idea
                 'price[]' => $backlog->payment_amount, //give the price from saved transaction
-                'productDescription[]' => 'for now we have no description', //I've no idea
+                'productDescription[]' => __('payment.payDescription', ["amount" => number_format($backlog->premium_amount), "currency" => $backlog->currency]), //I've no idea
                 'quantity[]' => 1, //I'm not sure
                 'pay' => false, // for now false is enough. later, depend on method of pay, it can change dynamically.
                 'block' => false, // I think so

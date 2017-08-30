@@ -85,7 +85,8 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
-
+    'iban' => "The :attribute must be a valid International Bank Account Number (IBAN).",
+    'bic' => 'The :attribute is not a valid Business Identifier Code (BIC).',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -98,10 +99,6 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
-
         //my custom validation error msgs.
         'captcha' => [
             'required' => 'Captcha Required!',
@@ -111,7 +108,7 @@ return [
             'required'  => "Please Enter an Amount.",
             'min'  => "Please Enter a Valid Amount.",
             'max'  => "Please Enter a Valid Amount.",
-            'regex' => "Please Inter an Amount Between 10 to 10000."
+            'between' => "Please Inter an Amount Between 10 to 10000."
         ],
     ],
 

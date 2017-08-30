@@ -95,4 +95,5 @@ return [
     'transSuccess' => 'İşlem Başarıyla yapıldı.',
     'errorDone' => 'Bu İşlem zaten yapıldı.',
     'errorTtl' => 'Zaman aşımı! Oranlar doldu, lütfen yeni oranlarla tekrar deneyin.',
+    'payDescription' => 'FANEx Online Ex-Change Service tarafından :amount :currency birimi aktarma.',
 ];
