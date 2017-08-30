@@ -251,9 +251,12 @@ class UserController extends Controller
         } else {
             $transactions = Transaction::join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
                 ->where('transactions.user_id', '=', $user->id)
-                ->where('transactions.upt_status', '=', $status)->orderby("transactions.id", "desc")->paginate(10);
+                ->where('transactions.upt_status', '=', $status)
+                ->select( "beneficiaries.firstname","beneficiaries.lastname","beneficiaries.account_number","beneficiaries.bank_name", "transactions.*")
+                ->orderby("transactions.id", "desc")->paginate(10);
             $transactions = $this->payable($transactions);
         }
+
         if ($request->ajax())
             return response()->json(view('partials.transaction-list-item', compact('transactions'))->render());
         else {

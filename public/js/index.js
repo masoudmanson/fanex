@@ -189,36 +189,16 @@ $(document).ready(function() {
         }
     });
 
-    $('.numberTextField').keydown(function(e) {
-        // Allow: backspace, delete, tab, escape, enter and .
-        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-            // Allow: Ctrl/cmd+A
-            (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
-            // Allow: Ctrl/cmd+C
-            (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
-            // Allow: Ctrl/cmd+X
-            (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
-            // Allow: home, end, left, right
-            (e.keyCode >= 35 && e.keyCode <= 39)) {
-            // let it happen, don't do anything
-            return;
-        }
-        // Ensure that it is a number and stop the keypress
-        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) &&
-            (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
-    });
-
-    var nice = $('html, body, .fanexMotto, .dropdown-menu .inner, textarea').niceScroll({
-        cursorcolor: '#000',
-        cursoropacitymin: 0.1,
-        cursoropacitymax: 0.3,
-        cursorwidth: '5px',
-        cursorborder: 'none',
-        cursorborderradius: '5px',
-        horizrailenabled:false
-    });
+    var nice = $('html, body, .fanexMotto, .dropdown-menu .inner, textarea').
+        niceScroll({
+            cursorcolor: '#000',
+            cursoropacitymin: 0.1,
+            cursoropacitymax: 0.3,
+            cursorwidth: '5px',
+            cursorborder: 'none',
+            cursorborderradius: '5px',
+            horizrailenabled: false,
+        });
 
     $('#accordion').on('shown.bs.collapse', function() {
         $(this).addClass('opened');
@@ -270,119 +250,141 @@ $(document).ready(function() {
     });
 
     $('.search-command').on('click', function() {
-       var search_key = $('.search-input').val();
-       var search_command = $(this).attr('data-command');
-       if(search_key.search(search_command) < 0) {
-           var new_search_keyword = search_key + ' ' + search_command;
-           $('.search-input').val(new_search_keyword);
-           setCaretPosition("transaction-search", new_search_keyword.length);
-           setCaretPosition("beneficiary-search", new_search_keyword.length);
-       }
-       else {
-           // var myString = search_key;
-           // var myRegexp = /(?:(name|transaction|account|amount|date):)([^: ]+(?:\s+[^: ]+\b(?!:))*)/gi;
-           // var match = myRegexp.exec(myString);
-           // var matches = new Array();
-           // matches.push({"key" : match[1], "value" : match[2], "index" : match.index});
-           // while (match != null) {
-           //     console.log(match[0]);
-           //     match = myRegexp.exec(myString);
-           //     if(match)
-           //          matches.push({"key" : match[1], "value" : match[2], "index" : match.index});
-           // }
-           // // while () {
-           // //     // matched text: match[0]
-           // //     // match start: match.index
-           // //     // capturing group n: match[n]
-           // //     console.log(match[0]);
-           // //     match = myRegexp.exec(myString);
-           // //     matches.push(match);
-           // // }
-           // console.log(matches);
-           // matches.each(function(index ) {
-           //     console.log(index);
-           // });
-           // console.log(jQuery.inArray( "name", matches ));
+        var search_key = $('.search-input').val();
+        var search_command = $(this).attr('data-command');
 
-           setCaretPosition("transaction-search", search_key.search(search_command)+search_command.length);
-           setCaretPosition("beneficiary-search", search_key.search(search_command)+search_command.length);
-       }
+        if (search_key.search(":") < 0) {
+            $('.search-input').val(' ');
+            search_key = "";
+        }
+
+        if (search_key.search(search_command) < 0) {
+            var new_search_keyword = search_key + ' ' + search_command;
+            $('.search-input').val(new_search_keyword);
+            setCaretPosition('transaction-search', new_search_keyword.length);
+            setCaretPosition('beneficiary-search', new_search_keyword.length);
+        }
+        else {
+            // var myString = search_key;
+            // var myRegexp = /(?:(name|transaction|account|amount|date):)([^:
+            // ]+(?:\s+[^: ]+\b(?!:))*)/gi; var match =
+            // myRegexp.exec(myString); var matches = new Array();
+            // matches.push({"key" : match[1], "value" : match[2], "index" :
+            // match.index}); while (match != null) { console.log(match[0]);
+            // match = myRegexp.exec(myString); if(match) matches.push({"key" :
+            // match[1], "value" : match[2], "index" : match.index}); } //
+            // while () { //     // matched text: match[0] //     // match
+            // start: match.index //     // capturing group n: match[n] //
+            // console.log(match[0]); //     match = myRegexp.exec(myString);
+            // //     matches.push(match); // } console.log(matches); matches.each(function(index ) { console.log(index); }); console.log(jQuery.inArray( "name", matches ));
+
+            setCaretPosition('transaction-search',
+                search_key.search(search_command) + search_command.length);
+            setCaretPosition('beneficiary-search',
+                search_key.search(search_command) + search_command.length);
+        }
     });
 });
 
-$(document).on('click', '#ajax-transaction-list .status-handler.collapsed:not(.help-link)', function() {
-        var trans_id = $(this).attr('data-id');
-        $('.status-container-' + trans_id + ' .ajax-status').
-            html('<div class="spinner3"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
-        $.ajax({
-            method: 'get',
-            url: '/transaction/status/update/' + trans_id,
-            data: {
-                '_token': csrfToken,
-                'X-CSRF-TOKEN': csrfToken,
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                console.log(thrownError);
-            },
-        }).done(function(response) {
-            $(this).parent().find('.ajax-status').attr('class',
-                function(i, c) {
-                    return c.replace(/(^|\s)fanex-text-\S+/g, '');
-                });
-            var result = $.parseJSON(response);
-            var bank = result.bank_status;
-            var fanex = result.fanex_status;
-            var upt = result.upt_status;
-            $('#header-status-' + trans_id).
-                html('<span class="acc-status fanex-text-' + result.upt_status +
-                    ' ajax-status"><i class="icon-' + result.upt_status +
-                    '"></i><span class="hidden-xs">' + statuses[upt] +
-                    '</span></span>');
-            $('#bank-status-' + trans_id).
-                html(statuses[bank]).
-                addClass('fanex-text-' + statuses[bank].toLowerCase());
-            $('#fanex-status-' + trans_id).
-                html(statuses[fanex]).
-                addClass('fanex-text-' + statuses[fanex].toLowerCase());
-            $('#upt-status-' + trans_id).
-                html(statuses[upt]).
-                addClass('fanex-text-' + statuses[upt].toLowerCase());
-        }).fail(function() {
-            console.log('There is problem in Loading the new statuses');
-        });
+$(document).on('keydown', '.numberTextField', function(e) {
+    // Allow: backspace, delete, tab, escape, enter and .
+    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+        // Allow: Ctrl/cmd+A
+        (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+        // Allow: Ctrl/cmd+C
+        (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+        // Allow: Ctrl/cmd+X
+        (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+        // Allow: home, end, left, right
+        (e.keyCode >= 35 && e.keyCode <= 39)) {
+        // let it happen, don't do anything
+        return;
+    }
+    // Ensure that it is a number and stop the keypress
+    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) &&
+        (e.keyCode < 96 || e.keyCode > 105)) {
+        e.preventDefault();
+    }
+});
+
+$(document).on('click','#ajax-transaction-list .status-handler.collapsed:not(.help-link)',function() {
+    var trans_id = $(this).attr('data-id');
+    $('.status-container-' + trans_id + ' .ajax-status').
+        html(
+            '<div class="spinner3"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
+    $.ajax({
+        method: 'get',
+        url: '/transaction/status/update/' + trans_id,
+        data: {
+            '_token': csrfToken,
+            'X-CSRF-TOKEN': csrfToken,
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            console.log(thrownError);
+        },
+    }).done(function(response) {
+        $(this).parent().find('.ajax-status').attr('class',
+            function(i, c) {
+                return c.replace(/(^|\s)fanex-text-\S+/g, '');
+            });
+        var result = $.parseJSON(response);
+        var bank = result.bank_status;
+        var fanex = result.fanex_status;
+        var upt = result.upt_status;
+        $('#header-status-' + trans_id).
+            html('<span class="acc-status fanex-text-' +
+                result.upt_status +
+                ' ajax-status"><i class="icon-' + result.upt_status +
+                '"></i><span class="hidden-xs">' + statuses[upt] +
+                '</span></span>');
+        $('#bank-status-' + trans_id).
+            html(statuses[bank]).
+            addClass('fanex-text-' + statuses[bank].toLowerCase());
+        $('#fanex-status-' + trans_id).
+            html(statuses[fanex]).
+            addClass('fanex-text-' + statuses[fanex].toLowerCase());
+        $('#upt-status-' + trans_id).
+            html(statuses[upt]).
+            addClass('fanex-text-' + statuses[upt].toLowerCase());
+    }).fail(function() {
+        console.log('There is problem in Loading the new statuses');
     });
+});
 
 function setCaretPosition(elemId, caretPos) {
     var elem = document.getElementById(elemId);
 
-    if(elem != null) {
-        if(elem.createTextRange) {
+    if (elem != null) {
+        if (elem.createTextRange) {
             var range = elem.createTextRange();
             range.move('character', caretPos);
             range.select();
         }
         else {
-            if(elem.selectionStart) {
+            if (elem.selectionStart) {
                 elem.focus();
                 elem.setSelectionRange(caretPos, caretPos);
             }
-            else
+            else {
                 elem.focus();
+            }
         }
     }
 }
 
 function createSelection(field, start, end) {
     field = document.getElementById(field);
-    if( field.createTextRange ) {
+    if (field.createTextRange) {
         var selRange = field.createTextRange();
         selRange.collapse(true);
         selRange.moveStart('character', start);
-        selRange.moveEnd('character', end-start);
+        selRange.moveEnd('character', end - start);
         selRange.select();
-    } else if( field.setSelectionRange ) {
+    }
+    else if (field.setSelectionRange) {
         field.setSelectionRange(start, end);
-    } else if( field.selectionStart ) {
+    }
+    else if (field.selectionStart) {
         field.selectionStart = start;
         field.selectionEnd = end;
     }
@@ -422,7 +424,9 @@ function search(keyword) {
             keyword = keyword.replace(/(\s+)/, '(<[^>]+>)*$1(<[^>]+>)*');
             var pattern = new RegExp('([^\/])(' + keyword + ')([^\?])', 'gi');
             response = response.replace(pattern, '$1<mark>$2</mark>$3');
-            response = response.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,'$1</mark>$2<mark>$4');
+            response = response.replace(
+                /(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,
+                '$1</mark>$2<mark>$4');
 
             $('#ajax-transaction-list').html(response);
         });

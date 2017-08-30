@@ -87,6 +87,8 @@ return [
     'unique'               => ':attribute daha önceden kayıt edilmiş.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => ':attribute biçimi geçersiz.',
+    'iban'                 => ":attribute, geçerli bir Uluslararası Banka Hesap Numarası (IBAN) olmalıdır.",
+    'bic'                  => ':attribute geçerli bir İşletme Tanımlayıcı Kodu (BIC) değil.',
 
     /*
     |--------------------------------------------------------------------------
@@ -112,7 +114,9 @@ return [
         ],
         'amount' => [
             'required'  => "Lütfen Bir Miktar Yazin.",
-            'min'  => "Lütfen geçerli bir miktar yazin."
+            'min'  => "Lütfen geçerli bir miktar yazin.",
+            'max'  => "Lütfen geçerli bir miktar yazin.",
+            'between' => "Lütfen 10 ile 10000 arasında bir Miktar girin."
         ],
     ],
 

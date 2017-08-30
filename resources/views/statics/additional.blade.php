@@ -113,8 +113,23 @@
                 }).done(function(response) {
                     $('#identifier-ajax-form').html(response);
                     $('#continue_btn').removeAttr('disabled');
+                    console.log('do it now');
+                    $('body').getNiceScroll().resize();
                 });
             });
+        });
+
+        $(document).on('keypress', '.only_latin', function(event){
+            var englishAlphabetAndWhiteSpace = /[A-Za-z ]/g;
+            var key = String.fromCharCode(event.which);
+            if (event.keyCode == 8 || event.keyCode == 37 || event.keyCode == 39 || englishAlphabetAndWhiteSpace.test(key)) {
+                return true;
+            }
+            return false;
+        });
+
+        $(document).on('paste', '.only_latin', function(event){
+            event.preventDefault();
         });
     </script>
 @endsection

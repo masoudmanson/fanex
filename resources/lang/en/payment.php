@@ -95,4 +95,5 @@ return [
     'transSuccess' => 'Transaction has Successfully done.',
     'errorDone' => 'This Transaction has already been done.',
     'errorTtl' => 'Time out! Rates has been expired, please try again with new rates.',
+    'payDescription' => 'Transferring :amount :currency by FANEx Online Ex-Change Service.',
 ];
