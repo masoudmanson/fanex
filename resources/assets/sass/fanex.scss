@@ -323,7 +323,7 @@ opacity-30 {
         padding: 100px 50px 30px;
     }
     @include mq($max-width: $breakePoint_sm) {
-        padding: 90px 30px 20px;
+        padding: 90px 20px 20px;
     }
     #bnf-ajax-div {
         min-height: 603px;
@@ -714,6 +714,11 @@ opacity-30 {
         width: 100%;
         padding: 25px 30px 40px;
     }
+    @include mq($max-width: $breakePoint_xs) {
+        margin: 0 auto;
+        width: 100%;
+        padding: 25px 15px;
+    }
     z-index: 300;
     h1 {
         color: $fanapDark;
@@ -810,10 +815,10 @@ opacity-30 {
 
 .fanexInput {
     color: $fanapGrey;
-    background-color: $fanapGreyUltraLight;
+    background-color: $fanapGreyUltraLight !important;
     height: 60px;
     line-height: 60px;
-    padding: 0px 50px;
+    padding: 0px 20px 0 50px;
     border: none;
     border-radius: 0 !important;
     @include box-shadow(none !important);
@@ -855,7 +860,7 @@ opacity-30 {
 
 .fanexInputWhite {
     @extend .fanexInput;
-    background-color: #fff;
+    background-color: #fff !important;
     &:hover, &:active, &:focus {
         color: $fanapDark;
         background-color: #fff;
@@ -872,7 +877,18 @@ div.fanexInput {
 div.fanexCaptcha {
     height: 60px;
     line-height: 60px;
-    padding: 0px 50px;
+    padding: 0px 0 0 50px;
+    @include mq($max-width: $breakePoint_xs) {
+        padding: 5px 0 5px 50px;
+    }
+}
+
+.captcha-img {
+    max-height: 50px;
+    display: block;
+    @include mq($max-width: $breakePoint_xs) {
+        max-height: 40px;
+    }
 }
 
 .fanexInputError {

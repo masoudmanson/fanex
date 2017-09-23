@@ -36,17 +36,17 @@
         </ul>
     </div>
 
-    <div class="white-card mt-4 pt-5 pb-3">
-        <ul class="profile-ul mb-0">
-            <li class="profile-li mb-4">
-                <a class="text-small">
+    {{--<div class="white-card mt-4 pt-5 pb-3">--}}
+        {{--<ul class="profile-ul mb-0">--}}
+            {{--<li class="profile-li mb-4">--}}
+                {{--<a class="text-small">--}}
                     {{--<i class="icon-card"></i>--}}
-                    @lang('profile.menuBalance')
-                </a>
-                <iframe src="https://gw.fanapium.com/v1/pbc/getcredit" id="myIframe" frameborder="0" style="width: 100%; max-height: 45px; margin-top:6px;"></iframe>
-                <a href="https://gw.fanapium.com/v1/pbc/BuyCredit/?redirectUri=http://85.133.159.140:12801/profile&callUri=http://85.133.159.140:12801"
-                   class="btn btnMini btnRound fanexBtnMiniOutlineGrey">@lang('profile.menuBalanceAdd')</a>
-            </li>
-        </ul>
-    </div>
+                    {{--@lang('profile.menuBalance')--}}
+                {{--</a>--}}
+                {{--<iframe src="https://gw.fanapium.com/v1/pbc/getcredit" id="myIframe" frameborder="0" style="width: 100%; max-height: 45px; margin-top:6px;"></iframe>--}}
+                {{--<a href="https://gw.fanapium.com/v1/pbc/BuyCredit/?redirectUri=http://85.133.159.140:12801/profile&callUri=http://85.133.159.140:12801"--}}
+                   {{--class="btn btnMini btnRound fanexBtnMiniOutlineGrey">@lang('profile.menuBalanceAdd')</a>--}}
+            {{--</li>--}}
+        {{--</ul>--}}
+    {{--</div>--}}
 </div>
