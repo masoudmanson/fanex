@@ -97,11 +97,12 @@
                 <input type="button" class="btn fanexBtnOutlineOrange disabledForm" value=@lang('index.calculate') id="calcBtn"
                        onclick="getAmount()" disabled/>
             </div>
+
             {{-- Go For Payment --}}
             <div class="col-sm-6 col-xs-12 pl-md-2">
                 <input type="submit" class="btn fanexBtnOutlineGrey disabledForm" id="paymentBtn"
                        value=@lang('index.pay') name="payment" disabled/>
-                <input type="text" id="fakeInput" name="fakeInput" style="height:0;width:0;opacity: 0">
+                <input type="text" id="fakeInput" name="fakeInput" style="height:0; width:0; opacity: 0">
             </div>
         </div>
 
