@@ -1,7 +1,22 @@
 $(document).ready(function() {
-    $('.selectpicker').selectpicker();
-    $('#exCountry').val('').focus();
+    // if (Modernizr.touch) {
+    //     $("body").mobileFix({
+    //         inputElements: "input,textarea,select",
+    //         addClass: "fixfixed"
+    //     });
+    // }
+
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+        $('.selectpicker').selectpicker('mobile');
+    }
+    else {
+        $('.selectpicker').selectpicker();
+    }
+
+    // $('#exCountry').val('').focus();
+
     $('.selectpicker').selectpicker('refresh');
+
     $('.disabledForm').
         attr({'disabled': 'disabled', 'title': indexFormCountry});
 
@@ -284,6 +299,21 @@ $(document).ready(function() {
                 search_key.search(search_command) + search_command.length);
         }
     });
+
+    if ('ontouchstart' in window) {
+        /* cache dom references */
+        var $body = $('body');
+
+        /* bind events */
+        $(document)
+        .on('focus', 'input', function() {
+            $body.addClass('fixfixed');
+        })
+        .on('blur', 'input', function() {
+            $body.removeClass('fixfixed');
+        });
+    }
+
 });
 
 $(document).on('keydown', '.numberTextField', function(e) {
@@ -560,6 +590,26 @@ function reloadCaptcha() {
         captcha.prop('src', response);
     });
 }
+
+// $.fn.mobileFix = function (options) {
+//     var $parent = $(this),
+//     $fixedElements = $(options.fixedElements);
+//
+//     $(document)
+//     .on('focus', options.inputElements, function(e) {
+//         $parent.addClass(options.addClass);
+//     })
+//     .on('blur', options.inputElements, function(e) {
+//         $parent.removeClass(options.addClass);
+//
+//         // Fix for some scenarios where you need to start scrolling
+//         setTimeout(function() {
+//             $(document).scrollTop($(document).scrollTop())
+//         }, 1);
+//     });
+//
+//     return this; // Allowing chaining
+// };
 
 /*
  | Change Language Modal

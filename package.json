@@ -28,6 +28,9 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "node-sass": "^4.5.3"
+    "generate": "^0.14.0",
+    "modernizr": "^3.5.0",
+    "node-sass": "^4.5.3",
+    "package": "^1.0.1"
   }
 }

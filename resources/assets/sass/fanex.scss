@@ -11,13 +11,6 @@ body {
     overflow-x: hidden !important;
 }
 
-//#main-content-wrapper {
-//    box-sizing: border-box;
-//    min-height: 100%;
-//    padding: 0 0 120px;
-//    position: relative;
-//}
-
 input[type=number] {
     -moz-appearance: textfield;
 }
@@ -180,6 +173,14 @@ opacity-30 {
     @include mq($max-width: $breakePoint_sm) {
         position: absolute !important;
     }
+}
+
+.navbar-fixed-top {
+    position: fixed;
+}
+
+.fixfixed .navbar-fixed-top {
+    position: absolute;
 }
 
 @include mq($max-width: $breakePoint_md) {
@@ -931,7 +932,7 @@ div.fanexCaptcha {
     content: "\51";
     vertical-align: middle;
     cursor: pointer;
-    padding-right: 15px;
+    padding-right: 5px;
     color: $fanapOrange;
     font-size: 32px;
     @include mq($max-width: $breakePoint_md) {
@@ -1918,6 +1919,7 @@ a.accordion-toggle {
     padding: 0 !important;
     margin: 0 !important;
     text-align: center;
+    float: right;
 }
 
 .panel-heading .accordion-toggle.status-handler:after {
