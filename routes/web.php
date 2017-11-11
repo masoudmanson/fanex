@@ -46,7 +46,6 @@ Route::get('/proforma/selected/{beneficiary}', 'PaymentController@proforma_with_
 Route::get('/proforma/transaction/{transaction}', 'PaymentController@proforma_with_selected_transaction')->name('proforma_with_transaction');
 Route::get('/proforma/selected', 'PaymentController@proforma_with_selected_bnf')->name('proforma_with_selected_bnf');
 
-
 Route::get('/get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'flat') {
     return $captcha->src($config);
 });

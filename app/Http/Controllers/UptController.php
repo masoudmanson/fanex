@@ -73,7 +73,6 @@ class UptController extends Controller
         $log = new Backlog();
         $log = $this->mainFormBackLog($log, $amount, $request, $upt_rate, $EuroER);
         setcookie('backlog', encrypt($log->id), time() + 600);
-//        setcookie('ttl', time()+600, time() + 600);
         return $amount;
     }
 

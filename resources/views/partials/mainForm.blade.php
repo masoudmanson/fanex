@@ -49,8 +49,6 @@
             <div class="col-md-6 col-sm-12 pl-lg-2">
                 <div class="form-group bsWrapper">
                     <i class="icon-change bsIcon"></i>
-                    {{--<input type="text" class="form-control fanexInput numberTextField" id="exAmount"--}}
-                           {{--name="amount" placeholder="@lang('index.formAmount')" autocomplete="off">--}}
                     <input type="text" class="form-control fanexInput disabledForm" id="exAmount"
                            name="amount" placeholder="@lang('index.formAmount')" autocomplete="off">
                 </div>

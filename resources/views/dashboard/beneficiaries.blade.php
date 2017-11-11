@@ -182,9 +182,8 @@
             });
 
             $('#search-button').on('click', function() {
-                searchBeneficiaries($(this).val());
+                searchBeneficiaries($('#beneficiary-search').val());
             });
-
         });
 
         function searchBeneficiaries(keyword) {
@@ -211,18 +210,19 @@
                         'X-CSRF-TOKEN': csrfToken,
                         'keyword': keyword,
                     },
+                    success: function(response) {
+                        $('#mainFormLoader').fadeOut(200);
+
+                        keyword = keyword.replace(/(\s+)/, '(<[^>]+>)*$1(<[^>]+>)*');
+                        var pattern = new RegExp('([^\/])(' + keyword + ')([^\?])', 'gi');
+                        response = response.replace(pattern, '$1<mark>$2</mark>$3');
+                        response = response.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,'$1</mark>$2<mark>$4');
+
+                        $('#ajax-beneficiary-list').html(response);
+                    },
                     error: function(xhr, ajaxOptions, thrownError) {
                         console.log(thrownError);
                     },
-                }).done(function(response) {
-                    $('#mainFormLoader').fadeOut(200);
-
-                    keyword = keyword.replace(/(\s+)/, '(<[^>]+>)*$1(<[^>]+>)*');
-                    var pattern = new RegExp('([^\/])(' + keyword + ')([^\?])', 'gi');
-                    response = response.replace(pattern, '$1<mark>$2</mark>$3');
-                    response = response.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,'$1</mark>$2<mark>$4');
-
-                    $('#ajax-beneficiary-list').html(response);
                 });
             }
         }

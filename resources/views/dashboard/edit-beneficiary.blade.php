@@ -237,6 +237,7 @@
                                            id="bnf-iban"
                                            name="iban_code" placeholder="@lang('payment.bnfFormIban') &rlm; @lang('payment.bnfFormIbanSample')"
                                            autocomplete="off"
+                                           dir="auto"
                                            value="{{ $beneficiary->iban_code }}">
                                 </div>
 
