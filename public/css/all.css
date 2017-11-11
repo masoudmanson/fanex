@@ -15891,6 +15891,7 @@ div.fanexCaptcha {
 
 #search-input #search-button {
   text-decoration: none;
+  float: none !important;
 }
 
 #search-input #search-button::after {
@@ -15987,6 +15988,15 @@ div.fanexCaptcha {
 
 #searchbox .tip .example {
   color: #949597;
+}
+
+@media only screen and (max-width: 520px) {
+  #searchbox {
+    padding: 10px 20px;
+  }
+  #searchbox ul {
+    padding-left: 15px;
+  }
 }
 
 .panel-body .bsWrapper {

@@ -1,4 +1,3 @@
-
 window._ = require('lodash');
 
 import 'babel-polyfill';
@@ -10,12 +9,9 @@ import 'babel-polyfill';
 
 try {
     window.$ = window.jQuery = require('jquery');
-
     require('bootstrap-sass');
-
     require('bootstrap-select');
 } catch (e) {}
-
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -40,5 +36,3 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
-
-// require('modernizr');

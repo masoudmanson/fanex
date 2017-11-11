@@ -142,12 +142,13 @@
                         '_token': csrfToken,
                         'X-CSRF-TOKEN': csrfToken,
                     },
+                    success: function(response) {
+                        $('#mainFormLoader').fadeOut(200);
+                        $('#ajax-transaction-list').html(response);
+                    },
                     error: function(xhr, ajaxOptions, thrownError) {
                         console.log(thrownError);
                     },
-                }).done(function(response) {
-                    $('#mainFormLoader').fadeOut(200);
-                    $('#ajax-transaction-list').html(response);
                 });
             });
 
@@ -158,7 +159,7 @@
             });
 
             $('#search-button').on('click', function() {
-                search($(this).val());
+                search($('#transaction-search').val());
             });
         });
 

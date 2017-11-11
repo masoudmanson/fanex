@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -6,11 +5,6 @@
  */
 
 require('./bootstrap');
-// require('formvalidation/dist/js/formValidation.min');
-// require('formvalidation/dist/js/language/fa_IR');
-// require('formvalidation/dist/js/language/en_US');
-// require('formvalidation/dist/js/language/tr_TR');
-
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

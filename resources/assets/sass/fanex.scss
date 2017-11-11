@@ -925,6 +925,7 @@ div.fanexCaptcha {
 
 #search-input #search-button {
     text-decoration: none;
+    float: none !important;
 }
 
 #search-input #search-button::after {
@@ -1003,6 +1004,12 @@ div.fanexCaptcha {
         color: $fanapDark;
         .example {
             color: $fanapGrey;
+        }
+    }
+    @include mq($max-width: $breakePoint_sm) {
+        padding: 10px 20px;
+        ul {
+            padding-left: 15px;
         }
     }
 }

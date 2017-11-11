@@ -14821,7 +14821,6 @@ process.umask = function() { return 0; };
 /* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -14829,11 +14828,6 @@ process.umask = function() { return 0; };
  */
 
 __webpack_require__(154);
-// require('formvalidation/dist/js/formValidation.min');
-// require('formvalidation/dist/js/language/fa_IR');
-// require('formvalidation/dist/js/language/en_US');
-// require('formvalidation/dist/js/language/tr_TR');
-
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -15697,7 +15691,6 @@ module.exports = function spread(callback) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_polyfill__ = __webpack_require__(155);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_polyfill___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_polyfill__);
-
 window._ = __webpack_require__(359);
 
 
@@ -15709,9 +15702,7 @@ window._ = __webpack_require__(359);
 
 try {
   window.$ = window.jQuery = __webpack_require__(131);
-
   __webpack_require__(357);
-
   __webpack_require__(358);
 } catch (e) {}
 
@@ -15738,8 +15729,6 @@ if (token) {
 } else {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
-
-// require('modernizr');
 
 /***/ }),
 /* 155 */
