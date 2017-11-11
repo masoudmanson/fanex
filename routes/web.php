@@ -26,7 +26,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::post('/home', 'HomeController@formController');
 
-Route::get('/dotin', 'DotinController@dotinAuthorization');//maybe get,will implement according to the fake web service
+Route::get('/dotin', 'DotinController@dotinAuthorization');//maybe get.will implement according to the fake web service
 
 Route::get('/profile', 'UserController@index');
 Route::resource('/beneficiaries', 'BeneficiaryController');
