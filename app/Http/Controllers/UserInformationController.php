@@ -86,11 +86,14 @@ class UserInformationController extends Controller
 
             //todo ... other data
             $user->identifier_id = $identity['identifier_id'];
+            $user->mobile = $identity['mobile'];
+            $user->identity_number = $identity['identity_number'];
 
             if (Identifier::find($user->identifier_id)->name == 'other')
                 $user->is_authorized = 0;
             else
                 $user->is_authorized = 1;
+
             $user->save();
             //todo : save or update
             Auth::attempt();

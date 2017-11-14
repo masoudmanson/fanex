@@ -69,7 +69,6 @@ trait IdentifierTrait
         $platform_user = json_decode($result->getBody()->getContents());
 
         if (!$platform_user->hasError) {
-
             $data = [
               'firstname' => $request->firstname,
               'lastname' => $request->lastname,
@@ -84,6 +83,8 @@ trait IdentifierTrait
                 $platform_user->result->firstName_latin = $request->firstname;
                 $platform_user->result->lastName_latin  = $request->lastname;
                 $platform_user->result->identifier_id  = $request->authorizer;
+                $platform_user->result->mobile  = $request->mobile;
+                $platform_user->result->identity_number  = $request->identity_number;
             }
             else
                 return json_encode(array('hasError' => true , 'message' =>"you're not authorized" , 'code'=>401),true);

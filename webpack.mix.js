@@ -34,10 +34,9 @@ mix.scripts([
     'resources/assets/js/index.js'
 ],'public/js/scripts.js');
 
-/*
- / Compiling RTL Css Class
- */
-const exec = require('child_process').exec
+/* Compiling RTL Css Class */
+
+const exec = require('child_process').exec;
 
 mix.then(() => {
     exec('rtlcss ./public/css/all.css ./public/css/fa.css', (error, stdout, stderr) => {
@@ -45,8 +44,6 @@ mix.then(() => {
             console.error(`exec error: ${error}`);
             return;
         }
-        console.log(`stdout(RTLCSS): ${stdout}`);
-        console.log(`stderr(RTLCSS): ${stderr}`);
     });
 });
 
