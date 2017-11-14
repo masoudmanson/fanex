@@ -29,7 +29,6 @@
 </head>
 
 <body class="m-0 p-0" id="main-body">
-{{--<div id="main-content-wrapper">--}}
     {{-- Yielding Page Content --}}
     @yield('header')
 
@@ -38,53 +37,41 @@
 
     {{-- Yielding Page Content --}}
     @yield('footer')
-{{--</div>--}}
-{{-- General Scripts --}}
-<script src="{{ mix('js/app.js') }}"></script>
-<script src="{{ mix('js/scripts.js') }}"></script>
-<script src="{{ asset('js/accounting.min.js') }}"></script>
-<script src="{{ asset('js/jquery.nicescroll.js') }}"></script>
-<script src="{{ asset('js/sweetalert2.js') }}"></script>
-<script src="{{ asset('js/jquery.sticky-kit.min.js') }}"></script>
-<script src="{{ asset('js/jquery.countdown.min.js') }}"></script>
-<script src="{{ asset('js/classie.js') }}"></script>
-<script src="{{ asset('js/html2canvas.js') }}"></script>
-<script src="{{ asset('js/jspdf.debug.js') }}"></script>
-<script src="{{ asset('js/input-mask.min.js') }}" data-autoinit="true"></script>
-<script src="{{ asset('js/jquery.priceformat.min.js') }}"></script>
 
-<script src="{{ asset('js/index.js') }}"></script>
-<script>
-  var csrfToken = $('meta[name="csrf-token"]').attr('content');
-  var timeOut = "@lang('index.timeout')";
-  var indexFormCountry = "@lang('js.indexFormCountry')";
-  var indexFormCurrency = "@lang('js.indexFormCurrency')";
-  var indexFormAmount = "@lang('js.indexFormAmount')";
-  var indexFormCaptcha = "@lang('js.indexFormCaptcha')";
-  var indexFormCalculate = "@lang('js.indexFormCalculate')";
-  var indexFormPay = "@lang('js.indexFormPay')";
-  var statuses = {
-      'successful' : '@lang('profile.successful')',
-      'pending' : '@lang('profile.pending')',
-      'waiting' : '@lang('profile.waiting')',
-      'failed' : '@lang('profile.failed')',
-      'rejected' : '@lang('profile.rejected')',
-      'canceled' : '@lang('profile.canceled')',
-      'accepted' : '@lang('profile.accepted')'
-  };
+    {{-- General Scripts --}}
+    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/scripts.js') }}"></script>
+    <script src="{{ asset('js/classie.js') }}"></script>
+    <script>
+      var csrfToken = $('meta[name="csrf-token"]').attr('content');
+      var timeOut = "@lang('index.timeout')";
+      var indexFormCountry = "@lang('js.indexFormCountry')";
+      var indexFormCurrency = "@lang('js.indexFormCurrency')";
+      var indexFormAmount = "@lang('js.indexFormAmount')";
+      var indexFormCaptcha = "@lang('js.indexFormCaptcha')";
+      var indexFormCalculate = "@lang('js.indexFormCalculate')";
+      var indexFormPay = "@lang('js.indexFormPay')";
+      var statuses = {
+          'successful' : '@lang('profile.successful')',
+          'pending' : '@lang('profile.pending')',
+          'waiting' : '@lang('profile.waiting')',
+          'failed' : '@lang('profile.failed')',
+          'rejected' : '@lang('profile.rejected')',
+          'canceled' : '@lang('profile.canceled')',
+          'accepted' : '@lang('profile.accepted')'
+      };
 
-  var AMOUNT_LIMIT_MIN = 0;
-  $.ajaxSetup(
-      {
-        headers: {
-          'X-CSRF-Token': csrfToken,
-          '_token': csrfToken,
-        },
-      });
-</script>
+      var AMOUNT_LIMIT_MIN = 0;
+      $.ajaxSetup(
+          {
+            headers: {
+              'X-CSRF-Token': csrfToken,
+              '_token': csrfToken,
+            },
+          });
+    </script>
 
-{{-- Yielding Pages Scripts --}}
-@yield('scripts')
-
+    {{-- Yielding Pages Scripts --}}
+    @yield('scripts')
 </body>
 </html>

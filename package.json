@@ -21,16 +21,24 @@
     "nicescroll": "^3.7.0",
     "rtlcss": "^2.2.0",
     "sass-mediaqueries": "^1.6.1",
-    "sweetalert2": "^6.9.1",
+    "sweetalert2": "^6.11.5",
     "tether": "^1.4.0",
     "vue": "^2.4.4",
     "webpack-livereload-plugin": "^0.11.0"
   },
   "dependencies": {
+    "accounting-js": "^1.1.1",
     "babel-polyfill": "^6.26.0",
+    "classie": "^1.0.0",
     "generate": "^0.14.0",
+    "inputmask": "^3.3.10",
+    "jquery-countdown": "^2.2.0",
+    "jquery-price-format": "0.0.1",
+    "jquery.inputmask": "^3.3.4",
+    "jquery.nicescroll": "^3.7.6",
     "modernizr": "^3.5.0",
     "node-sass": "^4.5.3",
-    "package": "^1.0.1"
+    "package": "^1.0.1",
+    "sticky-kit": "^1.1.3"
   }
 }
