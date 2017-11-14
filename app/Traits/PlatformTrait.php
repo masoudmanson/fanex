@@ -120,9 +120,7 @@ trait PlatformTrait
     public function userInvoice(Request $request, Backlog $backlog)
     {
         $client = new Client();
-
         $token = config('services.sso.api');
-//dd($token);
         $user_object = $this->getCurrentPlatformUser($request->cookie('token')['access']);
         $json_input = $user_object->getBody()->getContents();
         $userId = json_decode($json_input)->result->userId;
@@ -140,10 +138,10 @@ trait PlatformTrait
                 'billNumber' => generateUniqueReferenceNumber(),
                 'description' => __('payment.payDescription', ["amount" => number_format($backlog->premium_amount), "currency" => $backlog->currency]),
                 'deadline' => jDate::forge('now')->format('Y/m/d'), //persian date in format yyyy/mm/dd
-                'productId[]' => 0, //I've no idea
+                'productId[]' => 0,
                 'price[]' => $backlog->payment_amount, //give the price from saved transaction
-                'productDescription[]' => __('payment.payDescription', ["amount" => number_format($backlog->premium_amount), "currency" => $backlog->currency]), //I've no idea
-                'quantity[]' => 1, //I'm not sure
+                'productDescription[]' => __('payment.payDescription', ["amount" => number_format($backlog->premium_amount), "currency" => $backlog->currency]),
+                'quantity[]' => 1,
                 'pay' => false, // for now false is enough. later, depend on method of pay, it can change dynamically.
                 'block' => false, // I think so
                 'guildCode' => 'FINANCIAL_GUILD',

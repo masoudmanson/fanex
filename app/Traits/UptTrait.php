@@ -25,8 +25,7 @@ trait UptTrait
         if ($upt_resp->COUNTRYSTATUS->RESPONSE == 'Success') {
             $country_list = $upt_resp->COUNTRYLIST->WSCountry;
         }
-
-
+         //return $country_list;
     }
 
     public function UPTGetTExchangeData($amount, $from, $to)
@@ -42,14 +41,14 @@ trait UptTrait
 
     public function CorpGetCountryData()
     {
-//        $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?WSDL';
+//        $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?WSDL'; // test server
         $url = 'https://upt.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?wsdl';
         $client = new SoapClient($url, array("soap_version" => SOAP_1_1, "trace" => 1));
 
         $user_param = array(
+//            'Username' => "2818", //test user
+//            'Password' => "1"  //test pass
             'Username' => "9590",
-//            'Username' => "2818",
-//            'Password' => "1"
             'Password' => "Fanex@123456!"
         );
 
@@ -71,9 +70,9 @@ trait UptTrait
         $client = new SoapClient($url, array("soap_version" => SOAP_1_1, "trace" => 1));
 
         $user_param = array(
-            'Username' => "9590",
 //            'Username' => "2818",
 //            'Password' => "1"
+            'Username' => "9590",
             'Password' => "Fanex@123456!"
         );
 
@@ -98,12 +97,11 @@ trait UptTrait
 //        $url = 'https://uptuat3.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?wsdl';
         $url = 'https://upt.aktifbank.com.tr/ISV/TU/WebServices/V1_2/CorpService.asmx?wsdl';
         $client = new SoapClient($url, array("soap_version" => SOAP_1_2, "trace" => 1));
-//        $client = new SoapClient($url);
 
         $user_param = array(
-            'Username' => "9590",
 //            'Username' => "2818",
 //            'Password' => "1"
+            'Username' => "9590",
             'Password' => "Fanex@123456!"
         );
 
@@ -121,34 +119,25 @@ trait UptTrait
 
             'SENDER_COUNTRY_CODE' => 'IR', // todo:later it should be detect automatically
             'SENDER_NATIONALITY' => 'IR', // todo: " " " "
-//            'SENDER_NAME' => Auth::user()->firstname,
-//            'SENDER_SURNAME' => Auth::user()->lastname,
+
             'SENDER_NAME' => Auth::user()->firstname_latin,
             'SENDER_SURNAME' => Auth::user()->lastname_latin,
-//            'BENEFICIARY_COUNTRY_CODE' => $backlog->country,// todo: "to"
-            'BENEFICIARY_COUNTRY_CODE' => 'TR',// todo: "to"
-            'BENEFICIARY_NAME' => $beneficiary->firstname, //todo : bnf firstname
-            'BENEFICIARY_SURNAME' => $beneficiary->lastname, // todo: bnf lastname
-//            'BENEFICIARY_NAME' => 'masoud', //todo : bnf firstname
-//            'BENEFICIARY_SURNAME' => 'test', // todo: bnf lastname
+            'BENEFICIARY_COUNTRY_CODE' => 'TR',// todo: "to". (like above line)
+            'BENEFICIARY_NAME' => $beneficiary->firstname,
+            'BENEFICIARY_SURNAME' => $beneficiary->lastname,
             'BENEFICIARY_GSM_COUNTRY_CODE' => '0090',
-//            'BENEFICIARY_GSM_NO' => '5057181936',
 //            'BENEFICIARY_GSM_NO' => '5314093654', //farzad sarseyfi mobile
             'BENEFICIARY_GSM_NO' => $beneficiary->tel, //farzad sarseyfi mobile
-//            'BENEFICIARY_IBAN' => 'TR290006400000164310007808',
+//            'BENEFICIARY_IBAN' => 'TR290006400000164310007808', //example test
             'BENEFICIARY_IBAN' => $beneficiary->iban_code,
 
             'TRANSACTION_TYPE' => '002', // todo:which type we have to use?!
-//            'MONEY_TAKEN_CURRENCY' => 'EUR', // todo ? I think it is EUR
             'MONEY_TAKEN'=>'0',
 //            'MONEY_TAKEN_CURRENCY' => 'TRY', // todo ? I think it is EUR
-//            'AMOUNT' => $backlog->payment_amount, // todo ?
-            'AMOUNT' => $transaction->premium_amount, // todo ?
-//            'AMOUNT_CURRENCY' => $backlog->currency, // currency
-//            'AMOUNT_CURRENCY' => 'TRY', // currency
+            'AMOUNT' => $transaction->premium_amount,
             'AMOUNT_CURRENCY' => $transaction->currency, // currency
 
-            // new parameters :|
+            /* additional parameters */
 
 //            "CORP_MONEY_ACCOUNTING_TAKEN_OUT"=>$transaction->premium_amount,
 //            "CORP_MONEY_ACCOUNTING_TAKEN_EXC_RATE_OUT"=> 1,
@@ -160,14 +149,14 @@ trait UptTrait
 //            "CORP_MONEY_TAKEN_EXC_RATE_OUT"=> 0,
 //            "CORP_AMOUNT_OUT"=> $transaction->premium_amount,
 //            "CORP_AMOUNT_EXC_RATE_OUT"=> 0,
+
+            /* additional parameters */
         ));
 
-//        dd($body_params);
 
         $return = $client->CorpSendRequest($body_params);
 //        $return = $client->__SoapCall('CorpSendRequest', $body_params);
 
-//        dd($return);
         return $return;
     }
 
@@ -203,9 +192,9 @@ trait UptTrait
 
         $user_param = array(
             'Username' => "9590",
+            'Password' => "Fanex@123456!"
 //            'Username' => "2818",
 //            'Password' => "1"
-            'Password' => "Fanex@123456!"
         );
 
         $header = new SoapHeader('http://tempuri.org/', 'WsSystemUserInfo', $user_param, false);
@@ -230,9 +219,9 @@ trait UptTrait
 
         $user_param = array(
             'Username' => "9590",
+            'Password' => "Fanex@123456!"
 //            'Username' => "2818",
 //            'Password' => "1"
-            'Password' => "Fanex@123456!"
         );
 
         $header = new SoapHeader('http://tempuri.org/', 'WsSystemUserInfo', $user_param, false);

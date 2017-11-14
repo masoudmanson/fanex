@@ -30,8 +30,8 @@ class PaymentController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkToken', ['only' => ['proforma_with_selected_transaction', 'proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
-        $this->middleware('checkUser', ['only' => ['proforma_with_selected_transaction', 'proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
+        $this->middleware('checkToken', ['only' => ['proforma_with_selected_transaction', 'proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice','showInvoice']]);
+        $this->middleware('checkUser', ['only' => ['proforma_with_selected_transaction', 'proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice','showInvoice']]);
         $this->middleware('checkLog', ['only' => ['proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
         $this->middleware('checkTtl', ['only' => ['issueInvoice']]);
         $this->middleware('authorized', ['only' => ['issueInvoice']]);
@@ -208,7 +208,7 @@ class PaymentController extends Controller
 
             $transaction = Transaction::findOrFail(json_decode(Crypt::decryptString($request->transaction_sign))->id);
 
-            $transaction->uri = $invoice->result->billNumber;
+            $transaction->uri = $invoice->result->billNumber; // uri = unique reference number
             $transaction->update();
 
             return redirect(config('urls.private') . "pbc/payinvoice/?invoiceId="
@@ -239,7 +239,7 @@ class PaymentController extends Controller
                 $transaction->bank_status = 'successful';
                 $transaction->fanex_status = 'pending';
 
-                // todo** : do it after admin accept the payment , in a specific func.**
+                // todo** : do it after admin accepted the payment , in a specific func.**
                 $upt_res = $this->CorpSendRequest($transaction, $transaction->user, $transaction->beneficiary, $transaction->backlog);
 
                 if ($upt_res->CorpSendRequestResult->TransferRequestStatus->RESPONSE == 'Success') {
@@ -357,6 +357,9 @@ class PaymentController extends Controller
             $transaction->payment_type = $backlog->payment_type;
             $transaction->ttl = $backlog->ttl;
             $transaction->country = $backlog->country;
+            $transaction->receiver_account = $beneficiary->account_number;
+            $transaction->receiver_firstname = $beneficiary->firstname;
+            $transaction->receiver_lastname = $beneficiary->lastname;
 
             $transaction->save();
         }

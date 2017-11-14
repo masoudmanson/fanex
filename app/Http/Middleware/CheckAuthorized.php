@@ -22,7 +22,7 @@ class CheckAuthorized
             $request->session()->flash('alert-success', __('auth.otherMsg'));
             return redirect('/');
         }
-        else if(!Auth::user()->is_authorized)
+        if(!Auth::user()->is_authorized)
         {
             $request->session()->flash('alert-danger', __('auth.notAuth'));
             return redirect('/');

@@ -103,17 +103,6 @@ class BeneficiaryController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param Beneficiary $beneficiary
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Beneficiary $beneficiary)
-    {
-        return view('beneficiary', compact('beneficiary'));
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param Beneficiary $beneficiary

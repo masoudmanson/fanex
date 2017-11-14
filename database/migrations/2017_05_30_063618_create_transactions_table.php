@@ -34,6 +34,9 @@ class CreateTransactionsTable extends Migration
             $table->string('country')->nullable();
             $table->string('upt_ref')->nullable();
             $table->string('ttl')->nullable();
+            $table->string('receiver_account')->nullable();
+            $table->string('receiver_firstname')->nullable();
+            $table->string('receiver_lastname')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')
