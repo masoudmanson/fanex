@@ -174,7 +174,7 @@ $(document).ready(function() {
         }
     });
 
-    var nice = $('html, .fanexMotto, .dropdown-menu .inner, textarea').
+    var nice = $('html, body, .fanexMotto, .dropdown-menu .inner, textarea').
         niceScroll({
             cursorcolor: '#000',
             cursoropacitymin: 0.1,
@@ -385,48 +385,6 @@ function createSelection(field, start, end) {
         field.selectionEnd = end;
     }
     field.focus();
-}
-
-function search(keyword) {
-    if (keyword.length == 0) {
-        $('#mainFormLoader').fadeIn(200);
-        x = $.ajax({
-            method: 'get',
-            url: '/profile',
-            success: function(response){
-                $('#mainFormLoader').fadeOut(200);
-                $('#ajax-transaction-list').html(response);
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                console.log(thrownError);
-            },
-        });
-    }
-    else if (keyword.length >= 1) {
-        $('#mainFormLoader').fadeIn(200);
-        $.ajax({
-            method: 'post',
-            url: '/search/transaction',
-            data: {
-                '_token': csrfToken,
-                'X-CSRF-TOKEN': csrfToken,
-                'keyword': keyword,
-            },
-            success: function(response) {
-                $('#mainFormLoader').fadeOut(200);
-                keyword = keyword.replace(/(\s+)/, '(<[^>]+>)*$1(<[^>]+>)*');
-                var pattern = new RegExp('([^\/])(' + keyword + ')([^\?])', 'gi');
-                response = response.replace(pattern, '$1<mark>$2</mark>$3');
-                response = response.replace(
-                    /(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,
-                    '$1</mark>$2<mark>$4');
-                $('#ajax-transaction-list').html(response);
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                console.log(thrownError);
-            }
-        });
-    }
 }
 
 function getAmount() {

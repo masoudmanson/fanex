@@ -156,7 +156,8 @@
         </div>
     </div>
 @endforeach
-{{ $beneficiaries->links() }}
+{{--{{ $beneficiaries->links() }}--}}
+{{ $beneficiaries->appends(Request::query())->render() }}
 @else
     <h2 class="no-results">@lang('profile.noBnfs')</h2>
 @endif
