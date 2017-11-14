@@ -37,7 +37,7 @@ class BeneficiaryController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $beneficiaries = $user->beneficiary()->available()->paginate(2);
+        $beneficiaries = $user->beneficiary()->available()->paginate(10);
         $countries = countries(session('applocale'));
         $filter_countries = $this->filterCountires();
 
