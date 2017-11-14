@@ -174,7 +174,7 @@ $(document).ready(function() {
         }
     });
 
-    var nice = $('body, .fanexMotto, .dropdown-menu .inner, textarea').
+    var nice = $('html, .fanexMotto, .dropdown-menu .inner, textarea').
         niceScroll({
             cursorcolor: '#000',
             cursoropacitymin: 0.1,
