@@ -90,7 +90,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/index.js') }}"></script>
+    {{--<script src="{{ asset('js/index.js') }}"></script>--}}
     <script>
         $(document).ready(function() {
             $('#main-content-wrapper').css({'padding-bottom': 0});

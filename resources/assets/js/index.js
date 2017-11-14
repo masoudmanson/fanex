@@ -1,11 +1,4 @@
 $(document).ready(function() {
-    // if (Modernizr.touch) {
-    //     $("body").mobileFix({
-    //         inputElements: "input,textarea,select",
-    //         addClass: "fixfixed"
-    //     });
-    // }
-
     if(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent))
         $('.selectpicker').selectpicker('mobile');
     else
@@ -100,13 +93,7 @@ $(document).ready(function() {
         $('.tempAmount').slideUp(300);
 
         var currency = $('#exCurrency').val();
-        var amount = 0;
-        if (currency === 'EUR' || currency === 'USD') {
-            amount = Number($('#exAmount').unmask()) / 100;
-        }
-        else if (currency === 'TRY') {
-            amount = Number($('#exAmount').unmask());
-        }
+        var amount = accounting.unformat($('#exAmount').val());
 
         if ($('#captcha').val().length == 5 && amount > AMOUNT_LIMIT_MIN &&
             $('#exCountry').val() != null && $('#exCurrency').val() != null) {
@@ -159,13 +146,7 @@ $(document).ready(function() {
         $('.tempAmount').slideUp(300);
 
         var currency = $('#exCurrency').val();
-        var amount = 0;
-        if (currency === 'EUR' || currency === 'USD') {
-            amount = Number($('#exAmount').unmask()) / 100;
-        }
-        else if (currency === 'TRY') {
-            amount = Number($('#exAmount').unmask());
-        }
+        var amount = accounting.unformat($('#exAmount').val());
 
         $(this).focus();
         if ($('#captcha').val().length == 5 && amount > AMOUNT_LIMIT_MIN &&
@@ -193,7 +174,7 @@ $(document).ready(function() {
         }
     });
 
-    var nice = $('html, body, .fanexMotto, .dropdown-menu .inner, textarea').
+    var nice = $('body, .fanexMotto, .dropdown-menu .inner, textarea').
         niceScroll({
             cursorcolor: '#000',
             cursoropacitymin: 0.1,
@@ -451,6 +432,7 @@ function search(keyword) {
 function getAmount() {
     var currency = $('#exCurrency').val();
     var amount = 0;
+
     if (currency === 'EUR' || currency === 'USD') {
         amount = Number($('#exAmount').unmask()) / 100;
     }
@@ -480,16 +462,22 @@ function getAmount() {
             $('#mainFormLoader').fadeOut(200);
             if (currency === 'EUR' || currency === 'USD') {
                 $('#tempAmountCash').
-                    text(accounting.formatMoney($('#exAmount').val(), '', 2) + ' ' +
-                        $('#exCurrency option:selected').text());
+                    text(accounting.formatMoney(amount, {
+                            symbol: '',
+                            precision: 2
+                        }) + ' ' + $('#exCurrency option:selected').text());
             }
             else {
-                $('#tempAmountCash').
-                    text(accounting.formatMoney($('#exAmount').val(), '', 0) + ' ' +
-                        $('#exCurrency option:selected').text());
+                $('#tempAmountCash').text(accounting.formatMoney(amount, {
+                        symbol: '',
+                        precision: 2
+                    }) + ' ' + $('#exCurrency option:selected').text());
             }
             $('#tempAmountCountry').text($('#exCountry option:selected').text());
-            $('.calcAmount').text(accounting.formatMoney(response, '', 0));
+            $('.calcAmount').text(accounting.formatMoney(response, {
+                symbol: '',
+                precision: 0
+            }));
             $('.tempAmount').slideDown(300);
             $('#calcBtn').
                 attr({'disabled': 'disabled'}).
