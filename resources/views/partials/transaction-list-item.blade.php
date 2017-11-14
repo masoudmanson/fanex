@@ -119,7 +119,8 @@
             </div>
         </div>
     @endforeach
-    {{ $transactions->links() }}
+    {{--{{ $transactions->links() }}--}}
+    {{ $transactions->appends(Request::query())->render() }}
 @else
     <h2 class="no-results">@lang('profile.noTrans')</h2>
 @endif
