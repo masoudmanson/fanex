@@ -237,7 +237,8 @@ class PaymentController extends Controller
                 $transaction->payment_date = $invoice_result->paymentDate;
                 $transaction->vat = $invoice_result->vat;
                 $transaction->bank_status = 'successful';
-                $transaction->fanex_status = 'pending';
+//                $transaction->fanex_status = 'pending';
+                $transaction->fanex_status = 'waiting';
 
                 // todo** : do it after admin accepted the payment , in a specific func.**
                 $upt_res = $this->CorpSendRequest($transaction, $transaction->user, $transaction->beneficiary, $transaction->backlog);
@@ -254,7 +255,7 @@ class PaymentController extends Controller
 
                     } else {
                         $transaction->upt_status = 'failed'; //or rejected?
-                        $transaction->fanex_status = 'pending';
+//                        $transaction->fanex_status = 'pending';
                         $transaction->update();
 //                  $this->CorpCancelRequest($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT);
 //                  $this->CorpCancelConfirm($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT); // todo: check it later

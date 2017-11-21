@@ -89,4 +89,9 @@ Transactions: (i) which exceed certain amounts; (ii) to certain destinations; (i
     'fanapium' => '‎Fanapium',
     'pasargad' => 'Pasargad Bank',
     'other' => 'Other Identifiers',
+    'sign' => [
+        'EUR' => '€',
+        'USD' => '$',
+        'TRY' => '‎₺',
+    ]
 ];

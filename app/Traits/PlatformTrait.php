@@ -24,7 +24,7 @@ trait PlatformTrait
         $nick = $request->nickname;
 
         $client = new Client();
-        $res = $client->request('GET', config('urls.platform').'aut/registerWithSSO/', [
+        $res = $client->request('GET', config('urls.platform') . 'aut/registerWithSSO/', [
             'query' => ['nickname' => $nick],
             'headers' => [
                 '_token_' => $token,
@@ -38,7 +38,7 @@ trait PlatformTrait
     public function getCurrentPlatformUser($token)
     {
         $client = new Client();
-        $res = $client->get(config('urls.platform').'nzh/getUserProfile/', [
+        $res = $client->get(config('urls.platform') . 'nzh/getUserProfile/', [
             'headers' => [
                 '_token_' => $token,
                 '_token_issuer_' => 1
@@ -62,10 +62,10 @@ trait PlatformTrait
 
     public function getOtt()
     {
-        $token = config('services.sso.api');
+//        $token = config('services.sso.api');
+        $token = config('exchanger.token');
         $client = new Client();
-        //businessId should receive from getBusiness.however it's static in platform db.
-        $res = $client->get(config('urls.platform').'nzh/ott/', [
+        $res = $client->get(config('urls.platform') . 'nzh/ott/', [
             'headers' => [
                 '_token_' => $token,
                 '_token_issuer_' => 1
@@ -74,11 +74,11 @@ trait PlatformTrait
         return $res;
     }
 
-    public function followBusiness($token)
+    public function followBusiness($token,$businessId = 42)
     {
         $client = new Client();
         //businessId should receive from getBusiness.however it's static in platform db.
-        $res = $client->get(config('urls.platform').'nzh/follow/?businessId=42&follow=true', [
+        $res = $client->get(config('urls.platform') . 'nzh/follow/?businessId='.$businessId.'&follow=true', [
             'headers' => [
                 '_token_' => $token,
                 '_token_issuer_' => 1
@@ -91,7 +91,7 @@ trait PlatformTrait
     {
         $client = new Client();
         //business token must taken from sso
-        $res = $client->get(config('urls.platform').'nzh/getUserBusiness/', [
+        $res = $client->get(config('urls.platform') . 'nzh/getUserBusiness/', [
             'headers' => [
                 '_token_' => $token,// get business token and put in here
                 '_token_issuer_' => 1
@@ -105,7 +105,7 @@ trait PlatformTrait
         $token = config('services.sso.api');
         $client = new Client();
         //business token must taken from sso
-        $res = $client->get(config('urls.platform').'nzh/biz/getCredit', [
+        $res = $client->get(config('urls.platform') . 'nzh/biz/getCredit', [
             'headers' => [
                 '_token_' => $token,// get business token and put in here
                 '_token_issuer_' => 1
@@ -117,10 +117,75 @@ trait PlatformTrait
         return $res;
     }
 
+    public function createProduct()
+    {
+        //nzh/biz/addProduct
+
+    }
+
+    public function updateProduct($price)
+    {
+//        $token = config('services.sso.api');
+        $token = config('exchanger.token');
+        $client = new Client();
+        $res = $client->get(config('urls.platform') . 'nzh/biz/updateProduct', [
+            'headers' => [
+                '_token_' => $token,// get business token and put in here
+                '_token_issuer_' => 1
+            ],
+            'form_params' => [
+                'name' => '',
+                'description' => '',
+                'canComment' => 'false',
+                'canLike' => 'false',
+                'enable' => 'true',
+                'businessId' => config('exchanger.businessId'),
+                'availableCount' => '',
+                'price' => $price,
+                'discount' => '0'
+            ],
+        ]);
+        return $res;
+    }
+
+    public function listProduct($attributes=array())
+    {
+//        $token = config('services.sso.api');
+        $token = config('exchanger.token');
+        $client = new Client();
+        $data = [
+            'size' => 100,
+            'offset' => 0,
+            'businessId' => config('exchanger.businessId'),
+        ];
+        if (!empty($attributes['entityId'])) {
+            $data = $data + ['id' => $attributes['entityId']];
+        }
+
+        if (!empty($attributes['tag'])) {
+            $data = $data + ['tags' => $attributes['tag']];
+        }
+
+        if (!empty($attributes['attributeCode'])) {
+            $data = $data + ['attributeCode[]' => $attributes['attributeCode']];
+            $data = $data + ['attributeValue[]' => $attributes['attributeValue']];
+        }
+        //business token must taken from sso
+        $res = $client->post(config('urls.platform') . 'nzh/productList', [
+            'headers' => [
+                '_token_' => $token,
+                '_token_issuer_' => 1
+            ],
+            'form_params' => $data
+        ]);
+        return $res;
+    }
+
     public function userInvoice(Request $request, Backlog $backlog)
     {
         $client = new Client();
-        $token = config('services.sso.api');
+        $token = config('exchanger.token');
+        $this->followBusiness($request->cookie('token')['access'],config('exchanger.businessId'));
         $user_object = $this->getCurrentPlatformUser($request->cookie('token')['access']);
         $json_input = $user_object->getBody()->getContents();
         $userId = json_decode($json_input)->result->userId;
@@ -131,7 +196,7 @@ trait PlatformTrait
         // *hint: if refresh token was needed, get the user refresh token from its db row
         //todo how can I know user object on db, if his token expired and I don't have his userId??
 
-        $res = $client->get(config('urls.platform').'nzh/biz/issueInvoice/', [
+        $res = $client->get(config('urls.platform') . 'nzh/biz/issueInvoice/', [
             'query' => [
                 'redirectURL' => $request->root() . '/invoice/show',
                 'userId' => $userId,// get userId from his token: gholi = 204
@@ -139,6 +204,7 @@ trait PlatformTrait
                 'description' => __('payment.payDescription', ["amount" => number_format($backlog->premium_amount), "currency" => $backlog->currency]),
                 'deadline' => jDate::forge('now')->format('Y/m/d'), //persian date in format yyyy/mm/dd
                 'productId[]' => 0,
+//                'productId[]' => $request->product->id,
                 'price[]' => $backlog->payment_amount, //give the price from saved transaction
                 'productDescription[]' => __('payment.payDescription', ["amount" => number_format($backlog->premium_amount), "currency" => $backlog->currency]),
                 'quantity[]' => 1,
@@ -168,7 +234,7 @@ trait PlatformTrait
         $client = new Client();
         $token = config('services.sso.api'); //biz static token
 
-        $res = $client->post(config('urls.platform').'nzh/biz/getInvoiceList/', [
+        $res = $client->post(config('urls.platform') . 'nzh/biz/getInvoiceList/', [
                 'form_params' => [
                     'billNumber' => $billNumber,
                     'size' => 1,
@@ -185,10 +251,10 @@ trait PlatformTrait
         return $res;
     }
 
-    public function cancelInvoice($invoice_id , $token = 'd35b0c351acd47cc87a76b1c4b07239a') //todo: get api_token from config or .env file
+    public function cancelInvoice($invoice_id, $token = 'd35b0c351acd47cc87a76b1c4b07239a') //todo: get api_token from config or .env file
     {
         $client = new Client();
-        $res = $client->get(config('urls.platform').'nzh/biz/cancelInvoice/', [
+        $res = $client->get(config('urls.platform') . 'nzh/biz/cancelInvoice/', [
             'query' =>
                 [
                     'invoiceId' => $invoice_id
@@ -201,12 +267,12 @@ trait PlatformTrait
         return $res;
     }
 
-    public function chargeUserWallet($user , $charge_amount)
+    public function chargeUserWallet($user, $charge_amount)
     {
         $token = config('services.sso.api');
         $client = new Client();
         //business token must taken from sso
-        $res = $client->get(config('urls.platform').'nzh/biz/transferToFollower', [
+        $res = $client->get(config('urls.platform') . 'nzh/biz/transferToFollower', [
             'headers' => [
                 '_token_' => $token,// get business token and put in here
                 '_token_issuer_' => 1

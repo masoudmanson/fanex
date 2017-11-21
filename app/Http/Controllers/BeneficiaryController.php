@@ -18,7 +18,7 @@ class BeneficiaryController extends Controller
         $this->middleware('checkLog', ['only' => ['createOrSelect']]);
     }
 
-    public function filterCountires()
+    public function filterCountries()
     {
         $beneficiaries = Auth::user()->beneficiary()->available()->get();
         $filter_countries = array();
@@ -39,7 +39,7 @@ class BeneficiaryController extends Controller
         $user = Auth::user();
         $beneficiaries = $user->beneficiary()->available()->paginate(10);
         $countries = countries(session('applocale'));
-        $filter_countries = $this->filterCountires();
+        $filter_countries = $this->filterCountries();
 
         if ($request->ajax())
             return response()->json(view('partials.beneficiaty-list-item', compact('beneficiaries', 'countries'))->render());
@@ -210,7 +210,7 @@ class BeneficiaryController extends Controller
             return response()->json(view('partials.beneficiaty-list-item', compact('beneficiaries', 'countries'))->render());
 
         else {
-            $filter_countries = $this->filterCountires();
+            $filter_countries = $this->filterCountries();
             return view('dashboard.beneficiaries', compact('beneficiaries', 'countries', 'filter_countries'));
         }
     }
@@ -232,7 +232,7 @@ class BeneficiaryController extends Controller
             return response()->json(view('partials.beneficiaty-list-item', compact('beneficiaries', 'countries'))->render());
 
         else {
-            $filter_countries = $this->filterCountires();
+            $filter_countries = $this->filterCountries();
 
             return view('dashboard.beneficiaries', compact('beneficiaries', 'countries', 'filter_countries'));
         }
