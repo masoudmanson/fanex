@@ -36,37 +36,37 @@
                             <div class="row m-0 p-0">
                                 <ul class="col-sm-12 col-md-8 col-md-push-2 invoice-factor">
                                     <li class="row m-0">
-                                        <div class="col-xs-12 col-sm-6 p-0 m-0">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 print-col-xs-6">
                                             <p class="table-header">@lang('payment.invItem')</p>
                                         </div>
-                                        <div class="hidden-xs col-sm-6 p-0 m-0">
+                                        <div class="hidden-xs col-sm-6 p-0 m-0 print-col-xs-6">
                                             <p class="table-header">@lang('payment.invCost')</p>
                                         </div>
                                     </li>
 
                                     <li class="row m-0">
-                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left print-col-xs-6">
                                             <p>@lang('payment.invAmount')</p>
                                         </div>
-                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right print-col-xs-6">
                                             <p>{{ number_format($transaction->premium_amount, 2) . ' ' . $transaction->currency }}</p>
                                         </div>
                                     </li>
 
                                     <li class="row m-0">
-                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left print-col-xs-6">
                                             <p>@lang('payment.invExp')</p>
                                         </div>
-                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right print-col-xs-6">
                                             <p>0 @lang('index.formRials')</p>
                                         </div>
                                     </li>
 
                                     <li class="row m-0">
-                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left print-col-xs-6">
                                             <p>@lang('payment.invTax')</p>
                                         </div>
-                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right print-col-xs-6">
                                             <p>{{ number_format($invoice_result->vat) }} @lang('index.formRials')</p>
                                         </div>
                                     </li>
@@ -74,10 +74,10 @@
                                     <hr>
 
                                     <li class="row m-0">
-                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left print-col-xs-6">
                                             <p>@lang('payment.invSum')</p>
                                         </div>
-                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right print-col-xs-6">
                                             <p>{{ number_format($transaction->premium_amount, 2) . ' ' . $transaction->currency . ' + &rlm;' . number_format($invoice_result->vat) }} @lang('index.formRials')</p>
                                             <p class="acc-factor-sum">
                                                 = {{ number_format($invoice_result->payableAmount) }} @lang('payment.invRials')</p>
@@ -87,35 +87,35 @@
                                     <hr>
 
                                     <li class="row m-0">
-                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left print-col-xs-6">
                                             <p class="orange">@lang('payment.invTrans')</p>
                                         </div>
-                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right print-col-xs-6">
                                             <p class="orange">{{ $transaction->uri }}</p>
                                         </div>
                                     </li>
 
                                     <li class="row m-0">
-                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left print-col-xs-6">
                                             <p class="grey">@lang('payment.invBankStatus')</p>
                                         </div>
-                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right print-col-xs-6">
                                             <p class="fanex-text-{{ $transaction->bank_status }}">@lang('profile.'.$transaction->bank_status)</p>
                                         </div>
                                     </li>
                                     <li class="row m-0">
-                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left print-col-xs-6">
                                             <p class="grey">@lang('payment.invFanexStatus')</p>
                                         </div>
-                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right print-col-xs-6">
                                             <p class="fanex-text-{{ $transaction->fanex_status }}">@lang('profile.'.$transaction->fanex_status)</p>
                                         </div>
                                     </li>
                                     <li class="row m-0">
-                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-left print-col-xs-6">
                                             <p class="grey">@lang('payment.invUptStatus')</p>
                                         </div>
-                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right">
+                                        <div class="col-xs-12 col-sm-6 p-0 m-0 acc-info-right print-col-xs-6">
                                             <p class="fanex-text-{{ $transaction->upt_status }}">@lang('profile.'.$transaction->upt_status)</p>
                                         </div>
                                     </li>

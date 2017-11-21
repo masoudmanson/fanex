@@ -2267,6 +2267,9 @@ mark, .mark {
 #pdfWrapper {
     text-align: left !important;
     font-family: 'IRANSans', Tahoma !important;
+    .print-col-xs-6 {
+        width: 50% !important;
+    }
 }
 
 .pdf {
