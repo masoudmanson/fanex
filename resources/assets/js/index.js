@@ -37,6 +37,7 @@ $(document).ready(function() {
             $('#exCurrency').
                 append($('<option data-sign=\'' + value.sign + '\'></option>').
                     attr('value', index).
+                    attr('data-productId', value.product_id).
                     text(value.name));
         });
         $('.fanexInput').removeClass('fanex-border');
@@ -47,6 +48,7 @@ $(document).ready(function() {
     });
 
     $('#exCurrency').change(function() {
+        $('#product_id').val($('#exCurrency option:selected').attr('data-productId'));
         $('.fanexInput').removeClass('fanex-border');
         $('#exAmount').removeAttr('disabled').addClass('fanex-border').focus();
         $('.disabledForm').attr({'title': indexFormAmount});
@@ -411,6 +413,7 @@ function getAmount() {
             'currency': $('#exCurrency').val(),
             'country': $('#exCountry').val(),
             'captcha': $('#captcha').val(),
+            'product_id': $('#product_id').val()
         },
         success: function(response){
             $('.disabledForm').removeAttr('title');

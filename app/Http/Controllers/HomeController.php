@@ -57,6 +57,7 @@ class HomeController extends Controller
             ];
         }
         $country_list = $response;
+//        dd($country_list);
         return view('index', compact('user', 'country_list'));
     }
 }

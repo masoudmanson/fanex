@@ -74,6 +74,7 @@ class PaymentController extends Controller
                 'date' => $proforma_date,
                 'user' => $user,
                 'amount' => $transaction['premium_amount'],
+                'product_id' => $transaction['product_id'],
                 'payable' =>$transaction['payment_amount'],
                 'currency' => $transaction['currency'],
                 'finish_time' => $finish_time
@@ -201,11 +202,12 @@ class PaymentController extends Controller
     {
         $id = decrypt($_COOKIE['backlog']);
         $backlog = Backlog::findOrFail($id);
+
         $result = $this->userInvoice($request, $backlog);
 
         $invoice = json_decode($result->getBody()->getContents());
-        if (!$invoice->hasError) {
 
+        if (!$invoice->hasError) {
             $transaction = Transaction::findOrFail(json_decode(Crypt::decryptString($request->transaction_sign))->id);
 
             $transaction->uri = $invoice->result->billNumber; // uri = unique reference number
@@ -223,6 +225,7 @@ class PaymentController extends Controller
         $invoice = json_decode($result->getBody()->getContents());
 
         $finish_time = 0;
+        $transaction = [];
 
         if (!$invoice->hasError && count($invoice->result) > 0) {
             $invoice_result = $invoice->result[0];
@@ -329,7 +332,7 @@ class PaymentController extends Controller
 
         }
         $error = __('payment.transFailed');
-        return view('dashboard.invoice', compact('error', 'finish_time'));
+        return view('dashboard.invoice', compact('error', 'transaction', 'finish_time'));
     }
 
     /**
@@ -352,6 +355,7 @@ class PaymentController extends Controller
                 $transaction->exchange_rate = $backlog->upt_exchange_rate;
             else
                 $transaction->exchange_rate = $backlog->exchange_rate;
+            $transaction->product_id = $backlog->product_id;
             $transaction->premium_amount = $backlog->premium_amount;
             $transaction->payment_amount = $backlog->payment_amount;
             $transaction->currency = $backlog->currency;

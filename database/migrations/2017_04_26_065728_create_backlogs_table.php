@@ -19,6 +19,7 @@ class CreateBacklogsTable extends Migration
             $table->increments('id')->unsigned();
             $table->string('ip');
             $table->string('currency');
+            $table->bigInteger('product_id');
             //todo : In case of making Fanex international we have to save both origin & destination currencies
             //$table->string('origin_currency');
             //$table->string('destination_currency');
