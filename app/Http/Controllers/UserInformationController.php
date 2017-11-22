@@ -60,13 +60,8 @@ class UserInformationController extends Controller
 
             $user = User::firstOrNew(array('userId' => $identity['userId']));
             $user->userId = $identity['userId'];
-//
 //            if(!isset($identity['firstName']) || !isset($identity['lastName']))
 //                return abort(401);
-//            else {
-//                $user->firstname = $identity['firstName'];
-//                $user->lastname = $identity['lastName'];
-//            }
             if (isset($identity['firstName']) && isset($identity['lastName'])) {
                 $user->firstname = $identity['firstName'];
                 $user->lastname = $identity['lastName'];
@@ -75,9 +70,12 @@ class UserInformationController extends Controller
             $user->lastname_latin = $identity['lastName_latin'];
 
             //todo ... other data
-            $user->identifier_id = $identity['identifier_id'];
-            $user->mobile = $identity['mobile'];
-            $user->identity_number = $identity['identity_number'];
+            if (isset($identity['identifier_id']))
+                $user->identifier_id = $identity['identifier_id'];
+            if (isset($identity['mobile']))
+                $user->mobile = $identity['mobile'];
+            if (isset($identity['identity_number']))
+                $user->identity_number = $identity['identity_number'];
 
             if (Identifier::find($user->identifier_id)->name == 'other')
                 $user->is_authorized = 0;
