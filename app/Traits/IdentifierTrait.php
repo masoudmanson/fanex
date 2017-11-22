@@ -33,6 +33,7 @@ trait IdentifierTrait
             $platform_user->result->firstName_latin = $request->firstname;
             $platform_user->result->lastName_latin = $request->lastname;
             $platform_user->result->identifier_id  = $request->authorizer;
+            $platform_user->result->mobile  = $platform_user->result->cellphoneNumber;
             return json_encode(array('hasError' => $platform_user->hasError, 'result' => $platform_user->result), true);
         }
         return json_encode(array('hasError' => $platform_user->hasError, 'message' => $platform_user->message, 'code' => $platform_user->errorCode), true);
@@ -54,6 +55,7 @@ trait IdentifierTrait
                 $platform_user->result->firstName_latin = $request->firstname;
                 $platform_user->result->lastName_latin  = $request->lastname;
                 $platform_user->result->identifier_id  = $request->authorizer;
+                $platform_user->result->mobile  = $request->mobile;
             }
             else
                 return json_encode(array('hasError' => true , 'message' =>"you're not authorized" , 'code'=>401),true);
