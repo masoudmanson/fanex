@@ -203,8 +203,8 @@ trait PlatformTrait
                 'billNumber' => generateUniqueReferenceNumber(),
                 'description' => __('payment.payDescription', ["amount" => number_format($backlog->premium_amount), "currency" => $backlog->currency]),
                 'deadline' => jDate::forge('now')->format('Y/m/d'), //persian date in format yyyy/mm/dd
-                'productId[]' => 0,
-//                'productId[]' => $request->product->id,
+//                'productId[]' => 0,
+                'productId[]' => $request->product_id,
                 'price[]' => $backlog->payment_amount, //give the price from saved transaction
                 'productDescription[]' => __('payment.payDescription', ["amount" => number_format($backlog->premium_amount), "currency" => $backlog->currency]),
                 'quantity[]' => 1,
