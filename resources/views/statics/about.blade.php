@@ -57,5 +57,5 @@
             $('#main-content-wrapper').css({'padding-bottom':0});
         });
     </script>
-    <script src="{{ asset('js/index.js') }}"></script>
+    {{--<script src="{{ asset('js/index.js') }}"></script>--}}
 @endsection

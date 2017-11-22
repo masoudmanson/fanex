@@ -30,8 +30,8 @@ class PaymentController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkToken', ['only' => ['proforma_with_selected_transaction', 'proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
-        $this->middleware('checkUser', ['only' => ['proforma_with_selected_transaction', 'proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
+        $this->middleware('checkToken', ['only' => ['proforma_with_selected_transaction', 'proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice','showInvoice']]);
+        $this->middleware('checkUser', ['only' => ['proforma_with_selected_transaction', 'proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice','showInvoice']]);
         $this->middleware('checkLog', ['only' => ['proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
         $this->middleware('checkTtl', ['only' => ['issueInvoice']]);
         $this->middleware('authorized', ['only' => ['issueInvoice']]);
@@ -74,6 +74,7 @@ class PaymentController extends Controller
                 'date' => $proforma_date,
                 'user' => $user,
                 'amount' => $transaction['premium_amount'],
+                'product_id' => $transaction['product_id'],
                 'payable' =>$transaction['payment_amount'],
                 'currency' => $transaction['currency'],
                 'finish_time' => $finish_time
@@ -201,14 +202,15 @@ class PaymentController extends Controller
     {
         $id = decrypt($_COOKIE['backlog']);
         $backlog = Backlog::findOrFail($id);
+
         $result = $this->userInvoice($request, $backlog);
 
         $invoice = json_decode($result->getBody()->getContents());
-        if (!$invoice->hasError) {
 
+        if (!$invoice->hasError) {
             $transaction = Transaction::findOrFail(json_decode(Crypt::decryptString($request->transaction_sign))->id);
 
-            $transaction->uri = $invoice->result->billNumber;
+            $transaction->uri = $invoice->result->billNumber; // uri = unique reference number
             $transaction->update();
 
             return redirect(config('urls.private') . "pbc/payinvoice/?invoiceId="
@@ -223,6 +225,7 @@ class PaymentController extends Controller
         $invoice = json_decode($result->getBody()->getContents());
 
         $finish_time = 0;
+        $transaction = [];
 
         if (!$invoice->hasError && count($invoice->result) > 0) {
             $invoice_result = $invoice->result[0];
@@ -237,9 +240,10 @@ class PaymentController extends Controller
                 $transaction->payment_date = $invoice_result->paymentDate;
                 $transaction->vat = $invoice_result->vat;
                 $transaction->bank_status = 'successful';
-                $transaction->fanex_status = 'pending';
+//                $transaction->fanex_status = 'pending';
+                $transaction->fanex_status = 'waiting';
 
-                // todo** : do it after admin accept the payment , in a specific func.**
+                // todo** : do it after admin accepted the payment , in a specific func.**
                 $upt_res = $this->CorpSendRequest($transaction, $transaction->user, $transaction->beneficiary, $transaction->backlog);
 
                 if ($upt_res->CorpSendRequestResult->TransferRequestStatus->RESPONSE == 'Success') {
@@ -254,7 +258,7 @@ class PaymentController extends Controller
 
                     } else {
                         $transaction->upt_status = 'failed'; //or rejected?
-                        $transaction->fanex_status = 'pending';
+//                        $transaction->fanex_status = 'pending';
                         $transaction->update();
 //                  $this->CorpCancelRequest($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT);
 //                  $this->CorpCancelConfirm($upt_res->CorpSendRequestResult->TU_REFNUMBER_OUT); // todo: check it later
@@ -328,7 +332,7 @@ class PaymentController extends Controller
 
         }
         $error = __('payment.transFailed');
-        return view('dashboard.invoice', compact('error', 'finish_time'));
+        return view('dashboard.invoice', compact('error', 'transaction', 'finish_time'));
     }
 
     /**
@@ -351,12 +355,16 @@ class PaymentController extends Controller
                 $transaction->exchange_rate = $backlog->upt_exchange_rate;
             else
                 $transaction->exchange_rate = $backlog->exchange_rate;
+            $transaction->product_id = $backlog->product_id;
             $transaction->premium_amount = $backlog->premium_amount;
             $transaction->payment_amount = $backlog->payment_amount;
             $transaction->currency = $backlog->currency;
             $transaction->payment_type = $backlog->payment_type;
             $transaction->ttl = $backlog->ttl;
             $transaction->country = $backlog->country;
+            $transaction->receiver_account = $beneficiary->account_number;
+            $transaction->receiver_firstname = $beneficiary->firstname;
+            $transaction->receiver_lastname = $beneficiary->lastname;
 
             $transaction->save();
         }

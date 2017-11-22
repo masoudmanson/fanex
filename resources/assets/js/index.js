@@ -1,19 +1,19 @@
 $(document).ready(function() {
-    $('.selectpicker').selectpicker();
-    $('#exCountry').val('').focus();
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent))
+        $('.selectpicker').selectpicker('mobile');
+    else
+        $('.selectpicker').selectpicker();
+
     $('.selectpicker').selectpicker('refresh');
-    $('.disabledForm').
-        attr({'disabled': 'disabled', 'title': indexFormCountry});
+
+    $('.disabledForm').attr({'disabled': 'disabled', 'title': indexFormCountry});
 
     $('#pdf-test').on('click', function(e) {
         e.preventDefault();
-        console.log('Getting ready to print the document.');
         if (!window.print) {
             alert('You need NS4.x to use this print button!');
             return;
         }
-
-        console.log('Hiding extra stuff from page.');
 
         $('#bnf-sidebar').hide();
         $('.dash-title').hide();
@@ -23,14 +23,11 @@ $(document).ready(function() {
 
         window.print();
 
-        console.log('Displaying hided stuff again.');
-
         $('#bnf-sidebar').fadeIn(300);
         $('.dash-title').fadeIn(300);
         $('.dash-subtitle').fadeIn(300);
         $('.not-print').fadeIn(300);
         $('.invoice-print').fadeIn(300);
-
     });
 
     $('#exCountry').change(function() {
@@ -40,6 +37,7 @@ $(document).ready(function() {
             $('#exCurrency').
                 append($('<option data-sign=\'' + value.sign + '\'></option>').
                     attr('value', index).
+                    attr('data-productId', value.product_id).
                     text(value.name));
         });
         $('.fanexInput').removeClass('fanex-border');
@@ -50,6 +48,7 @@ $(document).ready(function() {
     });
 
     $('#exCurrency').change(function() {
+        $('#product_id').val($('#exCurrency option:selected').attr('data-productId'));
         $('.fanexInput').removeClass('fanex-border');
         $('#exAmount').removeAttr('disabled').addClass('fanex-border').focus();
         $('.disabledForm').attr({'title': indexFormAmount});
@@ -96,13 +95,7 @@ $(document).ready(function() {
         $('.tempAmount').slideUp(300);
 
         var currency = $('#exCurrency').val();
-        var amount = 0;
-        if (currency === 'EUR' || currency === 'USD') {
-            amount = Number($('#exAmount').unmask()) / 100;
-        }
-        else if (currency === 'TRY') {
-            amount = Number($('#exAmount').unmask());
-        }
+        var amount = accounting.unformat($('#exAmount').val());
 
         if ($('#captcha').val().length == 5 && amount > AMOUNT_LIMIT_MIN &&
             $('#exCountry').val() != null && $('#exCurrency').val() != null) {
@@ -155,13 +148,7 @@ $(document).ready(function() {
         $('.tempAmount').slideUp(300);
 
         var currency = $('#exCurrency').val();
-        var amount = 0;
-        if (currency === 'EUR' || currency === 'USD') {
-            amount = Number($('#exAmount').unmask()) / 100;
-        }
-        else if (currency === 'TRY') {
-            amount = Number($('#exAmount').unmask());
-        }
+        var amount = accounting.unformat($('#exAmount').val());
 
         $(this).focus();
         if ($('#captcha').val().length == 5 && amount > AMOUNT_LIMIT_MIN &&
@@ -284,11 +271,21 @@ $(document).ready(function() {
                 search_key.search(search_command) + search_command.length);
         }
     });
+
+    if ('ontouchstart' in window) {
+        var $body = $('body');
+        $(document).on('focus', 'input', function() {
+            $body.addClass('fixfixed');
+        }).on('blur', 'input', function() {
+            $body.removeClass('fixfixed');
+        });
+    }
 });
 
 $(document).on('keydown', '.numberTextField', function(e) {
-    // Allow: backspace, delete, tab, escape, enter and .
-    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+    console.log(e.keyCode);
+    // Allow: backspace, delete, tab, escape, enter and . , 110, 190
+    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
         // Allow: Ctrl/cmd+A
         (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
         // Allow: Ctrl/cmd+C
@@ -321,6 +318,7 @@ $(document).on('click','#ajax-transaction-list .status-handler.collapsed:not(.he
         },
         error: function(xhr, ajaxOptions, thrownError) {
             console.log(thrownError);
+            document.getElementById('logout-form').submit();
         },
     }).done(function(response) {
         $(this).parent().find('.ajax-status').attr('class',
@@ -391,58 +389,19 @@ function createSelection(field, start, end) {
     field.focus();
 }
 
-function search(keyword) {
-    if (keyword.length == 0) {
-        $('#mainFormLoader').fadeIn(200);
-        x = $.ajax({
-            method: 'get',
-            url: '/profile',
-            error: function(xhr, ajaxOptions, thrownError) {
-                console.log(thrownError);
-            },
-        }).done(function(response) {
-            $('#mainFormLoader').fadeOut(200);
-            $('#ajax-transaction-list').html(response);
-        });
-    }
-    else if (keyword.length >= 1) {
-        $('#mainFormLoader').fadeIn(200);
-        $.ajax({
-            method: 'post',
-            url: '/search/transaction',
-            data: {
-                '_token': csrfToken,
-                'X-CSRF-TOKEN': csrfToken,
-                'keyword': keyword,
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                console.log(thrownError);
-            },
-        }).done(function(response) {
-            $('#mainFormLoader').fadeOut(200);
-
-            keyword = keyword.replace(/(\s+)/, '(<[^>]+>)*$1(<[^>]+>)*');
-            var pattern = new RegExp('([^\/])(' + keyword + ')([^\?])', 'gi');
-            response = response.replace(pattern, '$1<mark>$2</mark>$3');
-            response = response.replace(
-                /(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,
-                '$1</mark>$2<mark>$4');
-
-            $('#ajax-transaction-list').html(response);
-        });
-    }
-}
-
 function getAmount() {
     var currency = $('#exCurrency').val();
     var amount = 0;
+
     if (currency === 'EUR' || currency === 'USD') {
         amount = Number($('#exAmount').unmask()) / 100;
     }
     else if (currency === 'TRY') {
         amount = Number($('#exAmount').unmask());
     }
-
+    else {
+        amount = Number($('#exAmount').unmask());
+    }
     $('#mainFormLoader').fadeIn(200);
     $.ajax({
         method: 'POST',
@@ -450,14 +409,56 @@ function getAmount() {
         data: {
             '_token': csrfToken,
             'X-CSRF-TOKEN': csrfToken,
-            // "amount": parseFloat($('#exAmount').maskMoney('unmasked')[0]),
-            // "amount": $('#exAmount').val(),
             'amount': amount,
             'currency': $('#exCurrency').val(),
             'country': $('#exCountry').val(),
             'captcha': $('#captcha').val(),
+            'product_id': $('#product_id').val()
+        },
+        success: function(response){
+            $('.disabledForm').removeAttr('title');
+            $('#paymentBtn').attr({'title': indexFormPay});
+
+            var currency = $('#exCurrency').val();
+            $('#mainFormLoader').fadeOut(200);
+            if (currency === 'EUR' || currency === 'USD') {
+                $('#tempAmountCash').
+                    text(accounting.formatMoney(amount, {
+                            symbol: '',
+                            precision: 2
+                        }) + ' ' + $('#exCurrency option:selected').text());
+            }
+            else {
+                $('#tempAmountCash').text(accounting.formatMoney(amount, {
+                        symbol: '',
+                        precision: 2
+                    }) + ' ' + $('#exCurrency option:selected').text());
+            }
+            $('#tempAmountCountry').text($('#exCountry option:selected').text());
+            $('.calcAmount').text(accounting.formatMoney(response, {
+                symbol: '',
+                precision: 0
+            }));
+            $('.tempAmount').slideDown(300);
+            $('#calcBtn').
+                attr({'disabled': 'disabled'}).
+                removeClass('fanexBtnOrange').
+                addClass('fanexBtnOutlineOrange');
+            $('#paymentBtn').
+                removeAttr('disabled').
+                addClass('fanexBtnOrange').
+                removeClass('fanexBtnOutlineGrey');
+            $('#fakeInput').focus();
+            reloadCaptcha();
+            document.onkeyup = function(event) {
+                event.preventDefault();
+                if (event.which == 13 || event.keyCode == 13) {
+                    $('#paymentBtn').click();
+                }
+            };
         },
         error: function(xhr, ajaxOptions, thrownError) {
+            console.log(thrownError);
             document.onkeyup = null;
             $('#calcBtn').
                 attr({'disabled': 'disabled'}).
@@ -477,43 +478,6 @@ function getAmount() {
                 });
             });
         },
-    }).done(function(response) {
-        $('.disabledForm').removeAttr('title');
-        $('#paymentBtn').attr({'title': indexFormPay});
-
-        var currency = $('#exCurrency').val();
-        $('#mainFormLoader').fadeOut(200);
-        if (currency === 'EUR' || currency === 'USD') {
-            $('#tempAmountCash').
-                text(accounting.formatMoney($('#exAmount').val(), '', 2) + ' ' +
-                    $('#exCurrency option:selected').text());
-        }
-        else {
-            $('#tempAmountCash').
-                text(accounting.formatMoney($('#exAmount').val(), '', 0) + ' ' +
-                    $('#exCurrency option:selected').text());
-        }
-        $('#tempAmountCountry').text($('#exCountry option:selected').text());
-        $('.calcAmount').text(accounting.formatMoney(response, '', 0));
-        $('.tempAmount').slideDown(300);
-        $('#calcBtn').
-            attr({'disabled': 'disabled'}).
-            removeClass('fanexBtnOrange').
-            addClass('fanexBtnOutlineOrange');
-        $('#paymentBtn').
-            removeAttr('disabled').
-            addClass('fanexBtnOrange').
-            removeClass('fanexBtnOutlineGrey');
-        $('#fakeInput').focus();
-        reloadCaptcha();
-
-        document.onkeyup = function(event) {
-            event.preventDefault();
-            if (event.which == 13 || event.keyCode == 13) {
-                $('#paymentBtn').click();
-            }
-        };
-
     });
 }
 
@@ -561,9 +525,6 @@ function reloadCaptcha() {
     });
 }
 
-/*
- | Change Language Modal
- */
 var ModalEffects = (function() {
     function init() {
         var overlay = document.querySelector('.md-overlay');
@@ -602,92 +563,5 @@ var ModalEffects = (function() {
                 });
             });
     }
-
     init();
 })();
-
-// PDF Generation
-
-var form = $('#pdfWrapper'),
-    cache_width = form.width(),
-    cache_height = form.height(),
-    a4 = [595.28, 990.89]; // for a4 size paper width and height
-
-var canvasImage,
-    winHeight = a4[1],
-    formHeight = form.height(),
-    formWidth = form.width();
-
-var imagePieces = [];
-
-// on create pdf button click
-$('#print-pdf').on('click', function() {
-    imagePieces = [];
-    imagePieces.length = 0;
-    window.scrollTo(0, 0);
-    main();
-});
-
-// main code
-function main() {
-    getCanvas().then(function(canvas) {
-        canvasImage = new Image();
-        canvasImage.src = canvas.toDataURL('image/png');
-        canvasImage.onload = splitImage;
-    });
-}
-
-// create canvas object
-function getCanvas() {
-    form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');
-    form.addClass('pdf');
-
-    return html2canvas(form, {
-        onrendered: function(canvas) {
-            theCanvas = canvas;
-            form.removeClass('pdf');
-        },
-        imageTimeout: 2000,
-        removeContainer: true,
-        letterRendering: false,
-        background: '#fff',
-        logging: true,
-    });
-}
-
-// chop image horizontally
-function splitImage(e) {
-    var totalImgs = Math.round(formHeight / winHeight);
-    for (var i = 0; i < totalImgs; i++) {
-        var canvas = document.createElement('canvas'),
-            ctx = canvas.getContext('2d');
-        canvas.width = formWidth;
-        canvas.height = winHeight;
-        canvas.background = '#fff';
-        ctx.drawImage(canvasImage, 0, i * winHeight, formWidth, winHeight, 0, 0,
-            canvas.width, canvas.height);
-
-        imagePieces.push(canvas.toDataURL('image/png'));
-    }
-    console.log(imagePieces.length);
-    createPDF();
-}
-
-// crete pdf using chopped images
-function createPDF() {
-    var totalPieces = imagePieces.length - 1;
-    var doc = new jsPDF({
-        unit: 'px',
-        format: 'a4',
-    });
-    imagePieces.forEach(function(img) {
-        doc.addImage(img, 'PNG', 0, 0);
-        if (totalPieces) {
-            doc.addPage();
-        }
-        totalPieces--;
-    });
-    doc.save('invoice.pdf');
-    form.width(cache_width);
-    form.height(cache_height);
-}

@@ -35,7 +35,7 @@ class CheckUserHome
         if (User::findByUserId($id)->first()) {
             $user = User::findByUserId($id)->first();
 
-            //todo : this is only for test, to find out in csrf-token problem is related to user seasion or not.
+            //todo : this is only for test, to find out csrf-token problem is related to user session or not.
             if (Auth::check())
                 return $next($request);
 

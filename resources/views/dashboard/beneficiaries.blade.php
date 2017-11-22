@@ -115,6 +115,32 @@
 
 @section('scripts')
     <script>
+        $(document).ready(function () {
+            $(document).on('click', '.pagination a', function (e) {
+                e.preventDefault();
+                getBeneficiaries($(this).attr('href'));
+            });
+
+            $('.filter-li').on('click', function() {
+                $('#mainFormLoader').fadeIn(200);
+                $('.filter-li').removeClass('active');
+                $(this).addClass('active');
+                var filter = $(this).attr('data-filter');
+                var keyword = $('#beneficiary-search').val();
+                getBeneficiaries('/search/beneficiary?page=1', keyword, filter);
+            });
+
+            $('#beneficiary-search').keyup(function(event) {
+                if (event.which == 13 || event.keyCode == 13) {
+                    searchBeneficiaries($(this).val());
+                }
+            });
+
+            $('#search-button').on('click', function() {
+                searchBeneficiaries($('#beneficiary-search').val());
+            });
+        });
+
         $(window).on('hashchange', function () {
             if (window.location.hash) {
                 var page = window.location.hash.replace('#', '');
@@ -126,68 +152,27 @@
             }
         });
 
-        function getBeneficiaries(url) {
-            var keyword = $('#beneficiary-search').val();
+        function getBeneficiaries(url, keyword, country) {
+            keyword = typeof keyword !== 'undefined' ? '&keyword=' + keyword : '';
+            country = typeof country !== 'undefined' ? '&country=' + country : '';
 
             $('#mainFormLoader').fadeIn(200);
             $.ajax({
-                url: url,
+                url:  url + keyword + country,
+                method: 'get',
                 dataType: 'json',
             }).done(function (data) {
                 $('#mainFormLoader').fadeOut(200);
-                if(keyword.length > 0) {
-                    keyword = keyword.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*");
-                    var pattern = new RegExp("([^\/])(" + keyword + ")([^\?])", "gi");
-                    data = data.replace(pattern, "$1<mark>$2</mark>$3");
-                    data = data.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4");
-                }
                 $('#ajax-beneficiary-list').html(data);
             }).fail(function () {
                 console.log('Posts could not be loaded.');
             });
         }
 
-        $(document).ready(function () {
-            $(document).on('click', '.pagination a', function (e) {
-                e.preventDefault();
-                getBeneficiaries($(this).attr('href'));
-            });
-
-            $('.filter-li').on('click', function () {
-                $('#beneficiary-search').val('');
-                $('#mainFormLoader').fadeIn(200);
-                $('.filter-li').removeClass('active');
-                $(this).addClass('active');
-                var filter = $(this).attr('data-filter');
-                $.ajax({
-                    method: 'get',
-                    url: '/search/beneficiary/country/' + filter,
-                    data: {
-                        '_token': csrfToken,
-                        'X-CSRF-TOKEN': csrfToken
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        console.log(thrownError);
-                    }
-                }).done(function (response) {
-                    $('#mainFormLoader').fadeOut(200);
-                    $('#ajax-beneficiary-list').html(response);
-                });
-            });
-
-            $('#beneficiary-search').keyup(function(event) {
-                if (event.which == 13 || event.keyCode == 13) {
-                    searchBeneficiaries($(this).val());
-                }
-            });
-
-            $('#search-button').on('click', function() {
-                searchBeneficiaries($(this).val());
-            });
-
-        });
-
         function searchBeneficiaries(keyword) {
+            $('.filter-li').removeClass('active');
+            $('#all-filter').addClass('active');
+
             if (keyword.length == 0) {
                 $('#mainFormLoader').fadeIn(200);
                 x = $.ajax({
@@ -195,6 +180,7 @@
                     url: '/beneficiaries',
                     error: function(xhr, ajaxOptions, thrownError) {
                         console.log(thrownError);
+                        document.getElementById('logout-form').submit();
                     },
                 }).done(function(response) {
                     $('#mainFormLoader').fadeOut(200);
@@ -211,18 +197,14 @@
                         'X-CSRF-TOKEN': csrfToken,
                         'keyword': keyword,
                     },
+                    success: function(response) {
+                        $('#mainFormLoader').fadeOut(200);
+                        $('#ajax-beneficiary-list').html(response);
+                    },
                     error: function(xhr, ajaxOptions, thrownError) {
                         console.log(thrownError);
+                        document.getElementById('logout-form').submit();
                     },
-                }).done(function(response) {
-                    $('#mainFormLoader').fadeOut(200);
-
-                    keyword = keyword.replace(/(\s+)/, '(<[^>]+>)*$1(<[^>]+>)*');
-                    var pattern = new RegExp('([^\/])(' + keyword + ')([^\?])', 'gi');
-                    response = response.replace(pattern, '$1<mark>$2</mark>$3');
-                    response = response.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,'$1</mark>$2<mark>$4');
-
-                    $('#ajax-beneficiary-list').html(response);
                 });
             }
         }

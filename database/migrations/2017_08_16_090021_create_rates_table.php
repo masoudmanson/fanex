@@ -21,7 +21,7 @@ class CreateRatesTable extends Migration
             $table->integer('currency_id')->unsigned()->nullable();
             $table->float('rate');
             $table->string('ip')->nullable();
-            $table->timestamps();
+            $table->nullableTimestamps();
 
             $table->foreign('exchanger_user_id')->references('id')->on('exchanger_users')
                 ->onUpdate('cascade')->onDelete('set null');

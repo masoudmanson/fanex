@@ -26,7 +26,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::post('/home', 'HomeController@formController');
 
-Route::get('/dotin', 'DotinController@dotinAuthorization');//maybe get,will implement according to the fake web service
+Route::get('/dotin', 'DotinController@dotinAuthorization');//maybe get.will implement according to the fake web service
 
 Route::get('/profile', 'UserController@index');
 Route::resource('/beneficiaries', 'BeneficiaryController');
@@ -46,7 +46,6 @@ Route::get('/proforma/selected/{beneficiary}', 'PaymentController@proforma_with_
 Route::get('/proforma/transaction/{transaction}', 'PaymentController@proforma_with_selected_transaction')->name('proforma_with_transaction');
 Route::get('/proforma/selected', 'PaymentController@proforma_with_selected_bnf')->name('proforma_with_selected_bnf');
 
-
 Route::get('/get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'flat') {
     return $captcha->src($config);
 });
@@ -57,12 +56,10 @@ Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@
 
 Route::get('pdf/proforma/{id}', 'StaticsController@proformaPdf');
 
-Route::post('/search/beneficiary', 'BeneficiaryController@search');
-Route::post('/search/transaction', 'UserController@search');
+Route::any('/search/beneficiary', 'BeneficiaryController@search');
+Route::any('/search/transaction', 'UserController@search');
 
 Route::get('/search/beneficiary/country/{country}', 'BeneficiaryController@searchCountry');
-Route::get('/search/beneficiary/{keyword}', 'BeneficiaryController@search');
 Route::get('/search/transaction/status/{status}', 'UserController@searchStatus');
-Route::get('/search/transaction/{keyword}', 'UserController@search');
 
 Route::get('/transaction/status/update/{transaction}','UserController@update_transaction_status');

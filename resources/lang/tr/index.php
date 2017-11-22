@@ -62,4 +62,9 @@ return [
     'fanapium' => '‎Fanapium',
     'pasargad' => 'Pasargad Bankası',
     'other' => 'Diğer Tanımlayıcılar',
+    'sign' => [
+        'EUR' => '€',
+        'USD' => '$',
+        'TRY' => '‎₺',
+    ]
 ];

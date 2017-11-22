@@ -113,72 +113,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param Request|ServerRequestInterface $request
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    /**
      * @param Request $request
      * @return Regex Search
      */
@@ -186,9 +120,20 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $keyword = $request->keyword;
+        $status = ($request->status) ? $request->status : 'all';
         if ($keyword == '') {
-            $transactions = $user->transaction()->paginate(10);
-            $transactions = $this->payable($transactions);
+            if($status == 'all') {
+                $transactions = $user->transaction()->paginate(10);
+                $transactions = $this->payable($transactions);
+            }
+            else {
+                $transactions = Transaction::join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
+                    ->where('transactions.user_id', '=', $user->id)
+                    ->where('transactions.upt_status', '=', $status)
+                    ->select( "beneficiaries.firstname","beneficiaries.lastname","beneficiaries.account_number","beneficiaries.bank_name", "transactions.*")
+                    ->orderby("transactions.id", "desc")->paginate(10);
+                $transactions = $this->payable($transactions);
+            }
         } else {
             preg_match_all('/(?:(name|transaction|account|amount|date):)([^: ]+(?:\s+[^: ]+\b(?!:))*)/xi', $keyword, $matches, PREG_SET_ORDER);
             $result = array();
@@ -202,6 +147,9 @@ class UserController extends Controller
                 $transactions = Transaction::select("transactions.*", "beneficiaries.firstname", "beneficiaries.lastname", "beneficiaries.account_number")
                     ->join('beneficiaries', 'transactions.beneficiary_id', '=', 'beneficiaries.id')
                     ->where('transactions.user_id', '=', $user->id);
+                if($status != 'all'){
+                    $transactions = $transactions->where('transactions.upt_status', '=', $status);
+                }
                 foreach ($result as $k => $v) {
                     if (strtolower($k) == 'name') {
                         $name = preg_replace('/\s+/', '', $v);
@@ -229,11 +177,15 @@ class UserController extends Controller
                             ->orWhereRaw("regexp_like(beneficiaries.firstname, '$keyword', 'i')")
                             ->orWhereRaw("regexp_like(beneficiaries.lastname, '$keyword', 'i')")
                             ->orWhere('transactions.premium_amount', 'like', "%$keyword%");
-                    })->orderby("transactions.id", "desc")->paginate(10);
-
+                    });
+                if($status != 'all'){
+                    $transactions = $transactions->where('transactions.upt_status', '=', $status);
+                }
+                $transactions = $transactions->orderby("transactions.id", "desc")->paginate(10);
                 $transactions = $this->payable($transactions);
             }
         }
+
         if ($request->ajax())
             return response()->json(view('partials.transaction-list-item', compact('transactions'))->render());
         else {

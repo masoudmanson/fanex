@@ -20,6 +20,7 @@ trait LogTrait
         $log->ip = $this->getClientIp();
 //        $log->ip = $request->ip();
         $log->currency = $request->currency;
+        $log->product_id = $request->product_id;
         $log->payment_amount = $amount;
         $log->premium_amount = $request->amount; //todo: I think it has to be added to db
         $log->country = $request->country;

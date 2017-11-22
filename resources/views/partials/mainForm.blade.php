@@ -49,8 +49,6 @@
             <div class="col-md-6 col-sm-12 pl-lg-2">
                 <div class="form-group bsWrapper">
                     <i class="icon-change bsIcon"></i>
-                    {{--<input type="text" class="form-control fanexInput numberTextField" id="exAmount"--}}
-                           {{--name="amount" placeholder="@lang('index.formAmount')" autocomplete="off">--}}
                     <input type="text" class="form-control fanexInput disabledForm" id="exAmount"
                            name="amount" placeholder="@lang('index.formAmount')" autocomplete="off">
                 </div>
@@ -100,6 +98,7 @@
 
             {{-- Go For Payment --}}
             <div class="col-sm-6 col-xs-12 pl-md-2">
+                <input type="hidden" name="product_id" id="product_id" value="">
                 <input type="submit" class="btn fanexBtnOutlineGrey disabledForm" id="paymentBtn"
                        value=@lang('index.pay') name="payment" disabled/>
                 <input type="text" id="fakeInput" name="fakeInput" style="height:0; width:0; opacity: 0">

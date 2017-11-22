@@ -8,7 +8,7 @@
                         <i class="icon-trans acc-main-icon hidden-xs"></i>
                         <span class="acc-user">
                             <span class="hidden-sm hidden-xs">@lang('profile.titleTransfer') </span>
-                            <b>{{ $transaction->beneficiary->firstname . ' ' . $transaction->beneficiary->lastname }}</b>
+                            <b>{{ $transaction->receiver_firstname . ' ' . $transaction->receiver_lastname }}</b>
                         </span>
                     </div>
                     <div class="col-md-2 hidden-xs hidden-sm" data-toggle="tooltip"
@@ -72,7 +72,7 @@
                                     <p>-</p>
                                 @endif
 
-                                <p>{{ $transaction->beneficiary->account_number }}</p>
+                                <p>{{ $transaction->receiver_account }}</p>
                                 <p>{{ $transaction->beneficiary->bank_name }}</p>
 
                                 @if($transaction->uri && $transaction->payment_date)
@@ -119,7 +119,8 @@
             </div>
         </div>
     @endforeach
-    {{ $transactions->links() }}
+    {{--{{ $transactions->links() }}--}}
+    {{ $transactions->appends(Request::query())->render() }}
 @else
     <h2 class="no-results">@lang('profile.noTrans')</h2>
 @endif
