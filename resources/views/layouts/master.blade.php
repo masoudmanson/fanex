@@ -40,7 +40,7 @@
 
     {{-- General Scripts --}}
     <script src="{{ mix('js/app.js') }}"></script>
-    <script src="{{ mix('js/scripts.js') }}"></script>
+    {{--<script src="{{ mix('js/scripts.js') }}"></script>--}}
     <script src="{{ asset('js/classie.js') }}"></script>
     <script>
       var csrfToken = $('meta[name="csrf-token"]').attr('content');
