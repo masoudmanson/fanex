@@ -203,8 +203,8 @@ trait PlatformTrait
                 'billNumber' => generateUniqueReferenceNumber(),
                 'description' => __('payment.payDescription', ["amount" => number_format($backlog->premium_amount), "currency" => $backlog->currency]),
                 'deadline' => jDate::forge('now')->format('Y/m/d'), //persian date in format yyyy/mm/dd
-                'productId[]' => 0,
-//                'productId[]' => $backlog->product_id,
+//                'productId[]' => 0,
+                'productId[]' => $backlog->product_id,
                 'price[]' => $backlog->payment_amount, //give the price from saved transaction
                 'productDescription[]' => __('payment.payDescription', ["amount" => number_format($backlog->premium_amount), "currency" => $backlog->currency]),
                 'quantity[]' => 1,
@@ -232,7 +232,7 @@ trait PlatformTrait
     public function trackingInvoiceByBillNumber($billNumber) //the form parameters can be taken from arguments, according to needs
     {
         $client = new Client();
-        $token = config('services.sso.api'); //biz static token
+        $token = config('exchanger.token');
 
         $res = $client->post(config('urls.platform') . 'nzh/biz/getInvoiceList/', [
                 'form_params' => [
