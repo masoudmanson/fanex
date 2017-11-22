@@ -1,10 +1,6 @@
 @extends('layouts.master')
 
 @section('styles')
-    <script src="{{ asset('js/ammap.js') }}"></script>
-    <script src="{{ asset('js/worldLow.js') }}"></script>
-    <script src="{{ asset('js/black.js') }}"></script>
-    <script src="{{ asset('js/export.min.js') }}"></script>
 @endsection
 
 @section('header')
@@ -52,6 +48,10 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('js/ammap.js') }}"></script>
+    <script src="{{ asset('js/worldLow.js') }}"></script>
+    <script src="{{ asset('js/black.js') }}"></script>
+    <script src="{{ asset('js/export.min.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('#main-content-wrapper').css({'padding-bottom':0});
