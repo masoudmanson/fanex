@@ -39,6 +39,7 @@ return [
     'formTo' => 'remittance to',
     'formIs' => 'is',
     'formRials' => 'Rials',
+    'formLowPriceError' =>  'Payment amount has to be larger than 1000 Rials.',
     'termsTitle' => 'Terms',
     'termsText' => 'FANEx Legal Terms <br>
 V. 0.0.1<br>

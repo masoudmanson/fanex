@@ -416,46 +416,65 @@ function getAmount() {
             'product_id': $('#product_id').val()
         },
         success: function(response){
-            $('.disabledForm').removeAttr('title');
-            $('#paymentBtn').attr({'title': indexFormPay});
+           if(response > 1000) {
 
-            var currency = $('#exCurrency').val();
-            $('#mainFormLoader').fadeOut(200);
-            if (currency === 'EUR' || currency === 'USD') {
-                $('#tempAmountCash').
-                    text(accounting.formatMoney(amount, {
-                            symbol: '',
-                            precision: 2
-                        }) + ' ' + $('#exCurrency option:selected').text());
-            }
-            else {
-                $('#tempAmountCash').text(accounting.formatMoney(amount, {
-                        symbol: '',
-                        precision: 2
-                    }) + ' ' + $('#exCurrency option:selected').text());
-            }
-            $('#tempAmountCountry').text($('#exCountry option:selected').text());
-            $('.calcAmount').text(accounting.formatMoney(response, {
-                symbol: '',
-                precision: 0
-            }));
-            $('.tempAmount').slideDown(300);
-            $('#calcBtn').
-                attr({'disabled': 'disabled'}).
-                removeClass('fanexBtnOrange').
-                addClass('fanexBtnOutlineOrange');
-            $('#paymentBtn').
-                removeAttr('disabled').
-                addClass('fanexBtnOrange').
-                removeClass('fanexBtnOutlineGrey');
-            $('#fakeInput').focus();
-            reloadCaptcha();
-            document.onkeyup = function(event) {
-                event.preventDefault();
-                if (event.which == 13 || event.keyCode == 13) {
-                    $('#paymentBtn').click();
-                }
-            };
+               $('.disabledForm').removeAttr('title');
+               $('#paymentBtn').attr({'title': indexFormPay});
+
+               var currency = $('#exCurrency').val();
+               $('#mainFormLoader').fadeOut(200);
+               if (currency === 'EUR' || currency === 'USD') {
+                   $('#tempAmountCash').
+                       text(accounting.formatMoney(amount, {
+                               symbol: '',
+                               precision: 2
+                           }) + ' ' + $('#exCurrency option:selected').text());
+               }
+               else {
+                   $('#tempAmountCash').text(accounting.formatMoney(amount, {
+                           symbol: '',
+                           precision: 2
+                       }) + ' ' + $('#exCurrency option:selected').text());
+               }
+               $('#tempAmountCountry').text($('#exCountry option:selected').text());
+               $('.calcAmount').text(accounting.formatMoney(response, {
+                   symbol: '',
+                   precision: 0
+               }));
+               $('.tempAmount').slideDown(300);
+               $('#calcBtn').
+                   attr({'disabled': 'disabled'}).
+                   removeClass('fanexBtnOrange').
+                   addClass('fanexBtnOutlineOrange');
+               $('#paymentBtn').
+                   removeAttr('disabled').
+                   addClass('fanexBtnOrange').
+                   removeClass('fanexBtnOutlineGrey');
+               $('#fakeInput').focus();
+               reloadCaptcha();
+               document.onkeyup = function(event) {
+                   event.preventDefault();
+                   if (event.which == 13 || event.keyCode == 13) {
+                       $('#paymentBtn').click();
+                   }
+               };
+           }
+           else {
+               document.onkeyup = null;
+               $('#calcBtn').
+                   attr({'disabled': 'disabled'}).
+                   removeClass('fanexBtnOrange').
+                   addClass('fanexBtnOutlineOrange');
+
+               reloadCaptcha();
+               $('#mainFormLoader .spinner2').fadeOut(200);
+               $('#mainFormLoader .errors').fadeIn(200).html(indexFormLowPriceError);
+               setTimeout(function() {
+                   $('#mainFormLoader, #mainFormLoader .errors').
+                       fadeOut(200);
+                   $('#mainFormLoader .spinner2').fadeIn();
+               }, 2000);
+           }
         },
         error: function(xhr, ajaxOptions, thrownError) {
             console.log(thrownError);

@@ -193,7 +193,7 @@
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         console.log(thrownError);
-                        document.getElementById('logout-form').submit();
+//                        document.getElementById('logout-form').submit();
                     },
                 });
             }
@@ -213,7 +213,7 @@
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         console.log(thrownError);
-                        document.getElementById('logout-form').submit();
+//                        document.getElementById('logout-form').submit();
                     }
                 });
             }

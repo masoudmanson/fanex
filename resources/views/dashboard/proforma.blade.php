@@ -24,16 +24,15 @@
                                 <div class="col-xs-4">
                                     <p class="fanex-text-orange" id="fanex-logo"><i class="icon-fanex"></i></p>
                                 </div>
-                                <div class="col-xs-8 right-align">
-                                    <p>@lang('payment.date') @lang('payment.invDate', ['dateEn' => $date->format('d M Y, H:i:s'), 'dateFa' => jdate($date)->format('%Y %B %d, H:i:s')])</p>
+                                <div class="col-xs-8 right-align proforma-date">
+                                    <p>@lang('payment.invDate', ['dateEn' => $date->format('d M Y'), 'dateFa' => jdate($date)->format('%Y %B %d')])</p>
+                                    <p>@lang('payment.invDate', ['dateEn' => $date->format('H:i:s'), 'dateFa' => jdate($date)->format('H:i:s')])</p>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-xs-12">
                                     <h2 class="proforma-h2">@lang('payment.prTitle')</h2>
-
-                                    {{--<p class="proforma-p">@lang('payment.prText', ['amount'=>number_format($amount, 2).' '.$currency])</p>--}}
 
                                     {{-- Payment Details --}}
                                     <div class="proforma-heading">@lang('payment.prPayment')</div>

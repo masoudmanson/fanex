@@ -20,7 +20,7 @@ class CreateAuthorizedTable extends Migration
             $table->integer('identifier_id')->nullable();
             $table->string('firstname');
             $table->string('lastname');
-            $table->string('mobile');
+            $table->string('mobile')->nullable();
             $table->enum('identity_type', ['passport', 'national', 'registration', 'national_id'])->default('national_id');
             $table->string('identity_number')->nullable();
 

@@ -51,6 +51,7 @@
       var indexFormCaptcha = "@lang('js.indexFormCaptcha')";
       var indexFormCalculate = "@lang('js.indexFormCalculate')";
       var indexFormPay = "@lang('js.indexFormPay')";
+      var indexFormLowPriceError = "@lang('index.formLowPriceError')";
       var statuses = {
           'successful' : '@lang('profile.successful')',
           'pending' : '@lang('profile.pending')',

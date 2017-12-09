@@ -27,7 +27,7 @@ return [
     'filterAllShort' => 'All',
     'filterSucc' => 'Successful',
     'successful' => 'Successful',
-    'filterPend' => 'Pending',
+    'filterPend' => 'Waiting',
     'pending' => 'Pending',
     'waiting' => 'Waiting',
     'filterFail' => 'Failed',

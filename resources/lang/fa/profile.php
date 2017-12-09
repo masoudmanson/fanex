@@ -42,7 +42,7 @@ return [
     'filterAllShort' => 'همه',
     'filterSucc' => 'موفق',
     'successful' => 'موفق',
-    'filterPend' => 'در حال انجام',
+    'filterPend' => 'در انتظار',
     'pending' => 'در حال انجام',
     'waiting' => 'در انتظار',
     'filterFail' => 'ناموفق',
