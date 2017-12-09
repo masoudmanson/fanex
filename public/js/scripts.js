@@ -10039,7 +10039,6 @@ $(document).ready(function() {
 });
 
 $(document).on('keydown', '.numberTextField', function(e) {
-    console.log(e.keyCode);
     // Allow: backspace, delete, tab, escape, enter and . , 110, 190
     if ($.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
         // Allow: Ctrl/cmd+A
