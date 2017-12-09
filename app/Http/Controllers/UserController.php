@@ -8,6 +8,7 @@ use App\Traits\TokenTrait;
 use App\Traits\UptTrait;
 use App\Transaction;
 use App\User;
+use Countries;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -107,8 +108,11 @@ class UserController extends Controller
 //        $data = $this->CorpGetCountryData();
 //        $country_list = indexFormCountryList($data, session('applocale'));
 
-        $data = '';
-        $country_list = indexFormCountryList($data, session('applocale'));
+//        $data = '';
+//        $country_list = indexFormCountryList($data, session('applocale'));
+        $result = $this->listProduct();
+        $products = json_decode($result->getBody()->getContents())->result;
+        $country_list = countryListByProduct($products,Countries::lookup(session('applocale'))['TR']);
         return view('dashboard.send-money', compact('country_list', 'beneficiary'));
     }
 

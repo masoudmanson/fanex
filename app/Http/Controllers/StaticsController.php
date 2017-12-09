@@ -6,14 +6,17 @@ use App;
 use App\Http\Requests\ContactFormRequest;
 use App\Mail\ContactMail;
 use App\Traits\UptTrait;
+use App\Traits\PlatformTrait;
 use ZanySoft\LaravelPDF\PDF;
 use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
 use Mail;
 use Redirect;
+use Countries;
 
 class StaticsController extends Controller
 {
     use UptTrait;
+    use PlatformTrait;
 
     public function __construct()
     {
@@ -26,8 +29,11 @@ class StaticsController extends Controller
     {
 //        $data = $this->CorpGetCountryData();
 //        $country_list = indexFormCountryList($data, session('applocale'));
-        $data = '';
-        $country_list = indexFormCountryList($data, session('applocale'));
+//        $data = '';
+//        $country_list = indexFormCountryList($data, session('applocale'));
+        $result = $this->listProduct();
+        $products = json_decode($result->getBody()->getContents())->result;
+        $country_list = countryListByProduct($products,Countries::lookup(session('applocale'))['TR']);
         return view('statics.about', compact('country_list'));
     }
 
@@ -36,10 +42,13 @@ class StaticsController extends Controller
      */
     public function terms()
     {
-//        $data = $this->CorpGetCountryData();
+////        $data = $this->CorpGetCountryData();
+////        $country_list = indexFormCountryList($data, session('applocale'));
+//        $data = '';
 //        $country_list = indexFormCountryList($data, session('applocale'));
-        $data = '';
-        $country_list = indexFormCountryList($data, session('applocale'));
+        $result = $this->listProduct();
+        $products = json_decode($result->getBody()->getContents())->result;
+        $country_list = countryListByProduct($products,Countries::lookup(session('applocale'))['TR']);
         return view('statics.terms', compact('country_list'));
     }
 

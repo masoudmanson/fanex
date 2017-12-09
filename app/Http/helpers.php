@@ -52,6 +52,26 @@ function twoStepExploder($string, $first_delimiter = '&', $second_delimiter = '=
     return $result;
 }
 
+function countryListByProduct($products,$country_name)
+{
+    $response = array();
+    $response['TR'] = array();
+//        $response['TR']['enable'] = (int)$product->enable;
+    $response['TR']['enable'] = 1;
+    $response['TR']['code'] = 'TR';
+    $response['TR']['name'] = $country_name;
+
+    foreach ($products as $product) {
+        $response['TR']['currency'][$product->description] = [
+            'type' => $product->description,
+            'name' => __('index.' . $product->description),
+            'sign' => __('index.sign.' . $product->description),
+            'product_id' => $product->entityId
+        ];
+    }
+    return $response;
+}
+
 function indexFormCountryList($data, $lang)
 {
     $multiLangCountries = Countries::lookup($lang)->mapWithKeys(function ($country, $key) {

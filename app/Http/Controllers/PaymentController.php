@@ -30,8 +30,8 @@ class PaymentController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkToken', ['only' => ['proforma_with_selected_transaction', 'proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice','showInvoice']]);
-        $this->middleware('checkUser', ['only' => ['proforma_with_selected_transaction', 'proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice','showInvoice']]);
+        $this->middleware('checkToken', ['only' => ['proforma_with_selected_transaction', 'proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice', 'showInvoice']]);
+        $this->middleware('checkUser', ['only' => ['proforma_with_selected_transaction', 'proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice', 'showInvoice']]);
         $this->middleware('checkLog', ['only' => ['proforma_with_selected_bnf_profile', 'proforma_with_selected_bnf', 'proforma_with_new_bnf', 'issueInvoice']]);
         $this->middleware('checkTtl', ['only' => ['issueInvoice']]);
         $this->middleware('authorized', ['only' => ['issueInvoice']]);
@@ -68,17 +68,7 @@ class PaymentController extends Controller
 
             $finish_time = strtotime($transaction['ttl']) - time();
 
-            $request->query->add(['beneficiary' => $beneficiary,
-                'transaction_sign' => $transaction['hash'],
-                'countries' => $countries,
-                'date' => $proforma_date,
-                'user' => $user,
-                'amount' => $transaction['premium_amount'],
-                'product_id' => $transaction['product_id'],
-                'payable' =>$transaction['payment_amount'],
-                'currency' => $transaction['currency'],
-                'finish_time' => $finish_time
-            ]);
+            $this->payment_query_add($request,$beneficiary,$transaction,$countries,$proforma_date,$user,$finish_time);
 
             return Hash::check($beneficiary, $request->hash)
                 ? response()->view('dashboard.proforma', $request->query(), 200)
@@ -101,16 +91,7 @@ class PaymentController extends Controller
 
             $finish_time = strtotime($transaction['ttl']) - time();
 
-            $request->query->add(['beneficiary' => $beneficiary,
-                'transaction_sign' => $transaction['hash'],
-                'countries' => $countries,
-                'date' => $proforma_date,
-                'user' => $user,
-                'amount' => $transaction['premium_amount'],
-                'payable' =>$transaction['payment_amount'],
-                'currency' => $transaction['currency'],
-                'finish_time' => $finish_time
-            ]);
+            $this->payment_query_add($request,$beneficiary,$transaction,$countries,$proforma_date,$user,$finish_time);
 
             return response()->view('dashboard.proforma', $request->query(), 200);
         }
@@ -135,16 +116,7 @@ class PaymentController extends Controller
 
         $finish_time = strtotime($transaction['ttl']) - time();
 
-        $request->query->add(['beneficiary' => $beneficiary,
-            'transaction_sign' => $transaction['hash'],
-            'countries' => $countries,
-            'date' => $proforma_date,
-            'user' => $user,
-            'amount' => $transaction['premium_amount'],
-            'payable' =>$transaction['payment_amount'],
-            'currency' => $transaction['currency'],
-            'finish_time' => $finish_time
-        ]);
+        $this->payment_query_add($request,$beneficiary,$transaction,$countries,$proforma_date,$user,$finish_time);
 
         return $beneficiary->id
             ? response()->view('dashboard.proforma', $request->query(), 200)
@@ -179,16 +151,8 @@ class PaymentController extends Controller
 
             $finish_time = strtotime($transaction['ttl']) - time();
 
-            $request->query->add(['beneficiary' => $beneficiary,
-                'transaction_sign' => $transaction['hash'],
-                'countries' => $countries,
-                'date' => $proforma_date,
-                'user' => $user,
-                'amount' => $transaction['premium_amount'],
-                'payable' =>$transaction['payment_amount'],
-                'currency' => $transaction['currency'],
-                'finish_time' => $finish_time
-            ]);
+            $this->payment_query_add($request,$beneficiary,$transaction,$countries,$proforma_date,$user,$finish_time);
+
             $diff = Carbon::now()->diffInSeconds($transaction->ttl);
             setcookie('backlog', encrypt($log->id), time() + $diff, '/');
 
@@ -273,7 +237,7 @@ class PaymentController extends Controller
                 }
 //                $transaction->update();
 
-                if(Auth::user()->email) {
+                if (Auth::user()->email) {
                     // Email to User
                     $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
                     $beautymail->send('emails.invoice', [
@@ -304,7 +268,7 @@ class PaymentController extends Controller
                 $transaction->upt_status = 'failed';
                 $transaction->payment_date = time();
                 $transaction->update();
-                if(Auth::user()->email) {
+                if (Auth::user()->email) {
                     // Email to User
                     $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
                     $beautymail->send('emails.invoice', [
@@ -369,6 +333,20 @@ class PaymentController extends Controller
             $transaction->save();
         }
         return $transaction;
+    }
+
+    private function payment_query_add($request,$beneficiary,$transaction,$countries,$proforma_date,$user,$finish_time){
+        $request->query->add(['beneficiary' => $beneficiary,
+            'transaction_sign' => $transaction['hash'],
+            'countries' => $countries,
+            'date' => $proforma_date,
+            'user' => $user,
+            'amount' => $transaction['premium_amount'],
+            'product_id' => $transaction['product_id'],
+            'payable' => $transaction['payment_amount'],
+            'currency' => $transaction['currency'],
+            'finish_time' => $finish_time
+        ]);
     }
 
     private function upload_file($file, $request, $bill_number, $file_type, $is_image = false)
