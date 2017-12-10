@@ -38,6 +38,8 @@ class CreateTransactionsTable extends Migration
             $table->string('receiver_account')->nullable();
             $table->string('receiver_firstname')->nullable();
             $table->string('receiver_lastname')->nullable();
+            $table->string('receiver_bank_name')->nullable();
+            $table->string('receiver_branch_name')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')
