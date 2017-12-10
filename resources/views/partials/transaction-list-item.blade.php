@@ -1,5 +1,5 @@
 @if(count($transactions) > 0)
-    @foreach($transactions as $transaction) 
+    @foreach($transactions as $transaction)
         <div class="panel panel-default filtered {{ $transaction->upt_status }} status-container-{{ $transaction->id }}">
             <div class="panel-heading @if($transaction->can_pay) newRed @endif">
                 <div class="row p-0 m-0">
