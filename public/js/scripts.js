@@ -9810,23 +9810,47 @@ $(document).ready(function() {
         $('.disabledForm').attr({'title': indexFormAmount});
     });
 
-    $('#exAmount').keyup(function() {
-        if ($('#exAmount').val().length > 1) {
+    $('#exAmount').on('keyup', function() {
+        $('.tempAmount').slideUp(300);
+        if ($(this).val().length > 0) {
             $('#exAmount').removeClass('fanex-border');
             $('#captcha').removeAttr('disabled').addClass('fanex-border');
             $('.disabledForm').attr({'title': indexFormCaptcha});
+
+            if($('#captcha').val().length == 5) {
+                $('#captcha').removeClass('fanex-border');
+                $('#calcBtn').
+                    removeAttr('disabled').
+                    removeClass('fanexBtnOutlineOrange').
+                    addClass('fanexBtnOrange');
+                $('.disabledForm').attr({'title': indexFormCalculate});
+                document.onkeyup = function(event) {
+                    if (event.which == 13 || event.keyCode == 13) {
+                        $('#calcBtn').click();
+                    }
+                };
+            }
         }
         else {
             document.onkeyup = null;
             $('#captcha').removeClass('fanex-border');
             $('#exAmount').addClass('fanex-border');
-            $('#captcha').
-                attr({'disabled': 'disabled', 'title': indexFormAmount});
+            $('#captcha').attr({'disabled': 'disabled', 'title': indexFormAmount});
+            $('#paymentBtn').
+                attr({'disabled': 'disabled'}).
+                removeClass('fanexBtnOrange').
+                addClass('fanexBtnOutlineOrange');
+            $('#calcBtn').
+                attr({'disabled': 'disabled'}).
+                removeClass('fanexBtnOrange').
+                addClass('fanexBtnOutlineOrange');
         }
     });
 
     $('#captcha').keyup(function() {
-        if ($(this).val().length == 5) {
+        $('.tempAmount').slideUp(300);
+
+        if ($(this).val().length == 5 && $('#exAmount').val().length > 0) {
             $('#captcha').removeClass('fanex-border');
             $('#calcBtn').
                 removeAttr('disabled').
@@ -9900,37 +9924,50 @@ $(document).ready(function() {
         $('.selectpicker').selectpicker('refresh');
     });
 
-    $('#captcha, #exAmount').keyup(function(e) {
-        $('.tempAmount').slideUp(300);
-
-        var currency = $('#exCurrency').val();
-        var amount = accounting.unformat($('#exAmount').val());
-
-        $(this).focus();
-        if ($('#captcha').val().length == 5 && amount > AMOUNT_LIMIT_MIN &&
-            $('#exCountry').val() != null && $('#exCurrency').val() != null) {
-            $('#calcBtn').
-                removeAttr('disabled').
-                removeClass('fanexBtnOutlineOrange').
-                addClass('fanexBtnOrange');
-            document.onkeyup = function(event) {
-                if (event.which == 13 || event.keyCode == 13) {
-                    $('#calcBtn').click();
-                }
-            };
-        }
-        else {
-            $('#paymentBtn').
-                attr({'disabled': 'disabled'}).
-                removeClass('fanexBtnOrange').
-                addClass('fanexBtnOutlineOrange');
-            $('#calcBtn').
-                attr({'disabled': 'disabled'}).
-                removeClass('fanexBtnOrange').
-                addClass('fanexBtnOutlineOrange');
-            document.onkeyup = null;
-        }
-    });
+    // $('#captcha, #exAmount').keydown(function(e) {
+    //     $('.tempAmount').slideUp(300);
+    //
+    //     var currency = $('#exCurrency').val();
+    //     var amount = 0;
+    //
+    //     if (currency === 'EUR' || currency === 'USD') {
+    //         amount = Number($(this).unmask()) / 100;
+    //     }
+    //     else if (currency === 'TRY') {
+    //         amount = Number($(this).unmask());
+    //     }
+    //     else {
+    //         amount = Number($(this).unmask());
+    //     }
+    //
+    //     $(this).focus();
+    //     if ($('#captcha').val().length == 5 &&
+    //         amount > 9 &&
+    //         amount < 10001 &&
+    //         $('#exCountry').val() != null &&
+    //         $('#exCurrency').val() != null) {
+    //         $('#calcBtn').
+    //             removeAttr('disabled').
+    //             removeClass('fanexBtnOutlineOrange').
+    //             addClass('fanexBtnOrange');
+    //         document.onkeyup = function(event) {
+    //             if (event.which == 13 || event.keyCode == 13) {
+    //                 $('#calcBtn').click();
+    //             }
+    //         };
+    //     }
+    //     else {
+    //         $('#paymentBtn').
+    //             attr({'disabled': 'disabled'}).
+    //             removeClass('fanexBtnOrange').
+    //             addClass('fanexBtnOutlineOrange');
+    //         $('#calcBtn').
+    //             attr({'disabled': 'disabled'}).
+    //             removeClass('fanexBtnOrange').
+    //             addClass('fanexBtnOutlineOrange');
+    //         document.onkeyup = null;
+    //     }
+    // });
 
     var nice = $('html, body, .fanexMotto, .dropdown-menu .inner, textarea').
         niceScroll({
