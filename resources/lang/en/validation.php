@@ -85,9 +85,9 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
-    'iban' => "The :attribute must be a valid International Bank Account Number (IBAN).",
-    'bic' => 'The :attribute is not a valid Business Identifier Code (BIC).',
-    'unique_with' => 'This combination of :fields already exists.',
+    'iban'                 => "The :attribute must be a valid International Bank Account Number (IBAN).",
+    'bic'                  => 'The :attribute is not a valid Business Identifier Code (BIC).',
+    'unique_with'          => 'This combination of :fields already exists.',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -164,7 +164,10 @@ return [
         'amount'                => 'Amount',
         'contactText'           => 'Contact Text',
         'account_number'        => 'Account Number',
-        'user_id‌'               => 'User ID',
+        'user_id‌'               => 'Shit',
+        'userid‌'                => 'Shit',
+        'user id‌'               => 'Shit',
+        'user‌'               => 'Shit',
     ],
 
 ];
