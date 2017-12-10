@@ -87,7 +87,7 @@ return [
     'unique'               => ':attribute قبلا انتخاب شده است.',
     'uploaded'             => 'آپلود فایل :attribute موفقیت آمیز نبود.',
     'url'                  => 'فرمت آدرس :attribute اشتباه است.',
-    'iban' => "مقدار :attribute وارد شده، یک کد iBan صحیح نمی باشد.",
+    'iban' => " کد iBan وارد شده، صحیح نمی باشد.",
     'bic' => 'مقدار :attribute وارد شده، صحیح نمیباشد.',
 
     /*
