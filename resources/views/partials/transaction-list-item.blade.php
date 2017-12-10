@@ -1,5 +1,5 @@
 @if(count($transactions) > 0)
-    @foreach($transactions as $transaction)
+    @foreach($transactions as $transaction) 
         <div class="panel panel-default filtered {{ $transaction->upt_status }} status-container-{{ $transaction->id }}">
             <div class="panel-heading @if($transaction->can_pay) newRed @endif">
                 <div class="row p-0 m-0">
@@ -73,7 +73,7 @@
                                 @endif
 
                                 <p>{{ $transaction->receiver_account }}</p>
-                                <p>{{ $transaction->beneficiary->bank_name }}</p>
+                                <p>{{ $transaction->receiver_bank_name }}</p>
 
                                 @if($transaction->uri && $transaction->payment_date)
                                     <p>@lang('payment.invDate', ['dateEn' => $transaction->payment_date->format('d M Y, H:i:s'), 'dateFa' => jdate($transaction->payment_date)->format('%Y %B %d, H:i:s')])</p>
