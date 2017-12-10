@@ -19,7 +19,7 @@
 
 @section('content')
     <div class="container-fluid additional-wrapper">
-        <div class="row m-0 p-0">
+        <div class="row m-0 additional-row">
             <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12 col-lg-push-3 col-md-push-2 col-sm-push-1 white-div">
 
                 <div class="staticMainForm m-0">
@@ -113,8 +113,7 @@
                 }).done(function(response) {
                     $('#identifier-ajax-form').html(response);
                     $('#continue_btn').removeAttr('disabled');
-                    console.log('do it now');
-                    $('body').getNiceScroll().resize();
+                    $('html').getNiceScroll().resize();
                 });
             });
         });

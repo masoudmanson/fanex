@@ -298,22 +298,19 @@ opacity-30 {
 }
 
 .additional-wrapper {
-    min-height: 80vh;
-    padding: 150px 100px 30px;
+    min-height: calc(100vh - 170px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: auto;
-    @include mq($max-width: $breakePoint_xxl) {
-        padding: 100px 50px 30px;
-    }
-    @include mq($max-width: $breakePoint_sm) {
-        padding: 65px 30px 20px;
-    }
-    @include mq($max-width: $breakePoint_xs) {
-        padding: 45px 30px 20px;
-    }
-    .white-div {
-        padding: 50px 40px;
-        background-color: #fff;
-        margin: auto;
+    .additional-row {
+        width: 100%;
+        padding: 30px 0;
+        .white-div {
+            padding: 50px 40px;
+            background-color: #fff;
+            margin: auto;
+        }
     }
 }
 
