@@ -89,6 +89,7 @@ return [
     'url'                  => ':attribute biçimi geçersiz.',
     'iban'                 => ":attribute, geçerli bir Uluslararası Banka Hesap Numarası (IBAN) olmalıdır.",
     'bic'                  => ':attribute geçerli bir İşletme Tanımlayıcı Kodu (BIC) değil.',
+    'unique_with'          => ':fields alan kombinasyonları daha önceden kaydedilmiş.',
 
     /*
     |--------------------------------------------------------------------------
@@ -103,11 +104,6 @@ return [
 
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
-
-        //my custom validation error msgs.
         'captcha' => [
             'required' => 'Captcha Gerekli!',
             'captcha'  => "Yanlış Captcha.",
@@ -132,7 +128,47 @@ return [
     */
 
     'attributes'           => [
-        'contactText'      => 'Iletişim metni',
+        'name'                  => 'Ad',
+        'username'              => 'Kullanıcı adı',
+        'email'                 => 'Email',
+        'firstname'             => 'İsim',
+        'lastname'              => 'Soyadı',
+        'password'              => 'Şifre',
+        'password_confirmation' => 'Şifre Onaylama',
+        'city'                  => 'Şehir',
+        'country'               => 'Ülke',
+        'address'               => 'Adres',
+        'phone'                 => 'Telefon',
+        'mobile'                => 'Cep telefonu',
+        'age'                   => 'Yaş',
+        'sex'                   => 'Seks',
+        'gender'                => 'Cinsiyet',
+        'day'                   => 'Gün',
+        'month'                 => 'Ay',
+        'year'                  => 'Yıl',
+        'hour'                  => 'Saat',
+        'minute'                => 'Dakika',
+        'second'                => 'İkinci',
+        'title'                 => 'Başlık',
+        'text'                  => 'Metin',
+        'content'               => 'İçerik',
+        'description'           => 'Açıklama',
+        'excerpt'               => 'Alıntı',
+        'date'                  => 'Tarih',
+        'time'                  => 'Zaman',
+        'available'             => 'Kullanılabilir',
+        'size'                  => 'Boyut',
+        'terms'                 => 'Şartlar',
+        'bank_name'             => 'Banka Adı',
+        'branch_name'           => 'Şube Adı',
+        'swift_code'            => 'Swift kodu',
+        'iban_code'             => 'iBan kodu',
+        'tel'                   => 'Cep Telefon Numarası',
+        'fax'                   => 'Faks Numarası',
+        'amount'                => 'Tutar',
+        'contactText'           => 'Iletişim metni',
+        'account_number'        => 'Hesap Numarası',
+        'user_id‌'               => 'Kullanıcı ID',
     ],
 
 ];

@@ -87,6 +87,7 @@ return [
     'url'                  => 'The :attribute format is invalid.',
     'iban' => "The :attribute must be a valid International Bank Account Number (IBAN).",
     'bic' => 'The :attribute is not a valid Business Identifier Code (BIC).',
+    'unique_with' => 'This combination of :fields already exists.',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -99,7 +100,6 @@ return [
     */
 
     'custom' => [
-        //my custom validation error msgs.
         'captcha' => [
             'required' => 'Captcha Required!',
             'captcha'  => "Incorrect Captcha.",
@@ -155,7 +155,6 @@ return [
         'available'             => 'Available',
         'size'                  => 'Size',
         'terms'                 => 'Terms',
-        'account_number'        => 'Account Number',
         'bank_name'             => 'Bank Name',
         'branch_name'           => 'Branch Name',
         'swift_code'            => 'Swift code',
@@ -164,6 +163,8 @@ return [
         'fax'                   => 'Fax Number',
         'amount'                => 'Amount',
         'contactText'           => 'Contact Text',
+        'account_number'        => 'Account Number',
+        'user_id‌'               => 'User ID',
     ],
 
 ];

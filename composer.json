@@ -8,6 +8,7 @@
         "php": ">=5.6.4",
         "caouecs/laravel-lang": "~3.0",
         "cornford/googlmapper": "2.*",
+        "felixkiss/uniquewith-validator": "^3.1",
         "guzzlehttp/guzzle": "~6.0",
         "intervention/validation": "^1.2",
         "laravel/framework": "5.4.*",

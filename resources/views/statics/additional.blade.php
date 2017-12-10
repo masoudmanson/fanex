@@ -34,7 +34,15 @@
                     </div>
 
                     <h1 class="pb-3 mt-0">@lang('index.additionalTitle')</h1>
-
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form action="/additional-info" method="post">
                         {{ csrf_field() }}
 

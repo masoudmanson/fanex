@@ -170,6 +170,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
+        Felixkiss\UniqueWithValidator\ServiceProvider::class,
 
         /*
          * Application Service Providers...

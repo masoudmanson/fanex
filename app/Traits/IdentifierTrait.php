@@ -23,8 +23,13 @@ trait IdentifierTrait
         return call_user_func(array($this, $identifier->name . '_identification'), $request);
     }
 
-    public function fanapium_identification($request)
+    public function fanapium_identification(Request $request)
     {
+        $this->validate($request, [
+            'firsname' => 'required',
+            'lastname' => 'required',
+        ]);
+
         $token = $request->cookie('token')['access'];
         $result = $this->getCurrentPlatformUser($token);
         $platform_user = json_decode($result->getBody()->getContents());
@@ -41,6 +46,13 @@ trait IdentifierTrait
 
     public function pasargad_identification($request)
     {
+        $this->validate($request, [
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'mobile' => 'required',
+            'identity_number' => 'required',
+        ]);
+
         $token = $request->cookie('token')['access'];
         $result = $this->getCurrentPlatformUser($token);
         $platform_user = json_decode($result->getBody()->getContents());
@@ -64,8 +76,15 @@ trait IdentifierTrait
         return json_encode(array('hasError' => $platform_user->hasError , 'message' =>$platform_user->message , 'code'=>$platform_user->errorCode),true);
     }
 
-    public function other_identification($request)
+    public function other_identification(Request $request)
     {
+        $this->validate($request, [
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'mobile' => 'required',
+            'identity_number' => 'required',
+        ]);
+
         $token = $request->cookie('token')['access'];
         $result = $this->getCurrentPlatformUser($token);
         $platform_user = json_decode($result->getBody()->getContents());
