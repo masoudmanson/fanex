@@ -327,6 +327,8 @@ class PaymentController extends Controller
             $transaction->ttl = $backlog->ttl;
             $transaction->country = $backlog->country;
             $transaction->receiver_account = $beneficiary->account_number;
+            $transaction->receiver_bank_name = $beneficiary->bank_name;
+            $transaction->receiver_branch_name = $beneficiary->branch_name;
             $transaction->receiver_firstname = $beneficiary->firstname;
             $transaction->receiver_lastname = $beneficiary->lastname;
 
