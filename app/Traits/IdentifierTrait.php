@@ -26,7 +26,7 @@ trait IdentifierTrait
     public function fanapium_identification(Request $request)
     {
         $this->validate($request, [
-            'firsname' => 'required',
+            'firstname' => 'required',
             'lastname' => 'required',
         ]);
 
