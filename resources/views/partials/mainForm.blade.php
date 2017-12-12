@@ -73,7 +73,7 @@
                 <div class="form-group bsWrapper">
                     <i class="icon-check bsIcon"></i>
                     <input type="text" class="form-control fanexInput disabledForm" name="captcha" id="captcha"
-                           placeholder="@lang('index.formCaptcha')">
+                           placeholder="@lang('index.formCaptcha')" maxlength="5">
                 </div>
             </div>
         </div>

@@ -73,7 +73,7 @@
                                 @endif
 
                                 <p>{{ $transaction->receiver_account }}</p>
-                                <p>{{ $transaction->beneficiary->bank_name }}</p>
+                                <p>{{ $transaction->receiver_bank_name }}</p>
 
                                 @if($transaction->uri && $transaction->payment_date)
                                     <p>@lang('payment.invDate', ['dateEn' => $transaction->payment_date->format('d M Y, H:i:s'), 'dateFa' => jdate($transaction->payment_date)->format('%Y %B %d, H:i:s')])</p>

@@ -52,7 +52,7 @@ class BeneficiaryRequest extends FormRequest
                 return [
                     'firstname' => 'required|between:3,30',
                     'lastname' => 'required|between:3,50',
-                    'account_number' => 'required|unique_with:beneficiaries,user_id|between:8,20',
+                    'account_number' => 'required|between:8,20',
                     'address' => 'sometimes|nullable|string|between:3,256',
                     'tel' => 'required|between:11,15',
                     'fax' => 'nullable|between:11,15',
