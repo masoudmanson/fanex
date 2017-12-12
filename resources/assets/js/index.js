@@ -1,8 +1,21 @@
 $(document).ready(function() {
-    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent))
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
         $('.selectpicker').selectpicker('mobile');
-    else
+    }
+    else {
         $('.selectpicker').selectpicker();
+
+        var nice = $('html, body, .fanexMotto, .dropdown-menu .inner, textarea').
+            niceScroll({
+                cursorcolor: '#000',
+                cursoropacitymin: 0.1,
+                cursoropacitymax: 0.3,
+                cursorwidth: '5px',
+                cursorborder: 'none',
+                cursorborderradius: '5px',
+                horizrailenabled: false,
+            });
+    }
 
     $('.selectpicker').selectpicker('refresh');
 
@@ -167,17 +180,6 @@ $(document).ready(function() {
 
         $('.selectpicker').selectpicker('refresh');
     });
-
-    var nice = $('html, body, .fanexMotto, .dropdown-menu .inner, textarea').
-        niceScroll({
-            cursorcolor: '#000',
-            cursoropacitymin: 0.1,
-            cursoropacitymax: 0.3,
-            cursorwidth: '5px',
-            cursorborder: 'none',
-            cursorborderradius: '5px',
-            horizrailenabled: false,
-        });
 
     $('#accordion').on('shown.bs.collapse', function() {
         $(this).addClass('opened');
