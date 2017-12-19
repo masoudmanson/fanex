@@ -72,7 +72,7 @@ return [
 
     'invTitle' => 'Fatura',
     'invSubtitle' => 'Ödeme İşleminiz Bitti',
-    'invUser' => 'Sayin Mr. :user',
+    'invUser' => 'Sayin :user',
     'invDate' => ':dateEn',
     'invText' => '<b>:name</b>\'ya para göndermek için FANEx\'i kullandığınız için teşekkür ederiz.',
     'invItem' => 'Madde',

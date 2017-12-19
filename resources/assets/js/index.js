@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $('#exCountry').val(0);
     if(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
         $('.selectpicker').selectpicker('mobile');
     }
@@ -76,6 +77,7 @@ $(document).ready(function() {
     });
 
     $('#exAmount').on('keyup', function() {
+        console.log('amount key up triggers');
         $('.tempAmount').slideUp(300);
         if ($(this).val().length > 0) {
             $('#exAmount').removeClass('fanex-border');
@@ -94,6 +96,15 @@ $(document).ready(function() {
                         $('#calcBtn').click();
                     }
                 };
+            } else {
+                $('#paymentBtn').
+                    attr({'disabled': 'disabled'}).
+                    removeClass('fanexBtnOrange').
+                    addClass('fanexBtnOutlineOrange');
+                $('#calcBtn').
+                    attr({'disabled': 'disabled'}).
+                    removeClass('fanexBtnOrange').
+                    addClass('fanexBtnOutlineOrange');
             }
         }
         else {
@@ -101,6 +112,7 @@ $(document).ready(function() {
             $('#captcha').removeClass('fanex-border');
             $('#exAmount').addClass('fanex-border');
             $('#captcha').attr({'disabled': 'disabled', 'title': indexFormAmount});
+            console.log('injam');
             $('#paymentBtn').
                 attr({'disabled': 'disabled'}).
                 removeClass('fanexBtnOrange').
@@ -282,6 +294,18 @@ $(document).ready(function() {
             $body.removeClass('fixfixed');
         });
     }
+
+    $('.noSpecialChars').bind('keyup paste', function(){
+        this.value = this.value.replace(/[`۱۲۳۴۵۶۷۸۹۰~!@#$%^&*()_|+\-=؟?;:'",،؛.<>\{\}\[\]\\\/]/gi, '')
+    });
+
+    $('.noDigits').bind('keyup paste', function(){
+        this.value = this.value.replace(/[0-9]/g, '');
+    });
+
+    $('.onlyDigits').bind('keyup paste', function(){
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
 });
 
 $(document).on('keydown', '.numberTextField', function(e) {
@@ -417,8 +441,7 @@ function getAmount() {
             'product_id': $('#product_id').val()
         },
         success: function(response){
-           if(response > 1000) {
-
+           if(response > 999) {
                $('.disabledForm').removeAttr('title');
                $('#paymentBtn').attr({'title': indexFormPay});
 
@@ -585,3 +608,90 @@ var ModalEffects = (function() {
     }
     init();
 })();
+
+
+// PDF Generation
+
+var form = $('#pdfWrapper'),
+    cache_width = form.width(),
+    cache_height = form.height(),
+    a4 = [595.28, 990.89]; // for a4 size paper width and height
+
+var canvasImage,
+    winHeight = a4[1],
+    formHeight = form.height(),
+    formWidth = form.width();
+
+var imagePieces = [];
+
+// on create pdf button click
+$('#print-pdf').on('click', function() {
+    imagePieces = [];
+    imagePieces.length = 0;
+    window.scrollTo(0, 0);
+    main();
+});
+
+// main code
+function main() {
+    getCanvas().then(function(canvas) {
+        canvasImage = new Image();
+        canvasImage.src = canvas.toDataURL('image/png');
+        canvasImage.onload = splitImage;
+    });
+}
+
+// create canvas object
+function getCanvas() {
+    form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');
+    form.addClass('pdf');
+
+    return html2canvas(form, {
+        onrendered: function(canvas) {
+            theCanvas = canvas;
+            form.removeClass('pdf');
+        },
+        imageTimeout: 2000,
+        removeContainer: true,
+        letterRendering: false,
+        background: '#fff',
+        logging: true,
+    });
+}
+
+// chop image horizontally
+function splitImage(e) {
+    var totalImgs = Math.round(formHeight / winHeight);
+    for (var i = 0; i < totalImgs; i++) {
+        var canvas = document.createElement('canvas'),
+            ctx = canvas.getContext('2d');
+        canvas.width = formWidth;
+        canvas.height = winHeight;
+        canvas.background = '#fff';
+        ctx.drawImage(canvasImage, 0, i * winHeight, formWidth, winHeight, 0, 0,
+            canvas.width, canvas.height);
+
+        imagePieces.push(canvas.toDataURL('image/png'));
+    }
+    console.log(imagePieces.length);
+    createPDF();
+}
+
+// crete pdf using chopped images
+function createPDF() {
+    var totalPieces = imagePieces.length - 1;
+    var doc = new jsPDF({
+        unit: 'px',
+        format: 'a4',
+    });
+    imagePieces.forEach(function(img) {
+        doc.addImage(img, 'PNG', 0, 0);
+        if (totalPieces) {
+            doc.addPage();
+        }
+        totalPieces--;
+    });
+    doc.save('print.pdf');
+    form.width(cache_width);
+    form.height(cache_height);
+}

@@ -72,7 +72,7 @@ return [
 
     'invTitle' => 'Invoice',
     'invSubtitle' => 'Your Payment Transaction has Ended',
-    'invUser' => 'Dear Mr. :user',
+    'invUser' => 'Dear :user',
     'invDate' => ':dateEn',
     'invText' => 'Thank you for using FANEx to send money to <b>:name</b>.',
     'invItem' => 'Item',

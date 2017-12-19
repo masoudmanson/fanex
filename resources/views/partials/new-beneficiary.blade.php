@@ -7,10 +7,11 @@
     <i class="icon-user bsIcon"></i>
     <div class="mandatoryField">
         <input type="text"
-               class="form-control fanexInput @if($errors->first('firstname')) fanexInputError @else fanexInputWhite @endif"
+               class="noSpecialChars noDigits form-control fanexInput @if($errors->first('firstname')) fanexInputError @else fanexInputWhite @endif"
                id="bnf-firstname"
                name="firstname" placeholder="@lang('payment.bnfFormFirstname')"
                autocomplete="off"
+               maxlength="24"
                value="{{ old('firstname') }}">
     </div>
     @if($errors->first('firstname'))
@@ -28,8 +29,9 @@
         <i class="icon-user bsIcon"></i>
         <div class="mandatoryField">
             <input type="text"
-                   class="form-control fanexInput  @if($errors->first('lastname')) fanexInputError @else fanexInputWhite @endif"
+                   class="noSpecialChars noDigits form-control fanexInput  @if($errors->first('lastname')) fanexInputError @else fanexInputWhite @endif"
                    id="bnf-lastname"
+                   maxlength="24"
                    name="lastname" placeholder="@lang('payment.bnfFormLastname')"
                    autocomplete="off" value="{{ old('lastname') }}">
         </div>
@@ -46,10 +48,11 @@
         <i class="icon-card bsIcon"></i>
         <div class="mandatoryField">
             <input type="text"
-                   class="form-control fanexInput  @if($errors->first('account_number')) fanexInputError @else fanexInputWhite @endif numberTextField"
+                   class="noSpecialChars onlyDigits form-control fanexInput  @if($errors->first('account_number')) fanexInputError @else fanexInputWhite @endif numberTextField"
                    id="bnf-accountnumber"
                    name="account_number" placeholder="@lang('payment.bnfFormCC')"
                    autocomplete="off"
+                   maxlength="24"
                    value="{{ old('account_number') }}">
         </div>
 
@@ -85,8 +88,9 @@
         @endif
         <i class="icon-globe bsIcon"></i>
         <input type="text"
-               class="form-control fanexInput  @if($errors->first('address')) fanexInputError @else fanexInputWhite @endif"
+               class="noSpecialChars form-control fanexInput  @if($errors->first('address')) fanexInputError @else fanexInputWhite @endif"
                id="bnf-address"
+               maxlength="256"
                name="address" placeholder="@lang('payment.bnfFormAddr')" autocomplete="off"
                value="{{ old('address') }}">
 
@@ -103,8 +107,9 @@
         <i class="icon-mobile bsIcon"></i>
         <div class="mandatoryField">
             <input type="text"
-                   class="form-control fanexInput  @if($errors->first('tel')) fanexInputError @else fanexInputWhite @endif numberTextField"
+                   class="noSpecialChars onlyDigits form-control fanexInput  @if($errors->first('tel')) fanexInputError @else fanexInputWhite @endif numberTextField"
                    id="bnf-phone"
+                   maxlength="13"
                    name="tel" placeholder="@lang('payment.bnfFormPhone')  @lang('payment.bnfFormPhoneSample')" autocomplete="off"
                    value="{{ old('tel') }}">
         </div>
@@ -121,8 +126,9 @@
         @endif
         <i class="icon-fax bsIcon"></i>
         <input type="text"
-               class="form-control fanexInput  @if($errors->first('fax')) fanexInputError @else fanexInputWhite @endif numberTextField"
+               class="noSpecialChars onlyDigits form-control fanexInput  @if($errors->first('fax')) fanexInputError @else fanexInputWhite @endif numberTextField"
                id="bnf-fax"
+               maxlength="13"
                name="fax" placeholder="@lang('payment.bnfFormFax')" autocomplete="off"
                value="{{ old('fax') }}">
 
@@ -139,10 +145,11 @@
         <i class="icon-bank bsIcon"></i>
         <div class="mandatoryField">
             <input type="text"
-                   class="form-control fanexInput  @if($errors->first('bank_name')) fanexInputError @else fanexInputWhite @endif"
+                   class="noSpecialChars form-control fanexInput  @if($errors->first('bank_name')) fanexInputError @else fanexInputWhite @endif"
                    id="bnf-bankname"
                    name="bank_name" placeholder="@lang('payment.bnfFormBank')"
                    autocomplete="off"
+                   maxlength="64"
                    value="{{ old('bank_name') }}">
         </div>
 
@@ -159,8 +166,9 @@
         <i class="icon-branch bsIcon"></i>
         <div class="mandatoryField">
             <input type="text"
-                   class="form-control fanexInput  @if($errors->first('branch_name')) fanexInputError @else fanexInputWhite @endif"
+                   class="noSpecialChars form-control fanexInput  @if($errors->first('branch_name')) fanexInputError @else fanexInputWhite @endif"
                    id="bnf-branch"
+                   maxlength="256"
                    name="branch_name" placeholder="@lang('payment.bnfFormBranch')"
                    autocomplete="off" value="{{ old('branch_name') }}">
         </div>
@@ -178,10 +186,11 @@
         <i class="icon-swift bsIcon"></i>
         <div class="mandatoryField">
             <input type="text"
-                   class="form-control fanexInput  @if($errors->first('swift_code')) fanexInputError @else fanexInputWhite @endif"
+                   class="noSpecialChars form-control fanexInput  @if($errors->first('swift_code')) fanexInputError @else fanexInputWhite @endif"
                    id="bnf-swift"
                    name="swift_code" placeholder="@lang('payment.bnfFormSwift') @lang('payment.bnfFormSwiftSample')"
                    autocomplete="off"
+                   maxlength="40"
                    value="{{ old('swift_code') }}">
         </div>
 
@@ -198,11 +207,12 @@
         <i class="icon-code bsIcon"></i>
         <div class="mandatoryField">
             <input type="text"
-                   class="form-control fanexInput  @if($errors->first('iban_code')) fanexInputError @else fanexInputWhite @endif"
+                   class="noSpecialChars form-control fanexInput  @if($errors->first('iban_code')) fanexInputError @else fanexInputWhite @endif"
                    id="bnf-iban"
                    name="iban_code" placeholder="@lang('payment.bnfFormIban') &rlm; @lang('payment.bnfFormIbanSample')"
                    autocomplete="off"
                    dir="auto"
+                   maxlength="40"
                    value="{{ old('iban_code') }}">
         </div>
 

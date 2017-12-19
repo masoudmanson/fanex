@@ -1,8 +1,8 @@
 <div class="col-lg-3 col-md-4 col-sm-12 px-0 pl-lg-4 pl-md-0 pl-sm-0 pl-xs-0 bnf-auto-sidebar" style="position:static;"
      id="bnf-sidebar">
     <div class="white-card">
-        <p>@lang('payment.stepsTitle')</p>
-        <h3 id="countdown">9:53</h3>
+        <p class="hideAfterInvoice">@lang('payment.stepsTitle')</p>
+        <h3 id="countdown" class="hideAfterInvoice">9:53</h3>
         <ul class="steps-ul">
             <li class="steps-li done">
                 <a href="/">

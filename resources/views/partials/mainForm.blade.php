@@ -21,7 +21,7 @@
             <i class="icon-globe bsIcon"></i>
             <select class="form-control fanexInput selectpicker indexSelectBox fanex-border" data-style="fanexInput" name="country"
                     id="exCountry">
-                <option value="" selected="selected" disabled="disabled">@lang('index.formCountry')</option>
+                <option value="0" selected="selected" disabled="disabled">@lang('index.formCountry')</option>
 
                 @foreach($country_list as $country)
                     <option value="{{ $country['code'] }}" @if(!$country['enable']) disabled @endif data-currency="{{ json_encode($country['currency']) }}">

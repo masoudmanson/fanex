@@ -1,6 +1,11 @@
 @extends('layouts.master')
 
 @section('styles')
+    <style>
+        .hideAfterInvoice {
+            display: none;
+        }
+    </style>
 @endsection
 
 @section('header')
@@ -163,5 +168,9 @@
         // Countdown Rates Exiration Time
         var finish = {{ $finish_time }};
         countdown(finish);
+
+//        $(document).ready(function(){
+            $('.hideAfterInvoice').hide();
+//        });
     </script>
 @endsection
