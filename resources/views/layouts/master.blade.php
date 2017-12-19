@@ -39,6 +39,7 @@
     @yield('footer')
 
     {{-- General Scripts --}}
+    <script src="{{ asset('js/cpgadget.js') }}"></script>
     <script src="{{ mix('js/app.js') }}"></script>
     <script src="{{ asset('js/scripts.js') }}"></script>
     <script src="{{ asset('js/classie.js') }}"></script>

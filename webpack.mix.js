@@ -17,6 +17,7 @@ mix.copy([
     'resources/assets/js/worldLow.js',
     'resources/assets/js/black.js',
     'resources/assets/js/export.min.js',
+    'resources/assets/js/cpgadget.js',
     'resources/assets/js/classie.js'
 ], 'public/js');
 

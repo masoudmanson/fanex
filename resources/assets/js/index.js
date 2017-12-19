@@ -23,6 +23,7 @@ $(document).ready(function() {
 
     $('#pdf-test').on('click', function(e) {
         e.preventDefault();
+
         if (!window.print) {
             alert('You need NS4.x to use this print button!');
             return;
@@ -34,7 +35,14 @@ $(document).ready(function() {
         $('.not-print').hide();
         $('.invoice-print').hide();
 
-        window.print();
+        if(/Android/i.test(navigator.userAgent)) {
+            var gadget = new cloudprint.Gadget();
+            gadget.setPrintDocument("url", "FANEx Documents", window.location.href, "utf-8");
+            gadget.openPrintDialog();
+        }
+        else {
+            window.print();
+        }
 
         $('#bnf-sidebar').fadeIn(300);
         $('.dash-title').fadeIn(300);
