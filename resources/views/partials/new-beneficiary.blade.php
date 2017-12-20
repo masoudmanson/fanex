@@ -7,7 +7,7 @@
     <i class="icon-user bsIcon"></i>
     <div class="mandatoryField">
         <input type="text"
-               class="noSpecialChars noDigits form-control fanexInput @if($errors->first('firstname')) fanexInputError @else fanexInputWhite @endif"
+               class="onlyAlpha form-control fanexInput @if($errors->first('firstname')) fanexInputError @else fanexInputWhite @endif"
                id="bnf-firstname"
                name="firstname" placeholder="@lang('payment.bnfFormFirstname')"
                autocomplete="off"
@@ -29,7 +29,7 @@
         <i class="icon-user bsIcon"></i>
         <div class="mandatoryField">
             <input type="text"
-                   class="noSpecialChars noDigits form-control fanexInput  @if($errors->first('lastname')) fanexInputError @else fanexInputWhite @endif"
+                   class="onlyAlpha form-control fanexInput  @if($errors->first('lastname')) fanexInputError @else fanexInputWhite @endif"
                    id="bnf-lastname"
                    maxlength="24"
                    name="lastname" placeholder="@lang('payment.bnfFormLastname')"
@@ -88,7 +88,7 @@
         @endif
         <i class="icon-globe bsIcon"></i>
         <input type="text"
-               class="noSpecialChars form-control fanexInput  @if($errors->first('address')) fanexInputError @else fanexInputWhite @endif"
+               class="onlyAlphaDash form-control fanexInput  @if($errors->first('address')) fanexInputError @else fanexInputWhite @endif"
                id="bnf-address"
                maxlength="256"
                name="address" placeholder="@lang('payment.bnfFormAddr')" autocomplete="off"
@@ -145,7 +145,7 @@
         <i class="icon-bank bsIcon"></i>
         <div class="mandatoryField">
             <input type="text"
-                   class="noSpecialChars form-control fanexInput  @if($errors->first('bank_name')) fanexInputError @else fanexInputWhite @endif"
+                   class="onlyAlphaDash form-control fanexInput  @if($errors->first('bank_name')) fanexInputError @else fanexInputWhite @endif"
                    id="bnf-bankname"
                    name="bank_name" placeholder="@lang('payment.bnfFormBank')"
                    autocomplete="off"
@@ -166,7 +166,7 @@
         <i class="icon-branch bsIcon"></i>
         <div class="mandatoryField">
             <input type="text"
-                   class="noSpecialChars form-control fanexInput  @if($errors->first('branch_name')) fanexInputError @else fanexInputWhite @endif"
+                   class="onlyAlphaDash form-control fanexInput  @if($errors->first('branch_name')) fanexInputError @else fanexInputWhite @endif"
                    id="bnf-branch"
                    maxlength="256"
                    name="branch_name" placeholder="@lang('payment.bnfFormBranch')"
@@ -186,7 +186,7 @@
         <i class="icon-swift bsIcon"></i>
         <div class="mandatoryField">
             <input type="text"
-                   class="noSpecialChars form-control fanexInput  @if($errors->first('swift_code')) fanexInputError @else fanexInputWhite @endif"
+                   class="onlyAlphanumeric form-control fanexInput  @if($errors->first('swift_code')) fanexInputError @else fanexInputWhite @endif"
                    id="bnf-swift"
                    name="swift_code" placeholder="@lang('payment.bnfFormSwift') @lang('payment.bnfFormSwiftSample')"
                    autocomplete="off"
@@ -207,7 +207,7 @@
         <i class="icon-code bsIcon"></i>
         <div class="mandatoryField">
             <input type="text"
-                   class="noSpecialChars form-control fanexInput  @if($errors->first('iban_code')) fanexInputError @else fanexInputWhite @endif"
+                   class="onlyAlphanumeric form-control fanexInput  @if($errors->first('iban_code')) fanexInputError @else fanexInputWhite @endif"
                    id="bnf-iban"
                    name="iban_code" placeholder="@lang('payment.bnfFormIban') &rlm; @lang('payment.bnfFormIbanSample')"
                    autocomplete="off"

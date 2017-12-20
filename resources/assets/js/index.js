@@ -306,6 +306,18 @@ $(document).ready(function() {
     $('.onlyDigits').bind('keyup paste', function(){
         this.value = this.value.replace(/[^0-9]/g, '');
     });
+
+    $('.onlyAlphanumeric').bind('keyup paste', function(){
+        this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
+    });
+
+    $('.onlyAlpha').bind('keyup paste', function(){
+        this.value = this.value.replace(/[^a-zA-Z]/g, '');
+    });
+
+    $('.onlyAlphaDash').bind('keyup paste', function(){
+        this.value = this.value.replace(/[^a-zA-Z0-9\-_\,.]/g, '');
+    });
 });
 
 $(document).on('keydown', '.numberTextField', function(e) {

@@ -33,7 +33,7 @@ class BeneficiaryRequest extends FormRequest
             }
             case 'POST': {
                 return [
-                    'firstname' => 'required|between:3,30',
+                    'firstname' => 'required|between:3,30',//|regex:/^[A-Za-z \t]*$/i
                     'lastname' => 'required|between:3,50',
                     'account_number' => 'required|unique_with:beneficiaries,user_id|between:8,20',
                     'address' => 'sometimes|nullable|string|between:3,256',
