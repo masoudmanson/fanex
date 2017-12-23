@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Response;
+use View;
 
 class PaymentController extends Controller
 {
@@ -238,30 +239,9 @@ class PaymentController extends Controller
 //                $transaction->update();
 
                 if (Auth::user()->email) {
-                    // Email to User
-                    $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
-                    $beautymail->send('emails.invoice', [
-                        'senderName' => 'FANEx Team',
-                        'firstname' => Auth::user()->firstname . ' ' . Auth::user()->lastname,
-                        'logo' => [
-                            'path' => 'http://185.104.229.163:12800/vendor/beautymail/assets/images/sunny/logo.png',
-                            'width' => 150,
-                            'height' => 50
-                        ],
-                        'css' => ".footer-text {padding:0; margin: 0 !important; color: #999; font-family: Tahoma;}",
-                        'transaction' => $transaction,
-                        'invoice_result' => $invoice_result,
-                        'transaction_status' => true
-                    ], function ($message) use ($request) {
-                        $message
-                            ->from('fanex@fanap.ir')
-                            ->to(Auth::user()->email, Auth::user()->firstname . ' ' . Auth::user()->lastname)
-                            ->subject('Thank You!');
-                    });
+                    $mail_object = $this->make_mail_object($transaction,$invoice_result);
                 }
-
-                return view('dashboard.invoice', compact('invoice_result', 'transaction', 'finish_time'));
-
+                return view('dashboard.invoice', compact('invoice_result', 'transaction', 'finish_time', 'mail_object'));
             } else {
                 $transaction->bank_status = 'canceled';
                 $transaction->fanex_status = 'rejected';
@@ -269,7 +249,9 @@ class PaymentController extends Controller
                 $transaction->payment_date = time();
                 $transaction->update();
                 if (Auth::user()->email) {
-                    // Email to User
+                    $mail_object = $this->make_mail_object($transaction,$invoice_result);
+
+/*                    // Email to User
                     $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
                     $beautymail->send('emails.invoice', [
                         'senderName' => 'FANEx Team',
@@ -289,11 +271,10 @@ class PaymentController extends Controller
                             ->to(Auth::user()->email, Auth::user()->firstname . ' ' . Auth::user()->lastname)
                             ->subject('Thank You!');
                     });
+*/
                 }
-
-                return view('dashboard.invoice', compact('invoice_result', 'transaction', 'finish_time'))->withErrors(['msg' => __('payment.transFailed')]);;
+                return view('dashboard.invoice', compact('invoice_result', 'transaction', 'finish_time', 'mail_object'))->withErrors(['msg' => __('payment.transFailed')]);;
             }
-
         }
         $error = __('payment.transFailed');
         return view('dashboard.invoice', compact('error', 'transaction', 'finish_time'));
@@ -349,6 +330,34 @@ class PaymentController extends Controller
             'currency' => $transaction['currency'],
             'finish_time' => $finish_time
         ]);
+    }
+
+    private function make_mail_object($transaction,$invoice_result)
+    {
+        $data_array = [
+            'senderName' => 'FANEx Team',
+            'firstname' => Auth::user()->firstname . ' ' . Auth::user()->lastname,
+            'logo' => [
+                'path' => 'http://85.133.159.140:12801/vendor/beautymail/assets/images/sunny/logo.png',
+                'width' => 150,
+                'height' => 50
+            ],
+            'css' => ".footer-text {padding:0; margin: 0 !important; color: #999; font-family: Tahoma;}",
+            'transaction' => $transaction,
+            'invoice_result' => $invoice_result,
+            'transaction_status' => true
+        ];
+
+        $view = View::make('emails.invoice', $data_array);
+        $contents = $view->render();
+        $mail_object = [
+            'to' => Auth::user()->email,
+            'from' => 'fanex@fanap.ir',
+            'subject' => 'Thank You!',
+            'content' => $contents
+        ];
+
+        return $mail_object;
     }
 
     private function upload_file($file, $request, $bill_number, $file_type, $is_image = false)
