@@ -191,6 +191,7 @@ class PaymentController extends Controller
 
         $finish_time = 0;
         $transaction = [];
+        $mail_object = '';
 
         if (!$invoice->hasError && count($invoice->result) > 0) {
             $invoice_result = $invoice->result[0];
@@ -239,7 +240,7 @@ class PaymentController extends Controller
 //                $transaction->update();
 
                 if (Auth::user()->email) {
-                    $mail_object = $this->make_mail_object($transaction,$invoice_result);
+                    $mail_object = $this->make_mail_object($transaction, $invoice_result);
                 }
                 return view('dashboard.invoice', compact('invoice_result', 'transaction', 'finish_time', 'mail_object'));
             } else {
@@ -251,6 +252,7 @@ class PaymentController extends Controller
                 if (Auth::user()->email) {
                     $mail_object = $this->make_mail_object($transaction,$invoice_result);
 
+//                    dd($mail_object);
 /*                    // Email to User
                     $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
                     $beautymail->send('emails.invoice', [
@@ -332,7 +334,7 @@ class PaymentController extends Controller
         ]);
     }
 
-    private function make_mail_object($transaction,$invoice_result)
+    public function make_mail_object($transaction, $invoice_result)
     {
         $data_array = [
             'senderName' => 'FANEx Team',
@@ -350,6 +352,12 @@ class PaymentController extends Controller
 
         $view = View::make('emails.invoice', $data_array);
         $contents = $view->render();
+        $contents = str_replace("\r", "", $contents);
+        $contents = str_replace("\n", "", $contents);
+        $contents = str_replace("\t", "", $contents);
+        $contents = str_replace("\"", "'", $contents);
+        $contents = str_replace("&quot;", "'", $contents);
+
         $mail_object = [
             'to' => Auth::user()->email,
             'from' => 'fanex@fanap.ir',
@@ -357,7 +365,7 @@ class PaymentController extends Controller
             'content' => $contents
         ];
 
-        return $mail_object;
+        return json_encode($mail_object);
     }
 
     private function upload_file($file, $request, $bill_number, $file_type, $is_image = false)

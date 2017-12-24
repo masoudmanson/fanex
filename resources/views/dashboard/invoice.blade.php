@@ -165,12 +165,49 @@
 
 @section('scripts')
     <script>
-        // Countdown Rates Exiration Time
         var finish = {{ $finish_time }};
         countdown(finish);
 
-//        $(document).ready(function(){
-            $('.hideAfterInvoice').hide();
-//        });
+        $('.hideAfterInvoice').hide();
+        var mailContent = "{{ $mail_object }}".replace(/&quot;/g,'"');
+        mailContent = mailContent.replace(/&#039;/g,'\'');
+        mailContent = mailContent.replace(/&gt;/g,'>');
+        mailContent = mailContent.replace(/&lt;/g,'<');
+
+        var mailContent = JSON.parse(mailContent);
+
+        var mail = {
+            to:[mailContent.to],
+            fromAddress: mailContent.from,
+            replyAddress: mailContent.from,
+            Subject: mailContent.subject,
+            mailType: 0,
+            messageId: 0,
+            content: mailContent.content
+        }
+
+        var req = {
+            requestHeader: {
+                apiToken:"token"
+            },
+            serviceName:"FANEx Online ExChange Service",
+            messageType: 518,
+            content:JSON.stringify(mail)
+        };
+
+        var msgVo = {
+            receivers: [12],
+            content: JSON.stringify(req)
+        };
+        var wrapper = {
+            type:3,
+            content: JSON.stringify(msgVo)
+        };
+        var httpGet = new XMLHttpRequest();
+        httpGet.open( "GET", "http://asyncurl:port//srv/?peerId=672064&data=" + JSON.stringify(wrapper), false);
+        httpGet.send();
+        var resp = JSON.parse(xmlHttp.responseText);
+        resp = JSON.parse(resp.content);
+        console.log(JSON.parse(resp.content));
     </script>
 @endsection
