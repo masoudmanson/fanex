@@ -51,6 +51,7 @@ return [
     'additionalfirstname' => 'İlk adınızı latin\'e girin',
     'additionallastname' => 'Soyadınızı latin\'e Giriniz',
     'additionalidentity_number' => 'Ulusal Kimlik Numaranızı Girin',
+    'additionalDesc' => 'Bu bilgiler paranın iletilmesi için gereklidir ve yetkilendiriciden gelen kişisel verilerinizi etkilemez.',
     'form_username' => 'Kullanıcı adı',
     'form_mobile' => 'Telefon Numarası',
     'form_cc' => 'Hesap Numarası',

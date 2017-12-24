@@ -46,8 +46,6 @@
                     <form action="/additional-info" method="post">
                         {{ csrf_field() }}
 
-                        {{--<input type="hidden" name="state" value="{{$state}}" id="state" style="display: none">--}}
-
                         {{-- Select Authorizer --}}
                         <div class="row">
                             <div class="col-xs-12">
@@ -98,7 +96,6 @@
 @endsection
 
 @section('scripts')
-    {{--<script src="{{ asset('js/index.js') }}"></script>--}}
     <script>
         $(document).ready(function() {
             $('#main-content-wrapper').css({'padding-bottom': 0});
