@@ -25,7 +25,7 @@ trait UptTrait
         if ($upt_resp->COUNTRYSTATUS->RESPONSE == 'Success') {
             $country_list = $upt_resp->COUNTRYLIST->WSCountry;
         }
-         //return $country_list;
+        //return $country_list;
     }
 
     public function UPTGetTExchangeData($amount, $from, $to)
@@ -105,14 +105,14 @@ trait UptTrait
             'Password' => "Fanex@123456!"
         );
 
-        $header = new SoapHeader('http://tempuri.org/', 'WsSystemUserInfo', $user_param,true);
+        $header = new SoapHeader('http://tempuri.org/', 'WsSystemUserInfo', $user_param, true);
 
         $client->__setSoapHeaders($header);
 
         $body_params = array('obj' => array(
-            'CORRESPONDENT_PARITY'=>'0',
-            'CORRESPONDENT_EXPENSE'=>'0',
-            'CORRESPONDENT_COMMISSION'=>'0', // these three parameter weren't on document and didn't used in postman even.but here, it seems necessary
+            'CORRESPONDENT_PARITY' => '0',
+            'CORRESPONDENT_EXPENSE' => '0',
+            'CORRESPONDENT_COMMISSION' => '0', // these three parameter weren't on document and didn't used in postman even.but here, it seems necessary
 //            'SENDER_CITIZENSHIP_NO' => '14695448',
 //            'SENDER_ID_TYPE' => 'pasport',
 //            'SENDER_ID_NO'=>'3',
@@ -132,7 +132,7 @@ trait UptTrait
             'BENEFICIARY_IBAN' => $beneficiary->iban_code,
 
             'TRANSACTION_TYPE' => '002', // todo:which type we have to use?!
-            'MONEY_TAKEN'=>'0',
+            'MONEY_TAKEN' => '0',
 //            'MONEY_TAKEN_CURRENCY' => 'TRY', // todo ? I think it is EUR
             'AMOUNT' => $transaction->premium_amount,
             'AMOUNT_CURRENCY' => $transaction->currency, // currency

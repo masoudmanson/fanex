@@ -43,7 +43,7 @@ class LoginController extends Controller
         }
         $id = adapterAssignment()->getId();
         return Redirect::away(config('urls.sso') . 'oauth2/authorize/?client_id='
-            . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri . '&scope=profile write phone')->withCookie(Cookie::forget('token'));
+            . $id . '&response_type=code&redirect_uri=' . $request->redirect_uri . '&scope=profile write phone email')->withCookie(Cookie::forget('token'));
     }
 
     public function logout(Request $request)

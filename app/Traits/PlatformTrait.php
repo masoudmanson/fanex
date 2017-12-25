@@ -288,4 +288,26 @@ trait PlatformTrait
         ]);
         return $res;
     }
+
+    public function sendMail()
+    {
+        $token = config('services.sso.api');
+        $client = new Client();
+        //business token must taken from sso
+        $res = $client->get(config('urls.platform') . 'nzh/biz/sendEmailByEmailAddress', [
+            'headers' => [
+                '_token_' => $token,// get business token and put in here
+                '_token_issuer_' => 1
+            ],
+            'query' => [
+                'toEmails' => 'toEmails',
+                'ccEmails' => 'ccEmails',
+                'bccEmails' => 'bccEmails',
+                'htmlContent' => 'htmlContent',
+//                'currencyCode' => '',
+
+            ],
+        ]);
+        return $res;
+    }
 }

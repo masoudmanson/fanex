@@ -26,8 +26,8 @@ trait IdentifierTrait
     public function fanapium_identification(Request $request)
     {
         $this->validate($request, [
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'firstname' => 'required|max:50',
+            'lastname' => 'required|max:50',
         ]);
 
         $token = $request->cookie('token')['access'];
@@ -47,8 +47,8 @@ trait IdentifierTrait
     public function pasargad_identification($request)
     {
         $this->validate($request, [
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'firstname' => 'required|max:50',
+            'lastname' => 'required|max:50',
             'mobile' => 'required',
             'identity_number' => 'required',
         ]);
@@ -79,8 +79,8 @@ trait IdentifierTrait
     public function other_identification(Request $request)
     {
         $this->validate($request, [
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'firstname' => 'required|max:50',
+            'lastname' => 'required|max:50',
             'mobile' => 'required',
             'identity_number' => 'required',
         ]);
