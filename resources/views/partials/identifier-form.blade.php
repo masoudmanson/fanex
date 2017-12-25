@@ -13,7 +13,9 @@
                            placeholder="@lang('index.additional'.$v)"
                            autocomplete="off"
                            required
-                           @if($v == 'mobile' || $v == 'account_number' || $v == 'identity_number') minlength="10" maxlength="11" @endif
+                           @if($v == 'mobile' || $v == 'account_number' || $v == 'identity_number') minlength="10" maxlength="11"
+                           @else minlength="3" maxlength="24"
+                           @endif
                            oninvalid="this.setCustomValidity('@lang('validation.required', ['attribute' => __('index.form_'.$v)])')"
                            oninput="setCustomValidity('')">
                 </div>

@@ -18,6 +18,10 @@ $(document).ready(function() {
             });
     }
 
+    if(/Android/i.test(navigator.userAgent)) {
+        $('#pdf-test').hide();
+    }
+
     $('.selectpicker').selectpicker('refresh');
 
     $('.disabledForm').attr({'disabled': 'disabled', 'title': indexFormCountry});
@@ -25,31 +29,24 @@ $(document).ready(function() {
     $('#pdf-test').on('click', function(e) {
         e.preventDefault();
 
-        if(/Android/i.test(navigator.userAgent)) {
-            var gadget = new cloudprint.Gadget();
-            gadget.setPrintDocument("url", "FANEx Documents", window.location.href, "utf-8");
-            gadget.openPrintDialog();
+        if (!window.print) {
+            alert('You need NS4.x to use this print button!');
+            return;
         }
-        else {
-            if (!window.print) {
-                alert('You need NS4.x to use this print button!');
-                return;
-            }
 
-            $('#bnf-sidebar').hide();
-            $('.dash-title').hide();
-            $('.dash-subtitle').hide();
-            $('.not-print').hide();
-            $('.invoice-print').hide();
+        $('#bnf-sidebar').hide();
+        $('.dash-title').hide();
+        $('.dash-subtitle').hide();
+        $('.not-print').hide();
+        $('.invoice-print').hide();
 
-            window.print();
+        window.print();
 
-            $('#bnf-sidebar').fadeIn(300);
-            $('.dash-title').fadeIn(300);
-            $('.dash-subtitle').fadeIn(300);
-            $('.not-print').fadeIn(300);
-            $('.invoice-print').fadeIn(300);
-        }
+        $('#bnf-sidebar').fadeIn(300);
+        $('.dash-title').fadeIn(300);
+        $('.dash-subtitle').fadeIn(300);
+        $('.not-print').fadeIn(300);
+        $('.invoice-print').fadeIn(300);
     });
 
     $('#exCountry').change(function() {
