@@ -1,3 +1,4 @@
+<h5 class="alert alert-warning">@lang('index.additionalDesc')</h5>
 @foreach($identifier as $k => $v)
     @if($v && $k != "id")
         {{--Nickname --}}

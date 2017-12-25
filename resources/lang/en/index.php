@@ -78,6 +78,7 @@ Transactions: (i) which exceed certain amounts; (ii) to certain destinations; (i
     'additionalfirstname' => 'Enter Your Firstname in Latin',
     'additionallastname' => 'Enter Your Lastname in Latin',
     'additionalidentity_number' => 'Enter Your National Identity Number',
+    'additionalDesc' => 'These information are needed for money transmitting and will not effect your personal data which come from the authorizer.',
     'form_username' => 'Username',
     'form_mobile' => 'Mobile Number',
     'form_cc' => 'Account Number',
