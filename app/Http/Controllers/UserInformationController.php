@@ -94,7 +94,7 @@ class UserInformationController extends Controller
              * 3. save user data , given from datin and platform (userId)
              */
         } else
-            return abort(401);
+            return abort(650);
 
     }
 

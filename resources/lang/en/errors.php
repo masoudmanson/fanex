@@ -21,6 +21,9 @@
         "2000Title"  =>  "Oops! Something is wrong with Database.",
         "2000Text"  =>  "There is a problem with Database Query. Please try later.",
 
+        "650Title"  =>  "Oops! Authentication problem.",
+        "650Text"  =>  "Pasargad Bank won't authorize you.",
+
         "playText"  =>  "Press ↑ and start to play",
         "backText"  =>  "or Go Home",
     ];

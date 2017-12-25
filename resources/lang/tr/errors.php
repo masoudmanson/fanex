@@ -21,6 +21,9 @@
         "2000Title"  =>  "Hata! Veritabanı sorgularıyla ilgili bir şeyler ters gitti.",
         "2000Text"  =>  "Sorguda bir sorun var ve yürütemiyor.",
 
+        "650Title"  =>  "Hoop! Kimlik doğrulama sorunu.",
+        "650Text"  =>  "Pasargad Bank size yetki vermedi.",
+
         "playText"  =>  "↑ tuşuna basın ve oyuna başlayın",
         "backText"  =>  "Anasayfaya dön",
     ];
