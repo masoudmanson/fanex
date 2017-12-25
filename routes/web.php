@@ -19,7 +19,7 @@ Route::get('/', 'HomeController@index')->name('index');
 Route::get('/about', 'StaticsController@about');
 Route::get('/terms', 'StaticsController@terms');
 Route::get('/contact', 'StaticsController@contact')->name('contact');
-Route::post('/contact', 'StaticsController@sendMail');
+Route::post('/contact', 'StaticsController@contactMail');
 
 Auth::routes();
 

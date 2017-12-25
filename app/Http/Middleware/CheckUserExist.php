@@ -29,9 +29,14 @@ class CheckUserExist
         $result = $this->getCurrentPlatformUser($access_token);
         $platform_user = json_decode($result->getBody()->getContents());
         $id = $platform_user->result->userId;
-
         if (User::findByUserId($id)->first()) {
             $user = User::findByUserId($id)->first();
+            if(isset($platform_user->result->email)){
+                if($user->email != $platform_user->result->email){
+                    $user->email = $platform_user->result->email;
+                    $user->save();
+                }
+            }
 
             //todo : this is only for test, to find out in csrf-token problem is related to user seasion or not.
             if (Auth::check())

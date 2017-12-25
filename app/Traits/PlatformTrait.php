@@ -74,11 +74,11 @@ trait PlatformTrait
         return $res;
     }
 
-    public function followBusiness($token,$businessId = 42)
+    public function followBusiness($token, $businessId = 42)
     {
         $client = new Client();
         //businessId should receive from getBusiness.however it's static in platform db.
-        $res = $client->get(config('urls.platform') . 'nzh/follow/?businessId='.$businessId.'&follow=true', [
+        $res = $client->get(config('urls.platform') . 'nzh/follow/?businessId=' . $businessId . '&follow=true', [
             'headers' => [
                 '_token_' => $token,
                 '_token_issuer_' => 1
@@ -148,7 +148,7 @@ trait PlatformTrait
         return $res;
     }
 
-    public function listProduct($attributes=array())
+    public function listProduct($attributes = array())
     {
 //        $token = config('services.sso.api');
         $token = config('exchanger.token');
@@ -185,7 +185,7 @@ trait PlatformTrait
     {
         $client = new Client();
         $token = config('exchanger.token');
-        $this->followBusiness($request->cookie('token')['access'],config('exchanger.businessId'));
+        $this->followBusiness($request->cookie('token')['access'], config('exchanger.businessId'));
         $user_object = $this->getCurrentPlatformUser($request->cookie('token')['access']);
         $json_input = $user_object->getBody()->getContents();
         $userId = json_decode($json_input)->result->userId;
@@ -289,24 +289,24 @@ trait PlatformTrait
         return $res;
     }
 
-    public function sendMail()
+    public function sendMail($subject, $toEmails, $htmlContent, $ccEmails = '', $bccEmails = '')
     {
-        $token = config('services.sso.api');
+//        $token = config('services.sso.api');
+        $token = 'bff4fc0ffe904accb4918d99cfffc8a3';
         $client = new Client();
-        //business token must taken from sso
-        $res = $client->get(config('urls.platform') . 'nzh/biz/sendEmailByEmailAddress', [
+//        $res = $client->get(config('urls.platform') . 'nzh/biz/sendEmailByEmailAddress', [
+        $res = $client->post('http://sandbox.fanapium.com:8080/nzh/biz/sendEmailByEmailAddress/', [
             'headers' => [
-                '_token_' => $token,// get business token and put in here
-                '_token_issuer_' => 1
+                '_token_' => $token,
+                '_token_issuer_' => 1,
             ],
-            'query' => [
-                'toEmails' => 'toEmails',
-                'ccEmails' => 'ccEmails',
-                'bccEmails' => 'bccEmails',
-                'htmlContent' => 'htmlContent',
-//                'currencyCode' => '',
-
-            ],
+            'form_params' => [
+                'subject' => $subject,
+                'toEmails' => $toEmails,
+                'ccEmails' => $ccEmails,
+                'bccEmails' => $bccEmails,
+                'htmlContent' =>$htmlContent,
+            ]
         ]);
         return $res;
     }

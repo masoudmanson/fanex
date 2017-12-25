@@ -240,7 +240,9 @@ class PaymentController extends Controller
 //                $transaction->update();
 
                 if (Auth::user()->email) {
-                    $mail_object = $this->make_mail_object($transaction, $invoice_result);
+                    $mail_object = $this->make_mail_object($transaction,$invoice_result);
+                    $result = $this->sendMail($mail_object['subject'],$mail_object['to'],$mail_object['content']);
+                    $mail = json_decode($result->getBody()->getContents());
                 }
                 return view('dashboard.invoice', compact('invoice_result', 'transaction', 'finish_time', 'mail_object'));
             } else {
@@ -249,10 +251,12 @@ class PaymentController extends Controller
                 $transaction->upt_status = 'failed';
                 $transaction->payment_date = time();
                 $transaction->update();
+
                 if (Auth::user()->email) {
                     $mail_object = $this->make_mail_object($transaction,$invoice_result);
+                    $result = $this->sendMail($mail_object['subject'],$mail_object['to'],$mail_object['content']);
+                    $mail = json_decode($result->getBody()->getContents());
 
-//                    dd($mail_object);
 /*                    // Email to User
                     $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
                     $beautymail->send('emails.invoice', [
@@ -352,11 +356,11 @@ class PaymentController extends Controller
 
         $view = View::make('emails.invoice', $data_array);
         $contents = $view->render();
-        $contents = str_replace("\r", "", $contents);
-        $contents = str_replace("\n", "", $contents);
-        $contents = str_replace("\t", "", $contents);
-        $contents = str_replace("\"", "'", $contents);
-        $contents = str_replace("&quot;", "'", $contents);
+//        $contents = str_replace("\r", "", $contents);
+//        $contents = str_replace("\n", "", $contents);
+//        $contents = str_replace("\t", "", $contents);
+//        $contents = str_replace("\"", "'", $contents);
+//        $contents = str_replace("&quot;", "'", $contents);
 
         $mail_object = [
             'to' => Auth::user()->email,
@@ -365,7 +369,7 @@ class PaymentController extends Controller
             'content' => $contents
         ];
 
-        return json_encode($mail_object);
+        return $mail_object;
     }
 
     private function upload_file($file, $request, $bill_number, $file_type, $is_image = false)

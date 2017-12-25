@@ -64,10 +64,9 @@ class StaticsController extends Controller
     /*
      * Contact Page Send Mail
      */
-    public function sendMail(ContactFormRequest $request)
+    public function contactMail(ContactFormRequest $request)
     {
-        $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
-        $beautymail->send('emails.contact', [
+        $data_array = [
             'senderName' => 'FANEx Team',
             'firstname' => $request->get('name'),
             'logo' => [
@@ -75,14 +74,12 @@ class StaticsController extends Controller
                 'width' => 150,
                 'height' => 50
             ],
-            'css' => ".footer-text {padding:0; margin: 0 !important; color: #999; font-family: Tahoma;}"
-        ], function($message) use ($request)
-        {
-            $message
-                ->from('fanex@fanap.ir')
-                ->to($request->get('email'), $request->get('name'))
-                ->subject('Thank You!');
-        });
+            'css' => ".footer-text {padding:0; margin: 0 !important; color: #999; font-family: Tahoma;}",
+        ];
+
+        $view = View::make('emails.contact', $data_array);
+        $contents = $view->render();
+        $result = $this->sendMail('Thank You!',$request->get('email'),$contents);
 
         return \Redirect::route('contact')->with('message', 'Thanks for contacting us!');
     }
