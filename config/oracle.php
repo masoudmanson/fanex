@@ -3,7 +3,7 @@
 return [
     'oracle' => [
         'driver' => 'oracle',
-        'host' => env('DB_HOST', '172.16.1.133'),
+        'host' => env('DB_HOST', '172.16.110.133'),
         'port' => env('DB_PORT', '1521'),
         'database' => env('DB_DATABASE', 'forge'),
         'username' => env('DB_USERNAME', 'forge'),

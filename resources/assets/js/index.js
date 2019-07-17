@@ -210,17 +210,26 @@ $(document).ready(function() {
     else {
         $('.bnf-auto-sidebar').insertAfter('.bnf-auto-content');
     }
-    if ($(window).width() > 993) {
-        $('#bnf-sidebar').stick_in_parent({
-            'offset_top': 25,
-        });
-        $('#profile-sidebar').stick_in_parent({
-            'offset_top': 75,
-        });
-    }
-    else {
-        $('#bnf-sidebar, #profile-sidebar').trigger('sticky_kit:detach');
-    }
+    $('#bnf-sidebar').stick_in_parent({
+        'offset_top': 5,
+        'min-width': 992
+    });
+    $('#profile-sidebar').stick_in_parent({
+        'offset_top': 5,
+        'min-width': 992
+    });
+
+    // if ($(window).width() > 993) {
+    //     $('#bnf-sidebar').stick_in_parent({
+    //         'offset_top': 25,
+    //     });
+    //     $('#profile-sidebar').stick_in_parent({
+    //         'offset_top': 75,
+    //     });
+    // }
+    // else {
+    //     $('#bnf-sidebar, #profile-sidebar').trigger('sticky_kit:detach');
+    // }
 
     $(window).resize(function() {
         var $iW = $(window).innerWidth();
@@ -230,17 +239,27 @@ $(document).ready(function() {
         else {
             $('.bnf-auto-sidebar').insertAfter('.bnf-auto-content');
         }
-        if ($(window).width() > 993) {
-            $('#bnf-sidebar').stick_in_parent({
-                'offset_top': 0,
-            });
-            $('#profile-sidebar').stick_in_parent({
-                'offset_top': 75,
-            });
-        }
-        else {
-            $('#bnf-sidebar, #profile-sidebar').trigger('sticky_kit:detach');
-        }
+
+        $('#bnf-sidebar').stick_in_parent({
+            'offset_top': 5,
+            'min-width': 992
+        });
+        $('#profile-sidebar').stick_in_parent({
+            'offset_top': 5,
+            'min-width': 992
+        });
+
+        // if ($(window).width() > 993) {
+        //     $('#bnf-sidebar').stick_in_parent({
+        //         'offset_top': 0,
+        //     });
+        //     $('#profile-sidebar').stick_in_parent({
+        //         'offset_top': 75,
+        //     });
+        // }
+        // else {
+        //     $('#bnf-sidebar, #profile-sidebar').trigger('sticky_kit:detach');
+        // }
     });
 
     $('a.accordion-toggle').click(function(e) {

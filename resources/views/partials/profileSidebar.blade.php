@@ -1,7 +1,6 @@
 <h1 class="dash-title">@lang('profile.welcome') <b>{{ Auth::user()->firstname }}</b></h1>
 
-<div class="col-lg-3 col-md-4 col-sm-12 px-0 pr-lg-4 pr-md-0 pr-sm-0 pr-xs-0" style="position:static;"
-     id="profile-sidebar">
+<div class="col-lg-3 col-md-4 col-sm-12 px-0 pr-lg-4 pr-md-0 pr-sm-0 pr-xs-0" style="position:static" id="profile-sidebar">
     <div class="white-card">
         <ul class="profile-ul">
             <li class="profile-li @if($page == "transactions") active @endif">
