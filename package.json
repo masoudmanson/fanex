@@ -38,7 +38,7 @@
     "jquery.inputmask": "^3.3.4",
     "jquery.nicescroll": "^3.7.6",
     "modernizr": "^3.7.1",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "package": "^1.0.1",
     "sticky-kit": "^1.1.3"
   }
